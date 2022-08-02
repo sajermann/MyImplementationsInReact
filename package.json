@@ -7,7 +7,7 @@
     "access": "public"
   },
   "scripts": {
-    "build": "npx tsc --declaration",
+    "build": "npx tsc",
     "test": "jest --coverage --watch"
   },
   "dependencies": {
