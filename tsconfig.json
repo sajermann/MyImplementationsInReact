@@ -8,7 +8,8 @@
 		"moduleResolution": "Node",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "noEmit": true,
+		"declaration": true,
+    // "noEmit": true,
 		"jsx": "react-jsx",
 		"target": "ESNext", /* Set the JavaScript language version for emitted JavaScript and include compatible library declarations. */
 		"rootDir": "./src", /* Specify the root folder within your source files. */
@@ -27,4 +28,3 @@
 		"src/**/*.test.ts"
 	]
 }
-

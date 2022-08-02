@@ -1,5 +1,4 @@
 /* eslint-disable react/button-has-type */
-import React from 'react';
 import Loading from '../Loading';
 // import styles from './styles.module.css';
 import './button.css';
