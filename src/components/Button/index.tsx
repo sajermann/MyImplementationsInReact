@@ -1,6 +1,6 @@
 /* eslint-disable react/button-has-type */
 import Loading from '../Loading';
-// import styles from './styles.module.css';
+import styles from './styles.module.css';
 import './button.css';
 
 interface Props extends React.HTMLProps<HTMLButtonElement> {
@@ -15,13 +15,7 @@ interface Props extends React.HTMLProps<HTMLButtonElement> {
 		| 'Warning';
 }
 
-export default function Button({
-	type,
-	isLoading,
-	children,
-	variant,
-	...props
-}: Props) {
+function Button({ type, isLoading, children, variant, ...props }: Props) {
 	const VARIANT = {
 		Primary: {
 			normal: 'primary',
@@ -80,7 +74,7 @@ export default function Button({
 		<button
 			onClick={createRipple}
 			type={type}
-			// className={`${styles.primary}  ${styles.btn} ${props.className} btn`}
+			className={`${styles.primary}  ${styles.btn} ${props.className} btn`}
 			{...props}
 		>
 			{isLoading && <Loading />}
@@ -88,3 +82,6 @@ export default function Button({
 		</button>
 	);
 }
+
+// eslint-disable-next-line import/prefer-default-export
+export { Button };
