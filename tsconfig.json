@@ -23,7 +23,8 @@
 	},
 	"include": [
 		"src",
-		"**.css"
+		"**.css",
+		"**.svg"
 	],
 	"exclude": [
 		"src/index.ts",

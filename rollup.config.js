@@ -1,4 +1,5 @@
 import typescript from '@rollup/plugin-typescript';
+import image from '@rollup/plugin-image';
 import autoprefixer from 'autoprefixer';
 import postcss from 'rollup-plugin-postcss';
 
@@ -14,6 +15,7 @@ export default [
 			typescript({
 				tsconfig: './tsconfig.json',
 			}),
+			image(),
 			postcss({
 				plugins: [autoprefixer()],
 				// sourceMap: true,
