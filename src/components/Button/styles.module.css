@@ -4,6 +4,30 @@
 	width: 1rem /* 16px */;
 }
 
+.internal {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+}
+
+.text {
+	width: 100%;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	margin: 0 5px;
+	flex: 1;
+}
+
+.containerIcon {
+	width: 24px;
+	height: 24px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
 .btn {
 	--tw-text-opacity: 1;
 	font-weight: 700;
@@ -15,8 +39,10 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	min-width: 120px;
-	max-width: 120px;
+	min-width: 140px;
+	max-width: 140px;
+	min-height: 44px;
+	max-height: 44px;
 	font-size: 1.125rem /* 18px */;
 	line-height: 1.75rem /* 28px */;
 	transition-property: color, background-color, border-color,
@@ -29,6 +55,11 @@
 }
 .btn:disabled {
 	cursor: not-allowed;
+}
+
+.onlyIcon {
+	min-width: 44px !important;
+	max-width: 44px !important;
 }
 
 .Primary {
@@ -81,13 +112,4 @@
 .Transparent:hover {
 	--tw-bg-opacity: 1;
 	/* background-color: rgb(161 98 7 / var(--tw-bg-opacity)) !important; */
-}
-
-
-
-.text {
-	width: 100%;
-	overflow: hidden;
-	white-space: nowrap;
-	text-overflow: ellipsis;
 }

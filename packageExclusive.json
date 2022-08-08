@@ -1,0 +1,19 @@
+{
+  "name": "@sajermann/ui-react",
+  "version": "0.0.3",
+  "description": "Componentes UI utilizados em meus projetos.",
+  "main": "index.js",
+  "publishConfig": {
+    "access": "public"
+  },
+	"repository": {
+    "type": "git",
+    "url": "https://github.com/sajermann/NPM-SajermannUiReact"
+  },
+  "keywords": [
+    "ui",
+    "react"
+  ],
+  "author": "Bruno Sajermann",
+  "license": "ISC"
+}

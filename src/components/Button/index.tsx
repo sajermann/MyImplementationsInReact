@@ -1,6 +1,6 @@
 /* eslint-disable react/button-has-type */
 import { useEffect, useRef, useState } from 'react';
-import Loading from '../Loading';
+import { Loading } from '../Loading';
 import styles from './styles.module.css';
 import successSvg from './success.svg';
 import failedSvg from './failed.svg';
@@ -199,5 +199,4 @@ function Button({
 	);
 }
 
-// eslint-disable-next-line import/prefer-default-export
 export { Button };

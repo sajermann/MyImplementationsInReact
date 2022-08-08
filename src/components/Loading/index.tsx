@@ -1,7 +1,7 @@
 import logoCirtcle from './circle-notch.svg';
 import styles from './styles.module.css';
 
-export default function Loading() {
+function Loading() {
 	function generateGuid(): string {
 		let d = new Date().getTime();
 		return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, c => {
@@ -42,3 +42,6 @@ export default function Loading() {
 		</div>
 	);
 }
+
+// eslint-disable-next-line import/prefer-default-export
+export { Loading };
