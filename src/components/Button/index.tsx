@@ -1,5 +1,5 @@
 /* eslint-disable react/button-has-type */
-import { useEffect } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Loading from '../Loading';
 import styles from './styles.module.css';
 import successSvg from './success.svg';
@@ -33,20 +33,41 @@ type PropsFeedBack = {
 interface Props extends React.HTMLProps<HTMLButtonElement> {
 	type: 'button' | 'reset' | 'submit';
 	withFeedback?: PropsFeedBack;
-	variant?: 'Primary' | 'Secondary' | 'Success' | 'Transparent' | 'Warning';
+	colorStyle?: 'Primary' | 'Secondary' | 'Success' | 'Transparent' | 'Warning';
+	startIcon?: JSX.Element;
+	endIcon?: JSX.Element;
 }
 
-function Button({ type, withFeedback, children, variant, ...props }: Props) {
+function Button({
+	type,
+	withFeedback,
+	children,
+	colorStyle,
+	startIcon,
+	endIcon,
+	...props
+}: Props) {
 	const { onClick } = props;
-	const VARIANT = {
+	const COLOR_STYLE = {
 		Primary: styles.Primary,
 		Secondary: styles.Secondary,
 		Success: styles.Success,
 		Warning: styles.Warning,
 		Transparent: styles.Transparent,
 	};
+	const [isEllipsisActive, setIsEllipsisActive] = useState(false);
+	const divRef = useRef<HTMLDivElement>(null);
 
-	console.log(variant);
+	useEffect(() => {
+		const element = divRef.current;
+
+		setIsEllipsisActive(
+			element
+				? element.offsetWidth < element.scrollWidth ||
+						element.offsetHeight < element.scrollHeight
+				: false
+		);
+	}, []);
 
 	function generateGuid(): string {
 		let d = new Date().getTime();
@@ -66,7 +87,7 @@ function Button({ type, withFeedback, children, variant, ...props }: Props) {
 		const element = document.createElement('style');
 		element.id = ID_BUTTON;
 		element.innerHTML = `
-		@keyframes ripple_${ID} {
+		@keyframes forLight_${ID} {
 			to {
 				transform: scale(4);
 				opacity: 0;
@@ -83,7 +104,7 @@ function Button({ type, withFeedback, children, variant, ...props }: Props) {
 		setTimeout(() => document.querySelector(`#${ID_BUTTON}`)?.remove(), 1000);
 	}
 
-	function createRipple(event: React.MouseEvent<HTMLButtonElement>) {
+	function createEffect(event: React.MouseEvent<HTMLButtonElement>) {
 		insertCss();
 		const button = event.currentTarget;
 		const circle = document.createElement('span');
@@ -97,14 +118,14 @@ function Button({ type, withFeedback, children, variant, ...props }: Props) {
 		circle.style.position = 'absolute';
 		circle.style.borderRadius = '50%';
 		circle.style.transform = 'scale(0)';
-		circle.style.animation = `ripple_${ID} 600ms linear`;
+		circle.style.animation = `forLight_${ID} 600ms linear`;
 		circle.style.backgroundColor = 'rgba(255, 255, 255, 0.7)';
-		circle.classList.add(`ripple_${ID}`);
+		circle.classList.add(`forLight_${ID}`);
 
-		const ripple = button.getElementsByClassName(`ripple_${ID}`)[0];
+		const effectLight = button.getElementsByClassName(`forLight_${ID}`)[0];
 
-		if (ripple) {
-			ripple.remove();
+		if (effectLight) {
+			effectLight.remove();
 		}
 
 		button.appendChild(circle);
@@ -136,16 +157,44 @@ function Button({ type, withFeedback, children, variant, ...props }: Props) {
 	return (
 		<button
 			{...props}
-			onClick={createRipple}
+			onClick={createEffect}
 			type={type}
-			className={`${VARIANT[variant || 'Primary']}  ${styles.btn} ${
-				props.className
-			} btn`}
+			className={`${COLOR_STYLE[colorStyle || 'Primary']}  ${styles.btn} ${
+				!children && styles.onlyIcon
+			} ${props.className} `}
 		>
-			<div className={styles.text}>{children}</div>
-			{withFeedback?.isLoading && <Loading />}
-			{withFeedback?.inSuccess?.success && <Success />}
-			{withFeedback?.inFailed?.failed && <Failed />}
+			<div className={styles.internal}>
+				{startIcon && <div className={styles.containerIcon}>{startIcon}</div>}
+				{children && (
+					<div
+						className={styles.text}
+						ref={divRef}
+						title={(isEllipsisActive && (children as unknown as string)) || ''}
+					>
+						{children}
+					</div>
+				)}
+				{(withFeedback?.isLoading ||
+					withFeedback?.inSuccess?.success ||
+					withFeedback?.inFailed?.failed) && (
+					<div className={styles.containerIcon}>
+						{withFeedback?.isLoading && <Loading />}
+						{!withFeedback?.isLoading && withFeedback?.inSuccess?.success && (
+							<Success />
+						)}
+						{!withFeedback?.isLoading && withFeedback?.inFailed?.failed && (
+							<Failed />
+						)}
+					</div>
+				)}
+
+				{endIcon &&
+					!withFeedback?.isLoading &&
+					!withFeedback?.inSuccess?.success &&
+					!withFeedback?.inFailed?.failed && (
+						<div className={styles.containerIcon}>{endIcon}</div>
+					)}
+			</div>
 		</button>
 	);
 }
