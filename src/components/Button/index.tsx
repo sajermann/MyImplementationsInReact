@@ -105,6 +105,7 @@ function Button({
 	}
 
 	function createEffect(event: React.MouseEvent<HTMLButtonElement>) {
+		console.log('Click');
 		insertCss();
 		const button = event.currentTarget;
 		const circle = document.createElement('span');

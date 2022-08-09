@@ -1,15 +1,22 @@
 import { useState } from 'react';
-import { Airplane } from 'phosphor-react';
-import { Button } from '../../Components/Button';
+// import { Button, Loading } from '@sajermann/ui-react';
+import { Button as Batata2 } from '../Components';
+import { Button } from '../../build';
 import styles from './styles.module.css';
-import delay from './delay';
+// import '@sajermann/ui-react/index.css';
+import '../../build/index.css';
 
-export default function Home() {
-	const [newItem, setNewItem] = useState('');
-	const [list, setList] = useState(['Bruno', 'Marcia']);
+function App() {
 	const [isLoading, setIsLoading] = useState(false);
 	const [success, setSuccess] = useState(false);
 	const [failed, setFailed] = useState(false);
+	const [darkMode, setDarkMode] = useState(false);
+
+	function delay(delayMs: number): Promise<void> {
+		return new Promise(resolve => {
+			setTimeout(() => resolve(), delayMs);
+		});
+	}
 
 	async function handle() {
 		setIsLoading(true);
@@ -19,17 +26,22 @@ export default function Home() {
 	}
 
 	return (
-		<div className={styles.container}>
-			<Button
-				type="button"
-				colorStyle="Primary"
-				onClick={() => {
-					console.log('s');
-				}}
-			>
-				Clique aqui
-			</Button>
-			<Button
+		<div
+			style={{
+				background: darkMode ? 'black' : 'white',
+				width: '98vw',
+				height: '98vh',
+				margin: 'auto',
+				gap: '10px',
+				display: 'flex',
+				alignItems: 'center',
+				justifyContent: 'center',
+			}}
+		>
+			<button type="button" onClick={() => setDarkMode(!darkMode)}>
+				Dark Mode
+			</button>
+			<Batata2
 				disabled={isLoading}
 				colorStyle="Secondary"
 				id="bruno"
@@ -46,52 +58,11 @@ export default function Home() {
 						failed,
 					},
 				}}
-				startIcon={<Airplane />}
 			>
 				Clique aqui
-			</Button>
+			</Batata2>
 			<Button
-				colorStyle="Warning"
-				type="button"
-				onClick={handle}
-				withFeedback={{
-					isLoading: true,
-					inSuccess: {
-						setSuccess,
-						success,
-					},
-					inFailed: {
-						setFailed,
-						failed,
-					},
-				}}
-				endIcon={<Airplane />}
-			>
-				Clique aqui
-			</Button>
-			<Button
-				colorStyle="Success"
-				type="button"
-				onClick={handle}
-				withFeedback={{
-					isLoading,
-				}}
-				style={{ minWidth: 600 }}
-			>
-				Clique aqui
-			</Button>
-
-			<Button
-				colorStyle="Success"
-				type="button"
-				onClick={handle}
-				withFeedback={{
-					isLoading,
-				}}
-				endIcon={<Airplane />}
-			/>
-
-			<Button
+				disabled={isLoading}
 				colorStyle="Warning"
 				type="button"
 				onClick={handle}
@@ -106,20 +77,51 @@ export default function Home() {
 						failed,
 					},
 				}}
-				endIcon={<Airplane />}
-			/>
-
+			>
+				Clique aqui
+			</Button>
 			<Button
-				colorStyle="Transparent"
+				disabled={isLoading}
+				colorStyle="Primary"
+				id="bruno"
 				type="button"
 				onClick={handle}
 				withFeedback={{
 					isLoading,
+					inSuccess: {
+						setSuccess,
+						success,
+					},
+					inFailed: {
+						setFailed,
+						failed,
+					},
 				}}
 			>
-				<Airplane />
+				Clique aqui
+			</Button>
+			<Button
+				disabled={isLoading}
+				colorStyle="Success"
+				id="bruno"
+				type="button"
+				onClick={handle}
+				withFeedback={{
+					isLoading,
+					inSuccess: {
+						setSuccess,
+						success,
+					},
+					inFailed: {
+						setFailed,
+						failed,
+					},
+				}}
+			>
 				Clique aqui
 			</Button>
 		</div>
 	);
 }
+
+export default App;
