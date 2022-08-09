@@ -7,7 +7,7 @@
     "start": "vite --open",
 		"build": "npx rollup --config rollup.config.js",
 		"copyRequiredsWindows": "@powershell copy './packageExclusive.json' './build/package.json' && @powershell copy './README.md' './build'",
-    "copyRequiredsLinux": "cp './package.json' './build' && cp './README.md' './build'",
+    "copyRequiredsLinux": "cp './packageExclusive.json' './build/package.json' && cp './README.md' './build'",
 		"test": "jest --coverage --watch",
     "vitest": "vitest run --coverage",
     "preview": "vite preview"
