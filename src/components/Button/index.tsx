@@ -1,9 +1,9 @@
 /* eslint-disable react/button-has-type */
 import { useEffect, useRef, useState } from 'react';
-import { Loading } from '../Loading';
 import styles from './styles.module.css';
 import successSvg from './success.svg';
 import failedSvg from './failed.svg';
+import { Loading } from '../Loading';
 import delay from './delay';
 
 function Success() {

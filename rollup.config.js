@@ -2,7 +2,6 @@ import typescript from '@rollup/plugin-typescript';
 import image from '@rollup/plugin-image';
 import autoprefixer from 'autoprefixer';
 import postcss from 'rollup-plugin-postcss';
-// import svg from 'rollup-plugin-svg';
 
 export default [
 	{
