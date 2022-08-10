@@ -8,7 +8,8 @@
     "build": "npx rollup --config rollup.config.js",
     "copyRequiredsWindows": "@powershell copy './packageExclusive.json' './build/package.json' && @powershell copy './README.md' './build'",
     "copyRequiredsLinux": "cp './packageExclusive.json' './build/package.json' && cp './README.md' './build'",
-    "test": "jest --coverage --watch"
+    "test": "jest --coverage",
+    "test:watch": "jest --coverage --watch"
   },
   "dependencies": {
     "@sajermann/ui-react": "^0.0.7",
