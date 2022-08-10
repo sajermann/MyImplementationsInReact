@@ -1,6 +1,6 @@
 import { useState } from 'react';
 // import { Button, Loading } from '@sajermann/ui-react';
-import { Button as Batata2 } from '../Components';
+import { Button as Batata2 } from '../components';
 import { Button } from '../../build';
 import styles from './styles.module.css';
 // import '@sajermann/ui-react/index.css';

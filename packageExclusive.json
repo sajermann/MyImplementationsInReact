@@ -1,6 +1,6 @@
 {
   "name": "@sajermann/ui-react",
-  "version": "0.0.3",
+  "version": "0.0.8",
   "description": "Componentes UI utilizados em meus projetos.",
   "main": "index.js",
   "publishConfig": {
@@ -12,7 +12,9 @@
   },
   "keywords": [
     "ui",
-    "react"
+    "react",
+		"front-end",
+		"css"
   ],
   "author": "Bruno Sajermann",
   "license": "ISC"
