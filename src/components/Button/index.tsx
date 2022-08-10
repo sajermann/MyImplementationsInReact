@@ -179,7 +179,7 @@ function Button({
 					withFeedback?.inSuccess?.success ||
 					withFeedback?.inFailed?.failed) && (
 					<div className={styles.containerIcon}>
-						{withFeedback?.isLoading && <Loading />}
+						{withFeedback?.isLoading && <Loading data-testid="loadingIcon" />}
 						{!withFeedback?.isLoading && withFeedback?.inSuccess?.success && (
 							<Success />
 						)}
