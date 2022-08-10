@@ -8,13 +8,10 @@
     "build": "npx rollup --config rollup.config.js",
     "copyRequiredsWindows": "@powershell copy './packageExclusive.json' './build/package.json' && @powershell copy './README.md' './build'",
     "copyRequiredsLinux": "cp './packageExclusive.json' './build/package.json' && cp './README.md' './build'",
-    "test": "jest --coverage --watch",
-    "vitest": "vitest run --coverage",
-    "preview": "vite preview"
+    "test": "jest --coverage --watch"
   },
   "dependencies": {
     "@sajermann/ui-react": "^0.0.7",
-    "@zarconontol/enzyme-adapter-react-18": "^0.7.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
@@ -25,7 +22,6 @@
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.3.0",
     "@testing-library/user-event": "^14.4.2",
-    "@types/enzyme": "^3.10.12",
     "@types/jest": "^28.1.6",
     "@types/react": "^18.0.15",
     "@types/react-dom": "^18.0.6",
@@ -33,7 +29,6 @@
     "@typescript-eslint/eslint-plugin": "^5.32.0",
     "@vitejs/plugin-react": "^2.0.0",
     "autoprefixer": "^10.4.8",
-    "enzyme": "^3.11.0",
     "eslint": "^8.21.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-prettier": "^8.5.0",
