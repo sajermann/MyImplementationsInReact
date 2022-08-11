@@ -1,0 +1,223 @@
+:root {
+  --tw-bg-opacity: 0.25;
+	--tw-bg-opacity: 1;
+	/* --tw-translate-x: 100%;
+	--tw-translate-x: 0; */
+	--tw-translate-y: 0;
+	--tw-rotate: 0;
+	--tw-skew-x: 0;
+	--tw-skew-y: 0;
+	--tw-scale-x: 1;
+	--tw-scale-y: 1;
+	--tw-pan-x: ;
+	--tw-pan-y: ;
+	--tw-pinch-zoom: ;
+	--tw-scroll-snap-strictness: proximity;
+	--tw-ordinal: ;
+	--tw-slashed-zero: ;
+	--tw-numeric-figure: ;
+	--tw-numeric-spacing: ;
+	--tw-numeric-fraction: ;
+	--tw-ring-inset: ;
+	--tw-ring-offset-width: 0px;
+	--tw-ring-offset-color: #fff;
+	--tw-ring-color: rgb(59 130 246 / 0.5);
+	--tw-ring-offset-shadow: 0 0 #0000;
+	--tw-ring-shadow: 0 0 #0000;
+	--tw-shadow: 0 0 #0000;
+	--tw-shadow-colored: 0 0 #0000;
+	--tw-blur: ;
+	--tw-brightness: ;
+	--tw-contrast: ;
+	--tw-grayscale: ;
+	--tw-hue-rotate: ;
+	--tw-invert: ;
+	--tw-saturate: ;
+	--tw-sepia: ;
+	--tw-drop-shadow: ;
+	--tw-backdrop-blur: ;
+	--tw-backdrop-brightness: ;
+	--tw-backdrop-contrast: ;
+	--tw-backdrop-grayscale: ;
+	--tw-backdrop-hue-rotate: ;
+	--tw-backdrop-invert: ;
+	--tw-backdrop-opacity: ;
+	--tw-backdrop-saturate: ;
+	--tw-backdrop-sepia: ;
+}
+
+.container {
+	overflow: hidden;
+	transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+	position: fixed;
+	z-index: 10;
+	top: 0px;
+	right: 0px;
+	bottom: 0px;
+	left: 0px;
+	transform: translate(var(--tw-translate-x), var(--tw-translate-y))
+		rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y))
+		scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+
+.containerOpen {
+	transition-property: opacity;
+	transition-duration: 150ms;
+	opacity: 1;
+	transition-duration: 500ms;
+	--tw-translate-x: 0px;
+	transform: translate(var(--tw-translate-x), var(--tw-translate-y))
+		rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y))
+		scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+
+.containerClose {
+	transition-property: all;
+	transition-duration: 150ms;
+	transition-delay: 500ms;
+	opacity: 0;
+	--tw-translate-x: 100%;
+	transform: translate(var(--tw-translate-x), var(--tw-translate-y))
+		rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y))
+		scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+
+.subContainer {
+	width: 100vw;
+	position: absolute;
+	height: 100%;
+	--tw-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1),
+		0 8px 10px -6px rgb(0 0 0 / 0.1);
+	--tw-shadow-colored: 0 20px 25px -5px var(--tw-shadow-color),
+		0 8px 10px -6px var(--tw-shadow-color);
+	box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000),
+		var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+	transition-delay: 400ms;
+	transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+	transition-property: all;
+	transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+	transition-duration: 150ms;
+	transform: translate(var(--tw-translate-x), var(--tw-translate-y))
+		rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y))
+		scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+
+.subContainerOpen {
+	--tw-translate-x: 0px;
+	transform: translate(var(--tw-translate-x), var(--tw-translate-y))
+		rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y))
+		scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+
+.rightZero {
+	right: 0px;
+}
+
+.leftZero {
+	left: 0px;
+}
+
+.translateXFull {
+	--tw-translate-x: 100%;
+	transform: translate(var(--tw-translate-x), var(--tw-translate-y))
+		rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y))
+		scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+
+.minusTranslateXFull {
+	--tw-translate-x: -100%;
+	transform: translate(var(--tw-translate-x), var(--tw-translate-y))
+		rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y))
+		scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+
+.translateYFull {
+	--tw-translate-y: 100%;
+	transform: translate(var(--tw-translate-x), var(--tw-translate-y))
+		rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y))
+		scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+
+.containerNav {
+	--tw-border-opacity: 1;
+	border-color: rgb(229 231 235 / var(--tw-border-opacity));
+	padding-left: 0.5rem /* 8px */;
+	padding-right: 0.5rem /* 8px */;
+	padding-top: 0.625rem /* 10px */;
+	padding-bottom: 0.625rem /* 10px */;
+	--tw-bg-opacity: 1;
+	background-color: rgb(31 41 55 / var(--tw-bg-opacity));
+}
+
+.subContainerNav {
+	width: 100%;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	align-items: center;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.article {
+	position: relative;
+	width: 100vw;
+	padding-bottom: 2.5rem /* 40px */;
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+}
+
+.widthfull {
+	width: 100%;
+}
+
+.maxWidthfull {
+	max-width: 100%;
+}
+
+.maxWidthHalf {
+	max-width: 32rem /* 512px */;
+}
+
+.sectionEscape {
+	width: 100vw;
+	height: 100%;
+}
+
+.main {
+	padding: 0.75rem /* 12px */;
+}
+
+@media (min-width: 640px) {
+	.containerNav {
+		padding-left: 1rem /* 16px */;
+		padding-right: 1rem /* 16px */;
+	}
+}
+
+@media (min-width: 640px) {
+	.subContainerNav {
+		max-width: 640px;
+	}
+}
+@media (min-width: 768px) {
+	.subContainerNav {
+		max-width: 768px;
+	}
+}
+@media (min-width: 1024px) {
+	.subContainerNav {
+		max-width: 1024px;
+	}
+}
+@media (min-width: 1280px) {
+	.subContainerNav {
+		max-width: 1280px;
+	}
+}
+@media (min-width: 1536px) {
+	.subContainerNav {
+		max-width: 1536px;
+	}
+}

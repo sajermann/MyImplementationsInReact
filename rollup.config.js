@@ -29,12 +29,9 @@ export default [
 				],
 			}),
 			image(),
-			// svg(),
 			postcss({
 				plugins: [autoprefixer()],
-				// sourceMap: true,
 				extract: true,
-				// minimize: true,
 				// modules: true,
 			}),
 		],

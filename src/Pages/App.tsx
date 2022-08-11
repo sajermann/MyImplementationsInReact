@@ -1,12 +1,14 @@
 import { useState } from 'react';
-// import { Button, Loading } from '@sajermann/ui-react';
-import { Button as Batata2 } from '../components';
-import { Button } from '../../build';
+import { Button } from '../components';
+import Drawler from '../components/Drawler';
 import styles from './styles.module.css';
+
+// import { Button, Loading } from '@sajermann/ui-react';
 // import '@sajermann/ui-react/index.css';
-import '../../build/index.css';
+// import '../../build/index.css';
 
 function App() {
+	const [isOpen, setIsOpen] = useState(false);
 	const [isLoading, setIsLoading] = useState(false);
 	const [success, setSuccess] = useState(false);
 	const [failed, setFailed] = useState(false);
@@ -21,6 +23,13 @@ function App() {
 	async function handle() {
 		setIsLoading(true);
 		await delay(3000);
+		setIsLoading(false);
+		setSuccess(true);
+	}
+	async function handleSave() {
+		setIsLoading(true);
+		await delay(1001);
+
 		setIsLoading(false);
 		setSuccess(true);
 	}
@@ -41,51 +50,12 @@ function App() {
 			<button type="button" onClick={() => setDarkMode(!darkMode)}>
 				Dark Mode
 			</button>
-			<Batata2
-				disabled={isLoading}
-				colorStyle="Secondary"
-				id="bruno"
-				type="button"
-				onClick={handle}
-				withFeedback={{
-					isLoading,
-					inSuccess: {
-						setSuccess,
-						success,
-					},
-					inFailed: {
-						setFailed,
-						failed,
-					},
-				}}
-			>
-				Clique aqui
-			</Batata2>
-			<Button
-				disabled={isLoading}
-				colorStyle="Warning"
-				type="button"
-				onClick={handle}
-				withFeedback={{
-					isLoading,
-					inSuccess: {
-						setSuccess,
-						success,
-					},
-					inFailed: {
-						setFailed,
-						failed,
-					},
-				}}
-			>
-				Clique aqui
-			</Button>
 			<Button
 				disabled={isLoading}
 				colorStyle="Primary"
 				id="bruno"
 				type="button"
-				onClick={handle}
+				onClick={() => setIsOpen(true)}
 				withFeedback={{
 					isLoading,
 					inSuccess: {
@@ -100,26 +70,26 @@ function App() {
 			>
 				Clique aqui
 			</Button>
-			<Button
-				disabled={isLoading}
-				colorStyle="Success"
-				id="bruno"
-				type="button"
-				onClick={handle}
-				withFeedback={{
-					isLoading,
-					inSuccess: {
-						setSuccess,
-						success,
-					},
-					inFailed: {
-						setFailed,
-						failed,
-					},
+			<Drawler
+				// disabledSaveButton={selectedRows.length === 0}
+				side="full"
+				isOpen={isOpen}
+				setIsOpen={e => setIsOpen(e)}
+				title="Listagem"
+				isLoading={isLoading}
+				onSave={handleSave}
+				inSuccess={{
+					success,
+					setSuccess,
+					setIsOpen,
+				}}
+				inFailed={{
+					failed,
+					setFailed,
 				}}
 			>
-				Clique aqui
-			</Button>
+				<div>Bruno</div>
+			</Drawler>
 		</div>
 	);
 }
