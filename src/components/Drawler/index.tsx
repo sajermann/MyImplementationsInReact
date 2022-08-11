@@ -69,7 +69,7 @@ export default function Drawler({
 
 		if (side === 'full') {
 			setConfigSide({
-				side: styles.rightZero,
+				side: styles.leftZero,
 				translate: styles.translateYFull,
 			});
 		}
@@ -115,7 +115,7 @@ export default function Drawler({
 							</div>
 						</nav>
 					)}
-					<div className={styles.main}>{isOpen && children}</div>
+					<div className={styles.main}>{children}</div>
 				</article>
 			</section>
 			<section

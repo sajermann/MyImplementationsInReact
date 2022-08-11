@@ -8,7 +8,9 @@ import styles from './styles.module.css';
 // import '../../build/index.css';
 
 function App() {
-	const [isOpen, setIsOpen] = useState(false);
+	const [isOpenLeft, setIsOpenLeft] = useState(false);
+	const [isOpenRight, setIsOpenRight] = useState(false);
+	const [isOpenFull, setIsOpenFull] = useState(false);
 	const [isLoading, setIsLoading] = useState(false);
 	const [success, setSuccess] = useState(false);
 	const [failed, setFailed] = useState(false);
@@ -55,7 +57,7 @@ function App() {
 				colorStyle="Primary"
 				id="bruno"
 				type="button"
-				onClick={() => setIsOpen(true)}
+				onClick={() => setIsOpenLeft(true)}
 				withFeedback={{
 					isLoading,
 					inSuccess: {
@@ -68,27 +70,90 @@ function App() {
 					},
 				}}
 			>
-				Clique aqui
+				Open Left
+			</Button>
+			<Button
+				disabled={isLoading}
+				colorStyle="Secondary"
+				id="bruno"
+				type="button"
+				onClick={() => setIsOpenRight(true)}
+				withFeedback={{
+					isLoading,
+					inSuccess: {
+						setSuccess,
+						success,
+					},
+					inFailed: {
+						setFailed,
+						failed,
+					},
+				}}
+			>
+				Open Right
+			</Button>
+			<Button
+				disabled={isLoading}
+				colorStyle="Success"
+				id="bruno"
+				type="button"
+				onClick={() => setIsOpenFull(true)}
+				withFeedback={{
+					isLoading,
+					inSuccess: {
+						setSuccess,
+						success,
+					},
+					inFailed: {
+						setFailed,
+						failed,
+					},
+				}}
+			>
+				Open Full
 			</Button>
 			<Drawler
 				// disabledSaveButton={selectedRows.length === 0}
+				side="left"
+				isOpen={isOpenLeft}
+				setIsOpen={e => setIsOpenLeft(e)}
+				title="Listagem"
+				isLoading={isLoading}
+				// onSave={handleSave}
+			>
+				<div>left</div>
+			</Drawler>
+			<Drawler
+				// disabledSaveButton={selectedRows.length === 0}
+				side="right"
+				isOpen={isOpenRight}
+				setIsOpen={e => setIsOpenRight(e)}
+				title="Listagem"
+				isLoading={isLoading}
+				// onSave={handleSave}
+			>
+				<div>left</div>
+			</Drawler>
+			<Drawler
+				// disabledSaveButton={selectedRows.length === 0}
 				side="full"
-				isOpen={isOpen}
-				setIsOpen={e => setIsOpen(e)}
+				isOpen={isOpenFull}
+				setIsOpen={e => setIsOpenFull(e)}
 				title="Listagem"
 				isLoading={isLoading}
 				onSave={handleSave}
-				inSuccess={{
-					success,
-					setSuccess,
-					setIsOpen,
-				}}
-				inFailed={{
-					failed,
-					setFailed,
-				}}
 			>
-				<div>Bruno</div>
+				<div>
+					<Button
+						disabled={isLoading}
+						colorStyle="Success"
+						id="ss"
+						type="button"
+						onClick={() => setIsOpenFull(false)}
+					>
+						Close Full
+					</Button>
+				</div>
 			</Drawler>
 		</div>
 	);
