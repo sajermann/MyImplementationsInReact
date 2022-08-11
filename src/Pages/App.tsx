@@ -8,6 +8,7 @@ import styles from './styles.module.css';
 // import '../../build/index.css';
 
 function App() {
+	const [isOpenTop, setIsOpenTop] = useState(false);
 	const [isOpenLeft, setIsOpenLeft] = useState(false);
 	const [isOpenRight, setIsOpenRight] = useState(false);
 	const [isOpenFull, setIsOpenFull] = useState(false);
@@ -112,37 +113,48 @@ function App() {
 			>
 				Open Full
 			</Button>
+			<Button
+				colorStyle="Warning"
+				id="bruno"
+				type="button"
+				onClick={() => setIsOpenTop(true)}
+			>
+				Open Top
+			</Button>
 			<Drawler
-				// disabledSaveButton={selectedRows.length === 0}
 				side="left"
 				isOpen={isOpenLeft}
 				setIsOpen={e => setIsOpenLeft(e)}
-				title="Listagem"
-				isLoading={isLoading}
-				// onSave={handleSave}
 			>
 				<div>left</div>
 			</Drawler>
 			<Drawler
-				// disabledSaveButton={selectedRows.length === 0}
 				side="right"
+				percentage={90}
 				isOpen={isOpenRight}
 				setIsOpen={e => setIsOpenRight(e)}
-				title="Listagem"
-				isLoading={isLoading}
-				// onSave={handleSave}
 			>
 				<div>left</div>
 			</Drawler>
 			<Drawler
-				// disabledSaveButton={selectedRows.length === 0}
-				side="full"
+				side="bottom"
+				percentage={10}
 				isOpen={isOpenFull}
 				setIsOpen={e => setIsOpenFull(e)}
-				title="Listagem"
-				isLoading={isLoading}
-				onSave={handleSave}
 			>
+				<div>
+					<Button
+						disabled={isLoading}
+						colorStyle="Success"
+						id="ss"
+						type="button"
+						onClick={() => setIsOpenFull(false)}
+					>
+						Close Full
+					</Button>
+				</div>
+			</Drawler>
+			<Drawler side="top" isOpen={isOpenTop} setIsOpen={e => setIsOpenTop(e)}>
 				<div>
 					<Button
 						disabled={isLoading}

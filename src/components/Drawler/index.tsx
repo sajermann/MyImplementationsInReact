@@ -5,72 +5,67 @@ import styles from './styles.module.css';
 // import CloseButton from '../CloseButton';
 // import SaveButton from '../SaveButton';
 
-interface ISide {
-	side: 'left' | 'right';
-	onSave?: () => never;
-}
-
-interface ISideFull {
-	side: 'full';
-	onSave: () => void;
-}
-
 type Props = {
-	leftButton?: React.ReactNode;
-	rightButton?: React.ReactNode;
 	children: JSX.Element;
 	isOpen: boolean;
-	isLoading?: boolean;
 	setIsOpen: (isOpen: boolean) => void;
-	title?: string;
-	disabledSaveButton?: boolean;
-	inSuccess?: {
-		success: boolean;
-		setSuccess: (data: boolean) => void;
-		setIsOpen: (data: boolean) => void;
-	};
-	inFailed?: {
-		failed: boolean;
-		setFailed: (data: boolean) => void;
-	};
+	side: 'left' | 'right' | 'bottom' | 'top';
+	percentage?: number;
 };
-
-type Batata = Props & (ISide | ISideFull);
 
 export default function Drawler({
 	children,
 	side,
 	isOpen,
 	setIsOpen,
-	title,
-	isLoading,
-	onSave,
-	inSuccess,
-	inFailed,
-	disabledSaveButton,
-	leftButton,
-	rightButton,
-}: Batata) {
-	const [configSide, setConfigSide] = useState({ side: '', translate: '' });
+	percentage,
+}: Props) {
+	const [configSide, setConfigSide] = useState({
+		side: '',
+		translate: '',
+		style: {},
+	});
 
 	useEffect(() => {
 		if (side === 'left') {
 			setConfigSide({
 				side: styles.leftZero,
 				translate: styles.minusTranslateXFull,
+				style: {
+					maxWidth: `${percentage || 100}%`,
+					maxHeight: '100%',
+				},
 			});
 		}
 		if (side === 'right') {
 			setConfigSide({
 				side: styles.rightZero,
 				translate: styles.translateXFull,
+				style: {
+					maxWidth: `${percentage || 100}%`,
+					maxHeight: '100%',
+				},
 			});
 		}
 
-		if (side === 'full') {
+		if (side === 'bottom') {
 			setConfigSide({
 				side: styles.leftZero,
 				translate: styles.translateYFull,
+				style: {
+					maxWidth: '100%',
+					top: `${100 - (percentage || 100)}%`,
+				},
+			});
+		}
+		if (side === 'top') {
+			setConfigSide({
+				side: styles.leftZero,
+				translate: styles.translateYFull,
+				style: {
+					maxWidth: '100%',
+					bottom: `${100 - (percentage || 100)}%`,
+				},
 			});
 		}
 	}, [side]);
@@ -87,41 +82,21 @@ export default function Drawler({
 	}, [isOpen]);
 
 	return (
+		// eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
 		<main
 			className={`${styles.container} ${
 				isOpen ? styles.containerOpen : styles.containerClose
 			}`}
+			onClick={() => setIsOpen(false)} // Tirar saporra depois
 		>
 			<section
-				className={`${styles.subContainer} ${
-					side === 'full' ? styles.maxWidthfull : styles.maxWidthHalf
-				} ${configSide.side} ${styles.subContainer}  ${
-					isOpen ? styles.subContainerOpen : `${configSide.translate}`
-				}`}
+				className={`${styles.subContainer} ${configSide.side} ${
+					styles.subContainer
+				}  ${isOpen ? styles.subContainerOpen : `${configSide.translate}`}`}
+				style={configSide.style}
 			>
-				<article
-					className={`${styles.article} ${
-						side === 'full' ? styles.widthfull : styles.maxWidthHalf
-					}`}
-				>
-					{side === 'full' && (
-						<nav className={styles.containerNav}>
-							<div className={styles.subContainerNav}>
-								{leftButton}
-
-								<h2>{title}</h2>
-
-								{rightButton}
-							</div>
-						</nav>
-					)}
-					<div className={styles.main}>{children}</div>
-				</article>
+				{children}
 			</section>
-			<section
-				className={styles.sectionEscape}
-				onClick={() => setIsOpen(false)}
-			/>
 		</main>
 	);
 }
