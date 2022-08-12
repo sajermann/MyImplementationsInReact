@@ -28,7 +28,7 @@ export default function ButtonDocs() {
 		<div>
 			<Button
 				disabled={isLoading}
-				colorStyle="Primary"
+				colorStyle="Transparent"
 				id="bruno"
 				type="button"
 				onClick={() => handleSave()}

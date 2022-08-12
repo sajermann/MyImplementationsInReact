@@ -54,6 +54,7 @@
 	transition-duration: 500ms;
 	position: relative;
 	overflow: hidden;
+	cursor: pointer;
 }
 .btn:disabled {
 	cursor: not-allowed;
@@ -121,5 +122,5 @@
 .Transparent:hover {
 	--tw-bg-opacity: 1;
 	color: #fff;
-	/* background-color: rgb(161 98 7); */
+	background-color: rgba(144, 202, 249, 0.08);
 }
