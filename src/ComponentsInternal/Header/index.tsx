@@ -1,5 +1,6 @@
 import { Moon, Sun } from 'phosphor-react';
 import { useDarkMode } from '../../Hooks/DarkMode';
+import Menu from '../Menu';
 import styles from './styles.module.css';
 
 export default function Header() {
@@ -7,6 +8,7 @@ export default function Header() {
 	return (
 		<nav className={styles.nav}>
 			<div className={styles.container}>
+				<Menu />
 				<a href="/" className={styles.link}>
 					<span className={styles.title}>Sajermann UI for React</span>
 				</a>

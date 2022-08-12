@@ -1,4 +1,11 @@
-import { createContext, useContext, ReactNode, useState, useMemo } from 'react';
+import {
+	createContext,
+	useContext,
+	ReactNode,
+	useState,
+	useMemo,
+	useEffect,
+} from 'react';
 
 type DarkModeContextType = {
 	darkMode: boolean;
@@ -23,14 +30,17 @@ type Props = {
 export function DarkModeProvider({ children }: Props) {
 	const [darkMode, setDarkMode] = useState(true);
 
+	useEffect(() => {
+		const result = sessionStorage.getItem('@sajermann/ui-react:darkMode');
+		if (result) {
+			setDarkMode(result === 'true');
+		}
+	}, []);
+
 	function toggleDarkMode() {
+		sessionStorage.setItem('@sajermann/ui-react:darkMode', String(!darkMode));
 		setDarkMode(!darkMode);
 	}
-
-	// const value = {
-	// 	darkMode,
-	// 	toggleDarkMode,
-	// };
 
 	const memoizedValue = useMemo(
 		() => ({

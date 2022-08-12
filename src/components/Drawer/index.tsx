@@ -10,6 +10,7 @@ type Props = {
 	disableBackdrop?: boolean;
 	disableEsc?: boolean;
 	disableClickOnBackdrop?: boolean;
+	oneClickToClose?: boolean;
 };
 
 export default function Drawer({
@@ -21,6 +22,7 @@ export default function Drawer({
 	disableBackdrop,
 	disableEsc,
 	disableClickOnBackdrop,
+	oneClickToClose,
 }: Props) {
 	const [configSide] = useState(() => {
 		if (openFrom === 'left') {
@@ -109,6 +111,8 @@ export default function Drawer({
 			className={`${styles.container} ${
 				isOpen ? styles.containerOpen : styles.containerClose
 			}`}
+			role="presentation"
+			onClick={oneClickToClose ? () => setIsOpen(false) : () => null}
 		>
 			<section
 				className={`${isOpen && styles.backdropOpen}`}
