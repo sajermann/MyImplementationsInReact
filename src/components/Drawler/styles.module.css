@@ -1,5 +1,5 @@
 :root {
-  --tw-bg-opacity: 0.25;
+	--tw-bg-opacity: 0.25;
 	--tw-bg-opacity: 1;
 	--tw-translate-x: 100%;
 	--tw-translate-x: 0;
@@ -52,7 +52,7 @@
 }
 
 .subContainer {
-	background-color: brown;
+	background-color: aqua;
 	width: 100vw;
 	position: absolute;
 	height: 100%;
@@ -87,22 +87,25 @@
 	left: 0px;
 }
 
-.translateXFull {
-	transform: translate(100%, var(--tw-translate-y));
+.translateRight {
+	transform: translate(100%, 0);
 }
 
-.minusTranslateXFull {
-	transform: translate(-100%, var(--tw-translate-y));
+.translateLeft {
+	transform: translate(-100%, 0);
 }
 
-.translateYFull {
+.translateBottom {
 	transform: translate(0%, 100%);
 }
 
-.maxWidthfull {
-	max-width: 100%;
+.translateTop {
+	transform: translate(0%, -100%);
 }
 
-.maxWidthHalf {
-	max-width: 32% /* 512px */;
+.backdropOpen {
+	width: 100%;
+	opacity: 0.5;
+	height: 100%;
+	position: fixed;
 }

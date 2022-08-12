@@ -123,6 +123,7 @@ function App() {
 			</Button>
 			<Drawler
 				side="left"
+				percentage={10}
 				isOpen={isOpenLeft}
 				setIsOpen={e => setIsOpenLeft(e)}
 			>
@@ -130,9 +131,10 @@ function App() {
 			</Drawler>
 			<Drawler
 				side="right"
-				percentage={90}
+				percentage={30}
 				isOpen={isOpenRight}
 				setIsOpen={e => setIsOpenRight(e)}
+				disableBackdrop
 			>
 				<div>left</div>
 			</Drawler>
@@ -140,6 +142,7 @@ function App() {
 				side="bottom"
 				percentage={10}
 				isOpen={isOpenFull}
+				disableEsc
 				setIsOpen={e => setIsOpenFull(e)}
 			>
 				<div>
@@ -154,14 +157,20 @@ function App() {
 					</Button>
 				</div>
 			</Drawler>
-			<Drawler side="top" isOpen={isOpenTop} setIsOpen={e => setIsOpenTop(e)}>
-				<div>
+			<Drawler
+				side="top"
+				disableClickOnBackdrop
+				percentage={90}
+				isOpen={isOpenTop}
+				setIsOpen={e => setIsOpenTop(e)}
+			>
+				<div style={{ backgroundColor: 'black', height: '100%' }}>
 					<Button
 						disabled={isLoading}
 						colorStyle="Success"
 						id="ss"
 						type="button"
-						onClick={() => setIsOpenFull(false)}
+						onClick={() => setIsOpenTop(false)}
 					>
 						Close Full
 					</Button>
