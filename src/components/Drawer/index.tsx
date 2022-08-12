@@ -5,16 +5,16 @@ type Props = {
 	children: JSX.Element;
 	isOpen: boolean;
 	setIsOpen: (isOpen: boolean) => void;
-	side: 'left' | 'right' | 'bottom' | 'top';
+	openFrom: 'left' | 'right' | 'bottom' | 'top';
 	percentage?: number;
 	disableBackdrop?: boolean;
 	disableEsc?: boolean;
 	disableClickOnBackdrop?: boolean;
 };
 
-export default function Drawler({
+export default function Drawer({
 	children,
-	side,
+	openFrom,
 	isOpen,
 	setIsOpen,
 	percentage,
@@ -23,9 +23,9 @@ export default function Drawler({
 	disableClickOnBackdrop,
 }: Props) {
 	const [configSide] = useState(() => {
-		if (side === 'left') {
+		if (openFrom === 'left') {
 			return {
-				side: styles.leftZero,
+				openFrom: styles.leftZero,
 				translate: styles.translateLeft,
 				style: {
 					maxWidth: `${percentage || 100}%`,
@@ -33,9 +33,9 @@ export default function Drawler({
 				},
 			};
 		}
-		if (side === 'right') {
+		if (openFrom === 'right') {
 			return {
-				side: styles.rightZero,
+				openFrom: styles.rightZero,
 				translate: styles.translateRight,
 				style: {
 					maxWidth: `${percentage || 100}%`,
@@ -44,9 +44,9 @@ export default function Drawler({
 			};
 		}
 
-		if (side === 'bottom') {
+		if (openFrom === 'bottom') {
 			return {
-				side: '',
+				openFrom: '',
 				translate: styles.translateBottom,
 				style: {
 					maxWidth: '100%',
@@ -54,9 +54,9 @@ export default function Drawler({
 				},
 			};
 		}
-		if (side === 'top') {
+		if (openFrom === 'top') {
 			return {
-				side: '',
+				openFrom: '',
 				translate: styles.translateTop,
 				style: {
 					maxWidth: '100%',
@@ -65,15 +65,6 @@ export default function Drawler({
 			};
 		}
 		return {};
-	});
-
-	const [id] = useState(() => {
-		const number: number[] = [];
-
-		while (number.length < 10) {
-			number.push(Math.floor(Math.random() * 10));
-		}
-		return number.join('');
 	});
 
 	useEffect(() => {
@@ -115,7 +106,6 @@ export default function Drawler({
 
 	return (
 		<main
-			id={`_${id}`}
 			className={`${styles.container} ${
 				isOpen ? styles.containerOpen : styles.containerClose
 			}`}
@@ -128,7 +118,7 @@ export default function Drawler({
 			/>
 
 			<section
-				className={`${styles.subContainer} ${configSide.side} ${
+				className={`${styles.subContainer} ${configSide.openFrom} ${
 					isOpen ? styles.subContainerOpen : `${configSide.translate}`
 				}`}
 				style={configSide.style}

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Button } from '../components';
-import Drawler from '../components/Drawler';
+import Drawer from '../components/Drawer';
 import styles from './styles.module.css';
 
 // import { Button, Loading } from '@sajermann/ui-react';
@@ -121,25 +121,25 @@ function App() {
 			>
 				Open Top
 			</Button>
-			<Drawler
-				side="left"
+			<Drawer
+				openFrom="left"
 				percentage={10}
 				isOpen={isOpenLeft}
 				setIsOpen={e => setIsOpenLeft(e)}
 			>
 				<div>left</div>
-			</Drawler>
-			<Drawler
-				side="right"
+			</Drawer>
+			<Drawer
+				openFrom="right"
 				percentage={30}
 				isOpen={isOpenRight}
 				setIsOpen={e => setIsOpenRight(e)}
 				disableBackdrop
 			>
 				<div>left</div>
-			</Drawler>
-			<Drawler
-				side="bottom"
+			</Drawer>
+			<Drawer
+				openFrom="bottom"
 				percentage={10}
 				isOpen={isOpenFull}
 				disableEsc
@@ -156,9 +156,9 @@ function App() {
 						Close Full
 					</Button>
 				</div>
-			</Drawler>
-			<Drawler
-				side="top"
+			</Drawer>
+			<Drawer
+				openFrom="top"
 				disableClickOnBackdrop
 				percentage={90}
 				isOpen={isOpenTop}
@@ -175,7 +175,7 @@ function App() {
 						Close Full
 					</Button>
 				</div>
-			</Drawler>
+			</Drawer>
 		</div>
 	);
 }
