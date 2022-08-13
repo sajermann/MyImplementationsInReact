@@ -67,52 +67,53 @@ function Button({
 	const [isEllipsisActive, setIsEllipsisActive] = useState(false);
 	const divRef = useRef<HTMLDivElement>(null);
 
-	function verify() {
+	function verifyClasses() {
+		const classesToReturn = [];
 		if (colorStyle === 'Primary' || colorStyle === undefined) {
-			if (variant === 'Default' || variant === undefined) {
-				return styles.PrimaryDefault;
-			}
+			classesToReturn.push(styles.primary);
 			if (variant === 'Outlined') {
-				return styles.PrimaryOutlined;
+				classesToReturn.push(styles.primaryOutlined);
 			}
 			if (variant === 'Option') {
-				return styles.PrimaryOption;
+				classesToReturn.push(styles.primaryOutlined);
+				classesToReturn.push(styles.option);
 			}
 		}
+
 		if (colorStyle === 'Secondary') {
-			if (variant === 'Default' || variant === undefined) {
-				return styles.SecondaryDefault;
-			}
+			classesToReturn.push(styles.secondary);
 			if (variant === 'Outlined') {
-				return styles.SecondaryOutlined;
+				classesToReturn.push(styles.secondaryOutlined);
 			}
 			if (variant === 'Option') {
-				return styles.SecondaryOption;
+				classesToReturn.push(styles.secondaryOutlined);
+				classesToReturn.push(styles.option);
 			}
 		}
+
 		if (colorStyle === 'Success') {
-			if (variant === 'Default' || variant === undefined) {
-				return styles.SuccessDefault;
-			}
+			classesToReturn.push(styles.success);
 			if (variant === 'Outlined') {
-				return styles.SuccessOutlined;
+				classesToReturn.push(styles.successOutlined);
 			}
 			if (variant === 'Option') {
-				return styles.SuccessOption;
+				classesToReturn.push(styles.successOutlined);
+				classesToReturn.push(styles.option);
 			}
 		}
+
 		if (colorStyle === 'Warning') {
-			if (variant === 'Default' || variant === undefined) {
-				return styles.WarningDefault;
-			}
+			classesToReturn.push(styles.warning);
 			if (variant === 'Outlined') {
-				return styles.WarningOutlined;
+				classesToReturn.push(styles.warningOutlined);
 			}
 			if (variant === 'Option') {
-				return styles.WarningOption;
+				classesToReturn.push(styles.warningOutlined);
+				classesToReturn.push(styles.option);
 			}
 		}
-		return null;
+
+		return classesToReturn.join(' ');
 	}
 
 	useEffect(() => {
@@ -216,9 +217,9 @@ function Button({
 			{...props}
 			onClick={createEffect}
 			type={type}
-			className={`${COLOR_STYLE[colorStyle || 'Primary']}  ${styles.btn} ${
-				!children && styles.onlyIcon
-			} ${props.className} ${verify()} `}
+			className={` ${styles.btn} ${!children && styles.onlyIcon} ${
+				props.className
+			} ${verifyClasses()} `}
 		>
 			<div className={styles.internal}>
 				{startIcon && <div className={styles.containerIcon}>{startIcon}</div>}

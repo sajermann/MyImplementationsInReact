@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Button } from '../../../components';
+import styles from './styles.module.css';
 
 export default function ButtonDocs() {
 	const [isLoading, setIsLoading] = useState(false);
@@ -26,110 +27,120 @@ export default function ButtonDocs() {
 	}
 	return (
 		<div>
-			<Button
-				disabled={isLoading}
-				colorStyle="Primary"
-				type="button"
-				onClick={() => handleSave()}
-				withFeedback={{
-					isLoading,
-					inSuccess: {
-						setSuccess,
-						success,
-					},
-					inFailed: {
-						setFailed,
-						failed,
-					},
-				}}
-			>
-				Default
-			</Button>
-			<Button
-				disabled={isLoading}
-				colorStyle="Primary"
-				variant="Outlined"
-				type="button"
-				onClick={() => handleSave()}
-				withFeedback={{
-					isLoading,
-					inSuccess: {
-						setSuccess,
-						success,
-					},
-					inFailed: {
-						setFailed,
-						failed,
-					},
-				}}
-			>
-				Outlined
-			</Button>
-			<Button
-				disabled={isLoading}
-				colorStyle="Primary"
-				variant="Option"
-				type="button"
-			>
-				Option
-			</Button>
-			<Button disabled={isLoading} colorStyle="Secondary" type="button">
-				Secondary Default
-			</Button>
-			<Button
-				disabled={isLoading}
-				colorStyle="Secondary"
-				variant="Outlined"
-				type="button"
-			>
-				Secondary Outilined
-			</Button>
-			<Button
-				disabled={isLoading}
-				colorStyle="Secondary"
-				variant="Option"
-				type="button"
-			>
-				Secondary Option
-			</Button>
-			<Button disabled={isLoading} colorStyle="Success" type="button">
-				Success Default
-			</Button>
-			<Button
-				disabled={isLoading}
-				colorStyle="Success"
-				variant="Outlined"
-				type="button"
-			>
-				Success Outilined
-			</Button>
-			<Button
-				disabled={isLoading}
-				colorStyle="Success"
-				variant="Option"
-				type="button"
-			>
-				Success Option
-			</Button>
-			<Button disabled={isLoading} colorStyle="Warning" type="button">
-				Warning Default
-			</Button>
-			<Button
-				disabled={isLoading}
-				colorStyle="Warning"
-				variant="Outlined"
-				type="button"
-			>
-				Warning Outilined
-			</Button>
-			<Button
-				disabled={isLoading}
-				colorStyle="Warning"
-				variant="Option"
-				type="button"
-			>
-				Warning Option
-			</Button>
+			O componente de Button permite renderizar alguns tipos de botões baseados
+			nas configurações abaixo: Default:
+			<div className={styles.containerButtons}>
+				<Button
+					disabled={isLoading}
+					colorStyle="Primary"
+					type="button"
+					onClick={() => handleSave()}
+					withFeedback={{
+						isLoading,
+						inSuccess: {
+							setSuccess,
+							success,
+						},
+						inFailed: {
+							setFailed,
+							failed,
+						},
+					}}
+				>
+					Default
+				</Button>
+				<Button
+					disabled={isLoading}
+					colorStyle="Primary"
+					variant="Outlined"
+					type="button"
+					onClick={() => handleSave()}
+					withFeedback={{
+						isLoading,
+						inSuccess: {
+							setSuccess,
+							success,
+						},
+						inFailed: {
+							setFailed,
+							failed,
+						},
+					}}
+				>
+					Outlined
+				</Button>
+				<Button
+					disabled={isLoading}
+					colorStyle="Primary"
+					variant="Option"
+					type="button"
+				>
+					Option
+				</Button>
+			</div>
+			<div className={styles.containerButtons}>
+				<Button disabled={isLoading} colorStyle="Secondary" type="button">
+					Secondary Default
+				</Button>
+				<Button
+					disabled={isLoading}
+					colorStyle="Secondary"
+					variant="Outlined"
+					type="button"
+				>
+					Secondary Outilined
+				</Button>
+				<Button
+					disabled={isLoading}
+					colorStyle="Secondary"
+					variant="Option"
+					type="button"
+				>
+					Secondary Option
+				</Button>
+			</div>
+			<div className={styles.containerButtons}>
+				<Button disabled={isLoading} colorStyle="Success" type="button">
+					Success Default
+				</Button>
+				<Button
+					disabled={isLoading}
+					colorStyle="Success"
+					variant="Outlined"
+					type="button"
+				>
+					Success Outilined
+				</Button>
+				<Button
+					disabled={isLoading}
+					colorStyle="Success"
+					variant="Option"
+					type="button"
+				>
+					Success Option
+				</Button>
+			</div>
+			<div className={styles.containerButtons}>
+				<Button disabled={isLoading} colorStyle="Warning" type="button">
+					Warning Default
+				</Button>
+				<Button
+					disabled={isLoading}
+					colorStyle="Warning"
+					variant="Outlined"
+					type="button"
+				>
+					Warning Outilined
+				</Button>
+				<Button
+					disabled={isLoading}
+					colorStyle="Warning"
+					variant="Option"
+					type="button"
+				>
+					Warning Option
+				</Button>
+			</div>
 		</div>
 	);
 }
