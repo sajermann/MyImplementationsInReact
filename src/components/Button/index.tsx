@@ -33,7 +33,8 @@ type PropsFeedBack = {
 interface Props extends React.HTMLProps<HTMLButtonElement> {
 	type: 'button' | 'reset' | 'submit';
 	withFeedback?: PropsFeedBack;
-	colorStyle?: 'Primary' | 'Secondary' | 'Success' | 'Transparent' | 'Warning';
+	colorStyle?: 'Primary' | 'Secondary' | 'Success' | 'Warning';
+	variant?: 'Default' | 'Outlined' | 'Option';
 	startIcon?: JSX.Element;
 	endIcon?: JSX.Element;
 }
@@ -45,6 +46,7 @@ function Button({
 	colorStyle,
 	startIcon,
 	endIcon,
+	variant,
 	...props
 }: Props) {
 	const { onClick } = props;
@@ -55,8 +57,63 @@ function Button({
 		Warning: styles.Warning,
 		Transparent: styles.Transparent,
 	};
+	const VARIANT = {
+		Primary: styles.PrimaryOutlined,
+		Secondary: styles.Secondary,
+		Success: styles.Success,
+		Warning: styles.Warning,
+		Transparent: styles.Transparent,
+	};
 	const [isEllipsisActive, setIsEllipsisActive] = useState(false);
 	const divRef = useRef<HTMLDivElement>(null);
+
+	function verify() {
+		if (colorStyle === 'Primary' || colorStyle === undefined) {
+			if (variant === 'Default' || variant === undefined) {
+				return styles.PrimaryDefault;
+			}
+			if (variant === 'Outlined') {
+				return styles.PrimaryOutlined;
+			}
+			if (variant === 'Option') {
+				return styles.PrimaryOption;
+			}
+		}
+		if (colorStyle === 'Secondary') {
+			if (variant === 'Default' || variant === undefined) {
+				return styles.SecondaryDefault;
+			}
+			if (variant === 'Outlined') {
+				return styles.SecondaryOutlined;
+			}
+			if (variant === 'Option') {
+				return styles.SecondaryOption;
+			}
+		}
+		if (colorStyle === 'Success') {
+			if (variant === 'Default' || variant === undefined) {
+				return styles.SuccessDefault;
+			}
+			if (variant === 'Outlined') {
+				return styles.SuccessOutlined;
+			}
+			if (variant === 'Option') {
+				return styles.SuccessOption;
+			}
+		}
+		if (colorStyle === 'Warning') {
+			if (variant === 'Default' || variant === undefined) {
+				return styles.WarningDefault;
+			}
+			if (variant === 'Outlined') {
+				return styles.WarningOutlined;
+			}
+			if (variant === 'Option') {
+				return styles.WarningOption;
+			}
+		}
+		return null;
+	}
 
 	useEffect(() => {
 		const element = divRef.current;
@@ -105,7 +162,6 @@ function Button({
 	}
 
 	function createEffect(event: React.MouseEvent<HTMLButtonElement>) {
-		console.log('Click');
 		insertCss();
 		const button = event.currentTarget;
 		const circle = document.createElement('span');
@@ -162,7 +218,7 @@ function Button({
 			type={type}
 			className={`${COLOR_STYLE[colorStyle || 'Primary']}  ${styles.btn} ${
 				!children && styles.onlyIcon
-			} ${props.className} `}
+			} ${props.className} ${verify()} `}
 		>
 			<div className={styles.internal}>
 				{startIcon && <div className={styles.containerIcon}>{startIcon}</div>}

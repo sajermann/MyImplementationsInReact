@@ -28,8 +28,7 @@ export default function ButtonDocs() {
 		<div>
 			<Button
 				disabled={isLoading}
-				colorStyle="Transparent"
-				id="bruno"
+				colorStyle="Primary"
 				type="button"
 				onClick={() => handleSave()}
 				withFeedback={{
@@ -44,7 +43,92 @@ export default function ButtonDocs() {
 					},
 				}}
 			>
-				Save
+				Default
+			</Button>
+			<Button
+				disabled={isLoading}
+				colorStyle="Primary"
+				variant="Outlined"
+				type="button"
+				onClick={() => handleSave()}
+				withFeedback={{
+					isLoading,
+					inSuccess: {
+						setSuccess,
+						success,
+					},
+					inFailed: {
+						setFailed,
+						failed,
+					},
+				}}
+			>
+				Outlined
+			</Button>
+			<Button
+				disabled={isLoading}
+				colorStyle="Primary"
+				variant="Option"
+				type="button"
+			>
+				Option
+			</Button>
+			<Button disabled={isLoading} colorStyle="Secondary" type="button">
+				Secondary Default
+			</Button>
+			<Button
+				disabled={isLoading}
+				colorStyle="Secondary"
+				variant="Outlined"
+				type="button"
+			>
+				Secondary Outilined
+			</Button>
+			<Button
+				disabled={isLoading}
+				colorStyle="Secondary"
+				variant="Option"
+				type="button"
+			>
+				Secondary Option
+			</Button>
+			<Button disabled={isLoading} colorStyle="Success" type="button">
+				Success Default
+			</Button>
+			<Button
+				disabled={isLoading}
+				colorStyle="Success"
+				variant="Outlined"
+				type="button"
+			>
+				Success Outilined
+			</Button>
+			<Button
+				disabled={isLoading}
+				colorStyle="Success"
+				variant="Option"
+				type="button"
+			>
+				Success Option
+			</Button>
+			<Button disabled={isLoading} colorStyle="Warning" type="button">
+				Warning Default
+			</Button>
+			<Button
+				disabled={isLoading}
+				colorStyle="Warning"
+				variant="Outlined"
+				type="button"
+			>
+				Warning Outilined
+			</Button>
+			<Button
+				disabled={isLoading}
+				colorStyle="Warning"
+				variant="Option"
+				type="button"
+			>
+				Warning Option
 			</Button>
 		</div>
 	);
