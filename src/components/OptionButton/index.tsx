@@ -1,11 +1,10 @@
 import { generateGuid } from '@sajermann/utils/Random';
 import styles from './styles.module.css';
 
-interface Props extends React.HTMLProps<HTMLButtonElement> {
-	srcForImage?: string;
-}
-
-function OptionButton({ children, srcForImage, ...props }: Props) {
+function OptionButton({
+	children,
+	...props
+}: React.HTMLProps<HTMLButtonElement>) {
 	const { onClick } = props;
 
 	const ID_BUTTON = 'effect_sajermann_ui_button';
@@ -77,9 +76,6 @@ function OptionButton({ children, srcForImage, ...props }: Props) {
 			type="button"
 			className={`${styles.btn} ${props.className}`}
 		>
-			{srcForImage && (
-				<img src={srcForImage} className={styles.img} alt="ImageOptionButton" />
-			)}
 			{children}
 		</button>
 	);

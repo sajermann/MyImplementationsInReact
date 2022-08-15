@@ -42,19 +42,21 @@ export default function Menu() {
 						<div className={styles.title}>Menu</div>
 					</nav>
 					<div className={styles.main}>
-						<Button
-							colorStyle="Primary"
-							type="button"
-							onClick={() => goTo('/')}
-						>
-							Home
-						</Button>
-
-						<strong>Componentes</strong>
 						<OptionButton
 							style={{
 								color: '#fff',
 								width: '100%',
+								display: 'flex',
+							}}
+							onClick={() => goTo('/')}
+						>
+							Home
+						</OptionButton>
+						<OptionButton
+							style={{
+								color: '#fff',
+								width: '100%',
+								display: 'flex',
 							}}
 							onClick={() => goTo('/docs/button')}
 						>

@@ -101,6 +101,7 @@ function FailedIcon({ color, size }: PropsFeedBackIcons) {
 
 type PropsFeedBack = {
 	isLoading: boolean;
+	typeLoadingIcon?: 'Default' | 'Points';
 	inSuccess?: {
 		success: boolean;
 		setSuccess: (data: boolean) => void;
@@ -219,6 +220,9 @@ function Button({
 	}
 
 	function createEffect(event: React.MouseEvent<HTMLButtonElement>) {
+		const temp = event.target as HTMLElement;
+		const { x: tempX, y: tempY } = temp.getBoundingClientRect();
+
 		insertCss();
 		const button = event.currentTarget;
 		const circle = document.createElement('span');
@@ -227,8 +231,12 @@ function Button({
 
 		// eslint-disable-next-line no-multi-assign
 		circle.style.width = circle.style.height = `${diameter}px`;
-		circle.style.left = `${event.clientX - button.offsetLeft - radius}px`;
-		circle.style.top = `${event.clientY - button.offsetTop - radius}px`;
+		circle.style.left = `${
+			(event.clientX || tempX) - button.offsetLeft - radius
+		}px`;
+		circle.style.top = `${
+			(event.clientY || tempY) - button.offsetTop - radius
+		}px`;
 		circle.style.position = 'absolute';
 		circle.style.borderRadius = '50%';
 		circle.style.transform = 'scale(0)';
@@ -325,7 +333,11 @@ function Button({
 					withFeedback?.inFailed?.failed) && (
 					<div className={styles.containerIcon}>
 						{withFeedback?.isLoading && (
-							<Loading color={verifyColorIcon()} data-testid="loadingIcon" />
+							<Loading
+								color={verifyColorIcon()}
+								type={withFeedback.typeLoadingIcon}
+								data-testid="loadingIcon"
+							/>
 						)}
 						{!withFeedback?.isLoading && withFeedback?.inSuccess?.success && (
 							<SuccessIcon />
