@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { Button } from '../../../components';
+import { Button, Loading, OptionButton } from '../../../components';
+import palmeiras from '../../../assets/palmeiras.webp';
 import styles from './styles.module.css';
 
 export default function ButtonDocs() {
@@ -20,7 +21,7 @@ export default function ButtonDocs() {
 	}
 	async function handleSave() {
 		setIsLoading(true);
-		await delay(1001);
+		await delay(3001);
 
 		setIsLoading(false);
 		setSuccess(true);
@@ -37,6 +38,7 @@ export default function ButtonDocs() {
 					onClick={() => handleSave()}
 					withFeedback={{
 						isLoading,
+						typeLoadingIcon: 'Points',
 						inSuccess: {
 							setSuccess,
 							success,
@@ -56,6 +58,7 @@ export default function ButtonDocs() {
 					type="button"
 					onClick={() => handleSave()}
 					withFeedback={{
+						typeLoadingIcon: 'Points',
 						isLoading: true,
 						inSuccess: {
 							setSuccess,
@@ -140,9 +143,23 @@ export default function ButtonDocs() {
 					colorStyle="Warning"
 					variant="Option"
 					type="button"
+					onClick={e => console.log(e)}
 				>
 					Warning Option
 				</Button>
+			</div>
+			<div className={styles.containerButtons}>
+				<OptionButton
+					// srcForImage={palmeiras}
+					style={{
+						color: '#fff',
+						width: '150px',
+						height: '150px',
+					}}
+				>
+					Warning Default
+				</OptionButton>
+				<Loading />
 			</div>
 		</div>
 	);
