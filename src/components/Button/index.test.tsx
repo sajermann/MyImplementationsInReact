@@ -1,7 +1,7 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import { render, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import delay from './delay';
+import { delay } from '@sajermann/utils/Delay';
 import { Button } from './index';
 
 describe('Components/Button', () => {

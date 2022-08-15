@@ -1,16 +1,16 @@
 /* eslint-disable react/button-has-type */
 import { useEffect, useRef, useState } from 'react';
 import { generateGuid } from '@sajermann/utils/Random';
+import { delay } from '@sajermann/utils/Delay';
 import styles from './styles.module.css';
 import { Loading } from '../Loading';
-import delay from './delay';
 
 type PropsFeedBackIcons = {
 	color?: string;
 	size?: string;
 };
 
-function Success({ color, size }: PropsFeedBackIcons) {
+function SuccessIcon({ color, size }: PropsFeedBackIcons) {
 	return (
 		<svg
 			version="1.1"
@@ -53,7 +53,7 @@ function Success({ color, size }: PropsFeedBackIcons) {
 	);
 }
 
-function Failed({ color, size }: PropsFeedBackIcons) {
+function FailedIcon({ color, size }: PropsFeedBackIcons) {
 	return (
 		<svg
 			version="1.1"
@@ -328,10 +328,10 @@ function Button({
 							<Loading color={verifyColorIcon()} data-testid="loadingIcon" />
 						)}
 						{!withFeedback?.isLoading && withFeedback?.inSuccess?.success && (
-							<Success />
+							<SuccessIcon />
 						)}
 						{!withFeedback?.isLoading && withFeedback?.inFailed?.failed && (
-							<Failed />
+							<FailedIcon />
 						)}
 					</div>
 				)}

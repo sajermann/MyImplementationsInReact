@@ -52,6 +52,7 @@ export default function Menu() {
 						<strong>Componentes</strong>
 						<Button
 							colorStyle="Primary"
+							variant="Option"
 							type="button"
 							onClick={() => goTo('/docs/button')}
 						>
