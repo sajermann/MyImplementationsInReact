@@ -56,7 +56,7 @@ export default function ButtonDocs() {
 					type="button"
 					onClick={() => handleSave()}
 					withFeedback={{
-						isLoading,
+						isLoading: true,
 						inSuccess: {
 							setSuccess,
 							success,
@@ -74,6 +74,9 @@ export default function ButtonDocs() {
 					colorStyle="Primary"
 					variant="Option"
 					type="button"
+					withFeedback={{
+						isLoading: true,
+					}}
 				>
 					Option
 				</Button>

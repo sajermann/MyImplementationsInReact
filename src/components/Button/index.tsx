@@ -1,20 +1,101 @@
 /* eslint-disable react/button-has-type */
 import { useEffect, useRef, useState } from 'react';
+import { generateGuid } from '@sajermann/utils/Random';
 import styles from './styles.module.css';
-import successSvg from './success.svg';
-import failedSvg from './failed.svg';
 import { Loading } from '../Loading';
 import delay from './delay';
 
-function Success() {
+type PropsFeedBackIcons = {
+	color?: string;
+	size?: string;
+};
+
+function Success({ color, size }: PropsFeedBackIcons) {
 	return (
-		<img src={successSvg} className={styles.successSvg} alt="success img" />
+		<svg
+			version="1.1"
+			style={{
+				color: color || '#fff',
+				width: size || '1.2rem',
+				height: size || '1.2rem',
+			}}
+			xmlns="http://www.w3.org/2000/svg"
+			x="0px"
+			y="0px"
+			viewBox="0 0 297 297"
+			xmlSpace="preserve"
+		>
+			<g>
+				<path
+					fill="currentColor"
+					d="M294.033,82.033l-54.675-54.701c-1.899-1.901-4.479-2.97-7.167-2.97c-2.688,0-5.268,1.068-7.168,2.97L113.636,138.765
+		L71.975,97.09c-1.901-1.9-4.479-2.969-7.169-2.969c-2.688,0-5.267,1.069-7.167,2.97L2.966,151.794
+		c-3.955,3.958-3.955,10.372,0.001,14.329l103.501,103.545c1.9,1.902,4.478,2.97,7.168,2.97c2.689,0,5.267-1.067,7.167-2.97
+		L294.033,96.361C297.989,92.405,297.989,85.99,294.033,82.033z"
+				/>
+			</g>
+			<g />
+			<g />
+			<g />
+			<g />
+			<g />
+			<g />
+			<g />
+			<g />
+			<g />
+			<g />
+			<g />
+			<g />
+			<g />
+			<g />
+			<g />
+		</svg>
 	);
 }
 
-function Failed() {
+function Failed({ color, size }: PropsFeedBackIcons) {
 	return (
-		<img src={failedSvg} className={styles.successSvg} alt="success img" />
+		<svg
+			version="1.1"
+			style={{
+				color: color || '#fff',
+				width: size || '1rem',
+				height: size || '1rem',
+			}}
+			xmlns="http://www.w3.org/2000/svg"
+			x="0px"
+			y="0px"
+			viewBox="0 0 503.021 503.021"
+			xmlSpace="preserve"
+		>
+			<g>
+				<g>
+					<path
+						fill="currentColor"
+						d="M491.613,75.643l-64.235-64.235c-15.202-15.202-39.854-15.202-55.056,0L251.507,132.222L130.686,11.407
+			c-15.202-15.202-39.853-15.202-55.055,0L11.401,75.643c-15.202,15.202-15.202,39.854,0,55.056l120.821,120.815L11.401,372.328
+			c-15.202,15.202-15.202,39.854,0,55.056l64.235,64.229c15.202,15.202,39.854,15.202,55.056,0l120.815-120.814l120.822,120.814
+			c15.202,15.202,39.854,15.202,55.056,0l64.235-64.229c15.202-15.202,15.202-39.854,0-55.056L370.793,251.514l120.82-120.815
+			C506.815,115.49,506.815,90.845,491.613,75.643z"
+					/>
+				</g>
+			</g>
+			<g />
+			<g />
+			<g />
+			<g />
+			<g />
+			<g />
+			<g />
+			<g />
+			<g />
+			<g />
+			<g />
+			<g />
+			<g />
+			<g />
+			<g />
+		</svg>
 	);
 }
 
@@ -50,20 +131,6 @@ function Button({
 	...props
 }: Props) {
 	const { onClick } = props;
-	const COLOR_STYLE = {
-		Primary: styles.Primary,
-		Secondary: styles.Secondary,
-		Success: styles.Success,
-		Warning: styles.Warning,
-		Transparent: styles.Transparent,
-	};
-	const VARIANT = {
-		Primary: styles.PrimaryOutlined,
-		Secondary: styles.Secondary,
-		Success: styles.Success,
-		Warning: styles.Warning,
-		Transparent: styles.Transparent,
-	};
 	const [isEllipsisActive, setIsEllipsisActive] = useState(false);
 	const divRef = useRef<HTMLDivElement>(null);
 
@@ -127,18 +194,7 @@ function Button({
 		);
 	}, []);
 
-	function generateGuid(): string {
-		let d = new Date().getTime();
-		return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, c => {
-			// eslint-disable-next-line no-bitwise
-			const r = (d + Math.random() * 16) % 16 | 0;
-			d = Math.floor(d / 16);
-			// eslint-disable-next-line no-bitwise
-			return (c === 'x' ? r : (r & 0x3) | 0x8).toString(16);
-		});
-	}
-
-	const ID_BUTTON = 'riple_sajermann_ui_button';
+	const ID_BUTTON = 'effect_sajermann_ui_button';
 	const ID = generateGuid();
 
 	function insertCss() {
@@ -212,6 +268,38 @@ function Button({
 		}
 	}, [withFeedback]);
 
+	function verifyColorIcon() {
+		if (variant === 'Default' || variant === undefined) {
+			return 'rgb(255 255 255)';
+		}
+
+		if (colorStyle === 'Primary' || colorStyle === undefined) {
+			if (variant === 'Outlined' || variant === 'Option') {
+				return '#476fe6';
+			}
+		}
+
+		if (colorStyle === 'Secondary') {
+			if (variant === 'Outlined' || variant === 'Option') {
+				return 'rgb(239 68 68)';
+			}
+		}
+
+		if (colorStyle === 'Success') {
+			if (variant === 'Outlined' || variant === 'Option') {
+				return 'rgb(34 197 94)';
+			}
+		}
+
+		if (colorStyle === 'Warning') {
+			if (variant === 'Outlined' || variant === 'Option') {
+				return 'rgb(234 179 8)';
+			}
+		}
+
+		return '';
+	}
+
 	return (
 		<button
 			{...props}
@@ -236,7 +324,9 @@ function Button({
 					withFeedback?.inSuccess?.success ||
 					withFeedback?.inFailed?.failed) && (
 					<div className={styles.containerIcon}>
-						{withFeedback?.isLoading && <Loading data-testid="loadingIcon" />}
+						{withFeedback?.isLoading && (
+							<Loading color={verifyColorIcon()} data-testid="loadingIcon" />
+						)}
 						{!withFeedback?.isLoading && withFeedback?.inSuccess?.success && (
 							<Success />
 						)}
