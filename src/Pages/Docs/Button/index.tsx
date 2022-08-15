@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { Button } from '../../../components';
+import { Button, OptionButton } from '../../../components';
+import palmeiras from '../../../assets/palmeiras.webp';
 import styles from './styles.module.css';
 
 export default function ButtonDocs() {
@@ -140,9 +141,22 @@ export default function ButtonDocs() {
 					colorStyle="Warning"
 					variant="Option"
 					type="button"
+					onClick={e => console.log(e)}
 				>
 					Warning Option
 				</Button>
+			</div>
+			<div className={styles.containerButtons}>
+				<OptionButton
+					srcForImage={palmeiras}
+					style={{
+						color: '#fff',
+						width: '150px',
+						height: '150px',
+					}}
+				>
+					Warning Default
+				</OptionButton>
 			</div>
 		</div>
 	);

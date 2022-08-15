@@ -1,6 +1,7 @@
 import { List } from 'phosphor-react';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { OptionButton } from '../../components';
 import { Button } from '../../components/Button';
 import Drawer from '../../components/Drawer';
 import { useDarkMode } from '../../Hooks/DarkMode';
@@ -50,14 +51,15 @@ export default function Menu() {
 						</Button>
 
 						<strong>Componentes</strong>
-						<Button
-							colorStyle="Primary"
-							variant="Option"
-							type="button"
+						<OptionButton
+							style={{
+								color: '#fff',
+								width: '100%',
+							}}
 							onClick={() => goTo('/docs/button')}
 						>
-							Button
-						</Button>
+							Buttons
+						</OptionButton>
 					</div>
 				</div>
 			</Drawer>
