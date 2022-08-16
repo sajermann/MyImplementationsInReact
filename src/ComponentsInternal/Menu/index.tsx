@@ -2,7 +2,6 @@ import { List } from 'phosphor-react';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { OptionButton } from '../../components';
-import { Button } from '../../components/Button';
 import Drawer from '../../components/Drawer';
 import { useDarkMode } from '../../Hooks/DarkMode';
 import styles from './styles.module.css';
@@ -44,7 +43,6 @@ export default function Menu() {
 					<div className={styles.main}>
 						<OptionButton
 							style={{
-								color: '#fff',
 								width: '100%',
 								display: 'flex',
 							}}
@@ -54,7 +52,15 @@ export default function Menu() {
 						</OptionButton>
 						<OptionButton
 							style={{
-								color: '#fff',
+								width: '100%',
+								display: 'flex',
+							}}
+							onClick={() => goTo('/getting-started')}
+						>
+							Instalação
+						</OptionButton>
+						<OptionButton
+							style={{
 								width: '100%',
 								display: 'flex',
 							}}

@@ -4,12 +4,21 @@ import ButtonDocs from '../../Pages/Docs/Button';
 import DrawerDocs from '../../Pages/Docs/Drawer';
 import Home from '../../Pages/Home';
 import { useDarkMode } from '../../Hooks/DarkMode';
+import GettingStarted from '../../Pages/Docs/Getting Started';
+import styles from './styles.module.css';
 
 const options = [
 	{
 		path: '/',
 		element: <Home />,
 		name: 'Home',
+		index: true,
+		subItems: [],
+	},
+	{
+		path: '/getting-started',
+		element: <GettingStarted />,
+		name: 'Instação',
 		index: true,
 		subItems: [],
 	},
@@ -36,12 +45,7 @@ const options = [
 export default function RoutesConfig() {
 	const { darkMode } = useDarkMode();
 	return (
-		<div
-			style={{
-				backgroundColor: darkMode ? 'rgb(31 41 55 / 1)' : '#fff',
-				height: '100%',
-			}}
-		>
+		<div className={styles.container}>
 			<Routes>
 				{options.map(item => {
 					if (item.subItems.length === 0) {

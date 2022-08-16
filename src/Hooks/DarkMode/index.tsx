@@ -40,6 +40,18 @@ export function DarkModeProvider({ children }: Props) {
 	function toggleDarkMode() {
 		sessionStorage.setItem('@sajermann/ui-react:darkMode', String(!darkMode));
 		setDarkMode(!darkMode);
+
+		const body = document.querySelector('body');
+		if (darkMode) {
+			if (body) {
+				body.classList.remove('darkMode');
+			}
+			return;
+		}
+
+		if (body) {
+			body.classList.add('darkMode');
+		}
 	}
 
 	const memoizedValue = useMemo(

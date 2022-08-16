@@ -38,12 +38,14 @@ describe('Components/Button', () => {
 
 	it(`should be disabled`, async () => {
 		const funcs = {
-			isLoading: false,
-			inSuccess: {
+			loadingOptions: {
+				isLoading: false,
+			},
+			successOptions: {
 				setSuccess: jest.fn(),
 				success: false,
 			},
-			inFailed: {
+			failedOptions: {
 				setFailed: jest.fn(),
 				failed: false,
 			},
@@ -62,14 +64,16 @@ describe('Components/Button', () => {
 				type="button"
 				onClick={onClick}
 				withFeedback={{
-					isLoading: funcs.isLoading,
-					inSuccess: {
-						setSuccess: funcs.inSuccess.setSuccess,
-						success: funcs.inSuccess.success,
+					loadingOptions: {
+						isLoading: funcs.loadingOptions.isLoading,
 					},
-					inFailed: {
-						setFailed: funcs.inFailed.setFailed,
-						failed: funcs.inFailed.failed,
+					successOptions: {
+						setSuccess: funcs.successOptions.setSuccess,
+						success: funcs.successOptions.success,
+					},
+					failedOptions: {
+						setFailed: funcs.failedOptions.setFailed,
+						failed: funcs.failedOptions.failed,
 					},
 				}}
 			>
