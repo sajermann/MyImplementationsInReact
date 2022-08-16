@@ -21,4 +21,91 @@ function generateGuid(): string {
 	});
 }
 
-export { delay, generateGuid };
+/**
+ * ### For use of @sajermann/ui-react
+ */
+function insertCss(ID_BUTTON: string, ID: string) {
+	const element = document.createElement('style');
+	element.id = ID_BUTTON;
+	element.innerHTML = `
+	@keyframes forLight_${ID} {
+		to {
+			transform: scale(4);
+			opacity: 0;
+		}
+	}
+	`;
+	const head = document.querySelector('head');
+	if (head) {
+		head.appendChild(element);
+	}
+}
+
+/**
+ * ### For use of @sajermann/ui-react
+ */
+function removeCss(ID_BUTTON: string) {
+	setTimeout(() => document.querySelector(`#${ID_BUTTON}`)?.remove(), 1000);
+}
+
+type CreateEffectProps = {
+	event: React.MouseEvent<HTMLButtonElement>;
+	ID_BUTTON: string;
+	ID: string;
+	variant?: 'Default' | 'Outlined' | 'Option';
+	verifyColorIcon?: (data: number) => string;
+	onClick: React.MouseEventHandler<HTMLButtonElement> | undefined;
+};
+
+/**
+ * ### For use of @sajermann/ui-react
+ */
+function createEffect({
+	event,
+	ID_BUTTON,
+	ID,
+	variant,
+	verifyColorIcon,
+	onClick,
+}: CreateEffectProps) {
+	const temp = event.target as HTMLElement;
+	const { x: tempX, y: tempY } = temp.getBoundingClientRect();
+
+	insertCss(ID_BUTTON, ID);
+	const button = event.currentTarget;
+	const effectArea = document.createElement('span');
+	const diameter = Math.max(button.clientWidth, button.clientHeight);
+	const radius = diameter / 2;
+
+	// eslint-disable-next-line no-multi-assign
+	effectArea.style.width = effectArea.style.height = `${diameter}px`;
+	effectArea.style.left = `${
+		(event.clientX || tempX) - button.offsetLeft - radius
+	}px`;
+	effectArea.style.top = `${
+		(event.clientY || tempY) - button.offsetTop - radius
+	}px`;
+	effectArea.style.position = 'absolute';
+	effectArea.style.borderRadius = '50%';
+	effectArea.style.transform = 'scale(0)';
+	effectArea.style.animation = `forLight_${ID} 600ms linear`;
+	effectArea.style.backgroundColor = 'rgba(255, 255, 255, 0.7)';
+	if ((variant === 'Option' || variant === 'Outlined') && verifyColorIcon) {
+		effectArea.style.backgroundColor = `${verifyColorIcon(0.7)}`;
+	}
+	effectArea.classList.add(`forLight_${ID}`);
+
+	const effectLight = button.getElementsByClassName(`forLight_${ID}`)[0];
+
+	if (effectLight) {
+		effectLight.remove();
+	}
+
+	button.appendChild(effectArea);
+	if (onClick) {
+		onClick(event);
+	}
+	removeCss(ID_BUTTON);
+}
+
+export { delay, generateGuid, createEffect };

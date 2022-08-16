@@ -3,7 +3,7 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import styles from './styles.module.css';
 import { Loading } from '../Loading';
 import { FeedbackIcons } from '../FeedbackIcons';
-import { delay, generateGuid } from '../utils';
+import { delay, generateGuid, createEffect } from '../utils';
 
 type PropsFeedBack = {
 	loadingOptions: {
@@ -117,27 +117,6 @@ function Button({
 	const ID_BUTTON = 'effect_sajermann_ui_button';
 	const ID = generateGuid();
 
-	function insertCss() {
-		const element = document.createElement('style');
-		element.id = ID_BUTTON;
-		element.innerHTML = `
-		@keyframes forLight_${ID} {
-			to {
-				transform: scale(4);
-				opacity: 0;
-			}
-		}
-		`;
-		const head = document.querySelector('head');
-		if (head) {
-			head.appendChild(element);
-		}
-	}
-
-	function removeCss() {
-		setTimeout(() => document.querySelector(`#${ID_BUTTON}`)?.remove(), 1000);
-	}
-
 	function verifyColorIcon(opacity?: number) {
 		if (variant === 'Default' || variant === undefined) {
 			return `rgba(255, 255, 255, ${opacity})`;
@@ -168,47 +147,6 @@ function Button({
 		}
 
 		return '';
-	}
-
-	function createEffect(event: React.MouseEvent<HTMLButtonElement>) {
-		const temp = event.target as HTMLElement;
-		const { x: tempX, y: tempY } = temp.getBoundingClientRect();
-
-		insertCss();
-		const button = event.currentTarget;
-		const circle = document.createElement('span');
-		const diameter = Math.max(button.clientWidth, button.clientHeight);
-		const radius = diameter / 2;
-
-		// eslint-disable-next-line no-multi-assign
-		circle.style.width = circle.style.height = `${diameter}px`;
-		circle.style.left = `${
-			(event.clientX || tempX) - button.offsetLeft - radius
-		}px`;
-		circle.style.top = `${
-			(event.clientY || tempY) - button.offsetTop - radius
-		}px`;
-		circle.style.position = 'absolute';
-		circle.style.borderRadius = '50%';
-		circle.style.transform = 'scale(0)';
-		circle.style.animation = `forLight_${ID} 600ms linear`;
-		circle.style.backgroundColor = 'rgba(255, 255, 255, 0.7)';
-		if (variant === 'Option' || variant === 'Outlined') {
-			circle.style.backgroundColor = `${verifyColorIcon(0.7)}`;
-		}
-		circle.classList.add(`forLight_${ID}`);
-
-		const effectLight = button.getElementsByClassName(`forLight_${ID}`)[0];
-
-		if (effectLight) {
-			effectLight.remove();
-		}
-
-		button.appendChild(circle);
-		if (onClick) {
-			onClick(event);
-		}
-		removeCss();
 	}
 
 	async function success() {
@@ -355,7 +293,16 @@ function Button({
 	return (
 		<button
 			{...props}
-			onClick={createEffect}
+			onClick={event =>
+				createEffect({
+					event,
+					ID_BUTTON,
+					ID,
+					variant,
+					verifyColorIcon,
+					onClick,
+				})
+			}
 			type={type}
 			className={`${verifyClasses()} ${props.className}`}
 		>
