@@ -26,7 +26,7 @@ export default function GettingStarted() {
 					<JsCode>
 						{`export function CodeBlock({ children }: Props) {
 	const t = children as {
-		type: {
+type: {
 			name: string;
 								};
 							};

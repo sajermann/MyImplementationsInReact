@@ -1,6 +1,7 @@
-import { Fragment } from 'react';
-import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { dracula } from 'react-syntax-highlighter/dist/esm/styles/prism';
+// import { Fragment } from 'react';
+// import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+// import { dracula } from 'react-syntax-highlighter/dist/esm/styles/prism';
+import { CopyBlock, dracula } from 'react-code-blocks';
 import { OptionButton } from '../../components/OptionButton';
 import styles from './styles.module.css';
 
@@ -16,15 +17,15 @@ export function JsCode({ children }: PropsJs) {
 	console.log(children);
 
 	return (
-		<SyntaxHighlighter
-			language="javascript"
-			showLineNumbers
-			wrapLines
-			style={dracula}
-		>
-			{children}
-		</SyntaxHighlighter>
+		<CopyBlock
+			text={children}
+			language="jsx"
+			theme={dracula}
+			codeBlock
+			showLineNumbers={false}
+		/>
 	);
+	return <p>Olá</p>;
 }
 
 export function TsCode({ children }: Props) {
@@ -43,15 +44,9 @@ export function CodeBlock({ children }: Props) {
 	// console.log(t?.type.name === 'JsCode' || '');
 	return (
 		<div>
-			<code>
-				{children}
-				<OptionButton className={styles.choiseLanguage}>
-					Javascript
-				</OptionButton>
-				<OptionButton className={styles.choiseLanguage}>
-					Typescript
-				</OptionButton>
-			</code>
+			{children}
+			<OptionButton className={styles.choiseLanguage}>Javascript</OptionButton>
+			<OptionButton className={styles.choiseLanguage}>Typescript</OptionButton>
 		</div>
 	);
 }
