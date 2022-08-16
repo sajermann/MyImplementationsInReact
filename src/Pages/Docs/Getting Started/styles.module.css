@@ -1,0 +1,6 @@
+.block{
+	display:flex;
+	flex-direction: column;
+	gap: 10px;
+	margin-bottom: 50px;
+}
