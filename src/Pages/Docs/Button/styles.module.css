@@ -8,3 +8,9 @@
 	justify-content: center;
 	gap: 10px
 }
+
+
+.test{
+	background-color: pink;
+	color: yellow;
+}

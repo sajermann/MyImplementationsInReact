@@ -1,114 +1,28 @@
 /* eslint-disable react/button-has-type */
-import { useEffect, useRef, useState } from 'react';
-import { generateGuid } from '@sajermann/utils/Random';
-import { delay } from '@sajermann/utils/Delay';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import styles from './styles.module.css';
 import { Loading } from '../Loading';
-
-type PropsFeedBackIcons = {
-	color?: string;
-	size?: string;
-};
-
-function SuccessIcon({ color, size }: PropsFeedBackIcons) {
-	return (
-		<svg
-			version="1.1"
-			style={{
-				color: color || '#fff',
-				width: size || '1.2rem',
-				height: size || '1.2rem',
-			}}
-			xmlns="http://www.w3.org/2000/svg"
-			x="0px"
-			y="0px"
-			viewBox="0 0 297 297"
-			xmlSpace="preserve"
-		>
-			<g>
-				<path
-					fill="currentColor"
-					d="M294.033,82.033l-54.675-54.701c-1.899-1.901-4.479-2.97-7.167-2.97c-2.688,0-5.268,1.068-7.168,2.97L113.636,138.765
-		L71.975,97.09c-1.901-1.9-4.479-2.969-7.169-2.969c-2.688,0-5.267,1.069-7.167,2.97L2.966,151.794
-		c-3.955,3.958-3.955,10.372,0.001,14.329l103.501,103.545c1.9,1.902,4.478,2.97,7.168,2.97c2.689,0,5.267-1.067,7.167-2.97
-		L294.033,96.361C297.989,92.405,297.989,85.99,294.033,82.033z"
-				/>
-			</g>
-			<g />
-			<g />
-			<g />
-			<g />
-			<g />
-			<g />
-			<g />
-			<g />
-			<g />
-			<g />
-			<g />
-			<g />
-			<g />
-			<g />
-			<g />
-		</svg>
-	);
-}
-
-function FailedIcon({ color, size }: PropsFeedBackIcons) {
-	return (
-		<svg
-			version="1.1"
-			style={{
-				color: color || '#fff',
-				width: size || '1rem',
-				height: size || '1rem',
-			}}
-			xmlns="http://www.w3.org/2000/svg"
-			x="0px"
-			y="0px"
-			viewBox="0 0 503.021 503.021"
-			xmlSpace="preserve"
-		>
-			<g>
-				<g>
-					<path
-						fill="currentColor"
-						d="M491.613,75.643l-64.235-64.235c-15.202-15.202-39.854-15.202-55.056,0L251.507,132.222L130.686,11.407
-			c-15.202-15.202-39.853-15.202-55.055,0L11.401,75.643c-15.202,15.202-15.202,39.854,0,55.056l120.821,120.815L11.401,372.328
-			c-15.202,15.202-15.202,39.854,0,55.056l64.235,64.229c15.202,15.202,39.854,15.202,55.056,0l120.815-120.814l120.822,120.814
-			c15.202,15.202,39.854,15.202,55.056,0l64.235-64.229c15.202-15.202,15.202-39.854,0-55.056L370.793,251.514l120.82-120.815
-			C506.815,115.49,506.815,90.845,491.613,75.643z"
-					/>
-				</g>
-			</g>
-			<g />
-			<g />
-			<g />
-			<g />
-			<g />
-			<g />
-			<g />
-			<g />
-			<g />
-			<g />
-			<g />
-			<g />
-			<g />
-			<g />
-			<g />
-		</svg>
-	);
-}
+import { FeedbackIcons } from '../FeedbackIcons';
+import { delay, generateGuid } from '../utils';
 
 type PropsFeedBack = {
-	isLoading: boolean;
-	typeLoadingIcon?: 'Default' | 'Points';
-	inSuccess?: {
+	loadingOptions: {
+		isLoading: boolean;
+		typeLoadingIcon?: 'Default' | 'Points';
+		customIcon?: JSX.Element;
+		fullIcon?: boolean;
+	};
+	successOptions?: {
 		success: boolean;
 		setSuccess: (data: boolean) => void;
+		customIcon?: JSX.Element;
+		fullIcon?: boolean;
 	};
-	inFailed?: {
+	failedOptions?: {
 		failed: boolean;
 		setFailed: (data: boolean) => void;
+		customIcon?: JSX.Element;
+		fullIcon?: boolean;
 	};
 };
 
@@ -136,7 +50,12 @@ function Button({
 	const divRef = useRef<HTMLDivElement>(null);
 
 	function verifyClasses() {
-		const classesToReturn = [];
+		const classesToReturn = [styles.btn];
+
+		if (!children) {
+			classesToReturn.push(styles.onlyIcon);
+		}
+
 		if (colorStyle === 'Primary' || colorStyle === undefined) {
 			classesToReturn.push(styles.primary);
 			if (variant === 'Outlined') {
@@ -219,6 +138,38 @@ function Button({
 		setTimeout(() => document.querySelector(`#${ID_BUTTON}`)?.remove(), 1000);
 	}
 
+	function verifyColorIcon(opacity?: number) {
+		if (variant === 'Default' || variant === undefined) {
+			return `rgba(255, 255, 255, ${opacity})`;
+		}
+
+		if (colorStyle === 'Primary' || colorStyle === undefined) {
+			if (variant === 'Outlined' || variant === 'Option') {
+				return `rgba(71, 111, 230, ${opacity})`;
+			}
+		}
+
+		if (colorStyle === 'Secondary') {
+			if (variant === 'Outlined' || variant === 'Option') {
+				return `rgba(239, 68, 68, ${opacity})`;
+			}
+		}
+
+		if (colorStyle === 'Success') {
+			if (variant === 'Outlined' || variant === 'Option') {
+				return `rgba(34, 197, 94, ${opacity})`;
+			}
+		}
+
+		if (colorStyle === 'Warning') {
+			if (variant === 'Outlined' || variant === 'Option') {
+				return `rgba(234, 179, 8, ${opacity})`;
+			}
+		}
+
+		return '';
+	}
+
 	function createEffect(event: React.MouseEvent<HTMLButtonElement>) {
 		const temp = event.target as HTMLElement;
 		const { x: tempX, y: tempY } = temp.getBoundingClientRect();
@@ -242,6 +193,9 @@ function Button({
 		circle.style.transform = 'scale(0)';
 		circle.style.animation = `forLight_${ID} 600ms linear`;
 		circle.style.backgroundColor = 'rgba(255, 255, 255, 0.7)';
+		if (variant === 'Option' || variant === 'Outlined') {
+			circle.style.backgroundColor = `${verifyColorIcon(0.7)}`;
+		}
 		circle.classList.add(`forLight_${ID}`);
 
 		const effectLight = button.getElementsByClassName(`forLight_${ID}`)[0];
@@ -259,101 +213,157 @@ function Button({
 
 	async function success() {
 		await delay(1000);
-		withFeedback?.inSuccess?.setSuccess(false);
+		withFeedback?.successOptions?.setSuccess(false);
 	}
 
 	async function failed() {
 		await delay(1000);
-		withFeedback?.inFailed?.setFailed(false);
+		withFeedback?.failedOptions?.setFailed(false);
 	}
 
 	useEffect(() => {
-		if (withFeedback?.inSuccess?.success) {
+		if (withFeedback?.successOptions?.success) {
 			success();
 		}
-		if (withFeedback?.inFailed?.failed) {
+		if (withFeedback?.failedOptions?.failed) {
 			failed();
 		}
 	}, [withFeedback]);
 
-	function verifyColorIcon() {
-		if (variant === 'Default' || variant === undefined) {
-			return 'rgb(255 255 255)';
+	const buildLoading = useMemo(() => {
+		if (
+			withFeedback?.loadingOptions.isLoading &&
+			!withFeedback?.loadingOptions.customIcon
+		) {
+			return (
+				<Loading
+					color={verifyColorIcon()}
+					type={withFeedback.loadingOptions.typeLoadingIcon}
+					data-testid="loadingIcon"
+				/>
+			);
 		}
 
-		if (colorStyle === 'Primary' || colorStyle === undefined) {
-			if (variant === 'Outlined' || variant === 'Option') {
-				return '#476fe6';
-			}
+		if (
+			withFeedback?.loadingOptions.isLoading &&
+			withFeedback?.loadingOptions.customIcon
+		) {
+			return <span>{withFeedback.loadingOptions.customIcon}</span>;
+		}
+		return null;
+	}, [withFeedback]);
+
+	const buildFeedbackIcon = useMemo(() => {
+		if (withFeedback?.loadingOptions.isLoading) {
+			return null;
+		}
+		if (
+			withFeedback?.successOptions?.success &&
+			!withFeedback?.successOptions?.customIcon
+		) {
+			return <FeedbackIcons name="Success" color={verifyColorIcon()} />;
+		}
+		if (
+			withFeedback?.successOptions?.success &&
+			withFeedback?.successOptions?.customIcon
+		) {
+			return withFeedback?.successOptions?.customIcon;
+		}
+		if (
+			withFeedback?.failedOptions?.failed &&
+			!withFeedback?.failedOptions?.customIcon
+		) {
+			return <FeedbackIcons name="Failed" color={verifyColorIcon()} />;
+		}
+		if (
+			withFeedback?.failedOptions?.failed &&
+			withFeedback?.failedOptions?.customIcon
+		) {
+			return withFeedback?.failedOptions?.customIcon;
 		}
 
-		if (colorStyle === 'Secondary') {
-			if (variant === 'Outlined' || variant === 'Option') {
-				return 'rgb(239 68 68)';
-			}
-		}
+		return null;
+	}, [withFeedback]);
 
-		if (colorStyle === 'Success') {
-			if (variant === 'Outlined' || variant === 'Option') {
-				return 'rgb(34 197 94)';
-			}
+	const mainFeedback = useMemo(() => {
+		if (
+			withFeedback?.loadingOptions.isLoading ||
+			withFeedback?.successOptions?.success ||
+			withFeedback?.failedOptions?.failed
+		) {
+			return (
+				<div className={styles.containerIcon}>
+					{buildLoading}
+					{buildFeedbackIcon}
+				</div>
+			);
 		}
+		return null;
+	}, [withFeedback]);
 
-		if (colorStyle === 'Warning') {
-			if (variant === 'Outlined' || variant === 'Option') {
-				return 'rgb(234 179 8)';
-			}
+	const buildStartIcon = useMemo(() => {
+		if (startIcon) {
+			return <div className={styles.containerIcon}>{startIcon}</div>;
 		}
+		return null;
+	}, [startIcon]);
 
-		return '';
-	}
+	const buildChildren = useMemo(() => {
+		if (
+			withFeedback?.loadingOptions.fullIcon &&
+			withFeedback?.loadingOptions.isLoading
+		) {
+			return null;
+		}
+		if (
+			withFeedback?.successOptions?.fullIcon &&
+			withFeedback?.successOptions.success
+		) {
+			return null;
+		}
+		if (
+			withFeedback?.failedOptions?.fullIcon &&
+			withFeedback?.failedOptions.failed
+		) {
+			return null;
+		}
+		return (
+			<div
+				className={styles.text}
+				ref={divRef}
+				title={
+					(isEllipsisActive && typeof children === 'string' && children) || ''
+				}
+			>
+				{children}
+			</div>
+		);
+	}, [withFeedback]);
+
+	const buildEndIcon = useMemo(() => {
+		if (
+			endIcon &&
+			!withFeedback?.loadingOptions.isLoading &&
+			!withFeedback?.successOptions?.success &&
+			!withFeedback?.failedOptions?.failed
+		) {
+			return <div className={styles.containerIcon}>{endIcon}</div>;
+		}
+		return null;
+	}, [endIcon, withFeedback]);
 
 	return (
 		<button
 			{...props}
 			onClick={createEffect}
 			type={type}
-			className={` ${styles.btn} ${!children && styles.onlyIcon} ${
-				props.className
-			} ${verifyClasses()} `}
+			className={`${verifyClasses()} ${props.className}`}
 		>
 			<div className={styles.internal}>
-				{startIcon && <div className={styles.containerIcon}>{startIcon}</div>}
-				{children && (
-					<div
-						className={styles.text}
-						ref={divRef}
-						title={(isEllipsisActive && (children as unknown as string)) || ''}
-					>
-						{children}
-					</div>
-				)}
-				{(withFeedback?.isLoading ||
-					withFeedback?.inSuccess?.success ||
-					withFeedback?.inFailed?.failed) && (
-					<div className={styles.containerIcon}>
-						{withFeedback?.isLoading && (
-							<Loading
-								color={verifyColorIcon()}
-								type={withFeedback.typeLoadingIcon}
-								data-testid="loadingIcon"
-							/>
-						)}
-						{!withFeedback?.isLoading && withFeedback?.inSuccess?.success && (
-							<SuccessIcon />
-						)}
-						{!withFeedback?.isLoading && withFeedback?.inFailed?.failed && (
-							<FailedIcon />
-						)}
-					</div>
-				)}
-
-				{endIcon &&
-					!withFeedback?.isLoading &&
-					!withFeedback?.inSuccess?.success &&
-					!withFeedback?.inFailed?.failed && (
-						<div className={styles.containerIcon}>{endIcon}</div>
-					)}
+				{buildStartIcon}
+				{buildChildren}
+				{mainFeedback}
+				{buildEndIcon}
 			</div>
 		</button>
 	);
