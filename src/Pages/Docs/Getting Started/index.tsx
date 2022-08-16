@@ -4,6 +4,7 @@ import styles from './styles.module.css';
 
 export default function GettingStarted() {
 	const { darkMode } = useDarkMode();
+
 	return (
 		<div>
 			<div className={styles.block}>
@@ -23,11 +24,10 @@ export default function GettingStarted() {
 				<CodeBlock>npm install @sajermann/ui-react</CodeBlock>
 				<CodeBlock>
 					<JsCode>
-						{`
-						export function CodeBlock({ children }: Props) {
-							const t = children as {
-								type: {
-									name: string;
+						{`export function CodeBlock({ children }: Props) {
+	const t = children as {
+		type: {
+			name: string;
 								};
 							};
 							console.log({ children });

@@ -1,4 +1,6 @@
 import { Fragment } from 'react';
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+import { dracula } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import { OptionButton } from '../../components/OptionButton';
 import styles from './styles.module.css';
 
@@ -6,8 +8,23 @@ type Props = {
 	children: React.ReactNode;
 };
 
-export function JsCode({ children }: Props) {
-	return <Fragment key={41231}>{children}</Fragment>;
+type PropsJs = {
+	children: string;
+};
+
+export function JsCode({ children }: PropsJs) {
+	console.log(children);
+
+	return (
+		<SyntaxHighlighter
+			language="javascript"
+			showLineNumbers
+			wrapLines
+			style={dracula}
+		>
+			{children}
+		</SyntaxHighlighter>
+	);
 }
 
 export function TsCode({ children }: Props) {
