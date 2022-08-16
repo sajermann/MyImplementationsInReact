@@ -32,18 +32,21 @@ export default function ButtonDocs() {
 			nas configurações abaixo: Default:
 			<div className={styles.containerButtons}>
 				<Button
+					startIcon={<p>B</p>}
 					disabled={isLoading}
 					colorStyle="Primary"
 					type="button"
 					onClick={() => handleSave()}
 					withFeedback={{
-						isLoading,
-						typeLoadingIcon: 'Points',
-						inSuccess: {
+						loadingOptions: {
+							isLoading,
+							typeLoadingIcon: 'Points',
+						},
+						successOptions: {
 							setSuccess,
 							success,
 						},
-						inFailed: {
+						failedOptions: {
 							setFailed,
 							failed,
 						},
@@ -58,15 +61,20 @@ export default function ButtonDocs() {
 					type="button"
 					onClick={() => handleSave()}
 					withFeedback={{
-						typeLoadingIcon: 'Points',
-						isLoading: true,
-						inSuccess: {
+						loadingOptions: {
+							isLoading,
+							typeLoadingIcon: 'Points',
+							fullIcon: true,
+						},
+						successOptions: {
 							setSuccess,
 							success,
+							fullIcon: true,
 						},
-						inFailed: {
+						failedOptions: {
 							setFailed,
 							failed,
+							fullIcon: true,
 						},
 					}}
 				>
@@ -78,7 +86,11 @@ export default function ButtonDocs() {
 					variant="Option"
 					type="button"
 					withFeedback={{
-						isLoading: true,
+						loadingOptions: {
+							isLoading: true,
+							typeLoadingIcon: 'Points',
+							customIcon: <Loading size="2rem" color="green" />,
+						},
 					}}
 				>
 					Option
@@ -150,13 +162,20 @@ export default function ButtonDocs() {
 			</div>
 			<div className={styles.containerButtons}>
 				<OptionButton
-					// srcForImage={palmeiras}
 					style={{
 						color: '#fff',
 						width: '150px',
 						height: '150px',
 					}}
 				>
+					<img
+						src={palmeiras}
+						style={{
+							width: '100px',
+							height: '100px',
+						}}
+						alt="edasd"
+					/>
 					Warning Default
 				</OptionButton>
 				<Loading />

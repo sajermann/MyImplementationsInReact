@@ -34,10 +34,10 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	min-width: 140px;
+	/* min-width: 140px;
 	max-width: 140px;
 	min-height: 44px;
-	max-height: 44px;
+	max-height: 44px; */
 	font-size: 1.125rem /* 18px */;
 	line-height: 1.75rem /* 28px */;
 	transition-property: color, background-color, border-color,
