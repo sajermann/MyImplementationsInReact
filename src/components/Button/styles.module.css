@@ -13,9 +13,10 @@
 	margin: 0 5px;
 	flex: 1;
 	/*Linhas abaixo são novas qualquer problema tira-las*/
-	display: flex;
+	/*Linhas abaixo centralizao o icone quando é só item com icone mas tiram o ellipsis quando tem texto*/
+	/* display: flex;
 	align-items: center;
-	justify-content: center;
+	justify-content: center; */
 }
 
 .containerIcon {

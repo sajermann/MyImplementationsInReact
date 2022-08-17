@@ -1,7 +1,7 @@
 import styles from './styles.module.css';
 
 type Props = {
-	children: JSX.Element;
+	children: React.ReactNode;
 };
 export function ComponentBlock({ children }: Props) {
 	return <div className="componentBlock">{children}</div>;

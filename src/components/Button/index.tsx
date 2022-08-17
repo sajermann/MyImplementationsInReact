@@ -4,6 +4,7 @@ import styles from './styles.module.css';
 import { Loading } from '../Loading';
 import { FeedbackIcons } from '../FeedbackIcons';
 import { delay, generateGuid, createEffect } from '../utils';
+import { useWindowSize } from '../utils/useWindowSize';
 
 type PropsFeedBack = {
 	loadingOptions: {
@@ -48,6 +49,7 @@ function Button({
 	const { onClick } = props;
 	const [isEllipsisActive, setIsEllipsisActive] = useState(false);
 	const divRef = useRef<HTMLDivElement>(null);
+	const size = useWindowSize();
 
 	function verifyClasses() {
 		const classesToReturn = [styles.btn];
@@ -112,7 +114,7 @@ function Button({
 						element.offsetHeight < element.scrollHeight
 				: false
 		);
-	}, []);
+	}, [size]);
 
 	const ID_BUTTON = 'effect_sajermann_ui_button';
 	const ID = generateGuid();
@@ -167,6 +169,16 @@ function Button({
 			failed();
 		}
 	}, [withFeedback]);
+
+	function verifyEllipsis() {
+		if (props.title) {
+			return props.title;
+		}
+		if (isEllipsisActive && typeof children === 'string') {
+			return children;
+		}
+		return '';
+	}
 
 	const buildLoading = useMemo(() => {
 		if (
@@ -269,20 +281,11 @@ function Button({
 			return null;
 		}
 		return (
-			<div
-				className={styles.text}
-				ref={divRef}
-				title={
-					props.title
-						? props.title
-						: (isEllipsisActive && typeof children === 'string' && children) ||
-						  ''
-				}
-			>
+			<div className={styles.text} ref={divRef} title={verifyEllipsis()}>
 				{children}
 			</div>
 		);
-	}, [withFeedback, children]);
+	}, [withFeedback, children, isEllipsisActive]);
 
 	const buildEndIcon = useMemo(() => {
 		if (
@@ -295,6 +298,10 @@ function Button({
 		}
 		return null;
 	}, [endIcon, withFeedback]);
+
+	function riple() {
+		return <span className={`forLight_${ID}`} />;
+	}
 
 	return (
 		<button
@@ -317,6 +324,7 @@ function Button({
 				{buildChildren}
 				{mainFeedback}
 				{buildEndIcon}
+				{riple()}
 			</div>
 		</button>
 	);

@@ -1,7 +1,11 @@
 import { useState } from 'react';
+import { CodeBlock } from '../../../ComponentsInternal/CodeBlock';
 import { Button, Loading, OptionButton } from '../../../components';
 import palmeiras from '../../../assets/palmeiras.webp';
 import styles from './styles.module.css';
+import Section from '../../../ComponentsInternal/Section';
+import { ComponentBlock } from '../../../ComponentsInternal/ComponentBlock';
+import { ex1, ex2 } from './exs';
 
 export default function ButtonDocs() {
 	const [isLoading, setIsLoading] = useState(false);
@@ -27,10 +31,55 @@ export default function ButtonDocs() {
 		setSuccess(true);
 	}
 	return (
-		<div>
-			O componente de Button permite renderizar alguns tipos de botões baseados
-			nas configurações abaixo: Default:
-			<div className={styles.containerButtons}>
+		<main>
+			<Section heading="Botões">
+				Os componentes de botões permitem que os usuários realizem ações. O
+				intuito desse componente é oferecer o mesmo botão que você já está
+				acostumado, porém com funcionalidades a mais.
+			</Section>
+			<Section subHeading="Variantes">
+				Existem 3 tipos de variantes que são:{' '}
+				<span className="highlight">Default</span> |{' '}
+				<span className="highlight">Outlined</span> |{' '}
+				<span className="highlight">Option</span>
+				<ComponentBlock>
+					<Button type="button">Default</Button>
+					<Button type="button" variant="Outlined">
+						Outlined
+					</Button>
+					<Button type="button" variant="Option">
+						Option
+					</Button>
+				</ComponentBlock>
+				<CodeBlock>{ex1}</CodeBlock>
+			</Section>
+			<Section subHeading="Estilos de Cores">
+				Existem 4 tipos de estilos de cores que são:{' '}
+				<span className="highlight">Primary</span> |{' '}
+				<span className="highlight">Secondary</span> |{' '}
+				<span className="highlight">Success</span> |{' '}
+				<span className="highlight">Warning</span>
+				<ComponentBlock>
+					<div>
+						<Button type="button" colorStyle="Primary">
+							Primary
+						</Button>
+					</div>
+
+					{/* <Button type="button" colorStyle="Secondary">
+						Secondary
+					</Button>
+					<Button type="button" colorStyle="Success">
+						Success
+					</Button>
+					<Button type="button" colorStyle="Warning">
+						Warning
+					</Button> */}
+				</ComponentBlock>
+				<CodeBlock>{ex2}</CodeBlock>
+			</Section>
+
+			{/* <div className={styles.containerButtons}>
 				<Button
 					startIcon={<p>B</p>}
 					disabled={isLoading}
@@ -181,7 +230,7 @@ export default function ButtonDocs() {
 				</OptionButton>
 
 				<Loading />
-			</div>
-		</div>
+			</div> */}
+		</main>
 	);
 }

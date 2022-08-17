@@ -70,6 +70,19 @@ function createEffect({
 }: CreateEffectProps) {
 	const temp = event.target as HTMLElement;
 	const { x: tempX, y: tempY } = temp.getBoundingClientRect();
+	const tempPosition = {
+		x: 0,
+		y: 0,
+	};
+	if (event.pageX === 0) {
+		// Is Enter
+		tempPosition.x = tempX + temp.offsetWidth / 2;
+		tempPosition.y = tempY + temp.offsetHeight / 2;
+	} else {
+		// Is Click
+		tempPosition.x = event.pageX;
+		tempPosition.y = event.pageY;
+	}
 
 	insertCss(ID_BUTTON, ID);
 	const button = event.currentTarget;
@@ -79,12 +92,8 @@ function createEffect({
 
 	// eslint-disable-next-line no-multi-assign
 	effectArea.style.width = effectArea.style.height = `${diameter}px`;
-	effectArea.style.left = `${
-		(event.clientX || tempX) - button.offsetLeft - radius
-	}px`;
-	effectArea.style.top = `${
-		(event.clientY || tempY) - button.offsetTop - radius
-	}px`;
+	effectArea.style.left = `${tempPosition.x - button.offsetLeft - radius}px`;
+	effectArea.style.top = `${tempPosition.y - button.offsetTop - radius}px`;
 	effectArea.style.position = 'absolute';
 	effectArea.style.borderRadius = '50%';
 	effectArea.style.transform = 'scale(0)';
@@ -96,7 +105,7 @@ function createEffect({
 	effectArea.classList.add(`forLight_${ID}`);
 
 	const effectLight = button.getElementsByClassName(`forLight_${ID}`)[0];
-	console.log(effectLight);
+
 	if (effectLight) {
 		effectLight.remove();
 	}

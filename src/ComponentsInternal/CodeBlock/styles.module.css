@@ -1,4 +1,6 @@
 .copy {
+	visibility: hidden;
+  opacity: 0;
 	color: #fff;
 	position: absolute;
 	top: 11px;
