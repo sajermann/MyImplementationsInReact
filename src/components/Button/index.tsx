@@ -247,6 +247,9 @@ function Button({
 	}, [startIcon]);
 
 	const buildChildren = useMemo(() => {
+		if (!children) {
+			return null;
+		}
 		if (
 			withFeedback?.loadingOptions.fullIcon &&
 			withFeedback?.loadingOptions.isLoading
@@ -270,13 +273,16 @@ function Button({
 				className={styles.text}
 				ref={divRef}
 				title={
-					(isEllipsisActive && typeof children === 'string' && children) || ''
+					props.title
+						? props.title
+						: (isEllipsisActive && typeof children === 'string' && children) ||
+						  ''
 				}
 			>
 				{children}
 			</div>
 		);
-	}, [withFeedback]);
+	}, [withFeedback, children]);
 
 	const buildEndIcon = useMemo(() => {
 		if (

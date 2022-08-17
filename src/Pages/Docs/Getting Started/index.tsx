@@ -1,4 +1,6 @@
-import { CodeBlock, JsCode } from '../../../ComponentsInternal/CodeBlock';
+/* eslint-disable react/no-unescaped-entities */
+import ex1 from './ex1';
+import { CodeBlock } from '../../../ComponentsInternal/CodeBlock';
 import { useDarkMode } from '../../../Hooks/DarkMode';
 import styles from './styles.module.css';
 
@@ -21,39 +23,11 @@ export default function GettingStarted() {
 					Sajermann UI está disponível como um pacote NPM e para instalar em seu
 					projeto basta executar:
 				</span>
-				<CodeBlock>npm install @sajermann/ui-react</CodeBlock>
-				<CodeBlock>
-					<JsCode>
-						{`export function CodeBlock({ children }: Props) {
-	const t = children as {
-type: {
-			name: string;
-								};
-							};
-							console.log({ children });
-							console.log({ t });
-							// console.log(t?.type.name);
-							// console.log(t?.type.name === 'JsCode' || '');
-							return (
-								<div>
-									<code>
-										{children}
-										<OptionButton className={styles.choiseLanguage}>
-											Javascript
-										</OptionButton>
-										<OptionButton className={styles.choiseLanguage}>
-											Typescript
-										</OptionButton>
-									</code>
-								</div>
-							);
-						}
-						`}
-					</JsCode>
-				</CodeBlock>
-				<CodeBlock>
-					<JsCode>npm install @sajermann/ui-react</JsCode>
-				</CodeBlock>
+				<CodeBlock language="shell">npm install @sajermann/ui-react</CodeBlock>
+				<span>Insira em algum arquivo raiz de seu projeto o css abaixo:</span>
+				<CodeBlock>import '@sajermann/ui-react/index.css';</CodeBlock>
+				{/* <CodeBlock>{ex1}</CodeBlock>
+				<CodeBlock>npm install @sajermann/ui-react</CodeBlock> */}
 			</div>
 		</div>
 	);

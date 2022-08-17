@@ -150,6 +150,7 @@ export default function ButtonDocs() {
 				>
 					Warning Outilined
 				</Button>
+
 				<Button
 					disabled={isLoading}
 					colorStyle="Warning"
@@ -178,6 +179,7 @@ export default function ButtonDocs() {
 					/>
 					Warning Default
 				</OptionButton>
+
 				<Loading />
 			</div>
 		</div>

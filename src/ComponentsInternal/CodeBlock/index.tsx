@@ -1,52 +1,50 @@
-// import { Fragment } from 'react';
-// import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-// import { dracula } from 'react-syntax-highlighter/dist/esm/styles/prism';
-import { CopyBlock, dracula } from 'react-code-blocks';
-import { OptionButton } from '../../components/OptionButton';
+import { ClipboardText } from 'phosphor-react';
+import { useState } from 'react';
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+import { dracula } from 'react-syntax-highlighter/dist/esm/styles/prism';
+import { Button } from '../../components/Button';
 import styles from './styles.module.css';
 
 type Props = {
-	children: React.ReactNode;
-};
-
-type PropsJs = {
 	children: string;
+	language?: 'jsx' | 'shell';
 };
+export function CodeBlock({ children, language }: Props) {
+	const [success, setSuccess] = useState(false);
+	const [isLoading, setIsLoading] = useState(false);
 
-export function JsCode({ children }: PropsJs) {
-	console.log(children);
+	async function handleCopy() {
+		setIsLoading(true);
+		await navigator.clipboard.writeText(children);
+		setIsLoading(false);
+		setSuccess(true);
+	}
 
 	return (
-		<CopyBlock
-			text={children}
-			language="jsx"
-			theme={dracula}
-			codeBlock
-			showLineNumbers={false}
-		/>
-	);
-	return <p>Olá</p>;
-}
-
-export function TsCode({ children }: Props) {
-	return children;
-}
-
-export function CodeBlock({ children }: Props) {
-	const t = children as {
-		type: {
-			name: string;
-		};
-	};
-	console.log({ children });
-	console.log({ t });
-	// console.log(t?.type.name);
-	// console.log(t?.type.name === 'JsCode' || '');
-	return (
-		<div>
-			{children}
-			<OptionButton className={styles.choiseLanguage}>Javascript</OptionButton>
-			<OptionButton className={styles.choiseLanguage}>Typescript</OptionButton>
+		<div className={styles.container}>
+			<Button
+				title="Copiar"
+				type="button"
+				variant="Option"
+				onClick={handleCopy}
+				className={styles.copy}
+				withFeedback={{
+					loadingOptions: {
+						isLoading,
+						fullIcon: true,
+					},
+					successOptions: {
+						setSuccess,
+						success,
+						fullIcon: true,
+					},
+				}}
+			>
+				<ClipboardText />
+			</Button>
+			<SyntaxHighlighter language={language || 'jsx'} style={dracula}>
+				{children}
+			</SyntaxHighlighter>
 		</div>
 	);
 }

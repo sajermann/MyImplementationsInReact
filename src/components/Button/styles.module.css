@@ -12,6 +12,10 @@
 	text-overflow: ellipsis;
 	margin: 0 5px;
 	flex: 1;
+	/*Linhas abaixo são novas qualquer problema tira-las*/
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
 
 .containerIcon {

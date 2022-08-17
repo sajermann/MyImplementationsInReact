@@ -15,7 +15,7 @@ body {
 	background-color: rgb(31 41 55 / 1)
 }
 
-code{
+pre{
 	color: #fff;
 	display: block;
 	padding: 30px;
@@ -23,4 +23,15 @@ code{
 	border-radius: 10px;
 	background-color: rgb(15 25 38);
 	margin: 10px 0;
+}
+
+.componentBlock{
+	display: block;
+	padding: 30px;
+	border: 1px solid;
+	border-radius: 10px;
+	margin: 10px 0;
+}
+.darkMode > .componentBlock{
+	border: 1px solid rgb(15 25 38);;
 }

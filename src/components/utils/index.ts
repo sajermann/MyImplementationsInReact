@@ -96,7 +96,7 @@ function createEffect({
 	effectArea.classList.add(`forLight_${ID}`);
 
 	const effectLight = button.getElementsByClassName(`forLight_${ID}`)[0];
-
+	console.log(effectLight);
 	if (effectLight) {
 		effectLight.remove();
 	}
