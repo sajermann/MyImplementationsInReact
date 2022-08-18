@@ -16,3 +16,8 @@
 .container {
 	position: relative;
 }
+
+.buttonToggleCode{
+	width: 100%;
+	display: flex;
+}

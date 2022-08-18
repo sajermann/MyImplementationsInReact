@@ -23,7 +23,6 @@ export function CodeBlock({ children, language }: Props) {
 	return (
 		<div className={styles.container}>
 			<Button
-				disabled
 				title="Copiar"
 				type="button"
 				variant="Option"

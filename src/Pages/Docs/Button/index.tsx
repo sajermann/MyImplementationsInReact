@@ -6,7 +6,8 @@ import palmeiras from '../../../assets/palmeiras.webp';
 import styles from './styles.module.css';
 import Section from '../../../ComponentsInternal/Section';
 import { ComponentBlock } from '../../../ComponentsInternal/ComponentBlock';
-import { ex1, ex2 } from './exs';
+import { ex1, ex2, ex3 } from './exs';
+import CustomLoading from '../../../ComponentsInternal/CustomLoading';
 
 export default function ButtonDocs() {
 	const [isLoading, setIsLoading] = useState(false);
@@ -107,72 +108,173 @@ export default function ButtonDocs() {
 				</ComponentBlock>
 			</Section>
 
-			{/* <div className={styles.containerButtons}>
-				<Button
-					startIcon={<p>B</p>}
-					disabled={isLoading}
-					colorStyle="Primary"
-					type="button"
-					onClick={() => handleSave()}
-					withFeedback={{
-						loadingOptions: {
-							isLoading,
-							typeLoadingIcon: 'Points',
-						},
-						successOptions: {
-							setSuccess,
-							success,
-						},
-						failedOptions: {
-							setFailed,
-							failed,
-						},
-					}}
-				>
-					Default
-				</Button>
-				<Button
-					disabled={isLoading}
-					colorStyle="Primary"
-					variant="Outlined"
-					type="button"
-					onClick={() => handleSave()}
-					withFeedback={{
-						loadingOptions: {
-							isLoading,
-							typeLoadingIcon: 'Points',
-							fullIcon: true,
-						},
-						successOptions: {
-							setSuccess,
-							success,
-							fullIcon: true,
-						},
-						failedOptions: {
-							setFailed,
-							failed,
-							fullIcon: true,
-						},
-					}}
-				>
-					Outlined
-				</Button>
-				<Button
-					disabled={isLoading}
-					colorStyle="Primary"
-					variant="Option"
-					type="button"
-					withFeedback={{
-						loadingOptions: {
-							isLoading: true,
-							typeLoadingIcon: 'Points',
-							customIcon: <Loading size="2rem" color="green" />,
-						},
-					}}
-				>
-					Option
-				</Button>
-			</div>
+			<Section subHeading="Com Feedbacks">
+				Os feedbacks são uma maneira intuitiva de informar ao usuário o que está
+				ocorrendo no momento, você pode personalizar os feedbacks através da
+				propriedade <span className="highlight">withFeedback</span>:
+				<div className={styles.blockH3}>
+					<h3>Opções de Carregamento</h3>A propriedade{' '}
+					<span className="highlight">isLoading</span> mostra o icone de
+					carregamento no final do botão, a propriedade{' '}
+					<span className="highlight">typeLoadingIcon</span> muda o icone
+					apresentado, a propriedade <span className="highlight">fullIcon</span>{' '}
+					remove a label do botão deixando apenas o icone, a propriedade{' '}
+					<span className="highlight">customIcon</span> permite a renderização
+					de um icone personalizado para carregamento, vale lembrar que esse
+					icone deve estar com a animação embutida.
+					<ComponentBlock code={ex3}>
+						<Button
+							disabled
+							colorStyle="Primary"
+							type="button"
+							onClick={() => handleSave()}
+							withFeedback={{
+								loadingOptions: {
+									isLoading: true,
+								},
+							}}
+						>
+							Default
+						</Button>
+						<Button
+							disabled
+							colorStyle="Secondary"
+							variant="Outlined"
+							type="button"
+							onClick={() => handleSave()}
+							withFeedback={{
+								loadingOptions: {
+									isLoading: true,
+									typeLoadingIcon: 'Points',
+								},
+							}}
+						>
+							Points
+						</Button>
+						<Button
+							disabled
+							colorStyle="Success"
+							variant="Option"
+							type="button"
+							onClick={() => handleSave()}
+							withFeedback={{
+								loadingOptions: {
+									isLoading: true,
+									fullIcon: true,
+								},
+							}}
+						>
+							Full Icon
+						</Button>
+						<Button
+							disabled
+							colorStyle="Warning"
+							type="button"
+							onClick={() => handleSave()}
+							withFeedback={{
+								loadingOptions: {
+									isLoading: true,
+									customIcon: <CustomLoading />,
+								},
+							}}
+						>
+							Custom Icon
+						</Button>
+					</ComponentBlock>
+				</div>
+				<div className={styles.blockH3}>
+					<h3>Opções de Sucesso</h3>As opções de sucesso retorna um feedback
+					para o usuário baseado em função do componente pai informando que ouve
+					o sucesso com a ação do clique, no exemplo abaixo vamos simular que
+					estamos salvando alguma informação na api e teremos exito após 3
+					segundos. A propriedade <span className="highlight">success</span> é o
+					boolean que o componente ficará monitorando, assim que ele mudar de
+					false para true, o componente exibirá o icone de sucesso, e após 1
+					segundo irá altera-la para false através da propriedade{' '}
+					<span className="highlight">setSuccess</span>
+					<ComponentBlock code={ex3}>
+						<Button
+							disabled={isLoading}
+							colorStyle="Primary"
+							type="button"
+							onClick={() => handleSave()}
+							withFeedback={{
+								loadingOptions: {
+									isLoading,
+								},
+								successOptions: {
+									success,
+									setSuccess,
+								},
+							}}
+						>
+							Sucesso
+						</Button>
+						<Button
+							disabled={isLoading}
+							colorStyle="Success"
+							variant="Outlined"
+							type="button"
+							onClick={() => handleSave()}
+							withFeedback={{
+								loadingOptions: {
+									isLoading,
+								},
+								successOptions: {
+									success,
+									setSuccess,
+									fullIcon: true,
+								},
+							}}
+						>
+							Full Icon
+						</Button>
+					</ComponentBlock>
+				</div>
+			</Section>
+
+			<Button
+				disabled={isLoading}
+				colorStyle="Primary"
+				variant="Outlined"
+				type="button"
+				onClick={() => handleSave()}
+				withFeedback={{
+					loadingOptions: {
+						isLoading,
+						typeLoadingIcon: 'Points',
+						fullIcon: true,
+					},
+					successOptions: {
+						setSuccess,
+						success,
+						fullIcon: true,
+					},
+					failedOptions: {
+						setFailed,
+						failed,
+						fullIcon: true,
+					},
+				}}
+			>
+				Outlined
+			</Button>
+			<Button
+				disabled={isLoading}
+				colorStyle="Primary"
+				variant="Option"
+				type="button"
+				withFeedback={{
+					loadingOptions: {
+						isLoading: true,
+						typeLoadingIcon: 'Points',
+						customIcon: <Loading size="2rem" color="green" />,
+					},
+				}}
+			>
+				Option
+			</Button>
+
 			<div className={styles.containerButtons}>
 				<Button disabled={isLoading} colorStyle="Secondary" type="button">
 					Secondary Default
@@ -258,7 +360,7 @@ export default function ButtonDocs() {
 				</OptionButton>
 
 				<Loading />
-			</div> */}
+			</div>
 		</main>
 	);
 }

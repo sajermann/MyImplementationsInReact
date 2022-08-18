@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { Button } from '../../components/Button';
-import { OptionButton } from '../../components/OptionButton';
 import { CodeBlock } from '../CodeBlock';
 import styles from './styles.module.css';
 
@@ -20,10 +19,7 @@ export function ComponentBlock({ children, code }: Props) {
 					variant="Option"
 					colorStyle={!codeVisible ? 'Primary' : 'Success'}
 					type="button"
-					style={{
-						width: '100%',
-						display: 'flex',
-					}}
+					className={styles.buttonToggleCode}
 					onClick={() => setCodeVisible(!codeVisible)}
 				>
 					Exemplo de Código

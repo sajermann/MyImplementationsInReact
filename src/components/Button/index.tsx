@@ -198,7 +198,7 @@ function Button({
 			withFeedback?.loadingOptions.isLoading &&
 			withFeedback?.loadingOptions.customIcon
 		) {
-			return <span>{withFeedback.loadingOptions.customIcon}</span>;
+			return withFeedback.loadingOptions.customIcon;
 		}
 		return null;
 	}, [withFeedback]);
@@ -299,10 +299,6 @@ function Button({
 		return null;
 	}, [endIcon, withFeedback]);
 
-	function riple() {
-		return <span className={`forLight_${ID}`} />;
-	}
-
 	return (
 		<button
 			{...props}
@@ -324,7 +320,6 @@ function Button({
 				{buildChildren}
 				{mainFeedback}
 				{buildEndIcon}
-				{riple()}
 			</div>
 		</button>
 	);
