@@ -28,12 +28,12 @@ type PropsFeedBack = {
 };
 
 interface Props extends React.HTMLProps<HTMLButtonElement> {
-	type: 'button' | 'reset' | 'submit';
-	withFeedback?: PropsFeedBack;
-	colorStyle?: 'Primary' | 'Secondary' | 'Success' | 'Warning';
 	variant?: 'Default' | 'Outlined' | 'Option';
+	colorStyle?: 'Primary' | 'Secondary' | 'Success' | 'Warning';
+	type: 'button' | 'reset' | 'submit';
 	startIcon?: JSX.Element;
 	endIcon?: JSX.Element;
+	withFeedback?: PropsFeedBack;
 }
 
 function Button({

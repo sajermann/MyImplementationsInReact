@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { TelegramLogo, WhatsappLogo, YoutubeLogo } from 'phosphor-react';
 import { CodeBlock } from '../../../ComponentsInternal/CodeBlock';
 import { Button, Loading, OptionButton } from '../../../components';
 import palmeiras from '../../../assets/palmeiras.webp';
@@ -37,12 +38,15 @@ export default function ButtonDocs() {
 				intuito desse componente é oferecer o mesmo botão que você já está
 				acostumado, porém com funcionalidades a mais.
 			</Section>
+			<Section subHeading="Importação">
+				<CodeBlock>{`import {Button} from '@sajermann/ui-react';`}</CodeBlock>
+			</Section>
 			<Section subHeading="Variantes">
 				Existem 3 tipos de variantes que são:{' '}
 				<span className="highlight">Default</span> |{' '}
 				<span className="highlight">Outlined</span> |{' '}
 				<span className="highlight">Option</span>
-				<ComponentBlock>
+				<ComponentBlock code={ex1}>
 					<Button type="button">Default</Button>
 					<Button type="button" variant="Outlined">
 						Outlined
@@ -51,7 +55,6 @@ export default function ButtonDocs() {
 						Option
 					</Button>
 				</ComponentBlock>
-				<CodeBlock>{ex1}</CodeBlock>
 			</Section>
 			<Section subHeading="Estilos de Cores">
 				Existem 4 tipos de estilos de cores que são:{' '}
@@ -59,14 +62,11 @@ export default function ButtonDocs() {
 				<span className="highlight">Secondary</span> |{' '}
 				<span className="highlight">Success</span> |{' '}
 				<span className="highlight">Warning</span>
-				<ComponentBlock>
-					<div>
-						<Button type="button" colorStyle="Primary">
-							Primary
-						</Button>
-					</div>
-
-					{/* <Button type="button" colorStyle="Secondary">
+				<ComponentBlock code={ex2}>
+					<Button type="button" colorStyle="Primary">
+						Primary
+					</Button>
+					<Button type="button" colorStyle="Secondary">
 						Secondary
 					</Button>
 					<Button type="button" colorStyle="Success">
@@ -74,9 +74,37 @@ export default function ButtonDocs() {
 					</Button>
 					<Button type="button" colorStyle="Warning">
 						Warning
-					</Button> */}
+					</Button>
 				</ComponentBlock>
-				<CodeBlock>{ex2}</CodeBlock>
+			</Section>
+			<Section subHeading="Icones">
+				É possível inserir icones personalizados no início ou no fim do botão
+				utilizando as propriedades <span className="highlight">startIcon</span>{' '}
+				e <span className="highlight">endIcon</span>
+				<ComponentBlock code={ex2}>
+					<Button
+						type="button"
+						colorStyle="Success"
+						startIcon={<WhatsappLogo size={30} />}
+					>
+						Whats
+					</Button>
+					<Button
+						type="button"
+						colorStyle="Primary"
+						endIcon={<TelegramLogo size={30} />}
+					>
+						Telegram
+					</Button>
+					<Button
+						type="button"
+						colorStyle="Secondary"
+						startIcon={<YoutubeLogo size={30} />}
+						endIcon={<YoutubeLogo size={30} />}
+					>
+						Youtube
+					</Button>
+				</ComponentBlock>
 			</Section>
 
 			{/* <div className={styles.containerButtons}>

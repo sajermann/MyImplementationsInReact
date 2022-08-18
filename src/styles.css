@@ -30,13 +30,27 @@ pre{
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	flex-direction: column;
 	padding: 30px;
 	border: 1px solid;
 	border-radius: 0.3rem;
 	margin: 10px 0;
 	gap: 10px;
-
 }
+
+.children{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: row;
+	width: 100%;
+	gap: 10px;
+}
+
+.toggleCode{
+	width: 100%
+}
+
 .darkMode > .componentBlock{
 	border: 1px solid rgb(15 25 38);;
 }
