@@ -30,19 +30,9 @@ type Props = {
 export function DarkModeProvider({ children }: Props) {
 	const [darkMode, setDarkMode] = useState(true);
 
-	useEffect(() => {
-		const result = sessionStorage.getItem('@sajermann/ui-react:darkMode');
-		if (result) {
-			setDarkMode(result === 'true');
-		}
-	}, []);
-
-	function toggleDarkMode() {
-		sessionStorage.setItem('@sajermann/ui-react:darkMode', String(!darkMode));
-		setDarkMode(!darkMode);
-
+	function handleChangeDom(darkModeNow: boolean) {
 		const body = document.querySelector('body');
-		if (darkMode) {
+		if (!darkModeNow) {
 			if (body) {
 				body.classList.remove('darkMode');
 			}
@@ -53,6 +43,20 @@ export function DarkModeProvider({ children }: Props) {
 			body.classList.add('darkMode');
 		}
 	}
+
+	function toggleDarkMode() {
+		sessionStorage.setItem('@sajermann/ui-react:darkMode', String(!darkMode));
+		setDarkMode(!darkMode);
+		handleChangeDom(!darkMode);
+	}
+
+	useEffect(() => {
+		const result = sessionStorage.getItem('@sajermann/ui-react:darkMode');
+		if (result) {
+			setDarkMode(result === 'true');
+			handleChangeDom(result === 'true');
+		}
+	}, []);
 
 	const memoizedValue = useMemo(
 		() => ({

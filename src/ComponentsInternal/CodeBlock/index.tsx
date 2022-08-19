@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { dracula } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import { Button } from '../../components/Button';
+import { delay } from '../../components/utils';
 import styles from './styles.module.css';
 
 type Props = {
@@ -18,6 +19,8 @@ export function CodeBlock({ children, language }: Props) {
 		await navigator.clipboard.writeText(children);
 		setIsLoading(false);
 		setSuccess(true);
+		await delay(2000);
+		setSuccess(false);
 	}
 
 	return (
@@ -34,7 +37,6 @@ export function CodeBlock({ children, language }: Props) {
 						fullIcon: true,
 					},
 					successOptions: {
-						setSuccess,
 						success,
 						fullIcon: true,
 					},

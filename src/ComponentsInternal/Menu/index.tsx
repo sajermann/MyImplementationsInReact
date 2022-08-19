@@ -45,6 +45,7 @@ export default function Menu() {
 							style={{
 								width: '100%',
 								display: 'flex',
+								color: darkMode ? '#fff' : 'black',
 							}}
 							onClick={() => goTo('/')}
 						>
@@ -54,6 +55,7 @@ export default function Menu() {
 							style={{
 								width: '100%',
 								display: 'flex',
+								color: darkMode ? '#fff' : 'black',
 							}}
 							onClick={() => goTo('/getting-started')}
 						>
@@ -63,10 +65,21 @@ export default function Menu() {
 							style={{
 								width: '100%',
 								display: 'flex',
+								color: darkMode ? '#fff' : 'black',
 							}}
 							onClick={() => goTo('/docs/button')}
 						>
-							Buttons
+							Button
+						</OptionButton>
+						<OptionButton
+							style={{
+								width: '100%',
+								display: 'flex',
+								color: darkMode ? '#fff' : 'black',
+							}}
+							onClick={() => goTo('/docs/option-button')}
+						>
+							Option Button
 						</OptionButton>
 					</div>
 				</div>

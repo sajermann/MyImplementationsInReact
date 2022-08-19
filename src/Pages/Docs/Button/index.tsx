@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import {
-	Cube,
 	TelegramLogo,
 	TrendDown,
 	TrendUp,
@@ -8,14 +7,13 @@ import {
 	YoutubeLogo,
 } from 'phosphor-react';
 import { CodeBlock } from '../../../ComponentsInternal/CodeBlock';
-import { Button, Loading, OptionButton } from '../../../components';
+import { Button, OptionButton } from '../../../components';
 import palmeiras from '../../../assets/palmeiras.webp';
 import styles from './styles.module.css';
 import Section from '../../../ComponentsInternal/Section';
 import { ComponentBlock } from '../../../ComponentsInternal/ComponentBlock';
-import { ex1, ex2, ex3, ex4, ex5 } from './exs';
+import { ex1, ex2, ex3, ex4, ex5, ex6, ex7 } from './exs';
 import CustomLoading from '../../../ComponentsInternal/CustomLoading';
-import CustomSuccess from '../../../ComponentsInternal/CustomSuccess';
 
 export default function ButtonDocs() {
 	const [isLoading, setIsLoading] = useState(false);
@@ -54,7 +52,7 @@ export default function ButtonDocs() {
 				acostumado, porém com funcionalidades a mais.
 			</Section>
 			<Section subHeading="Importação">
-				<CodeBlock>{`import {Button} from '@sajermann/ui-react';`}</CodeBlock>
+				<CodeBlock>{`import { Button } from '@sajermann/ui-react';`}</CodeBlock>
 			</Section>
 			<Section subHeading="Variantes">
 				Existem 3 tipos de variantes que são:{' '}
@@ -354,103 +352,108 @@ export default function ButtonDocs() {
 				exemplo manter o botão com tamanho fixo para que ele não fique se
 				mexendo na alteração dos icones, outro recurso bacana é o ellipsis, veja
 				abaixo alguns exemplos diversificados.
-				<ComponentBlock code={ex2}>
-					<Button
-						style={{ width: '250px', height: '50px' }}
-						disabled={isLoading}
-						colorStyle="Primary"
-						type="button"
-						onClick={handleSave}
-						withFeedback={{
-							loadingOptions: {
-								isLoading,
-								fullIcon: true,
-							},
-							successOptions: {
-								success,
-								fullIcon: true,
-							},
-						}}
-					>
-						Fixo Somente Icone
-					</Button>
-					<Button
-						style={{ width: '250px', height: '50px' }}
-						disabled={isLoading}
-						colorStyle="Secondary"
-						type="button"
-						onClick={handleSave}
-						withFeedback={{
-							loadingOptions: {
-								isLoading,
-							},
-							successOptions: {
-								success,
-							},
-						}}
-					>
-						Fixo Com Icone
-					</Button>
-					<Button
-						style={{ width: '100px', height: '50px' }}
-						disabled={isLoading}
-						colorStyle="Success"
-						type="button"
-						onClick={handleSave}
-						withFeedback={{
-							loadingOptions: {
-								isLoading,
-							},
-							successOptions: {
-								success,
-							},
-						}}
-					>
-						Ellipsis
-					</Button>
-					<Button
-						style={{ minWidth: '50px', height: '50px' }}
-						disabled={isLoading}
-						colorStyle="Success"
-						variant="Outlined"
-						type="button"
-						onClick={handleSave}
-						startIcon={<WhatsappLogo size={30} />}
-					/>
-					<Button
-						style={{ minWidth: '50px', height: '50px' }}
-						disabled={isLoading}
-						colorStyle="Secondary"
-						variant="Outlined"
-						type="button"
-						onClick={handleSave}
-						endIcon={<YoutubeLogo size={30} />}
-					/>
-					{/* <Button
-						type="button"
-						colorStyle="Success"
-						startIcon={<WhatsappLogo size={30} />}
-					>
-						Whats
-					</Button>
-					<Button
-						type="button"
-						colorStyle="Primary"
-						endIcon={<TelegramLogo size={30} />}
-					>
-						Telegram
-					</Button>
-					<Button
-						type="button"
-						colorStyle="Secondary"
-						startIcon={<YoutubeLogo size={30} />}
-						endIcon={<YoutubeLogo size={30} />}
-					>
-						Youtube
-					</Button> */}
-				</ComponentBlock>
+				<div className={styles.blockH3}>
+					<h3>Tamanhos</h3>
+					<ComponentBlock code={ex6}>
+						<Button
+							style={{ width: '250px', height: '50px' }}
+							disabled={isLoading}
+							colorStyle="Primary"
+							type="button"
+							onClick={handleSave}
+							withFeedback={{
+								loadingOptions: {
+									isLoading,
+									fullIcon: true,
+								},
+								successOptions: {
+									success,
+									fullIcon: true,
+								},
+							}}
+						>
+							Fixo Somente Icone
+						</Button>
+						<Button
+							style={{ width: '250px', height: '50px' }}
+							disabled={isLoading}
+							colorStyle="Secondary"
+							type="button"
+							onClick={handleSave}
+							withFeedback={{
+								loadingOptions: {
+									isLoading,
+								},
+								successOptions: {
+									success,
+								},
+							}}
+						>
+							Fixo Com Icone
+						</Button>
+						<Button
+							style={{ width: '100px', height: '50px' }}
+							disabled={isLoading}
+							colorStyle="Success"
+							type="button"
+							onClick={handleSave}
+							withFeedback={{
+								loadingOptions: {
+									isLoading,
+								},
+								successOptions: {
+									success,
+								},
+							}}
+						>
+							Ellipsis
+						</Button>
+					</ComponentBlock>
+				</div>
+				<div className={styles.blockH3}>
+					<h3>Botões de Icones</h3> Caso queira que seu botão tenha apenas o
+					icone, utilize a propriedades{' '}
+					<span className="highlight">endIcon</span> não passando nenhum filho.
+					<ComponentBlock code={ex7}>
+						<Button
+							style={{ minWidth: '50px', height: '50px' }}
+							disabled={isLoading}
+							colorStyle="Success"
+							variant="Outlined"
+							type="button"
+							onClick={handleSave}
+							withFeedback={{
+								loadingOptions: {
+									isLoading,
+								},
+								successOptions: {
+									success,
+								},
+							}}
+							endIcon={<WhatsappLogo size={30} />}
+						/>
+						<Button
+							style={{ minWidth: '50px', height: '50px' }}
+							disabled={isLoading}
+							colorStyle="Secondary"
+							variant="Outlined"
+							type="button"
+							onClick={handleSave}
+							withFeedback={{
+								loadingOptions: {
+									isLoading,
+									typeLoadingIcon: 'Points',
+								},
+								successOptions: {
+									success,
+								},
+							}}
+							endIcon={<YoutubeLogo size={30} />}
+						/>
+					</ComponentBlock>
+				</div>
 			</Section>
-			<div className={styles.containerButtons}>
+			{/* <div className={styles.containerButtons}>
 				<OptionButton
 					style={{
 						color: '#fff',
@@ -466,11 +469,8 @@ export default function ButtonDocs() {
 						}}
 						alt="edasd"
 					/>
-					Warning Default
 				</OptionButton>
-
-				<Loading />
-			</div>
+			</div> */}
 		</main>
 	);
 }

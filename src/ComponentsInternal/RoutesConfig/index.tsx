@@ -6,6 +6,7 @@ import Home from '../../Pages/Home';
 import { useDarkMode } from '../../Hooks/DarkMode';
 import GettingStarted from '../../Pages/Docs/Getting Started';
 import styles from './styles.module.css';
+import OptionButtonDocs from '../../Pages/Docs/OptionButton';
 
 const options = [
 	{
@@ -31,6 +32,11 @@ const options = [
 			{
 				path: 'button',
 				element: <ButtonDocs />,
+				index: false,
+			},
+			{
+				path: 'option-button',
+				element: <OptionButtonDocs />,
 				index: false,
 			},
 			{

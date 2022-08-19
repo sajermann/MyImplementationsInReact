@@ -1,0 +1,20 @@
+.containerButtons{
+	border: 1px rgb(15 25 38) solid;
+	margin: 10px;
+	border-radius: 10px;
+	padding: 20px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 10px
+}
+
+
+.test{
+	background-color: pink;
+	color: yellow;
+}
+
+.blockH3{
+	margin-top: 15px;
+}

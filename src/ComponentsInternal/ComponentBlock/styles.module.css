@@ -1,23 +1,6 @@
-.copy {
-	color: #fff;
-	position: absolute;
-	top: 11px;
-	right: 3px;
-	transition: visibility 0s, opacity 0.5s linear;
-	width: 60px;
-	height: 40px;
-
-}
-
-.container:hover > .copy {
-	visibility: visible;
-  opacity: 1;
-}
-.container {
-	position: relative;
-}
 
 .buttonToggleCode{
 	width: 100%;
 	display: flex;
+	/* overflow: auto; */
 }
