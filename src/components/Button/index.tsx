@@ -3,7 +3,7 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import styles from './styles.module.css';
 import { Loading } from '../Loading';
 import { FeedbackIcons } from '../FeedbackIcons';
-import { delay, generateGuid, createEffect } from '../utils';
+import { generateGuid, createEffect } from '../utils';
 import { useWindowSize } from '../utils/useWindowSize';
 
 type PropsFeedBack = {
@@ -15,13 +15,11 @@ type PropsFeedBack = {
 	};
 	successOptions?: {
 		success: boolean;
-		setSuccess: (data: boolean) => void;
 		customIcon?: JSX.Element;
 		fullIcon?: boolean;
 	};
 	failedOptions?: {
 		failed: boolean;
-		setFailed: (data: boolean) => void;
 		customIcon?: JSX.Element;
 		fullIcon?: boolean;
 	};
@@ -150,25 +148,6 @@ function Button({
 
 		return '';
 	}
-
-	async function success() {
-		await delay(1000);
-		withFeedback?.successOptions?.setSuccess(false);
-	}
-
-	async function failed() {
-		await delay(1000);
-		withFeedback?.failedOptions?.setFailed(false);
-	}
-
-	useEffect(() => {
-		if (withFeedback?.successOptions?.success) {
-			success();
-		}
-		if (withFeedback?.failedOptions?.failed) {
-			failed();
-		}
-	}, [withFeedback]);
 
 	function verifyEllipsis() {
 		if (props.title) {

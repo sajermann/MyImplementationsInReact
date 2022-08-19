@@ -1,13 +1,21 @@
 import { useState } from 'react';
-import { TelegramLogo, WhatsappLogo, YoutubeLogo } from 'phosphor-react';
+import {
+	Cube,
+	TelegramLogo,
+	TrendDown,
+	TrendUp,
+	WhatsappLogo,
+	YoutubeLogo,
+} from 'phosphor-react';
 import { CodeBlock } from '../../../ComponentsInternal/CodeBlock';
 import { Button, Loading, OptionButton } from '../../../components';
 import palmeiras from '../../../assets/palmeiras.webp';
 import styles from './styles.module.css';
 import Section from '../../../ComponentsInternal/Section';
 import { ComponentBlock } from '../../../ComponentsInternal/ComponentBlock';
-import { ex1, ex2, ex3 } from './exs';
+import { ex1, ex2, ex3, ex4, ex5 } from './exs';
 import CustomLoading from '../../../ComponentsInternal/CustomLoading';
+import CustomSuccess from '../../../ComponentsInternal/CustomSuccess';
 
 export default function ButtonDocs() {
 	const [isLoading, setIsLoading] = useState(false);
@@ -19,19 +27,25 @@ export default function ButtonDocs() {
 			setTimeout(() => resolve(), delayMs);
 		});
 	}
-	async function handle() {
+
+	async function handleSave() {
 		setIsLoading(true);
 		await delay(3000);
 		setIsLoading(false);
 		setSuccess(true);
+		await delay(2000);
+		setSuccess(false);
 	}
-	async function handleSave() {
-		setIsLoading(true);
-		await delay(3001);
 
+	async function handleSaveFailed() {
+		setIsLoading(true);
+		await delay(3000);
 		setIsLoading(false);
-		setSuccess(true);
+		setFailed(true);
+		await delay(2000);
+		setFailed(false);
 	}
+
 	return (
 		<main>
 			<Section heading="Botões">
@@ -183,28 +197,30 @@ export default function ButtonDocs() {
 					</ComponentBlock>
 				</div>
 				<div className={styles.blockH3}>
-					<h3>Opções de Sucesso</h3>As opções de sucesso retorna um feedback
-					para o usuário baseado em função do componente pai informando que ouve
-					o sucesso com a ação do clique, no exemplo abaixo vamos simular que
-					estamos salvando alguma informação na api e teremos exito após 3
-					segundos. A propriedade <span className="highlight">success</span> é o
-					boolean que o componente ficará monitorando, assim que ele mudar de
-					false para true, o componente exibirá o icone de sucesso, e após 1
-					segundo irá altera-la para false através da propriedade{' '}
-					<span className="highlight">setSuccess</span>
-					<ComponentBlock code={ex3}>
+					<h3>Opções de Sucesso</h3>As opções de sucessos retornam feedbacks
+					para o usuário baseado em função do componente pai informando que
+					ocorreu o sucesso com a ação do clique, no exemplo abaixo vamos
+					simular que estamos salvando alguma informação na api e teremos êxito
+					após 3 segundos. A propriedade{' '}
+					<span className="highlight">success</span> é o boolean que o
+					componente ficará monitorando, enquanto ele for true, o icone de
+					sucesso será exibido. A propriedade{' '}
+					<span className="highlight">fullIcon</span> remove a label do botão
+					deixando apenas o icone de sucesso. A propriedade{' '}
+					<span className="highlight">customIcon</span> permite a renderização
+					de um icone personalizado.
+					<ComponentBlock code={ex4}>
 						<Button
 							disabled={isLoading}
 							colorStyle="Primary"
 							type="button"
-							onClick={() => handleSave()}
+							onClick={handleSave}
 							withFeedback={{
 								loadingOptions: {
 									isLoading,
 								},
 								successOptions: {
 									success,
-									setSuccess,
 								},
 							}}
 						>
@@ -215,131 +231,225 @@ export default function ButtonDocs() {
 							colorStyle="Success"
 							variant="Outlined"
 							type="button"
-							onClick={() => handleSave()}
+							onClick={handleSave}
 							withFeedback={{
 								loadingOptions: {
 									isLoading,
 								},
 								successOptions: {
 									success,
-									setSuccess,
 									fullIcon: true,
 								},
 							}}
 						>
 							Full Icon
 						</Button>
+						<Button
+							disabled={isLoading}
+							colorStyle="Warning"
+							type="button"
+							onClick={handleSave}
+							withFeedback={{
+								loadingOptions: {
+									isLoading,
+								},
+								successOptions: {
+									success,
+									customIcon: (
+										<TrendUp>
+											<animate
+												attributeName="opacity"
+												values="0;1;0"
+												dur="1s"
+												repeatCount="indefinite"
+											/>
+										</TrendUp>
+									),
+								},
+							}}
+						>
+							Custom Icon
+						</Button>
+					</ComponentBlock>
+				</div>
+				<div className={styles.blockH3}>
+					<h3>Opções de Falha</h3>As opções de falhas retornam feedbacks para o
+					usuário baseado em função do componente pai informando que ocorreu a
+					falha com a ação do clique, no exemplo abaixo vamos simular que
+					estamos salvando alguma informação na api e não teremos êxito após 3
+					segundos. A propriedade <span className="highlight">failed</span> é o
+					boolean que o componente ficará monitorando, enquanto ele for true, o
+					icone de falha será exibido. A propriedade{' '}
+					<span className="highlight">fullIcon</span> remove a label do botão
+					deixando apenas o icone de falha. A propriedade{' '}
+					<span className="highlight">customIcon</span> permite a renderização
+					de um icone personalizado.
+					<ComponentBlock code={ex5}>
+						<Button
+							disabled={isLoading}
+							colorStyle="Primary"
+							type="button"
+							onClick={handleSaveFailed}
+							withFeedback={{
+								loadingOptions: {
+									isLoading,
+								},
+								failedOptions: {
+									failed,
+								},
+							}}
+						>
+							Falha
+						</Button>
+						<Button
+							disabled={isLoading}
+							colorStyle="Secondary"
+							variant="Outlined"
+							type="button"
+							onClick={handleSaveFailed}
+							withFeedback={{
+								loadingOptions: {
+									isLoading,
+								},
+								failedOptions: {
+									failed,
+									fullIcon: true,
+								},
+							}}
+						>
+							Full Icon
+						</Button>
+						<Button
+							disabled={isLoading}
+							colorStyle="Warning"
+							type="button"
+							onClick={handleSaveFailed}
+							withFeedback={{
+								loadingOptions: {
+									isLoading,
+								},
+								failedOptions: {
+									failed: true,
+									customIcon: (
+										<TrendDown>
+											<animate
+												attributeName="opacity"
+												values="0;1;0"
+												dur="1s"
+												repeatCount="indefinite"
+											/>
+										</TrendDown>
+									),
+								},
+							}}
+						>
+							Custom Icon
+						</Button>
 					</ComponentBlock>
 				</div>
 			</Section>
 
-			<Button
-				disabled={isLoading}
-				colorStyle="Primary"
-				variant="Outlined"
-				type="button"
-				onClick={() => handleSave()}
-				withFeedback={{
-					loadingOptions: {
-						isLoading,
-						typeLoadingIcon: 'Points',
-						fullIcon: true,
-					},
-					successOptions: {
-						setSuccess,
-						success,
-						fullIcon: true,
-					},
-					failedOptions: {
-						setFailed,
-						failed,
-						fullIcon: true,
-					},
-				}}
-			>
-				Outlined
-			</Button>
-			<Button
-				disabled={isLoading}
-				colorStyle="Primary"
-				variant="Option"
-				type="button"
-				withFeedback={{
-					loadingOptions: {
-						isLoading: true,
-						typeLoadingIcon: 'Points',
-						customIcon: <Loading size="2rem" color="green" />,
-					},
-				}}
-			>
-				Option
-			</Button>
-
-			<div className={styles.containerButtons}>
-				<Button disabled={isLoading} colorStyle="Secondary" type="button">
-					Secondary Default
-				</Button>
-				<Button
-					disabled={isLoading}
-					colorStyle="Secondary"
-					variant="Outlined"
-					type="button"
-				>
-					Secondary Outilined
-				</Button>
-				<Button
-					disabled={isLoading}
-					colorStyle="Secondary"
-					variant="Option"
-					type="button"
-				>
-					Secondary Option
-				</Button>
-			</div>
-			<div className={styles.containerButtons}>
-				<Button disabled={isLoading} colorStyle="Success" type="button">
-					Success Default
-				</Button>
-				<Button
-					disabled={isLoading}
-					colorStyle="Success"
-					variant="Outlined"
-					type="button"
-				>
-					Success Outilined
-				</Button>
-				<Button
-					disabled={isLoading}
-					colorStyle="Success"
-					variant="Option"
-					type="button"
-				>
-					Success Option
-				</Button>
-			</div>
-			<div className={styles.containerButtons}>
-				<Button disabled={isLoading} colorStyle="Warning" type="button">
-					Warning Default
-				</Button>
-				<Button
-					disabled={isLoading}
-					colorStyle="Warning"
-					variant="Outlined"
-					type="button"
-				>
-					Warning Outilined
-				</Button>
-
-				<Button
-					disabled={isLoading}
-					colorStyle="Warning"
-					variant="Option"
-					type="button"
-					onClick={e => console.log(e)}
-				>
-					Warning Option
-				</Button>
-			</div>
+			<Section subHeading="Outras Possibilidades">
+				É possível personalizar seus botões de diversas formas diferentes, por
+				exemplo manter o botão com tamanho fixo para que ele não fique se
+				mexendo na alteração dos icones, outro recurso bacana é o ellipsis, veja
+				abaixo alguns exemplos diversificados.
+				<ComponentBlock code={ex2}>
+					<Button
+						style={{ width: '250px', height: '50px' }}
+						disabled={isLoading}
+						colorStyle="Primary"
+						type="button"
+						onClick={handleSave}
+						withFeedback={{
+							loadingOptions: {
+								isLoading,
+								fullIcon: true,
+							},
+							successOptions: {
+								success,
+								fullIcon: true,
+							},
+						}}
+					>
+						Fixo Somente Icone
+					</Button>
+					<Button
+						style={{ width: '250px', height: '50px' }}
+						disabled={isLoading}
+						colorStyle="Secondary"
+						type="button"
+						onClick={handleSave}
+						withFeedback={{
+							loadingOptions: {
+								isLoading,
+							},
+							successOptions: {
+								success,
+							},
+						}}
+					>
+						Fixo Com Icone
+					</Button>
+					<Button
+						style={{ width: '100px', height: '50px' }}
+						disabled={isLoading}
+						colorStyle="Success"
+						type="button"
+						onClick={handleSave}
+						withFeedback={{
+							loadingOptions: {
+								isLoading,
+							},
+							successOptions: {
+								success,
+							},
+						}}
+					>
+						Ellipsis
+					</Button>
+					<Button
+						style={{ minWidth: '50px', height: '50px' }}
+						disabled={isLoading}
+						colorStyle="Success"
+						variant="Outlined"
+						type="button"
+						onClick={handleSave}
+						startIcon={<WhatsappLogo size={30} />}
+					/>
+					<Button
+						style={{ minWidth: '50px', height: '50px' }}
+						disabled={isLoading}
+						colorStyle="Secondary"
+						variant="Outlined"
+						type="button"
+						onClick={handleSave}
+						endIcon={<YoutubeLogo size={30} />}
+					/>
+					{/* <Button
+						type="button"
+						colorStyle="Success"
+						startIcon={<WhatsappLogo size={30} />}
+					>
+						Whats
+					</Button>
+					<Button
+						type="button"
+						colorStyle="Primary"
+						endIcon={<TelegramLogo size={30} />}
+					>
+						Telegram
+					</Button>
+					<Button
+						type="button"
+						colorStyle="Secondary"
+						startIcon={<YoutubeLogo size={30} />}
+						endIcon={<YoutubeLogo size={30} />}
+					>
+						Youtube
+					</Button> */}
+				</ComponentBlock>
+			</Section>
 			<div className={styles.containerButtons}>
 				<OptionButton
 					style={{

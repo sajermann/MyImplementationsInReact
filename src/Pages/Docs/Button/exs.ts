@@ -11,7 +11,7 @@ export const ex3 = `<Button
 	disabled
 	colorStyle="Primary"
 	type="button"
-	onClick={() => handleSave()}
+	onClick={handleSave}
 	withFeedback={{
 		loadingOptions: {
 		isLoading: true,
@@ -25,7 +25,7 @@ export const ex3 = `<Button
 	colorStyle="Secondary"
 	variant="Outlined"
 	type="button"
-	onClick={() => handleSave()}
+	onClick={handleSave}
 	withFeedback={{
 		loadingOptions: {
 		isLoading: true,
@@ -40,7 +40,7 @@ export const ex3 = `<Button
 	colorStyle="Success"
 	variant="Option"
 	type="button"
-	onClick={() => handleSave()}
+	onClick={handleSave}
 	withFeedback={{
 		loadingOptions: {
 		isLoading: true,
@@ -54,7 +54,7 @@ export const ex3 = `<Button
 	disabled
 	colorStyle="Warning"
 	type="button"
-	onClick={() => handleSave()}
+	onClick={handleSave}
 	withFeedback={{
 		loadingOptions: {
 		isLoading: true,
@@ -64,3 +64,145 @@ export const ex3 = `<Button
 >
 	Custom Icon
 </Button>`;
+
+export const ex4 = `const [isLoading, setIsLoading] = useState(false);
+const [success, setSuccess] = useState(false);
+
+function delay(delayMs: number): Promise<void> {
+	return new Promise(resolve => {
+		setTimeout(() => resolve(), delayMs);
+	});
+}
+
+async function handleSave() {
+	setIsLoading(true);
+	await delay(3000);
+	setIsLoading(false);
+	setSuccess(true);
+	await delay(2000);
+	setSuccess(false);
+}
+
+<Button
+	disabled={isLoading}
+	colorStyle="Primary"
+	type="button"
+	onClick={handleSave}
+	withFeedback={{
+		loadingOptions: {
+			isLoading,
+		},
+		successOptions: {
+			success,
+		},
+	}}
+>
+	Sucesso
+</Button>
+<Button
+	disabled={isLoading}
+	colorStyle="Success"
+	variant="Outlined"
+	type="button"
+	onClick={handleSave}
+	withFeedback={{
+		loadingOptions: {
+			isLoading,
+		},
+		successOptions: {
+			success,
+			fullIcon: true,
+		},
+	}}
+>
+	Full Icon
+</Button>
+<Button
+	disabled={isLoading}
+	colorStyle="Warning"
+	type="button"
+	onClick={handleSave}
+	withFeedback={{
+		loadingOptions: {
+			isLoading,
+		},
+		successOptions: {
+			success,
+			customIcon: <TrendUp />,
+		},
+	}}
+>
+	Custom Icon
+</Button>
+`;
+
+export const ex5 = `const [isLoading, setIsLoading] = useState(false);
+const [failed, setFailed] = useState(false);
+
+function delay(delayMs: number): Promise<void> {
+	return new Promise(resolve => {
+		setTimeout(() => resolve(), delayMs);
+	});
+}
+
+async function handleSaveFailed() {
+	setIsLoading(true);
+	await delay(3000);
+	setIsLoading(false);
+	setFailed(true);
+	await delay(2000);
+	setFailed(false);
+}
+
+<Button
+	disabled={isLoading}
+	colorStyle="Primary"
+	type="button"
+	onClick={handleSaveFailed}
+	withFeedback={{
+		loadingOptions: {
+			isLoading,
+		},
+		failedOptions: {
+			failed,
+		},
+	}}
+>
+	Falha
+</Button>
+<Button
+	disabled={isLoading}
+	colorStyle="Secondary"
+	variant="Outlined"
+	type="button"
+	onClick={handleSaveFailed}
+	withFeedback={{
+		loadingOptions: {
+			isLoading,
+		},
+		failedOptions: {
+			failed,
+			fullIcon: true,
+		},
+	}}
+>
+	Full Icon
+</Button>
+<Button
+	disabled={isLoading}
+	colorStyle="Warning"
+	type="button"
+	onClick={handleSaveFailed}
+	withFeedback={{
+		loadingOptions: {
+			isLoading,
+		},
+		failedOptions: {
+			failed: true,
+			customIcon: <TrendDown />,
+		},
+	}}
+>
+	Custom Icon
+</Button>
+`;
