@@ -7,8 +7,7 @@ import {
 	YoutubeLogo,
 } from 'phosphor-react';
 import { CodeBlock } from '../../../ComponentsInternal/CodeBlock';
-import { Button, OptionButton } from '../../../components';
-import palmeiras from '../../../assets/palmeiras.webp';
+import { Button } from '../../../components';
 import styles from './styles.module.css';
 import Section from '../../../ComponentsInternal/Section';
 import { ComponentBlock } from '../../../ComponentsInternal/ComponentBlock';
@@ -450,27 +449,27 @@ export default function ButtonDocs() {
 							}}
 							endIcon={<YoutubeLogo size={30} />}
 						/>
+						<Button
+							style={{ minWidth: '50px', height: '50px', borderRadius: '50%' }}
+							disabled={isLoading}
+							colorStyle="Primary"
+							variant="Outlined"
+							type="button"
+							onClick={handleSave}
+							withFeedback={{
+								loadingOptions: {
+									isLoading,
+									typeLoadingIcon: 'Points',
+								},
+								successOptions: {
+									success,
+								},
+							}}
+							endIcon={<TelegramLogo size={30} />}
+						/>
 					</ComponentBlock>
 				</div>
 			</Section>
-			{/* <div className={styles.containerButtons}>
-				<OptionButton
-					style={{
-						color: '#fff',
-						width: '150px',
-						height: '150px',
-					}}
-				>
-					<img
-						src={palmeiras}
-						style={{
-							width: '100px',
-							height: '100px',
-						}}
-						alt="edasd"
-					/>
-				</OptionButton>
-			</div> */}
 		</main>
 	);
 }

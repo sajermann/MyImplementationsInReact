@@ -25,7 +25,9 @@ function OptionButton({
 			type="button"
 			className={`${styles.btn} ${props.className}`}
 		>
-			<div style={{ backgroundImage: `url(${palmeiras})` }}>{children}</div>
+			<button type="button" className={`${styles.btn} ${props.className}`}>
+				{children}
+			</button>
 		</button>
 	);
 }

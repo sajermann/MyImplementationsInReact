@@ -333,4 +333,21 @@ async function handleSave() {
 	}}
 	endIcon={<YoutubeLogo size={30} />}
 />
-`;
+<Button
+	style={{ minWidth: '50px', height: '50px', borderRadius: '50%' }}
+	disabled={isLoading}
+	colorStyle="Primary"
+	variant="Outlined"
+	type="button"
+	onClick={handleSave}
+	withFeedback={{
+		loadingOptions: {
+			isLoading,
+			typeLoadingIcon: 'Points',
+		},
+		successOptions: {
+			success,
+		},
+	}}
+	endIcon={<TelegramLogo size={30} />}
+/>`;
