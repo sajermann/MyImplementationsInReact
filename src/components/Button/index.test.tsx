@@ -68,11 +68,9 @@ describe('Components/Button', () => {
 						isLoading: funcs.loadingOptions.isLoading,
 					},
 					successOptions: {
-						setSuccess: funcs.successOptions.setSuccess,
 						success: funcs.successOptions.success,
 					},
 					failedOptions: {
-						setFailed: funcs.failedOptions.setFailed,
 						failed: funcs.failedOptions.failed,
 					},
 				}}

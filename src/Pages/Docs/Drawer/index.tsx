@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Button } from '../../../components';
-import Drawer from '../../../components/Drawer';
+import { Drawer } from '../../../components/Drawer';
 
 export default function DrawerDocs() {
 	const [isOpenTop, setIsOpenTop] = useState(false);
@@ -8,68 +8,29 @@ export default function DrawerDocs() {
 	const [isOpenRight, setIsOpenRight] = useState(false);
 	const [isOpenFull, setIsOpenFull] = useState(false);
 
-	const [success, setSuccess] = useState(false);
-	const [failed, setFailed] = useState(false);
-	const [isLoading, setIsLoading] = useState(false);
 	return (
 		<div>
 			<Button
-				disabled={isLoading}
 				colorStyle="Primary"
 				id="bruno"
 				type="button"
 				onClick={() => setIsOpenLeft(true)}
-				withFeedback={{
-					isLoading,
-					inSuccess: {
-						setSuccess,
-						success,
-					},
-					inFailed: {
-						setFailed,
-						failed,
-					},
-				}}
 			>
 				Open Left
 			</Button>
 			<Button
-				disabled={isLoading}
 				colorStyle="Secondary"
 				id="bruno"
 				type="button"
 				onClick={() => setIsOpenRight(true)}
-				withFeedback={{
-					isLoading,
-					inSuccess: {
-						setSuccess,
-						success,
-					},
-					inFailed: {
-						setFailed,
-						failed,
-					},
-				}}
 			>
 				Open Right
 			</Button>
 			<Button
-				disabled={isLoading}
 				colorStyle="Success"
 				id="bruno"
 				type="button"
 				onClick={() => setIsOpenFull(true)}
-				withFeedback={{
-					isLoading,
-					inSuccess: {
-						setSuccess,
-						success,
-					},
-					inFailed: {
-						setFailed,
-						failed,
-					},
-				}}
 			>
 				Open Full
 			</Button>
@@ -107,7 +68,6 @@ export default function DrawerDocs() {
 			>
 				<div>
 					<Button
-						disabled={isLoading}
 						colorStyle="Success"
 						id="ss"
 						type="button"
@@ -126,7 +86,6 @@ export default function DrawerDocs() {
 			>
 				<div style={{ backgroundColor: 'black', height: '100%' }}>
 					<Button
-						disabled={isLoading}
 						colorStyle="Success"
 						id="ss"
 						type="button"

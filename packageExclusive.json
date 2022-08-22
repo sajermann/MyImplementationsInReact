@@ -1,6 +1,6 @@
 {
   "name": "@sajermann/ui-react",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "description": "Componentes UI utilizados em meus projetos.",
   "main": "index.js",
   "publishConfig": {

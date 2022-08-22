@@ -19,14 +19,6 @@ export default [
 					declaration: true,
 					declarationDir: 'build',
 				},
-				exclude: [
-					'src/Pages',
-					'src/test',
-					'src/App.tsx',
-					'src/main.tsx',
-					'src/**/*.spec.ts',
-					'src/**/*.test.ts',
-				],
 			}),
 			image(),
 			postcss({

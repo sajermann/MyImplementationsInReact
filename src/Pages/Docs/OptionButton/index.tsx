@@ -7,7 +7,7 @@ import {
 	YoutubeLogo,
 } from 'phosphor-react';
 import { CodeBlock } from '../../../ComponentsInternal/CodeBlock';
-import { OptionButton } from '../../../components';
+import { OptionButton } from '../../../components/OptionButton';
 import palmeiras from '../../../assets/palmeiras.png';
 import styles from './styles.module.css';
 import Section from '../../../ComponentsInternal/Section';

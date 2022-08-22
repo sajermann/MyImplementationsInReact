@@ -1,4 +1,4 @@
-import { generateGuid } from '@sajermann/utils/Random';
+import { generateGuid } from '../utils';
 import styles from './styles.module.css';
 
 type Props = {

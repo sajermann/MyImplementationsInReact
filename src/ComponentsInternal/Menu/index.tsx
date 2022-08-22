@@ -1,8 +1,8 @@
 import { List } from 'phosphor-react';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { OptionButton } from '../../components';
-import Drawer from '../../components/Drawer';
+import { OptionButton } from '../../components/OptionButton';
+import { Drawer } from '../../components/Drawer';
 import { useDarkMode } from '../../Hooks/DarkMode';
 import styles from './styles.module.css';
 
