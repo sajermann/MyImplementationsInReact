@@ -5,7 +5,7 @@ import { DarkModeProvider } from '../Hooks/DarkMode';
 
 function App() {
 	return (
-		<BrowserRouter>
+		<BrowserRouter basename="/">
 			<DarkModeProvider>
 				<Header />
 				<RoutesConfig />
