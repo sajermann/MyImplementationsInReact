@@ -5,7 +5,7 @@ import { DarkModeProvider } from '../Hooks/DarkMode';
 
 function App() {
 	return (
-		<BrowserRouter basename="/">
+		<BrowserRouter basename="/NPM-SajermannUiReact">
 			<DarkModeProvider>
 				<Header />
 				<RoutesConfig />
