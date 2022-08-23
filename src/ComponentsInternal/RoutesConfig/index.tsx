@@ -17,7 +17,7 @@ const options = [
 		subItems: [],
 	},
 	{
-		path: '/NPM-SajermannUiReact/',
+		path: '/NPM-SajermannUiReact',
 		element: <Home />,
 		name: 'Home',
 		index: true,
