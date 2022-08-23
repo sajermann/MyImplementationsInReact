@@ -1,4 +1,5 @@
 import { Moon, Sun } from 'phosphor-react';
+import { Link } from 'react-router-dom';
 import { useDarkMode } from '../../Hooks/DarkMode';
 import Menu from '../Menu';
 import styles from './styles.module.css';
@@ -9,9 +10,9 @@ export default function Header() {
 		<nav className={styles.nav}>
 			<div className={styles.container}>
 				<Menu />
-				<a href="/" className={styles.link}>
-					<span className={styles.title}>Sajermann UI for React</span>
-				</a>
+				<Link to="/" className={styles.link}>
+					<h1 className={styles.title}>Sajermann UI for React</h1>
+				</Link>
 				<button
 					onClick={toggleDarkMode}
 					type="button"

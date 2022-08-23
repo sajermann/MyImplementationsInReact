@@ -12,7 +12,7 @@ export default function Menu() {
 	const navigate = useNavigate();
 
 	function goTo(url: string) {
-		navigate(url, { replace: true });
+		navigate(url);
 	}
 
 	return (
