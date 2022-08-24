@@ -1,20 +1,13 @@
-import { useState } from 'react';
-import {
-	TelegramLogo,
-	TrendDown,
-	TrendUp,
-	WhatsappLogo,
-	YoutubeLogo,
-} from 'phosphor-react';
-import { CodeBlock } from '../../../ComponentsInternal/CodeBlock';
 import { OptionButton } from '../../../components/OptionButton';
-import palmeiras from '../../../assets/palmeiras.png';
 import styles from './styles.module.css';
 import Section from '../../../ComponentsInternal/Section';
 import { ComponentBlock } from '../../../ComponentsInternal/ComponentBlock';
-import { ex1, ex2, ex3, ex4, ex5, ex6, ex7 } from './exs';
+import { ex1, ex2 } from './exs';
+import { useDarkMode } from '../../../Hooks/DarkMode';
+import { CodeBlock } from '../../../ComponentsInternal/CodeBlock';
 
 export default function OptionButtonDocs() {
+	const { darkMode } = useDarkMode();
 	return (
 		<main>
 			<Section heading="Botão de Opção">
@@ -25,35 +18,40 @@ export default function OptionButtonDocs() {
 			<Section subHeading="Importação">
 				<CodeBlock>{`import { OptionButton } from '@sajermann/ui-react';`}</CodeBlock>
 			</Section>
-
-			<Section subHeading="Outras Possibilidades">
-				É possível personalizar seus botões de diversas formas diferentes, por
-				exemplo manter o botão com tamanho fixo para que ele não fique se
-				mexendo na alteração dos icones, outro recurso bacana é o ellipsis, veja
-				abaixo alguns exemplos diversificados.
-				<div className={styles.blockH3}>
-					<h3>Tamanhos</h3>
-					<ComponentBlock code={ex6}>
-						<OptionButton
-							style={{
-								color: '#fff',
-								width: '150px',
-								height: '150px',
-								backgroundImage: `url(${palmeiras})`,
-							}}
-						>
-							{/* <img
-								src={palmeiras}
-								style={{
-									width: '100px',
-									height: '100px',
-								}}
-								alt="edasd"
-							/> */}
-							Notícias
-						</OptionButton>
-					</ComponentBlock>
-				</div>
+			<Section subHeading="Cover">
+				É possível criar botões grandes para que o usuário acesse uma categoria
+				<ComponentBlock code={ex1}>
+					<OptionButton className={styles.history}>História</OptionButton>
+					<OptionButton className={styles.news}>Futebol</OptionButton>
+					<OptionButton className={styles.cities}>Cidades</OptionButton>
+				</ComponentBlock>
+			</Section>
+			<Section subHeading="Menu">
+				Apesar de não ser semanticamente correto, você pode criar menu de opção
+				também:
+				<ComponentBlock code={ex2}>
+					<OptionButton
+						className={`${styles.menuLeft} ${
+							darkMode ? styles.dark : styles.light
+						}`}
+					>
+						Esquerda
+					</OptionButton>
+					<OptionButton
+						className={`${styles.menuCenter} ${
+							darkMode ? styles.dark : styles.light
+						}`}
+					>
+						Centro
+					</OptionButton>
+					<OptionButton
+						className={`${styles.menuRight} ${
+							darkMode ? styles.dark : styles.light
+						}`}
+					>
+						Direita
+					</OptionButton>
+				</ComponentBlock>
 			</Section>
 		</main>
 	);

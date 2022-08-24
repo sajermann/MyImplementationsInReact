@@ -1,7 +1,12 @@
 .container{
 	height: 100%;
-	/* width: 100%; */
 	max-width: 800px;
 	margin: auto;
 	padding: 10px;
+}
+
+@media (max-width: 380px) {
+	.container{
+		margin: 0;
+	}
 }

@@ -1,6 +1,7 @@
- # @sajermann/ui-react
 
-Conjunto de componentes para React que eu desenvolvi para evitar colar de um projeto para outro. Esse projeto encontra-se em desenvolvimento, algumas funções podem mudar, atente-se a versão.
+# @sajermann/ui-react
+
+UI library created for the purpose of studies on developing NPM packages for React.
 
 ## Installation
 
@@ -10,9 +11,10 @@ In your App.tsx import
 
 ```import '@sajermann/ui-react/index.css';```
 
-## Demo
-Em breve
+## Links
 
-## Componentes
-### Button
-Botões personalizados com recursos a mais do que o tradicional
+[Demo](https://sajermann.github.io/NPM-SajermannUiReact/)
+
+[NPM](https://www.npmjs.com/package/@sajermann/ui-react)
+
+[Github](https://github.com/sajermann/NPM-SajermannUiReact)

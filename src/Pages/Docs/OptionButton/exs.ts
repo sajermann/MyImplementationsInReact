@@ -1,336 +1,102 @@
-export const ex1 = `<Button type="button">Default</Button>
-<Button type="button" variant="Outlined">Outlined</Button>
-<Button type="button" variant="Option">Option</Button>`;
-
-export const ex2 = `<Button type="button" colorStyle="Primary">Primary</Button>
-<Button type="button" colorStyle="Secondary">Secondary</Button>
-<Button type="button" colorStyle="Success">Success</Button>
-<Button type="button" colorStyle="Warning">Warning</Button>`;
-
-export const ex3 = `<Button
-	disabled
-	colorStyle="Primary"
-	type="button"
-	onClick={handleSave}
-	withFeedback={{
-		loadingOptions: {
-		isLoading: true,
-		},
-	}}
->
-	Default
-</Button>
-<Button
-	disabled
-	colorStyle="Secondary"
-	variant="Outlined"
-	type="button"
-	onClick={handleSave}
-	withFeedback={{
-		loadingOptions: {
-		isLoading: true,
-		typeLoadingIcon: 'Points',
-		},
-	}}
->
-	Points
-</Button>
-<Button
-	disabled
-	colorStyle="Success"
-	variant="Option"
-	type="button"
-	onClick={handleSave}
-	withFeedback={{
-		loadingOptions: {
-		isLoading: true,
-		fullIcon: true,
-		},
-	}}
->
-	Full Icon
-</Button>
-<Button
-	disabled
-	colorStyle="Warning"
-	type="button"
-	onClick={handleSave}
-	withFeedback={{
-		loadingOptions: {
-		isLoading: true,
-		customIcon: <CustomLoading />,
-		},
-	}}
->
-	Custom Icon
-</Button>`;
-
-export const ex4 = `const [isLoading, setIsLoading] = useState(false);
-const [success, setSuccess] = useState(false);
-
-function delay(delayMs: number): Promise<void> {
-	return new Promise(resolve => {
-		setTimeout(() => resolve(), delayMs);
-	});
+export const ex1 = `styles.module.css
+.news {
+	width: 150px;
+	height: 150px;
+	background-image: url(/NPM-SajermannUiReact/src/assets/palmeiras.png);
+	border-radius: 50%;
+	background-size: cover;
 }
 
-async function handleSave() {
-	setIsLoading(true);
-	await delay(3000);
-	setIsLoading(false);
-	setSuccess(true);
-	await delay(2000);
-	setSuccess(false);
+.news > div {
+	color: white;
+	background: red;
+	opacity: 0.5;
 }
 
-<Button
-	disabled={isLoading}
-	colorStyle="Primary"
-	type="button"
-	onClick={handleSave}
-	withFeedback={{
-		loadingOptions: {
-			isLoading,
-		},
-		successOptions: {
-			success,
-		},
-	}}
->
-	Sucesso
-</Button>
-<Button
-	disabled={isLoading}
-	colorStyle="Success"
-	variant="Outlined"
-	type="button"
-	onClick={handleSave}
-	withFeedback={{
-		loadingOptions: {
-			isLoading,
-		},
-		successOptions: {
-			success,
-			fullIcon: true,
-		},
-	}}
->
-	Full Icon
-</Button>
-<Button
-	disabled={isLoading}
-	colorStyle="Warning"
-	type="button"
-	onClick={handleSave}
-	withFeedback={{
-		loadingOptions: {
-			isLoading,
-		},
-		successOptions: {
-			success,
-			customIcon: <TrendUp />,
-		},
-	}}
->
-	Custom Icon
-</Button>
+.news:hover > div {
+	border: 2px solid white;
+	opacity: 1;
+}
+
+.history {
+	width: 150px;
+	height: 150px;
+	background-image: url(/NPM-SajermannUiReact/src/assets/history.jpg);
+	background-size: cover;
+	opacity: 0.5;
+}
+.history:hover {
+	opacity: 1;
+}
+
+.history > div {
+	color: white;
+}
+
+.history:hover > div {
+	border: 2px solid white;
+}
+
+.cities {
+	width: 150px;
+	height: 150px;
+	background-image: url(/NPM-SajermannUiReact/src/assets/cities.png);
+	background-size: cover;
+}
+
+.cities > div {
+	opacity: 0.5;
+}
+
+.cities:hover > div {
+	border: 2px solid;
+	opacity: 1;
+}
+
+Components
+
+<OptionButton className={styles.history}>História</OptionButton>
+<OptionButton className={styles.news}>Futebol</OptionButton>
+<OptionButton className={styles.cities}>Cidades</OptionButton>
 `;
 
-export const ex5 = `const [isLoading, setIsLoading] = useState(false);
-const [failed, setFailed] = useState(false);
-
-function delay(delayMs: number): Promise<void> {
-	return new Promise(resolve => {
-		setTimeout(() => resolve(), delayMs);
-	});
+export const ex2 = `styles.module.css
+.dark {
+	color: rgb(255, 255, 255);
 }
 
-async function handleSaveFailed() {
-	setIsLoading(true);
-	await delay(3000);
-	setIsLoading(false);
-	setFailed(true);
-	await delay(2000);
-	setFailed(false);
+.light {
+	color: rgb(0, 0, 0);
 }
 
-<Button
-	disabled={isLoading}
-	colorStyle="Primary"
-	type="button"
-	onClick={handleSaveFailed}
-	withFeedback={{
-		loadingOptions: {
-			isLoading,
-		},
-		failedOptions: {
-			failed,
-		},
-	}}
->
-	Falha
-</Button>
-<Button
-	disabled={isLoading}
-	colorStyle="Secondary"
-	variant="Outlined"
-	type="button"
-	onClick={handleSaveFailed}
-	withFeedback={{
-		loadingOptions: {
-			isLoading,
-		},
-		failedOptions: {
-			failed,
-			fullIcon: true,
-		},
-	}}
->
-	Full Icon
-</Button>
-<Button
-	disabled={isLoading}
-	colorStyle="Warning"
-	type="button"
-	onClick={handleSaveFailed}
-	withFeedback={{
-		loadingOptions: {
-			isLoading,
-		},
-		failedOptions: {
-			failed: true,
-			customIcon: <TrendDown />,
-		},
-	}}
->
-	Custom Icon
-</Button>
-`;
-
-export const ex6 = `const [isLoading, setIsLoading] = useState(false);
-const [success, setSuccess] = useState(false);
-
-function delay(delayMs: number): Promise<void> {
-	return new Promise(resolve => {
-		setTimeout(() => resolve(), delayMs);
-	});
+.menuLeft {
+	width: 100%;
+	display: flex;
 }
 
-async function handleSave() {
-	setIsLoading(true);
-	await delay(3000);
-	setIsLoading(false);
-	setSuccess(true);
-	await delay(2000);
-	setSuccess(false);
+.menuRight {
+	width: 100%;
+	display: flex;
+	justify-content: flex-end;
 }
 
-<Button
-	style={{ width: '250px', height: '50px' }}
-	disabled={isLoading}
-	colorStyle="Primary"
-	type="button"
-	onClick={handleSave}
-	withFeedback={{
-		loadingOptions: {
-			isLoading,
-			fullIcon: true,
-		},
-		successOptions: {
-			success,
-			fullIcon: true,
-		},
-	}}
->
-	Fixo Somente Icone
-</Button>
-<Button
-	style={{ width: '250px', height: '50px' }}
-	disabled={isLoading}
-	colorStyle="Secondary"
-	type="button"
-	onClick={handleSave}
-	withFeedback={{
-		loadingOptions: {
-			isLoading,
-		},
-		successOptions: {
-			success,
-		},
-	}}
->
-	Fixo Com Icone
-</Button>
-<Button
-	style={{ width: '100px', height: '50px' }}
-	disabled={isLoading}
-	colorStyle="Success"
-	type="button"
-	onClick={handleSave}
-	withFeedback={{
-		loadingOptions: {
-			isLoading,
-		},
-		successOptions: {
-			success,
-		},
-	}}
->
-	Ellipsis
-</Button>
-`;
-
-export const ex7 = `const [isLoading, setIsLoading] = useState(false);
-const [success, setSuccess] = useState(false);
-
-function delay(delayMs: number): Promise<void> {
-	return new Promise(resolve => {
-		setTimeout(() => resolve(), delayMs);
-	});
+.menuCenter {
+	width: 100%;
+	display: flex;
+	justify-content: center;
 }
 
-async function handleSave() {
-	setIsLoading(true);
-	await delay(3000);
-	setIsLoading(false);
-	setSuccess(true);
-	await delay(2000);
-	setSuccess(false);
-}
+Components
 
-<Button
-	style={{ minWidth: '50px', height: '50px' }}
-	disabled={isLoading}
-	colorStyle="Success"
-	variant="Outlined"
-	type="button"
-	onClick={handleSave}
-	withFeedback={{
-		loadingOptions: {
-			isLoading,
-		},
-		successOptions: {
-			success,
-		},
-	}}
-	endIcon={<WhatsappLogo size={30} />}
-/>
-<Button
-	style={{ minWidth: '50px', height: '50px' }}
-	disabled={isLoading}
-	colorStyle="Secondary"
-	variant="Outlined"
-	type="button"
-	onClick={handleSave}
-	withFeedback={{
-		loadingOptions: {
-			isLoading,
-			typeLoadingIcon: 'Points',
-		},
-		successOptions: {
-			success,
-		},
-	}}
-	endIcon={<YoutubeLogo size={30} />}
-/>
+const { darkMode } = useDarkMode();
+
+<OptionButton className={\`\${styles.menuLeft} \${darkMode ? styles.dark : styles.light}\`}>
+	Esquerda
+</OptionButton>
+<OptionButton className={\`\${styles.menuCenter} \${darkMode ? styles.dark : styles.light}\`}>
+	Centro
+</OptionButton>
+<OptionButton className={\`\${styles.menuRight} \${darkMode ? styles.dark : styles.light}\`}>
+	Direita
+</OptionButton>
 `;

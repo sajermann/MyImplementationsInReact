@@ -41,9 +41,8 @@ export function CodeBlock({ children, language }: Props) {
 						fullIcon: true,
 					},
 				}}
-			>
-				<ClipboardText />
-			</Button>
+				endIcon={<ClipboardText />}
+			/>
 			<SyntaxHighlighter language={language || 'jsx'} style={dracula}>
 				{children}
 			</SyntaxHighlighter>

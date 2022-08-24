@@ -25,7 +25,7 @@ function OptionButton({
 			type="button"
 			className={`${styles.btn} ${props.className}`}
 		>
-			{children}
+			<div>{children}</div>
 		</button>
 	);
 }
