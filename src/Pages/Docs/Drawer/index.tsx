@@ -1,6 +1,10 @@
 import { useState } from 'react';
 import { Button } from '../../../components';
 import { Drawer } from '../../../components/Drawer';
+import { CodeBlock } from '../../../ComponentsInternal/CodeBlock';
+import { ComponentBlock } from '../../../ComponentsInternal/ComponentBlock';
+import Section from '../../../ComponentsInternal/Section';
+import { ex1 } from './exs';
 
 export default function DrawerDocs() {
 	const [isOpenTop, setIsOpenTop] = useState(false);
@@ -9,92 +13,87 @@ export default function DrawerDocs() {
 	const [isOpenFull, setIsOpenFull] = useState(false);
 
 	return (
-		<div>
-			<Button
-				colorStyle="Primary"
-				id="bruno"
-				type="button"
-				onClick={() => setIsOpenLeft(true)}
-			>
-				Open Left
-			</Button>
-			<Button
-				colorStyle="Secondary"
-				id="bruno"
-				type="button"
-				onClick={() => setIsOpenRight(true)}
-			>
-				Open Right
-			</Button>
-			<Button
-				colorStyle="Success"
-				id="bruno"
-				type="button"
-				onClick={() => setIsOpenFull(true)}
-			>
-				Open Full
-			</Button>
-			<Button
-				colorStyle="Warning"
-				id="bruno"
-				type="button"
-				onClick={() => setIsOpenTop(true)}
-			>
-				Open Top
-			</Button>
-			<Drawer
-				openFrom="left"
-				percentage={10}
-				isOpen={isOpenLeft}
-				setIsOpen={e => setIsOpenLeft(e)}
-			>
-				<div>left</div>
-			</Drawer>
-			<Drawer
-				openFrom="right"
-				percentage={30}
-				isOpen={isOpenRight}
-				setIsOpen={e => setIsOpenRight(e)}
-				disableBackdrop
-			>
-				<div>left</div>
-			</Drawer>
-			<Drawer
-				openFrom="bottom"
-				percentage={10}
-				isOpen={isOpenFull}
-				disableEsc
-				setIsOpen={e => setIsOpenFull(e)}
-			>
-				<div>
+		<main>
+			<Section heading="Drawer">
+				O componente de Drawer ajuda a fornecer mais opções para o usuário
+				quando necessário e deixando a tela com mais espaço, o drawer pode ser
+				usado para armazenar as opções de perfil, menu, entre outras.
+			</Section>
+			<Section subHeading="Importação">
+				<CodeBlock>{`import { Drawer } from '@sajermann/ui-react';`}</CodeBlock>
+			</Section>
+			<Section subHeading="Lado de Abertura">
+				Existem 4 opções para escolher a origem da abertura do drawer:{' '}
+				<span className="highlight">left</span> |{' '}
+				<span className="highlight">right</span> |{' '}
+				<span className="highlight">bottom</span> |{' '}
+				<span className="highlight">top</span>
+				<ComponentBlock code={ex1}>
+					<Button
+						colorStyle="Primary"
+						type="button"
+						onClick={() => setIsOpenLeft(true)}
+					>
+						Abrir da Esquerda
+					</Button>
+					<Drawer
+						openFrom="left"
+						percentage={50}
+						isOpen={isOpenLeft}
+						setIsOpen={e => setIsOpenLeft(e)}
+					>
+						<div>Left</div>
+					</Drawer>
+
+					<Button
+						colorStyle="Secondary"
+						type="button"
+						onClick={() => setIsOpenRight(true)}
+					>
+						Abrir da Direita
+					</Button>
+					<Drawer
+						openFrom="right"
+						percentage={50}
+						isOpen={isOpenRight}
+						setIsOpen={e => setIsOpenRight(e)}
+						disableBackdrop
+					>
+						<div>Right</div>
+					</Drawer>
+
 					<Button
 						colorStyle="Success"
-						id="ss"
 						type="button"
-						onClick={() => setIsOpenFull(false)}
+						onClick={() => setIsOpenFull(true)}
 					>
-						Close Full
+						Abrir de baixo
 					</Button>
-				</div>
-			</Drawer>
-			<Drawer
-				openFrom="top"
-				disableClickOnBackdrop
-				percentage={90}
-				isOpen={isOpenTop}
-				setIsOpen={e => setIsOpenTop(e)}
-			>
-				<div style={{ backgroundColor: 'black', height: '100%' }}>
+					<Drawer
+						openFrom="bottom"
+						percentage={50}
+						isOpen={isOpenFull}
+						setIsOpen={e => setIsOpenFull(e)}
+					>
+						<div>Bottom</div>
+					</Drawer>
 					<Button
-						colorStyle="Success"
-						id="ss"
+						colorStyle="Warning"
 						type="button"
-						onClick={() => setIsOpenTop(false)}
+						onClick={() => setIsOpenTop(true)}
 					>
-						Close Full
+						Abrir de Cima
 					</Button>
-				</div>
-			</Drawer>
-		</div>
+					<Drawer
+						openFrom="top"
+						percentage={50}
+						isOpen={isOpenTop}
+						setIsOpen={e => setIsOpenTop(e)}
+					>
+						<div>Top</div>
+					</Drawer>
+				</ComponentBlock>
+			</Section>
+		</main>
 	);
 }

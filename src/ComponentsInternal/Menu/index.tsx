@@ -33,6 +33,10 @@ export default function Menu() {
 			title: 'Botão Opção',
 			url: '/docs/option-button',
 		},
+		{
+			title: 'Drawer',
+			url: '/docs/drawer',
+		},
 	];
 
 	return (
