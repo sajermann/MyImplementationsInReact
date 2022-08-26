@@ -351,3 +351,60 @@ async function handleSave() {
 	}}
 	endIcon={<TelegramLogo size={30} />}
 />`;
+
+export const ex8 = `<style>
+.custom {
+	background-color: #f535e6;
+	border: 1px solid green;
+	border-radius: 0px;
+}
+
+.custom > div {
+	color: white;
+}
+
+.custom > span {
+	background-color: yellow !important;
+}
+
+.custom:hover {
+	background-color: #f590e6;
+}
+
+.custom:focus {
+	outline: 2px solid green;
+}
+
+.custom2 {
+	background-color: rgb(155, 165, 10);
+	border: 1px solid red;
+	border-radius: 30px;
+}
+
+.custom2 > div {
+	color: white;
+}
+
+.custom2 > span {
+	display: none;
+}
+
+.custom2:hover {
+	background-color: rgb(155, 165, 120);
+}
+
+.custom2:focus {
+	outline: 2px solid red;
+}
+
+.custom2:active {
+	transform: scale(0.98);
+}
+</style>
+
+<Button type="button" variant="Outlined" className={styles.custom}>
+	Custom 1
+</Button>
+<Button type="button" variant="Outlined" className={styles.custom2}>
+	Custom 2
+</Button>`;

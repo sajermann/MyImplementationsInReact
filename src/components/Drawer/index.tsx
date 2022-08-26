@@ -73,10 +73,10 @@ function Drawer({
 		const body = document.querySelector('body');
 		if (isOpen) {
 			if (body) {
-				body.classList.add('overflow-hidden');
+				body.style.overflow = 'hidden';
 			}
 		} else if (body) {
-			body.classList.remove('overflow-hidden');
+			body.style.overflow = '';
 		}
 	}, [isOpen]);
 

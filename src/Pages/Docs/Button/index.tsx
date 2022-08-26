@@ -11,7 +11,7 @@ import { Button } from '../../../components';
 import styles from './styles.module.css';
 import Section from '../../../ComponentsInternal/Section';
 import { ComponentBlock } from '../../../ComponentsInternal/ComponentBlock';
-import { ex1, ex2, ex3, ex4, ex5, ex6, ex7 } from './exs';
+import { ex1, ex2, ex3, ex4, ex5, ex6, ex7, ex8 } from './exs';
 import CustomLoading from '../../../ComponentsInternal/CustomLoading';
 
 export default function ButtonDocs() {
@@ -53,6 +53,7 @@ export default function ButtonDocs() {
 			<Section subHeading="Importação">
 				<CodeBlock>{`import { Button } from '@sajermann/ui-react';`}</CodeBlock>
 			</Section>
+
 			<Section subHeading="Variantes">
 				Existem 3 tipos de variantes que são:{' '}
 				<span className="highlight">Default</span> |{' '}
@@ -68,6 +69,7 @@ export default function ButtonDocs() {
 					</Button>
 				</ComponentBlock>
 			</Section>
+
 			<Section subHeading="Estilos de Cores">
 				Existem 4 tipos de estilos de cores que são:{' '}
 				<span className="highlight">Primary</span> |{' '}
@@ -89,6 +91,7 @@ export default function ButtonDocs() {
 					</Button>
 				</ComponentBlock>
 			</Section>
+
 			<Section subHeading="Icones">
 				É possível inserir icones personalizados no início ou no fim do botão
 				utilizando as propriedades <span className="highlight">startIcon</span>{' '}
@@ -467,6 +470,18 @@ export default function ButtonDocs() {
 							}}
 							endIcon={<TelegramLogo size={30} />}
 						/>
+					</ComponentBlock>
+				</div>
+				<div className={styles.blockH3}>
+					<h3>Personalizações</h3> Você pode personalizar as cores de seus
+					botões do jeito que quiser, veja alguns exemplos:
+					<ComponentBlock code={ex8}>
+						<Button type="button" variant="Outlined" className={styles.custom}>
+							Custom 1
+						</Button>
+						<Button type="button" variant="Outlined" className={styles.custom2}>
+							Custom 2
+						</Button>
 					</ComponentBlock>
 				</div>
 			</Section>
