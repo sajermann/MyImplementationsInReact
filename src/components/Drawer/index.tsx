@@ -4,7 +4,7 @@ import styles from './styles.module.css';
 type Props = {
 	children: JSX.Element;
 	isOpen: boolean;
-	setIsOpen: (isOpen: boolean) => void;
+	onClose: () => void;
 	openFrom: 'left' | 'right' | 'bottom' | 'top';
 	percentage?: number;
 	disableBackdrop?: boolean;
@@ -17,7 +17,7 @@ function Drawer({
 	children,
 	openFrom,
 	isOpen,
-	setIsOpen,
+	onClose,
 	percentage,
 	disableBackdrop,
 	disableEsc,
@@ -52,7 +52,7 @@ function Drawer({
 				translate: styles.translateBottom,
 				style: {
 					maxWidth: '100%',
-					top: `${percentage || 100}%`,
+					top: `${100 - (percentage || 100)}%`,
 				},
 			};
 		}
@@ -83,13 +83,13 @@ function Drawer({
 	function handleClose(esc: boolean) {
 		// Verify if caller is ESC and user allow ESC
 		if (esc && !disableEsc) {
-			setIsOpen(false);
+			onClose();
 			return;
 		}
 
 		// Verify if caller is click in back drop and user allow backdrop
 		if (!esc && !disableClickOnBackdrop) {
-			setIsOpen(false);
+			onClose();
 		}
 	}
 
@@ -112,7 +112,7 @@ function Drawer({
 				isOpen ? styles.containerOpen : styles.containerClose
 			}`}
 			role="presentation"
-			onClick={oneClickToClose ? () => setIsOpen(false) : () => null}
+			onClick={oneClickToClose ? () => onClose() : () => null}
 		>
 			<section
 				className={`${isOpen && styles.backdropOpen}`}

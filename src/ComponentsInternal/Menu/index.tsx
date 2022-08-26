@@ -33,6 +33,10 @@ export default function Menu() {
 			title: 'Botão Opção',
 			url: '/docs/option-button',
 		},
+		{
+			title: 'Drawer',
+			url: '/docs/drawer',
+		},
 	];
 
 	return (
@@ -49,7 +53,7 @@ export default function Menu() {
 				openFrom="left"
 				percentage={30}
 				isOpen={isOpen}
-				setIsOpen={e => setIsOpen(e)}
+				onClose={() => setIsOpen(false)}
 			>
 				<div
 					className={darkMode ? styles.containerDark : styles.containerLight}

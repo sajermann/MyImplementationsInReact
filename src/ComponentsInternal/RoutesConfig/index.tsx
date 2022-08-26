@@ -3,7 +3,6 @@ import { generateGuid } from '@sajermann/utils/Random';
 import ButtonDocs from '../../Pages/Docs/Button';
 import DrawerDocs from '../../Pages/Docs/Drawer';
 import Home from '../../Pages/Home';
-import { useDarkMode } from '../../Hooks/DarkMode';
 import GettingStarted from '../../Pages/Docs/Getting Started';
 import styles from './styles.module.css';
 import OptionButtonDocs from '../../Pages/Docs/OptionButton';
@@ -56,7 +55,6 @@ const options = [
 ];
 
 export default function RoutesConfig() {
-	const { darkMode } = useDarkMode();
 	return (
 		<div className={styles.container}>
 			<Routes>
