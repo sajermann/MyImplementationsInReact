@@ -1,353 +1,349 @@
-export const ex1 = `<Button type="button">Default</Button>
-<Button type="button" variant="Outlined">Outlined</Button>
-<Button type="button" variant="Option">Option</Button>`;
+export const ex1 = `const [isOpenLeft, setIsOpenLeft] = useState(false);
+const [isOpenRight, setIsOpenRight] = useState(false);
+const [isOpenBotttom, setIsOpenBottom] = useState(false);
+const [isOpenTop, setIsOpenTop] = useState(false);
 
-export const ex2 = `<Button type="button" colorStyle="Primary">Primary</Button>
-<Button type="button" colorStyle="Secondary">Secondary</Button>
-<Button type="button" colorStyle="Success">Success</Button>
-<Button type="button" colorStyle="Warning">Warning</Button>`;
-
-export const ex3 = `<Button
-	disabled
+<Button
 	colorStyle="Primary"
 	type="button"
-	onClick={handleSave}
-	withFeedback={{
-		loadingOptions: {
-		isLoading: true,
-		},
-	}}
+	onClick={() => setIsOpenLeft(true)}
 >
-	Default
+	Abrir da Esquerda
 </Button>
+<Drawer
+	openFrom="left"
+	percentage={50}
+	isOpen={isOpenLeft}
+	onClose={() => setIsOpenLeft(false)}
+>
+	<div>Left</div>
+</Drawer>
+
 <Button
-	disabled
 	colorStyle="Secondary"
-	variant="Outlined"
 	type="button"
-	onClick={handleSave}
-	withFeedback={{
-		loadingOptions: {
-		isLoading: true,
-		typeLoadingIcon: 'Points',
-		},
-	}}
+	onClick={() => setIsOpenRight(true)}
 >
-	Points
+	Abrir da Direita
 </Button>
+<Drawer
+	openFrom="right"
+	percentage={50}
+	isOpen={isOpenRight}
+	onClose={() => setIsOpenRight(false)}
+	disableBackdrop
+>
+	<div>Right</div>
+</Drawer>
+
 <Button
-	disabled
 	colorStyle="Success"
-	variant="Option"
 	type="button"
-	onClick={handleSave}
-	withFeedback={{
-		loadingOptions: {
-		isLoading: true,
-		fullIcon: true,
-		},
-	}}
+	onClick={() => setIsOpenBottom(true)}
 >
-	Full Icon
+	Abrir de baixo
 </Button>
+<Drawer
+	openFrom="bottom"
+	percentage={50}
+	isOpen={isOpenBotttom}
+	onClose={() => setIsOpenBottom(false)}
+>
+	<div>Bottom</div>
+</Drawer>
 <Button
-	disabled
 	colorStyle="Warning"
 	type="button"
-	onClick={handleSave}
-	withFeedback={{
-		loadingOptions: {
-		isLoading: true,
-		customIcon: <CustomLoading />,
-		},
-	}}
+	onClick={() => setIsOpenTop(true)}
 >
-	Custom Icon
-</Button>`;
+	Abrir de Cima
+</Button>
+<Drawer
+	openFrom="top"
+	percentage={50}
+	isOpen={isOpenTop}
+	onClose={() => setIsOpenTop(false)}
+>
+	<div>Top</div>
+</Drawer>
+`;
 
-export const ex4 = `const [isLoading, setIsLoading] = useState(false);
-const [success, setSuccess] = useState(false);
-
-function delay(delayMs: number): Promise<void> {
-	return new Promise(resolve => {
-		setTimeout(() => resolve(), delayMs);
-	});
-}
-
-async function handleSave() {
-	setIsLoading(true);
-	await delay(3000);
-	setIsLoading(false);
-	setSuccess(true);
-	await delay(2000);
-	setSuccess(false);
-}
+export const ex2 = `const [isOpenLeft10, setIsOpenLeft10] = useState(false);
+const [isOpenRight40, setIsOpenRight40] = useState(false);
+const [isOpenBottom80, setIsOpenBottom80] = useState(false);
+const [isOpenTopFull, setIsOpenTopFull] = useState(false);
 
 <Button
-	disabled={isLoading}
 	colorStyle="Primary"
 	type="button"
-	onClick={handleSave}
-	withFeedback={{
-		loadingOptions: {
-			isLoading,
-		},
-		successOptions: {
-			success,
-		},
-	}}
+	onClick={() => setIsOpenLeft10(true)}
 >
-	Sucesso
+	Esquerda 10%
 </Button>
+<Drawer
+	openFrom="left"
+	percentage={10}
+	isOpen={isOpenLeft10}
+	onClose={() => setIsOpenLeft10(false)}
+>
+	<div>Left</div>
+</Drawer>
+
 <Button
-	disabled={isLoading}
-	colorStyle="Success"
-	variant="Outlined"
+	colorStyle="Secondary"
 	type="button"
-	onClick={handleSave}
-	withFeedback={{
-		loadingOptions: {
-			isLoading,
-		},
-		successOptions: {
-			success,
-			fullIcon: true,
-		},
-	}}
+	onClick={() => setIsOpenRight40(true)}
 >
-	Full Icon
+	Direita 40%
 </Button>
+<Drawer
+	openFrom="right"
+	percentage={40}
+	isOpen={isOpenRight40}
+	onClose={() => setIsOpenRight40(false)}
+	disableBackdrop
+>
+	<div>Right</div>
+</Drawer>
+
 <Button
-	disabled={isLoading}
+	colorStyle="Success"
+	type="button"
+	onClick={() => setIsOpenBottom80(true)}
+>
+	Baixo 80%
+</Button>
+<Drawer
+	openFrom="bottom"
+	percentage={80}
+	isOpen={isOpenBottom80}
+	onClose={() => setIsOpenBottom80(false)}
+>
+	<div>Bottom</div>
+</Drawer>
+<Button
 	colorStyle="Warning"
 	type="button"
-	onClick={handleSave}
-	withFeedback={{
-		loadingOptions: {
-			isLoading,
-		},
-		successOptions: {
-			success,
-			customIcon: <TrendUp />,
-		},
-	}}
+	onClick={() => setIsOpenTopFull(true)}
 >
-	Custom Icon
+	Cima 100%
 </Button>
+<Drawer
+	openFrom="top"
+	isOpen={isOpenTopFull}
+	onClose={() => setIsOpenTopFull(false)}
+>
+	<div>
+		<Button
+			colorStyle="Primary"
+			variant="Outlined"
+			type="button"
+			onClick={() => setIsOpenTopFull(false)}
+		>
+			Fechar
+		</Button>
+	</div>
+</Drawer>
 `;
 
-export const ex5 = `const [isLoading, setIsLoading] = useState(false);
-const [failed, setFailed] = useState(false);
-
-function delay(delayMs: number): Promise<void> {
-	return new Promise(resolve => {
-		setTimeout(() => resolve(), delayMs);
-	});
-}
-
-async function handleSaveFailed() {
-	setIsLoading(true);
-	await delay(3000);
-	setIsLoading(false);
-	setFailed(true);
-	await delay(2000);
-	setFailed(false);
-}
+export const ex3 = `const [isOpenBackDrop, setIsOpenBackDrop] = useState(false);
+const [isOpenWithoutBackDrop, setIsOpenWithoutBackDrop] = useState(false);
 
 <Button
-	disabled={isLoading}
 	colorStyle="Primary"
 	type="button"
-	onClick={handleSaveFailed}
-	withFeedback={{
-		loadingOptions: {
-			isLoading,
-		},
-		failedOptions: {
-			failed,
-		},
-	}}
+	onClick={() => setIsOpenBackDrop(true)}
 >
-	Falha
+	Com Back Drop
 </Button>
+<Drawer
+	openFrom="left"
+	percentage={50}
+	isOpen={isOpenBackDrop}
+	onClose={() => setIsOpenBackDrop(false)}
+>
+	<div>Left</div>
+</Drawer>
+
 <Button
-	disabled={isLoading}
 	colorStyle="Secondary"
-	variant="Outlined"
 	type="button"
-	onClick={handleSaveFailed}
-	withFeedback={{
-		loadingOptions: {
-			isLoading,
-		},
-		failedOptions: {
-			failed,
-			fullIcon: true,
-		},
-	}}
+	onClick={() => setIsOpenWithoutBackDrop(true)}
 >
-	Full Icon
+	Sem Back Drop
 </Button>
-<Button
-	disabled={isLoading}
-	colorStyle="Warning"
-	type="button"
-	onClick={handleSaveFailed}
-	withFeedback={{
-		loadingOptions: {
-			isLoading,
-		},
-		failedOptions: {
-			failed: true,
-			customIcon: <TrendDown />,
-		},
-	}}
+<Drawer
+	openFrom="left"
+	percentage={50}
+	isOpen={isOpenWithoutBackDrop}
+	onClose={() => setIsOpenWithoutBackDrop(false)}
+	disableBackdrop
 >
-	Custom Icon
-</Button>
+	<div>Right</div>
+</Drawer>
 `;
 
-export const ex6 = `const [isLoading, setIsLoading] = useState(false);
-const [success, setSuccess] = useState(false);
-
-function delay(delayMs: number): Promise<void> {
-	return new Promise(resolve => {
-		setTimeout(() => resolve(), delayMs);
-	});
-}
-
-async function handleSave() {
-	setIsLoading(true);
-	await delay(3000);
-	setIsLoading(false);
-	setSuccess(true);
-	await delay(2000);
-	setSuccess(false);
-}
+export const ex4 = `const [isOpenEsc, setIsOpenEsc] = useState(false);
+const [isOpenEscDisabled, setIsOpenEscDisabled] = useState(false);
 
 <Button
-	style={{ width: '250px', height: '50px' }}
-	disabled={isLoading}
 	colorStyle="Primary"
 	type="button"
-	onClick={handleSave}
-	withFeedback={{
-		loadingOptions: {
-			isLoading,
-			fullIcon: true,
-		},
-		successOptions: {
-			success,
-			fullIcon: true,
-		},
-	}}
+	onClick={() => setIsOpenEsc(true)}
 >
-	Fixo Somente Icone
+	Esc habilitado
 </Button>
+<Drawer
+	openFrom="left"
+	percentage={50}
+	isOpen={isOpenEsc}
+	onClose={() => setIsOpenEsc(false)}
+>
+	<div>Left</div>
+</Drawer>
+
 <Button
-	style={{ width: '250px', height: '50px' }}
-	disabled={isLoading}
 	colorStyle="Secondary"
 	type="button"
-	onClick={handleSave}
-	withFeedback={{
-		loadingOptions: {
-			isLoading,
-		},
-		successOptions: {
-			success,
-		},
-	}}
+	onClick={() => setIsOpenEscDisabled(true)}
 >
-	Fixo Com Icone
+	Esc desabilitado
 </Button>
-<Button
-	style={{ width: '100px', height: '50px' }}
-	disabled={isLoading}
-	colorStyle="Success"
-	type="button"
-	onClick={handleSave}
-	withFeedback={{
-		loadingOptions: {
-			isLoading,
-		},
-		successOptions: {
-			success,
-		},
-	}}
+<Drawer
+	disableEsc
+	openFrom="left"
+	percentage={50}
+	isOpen={isOpenEscDisabled}
+	onClose={() => setIsOpenEscDisabled(false)}
+	disableBackdrop
 >
-	Ellipsis
-</Button>
+	<div>Right</div>
+</Drawer>
 `;
 
-export const ex7 = `const [isLoading, setIsLoading] = useState(false);
-const [success, setSuccess] = useState(false);
-
-function delay(delayMs: number): Promise<void> {
-	return new Promise(resolve => {
-		setTimeout(() => resolve(), delayMs);
-	});
-}
-
-async function handleSave() {
-	setIsLoading(true);
-	await delay(3000);
-	setIsLoading(false);
-	setSuccess(true);
-	await delay(2000);
-	setSuccess(false);
-}
+export const ex5 = `const [isOpenDisableClickOnBackdrop, setIsOpenDisableClickOnBackdrop] = useState(false);
+const [isOpenDisableClickOnBackdropDisabled,setIsOpenDisableClickOnBackdropDisabled] = useState(false);
 
 <Button
-	style={{ minWidth: '50px', height: '50px' }}
-	disabled={isLoading}
-	colorStyle="Success"
-	variant="Outlined"
-	type="button"
-	onClick={handleSave}
-	withFeedback={{
-		loadingOptions: {
-			isLoading,
-		},
-		successOptions: {
-			success,
-		},
-	}}
-	endIcon={<WhatsappLogo size={30} />}
-/>
-<Button
-	style={{ minWidth: '50px', height: '50px' }}
-	disabled={isLoading}
-	colorStyle="Secondary"
-	variant="Outlined"
-	type="button"
-	onClick={handleSave}
-	withFeedback={{
-		loadingOptions: {
-			isLoading,
-			typeLoadingIcon: 'Points',
-		},
-		successOptions: {
-			success,
-		},
-	}}
-	endIcon={<YoutubeLogo size={30} />}
-/>
-<Button
-	style={{ minWidth: '50px', height: '50px', borderRadius: '50%' }}
-	disabled={isLoading}
 	colorStyle="Primary"
-	variant="Outlined"
 	type="button"
-	onClick={handleSave}
-	withFeedback={{
-		loadingOptions: {
-			isLoading,
-			typeLoadingIcon: 'Points',
-		},
-		successOptions: {
-			success,
-		},
-	}}
-	endIcon={<TelegramLogo size={30} />}
-/>`;
+	onClick={() => setIsOpenDisableClickOnBackdrop(true)}
+>
+	Clique Fora
+</Button>
+<Drawer
+	openFrom="left"
+	percentage={50}
+	isOpen={isOpenDisableClickOnBackdrop}
+	onClose={() => setIsOpenDisableClickOnBackdrop(false)}
+>
+	<div>Left</div>
+</Drawer>
+
+<Button
+	colorStyle="Secondary"
+	type="button"
+	onClick={() => setIsOpenDisableClickOnBackdropDisabled(true)}
+>
+	Sem Clique Fora
+</Button>
+<Drawer
+	disableClickOnBackdrop
+	openFrom="left"
+	percentage={50}
+	isOpen={isOpenDisableClickOnBackdropDisabled}
+	onClose={() => setIsOpenDisableClickOnBackdropDisabled(false)}
+	disableBackdrop
+>
+	<div>Right</div>
+</Drawer>
+`;
+
+export const ex6 = `const [isOpenOneClickToClose, setIsOpenOneClickToClose] = useState(false);
+const [isOpenOneClickToCloseDisabled, setIsOpenOneClickToCloseDisabled] = useState(false);
+
+<Button
+	colorStyle="Primary"
+	type="button"
+	onClick={() => setIsOpenOneClickToClose(true)}
+>
+	Um clique desabilitado
+</Button>
+<Drawer
+	openFrom="left"
+	percentage={50}
+	isOpen={isOpenOneClickToClose}
+	onClose={() => setIsOpenOneClickToClose(false)}
+>
+	<div>Left</div>
+</Drawer>
+
+<Button
+	colorStyle="Secondary"
+	type="button"
+	onClick={() => setIsOpenOneClickToCloseDisabled(true)}
+>
+	Um clique habilitado
+</Button>
+<Drawer
+	oneClickToClose
+	openFrom="left"
+	percentage={50}
+	isOpen={isOpenOneClickToCloseDisabled}
+	onClose={() => setIsOpenOneClickToCloseDisabled(false)}
+	disableBackdrop
+>
+	<div>Right</div>
+</Drawer>`;
+
+export const ex7 = `const [isOpenLeftBlue, setIsOpenLeftBlue] = useState(false);
+const [isOpenLeftRed, setIsOpenLeftRed] = useState(false);
+
+<Button
+	colorStyle="Primary"
+	type="button"
+	onClick={() => setIsOpenLeftBlue(true)}
+>
+	Azul
+</Button>
+<Drawer
+	openFrom="left"
+	percentage={50}
+	isOpen={isOpenLeftBlue}
+	onClose={() => setIsOpenLeftBlue(false)}
+>
+	<div
+		style={{
+			backgroundColor: 'blue',
+			height: '100%',
+			color: 'white',
+		}}
+	>
+		Azul
+	</div>
+</Drawer>
+
+<Button
+	colorStyle="Secondary"
+	type="button"
+	onClick={() => setIsOpenLeftRed(true)}
+>
+	Vermelho
+</Button>
+<Drawer
+	openFrom="right"
+	percentage={50}
+	isOpen={isOpenLeftRed}
+	onClose={() => setIsOpenLeftRed(false)}
+	disableBackdrop
+>
+	<div
+		style={{
+			backgroundColor: 'red',
+			height: '100%',
+			color: 'white',
+		}}
+	>
+		Vermelho
+	</div>
+</Drawer>`;

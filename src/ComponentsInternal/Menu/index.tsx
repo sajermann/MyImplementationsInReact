@@ -53,7 +53,7 @@ export default function Menu() {
 				openFrom="left"
 				percentage={30}
 				isOpen={isOpen}
-				setIsOpen={e => setIsOpen(e)}
+				onClose={() => setIsOpen(false)}
 			>
 				<div
 					className={darkMode ? styles.containerDark : styles.containerLight}
