@@ -37,6 +37,10 @@ export default function Menu() {
 			title: 'Drawer',
 			url: '/docs/drawer',
 		},
+		{
+			title: 'Input',
+			url: '/docs/input',
+		},
 	];
 
 	return (

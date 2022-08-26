@@ -6,6 +6,7 @@ import Home from '../../Pages/Home';
 import GettingStarted from '../../Pages/Docs/Getting Started';
 import styles from './styles.module.css';
 import OptionButtonDocs from '../../Pages/Docs/OptionButton';
+import InputDocs from '../../Pages/Docs/Input';
 
 const options = [
 	{
@@ -48,6 +49,11 @@ const options = [
 			{
 				path: 'drawer',
 				element: <DrawerDocs />,
+				index: false,
+			},
+			{
+				path: 'input',
+				element: <InputDocs />,
 				index: false,
 			},
 		],
