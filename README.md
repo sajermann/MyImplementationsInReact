@@ -1,7 +1,7 @@
 
 # @sajermann/ui-react
 
-UI library created for the purpose of studies on developing NPM packages for React.
+UI library created by Bruno Sajermann for the purpose of studies on developing NPM packages for React.
 
 ## Installation
 
