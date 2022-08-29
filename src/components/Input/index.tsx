@@ -282,7 +282,7 @@ function Input({
 			{/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
 			<label className={styles.label}>
 				<input {...props} />
-				<span className={styles.labelNormal}>Normal</span>
+				<span className={styles.labelNormal}>Normal Tenso</span>
 				<span className={styles.labelHelper}>Helper Text</span>
 				<svg
 					xmlns="http://www.w3.org/2000/svg"
