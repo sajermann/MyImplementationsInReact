@@ -5,7 +5,7 @@ import { ComponentBlock } from '../../../ComponentsInternal/ComponentBlock';
 import { ex1, ex2, ex3, ex4, ex5 } from './exs';
 import { CodeBlock } from '../../../ComponentsInternal/CodeBlock';
 import { Input } from '../../../components/Input';
-import { Button } from '../../../components';
+import { Button } from '../../../components/Button';
 
 export default function InputDocs() {
 	return (
