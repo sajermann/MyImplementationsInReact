@@ -1,4 +1,4 @@
-import { WhatsappLogo } from 'phosphor-react';
+import { FileSearch, WhatsappLogo } from 'phosphor-react';
 import styles from './styles.module.css';
 import Section from '../../../ComponentsInternal/Section';
 import { ComponentBlock } from '../../../ComponentsInternal/ComponentBlock';
@@ -60,16 +60,36 @@ export default function InputDocs() {
 						id="mySite"
 					/>
 					<Input
-						label="Website"
-						onlyNumbers
-						onChange={e => console.log({ e })}
+						customlabel={{ text: 'Website' }}
+						verifyBeforeChange={{
+							letterLow: false,
+							letterUpper: true,
+							number: true,
+							specialCharacter: false,
+						}}
+						onChange={e => console.log(e.target.value)}
 						endContent={
 							<Button
-								style={{ minWidth: '50px', height: '50px' }}
+								style={{ minWidth: '10px', height: '31px' }}
 								colorStyle="Success"
-								variant="Outlined"
+								variant="Option"
 								type="button"
 								endIcon={<WhatsappLogo size={30} />}
+							/>
+						}
+						id="ww"
+					/>
+					<Input
+						type="number"
+						customlabel={{ text: 'Website', position: 'Left' }}
+						onChange={e => console.log({ e })}
+						startContent={
+							<Button
+								style={{ minWidth: '10px', height: '31px' }}
+								colorStyle="Success"
+								variant="Option"
+								type="button"
+								endIcon={<FileSearch size={30} />}
 							/>
 						}
 						id="batata"

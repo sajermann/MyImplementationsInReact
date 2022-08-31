@@ -1,26 +1,22 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
-/* eslint-disable react/button-has-type */
-import {
-	FormEvent,
-	FocusEvent,
-	useEffect,
-	useMemo,
-	useRef,
-	useState,
-} from 'react';
 import styles from './styles.module.css';
-import { Loading } from '../Loading';
-import { FeedbackIcons } from '../FeedbackIcons';
-import { generateGuid, createEffect } from '../utils';
-import { useWindowSize } from '../utils/useWindowSize';
 
 interface Props extends React.HTMLProps<HTMLInputElement> {
 	startAttach?: React.ReactNode;
 	endAttach?: React.ReactNode;
 	startContent?: JSX.Element;
 	endContent?: JSX.Element;
-	label?: string;
-	onlyNumbers?: boolean;
+	customlabel?: {
+		text: string;
+		position?: 'Top' | 'Left';
+	};
+	verifyBeforeChange?: {
+		number: boolean;
+		letterUpper: boolean;
+		letterLow: boolean;
+		specialCharacter: boolean;
+	};
+	onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 function Input({
@@ -28,42 +24,48 @@ function Input({
 	endAttach,
 	startContent,
 	endContent,
-	label,
-	onlyNumbers,
+	customlabel,
+	verifyBeforeChange,
+	onChange,
 	...props
 }: Props) {
-	const { onChange, onBlur } = props;
-	function onBlurCustom(e: FocusEvent<HTMLInputElement, Element>) {
-		if (!onlyNumbers && onBlur) {
-			onBlur(e);
+	function onChangeCustom(e: React.ChangeEvent<HTMLInputElement>) {
+		if (!verifyBeforeChange && onChange) {
+			onChange(e);
 		}
-		const { value: valueCustom, id: idCustom } =
-			e?.target as unknown as HTMLInputElement;
-		const allows = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0'];
-		const newValueTemp: string[] = [];
-		const characters = valueCustom.split('');
-		for (let i = 0; i < characters.length; i += 1) {
-			if (allows.includes(characters[i])) {
-				newValueTemp.push(characters[i]);
-			}
+
+		const temp = { ...e };
+		let valueTemp = temp.target.value;
+		if (!verifyBeforeChange?.letterLow) {
+			valueTemp = valueTemp.replace(/[a-z]/g, '');
 		}
-		const newChange = {
-			target: { id: idCustom, value: newValueTemp.join('') },
-		} as unknown as FormEvent<HTMLInputElement>;
+		if (!verifyBeforeChange?.letterUpper) {
+			valueTemp = valueTemp.replace(/[A-Z]/g, '');
+		}
+		if (!verifyBeforeChange?.number) {
+			valueTemp = valueTemp.replace(/[0-9]/g, '');
+		}
+		if (!verifyBeforeChange?.specialCharacter) {
+			valueTemp = valueTemp.replace(/[!@#$%^&*(),.?"':{}|<>_-]/g, '');
+		}
+		temp.target.value = valueTemp;
 		if (onChange) {
-			onChange(newChange);
+			onChange(temp);
 		}
 	}
 
 	return (
-		<div className={styles.container}>
-			{label && (
+		<div
+			className={`${styles.container} ${
+				customlabel?.position === 'Left' && styles.containerRow
+			}`}
+		>
+			{customlabel && (
 				<div>
-					<label htmlFor={props.id}>{label}</label>
+					<label htmlFor={props.id}>{customlabel.text}</label>
 				</div>
 			)}
 			<div className={styles.subContainer}>
-				{startContent}
 				{startAttach && (
 					<div
 						className={`${styles.startAttch} ${
@@ -73,19 +75,22 @@ function Input({
 						{startAttach}
 					</div>
 				)}
-				<div className={styles.containerInput}>
-					<input
-						onBlur={onBlurCustom}
-						className={`${styles.input} ${startAttach && styles.hasStartAtt} ${
-							endAttach && styles.hasEndAtt
-						}`}
-						{...props}
-					/>
-					{endContent && (
-						<div style={{ display: 'flex', alignItems: 'center' }}>
-							{endContent}
-						</div>
+				<div className={`${styles.containerInput}`}>
+					{startContent && (
+						<div className={styles.startContent}>{startContent}</div>
 					)}
+					<input
+						{...props}
+						onChange={onChangeCustom}
+						// onBlur={onBlurCustom}
+						className={`${styles.input}
+						${startAttach && styles.hasStartAtt}
+						${endAttach && styles.hasEndAtt}
+						${startContent && styles.hasStartContent}
+						${endContent && styles.hasEndContent}
+						`}
+					/>
+					{endContent && <div className={styles.endContent}>{endContent}</div>}
 				</div>
 				{endAttach && (
 					<div

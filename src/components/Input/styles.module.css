@@ -4,11 +4,19 @@
 	flex-direction: column;
 }
 
-.subContainer{
-	display: flex;
+.containerRow {
+	flex-direction: row;
+	align-items: center;
+	gap: 10px;
 }
 
-.containerInput{
+.subContainer {
+	display: flex;
+	flex: 1;
+}
+
+.containerInput {
+	position: relative;
 	width: 100%;
 	display: flex;
 }
@@ -20,6 +28,7 @@
 	border-radius: 5px;
 	border: 1px solid black;
 	transition: 200ms border;
+	position: relative;
 }
 
 .input:disabled {
@@ -66,6 +75,34 @@
 	border-right: 0;
 }
 
+.hasStartContent {
+	padding-left: 50px;
+}
+
+.hasEndContent {
+	padding-right: 50px;
+}
+
 .zeroPadding {
 	padding: 0;
+}
+
+.startContent {
+	display: flex;
+	align-items: center;
+	position: absolute;
+	left: 5px;
+	top: 5px;
+	z-index: 2;
+	max-width: 40px;
+}
+
+.endContent {
+	display: flex;
+	align-items: center;
+	position: absolute;
+	right: 5px;
+	top: 5px;
+	z-index: 2;
+	max-width: 40px;
 }
