@@ -10,11 +10,12 @@ interface Props extends React.HTMLProps<HTMLInputElement> {
 		text: string;
 		position?: 'Top' | 'Left';
 	};
-	verifyBeforeChange?: {
-		number: boolean;
-		letterUpper: boolean;
-		letterLow: boolean;
-		specialCharacter: boolean;
+	removeBeforeChange?: {
+		number?: boolean;
+		letterUpper?: boolean;
+		letterLow?: boolean;
+		specialCharacter?: boolean;
+		regexForReplace?: RegExp;
 	};
 	onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
@@ -25,28 +26,34 @@ function Input({
 	startContent,
 	endContent,
 	customlabel,
-	verifyBeforeChange,
+	removeBeforeChange,
 	onChange,
 	...props
 }: Props) {
 	function onChangeCustom(e: React.ChangeEvent<HTMLInputElement>) {
-		if (!verifyBeforeChange && onChange) {
+		if (!removeBeforeChange && onChange) {
 			onChange(e);
 		}
 
 		const temp = { ...e };
 		let valueTemp = temp.target.value;
-		if (!verifyBeforeChange?.letterLow) {
+		if (removeBeforeChange?.letterLow) {
 			valueTemp = valueTemp.replace(/[a-z]/g, '');
 		}
-		if (!verifyBeforeChange?.letterUpper) {
+		if (removeBeforeChange?.letterUpper) {
 			valueTemp = valueTemp.replace(/[A-Z]/g, '');
 		}
-		if (!verifyBeforeChange?.number) {
+		if (removeBeforeChange?.number) {
 			valueTemp = valueTemp.replace(/[0-9]/g, '');
 		}
-		if (!verifyBeforeChange?.specialCharacter) {
-			valueTemp = valueTemp.replace(/[!@#$%^&*(),.?"':{}|<>_-]/g, '');
+		if (removeBeforeChange?.specialCharacter) {
+			valueTemp = valueTemp.replace(
+				/[!@#$%^&*(),.?":{ }|<>'¨_=+[;^~´`°\]\\\-/]/g,
+				''
+			);
+		}
+		if (removeBeforeChange?.regexForReplace) {
+			valueTemp = valueTemp.replace(removeBeforeChange?.regexForReplace, '');
 		}
 		temp.target.value = valueTemp;
 		if (onChange) {
@@ -66,41 +73,41 @@ function Input({
 				</div>
 			)}
 			<div className={styles.subContainer}>
-				{startAttach && (
-					<div
-						className={`${styles.startAttch} ${
-							typeof startAttach !== 'string' && styles.zeroPadding
-						}`}
-					>
-						{startAttach}
-					</div>
-				)}
 				<div className={`${styles.containerInput}`}>
+					{startAttach && (
+						<div
+							className={`${styles.startAttch} ${
+								typeof startAttach !== 'string' && styles.zeroPadding
+							}`}
+						>
+							{startAttach}
+						</div>
+					)}
 					{startContent && (
 						<div className={styles.startContent}>{startContent}</div>
 					)}
 					<input
 						{...props}
 						onChange={onChangeCustom}
-						// onBlur={onBlurCustom}
 						className={`${styles.input}
 						${startAttach && styles.hasStartAtt}
 						${endAttach && styles.hasEndAtt}
 						${startContent && styles.hasStartContent}
 						${endContent && styles.hasEndContent}
+						${props.className}
 						`}
 					/>
 					{endContent && <div className={styles.endContent}>{endContent}</div>}
+					{endAttach && (
+						<div
+							className={`${styles.endAttch} ${
+								typeof endAttach !== 'string' && styles.zeroPadding
+							}`}
+						>
+							{endAttach}
+						</div>
+					)}
 				</div>
-				{endAttach && (
-					<div
-						className={`${styles.endAttch} ${
-							typeof endAttach !== 'string' && styles.zeroPadding
-						}`}
-					>
-						{endAttach}
-					</div>
-				)}
 			</div>
 		</div>
 	);
