@@ -45,7 +45,7 @@
 
 .startAttch {
 	background-color: gray;
-	padding: 5px;
+	padding: 0 10px;
 	border: 1px solid black;
 	border-radius: 5px 0px 0px 5px;
 	display: flex;
@@ -62,7 +62,7 @@
 
 .endAttch {
 	background-color: gray;
-	padding: 5px;
+	padding: 0 10px;
 	border: 1px solid black;
 	border-radius: 0px 5px 5px 0px;
 	display: flex;

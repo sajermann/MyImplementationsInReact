@@ -122,7 +122,7 @@ export default function InputDocs() {
 						customlabel={{
 							text: 'Com anexo de personalizado no início e no fim',
 						}}
-						id="attchStartAndEnd"
+						id="attchStartAndEndCustom"
 						startAttach={
 							<div
 								style={{

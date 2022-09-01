@@ -44,7 +44,7 @@ export default function ButtonDocs() {
 	}
 
 	return (
-		<main>
+		<main data-content="content-main">
 			<Section heading="Botões">
 				Os componentes de botões permitem que os usuários realizem ações. O
 				intuito desse componente é oferecer o mesmo botão que você já está

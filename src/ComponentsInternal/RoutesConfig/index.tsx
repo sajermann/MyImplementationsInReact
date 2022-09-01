@@ -7,6 +7,7 @@ import GettingStarted from '../../Pages/Docs/Getting Started';
 import styles from './styles.module.css';
 import OptionButtonDocs from '../../Pages/Docs/OptionButton';
 import InputDocs from '../../Pages/Docs/Input';
+import TableOfContents from '../TableOfContents';
 
 const options = [
 	{
@@ -85,6 +86,7 @@ export default function RoutesConfig() {
 					);
 				})}
 			</Routes>
+			<TableOfContents />
 		</div>
 	);
 }

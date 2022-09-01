@@ -1,4 +1,5 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
+import { useMemo } from 'react';
 import styles from './styles.module.css';
 
 interface Props extends React.HTMLProps<HTMLInputElement> {
@@ -61,52 +62,102 @@ function Input({
 		}
 	}
 
-	return (
-		<div
-			className={`${styles.container} ${
-				customlabel?.position === 'Left' && styles.containerRow
-			}`}
-		>
-			{customlabel && (
+	function verifyClassesContainer() {
+		const classesToReturn = [styles.container];
+
+		if (customlabel?.position === 'Left') {
+			classesToReturn.push(styles.containerRow);
+		}
+		return classesToReturn.join(' ');
+	}
+
+	function verifyClassesInput() {
+		const classesToReturn = [styles.input];
+
+		if (startAttach) {
+			classesToReturn.push(styles.hasStartAtt);
+		}
+
+		if (endAttach) {
+			classesToReturn.push(styles.hasEndAtt);
+		}
+
+		if (startContent) {
+			classesToReturn.push(styles.hasStartContent);
+		}
+
+		if (endContent) {
+			classesToReturn.push(styles.hasEndContent);
+		}
+
+		if (props.className) {
+			classesToReturn.push(props.className);
+		}
+
+		return classesToReturn.join(' ');
+	}
+
+	const buildLabel = useMemo(() => {
+		if (customlabel) {
+			return (
 				<div>
 					<label htmlFor={props.id}>{customlabel.text}</label>
 				</div>
-			)}
+			);
+		}
+		return null;
+	}, [customlabel]);
+
+	const buildStartAttach = useMemo(() => {
+		const classes = [styles.startAttch];
+		if (typeof startAttach !== 'string') {
+			classes.push(styles.zeroPadding);
+		}
+		if (startAttach) {
+			return <div className={classes.join(' ')}>{startAttach}</div>;
+		}
+		return null;
+	}, [startAttach]);
+
+	const buildStartContent = useMemo(() => {
+		if (startContent) {
+			return <div className={styles.startContent}>{startContent}</div>;
+		}
+		return null;
+	}, [startContent]);
+
+	const buildEndContent = useMemo(() => {
+		if (endContent) {
+			return <div className={styles.endContent}>{endContent}</div>;
+		}
+		return null;
+	}, [endContent]);
+
+	const buildEndAttach = useMemo(() => {
+		const classes = [styles.endAttch];
+		if (typeof endAttach !== 'string') {
+			classes.push(styles.zeroPadding);
+		}
+		if (endAttach) {
+			return <div className={classes.join(' ')}>{endAttach}</div>;
+		}
+		return null;
+	}, [endAttach]);
+
+	return (
+		<div className={verifyClassesContainer()}>
+			{buildLabel}
 			<div className={styles.subContainer}>
 				<div className={`${styles.containerInput}`}>
-					{startAttach && (
-						<div
-							className={`${styles.startAttch} ${
-								typeof startAttach !== 'string' && styles.zeroPadding
-							}`}
-						>
-							{startAttach}
-						</div>
-					)}
-					{startContent && (
-						<div className={styles.startContent}>{startContent}</div>
-					)}
+					{buildStartAttach}
+					{buildStartContent}
 					<input
 						{...props}
 						onChange={onChangeCustom}
-						className={`${styles.input}
-						${startAttach && styles.hasStartAtt}
-						${endAttach && styles.hasEndAtt}
-						${startContent && styles.hasStartContent}
-						${endContent && styles.hasEndContent}
-						${props.className}
-						`}
+						className={verifyClassesInput()}
 					/>
-					{endContent && <div className={styles.endContent}>{endContent}</div>}
-					{endAttach && (
-						<div
-							className={`${styles.endAttch} ${
-								typeof endAttach !== 'string' && styles.zeroPadding
-							}`}
-						>
-							{endAttach}
-						</div>
-					)}
+					{buildEndContent}
+					{buildEndAttach}
 				</div>
 			</div>
 		</div>
