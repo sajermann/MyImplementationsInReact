@@ -9,7 +9,7 @@ import { Button } from '../../../components/Button';
 
 export default function InputDocs() {
 	return (
-		<main>
+		<main data-content="content-main">
 			<Section heading="Inputs">
 				O input dá ao usuário a oportunidade de inserir dados na página, nosso
 				componente de input tenta ser o mais fiel possível com algumas

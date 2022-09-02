@@ -18,18 +18,21 @@
 }
 
 .container {
-	min-width: 300px;
-	max-height: 100%;
 	border: 1px solid;
 	border-radius: 20px;
 	padding: 20px;
 	font-size: 0.8rem;
 }
 
-@media (max-width: 780px) {
-	.container{
-		display: none;
-	}
+
+.active {
+	border-left: 3px solid #476fe6;
+	padding-left: 3px;
+
+}
+
+.active a{
+	color:#476fe6 !important;
 }
 
 .container a,

@@ -1,16 +1,27 @@
 import { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
+import useScrollPosition from '../../Hooks/useScrollPosition';
 import styles from './styles.module.css';
 
-type Te = {
+type Menu = {
 	type: string;
 	title: string;
 	anchor: string;
+	top: number;
+	active: boolean;
 };
 
 export default function TableOfContents() {
-	const [optionsMenu, setOptionsMenu] = useState<Te[]>([]);
+	const [optionsMenu, setOptionsMenu] = useState<Menu[]>([]);
+	const location = useLocation();
+	const scrollPosition = useScrollPosition();
+
 	function load() {
-		const menus: Te[] = [];
+		if (!location.pathname.includes('/docs/')) {
+			setOptionsMenu([]);
+			return;
+		}
+		const menus: Menu[] = [];
 		const subs = document.querySelectorAll(
 			'[data-content="content-main"] h1,[data-content="content-main"] h2,[data-content="content-main"] h3'
 		);
@@ -19,23 +30,44 @@ export default function TableOfContents() {
 				type: subs[i].nodeName,
 				title: subs[i].textContent || '',
 				anchor: `${i}-${subs[i].nodeName}-${subs[i].textContent}`,
+				top: subs[i].getBoundingClientRect().top,
+				active: false,
 			});
 			subs[i].setAttribute(
 				'id',
 				`${i}-${subs[i].nodeName}-${subs[i].textContent}`
 			);
 		}
-		setOptionsMenu([...menus]);
+
+		const goal = 0;
+		const closest = menus.reduce((prev, curr) =>
+			Math.abs(curr.top - goal) < Math.abs(prev.top - goal) ? curr : prev
+		);
+		const menusWithActive = menus.map(item => {
+			if (item.anchor === closest.anchor) {
+				return { ...item, active: true };
+			}
+			return item;
+		});
+
+		setOptionsMenu([...menusWithActive]);
 	}
-	useEffect(() => {
-		load();
-	}, []);
+
+	useEffect(() => load(), [scrollPosition, location.pathname]);
+
+	if (!optionsMenu.length) {
+		return null;
+	}
+
 	return (
 		<nav className={styles.container}>
-			<strong>Nessa Página</strong>
+			<strong>Acesso Rápido</strong>
 			<ul>
 				{optionsMenu.map(item => (
-					<li key={`#${item.anchor}`} className={styles[item.type]}>
+					<li
+						key={`#${item.anchor}`}
+						className={`${styles[item.type]} ${item.active && styles.active}`}
+					>
 						<a href={`#${item.anchor}`}>{item.title}</a>
 					</li>
 				))}

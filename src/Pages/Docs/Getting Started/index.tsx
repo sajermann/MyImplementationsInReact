@@ -9,7 +9,7 @@ export default function GettingStarted() {
 	const { darkMode } = useDarkMode();
 
 	return (
-		<main>
+		<main data-content="content-main">
 			<Section heading="Introdução">
 				<span>
 					Sajermann UI é um conjunto de componentes para React de interface de

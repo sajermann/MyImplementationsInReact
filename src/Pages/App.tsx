@@ -1,7 +1,6 @@
 import { BrowserRouter } from 'react-router-dom';
 import Header from '../ComponentsInternal/Header';
 import RoutesConfig from '../ComponentsInternal/RoutesConfig';
-import TableOfContents from '../ComponentsInternal/TableOfContents';
 import { DarkModeProvider } from '../Hooks/DarkMode';
 
 function App() {
@@ -9,7 +8,6 @@ function App() {
 		<BrowserRouter basename="NPM-SajermannUiReact">
 			<DarkModeProvider>
 				<Header />
-
 				<RoutesConfig />
 			</DarkModeProvider>
 		</BrowserRouter>

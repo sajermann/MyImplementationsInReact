@@ -6,6 +6,7 @@ import { OptionButton } from '../../components/OptionButton';
 import { Drawer } from '../../components/Drawer';
 import { useDarkMode } from '../../Hooks/DarkMode';
 import styles from './styles.module.css';
+import optionsMenu from '../../Utils/OptionsMenu';
 
 export default function Menu() {
 	const { darkMode } = useDarkMode();
@@ -15,33 +16,6 @@ export default function Menu() {
 	function goTo(url: string) {
 		navigate(url);
 	}
-
-	const optionsMenu = [
-		{
-			title: 'Home',
-			url: '/',
-		},
-		{
-			title: 'Instalação',
-			url: '/getting-started',
-		},
-		{
-			title: 'Botão',
-			url: '/docs/button',
-		},
-		{
-			title: 'Botão Opção',
-			url: '/docs/option-button',
-		},
-		{
-			title: 'Drawer',
-			url: '/docs/drawer',
-		},
-		{
-			title: 'Input',
-			url: '/docs/input',
-		},
-	];
 
 	return (
 		<>

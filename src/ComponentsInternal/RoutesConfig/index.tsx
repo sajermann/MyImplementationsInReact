@@ -7,7 +7,8 @@ import GettingStarted from '../../Pages/Docs/Getting Started';
 import styles from './styles.module.css';
 import OptionButtonDocs from '../../Pages/Docs/OptionButton';
 import InputDocs from '../../Pages/Docs/Input';
-import TableOfContents from '../TableOfContents';
+import Footer from '../Footer';
+import Sidebar from '../Sidebar';
 
 const options = [
 	{
@@ -64,29 +65,32 @@ const options = [
 export default function RoutesConfig() {
 	return (
 		<div className={styles.container}>
-			<Routes>
-				{options.map(item => {
-					if (item.subItems.length === 0) {
+			<div>
+				<Routes>
+					{options.map(item => {
+						if (item.subItems.length === 0) {
+							return (
+								<Route key={generateGuid()} path={item.path}>
+									<Route index={item.index} element={item.element} />
+								</Route>
+							);
+						}
 						return (
 							<Route key={generateGuid()} path={item.path}>
-								<Route index={item.index} element={item.element} />
+								{item.subItems.map(subItem => (
+									<Route
+										key={generateGuid()}
+										path={subItem.path}
+										element={subItem.element}
+									/>
+								))}
 							</Route>
 						);
-					}
-					return (
-						<Route key={generateGuid()} path={item.path}>
-							{item.subItems.map(subItem => (
-								<Route
-									key={generateGuid()}
-									path={subItem.path}
-									element={subItem.element}
-								/>
-							))}
-						</Route>
-					);
-				})}
-			</Routes>
-			<TableOfContents />
+					})}
+				</Routes>
+				<Footer />
+			</div>
+			<Sidebar />
 		</div>
 	);
 }
