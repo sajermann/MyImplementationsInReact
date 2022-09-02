@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import useScrollPosition from '../../Hooks/useScrollPosition';
+import useWindow from '../../Hooks/useWindow';
 import styles from './styles.module.css';
 
 type Menu = {
@@ -14,7 +14,7 @@ type Menu = {
 export default function TableOfContents() {
 	const [optionsMenu, setOptionsMenu] = useState<Menu[]>([]);
 	const location = useLocation();
-	const scrollPosition = useScrollPosition();
+	const { scrollPosition } = useWindow();
 
 	function load() {
 		if (!location.pathname.includes('/docs/')) {

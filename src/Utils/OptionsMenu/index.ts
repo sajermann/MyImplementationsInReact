@@ -5,7 +5,7 @@ const optionsMenu = [
 	},
 	{
 		title: 'Instalação',
-		url: '/getting-started',
+		url: '/docs/getting-started',
 	},
 	{
 		title: 'Botão',

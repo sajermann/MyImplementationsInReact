@@ -26,7 +26,7 @@ const options = [
 		subItems: [],
 	},
 	{
-		path: '/getting-started',
+		path: '/docs/getting-started',
 		element: <GettingStarted />,
 		name: 'Instação',
 		index: true,
@@ -65,7 +65,7 @@ const options = [
 export default function RoutesConfig() {
 	return (
 		<div className={styles.container}>
-			<div>
+			<div className={styles.subContainer}>
 				<Routes>
 					{options.map(item => {
 						if (item.subItems.length === 0) {

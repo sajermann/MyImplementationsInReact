@@ -1,7 +1,17 @@
 import { useEffect, useState } from 'react';
 
-const useScrollPosition = () => {
+function useWindow() {
 	const [scrollPosition, setScrollPosition] = useState(0);
+	const [view] = useState({
+		width: Math.max(
+			document.documentElement.clientWidth || 0,
+			window.innerWidth || 0
+		),
+		height: Math.max(
+			document.documentElement.clientHeight || 0,
+			window.innerHeight || 0
+		),
+	});
 
 	useEffect(() => {
 		const updatePosition = () => {
@@ -13,7 +23,7 @@ const useScrollPosition = () => {
 		return () => window.removeEventListener('scroll', updatePosition);
 	}, []);
 
-	return scrollPosition;
-};
+	return { scrollPosition, view };
+}
 
-export default useScrollPosition;
+export default useWindow;

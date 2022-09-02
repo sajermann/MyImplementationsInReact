@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useLocation, Link } from 'react-router-dom';
-import { ArrowArcLeft, CaretLeft, CaretRight } from 'phosphor-react';
-import useScrollPosition from '../../Hooks/useScrollPosition';
+import { CaretLeft, CaretRight } from 'phosphor-react';
 import styles from './styles.module.css';
 import optionsMenu from '../../Utils/OptionsMenu';
 
