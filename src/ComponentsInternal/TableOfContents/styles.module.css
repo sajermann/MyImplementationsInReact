@@ -1,0 +1,57 @@
+.H1 a {
+	text-decoration: none;
+}
+.H1:link {
+	text-decoration: none;
+}
+
+.H1:visited {
+	text-decoration: none;
+}
+
+.H1:hover {
+	text-decoration: none;
+}
+
+.H1:active {
+	text-decoration: none;
+}
+
+.container {
+	border: 1px solid;
+	border-radius: 20px;
+	padding: 20px;
+	font-size: 0.8rem;
+}
+
+
+.active {
+	border-left: 3px solid #476fe6;
+	padding-left: 3px;
+
+}
+
+.active a{
+	color:#476fe6 !important;
+}
+
+.container a,
+.container a:link,
+.container a:visited,
+.container a:hover,
+.container a:active {
+	text-decoration: none;
+}
+
+.container li {
+	list-style-type: none;
+}
+
+.H1 {
+}
+.H2 {
+	margin-left: 24px;
+}
+.H3 {
+	margin-left: 48px;
+}

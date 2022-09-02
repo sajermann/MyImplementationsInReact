@@ -1,12 +1,21 @@
 .container{
-	height: 100%;
-	max-width: 800px;
-	margin: auto;
+	max-width: 1100px;
+	margin: 0 auto;
 	padding: 10px;
+	padding-bottom: 0;
+	display: flex;
+	gap: 20px;
+	/* height: 100%; */
 }
 
 @media (max-width: 380px) {
 	.container{
 		margin: 0;
 	}
+}
+
+
+.subContainer{
+	display: flex;
+	flex-direction: column;
 }

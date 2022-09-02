@@ -1,0 +1,40 @@
+.footer {
+	padding: 1rem;
+	height: 3rem;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background-color: rgb(15 25 38);
+	border-bottom: 1px rgba(194, 224, 255, 0.08) solid;
+	flex-direction: column;
+	color: white !important;
+	margin-top: auto;
+}
+
+.link {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background: transparent !important;
+	font-size: 34px;
+	transition: color 0.8s;
+	color: white;
+}
+
+.link:hover {
+	color: #476fe6;
+}
+
+.containerIcones {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 10px;
+}
+
+.footerFixed {
+	position: fixed;
+	bottom: 0;
+	width: 100%;
+	left: 0;
+}

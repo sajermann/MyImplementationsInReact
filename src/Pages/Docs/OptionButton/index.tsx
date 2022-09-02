@@ -9,7 +9,7 @@ import { CodeBlock } from '../../../ComponentsInternal/CodeBlock';
 export default function OptionButtonDocs() {
 	const { darkMode } = useDarkMode();
 	return (
-		<main>
+		<main data-content="content-main">
 			<Section heading="Botão de Opção">
 				O componente Botão de Opção pode ser utilizado para destacar uma opção
 				ao usuário, geralmente são grandes e não possuem regras que fujam do

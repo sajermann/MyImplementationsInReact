@@ -1,15 +1,10 @@
 /* eslint-disable react/no-unescaped-entities */
-import ex1 from './ex1';
 import { CodeBlock } from '../../../ComponentsInternal/CodeBlock';
-import { useDarkMode } from '../../../Hooks/DarkMode';
-import styles from './styles.module.css';
 import Section from '../../../ComponentsInternal/Section';
 
 export default function GettingStarted() {
-	const { darkMode } = useDarkMode();
-
 	return (
-		<main>
+		<main data-content="content-main">
 			<Section heading="Introdução">
 				<span>
 					Sajermann UI é um conjunto de componentes para React de interface de
@@ -25,8 +20,20 @@ export default function GettingStarted() {
 				<CodeBlock language="shell">npm install @sajermann/ui-react</CodeBlock>
 				<span>Insira em algum arquivo raiz de seu projeto o css abaixo:</span>
 				<CodeBlock>import '@sajermann/ui-react/index.css';</CodeBlock>
-				{/* <CodeBlock>{ex1}</CodeBlock>
-				<CodeBlock>npm install @sajermann/ui-react</CodeBlock> */}
+			</Section>
+			<Section heading="Dúvidas">
+				<span>
+					Caso tenha alguma dúvida ou queira compartilhar alguma opinião sugiro
+					abrir uma discussão dentro do github através desse{' '}
+					<a
+						href="https://github.com/sajermann/NPM-SajermannUiReact/discussions"
+						target="_blank"
+						rel="noopener noreferrer"
+					>
+						link
+					</a>
+					.
+				</span>
 			</Section>
 		</main>
 	);

@@ -25,6 +25,7 @@
 			"prettier"
 	],
 	"rules": {
+		"no-alert": "off",
 		"import/prefer-default-export": "off",
 		"no-restricted-syntax": [
 			"error",

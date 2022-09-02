@@ -1,0 +1,27 @@
+.container {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	min-width: 250px;
+	max-width: 300px;
+	max-height: 100%;
+	padding: 20px;
+	font-size: 0.8rem;
+	-webkit-flex-shrink: 0;
+	-ms-flex-negative: 0;
+	flex-shrink: 0;
+	position: -webkit-sticky;
+	position: sticky;
+	top: 10px;
+	-ms-flex-item-align: start;
+	align-self: start;
+	overflow-y: auto;
+	visibility: initial;
+	overscroll-behavior: contain;
+}
+
+@media (max-width: 780px) {
+	.container {
+		display: none;
+	}
+}

@@ -1,0 +1,15 @@
+.container {
+	border: 1px solid;
+	border-radius: 20px;
+	padding: 20px;
+	font-size: 0.8rem;
+}
+.subContainer {
+	display: flex;
+	justify-content: space-between;
+}
+.subContainer a {
+	text-decoration: none;
+	display: flex;
+	align-items: center;
+}

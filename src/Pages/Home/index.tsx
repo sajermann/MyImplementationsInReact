@@ -53,7 +53,7 @@ export default function Home() {
 					className={`${styles.blocks} ${
 						darkMode ? styles.dark : styles.light
 					}`}
-					onClick={() => handleGotTo('/getting-started')}
+					onClick={() => handleGotTo('/docs/getting-started')}
 				>
 					Get Started {`${'>'}`}
 				</OptionButton>

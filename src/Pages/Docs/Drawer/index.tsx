@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Button } from '../../../components';
+import { Button } from '../../../components/Button';
 import { Drawer } from '../../../components/Drawer';
 import { CodeBlock } from '../../../ComponentsInternal/CodeBlock';
 import { ComponentBlock } from '../../../ComponentsInternal/ComponentBlock';
@@ -38,7 +38,7 @@ export default function DrawerDocs() {
 	const [isOpenLeftRed, setIsOpenLeftRed] = useState(false);
 
 	return (
-		<main>
+		<main data-content="content-main">
 			<Section heading="Drawer">
 				O componente de Drawer ajuda a fornecer mais opções para o usuário
 				quando necessário e deixando a tela com mais espaço, o drawer pode ser

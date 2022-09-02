@@ -7,7 +7,7 @@ import {
 	YoutubeLogo,
 } from 'phosphor-react';
 import { CodeBlock } from '../../../ComponentsInternal/CodeBlock';
-import { Button } from '../../../components';
+import { Button } from '../../../components/Button';
 import styles from './styles.module.css';
 import Section from '../../../ComponentsInternal/Section';
 import { ComponentBlock } from '../../../ComponentsInternal/ComponentBlock';
@@ -44,7 +44,7 @@ export default function ButtonDocs() {
 	}
 
 	return (
-		<main>
+		<main data-content="content-main">
 			<Section heading="Botões">
 				Os componentes de botões permitem que os usuários realizem ações. O
 				intuito desse componente é oferecer o mesmo botão que você já está

@@ -26,7 +26,9 @@
 	display: flex;
 	align-items: center;
 	text-decoration: none;
+	background-color: rgb(15 25 38) !important;
 }
+
 
 .buttonDarkMode {
 	display: inline-flex;
