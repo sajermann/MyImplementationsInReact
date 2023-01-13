@@ -1,10 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import App from './Pages/App';
+import { BrowserRouter } from 'react-router-dom';
+import Header from './Components/Header';
+import RoutesConfig from './Components/RoutesConfig';
+import { DarkModeProvider } from './Hooks/DarkMode';
+
 import './styles.css';
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
 	<React.StrictMode>
-		<App />
+		<BrowserRouter basename="MyImplementationsInReact">
+			<DarkModeProvider>
+				<Header />
+				<RoutesConfig />
+			</DarkModeProvider>
+		</BrowserRouter>
 	</React.StrictMode>
 );
