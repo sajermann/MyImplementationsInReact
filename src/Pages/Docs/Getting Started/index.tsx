@@ -26,7 +26,7 @@ export default function GettingStarted() {
 					Caso tenha alguma dúvida ou queira compartilhar alguma opinião sugiro
 					abrir uma discussão dentro do github através desse{' '}
 					<a
-						href="https://github.com/sajermann/NPM-SajermannUiReact/discussions"
+						href="https://github.com/sajermann/MyImplementationsInReact/discussions"
 						target="_blank"
 						rel="noopener noreferrer"
 					>

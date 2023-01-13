@@ -23,7 +23,7 @@ export default function Home() {
 			<p>Confira nosso projeto em:</p>
 
 			<a
-				href="https://github.com/sajermann/NPM-SajermannUiReact"
+				href="https://github.com/sajermann/MyImplementationsInReact/"
 				target="_blank"
 				rel="noreferrer"
 			>

@@ -2,7 +2,7 @@ export const ex1 = `styles.module.css
 .news {
 	width: 150px;
 	height: 150px;
-	background-image: url(/NPM-SajermannUiReact/src/assets/palmeiras.png);
+	background-image: url(/MyImplementationsInReact/src/assets/palmeiras.png);
 	border-radius: 50%;
 	background-size: cover;
 }
@@ -21,7 +21,7 @@ export const ex1 = `styles.module.css
 .history {
 	width: 150px;
 	height: 150px;
-	background-image: url(/NPM-SajermannUiReact/src/assets/history.jpg);
+	background-image: url(/MyImplementationsInReact/src/assets/history.jpg);
 	background-size: cover;
 	opacity: 0.5;
 }
@@ -40,7 +40,7 @@ export const ex1 = `styles.module.css
 .cities {
 	width: 150px;
 	height: 150px;
-	background-image: url(/NPM-SajermannUiReact/src/assets/cities.png);
+	background-image: url(/MyImplementationsInReact/src/assets/cities.png);
 	background-size: cover;
 }
 

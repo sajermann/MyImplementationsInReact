@@ -13,8 +13,8 @@ In your App.tsx import
 
 ## Links
 
-[Demo](https://sajermann.github.io/NPM-SajermannUiReact/)
+[Demo](https://sajermann.github.io/MyImplementationsInReact/)
 
 [NPM](https://www.npmjs.com/package/@sajermann/ui-react)
 
-[Github](https://github.com/sajermann/NPM-SajermannUiReact)
+[Github](https://github.com/sajermann/MyImplementationsInReact)

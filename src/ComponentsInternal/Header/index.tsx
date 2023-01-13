@@ -11,7 +11,7 @@ export default function Header() {
 			<div className={styles.container}>
 				<Menu />
 				<Link to="/" className={styles.link}>
-					<h1 className={styles.title}>Sajermann UI for React</h1>
+					<h1 className={styles.title}>My Implementations In React</h1>
 				</Link>
 				<button
 					onClick={toggleDarkMode}
