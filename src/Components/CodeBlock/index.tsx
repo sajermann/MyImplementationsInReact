@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { dracula } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import { Button } from '../Button';
-import { delay } from '../../components/utils';
+import { delay } from '../../Components/utils';
 import styles from './styles.module.css';
 
 type Props = {

@@ -1,7 +1,7 @@
 import { GithubLogo, LinkedinLogo } from 'phosphor-react';
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import { delay } from '../../components/utils';
+import { delay } from '../../Components/utils';
 import useWindow from '../../Hooks/useWindow';
 import styles from './styles.module.css';
 

@@ -1,10 +1,12 @@
 import styles from './styles.module.css';
-import Section from '../../../ComponentsInternal/Section';
-import { ComponentBlock } from '../../../ComponentsInternal/ComponentBlock';
+
 import { ex1, ex2 } from './exs';
-import { useDarkMode } from '../../../Hooks/DarkMode';
-import { CodeBlock } from '../../../ComponentsInternal/CodeBlock';
+
 import { OptionButton } from '../../Components/OptionButton';
+import { useDarkMode } from '../../Hooks/DarkMode';
+import Section from '../../Components/Section';
+import { CodeBlock } from '../../Components/CodeBlock';
+import { ComponentBlock } from '../../Components/ComponentBlock';
 
 export default function OptionButtonDocs() {
 	const { darkMode } = useDarkMode();

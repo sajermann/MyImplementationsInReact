@@ -1,6 +1,6 @@
 /* eslint-disable react/no-unescaped-entities */
-import { CodeBlock } from '../../../ComponentsInternal/CodeBlock';
-import Section from '../../../ComponentsInternal/Section';
+import { CodeBlock } from '../../Components/CodeBlock';
+import Section from '../../Components/Section';
 
 export default function GettingStarted() {
 	return (

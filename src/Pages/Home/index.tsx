@@ -1,7 +1,8 @@
 import { useNavigate } from 'react-router-dom';
+import { OptionButton } from '../../Components/OptionButton';
 
 import { useDarkMode } from '../../Hooks/DarkMode';
-import { OptionButton } from '../OptionButton';
+
 import styles from './styles.module.css';
 
 export default function Home() {
@@ -48,7 +49,7 @@ export default function Home() {
 					className={`${styles.blocks} ${
 						darkMode ? styles.dark : styles.light
 					}`}
-					onClick={() => handleGotTo('/button')}
+					onClick={() => handleGotTo('/Button')}
 				>
 					Componentes {`${'>'}`}
 				</OptionButton>

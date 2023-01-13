@@ -1,9 +1,9 @@
 import { useState } from 'react';
-import { Button } from '../../../ComponentsInternal/Button';
-import { Drawer } from '../../../components/Drawer';
-import { CodeBlock } from '../../../ComponentsInternal/CodeBlock';
-import { ComponentBlock } from '../../../ComponentsInternal/ComponentBlock';
-import Section from '../../../ComponentsInternal/Section';
+import { Button } from '../../Components/Button';
+import { Drawer } from '../../Components/Drawer';
+import { CodeBlock } from '../../Components/CodeBlock';
+import { ComponentBlock } from '../../Components/ComponentBlock';
+import Section from '../../Components/Section';
 import { ex1, ex2, ex3, ex4, ex5, ex6, ex7 } from './exs';
 
 export default function DrawerDocs() {

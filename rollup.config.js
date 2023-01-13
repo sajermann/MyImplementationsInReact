@@ -21,7 +21,7 @@ export default [
 				},
 				exclude: [
 					'src/Pages',
-					'src/ComponentsInternal',
+					'src/Components',
 					'src/Hooks',
 					'src/test',
 					'src/App.tsx',

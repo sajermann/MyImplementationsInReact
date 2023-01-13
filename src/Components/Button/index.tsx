@@ -1,5 +1,6 @@
 /* eslint-disable react/button-has-type */
 import { useEffect, useMemo, useRef, useState } from 'react';
+import { Button as ButtonSajermann } from '@sajermann/react-button';
 import styles from './styles.module.css';
 import { Loading } from '../Loading';
 import { FeedbackIcons } from '../FeedbackIcons';
@@ -279,28 +280,34 @@ function Button({
 	}, [endIcon, withFeedback]);
 
 	return (
-		<button
+		<ButtonSajermann
 			{...props}
-			onClick={event =>
-				createEffect({
-					event,
-					ID_BUTTON,
-					ID,
-					variant,
-					verifyColorIcon,
-					onClick,
-				})
-			}
-			type={type}
 			className={`${verifyClasses()} ${props.className}`}
 		>
-			<div className={styles.internal}>
-				{buildStartIcon}
-				{buildChildren}
-				{mainFeedback}
-				{buildEndIcon}
-			</div>
-		</button>
+			{children}
+		</ButtonSajermann>
+		// <button
+		// 	{...props}
+		// 	onClick={event =>
+		// 		createEffect({
+		// 			event,
+		// 			ID_BUTTON,
+		// 			ID,
+		// 			variant,
+		// 			verifyColorIcon,
+		// 			onClick,
+		// 		})
+		// 	}
+		// 	type={type}
+		// 	className={`${verifyClasses()} ${props.className}`}
+		// >
+		// 	<div className={styles.internal}>
+		// 		{buildStartIcon}
+		// 		{buildChildren}
+		// 		{mainFeedback}
+		// 		{buildEndIcon}
+		// 	</div>
+		// </button>
 	);
 }
 

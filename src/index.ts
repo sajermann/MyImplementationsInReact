@@ -1,7 +1,7 @@
-import { Button } from './ComponentsInternal/Button';
-import { Loading } from './components/Loading';
-import { Drawer } from './components/Drawer';
-import { OptionButton } from './components/OptionButton';
-import { Input } from './components/Input';
+import { Button } from './Components/Button';
+import { Loading } from './Components/Loading';
+import { Drawer } from './Components/Drawer';
+import { OptionButton } from './Components/OptionButton';
+import { Input } from './Components/Input';
 
 export { Button, Loading, Drawer, OptionButton, Input };

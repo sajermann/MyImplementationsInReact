@@ -6,15 +6,15 @@ import {
 	WhatsappLogo,
 	YoutubeLogo,
 } from 'phosphor-react';
-import { CodeBlock } from '../../../ComponentsInternal/CodeBlock';
-import { Button } from '../../../ComponentsInternal/Button';
+import { CodeBlock } from '../../Components/CodeBlock';
+import { Button } from '../../Components/Button';
 import styles from './styles.module.css';
-import Section from '../../../ComponentsInternal/Section';
-import { ComponentBlock } from '../../../ComponentsInternal/ComponentBlock';
+import Section from '../../Components/Section';
+import { ComponentBlock } from '../../Components/ComponentBlock';
 import { ex1, ex2, ex3, ex4, ex5, ex6, ex7, ex8 } from './exs';
-import CustomLoading from '../../../ComponentsInternal/CustomLoading';
+import CustomLoading from '../../Components/CustomLoading';
 
-export default function ButtonDocs() {
+export function ButtonPage() {
 	const [isLoading, setIsLoading] = useState(false);
 	const [success, setSuccess] = useState(false);
 	const [failed, setFailed] = useState(false);

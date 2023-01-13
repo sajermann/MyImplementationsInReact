@@ -1,11 +1,11 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import { Scales, WhatsappLogo, YoutubeLogo } from 'phosphor-react';
-import Section from '../../../ComponentsInternal/Section';
-import { ComponentBlock } from '../../../ComponentsInternal/ComponentBlock';
+import Section from '../../Components/Section';
+import { ComponentBlock } from '../../Components/ComponentBlock';
 import { ex1, ex2, ex3, ex4, ex5 } from './exs';
-import { CodeBlock } from '../../../ComponentsInternal/CodeBlock';
-import { Input } from '../../../components/Input';
-import { Button } from '../../../ComponentsInternal/Button';
+import { CodeBlock } from '../../Components/CodeBlock';
+import { Input } from '../../Components/Input';
+import { Button } from '../../Components/Button';
 
 export default function InputDocs() {
 	return (
