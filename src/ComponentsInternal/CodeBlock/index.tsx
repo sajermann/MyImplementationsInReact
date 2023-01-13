@@ -2,7 +2,7 @@ import { ClipboardText } from 'phosphor-react';
 import { useState } from 'react';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { dracula } from 'react-syntax-highlighter/dist/esm/styles/prism';
-import { Button } from '../../components/Button';
+import { Button } from '../Button';
 import { delay } from '../../components/utils';
 import styles from './styles.module.css';
 

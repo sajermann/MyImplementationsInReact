@@ -1,4 +1,4 @@
-import { Button } from './components/Button';
+import { Button } from './ComponentsInternal/Button';
 import { Loading } from './components/Loading';
 import { Drawer } from './components/Drawer';
 import { OptionButton } from './components/OptionButton';

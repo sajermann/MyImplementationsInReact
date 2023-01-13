@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Button } from '../../components/Button';
+import { Button } from '../Button';
 import { CodeBlock } from '../CodeBlock';
 import styles from './styles.module.css';
 

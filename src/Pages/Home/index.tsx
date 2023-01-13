@@ -14,13 +14,12 @@ export default function Home() {
 	return (
 		<main>
 			<p>
-				<strong>Bem Vindo ao @sajermann/ui-react</strong>
+				<strong>Bem Vindo ao My Implementations In React</strong>
 			</p>
 			<p>
-				Biblioteca UI criada a fim de estudos sobre desenvolvimento de pacotes
-				NPM para React.
+				Projeto criado para demonstrar como realizo minhas implementações em
+				React
 			</p>
-			<p>Confira nosso projeto em:</p>
 
 			<a
 				href="https://github.com/sajermann/MyImplementationsInReact/"
@@ -32,19 +31,6 @@ export default function Home() {
 					alt="github"
 					height="18"
 					style={{ borderRadius: 5, marginRight: 5 }}
-				/>
-			</a>
-
-			<a
-				target="_blank"
-				rel="noreferrer"
-				href="https://badge.fury.io/js/@sajermann%2Fui-react"
-			>
-				<img
-					src="https://badge.fury.io/js/@sajermann%2Fui-react.svg"
-					alt="npm version"
-					width="120"
-					height="18"
 				/>
 			</a>
 
