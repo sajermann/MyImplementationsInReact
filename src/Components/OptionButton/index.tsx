@@ -1,5 +1,5 @@
 import { generateGuid } from '@sajermann/utils/Random';
-import { createEffect } from '../utils';
+import { createEffect } from '../Utils';
 import styles from './styles.module.css';
 
 function OptionButton({

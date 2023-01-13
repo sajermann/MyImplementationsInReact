@@ -13,7 +13,7 @@
     "sonar": "npx sonar-scanner -D sonar.login=sqp_"
   },
   "dependencies": {
-    "@sajermann/react-button": "^0.0.4",
+    "@sajermann/react-button": "^0.0.5",
     "@sajermann/utils": "^0.0.10",
     "phosphor-react": "^1.4.1",
     "react": "^18.2.0",

@@ -1,4 +1,4 @@
-import { generateGuid } from '../utils';
+import { generateGuid } from '../Utils';
 import styles from './styles.module.css';
 
 type Props = {

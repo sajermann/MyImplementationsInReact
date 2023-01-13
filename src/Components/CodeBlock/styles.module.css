@@ -1,23 +1,21 @@
 .copy {
 	visibility: hidden;
-  opacity: 0;
+	opacity: 0;
 	color: #fff;
 	position: absolute;
-	top: 3px;
-	right: 3px;
+	top: 1em;
+	right: 0;
 	transition: visibility 0s, opacity 0.5s linear;
 	width: 60px;
 	height: 40px;
-
 }
 
 .container:hover > .copy {
 	visibility: visible;
-  opacity: 1;
+	opacity: 1;
 }
 .container {
 	position: relative;
 	width: 100%;
-	font-size: 0.8rem
+	font-size: 0.8rem;
 }
-

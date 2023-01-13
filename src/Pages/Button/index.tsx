@@ -429,7 +429,7 @@ export function ButtonPage() {
 									isLoading,
 								},
 								successOptions: {
-									success,
+									success: true,
 								},
 							}}
 							endIcon={<WhatsappLogo size={30} />}

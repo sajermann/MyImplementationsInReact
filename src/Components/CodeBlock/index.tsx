@@ -1,9 +1,9 @@
+import { delay } from '@sajermann/utils/Delay';
 import { ClipboardText } from 'phosphor-react';
 import { useState } from 'react';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { dracula } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import { Button } from '../Button';
-import { delay } from '../../Components/utils';
 import styles from './styles.module.css';
 
 type Props = {
@@ -20,29 +20,30 @@ export function CodeBlock({ children, language }: Props) {
 		setIsLoading(false);
 		setSuccess(true);
 		await delay(2000);
-		setSuccess(false);
+		// setSuccess(false);
 	}
 
 	return (
 		<div className={styles.container}>
-			<Button
-				title="Copiar"
-				type="button"
-				variant="Option"
-				onClick={handleCopy}
-				className={styles.copy}
-				withFeedback={{
-					loadingOptions: {
-						isLoading,
-						fullIcon: true,
-					},
-					successOptions: {
-						success,
-						fullIcon: true,
-					},
-				}}
-				endIcon={<ClipboardText />}
-			/>
+			<div className={styles.copy}>
+				<Button
+					title="Copiar"
+					type="button"
+					variant="Option"
+					onClick={handleCopy}
+					withFeedback={{
+						loadingOptions: {
+							isLoading,
+							fullIcon: true,
+						},
+						successOptions: {
+							success,
+							fullIcon: true,
+						},
+					}}
+					endIcon={<ClipboardText />}
+				/>
+			</div>
 			<SyntaxHighlighter language={language || 'jsx'} style={dracula}>
 				{children}
 			</SyntaxHighlighter>

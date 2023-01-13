@@ -5,23 +5,23 @@ const optionsMenu = [
 	},
 	{
 		title: 'Instalação',
-		url: '/docs/getting-started',
+		url: '/getting-started',
 	},
 	{
 		title: 'Botão',
-		url: '/docs/button',
+		url: '/button',
 	},
 	{
 		title: 'Botão Opção',
-		url: '/docs/option-button',
+		url: '/option-button',
 	},
 	{
 		title: 'Drawer',
-		url: '/docs/drawer',
+		url: '/drawer',
 	},
 	{
 		title: 'Input',
-		url: '/docs/input',
+		url: '/input',
 	},
 ];
 
