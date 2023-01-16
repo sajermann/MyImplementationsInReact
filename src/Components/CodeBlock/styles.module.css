@@ -3,7 +3,7 @@
 	opacity: 0;
 	color: #fff;
 	position: absolute;
-	top: 1em;
+	top: 3px;
 	right: 0;
 	transition: visibility 0s, opacity 0.5s linear;
 	width: 60px;

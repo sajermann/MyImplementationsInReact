@@ -5,7 +5,7 @@ import styles from './styles.module.css';
 
 type Props = {
 	children: React.ReactNode;
-	code: string;
+	code?: string;
 };
 export function ComponentBlock({ children, code }: Props) {
 	const [codeVisible, setCodeVisible] = useState(false);
@@ -14,18 +14,22 @@ export function ComponentBlock({ children, code }: Props) {
 			<div className="componentBlock">
 				<div className="children">{children}</div>
 			</div>
-			<div className="toggleCode">
-				<Button
-					variant="Option"
-					colorStyle={!codeVisible ? 'Primary' : 'Success'}
-					type="button"
-					className={styles.buttonToggleCode}
-					onClick={() => setCodeVisible(!codeVisible)}
-				>
-					Exemplo de Código
-				</Button>
-			</div>
-			{codeVisible && <CodeBlock>{code}</CodeBlock>}
+			{code && (
+				<>
+					<div className="toggleCode">
+						<Button
+							variant="Option"
+							colorStyle={!codeVisible ? 'Primary' : 'Success'}
+							type="button"
+							className={styles.buttonToggleCode}
+							onClick={() => setCodeVisible(!codeVisible)}
+						>
+							Exemplo de Código
+						</Button>
+					</div>
+					{codeVisible && <CodeBlock>{code}</CodeBlock>}
+				</>
+			)}
 		</>
 	);
 }

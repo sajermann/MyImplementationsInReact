@@ -9,12 +9,7 @@ interface Props extends ISajermannReactButton {
 	colorStyle?: 'Primary' | 'Secondary' | 'Success' | 'Warning';
 }
 
-function Button({
-	colorStyle,
-
-	variant,
-	...props
-}: Props) {
+function Button({ colorStyle, variant, ...props }: Props) {
 	function verifyClasses() {
 		const classesToReturn = [styles.btn];
 
@@ -67,38 +62,6 @@ function Button({
 		}
 
 		return classesToReturn.join(' ');
-	}
-
-	function verifyColorIcon(opacity?: number) {
-		if (variant === 'Default' || variant === undefined) {
-			return `rgba(255, 255, 255, ${opacity})`;
-		}
-
-		if (colorStyle === 'Primary' || colorStyle === undefined) {
-			if (variant === 'Outlined' || variant === 'Option') {
-				return `rgba(71, 111, 230, ${opacity})`;
-			}
-		}
-
-		if (colorStyle === 'Secondary') {
-			if (variant === 'Outlined' || variant === 'Option') {
-				return `rgba(239, 68, 68, ${opacity})`;
-			}
-		}
-
-		if (colorStyle === 'Success') {
-			if (variant === 'Outlined' || variant === 'Option') {
-				return `rgba(34, 197, 94, ${opacity})`;
-			}
-		}
-
-		if (colorStyle === 'Warning') {
-			if (variant === 'Outlined' || variant === 'Option') {
-				return `rgba(234, 179, 8, ${opacity})`;
-			}
-		}
-
-		return '';
 	}
 
 	return (

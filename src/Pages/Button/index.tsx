@@ -46,73 +46,93 @@ export function ButtonPage() {
 	return (
 		<main data-content="content-main">
 			<Section heading="Botões">
-				Os componentes de botões permitem que os usuários realizem ações. O
-				intuito desse componente é oferecer o mesmo botão que você já está
-				acostumado, porém com funcionalidades a mais.
+				Implementação do componente de botão utilizando minha própria biblioteca
+				para uso pessoal.
 			</Section>
-			<Section subHeading="Importação">
-				<CodeBlock>{`import { Button } from '@sajermann/ui-react';`}</CodeBlock>
+			<Section subHeading="Instalação da Biblioteca">
+				<CodeBlock>npm i @sajermann/react-button;</CodeBlock>
+			</Section>
+			<Section subHeading="Importação do Componente">
+				<CodeBlock>{`import { Button } from '@sajermann/react-button';`}</CodeBlock>
+			</Section>
+			<Section subHeading="Implementação">
+				<a
+					href="https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Components/Button"
+					target="_blank"
+					rel="noopener noreferrer"
+				>
+					Github
+				</a>
+			</Section>
+			<Section subHeading="Códigos dos Exemplos">
+				<a
+					href="https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/Button"
+					target="_blank"
+					rel="noopener noreferrer"
+				>
+					Github
+				</a>
 			</Section>
 
 			<Section subHeading="Variantes">
-				Existem 3 tipos de variantes que são:{' '}
+				3 tipos de variantes que são:
 				<span className="highlight">Default</span> |{' '}
 				<span className="highlight">Outlined</span> |{' '}
 				<span className="highlight">Option</span>
-				<ComponentBlock code={ex1}>
-					<Button type="button">Default</Button>
-					<Button type="button" variant="Outlined">
+				<ComponentBlock>
+					<Button className={styles.btn}>Default</Button>
+					<Button className={styles.btn} variant="Outlined">
 						Outlined
 					</Button>
-					<Button type="button" variant="Option">
+					<Button className={styles.btn} variant="Option">
 						Option
 					</Button>
 				</ComponentBlock>
 			</Section>
 
 			<Section subHeading="Estilos de Cores">
-				Existem 4 tipos de estilos de cores que são:{' '}
+				4 tipos de estilos de cores que são:{' '}
 				<span className="highlight">Primary</span> |{' '}
 				<span className="highlight">Secondary</span> |{' '}
 				<span className="highlight">Success</span> |{' '}
 				<span className="highlight">Warning</span>
-				<ComponentBlock code={ex2}>
-					<Button type="button" colorStyle="Primary">
+				<ComponentBlock>
+					<Button className={styles.btn} colorStyle="Primary">
 						Primary
 					</Button>
-					<Button type="button" colorStyle="Secondary">
+					<Button className={styles.btn} colorStyle="Secondary">
 						Secondary
 					</Button>
-					<Button type="button" colorStyle="Success">
+					<Button className={styles.btn} colorStyle="Success">
 						Success
 					</Button>
-					<Button type="button" colorStyle="Warning">
+					<Button className={styles.btn} colorStyle="Warning">
 						Warning
 					</Button>
 				</ComponentBlock>
 			</Section>
 
 			<Section subHeading="Icones">
-				É possível inserir icones personalizados no início ou no fim do botão
-				utilizando as propriedades <span className="highlight">startIcon</span>{' '}
-				e <span className="highlight">endIcon</span>
-				<ComponentBlock code={ex2}>
+				Icones personalizados no início ou no fim do botão utilizando as
+				propriedades <span className="highlight">startIcon</span> e{' '}
+				<span className="highlight">endIcon</span>
+				<ComponentBlock>
 					<Button
-						type="button"
+						className={styles.btn}
 						colorStyle="Success"
 						startIcon={<WhatsappLogo size={30} />}
 					>
 						Whats
 					</Button>
 					<Button
-						type="button"
+						className={styles.btn}
 						colorStyle="Primary"
 						endIcon={<TelegramLogo size={30} />}
 					>
 						Telegram
 					</Button>
 					<Button
-						type="button"
+						className={styles.btn}
 						colorStyle="Secondary"
 						startIcon={<YoutubeLogo size={30} />}
 						endIcon={<YoutubeLogo size={30} />}
@@ -136,11 +156,11 @@ export function ButtonPage() {
 					<span className="highlight">customIcon</span> permite a renderização
 					de um icone personalizado para carregamento, vale lembrar que esse
 					icone deve estar com a animação embutida.
-					<ComponentBlock code={ex3}>
+					<ComponentBlock>
 						<Button
 							disabled
 							colorStyle="Primary"
-							type="button"
+							className={styles.btn}
 							onClick={() => handleSave()}
 							withFeedback={{
 								loadingOptions: {
@@ -154,7 +174,7 @@ export function ButtonPage() {
 							disabled
 							colorStyle="Secondary"
 							variant="Outlined"
-							type="button"
+							className={styles.btn}
 							onClick={() => handleSave()}
 							withFeedback={{
 								loadingOptions: {
@@ -169,7 +189,7 @@ export function ButtonPage() {
 							disabled
 							colorStyle="Success"
 							variant="Option"
-							type="button"
+							className={styles.btn}
 							onClick={() => handleSave()}
 							withFeedback={{
 								loadingOptions: {
@@ -183,7 +203,7 @@ export function ButtonPage() {
 						<Button
 							disabled
 							colorStyle="Warning"
-							type="button"
+							className={styles.btn}
 							onClick={() => handleSave()}
 							withFeedback={{
 								loadingOptions: {
@@ -209,11 +229,11 @@ export function ButtonPage() {
 					deixando apenas o icone de sucesso. A propriedade{' '}
 					<span className="highlight">customIcon</span> permite a renderização
 					de um icone personalizado.
-					<ComponentBlock code={ex4}>
+					<ComponentBlock>
 						<Button
 							disabled={isLoading}
 							colorStyle="Primary"
-							type="button"
+							className={styles.btn}
 							onClick={handleSave}
 							withFeedback={{
 								loadingOptions: {
@@ -230,7 +250,7 @@ export function ButtonPage() {
 							disabled={isLoading}
 							colorStyle="Success"
 							variant="Outlined"
-							type="button"
+							className={styles.btn}
 							onClick={handleSave}
 							withFeedback={{
 								loadingOptions: {
@@ -247,7 +267,7 @@ export function ButtonPage() {
 						<Button
 							disabled={isLoading}
 							colorStyle="Warning"
-							type="button"
+							className={styles.btn}
 							onClick={handleSave}
 							withFeedback={{
 								loadingOptions: {
@@ -284,11 +304,11 @@ export function ButtonPage() {
 					deixando apenas o icone de falha. A propriedade{' '}
 					<span className="highlight">customIcon</span> permite a renderização
 					de um icone personalizado.
-					<ComponentBlock code={ex5}>
+					<ComponentBlock>
 						<Button
 							disabled={isLoading}
 							colorStyle="Primary"
-							type="button"
+							className={styles.btn}
 							onClick={handleSaveFailed}
 							withFeedback={{
 								loadingOptions: {
@@ -305,7 +325,7 @@ export function ButtonPage() {
 							disabled={isLoading}
 							colorStyle="Secondary"
 							variant="Outlined"
-							type="button"
+							className={styles.btn}
 							onClick={handleSaveFailed}
 							withFeedback={{
 								loadingOptions: {
@@ -322,7 +342,7 @@ export function ButtonPage() {
 						<Button
 							disabled={isLoading}
 							colorStyle="Warning"
-							type="button"
+							className={styles.btn}
 							onClick={handleSaveFailed}
 							withFeedback={{
 								loadingOptions: {
@@ -356,7 +376,7 @@ export function ButtonPage() {
 				abaixo alguns exemplos diversificados.
 				<div className={styles.blockH3}>
 					<h3>Tamanhos</h3>
-					<ComponentBlock code={ex6}>
+					<ComponentBlock>
 						<Button
 							style={{ width: '250px', height: '50px' }}
 							disabled={isLoading}
@@ -394,7 +414,7 @@ export function ButtonPage() {
 							Fixo Com Icone
 						</Button>
 						<Button
-							style={{ width: '100px', height: '50px' }}
+							style={{ width: '250px', height: '50px' }}
 							disabled={isLoading}
 							colorStyle="Success"
 							type="button"
@@ -408,7 +428,10 @@ export function ButtonPage() {
 								},
 							}}
 						>
-							Ellipsis
+							Ellipsis Lorem ipsum dolor sit amet consectetur adipisicing elit.
+							Ea hic molestias aperiam quia nihil quod odit sit accusamus cum
+							praesentium, nulla in, ullam obcaecati dolorum possimus ipsa
+							commodi quidem voluptatem!
 						</Button>
 					</ComponentBlock>
 				</div>
@@ -416,7 +439,7 @@ export function ButtonPage() {
 					<h3>Botões de Icones</h3> Caso queira que seu botão tenha apenas o
 					icone, utilize a propriedades{' '}
 					<span className="highlight">endIcon</span> não passando nenhum filho.
-					<ComponentBlock code={ex7}>
+					<ComponentBlock>
 						<Button
 							style={{ minWidth: '50px', height: '50px' }}
 							disabled={isLoading}
@@ -475,7 +498,7 @@ export function ButtonPage() {
 				<div className={styles.blockH3}>
 					<h3>Personalizações</h3> Você pode personalizar as cores de seus
 					botões do jeito que quiser, veja alguns exemplos:
-					<ComponentBlock code={ex8}>
+					<ComponentBlock>
 						<Button type="button" variant="Outlined" className={styles.custom}>
 							Custom 1
 						</Button>
