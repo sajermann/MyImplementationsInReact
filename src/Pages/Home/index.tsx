@@ -1,4 +1,5 @@
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from '~/Hooks/UseTranslation';
 import { OptionButton } from '../../Components/OptionButton';
 
 import { useDarkMode } from '../../Hooks/DarkMode';
@@ -6,6 +7,7 @@ import { useDarkMode } from '../../Hooks/DarkMode';
 import styles from './styles.module.css';
 
 export default function Home() {
+	const { translate } = useTranslation();
 	const { darkMode } = useDarkMode();
 	const navigate = useNavigate();
 
@@ -16,7 +18,7 @@ export default function Home() {
 	return (
 		<main>
 			<p>
-				<strong>Bem Vindo ao My Implementations In React</strong>
+				<strong>{translate('WELCOME_TO_MY_IMPLEMENTATIONS_IN_REACT')}</strong>
 			</p>
 			<p>
 				Projeto criado para demonstrar como realizo minhas implementações em

@@ -11,7 +11,6 @@ import { Button } from '../../Components/Button';
 import styles from './styles.module.css';
 import Section from '../../Components/Section';
 import { ComponentBlock } from '../../Components/ComponentBlock';
-import { ex1, ex2, ex3, ex4, ex5, ex6, ex7, ex8 } from './exs';
 import CustomLoading from '../../Components/CustomLoading';
 
 export function ButtonPage() {

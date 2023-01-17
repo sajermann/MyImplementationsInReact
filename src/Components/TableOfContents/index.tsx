@@ -17,10 +17,10 @@ export default function TableOfContents() {
 	const { scrollPosition } = useWindow();
 
 	function load() {
-		if (!location.pathname.includes('/docs/')) {
-			setOptionsMenu([]);
-			return;
-		}
+		// if (!location.pathname.includes('/docs/')) {
+		// 	setOptionsMenu([]);
+		// 	return;
+		// }
 		const menus: Menu[] = [];
 		const subs = document.querySelectorAll(
 			'[data-content="content-main"] h1,[data-content="content-main"] h2,[data-content="content-main"] h3'
@@ -40,6 +40,8 @@ export default function TableOfContents() {
 		}
 
 		const goal = 0;
+		console.log({ menus });
+		if (menus.length === 0) return;
 		const closest = menus.reduce((prev, curr) =>
 			Math.abs(curr.top - goal) < Math.abs(prev.top - goal) ? curr : prev
 		);
