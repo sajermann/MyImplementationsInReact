@@ -7,7 +7,7 @@ export default function Sidebar() {
 	const location = useLocation();
 
 	// if (!location.pathname.includes('/docs/')) {
-	// 	return null;;Favzer verificacao de coimo vai ficar
+	// 	return null;;Favzer verificacao de coimo vai ficar, tem outro lugar com essa mesma pegada para conferir
 	// }
 
 	return (
