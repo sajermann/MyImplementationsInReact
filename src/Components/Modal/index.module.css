@@ -1,0 +1,47 @@
+.overlay {
+	@apply bg-black/60
+	inset-0
+	fixed;
+	z-index: 2;
+}
+
+.content {
+	@apply fixed bg-white
+	top-1/2
+	left-1/2
+	-translate-x-1/2
+	-translate-y-1/2
+	rounded
+	shadow-lg
+	shadow-black/25;
+	z-index: 3;
+}
+
+.closeButton {
+	@apply absolute top-4 right-6 w-4 text-primary-500 hover:text-primary-300 transition-colors duration-500;
+}
+
+.header {
+	@apply h-12 p-3;
+	border-bottom: 2px solid #dee2e6;
+}
+
+:global(.dark) .header {
+	@apply bg-slate-900;
+}
+
+.title {
+	@apply text-primary-500 font-bold;
+}
+
+:global(.dark) .title {
+	@apply text-white;
+}
+
+.main {
+	@apply px-6 py-3;
+}
+
+:global(.dark) .main {
+	@apply bg-gray-800;
+}

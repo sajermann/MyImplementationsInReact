@@ -13,6 +13,8 @@
     "sonar": "npx sonar-scanner -D sonar.login=sqp_"
   },
   "dependencies": {
+    "@headlessui/react": "^1.7.7",
+    "@radix-ui/react-dialog": "^1.0.2",
     "@sajermann/react-button": "^0.0.6",
     "@sajermann/utils": "^0.0.10",
     "i18next": "^22.4.9",
@@ -51,6 +53,8 @@
     "eslint-plugin-react": "^7.30.1",
     "eslint-plugin-react-hooks": "^4.6.0",
     "postcss": "^8.4.14",
+		"tailwind-scrollbar": "^2.0.1",
+    "tailwindcss": "^3.1.8",
     "prettier": "^2.7.1",
     "rollup": "^2.77.2",
     "rollup-plugin-generate-declarations": "^1.1.1",

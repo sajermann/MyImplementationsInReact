@@ -1,15 +1,17 @@
 import { useEffect, useState } from 'react';
 import { useLocation, Link } from 'react-router-dom';
 import { CaretLeft, CaretRight } from 'phosphor-react';
+
+import { useRoutesMenu } from '~/Hooks/UseRoutesMenu';
 import styles from './styles.module.css';
-import optionsMenu from '../../Utils/OptionsMenu';
 
 type Menu = {
-	title: string;
-	url: string;
+	name: string;
+	path: string;
 };
 
 export default function PrevAndNext() {
+	const { options } = useRoutesMenu();
 	const location = useLocation();
 	const [prev, setPrev] = useState<Menu | null>(null);
 	const [next, setNext] = useState<Menu | null>(null);
@@ -19,22 +21,22 @@ export default function PrevAndNext() {
 			setPrev(null);
 			setNext(null);
 		}
-		const index = optionsMenu.map(item => item.url).indexOf(location.pathname);
+		const index = options.map(item => item.path).indexOf(location.pathname);
 		if (index - 1 < 0) {
 			setPrev(null);
 		} else {
-			setPrev(optionsMenu[index - 1]);
+			setPrev(options[index - 1]);
 		}
-		if (index + 1 > optionsMenu.length) {
+		if (index + 1 > options.length) {
 			setPrev(null);
 		} else {
-			setNext(optionsMenu[index + 1]);
+			setNext(options[index + 1]);
 		}
 	}
 
 	useEffect(() => load(), [location.pathname]);
 
-	if (!optionsMenu.length) {
+	if (!options.length) {
 		return null;
 	}
 
@@ -43,13 +45,13 @@ export default function PrevAndNext() {
 			<strong>Outros Componentes</strong>
 			<div className={styles.subContainer}>
 				{prev && (
-					<Link to={prev.url}>
-						<CaretLeft /> {prev.title}
+					<Link to={prev.path}>
+						<CaretLeft /> {prev.name}
 					</Link>
 				)}
 				{next && (
-					<Link to={next.url}>
-						{next.title}
+					<Link to={next.path}>
+						{next.name}
 						<CaretRight />
 					</Link>
 				)}

@@ -2,15 +2,16 @@ import { List } from 'phosphor-react';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { generateGuid } from '@sajermann/utils/Random';
-import { OptionButton } from '../../Components/OptionButton';
-import { Drawer } from '../../Components/Drawer';
+import { useRoutesMenu } from '~/Hooks/UseRoutesMenu';
+import { OptionButton } from '../OptionButton';
+import { Drawer } from '../Drawer';
 import { useDarkMode } from '../../Hooks/DarkMode';
 import styles from './styles.module.css';
-import optionsMenu from '../../Utils/OptionsMenu';
 
 export default function Menu() {
 	const { darkMode } = useDarkMode();
 	const [isOpen, setIsOpen] = useState(false);
+	const { options } = useRoutesMenu();
 	const navigate = useNavigate();
 
 	function goTo(url: string) {
@@ -40,15 +41,15 @@ export default function Menu() {
 						<div className={styles.title}>Menu</div>
 					</nav>
 					<div className={styles.main}>
-						{optionsMenu.map(menu => (
+						{options.map(menu => (
 							<OptionButton
 								key={generateGuid()}
 								className={`${styles.menu} ${
 									darkMode ? styles.dark : styles.light
 								}`}
-								onClick={() => goTo(menu.url)}
+								onClick={() => goTo(menu.path)}
 							>
-								{menu.title}
+								{menu.name}
 							</OptionButton>
 						))}
 					</div>

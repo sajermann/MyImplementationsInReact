@@ -2,7 +2,7 @@ import { GithubLogo, LinkedinLogo } from 'phosphor-react';
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { delay } from '../Utils';
-import useWindow from '../../Hooks/useWindow';
+import useWindow from '../../Hooks/UseWindow';
 import styles from './styles.module.css';
 
 export default function Footer() {

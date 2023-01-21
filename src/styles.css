@@ -1,4 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 * {
 	margin: 0;
 	padding: 0;
@@ -15,8 +18,8 @@ body {
 	line-height: 1.9rem;
 }
 
-.darkMode,
-.darkMode a {
+.dark,
+.dark a {
 	color: #fff;
 	background-color: rgb(31 41 55 / 1);
 }

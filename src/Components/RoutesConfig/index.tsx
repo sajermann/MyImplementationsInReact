@@ -1,29 +1,13 @@
 import { Routes, Route } from 'react-router-dom';
 import { generateGuid } from '@sajermann/utils/Random';
-import { ButtonPage } from '../../Pages/Button';
-import DrawerDocs from '../../Pages/Drawer';
-import Home from '../../Pages/Home';
-import GettingStarted from '../../Pages/Getting Started';
+
+import { useRoutesMenu } from '~/Hooks/UseRoutesMenu';
 import styles from './styles.module.css';
-import OptionButtonDocs from '../../Pages/OptionButton';
-import InputDocs from '../../Pages/Input';
 import Footer from '../Footer';
 import Sidebar from '../Sidebar';
 
-const options = [
-	{
-		path: '/',
-		element: <Home />,
-		name: 'Home',
-	},
-	{
-		path: '/button',
-		element: <ButtonPage />,
-		name: 'Button',
-	},
-];
-
 export default function RoutesConfig() {
+	const { options } = useRoutesMenu();
 	return (
 		<div className={styles.container}>
 			<div className={styles.subContainer}>

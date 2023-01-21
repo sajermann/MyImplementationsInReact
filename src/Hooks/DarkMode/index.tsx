@@ -34,13 +34,13 @@ export function DarkModeProvider({ children }: Props) {
 		const body = document.querySelector('body');
 		if (!darkModeNow) {
 			if (body) {
-				body.classList.remove('darkMode');
+				body.classList.remove('dark');
 			}
 			return;
 		}
 
 		if (body) {
-			body.classList.add('darkMode');
+			body.classList.add('dark');
 		}
 	}
 

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import useWindow from '../../Hooks/useWindow';
+import useWindow from '../../Hooks/UseWindow';
 import styles from './styles.module.css';
 
 type Menu = {
