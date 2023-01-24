@@ -24,6 +24,24 @@
 		"OPTION_FOR_EXPAND_MODAL_FOR_FULL_SCREEN": "Option for expand modal for full screen",
 		"RESET_ON_CLOSE": "Reset On Close",
 		"DONT_RESET_ON_CLOSE": "Dont Reset On Close",
-		"EXPAND_MODAL": "Expand Modal"
+		"EXPAND_MODAL": "Expand Modal",
+		"VARIANTS": "Variants",
+		"COLOR_STYLE": "Color Style",
+		"ICONS": "Icons",
+		"WITH_FEEDBACKS": "With Feedbacks",
+		"LOADING_OPTIONS": "Loading Options",
+		"SUCCESS_OPTIONS": "Success Options",
+		"FAILED_OPTIONS": "Failed Options",
+		"OTHERS": "Others",
+		"WIDTHS": "Widths",
+		"ICON_BUTTONS": "Icon Buttons",
+		"CUSTOMIZATIONS": "Customizations",
+		"SUCCESS": "Success",
+		"FAILED": "Failed",
+		"FIXED_ONLY_ICON": "Fixed Only Icon",
+		"FIXED_WITH_ICON": "Fixed With Icon",
+		"BUTTON": "Button",
+		"BUTTONS": "Buttons",
+		"USING_THE_MY_SELF_LIB": "using the my self lib"
 	}
 }

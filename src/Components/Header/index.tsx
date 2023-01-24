@@ -1,7 +1,8 @@
 import { Moon, Sun } from 'phosphor-react';
 import { Link } from 'react-router-dom';
 import { useDarkMode } from '../../Hooks/DarkMode';
-import Menu from '../Menu';
+import MenuSettings from '../MenuSettings';
+import MenuAccessOptions from '../MenuAccessOptions';
 import styles from './styles.module.css';
 
 export default function Header() {
@@ -9,7 +10,7 @@ export default function Header() {
 	return (
 		<nav className={styles.nav}>
 			<div className={styles.container}>
-				<Menu />
+				<MenuAccessOptions />
 				<Link to="/" className={styles.link}>
 					<h1 className={styles.title}>My Implementations In React</h1>
 				</Link>
@@ -21,6 +22,7 @@ export default function Header() {
 					{!darkMode && <Moon size={22} />}
 					{darkMode && <Sun size={22} />}
 				</button>
+				<MenuSettings />
 			</div>
 		</nav>
 	);

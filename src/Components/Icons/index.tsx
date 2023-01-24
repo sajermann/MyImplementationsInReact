@@ -958,7 +958,7 @@ function Pen({ width, height, color, ...rest }: Props) {
 	);
 }
 
-function Brazil({ width, height, color, ...rest }: Props) {
+function Brazil() {
 	return (
 		<svg
 			textRendering="geometricPrecision"
@@ -968,6 +968,7 @@ function Brazil({ width, height, color, ...rest }: Props) {
 			shapeRendering="geometricPrecision"
 			viewBox="0 0 100000 70000"
 		>
+			<title>Português</title>
 			<rect y="0" x="0" fill="#00923F" width="1e5" height="7e4" />
 			<path
 				d="m5e4 8500l-41500 26500 41500 26500 41500-26500-41500-26500z"
@@ -990,11 +991,11 @@ function Brazil({ width, height, color, ...rest }: Props) {
 	);
 }
 
-function Eua({ width, height, color, ...rest }: Props) {
+function Eua() {
 	return (
 		<svg viewBox="0 0 600 400">
 			<g id="imagebot_1">
-				<title>Layer 1</title>
+				<title>English</title>
 				<g
 					id="imagebot_73"
 					transform="translate(0 .52632) matrix(2.9977 0 0 3.8541 0 -2.0285)"
@@ -1410,6 +1411,172 @@ function Eua({ width, height, color, ...rest }: Props) {
 	);
 }
 
+function Gear({ width, height, color, ...rest }: Props) {
+	return (
+		<svg
+			{...rest}
+			width={width || '100%'}
+			height={height || '100%'}
+			fill={color || 'currentColor'}
+			viewBox="0 0 256 256"
+		>
+			<rect width="256" height="256" fill="none" />
+			<circle
+				cx="128"
+				cy="128"
+				r="48"
+				fill="none"
+				stroke={color || 'currentColor'}
+				strokeLinecap="round"
+				strokeLinejoin="round"
+				strokeWidth="16"
+			/>
+			<path
+				d="M183.7,65.1q3.8,3.5,7.2,7.2l27.3,3.9a103.2,103.2,0,0,1,10.2,24.6l-16.6,22.1s.3,6.8,0,10.2l16.6,22.1a102.2,102.2,0,0,1-10.2,24.6l-27.3,3.9s-4.7,4.9-7.2,7.2l-3.9,27.3a103.2,103.2,0,0,1-24.6,10.2l-22.1-16.6a57.9,57.9,0,0,1-10.2,0l-22.1,16.6a102.2,102.2,0,0,1-24.6-10.2l-3.9-27.3q-3.7-3.5-7.2-7.2l-27.3-3.9a103.2,103.2,0,0,1-10.2-24.6l16.6-22.1s-.3-6.8,0-10.2L27.6,100.8A102.2,102.2,0,0,1,37.8,76.2l27.3-3.9q3.5-3.7,7.2-7.2l3.9-27.3a103.2,103.2,0,0,1,24.6-10.2l22.1,16.6a57.9,57.9,0,0,1,10.2,0l22.1-16.6a102.2,102.2,0,0,1,24.6,10.2Z"
+				fill="none"
+				stroke={color || 'currentColor'}
+				strokeLinecap="round"
+				strokeLinejoin="round"
+				strokeWidth="16"
+			/>
+		</svg>
+	);
+}
+
+function Moon({ width, height, color, ...rest }: Props) {
+	return (
+		<svg
+			{...rest}
+			width={width || '100%'}
+			height={height || '100%'}
+			fill={color || 'currentColor'}
+			viewBox="0 0 256 256"
+		>
+			<rect width="256" height="256" fill="none" />
+			<path
+				d="M216.7,152.6A91.9,91.9,0,0,1,103.4,39.3h0A92,92,0,1,0,216.7,152.6Z"
+				fill="none"
+				stroke={color || 'currentColor'}
+				strokeLinecap="round"
+				strokeLinejoin="round"
+				strokeWidth="16"
+			/>
+		</svg>
+	);
+}
+
+function Sun({ width, height, color, ...rest }: Props) {
+	return (
+		<svg
+			{...rest}
+			width={width || '100%'}
+			height={height || '100%'}
+			fill={color || 'currentColor'}
+			viewBox="0 0 256 256"
+		>
+			<rect width="256" height="256" fill="none" />
+			<circle
+				cx="128"
+				cy="128"
+				r="60"
+				fill="none"
+				stroke={color || 'currentColor'}
+				strokeLinecap="round"
+				strokeLinejoin="round"
+				strokeWidth="16"
+			/>
+			<line
+				x1="128"
+				y1="36"
+				x2="128"
+				y2="16"
+				fill="none"
+				stroke={color || 'currentColor'}
+				strokeLinecap="round"
+				strokeLinejoin="round"
+				strokeWidth="16"
+			/>
+			<line
+				x1="62.9"
+				y1="62.9"
+				x2="48.8"
+				y2="48.8"
+				fill="none"
+				stroke={color || 'currentColor'}
+				strokeLinecap="round"
+				strokeLinejoin="round"
+				strokeWidth="16"
+			/>
+			<line
+				x1="36"
+				y1="128"
+				x2="16"
+				y2="128"
+				fill="none"
+				stroke={color || 'currentColor'}
+				strokeLinecap="round"
+				strokeLinejoin="round"
+				strokeWidth="16"
+			/>
+			<line
+				x1="62.9"
+				y1="193.1"
+				x2="48.8"
+				y2="207.2"
+				fill="none"
+				stroke={color || 'currentColor'}
+				strokeLinecap="round"
+				strokeLinejoin="round"
+				strokeWidth="16"
+			/>
+			<line
+				x1="128"
+				y1="220"
+				x2="128"
+				y2="240"
+				fill="none"
+				stroke={color || 'currentColor'}
+				strokeLinecap="round"
+				strokeLinejoin="round"
+				strokeWidth="16"
+			/>
+			<line
+				x1="193.1"
+				y1="193.1"
+				x2="207.2"
+				y2="207.2"
+				fill="none"
+				stroke={color || 'currentColor'}
+				strokeLinecap="round"
+				strokeLinejoin="round"
+				strokeWidth="16"
+			/>
+			<line
+				x1="220"
+				y1="128"
+				x2="240"
+				y2="128"
+				fill="none"
+				stroke={color || 'currentColor'}
+				strokeLinecap="round"
+				strokeLinejoin="round"
+				strokeWidth="16"
+			/>
+			<line
+				x1="193.1"
+				y1="62.9"
+				x2="207.2"
+				y2="48.8"
+				fill="none"
+				stroke={color || 'currentColor'}
+				strokeLinecap="round"
+				strokeLinejoin="round"
+				strokeWidth="16"
+			/>
+		</svg>
+	);
+}
+
 export const Icons = {
 	ArrowsOutSimple,
 	ArrowsInSimple,
@@ -1443,4 +1610,7 @@ export const Icons = {
 	Pen,
 	Brazil,
 	Eua,
+	Gear,
+	Moon,
+	Sun,
 };

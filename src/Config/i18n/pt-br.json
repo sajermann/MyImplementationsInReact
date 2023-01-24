@@ -24,6 +24,24 @@
 		"OPTION_FOR_EXPAND_MODAL_FOR_FULL_SCREEN": "Opções para expandir o Modal",
 		"RESET_ON_CLOSE": "Reiniciar no Fechamento",
 		"DONT_RESET_ON_CLOSE": "Não reiniciar no Fechamento",
-		"EXPAND_MODAL": "Expandir Modal"
+		"EXPAND_MODAL": "Expandir Modal",
+		"VARIANTS": "Variantes",
+		"COLOR_STYLE": "Estilo de Cor",
+		"ICONS": "Icones",
+		"WITH_FEEDBACKS": "Com Feedbacks",
+		"LOADING_OPTIONS": "Opções de Carregamento",
+		"SUCCESS_OPTIONS": "Opções de Sucesso",
+		"FAILED_OPTIONS": "Opções de Falha",
+		"OTHERS": "Outros",
+		"WIDTHS": "Larguras",
+		"ICON_BUTTONS": "Botões de Icones",
+		"CUSTOMIZATIONS": "Personalizações",
+		"SUCCESS": "Sucesso",
+		"FAILED": "Falha",
+		"FIXED_ONLY_ICON": "Fixo apenas Icone",
+		"FIXED_WITH_ICON": "Fixo com Icone",
+		"BUTTON": "Botão",
+		"BUTTONS": "Botões",
+		"USING_THE_MY_SELF_LIB": "usando minha própria biblioteca"
 	}
 }

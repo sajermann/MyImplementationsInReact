@@ -8,7 +8,7 @@ import { Drawer } from '../Drawer';
 import { useDarkMode } from '../../Hooks/DarkMode';
 import styles from './styles.module.css';
 
-export default function Menu() {
+export default function MenuAccessOptions() {
 	const { darkMode } = useDarkMode();
 	const [isOpen, setIsOpen] = useState(false);
 	const { options } = useRoutesMenu();
