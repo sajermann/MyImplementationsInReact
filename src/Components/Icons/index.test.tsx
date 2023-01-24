@@ -6,6 +6,13 @@ import { it, describe, expect } from 'vitest';
 import { Icons } from './index';
 
 describe('Components/Icons', () => {
+	it(`should render icon ArrowsOutSimple`, async () => {
+		const { getByTestId } = render(
+			<Icons.ArrowsOutSimple data-testid="IconArrowsOutSimple" />
+		);
+		expect(getByTestId('IconArrowsOutSimple')).toBeInTheDocument();
+	});
+
 	it(`should render icon Report`, async () => {
 		const { getByTestId } = render(<Icons.Report data-testid="IconReport" />);
 		expect(getByTestId('IconReport')).toBeInTheDocument();

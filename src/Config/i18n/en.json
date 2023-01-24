@@ -1,5 +1,29 @@
 {
 	"translations": {
-		"WELCOME_TO_MY_IMPLEMENTATIONS_IN_REACT": "Welcome to My Implementations in React"
+		"WELCOME_TO_MY_IMPLEMENTATIONS_IN_REACT": "Welcome to My Implementations in React",
+		"MODALS": "Modals",
+		"IMPLEMENTS_COMPONENT": "Implements Components",
+		"MODAL": "Modal",
+		"USING_THE_LIB": "Using the lib",
+		"INSTALLATION_OF_LIB": "Installation of lib",
+		"CODES": "Codes",
+		"IMPLEMENTS_CODE": "Implements Code",
+		"EXAMPLES_CODE": "Examples Code",
+		"CLOSE_OPTIONS": "Close Options",
+		"COMUM_MODAL_WITH_OPIONS_FOR_CLOSING": "Comum modal with options closing",
+		"WITH_CLOSE_BUTTON": "With Close Button",
+		"WITH_CLOSE_BY_ESC": "With Close by Esc",
+		"WITH_CLOSE_BY_BACKDROP": "With Close by Backdrop",
+		"WITHOUT_OPTIONS_CLOSING": "Without Options Closing",
+		"COMUM_MODAL": "Comum Modal",
+		"CLICK_IN_CLOSE_BUTTON_FOR_CLOSING_MODAL": "Click in Close Button for Closing Modal",
+		"TYPE_IN_ESC_BUTTON_FOR_CLOSING_MODAL": "Type in ESC Button for Closing Modal",
+		"CLICK_IN_BACKDROP_FOR_CLOSING_MODAL": "Click in Backdrop for Closing Modal",
+		"CLOSE": "Close",
+		"EXPAND_OPTIONS": "Expand Options",
+		"OPTION_FOR_EXPAND_MODAL_FOR_FULL_SCREEN": "Option for expand modal for full screen",
+		"RESET_ON_CLOSE": "Reset On Close",
+		"DONT_RESET_ON_CLOSE": "Dont Reset On Close",
+		"EXPAND_MODAL": "Expand Modal"
 	}
 }

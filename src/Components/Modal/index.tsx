@@ -1,6 +1,7 @@
 import { Transition } from '@headlessui/react';
 import * as Dialog from '@radix-ui/react-dialog';
-import { Fragment } from 'react';
+import { Fragment, useEffect, useState } from 'react';
+import { ButtonIcon } from '../ButtonIcon';
 import { Icons } from '../Icons';
 import styles from './index.module.css';
 
@@ -10,11 +11,15 @@ type Props = {
 	isOpen: boolean;
 	onClose: () => void;
 	width?: string;
+	height?: string;
 	closeByBackdrop?: boolean;
 	closeByEsc?: boolean;
 	contentProps?: object;
 	overlayProps?: object;
 	closeButton?: boolean;
+	expand?: {
+		resetOnClose: boolean;
+	};
 };
 
 export function Modal({
@@ -25,10 +30,20 @@ export function Modal({
 	closeByBackdrop,
 	closeByEsc,
 	width,
+	height,
 	contentProps,
 	overlayProps,
 	closeButton,
+	expand,
 }: Props) {
+	const [isExpanded, setIsExpanded] = useState(false);
+
+	useEffect(() => {
+		if (expand && expand.resetOnClose && !isOpen) {
+			setIsExpanded(false);
+		}
+	}, [isOpen]);
+
 	return (
 		<Dialog.Root open={isOpen}>
 			<Dialog.Portal forceMount>
@@ -59,26 +74,41 @@ export function Modal({
 					>
 						<Dialog.Content
 							{...contentProps}
-							style={{ width }}
+							style={{
+								width: isExpanded ? '100%' : width,
+								height: isExpanded ? '100%' : height,
+								transition: '300ms',
+							}}
 							onEscapeKeyDown={closeByEsc ? onClose : undefined}
 							className={styles.content}
 						>
-							{/* <Dialog.Title></Dialog.Title> */}
-							<header className={styles.header}>
-								{title && <span className={styles.title}>{title}</span>}
-								{closeButton && (
-									<div
-										className={styles.closeButton}
-										onClick={onClose}
-										onKeyPress={onClose}
-										role="button"
-										tabIndex={0}
-										data-testid="closeButtonModal"
-									>
-										<Icons.Close />
-									</div>
-								)}
-							</header>
+							{title && (
+								<Dialog.Title className={styles.header}>
+									{title}
+									{expand && (
+										<ButtonIcon
+											className="absolute top-2 right-16 text-primary-500 hover:text-primary-300 transition-colors duration-500"
+											onClick={() => setIsExpanded(prev => !prev)}
+										>
+											{!isExpanded ? (
+												<Icons.ArrowsOutSimple />
+											) : (
+												<Icons.ArrowsInSimple />
+											)}
+										</ButtonIcon>
+									)}
+
+									{closeButton && (
+										<ButtonIcon
+											className="absolute top-2 right-6  text-primary-500 hover:text-primary-300 transition-colors duration-500"
+											onClick={onClose}
+											data-testid="closeButtonModal"
+										>
+											<Icons.Close width="1rem" />
+										</ButtonIcon>
+									)}
+								</Dialog.Title>
+							)}
 							<main className={styles.main}>{children}</main>
 						</Dialog.Content>
 					</Transition.Child>

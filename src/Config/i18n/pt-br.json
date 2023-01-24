@@ -1,5 +1,29 @@
 {
 	"translations": {
-		"WELCOME_TO_MY_IMPLEMENTATIONS_IN_REACT": "Bem Vindo ao My Implementations In React"
+		"WELCOME_TO_MY_IMPLEMENTATIONS_IN_REACT": "Bem Vindo ao My Implementations In React",
+		"MODALS": "Modais",
+		"IMPLEMENTS_COMPONENT": "Implementação do componente",
+		"MODAL": "Modal",
+		"USING_THE_LIB": "usando a biblioteca",
+		"INSTALLATION_OF_LIB": "Instalação da biblioteca",
+		"CODES": "Códigos",
+		"IMPLEMENTS_CODE": "Códigos da Implementação",
+		"EXAMPLES_CODE": "Códigos de Exemplo",
+		"CLOSE_OPTIONS": "Opções de Fechamento",
+		"COMUM_MODAL_WITH_OPIONS_FOR_CLOSING": "Modal comum com opções de fechamento",
+		"WITH_CLOSE_BUTTON": "Com Botão Fechar",
+		"WITH_CLOSE_BY_ESC": "Fechar pelo ESC",
+		"WITH_CLOSE_BY_BACKDROP": "Fechar pelo clique no overlay de fundo",
+		"WITHOUT_OPTIONS_CLOSING": "Sem Opções de Fechamento",
+		"COMUM_MODAL": "Modal Comum",
+		"CLICK_IN_CLOSE_BUTTON_FOR_CLOSING_MODAL": "Clique no botão Fechar para Fechar o Modal",
+		"TYPE_IN_ESC_BUTTON_FOR_CLOSING_MODAL": "Tecle o botão ESC para Fechar o Modal",
+		"CLICK_IN_BACKDROP_FOR_CLOSING_MODAL": "Clique no overlay de fundo para Fechar o Modal",
+		"CLOSE": "Fechar",
+		"EXPAND_OPTIONS": "Opções de Expandir",
+		"OPTION_FOR_EXPAND_MODAL_FOR_FULL_SCREEN": "Opções para expandir o Modal",
+		"RESET_ON_CLOSE": "Reiniciar no Fechamento",
+		"DONT_RESET_ON_CLOSE": "Não reiniciar no Fechamento",
+		"EXPAND_MODAL": "Expandir Modal"
 	}
 }

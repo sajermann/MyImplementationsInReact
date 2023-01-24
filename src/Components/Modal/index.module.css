@@ -6,7 +6,8 @@
 }
 
 .content {
-	@apply fixed bg-white
+	@apply fixed
+	bg-white
 	top-1/2
 	left-1/2
 	-translate-x-1/2
@@ -17,12 +18,16 @@
 	z-index: 3;
 }
 
+:global(.dark) .content {
+	@apply bg-slate-900;
+}
+
 .closeButton {
 	@apply absolute top-4 right-6 w-4 text-primary-500 hover:text-primary-300 transition-colors duration-500;
 }
 
 .header {
-	@apply h-12 p-3;
+	@apply h-12 px-6 py-3 text-primary-500 font-bold flex items-center;
 	border-bottom: 2px solid #dee2e6;
 }
 
@@ -40,6 +45,7 @@
 
 .main {
 	@apply px-6 py-3;
+	height: calc(100% - 48px);
 }
 
 :global(.dark) .main {
