@@ -1,77 +1,42 @@
-/* eslint-disable import/no-extraneous-dependencies */
 import { useState } from 'react';
-import clsx from 'clsx';
 
 import { useTranslation } from '~/Hooks/UseTranslation';
-import { Drawer } from '../Drawer';
-import { useDarkMode } from '../../Hooks/DarkMode';
-import styles from './styles.module.css';
-import { Icons } from '../Icons';
+import { Drawer } from '~/Components/Drawer';
+import { Icons } from '~/Components/Icons';
+import { HeaderButton } from '~/Components/HeaderButton';
+import { Nav } from '~/Components/Nav';
+import { Main } from '~/Components/Main';
+import { SwitchTheme } from '~/Components/SwitchTheme';
+import { SwitchLanguage } from '~/Components/SwitchLanguage';
 
 export default function MenuSettings() {
 	const [isOpen, setIsOpen] = useState(false);
 	const { translate } = useTranslation();
-	const { darkMode, toggleDarkMode } = useDarkMode();
 
 	return (
 		<>
-			<button
-				onClick={() => setIsOpen(!isOpen)}
-				type="button"
-				className={styles.buttonMenu}
-			>
+			<HeaderButton onClick={() => setIsOpen(!isOpen)}>
 				<Icons.Gear width="22" />
-			</button>
+			</HeaderButton>
+
 			<Drawer
 				openFrom="right"
-				percentage={30}
+				size="500px"
 				isOpen={isOpen}
 				onClose={() => setIsOpen(false)}
 			>
-				<div
-					className={darkMode ? styles.containerDark : styles.containerLight}
-				>
-					<nav className={styles.nav}>
-						<div className={styles.title}>{translate('SETTINGS')}</div>
-					</nav>
-					<div className={styles.main}>
-						<div>
-							<div>{translate('THEME')}</div>
-							<div className="flex items-center justify-center gap-2">
-								<button
-									type="button"
-									className={clsx('w-32 h-32 rounded border cursor-pointer', {
-										'border-violet-700': darkMode,
-									})}
-									onClick={!darkMode ? toggleDarkMode : undefined}
-								>
-									<Icons.Moon />
-								</button>
-								<button
-									type="button"
-									className={clsx('w-32 h-32 rounded border cursor-pointer', {
-										'border-violet-700': !darkMode,
-									})}
-									onClick={darkMode ? toggleDarkMode : undefined}
-								>
-									<Icons.Sun />
-								</button>
-							</div>
-						</div>
+				<Main>
+					<Nav>
+						<h2 className="text-xl whitespace-nowrap font-bold text-white">
+							{translate('SETTINGS')}
+						</h2>
+					</Nav>
+					<div className="flex flex-col p-4 gap-4">
+						<SwitchTheme />
 
-						<div>
-							<div>{translate('LANGUAGE')}</div>
-							<div className="flex items-center justify-center gap-2">
-								<div className="w-32 rounded border">
-									<Icons.Brazil />
-								</div>
-								<div className="w-32 rounded border-2 border-violet-700">
-									<Icons.Eua />
-								</div>
-							</div>
-						</div>
+						<SwitchLanguage />
 					</div>
-				</div>
+				</Main>
 			</Drawer>
 		</>
 	);

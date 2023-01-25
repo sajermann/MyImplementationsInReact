@@ -14,6 +14,7 @@ import { ComponentBlock } from '~/Components/ComponentBlock';
 import { useTranslation } from '~/Hooks/UseTranslation';
 import CustomLoading from '~/Components/CustomLoading';
 
+import { Main } from '~/Components/Main';
 import styles from './styles.module.css';
 
 export function ButtonPage() {
@@ -47,7 +48,7 @@ export function ButtonPage() {
 	}
 
 	return (
-		<main data-content="content-main">
+		<Main data-content="content-main">
 			<Section heading={translate('BUTTONS')}>
 				{`${translate('IMPLEMENTS_COMPONENT')} ${translate(
 					'BUTTON'
@@ -454,6 +455,6 @@ export function ButtonPage() {
 					</ComponentBlock>
 				</div>
 			</Section>
-		</main>
+		</Main>
 	);
 }

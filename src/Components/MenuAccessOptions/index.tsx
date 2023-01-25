@@ -2,14 +2,15 @@ import { List } from 'phosphor-react';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { generateGuid } from '@sajermann/utils/Random';
+
 import { useRoutesMenu } from '~/Hooks/UseRoutesMenu';
 import { OptionButton } from '../OptionButton';
 import { Drawer } from '../Drawer';
-import { useDarkMode } from '../../Hooks/DarkMode';
-import styles from './styles.module.css';
+import { Nav } from '../Nav';
+import { HeaderButton } from '../HeaderButton';
+import { Main } from '../Main';
 
 export default function MenuAccessOptions() {
-	const { darkMode } = useDarkMode();
 	const [isOpen, setIsOpen] = useState(false);
 	const { options } = useRoutesMenu();
 	const navigate = useNavigate();
@@ -20,40 +21,34 @@ export default function MenuAccessOptions() {
 
 	return (
 		<>
-			<button
-				onClick={() => setIsOpen(!isOpen)}
-				type="button"
-				className={styles.buttonMenu}
-			>
+			<HeaderButton onClick={() => setIsOpen(!isOpen)}>
 				<List size={22} />
-			</button>
+			</HeaderButton>
 			<Drawer
 				oneClickToClose
 				openFrom="left"
-				percentage={30}
+				size="500px"
 				isOpen={isOpen}
 				onClose={() => setIsOpen(false)}
 			>
-				<div
-					className={darkMode ? styles.containerDark : styles.containerLight}
-				>
-					<nav className={styles.nav}>
-						<div className={styles.title}>Menu</div>
-					</nav>
-					<div className={styles.main}>
+				<Main>
+					<Nav>
+						<h2 className="text-xl whitespace-nowrap font-bold text-white">
+							Menu
+						</h2>
+					</Nav>
+					<div>
 						{options.map(menu => (
 							<OptionButton
 								key={generateGuid()}
-								className={`${styles.menu} ${
-									darkMode ? styles.dark : styles.light
-								}`}
 								onClick={() => goTo(menu.path)}
+								className="w-full flex"
 							>
 								{menu.name}
 							</OptionButton>
 						))}
 					</div>
-				</div>
+				</Main>
 			</Drawer>
 		</>
 	);

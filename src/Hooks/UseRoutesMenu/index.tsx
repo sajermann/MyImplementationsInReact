@@ -1,4 +1,5 @@
 import { ButtonPage } from '~/Pages/Button';
+import DrawerPage from '~/Pages/Drawer';
 import Home from '~/Pages/Home';
 import { ModalPage } from '~/Pages/Modal';
 
@@ -18,6 +19,11 @@ export function useRoutesMenu() {
 			path: '/modal',
 			element: <ModalPage />,
 			name: 'Modal',
+		},
+		{
+			path: '/drawler',
+			element: <DrawerPage />,
+			name: 'Drawer',
 		},
 	];
 	return { options };

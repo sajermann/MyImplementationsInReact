@@ -41,6 +41,7 @@ module.exports = {
 				},
 				dark: {
 					500: '#3C3C3C',
+					700: '#0f1926',
 				},
 				odd: {
 					500: '#F2F2F2',

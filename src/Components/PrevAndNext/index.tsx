@@ -3,6 +3,7 @@ import { useLocation, Link } from 'react-router-dom';
 import { CaretLeft, CaretRight } from 'phosphor-react';
 
 import { useRoutesMenu } from '~/Hooks/UseRoutesMenu';
+import { useTranslation } from '~/Hooks/UseTranslation';
 import styles from './styles.module.css';
 
 type Menu = {
@@ -12,15 +13,12 @@ type Menu = {
 
 export default function PrevAndNext() {
 	const { options } = useRoutesMenu();
+	const { translate } = useTranslation();
 	const location = useLocation();
 	const [prev, setPrev] = useState<Menu | null>(null);
 	const [next, setNext] = useState<Menu | null>(null);
 
 	function load() {
-		if (!location.pathname.includes('/docs/')) {
-			setPrev(null);
-			setNext(null);
-		}
 		const index = options.map(item => item.path).indexOf(location.pathname);
 		if (index - 1 < 0) {
 			setPrev(null);
@@ -42,7 +40,7 @@ export default function PrevAndNext() {
 
 	return (
 		<div className={styles.container}>
-			<strong>Outros Componentes</strong>
+			<strong>{translate('OTHERS_COMPONENTS')}</strong>
 			<div className={styles.subContainer}>
 				{prev && (
 					<Link to={prev.path}>

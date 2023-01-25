@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
+import { useTranslation } from '~/Hooks/UseTranslation';
 import useWindow from '../../Hooks/UseWindow';
 import styles from './styles.module.css';
 
@@ -15,12 +16,9 @@ export default function TableOfContents() {
 	const [optionsMenu, setOptionsMenu] = useState<Menu[]>([]);
 	const location = useLocation();
 	const { scrollPosition } = useWindow();
+	const { translate, currentLanguage } = useTranslation();
 
 	function load() {
-		// if (!location.pathname.includes('/docs/')) {
-		// 	setOptionsMenu([]);
-		// 	return;
-		// }
 		const menus: Menu[] = [];
 		const subs = document.querySelectorAll(
 			'[data-content="content-main"] h1,[data-content="content-main"] h2,[data-content="content-main"] h3'
@@ -40,7 +38,7 @@ export default function TableOfContents() {
 		}
 
 		const goal = 0;
-		console.log({ menus });
+
 		if (menus.length === 0) return;
 		const closest = menus.reduce((prev, curr) =>
 			Math.abs(curr.top - goal) < Math.abs(prev.top - goal) ? curr : prev
@@ -55,7 +53,7 @@ export default function TableOfContents() {
 		setOptionsMenu([...menusWithActive]);
 	}
 
-	useEffect(() => load(), [scrollPosition, location.pathname]);
+	useEffect(() => load(), [scrollPosition, location.pathname, currentLanguage]);
 
 	if (!optionsMenu.length) {
 		return null;
@@ -63,7 +61,7 @@ export default function TableOfContents() {
 
 	return (
 		<nav className={styles.container}>
-			<strong>Acesso Rápido</strong>
+			<strong>{translate('QUICK_ACCESS')}</strong>
 			<ul>
 				{optionsMenu.map(item => (
 					<li

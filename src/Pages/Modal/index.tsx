@@ -7,6 +7,7 @@ import { Button } from '~/Components/Button';
 import Section from '~/Components/Section';
 import { ComponentBlock } from '~/Components/ComponentBlock';
 
+import { Main } from '~/Components/Main';
 import styles from './styles.module.css';
 
 export function ModalPage() {
@@ -19,7 +20,7 @@ export function ModalPage() {
 	const [isOpenModal2, setIsOpenModal2] = useState(false);
 
 	return (
-		<main data-content="content-main">
+		<Main data-content="content-main">
 			<Section heading={translate('MODALS')}>
 				{`${translate('IMPLEMENTS_COMPONENT')} ${translate(
 					'MODAL'
@@ -171,6 +172,6 @@ export function ModalPage() {
 					</Modal>
 				</ComponentBlock>
 			</Section>
-		</main>
+		</Main>
 	);
 }

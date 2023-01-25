@@ -2,11 +2,11 @@ import { useEffect, useState } from 'react';
 import styles from './styles.module.css';
 
 type Props = {
-	children: JSX.Element;
+	children: React.ReactNode;
 	isOpen: boolean;
 	onClose: () => void;
 	openFrom: 'left' | 'right' | 'bottom' | 'top';
-	percentage?: number;
+	size?: string;
 	disableBackdrop?: boolean;
 	disableEsc?: boolean;
 	disableClickOnBackdrop?: boolean;
@@ -18,7 +18,7 @@ function Drawer({
 	openFrom,
 	isOpen,
 	onClose,
-	percentage,
+	size,
 	disableBackdrop,
 	disableEsc,
 	disableClickOnBackdrop,
@@ -30,7 +30,7 @@ function Drawer({
 				openFrom: styles.leftZero,
 				translate: styles.translateLeft,
 				style: {
-					maxWidth: `${percentage || 100}%`,
+					maxWidth: `${size || '100%'}`,
 					maxHeight: '100%',
 				},
 			};
@@ -40,19 +40,18 @@ function Drawer({
 				openFrom: styles.rightZero,
 				translate: styles.translateRight,
 				style: {
-					maxWidth: `${percentage || 100}%`,
+					maxWidth: `${size || '100%'}`,
 					maxHeight: '100%',
 				},
 			};
 		}
-
 		if (openFrom === 'bottom') {
 			return {
 				openFrom: '',
 				translate: styles.translateBottom,
 				style: {
 					maxWidth: '100%',
-					top: `${100 - (percentage || 100)}%`,
+					top: size,
 				},
 			};
 		}
@@ -62,7 +61,7 @@ function Drawer({
 				translate: styles.translateTop,
 				style: {
 					maxWidth: '100%',
-					maxHeight: `${percentage || 100}%`,
+					maxHeight: size,
 				},
 			};
 		}

@@ -1,29 +1,21 @@
-import { Moon, Sun } from 'phosphor-react';
 import { Link } from 'react-router-dom';
-import { useDarkMode } from '../../Hooks/DarkMode';
+
 import MenuSettings from '../MenuSettings';
 import MenuAccessOptions from '../MenuAccessOptions';
-import styles from './styles.module.css';
+import { Nav } from '../Nav';
 
 export default function Header() {
-	const { darkMode, toggleDarkMode } = useDarkMode();
 	return (
-		<nav className={styles.nav}>
-			<div className={styles.container}>
+		<Nav>
+			<div className="w-full flex flex-wrap justify-between items-center mx-auto">
 				<MenuAccessOptions />
-				<Link to="/" className={styles.link}>
-					<h1 className={styles.title}>My Implementations In React</h1>
+				<Link to="/" className="flex items-center !bg-dark-700">
+					<h1 className="text-xl whitespace-nowrap font-bold text-white">
+						My Implementations In React
+					</h1>
 				</Link>
-				<button
-					onClick={toggleDarkMode}
-					type="button"
-					className={styles.buttonDarkMode}
-				>
-					{!darkMode && <Moon size={22} />}
-					{darkMode && <Sun size={22} />}
-				</button>
 				<MenuSettings />
 			</div>
-		</nav>
+		</Nav>
 	);
 }
