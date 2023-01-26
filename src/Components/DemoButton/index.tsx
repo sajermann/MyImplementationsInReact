@@ -38,7 +38,7 @@ export function DemoButton() {
 	}
 
 	return (
-		<div className="w-full h-64 flex items-center justify-center">
+		<main className="w-full flex items-center justify-center flex-1">
 			<Button
 				variant={config.variant}
 				colorStyle={config.style}
@@ -47,6 +47,6 @@ export function DemoButton() {
 			>
 				{config.variant} | {config.style}
 			</Button>
-		</div>
+		</main>
 	);
 }

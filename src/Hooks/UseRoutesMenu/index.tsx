@@ -11,32 +11,50 @@ import { ModalPage } from '~/Pages/Modal';
 export function useRoutesMenu() {
 	const options = [
 		{
-			path: '/',
-			element: <Home />,
 			name: 'Home',
+			path: '/',
+			implements_code: '',
+			docs_code: '',
+			element: <Home />,
 		},
 		{
-			path: '/button',
-			element: <ButtonPage />,
 			name: 'Button',
+			path: '/button',
+			implements_code:
+				'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Components/Button/',
+			docs_code:
+				'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/Button',
+			element: <ButtonPage />,
 			demo: <DemoButton />,
 		},
 		{
-			path: '/modal',
-			element: <ModalPage />,
 			name: 'Modal',
+			path: '/modal',
+			implements_code:
+				'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Components/Modal',
+			docs_code:
+				'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/Modal',
+			element: <ModalPage />,
 			demo: <DemoModal />,
 		},
 		{
-			path: '/drawler',
-			element: <DrawerPage />,
 			name: 'Drawer',
+			path: '/drawler',
+			implements_code:
+				'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Components/Drawer',
+			docs_code:
+				'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/Drawer',
+			element: <DrawerPage />,
 			demo: <DemoDrawer />,
 		},
 		{
-			path: '/input',
-			element: <InputPage />,
 			name: 'Input',
+			path: '/input',
+			implements_code:
+				'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Components/Input',
+			docs_code:
+				'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/Input',
+			element: <InputPage />,
 			demo: <DemoInput />,
 		},
 	];

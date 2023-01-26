@@ -1,18 +1,16 @@
-import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import { Main } from '~/Components/Main';
 import { useTranslation } from '~/Hooks/UseTranslation';
 import { useRoutesMenu } from '~/Hooks/UseRoutesMenu';
-import { Button } from '~/Components/Button';
+import { Icons } from '~/Components/Icons';
 
 export default function Home() {
 	const { translate } = useTranslation();
 	const { options } = useRoutesMenu();
-	const navigate = useNavigate();
 
-	function handleGotTo(url: string) {
-		navigate(url);
-	}
+	const LINK_CLASS =
+		'flex flex-col flex-1 items-center justify-center gap-1 p-1 text-sm text-white !bg-dark-700 hover:text-primary-700 transition-colors duration-500';
 
 	return (
 		<Main>
@@ -45,20 +43,36 @@ export default function Home() {
 						opt.name !== 'Home' && (
 							<div
 								key={opt.path}
-								className="w-80 h-80 border border-solid rounded-2xl  dark:border-white text-xl"
+								className="flex flex-col w-80 h-80 border border-solid rounded-2xl  dark:border-white text-xl overflow-auto"
 							>
-								<header className="border-b-2 p-2 flex justify-between items-center bg-dark-700 rounded-t-2xl text-white">
+								<header className="border-b-2 p-2 flex justify-center items-center bg-dark-700 rounded-t-2xl text-white">
 									{opt.name}
-									<Button
-										variant="Outlined"
-										onClick={() => handleGotTo(opt.path)}
-										className="!w-24 !h-10"
-									>
-										Docs
-									</Button>
 								</header>
 
 								{opt.demo}
+
+								<footer className="border-t-2 flex !bg-dark-700">
+									<Link
+										to={opt.implements_code}
+										target="_blank"
+										className={LINK_CLASS}
+									>
+										<Icons.List width="30px" />
+										Impl Code
+									</Link>
+									<Link
+										to={opt.docs_code}
+										target="_blank"
+										className={LINK_CLASS}
+									>
+										<Icons.ShortList width="30px" />
+										Docs Code
+									</Link>
+									<Link to={opt.path} className={LINK_CLASS}>
+										<Icons.Summary width="30px" />
+										See Docs
+									</Link>
+								</footer>
 							</div>
 						)
 				)}

@@ -9,7 +9,7 @@ function Input({ ...props }: Props) {
 	return (
 		<InputSajermann
 			containerProps={{ className: 'flex w-full flex-col' }}
-			className="w-full p-2 rounded-md border dark:text-black"
+			className="w-full py-1 px-2 rounded-md border dark:text-black"
 			{...props}
 		/>
 	);
