@@ -10,18 +10,13 @@ export default function RoutesConfig() {
 	const { options } = useRoutesMenu();
 	return (
 		<div className={styles.container}>
-			<div className={styles.subContainer}>
-				<Routes>
-					{options.map(item => (
-						<Route
-							key={generateGuid()}
-							path={item.path}
-							element={item.element}
-						/>
-					))}
-				</Routes>
-				<Footer />
-			</div>
+			<Routes>
+				{options.map(item => (
+					<Route key={generateGuid()} path={item.path} element={item.element} />
+				))}
+			</Routes>
+			<Footer />
+
 			<Sidebar />
 		</div>
 	);

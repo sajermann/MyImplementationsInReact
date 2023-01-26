@@ -17,6 +17,7 @@
     "@headlessui/react": "^1.7.7",
     "@radix-ui/react-dialog": "^1.0.2",
     "@sajermann/react-button": "^0.0.6",
+    "@sajermann/react-input": "^0.0.9",
     "@sajermann/utils": "^0.0.10",
     "clsx": "^1.2.1",
     "i18next": "^22.4.9",

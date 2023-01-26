@@ -1,21 +1,15 @@
-.container{
-	max-width: 1100px;
+.container {
+	max-width: 1330px;
 	margin: 0 auto;
 	padding: 10px;
 	padding-bottom: 0;
 	display: flex;
 	gap: 20px;
-	/* height: 100%; */
+	flex-direction: column;
 }
 
 @media (max-width: 380px) {
-	.container{
+	.container {
 		margin: 0;
 	}
-}
-
-
-.subContainer{
-	display: flex;
-	flex-direction: column;
 }

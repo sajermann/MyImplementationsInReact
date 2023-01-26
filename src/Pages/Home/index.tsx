@@ -16,7 +16,7 @@ export default function Home() {
 
 	return (
 		<Main>
-			<div>
+			<div className="flex flex-col items-center justify-center">
 				<p>
 					<strong>{translate('WELCOME_TO_MY_IMPLEMENTATIONS_IN_REACT')}</strong>
 				</p>
@@ -39,7 +39,7 @@ export default function Home() {
 				</a>
 			</div>
 
-			<div className="flex flex-wrap gap-2">
+			<div className="flex flex-wrap gap-2 items-center justify-center">
 				{options.map(
 					opt =>
 						opt.name !== 'Home' && (

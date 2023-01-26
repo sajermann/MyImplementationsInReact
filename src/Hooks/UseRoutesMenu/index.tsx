@@ -1,5 +1,6 @@
 import { DemoButton } from '~/Components/DemoButton';
 import { DemoDrawer } from '~/Components/DemoDrawer';
+import { DemoInput } from '~/Components/DemoInput';
 import { DemoModal } from '~/Components/DemoModal';
 import { ButtonPage } from '~/Pages/Button';
 import DrawerPage from '~/Pages/Drawer';
@@ -36,7 +37,7 @@ export function useRoutesMenu() {
 			path: '/input',
 			element: <InputPage />,
 			name: 'Input',
-			demo: <DemoDrawer />,
+			demo: <DemoInput />,
 		},
 	];
 	return { options };
