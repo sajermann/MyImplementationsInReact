@@ -68,9 +68,7 @@ function Button({ colorStyle, variant, ...props }: Props) {
 		<ButtonSajermann
 			{...props}
 			className={`${verifyClasses()} ${props.className}`}
-		>
-			{props.children}
-		</ButtonSajermann>
+		/>
 	);
 }
 

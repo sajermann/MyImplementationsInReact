@@ -1,5 +1,7 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import { Scales, WhatsappLogo, YoutubeLogo } from 'phosphor-react';
+import { Main } from '~/Components/Main';
+import { useTranslation } from '~/Hooks/UseTranslation';
 import Section from '../../Components/Section';
 import { ComponentBlock } from '../../Components/ComponentBlock';
 import { ex1, ex2, ex3, ex4, ex5 } from './exs';
@@ -7,16 +9,37 @@ import { CodeBlock } from '../../Components/CodeBlock';
 import { Input } from '../../Components/Input';
 import { Button } from '../../Components/Button';
 
-export default function InputDocs() {
+export function InputPage() {
+	const { translate } = useTranslation();
 	return (
-		<main data-content="content-main">
-			<Section heading="Inputs">
-				O input dá ao usuário a oportunidade de inserir dados na página, nosso
-				componente de input tenta ser o mais fiel possível com algumas
-				melhorias.
+		<Main data-content="content-main">
+			<Section heading={translate('INPUT')}>
+				{`${translate('IMPLEMENTS_COMPONENT')} ${translate(
+					'INPUT'
+				)} ${translate('USING_THE_MY_SELF_LIB')} @sajermann/react-input.`}
 			</Section>
-			<Section subHeading="Importação">
-				<CodeBlock>{`import { Input } from '@sajermann/ui-react';`}</CodeBlock>
+			<Section subHeading={translate('INSTALLATION_OF_LIB')}>
+				<CodeBlock>npm i @sajermann/react-input;</CodeBlock>
+			</Section>
+
+			<Section subHeading={translate('CODES')}>
+				<div className="flex gap-2">
+					<a
+						href="https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Components/Input"
+						target="_blank"
+						rel="noopener noreferrer"
+					>
+						{translate('IMPLEMENTS_CODE')}
+					</a>
+
+					<a
+						href="https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/Input"
+						target="_blank"
+						rel="noopener noreferrer"
+					>
+						{translate('EXAMPLES_CODE')}
+					</a>
+				</div>
 			</Section>
 
 			<Section subHeading="Tradicional">
@@ -263,6 +286,6 @@ export default function InputDocs() {
 					/>
 				</ComponentBlock>
 			</Section>
-		</main>
+		</Main>
 	);
 }

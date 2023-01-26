@@ -13,6 +13,7 @@
     "sonar": "npx sonar-scanner -D sonar.login=sqp_"
   },
   "dependencies": {
+    "@faker-js/faker": "^7.6.0",
     "@headlessui/react": "^1.7.7",
     "@radix-ui/react-dialog": "^1.0.2",
     "@sajermann/react-button": "^0.0.6",

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo } from 'react';
 import styles from './styles.module.css';
 
 type Props = {
@@ -24,7 +24,7 @@ function Drawer({
 	disableClickOnBackdrop,
 	oneClickToClose,
 }: Props) {
-	const [configSide] = useState(() => {
+	const configSide = useMemo(() => {
 		if (openFrom === 'left') {
 			return {
 				openFrom: styles.leftZero,
@@ -66,7 +66,7 @@ function Drawer({
 			};
 		}
 		return {};
-	});
+	}, [openFrom]);
 
 	useEffect(() => {
 		const body = document.querySelector('body');

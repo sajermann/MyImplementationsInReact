@@ -2,8 +2,8 @@ import { useNavigate } from 'react-router-dom';
 
 import { Main } from '~/Components/Main';
 import { useTranslation } from '~/Hooks/UseTranslation';
-import { OptionButton } from '~/Components/OptionButton';
 import { useRoutesMenu } from '~/Hooks/UseRoutesMenu';
+import { Button } from '~/Components/Button';
 
 export default function Home() {
 	const { translate } = useTranslation();
@@ -43,13 +43,23 @@ export default function Home() {
 				{options.map(
 					opt =>
 						opt.name !== 'Home' && (
-							<OptionButton
+							<div
 								key={opt.path}
-								className="w-80 h-80 border border-solid rounded-2xl border-dark-700 dark:border-white text-2xl"
-								onClick={() => handleGotTo(opt.path)}
+								className="w-80 h-80 border border-solid rounded-2xl  dark:border-white text-xl"
 							>
-								{opt.name}
-							</OptionButton>
+								<header className="border-b-2 p-2 flex justify-between items-center bg-dark-700 rounded-t-2xl text-white">
+									{opt.name}
+									<Button
+										variant="Outlined"
+										onClick={() => handleGotTo(opt.path)}
+										className="!w-24 !h-10"
+									>
+										Docs
+									</Button>
+								</header>
+
+								{opt.demo}
+							</div>
 						)
 				)}
 			</div>
