@@ -3,8 +3,9 @@ import { DemoDrawer } from '~/Components/DemoDrawer';
 import { DemoInput } from '~/Components/DemoInput';
 import { DemoModal } from '~/Components/DemoModal';
 import { ButtonPage } from '~/Pages/Button';
-import DrawerPage from '~/Pages/Drawer';
-import Home from '~/Pages/Home';
+import { DatepickerPage } from '~/Pages/Datepicker';
+import { DrawerPage } from '~/Pages/Drawer';
+import { Home } from '~/Pages/Home';
 import { InputPage } from '~/Pages/Input';
 import { ModalPage } from '~/Pages/Modal';
 
@@ -55,6 +56,16 @@ export function useRoutesMenu() {
 			docs_code:
 				'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/Input',
 			element: <InputPage />,
+			demo: <DemoInput />,
+		},
+		{
+			name: 'Datepicker',
+			path: '/datepicker',
+			implements_code:
+				'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Components/Datepicker',
+			docs_code:
+				'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/Datepicker',
+			element: <DatepickerPage />,
 			demo: <DemoInput />,
 		},
 	];

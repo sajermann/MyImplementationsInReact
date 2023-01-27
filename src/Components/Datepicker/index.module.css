@@ -1,0 +1,21 @@
+.popper {
+	z-index: 2 !important;
+}
+
+.input {
+	@apply text-[#6C757D]
+	w-full
+	disabled:cursor-not-allowed;
+	box-sizing: border-box;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	padding: 6px 12px;
+	height: 38px;
+	background: #ffffff;
+	border: 1px solid #ced4da;
+	border-radius: 4px;
+	flex: none;
+	order: 0;
+	flex-grow: 1;
+}

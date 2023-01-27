@@ -6,7 +6,7 @@ import { useRoutesMenu } from '~/Hooks/UseRoutesMenu';
 import { Icons } from '~/Components/Icons';
 import { QuickAccessGithub } from '~/Components/QuickAccessGithub';
 
-export default function Home() {
+export function Home() {
 	const { translate } = useTranslation();
 	const { options } = useRoutesMenu();
 

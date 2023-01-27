@@ -19,7 +19,7 @@ function Lorem() {
 	);
 }
 
-export default function DrawerPage() {
+export function DrawerPage() {
 	const [isOpenLeft, setIsOpenLeft] = useState(false);
 	const [isOpenRight, setIsOpenRight] = useState(false);
 	const [isOpenBotttom, setIsOpenBottom] = useState(false);
