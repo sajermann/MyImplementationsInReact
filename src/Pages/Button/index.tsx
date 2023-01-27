@@ -13,8 +13,8 @@ import Section from '~/Components/Section';
 import { ComponentBlock } from '~/Components/ComponentBlock';
 import { useTranslation } from '~/Hooks/UseTranslation';
 import CustomLoading from '~/Components/CustomLoading';
-
 import { Main } from '~/Components/Main';
+import { QuickAccessGithub } from '~/Components/QuickAccessGithub';
 import styles from './styles.module.css';
 
 export function ButtonPage() {
@@ -60,21 +60,7 @@ export function ButtonPage() {
 
 			<Section subHeading={translate('CODES')}>
 				<div className="flex gap-2">
-					<a
-						href="https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Components/Button"
-						target="_blank"
-						rel="noopener noreferrer"
-					>
-						{translate('IMPLEMENTS_CODE')}
-					</a>
-
-					<a
-						href="https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/Button"
-						target="_blank"
-						rel="noopener noreferrer"
-					>
-						{translate('EXAMPLES_CODE')}
-					</a>
+					<QuickAccessGithub name="Button" />
 				</div>
 			</Section>
 

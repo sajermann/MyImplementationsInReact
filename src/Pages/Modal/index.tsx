@@ -8,6 +8,7 @@ import Section from '~/Components/Section';
 import { ComponentBlock } from '~/Components/ComponentBlock';
 
 import { Main } from '~/Components/Main';
+import { QuickAccessGithub } from '~/Components/QuickAccessGithub';
 import styles from './styles.module.css';
 
 export function ModalPage() {
@@ -32,20 +33,7 @@ export function ModalPage() {
 
 			<Section subHeading={translate('CODES')}>
 				<div className="flex gap-2">
-					<a
-						href="https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Components/Modal"
-						target="_blank"
-						rel="noopener noreferrer"
-					>
-						{translate('IMPLEMENTS_CODE')}
-					</a>
-					<a
-						href="https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/Modal"
-						target="_blank"
-						rel="noopener noreferrer"
-					>
-						{translate('EXAMPLES_CODE')}
-					</a>
+					<QuickAccessGithub name="Modal" />
 				</div>
 			</Section>
 

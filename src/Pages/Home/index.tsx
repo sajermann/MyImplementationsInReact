@@ -4,6 +4,7 @@ import { Main } from '~/Components/Main';
 import { useTranslation } from '~/Hooks/UseTranslation';
 import { useRoutesMenu } from '~/Hooks/UseRoutesMenu';
 import { Icons } from '~/Components/Icons';
+import { QuickAccessGithub } from '~/Components/QuickAccessGithub';
 
 export default function Home() {
 	const { translate } = useTranslation();
@@ -18,10 +19,7 @@ export default function Home() {
 				<p>
 					<strong>{translate('WELCOME_TO_MY_IMPLEMENTATIONS_IN_REACT')}</strong>
 				</p>
-				<p>
-					Projeto criado para demonstrar como realizo minhas implementações em
-					React
-				</p>
+				<p>{translate('HOME_MESSAGE_PRESENTATION')}</p>
 
 				<a
 					href="https://github.com/sajermann/MyImplementationsInReact/"
@@ -52,26 +50,11 @@ export default function Home() {
 								{opt.demo}
 
 								<footer className="border-t-2 flex !bg-dark-700">
-									<Link
-										to={opt.implements_code}
-										target="_blank"
-										className={LINK_CLASS}
-									>
-										<Icons.List width="30px" />
-										Impl Code
-									</Link>
-									<Link
-										to={opt.docs_code}
-										target="_blank"
-										className={LINK_CLASS}
-									>
-										<Icons.ShortList width="30px" />
-										Docs Code
-									</Link>
 									<Link to={opt.path} className={LINK_CLASS}>
-										<Icons.Summary width="30px" />
-										See Docs
+										<Icons.Eye width="30px" />
+										Demo
 									</Link>
+									<QuickAccessGithub name={opt.name} />
 								</footer>
 							</div>
 						)

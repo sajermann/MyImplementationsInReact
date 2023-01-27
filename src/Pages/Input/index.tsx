@@ -4,6 +4,7 @@ import Section from '~/Components/Section';
 import { ComponentBlock } from '~/Components/ComponentBlock';
 import { CodeBlock } from '~/Components/CodeBlock';
 import { Input } from '~/Components/Input';
+import { QuickAccessGithub } from '~/Components/QuickAccessGithub';
 
 export function InputPage() {
 	const { translate } = useTranslation();
@@ -26,21 +27,7 @@ export function InputPage() {
 
 			<Section subHeading={translate('CODES')}>
 				<div className="flex gap-2">
-					<a
-						href="https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Components/Input"
-						target="_blank"
-						rel="noopener noreferrer"
-					>
-						{translate('IMPLEMENTS_CODE')}
-					</a>
-
-					<a
-						href="https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/Input"
-						target="_blank"
-						rel="noopener noreferrer"
-					>
-						{translate('EXAMPLES_CODE')}
-					</a>
+					<QuickAccessGithub name="Input" />
 				</div>
 			</Section>
 

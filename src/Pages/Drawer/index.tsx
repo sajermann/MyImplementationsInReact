@@ -6,6 +6,7 @@ import { Button } from '~/Components/Button';
 import { Drawer } from '~/Components/Drawer';
 import { ComponentBlock } from '~/Components/ComponentBlock';
 import Section from '~/Components/Section';
+import { QuickAccessGithub } from '~/Components/QuickAccessGithub';
 
 function Lorem() {
 	return (
@@ -58,21 +59,7 @@ export default function DrawerPage() {
 
 			<Section subHeading={translate('CODES')}>
 				<div className="flex gap-2">
-					<a
-						href="https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Components/Drawer"
-						target="_blank"
-						rel="noopener noreferrer"
-					>
-						{translate('IMPLEMENTS_CODE')}
-					</a>
-
-					<a
-						href="https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/Drawer"
-						target="_blank"
-						rel="noopener noreferrer"
-					>
-						{translate('EXAMPLES_CODE')}
-					</a>
+					<QuickAccessGithub name="Drawer" />
 				</div>
 			</Section>
 
