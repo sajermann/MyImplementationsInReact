@@ -8,16 +8,38 @@ import {
 	InputHTMLAttributes,
 	LabelHTMLAttributes,
 	ChangeEvent,
+	HTMLProps,
+	useRef,
+	forwardRef,
 } from 'react';
 import DatePicker from 'react-datepicker';
-// import { ContainerInput } from '../ContainerInput';
+import { Input } from '../Input';
 import styles from './index.module.css';
 import 'react-datepicker/dist/react-datepicker.css';
-import { Input } from '../Input';
 
-type TEvent = {
-	value: string;
-};
+function formatDataTemp(value: string, withoutDay?: boolean) {
+	if (withoutDay) {
+		return value
+			.replace(/\D/g, '')
+			.replace(/(\d{2})(\d)/, '$1/$2')
+			.replace(/(\/\d{4})\d+$/, '$1');
+	}
+	return value
+		.replace(/\D/g, '')
+		.replace(/(\d{2})(\d)/, '$1/$2')
+		.replace(/(\d{2})(\d)/, '$1/$2')
+		.replace(/(\/\d{4})\d+$/, '$1');
+}
+
+const CustomInput = forwardRef(
+	(props: HTMLProps<HTMLInputElement> & { withoutDay?: boolean }, ref) => {
+		const newProps = { ...props };
+		delete newProps.withoutDay;
+		const result = formatDataTemp(newProps.value as string, props.withoutDay);
+
+		return <Input {...newProps} value={result} />;
+	}
+);
 
 interface Props
 	extends DetailedHTMLProps<
@@ -45,10 +67,10 @@ export function Datepicker({
 	withoutDay,
 	...rest
 }: Props) {
-	const [valueInput, setValueInput] = useState('');
 	const [startDate, setStartDate] = useState<Date | null>(
 		customDefaultValue || null
 	);
+	const ref = useRef(null);
 
 	function onChangeInternal(date: Date | null) {
 		setStartDate(date);
@@ -78,71 +100,6 @@ export function Datepicker({
 		}
 	}, []);
 
-	function formatDataTemp(value: string) {
-		if (withoutDay) {
-			return value
-				.replace(/\D/g, '')
-				.replace(/(\d{2})(\d)/, '$1/$2')
-				.replace(/(\/\d{4})\d+$/, '$1');
-		}
-
-		return value
-			.replace(/\D/g, '')
-			.replace(/(\d{2})(\d)/, '$1/$2')
-			.replace(/(\d{2})(\d)/, '$1/$2')
-			.replace(/(\/\d{4})\d+$/, '$1');
-	}
-
-	function onKeyDownInternal(e: React.KeyboardEvent<HTMLInputElement>) {
-		const { value } = e.target as unknown as TEvent;
-
-		const limit = withoutDay ? 6 : 9;
-		const allowsNormal = [
-			'0',
-			'1',
-			'2',
-			'3',
-			'4',
-			'5',
-			'6',
-			'7',
-			'8',
-			'9',
-			'/',
-		];
-		const allowsTools = [
-			'backspace',
-			'delete',
-			'arrowright',
-			'arrowleft',
-			'arrowup',
-			'arrowdown',
-			'tab',
-		];
-		const controlKeyAllow = ['c', 'v'];
-
-		console.log((e.target as unknown as TEvent).value);
-
-		(e.target as unknown as TEvent).value = formatDataTemp(value);
-
-		if (allowsTools.includes(e.key.toLowerCase())) {
-			return; // Pass
-		}
-
-		if (value.length > limit) {
-			e.preventDefault();
-			return;
-		}
-		if (controlKeyAllow.includes(e.key.toLowerCase()) && e.ctrlKey) {
-			return; // Pass
-		}
-
-		if (allowsNormal.includes(e.key.toLowerCase())) {
-			return; // Pass
-		}
-
-		e.preventDefault();
-	}
 	function classContainer() {
 		if (containerProps?.className) {
 			return `${styles.customContainer} ${containerProps?.className}`;
@@ -157,18 +114,6 @@ export function Datepicker({
 					{label}
 				</label>
 			)}
-			<Input
-				value={valueInput}
-				onChange={e =>
-					setValueInput(
-						e.target.value
-							.replace(/\D/g, '')
-							.replace(/(\d{2})(\d)/, '$1/$2')
-							.replace(/(\d{2})(\d)/, '$1/$2')
-							.replace(/(\/\d{4})\d+$/, '$1')
-					)
-				}
-			/>
 			<DatePicker
 				autoComplete="off"
 				id={rest.id}
@@ -183,7 +128,7 @@ export function Datepicker({
 				closeOnScroll
 				shouldCloseOnSelect
 				showMonthYearPicker={withoutDay}
-				onKeyDown={onKeyDownInternal}
+				customInput={<CustomInput withoutDay={withoutDay} ref={ref} />}
 			/>
 		</div>
 	);

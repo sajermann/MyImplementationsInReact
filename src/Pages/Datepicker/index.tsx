@@ -4,8 +4,11 @@ import { ComponentBlock } from '~/Components/ComponentBlock';
 import Section from '~/Components/Section';
 import { QuickAccessGithub } from '~/Components/QuickAccessGithub';
 import { Datepicker } from '~/Components/Datepicker';
+import { useState } from 'react';
+import { Button } from '~/Components/Button';
 
 export function DatepickerPage() {
+	const [firstPicker, setFirstPicker] = useState(new Date().toISOString());
 	const { translate } = useTranslation();
 
 	return (
@@ -22,18 +25,42 @@ export function DatepickerPage() {
 				</div>
 			</Section>
 
-			<Section subHeading={translate('OPEN_FROM')}>
+			<Section subHeading={translate('DATE')}>
 				<ComponentBlock>
 					<Datepicker
-						label="Data"
+						label={translate('DATE')}
 						placeholder="dd/mm/aaaa"
-						id="Data"
-						// value={option.value}
-						onChange={console.log}
-						// containerProps={option.containerProps}
-						// withoutDay={option.withoutDay}
-						// disabled={isLoading}
+						id="Date"
 					/>
+				</ComponentBlock>
+			</Section>
+
+			<Section subHeading={translate('CONTROLLED')}>
+				<ComponentBlock>
+					<div className="flex flex-col gap-2">
+						<div className="flex gap-2">
+							<Datepicker
+								label={translate('DATE')}
+								placeholder="dd/mm/aaaa"
+								id="Date"
+								value={firstPicker}
+								onChange={e => setFirstPicker(e.target.value)}
+							/>
+
+							<Datepicker
+								customDefaultValue={new Date()}
+								label={translate('DEFAULT_VALUE')}
+								placeholder="dd/mm/aaaa"
+								id="Date"
+								value={firstPicker}
+								onChange={e => setFirstPicker(e.target.value)}
+							/>
+						</div>
+						<div className="flex items-center justify-center gap-2">
+							{firstPicker}
+							<Button onClick={() => setFirstPicker('')}>Limpar</Button>
+						</div>
+					</div>
 				</ComponentBlock>
 			</Section>
 		</Main>
