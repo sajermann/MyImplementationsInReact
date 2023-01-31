@@ -1,5 +1,13 @@
 {
 	"translations": {
+		"DD/MM/YYYY": "dd/mm/aaaa",
+		"YYYY-MM-DD": "aaaa-mm-dd",
+		"MM/YYYY": "mm/aaaa",
+		"CONTAINER_PROPS": "Propriedades Container",
+		"DATE": "Data",
+		"CONTROLLED": "Controlado",
+		"DEFAULT_VALUE": "Valor Padrão",
+		"DATE_FORMAT": "Formato de Data",
 		"HOME_MESSAGE_PRESENTATION": "Projeto criado para demonstrar como eu realizo minhas implementações em React.",
 		"DEBOUNCE_2_SECONDS": "Debounce 2 Segundos",
 		"ZIP_CODE": "Cep",

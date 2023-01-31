@@ -1,5 +1,9 @@
 {
 	"translations": {
+		"DD/MM/YYYY": "dd/mm/yyyy",
+		"YYYY-MM-DD": "yyyy-mm-dd",
+		"MM/YYYY": "mm/yyyy",
+		"CONTAINER_PROPS": "Container Props",
 		"DATE": "Date",
 		"CONTROLLED": "Controlled",
 		"DEFAULT_VALUE": "Default Value",

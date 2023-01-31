@@ -29,7 +29,7 @@ export function DatepickerPage() {
 				<ComponentBlock>
 					<Datepicker
 						label={translate('DATE')}
-						placeholder="dd/mm/aaaa"
+						placeholder={translate('DD/MM/YYYY')}
 						id="Date1"
 					/>
 				</ComponentBlock>
@@ -41,7 +41,7 @@ export function DatepickerPage() {
 						<div className="flex gap-2">
 							<Datepicker
 								label={translate('DATE')}
-								placeholder="dd/mm/aaaa"
+								placeholder={translate('DD/MM/YYYY')}
 								id="Date2"
 								value={firstPicker}
 								onChange={e => setFirstPicker(e.target.value)}
@@ -50,7 +50,7 @@ export function DatepickerPage() {
 							<Datepicker
 								customDefaultValue={new Date()}
 								label={translate('DEFAULT_VALUE')}
-								placeholder="dd/mm/aaaa"
+								placeholder={translate('DD/MM/YYYY')}
 								id="Date3"
 								onChange={e => setFirstPicker(e.target.value)}
 							/>
@@ -68,31 +68,30 @@ export function DatepickerPage() {
 					<Datepicker
 						dateFormat="yyyy-MM-dd"
 						label={translate('DATE')}
-						placeholder="yyyy-MM-dd"
+						placeholder={translate('YYYY-MM-DD')}
 						id="DateFormat1"
 					/>
 
 					<Datepicker
 						dateFormat="MM/yyyy"
 						label={translate('DATE')}
-						placeholder="MM/yyyy"
+						placeholder={translate('MM/YYYY')}
 						id="DateFormat2"
 						withoutDay
 					/>
 				</ComponentBlock>
 			</Section>
 
-			<Section subHeading={translate('CONTAINER')}>
+			<Section subHeading={translate('CONTAINER_PROPS')}>
 				<ComponentBlock>
 					<Datepicker
 						containerProps={{
 							style: {
-								width: 100,
+								width: 120,
 							},
 						}}
-						dateFormat="yyyy-MM-dd"
 						label={translate('DATE')}
-						placeholder="yyyy-MM-dd"
+						placeholder={translate('DD/MM/YYYY')}
 						id="DateFormat1"
 					/>
 				</ComponentBlock>

@@ -66,12 +66,13 @@ const CustomInput = forwardRef(
 	) => {
 		const newProps = { ...props };
 		delete newProps.withoutDay;
+
 		const result = formatDataTemp(
 			newProps.value as string,
 			props.withoutDay,
 			props.dateFormat
 		);
-
+		delete newProps.dateFormat;
 		return <Input {...newProps} value={result} />;
 	}
 );
@@ -160,6 +161,7 @@ export function Datepicker({
 				id={rest.id}
 				disabled={rest.disabled}
 				placeholderText={rest.placeholder}
+				calendarClassName="batata"
 				className={styles.input}
 				popperClassName={styles.popper}
 				selected={startDate}
