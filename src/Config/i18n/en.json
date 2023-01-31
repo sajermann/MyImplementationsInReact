@@ -1,5 +1,9 @@
 {
 	"translations": {
+		"DATE": "Date",
+		"CONTROLLED": "Controlled",
+		"DEFAULT_VALUE": "Default Value",
+		"DATE_FORMAT": "Date Format",
 		"HOME_MESSAGE_PRESENTATION": "Project created to demonstrate how I do my implementations in React.",
 		"DEBOUNCE_2_SECONDS": "Debounce 2 Seconds",
 		"ZIP_CODE": "Zipe Code - (Brazilian Format)",

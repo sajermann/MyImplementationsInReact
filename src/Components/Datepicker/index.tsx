@@ -1,5 +1,6 @@
 /* eslint-disable import/no-extraneous-dependencies */
-import ptBr from 'date-fns/locale/pt-BR';
+// import ptBr from 'date-fns/locale/pt-BR';
+import { enUS, ptBR } from 'date-fns/locale';
 import {
 	useEffect,
 	useState,
@@ -13,29 +14,63 @@ import {
 	forwardRef,
 } from 'react';
 import DatePicker from 'react-datepicker';
+
+import { useTranslation } from '~/Hooks/UseTranslation';
 import { Input } from '../Input';
 import styles from './index.module.css';
 import 'react-datepicker/dist/react-datepicker.css';
 
-function formatDataTemp(value: string, withoutDay?: boolean) {
-	if (withoutDay) {
-		return value
-			.replace(/\D/g, '')
-			.replace(/(\d{2})(\d)/, '$1/$2')
-			.replace(/(\/\d{4})\d+$/, '$1');
-	}
-	return value
-		.replace(/\D/g, '')
-		.replace(/(\d{2})(\d)/, '$1/$2')
-		.replace(/(\d{2})(\d)/, '$1/$2')
-		.replace(/(\/\d{4})\d+$/, '$1');
+const LANGUAGE_OPTION = {
+	'pt-BR': ptBR,
+	en: enUS,
+};
+
+type TDateFormat = 'dd/MM/yyyy' | 'yyyy-MM-dd' | 'MM/yyyy';
+
+function formatDataTemp(
+	value: string,
+	withoutDay?: boolean,
+	dateFormat?: TDateFormat
+) {
+	if (!dateFormat) return value;
+	const ob = {
+		'dd/MM/yyyy': (valueTemp: string) =>
+			valueTemp
+				.replace(/\D/g, '')
+				.replace(/(\d{2})(\d)/, '$1/$2')
+				.replace(/(\d{2})(\d)/, '$1/$2')
+				.replace(/(\/\d{4})\d+$/, '$1'),
+		'yyyy-MM-dd': (valueTemp: string) =>
+			valueTemp
+				.replace(/\D/g, '')
+				.replace(/(\d{4})(\d)/, '$1-$2')
+				.replace(/(\d{2})(\d)/, '$1-$2')
+				.replace(/(\/\d{2})\d+$/, '$1'),
+		'MM/yyyy': (valueTemp: string) =>
+			valueTemp
+				.replace(/\D/g, '')
+				.replace(/(\d{2})(\d)/, '$1/$2')
+				.replace(/(\/\d{4})\d+$/, '$1'),
+	};
+
+	return ob[dateFormat](value);
 }
 
 const CustomInput = forwardRef(
-	(props: HTMLProps<HTMLInputElement> & { withoutDay?: boolean }, ref) => {
+	(
+		props: HTMLProps<HTMLInputElement> & {
+			withoutDay?: boolean;
+			dateFormat?: TDateFormat;
+		},
+		ref
+	) => {
 		const newProps = { ...props };
 		delete newProps.withoutDay;
-		const result = formatDataTemp(newProps.value as string, props.withoutDay);
+		const result = formatDataTemp(
+			newProps.value as string,
+			props.withoutDay,
+			props.dateFormat
+		);
 
 		return <Input {...newProps} value={result} />;
 	}
@@ -49,6 +84,7 @@ interface Props
 	withoutDay?: boolean;
 	label?: string;
 	customDefaultValue?: Date;
+	dateFormat?: TDateFormat;
 	labelProps?: DetailedHTMLProps<
 		LabelHTMLAttributes<HTMLLabelElement>,
 		HTMLLabelElement
@@ -64,12 +100,14 @@ export function Datepicker({
 	containerProps,
 	labelProps,
 	customDefaultValue,
+	dateFormat = 'dd/MM/yyyy',
 	withoutDay,
 	...rest
 }: Props) {
 	const [startDate, setStartDate] = useState<Date | null>(
 		customDefaultValue || null
 	);
+	const { currentLanguage } = useTranslation();
 	const ref = useRef(null);
 
 	function onChangeInternal(date: Date | null) {
@@ -89,8 +127,11 @@ export function Datepicker({
 	}
 
 	useEffect(() => {
+		console.log(rest.value);
 		if (rest.value === '' || rest.value === undefined) {
 			setStartDate(null);
+		} else {
+			setStartDate(new Date(rest.value as string));
 		}
 	}, [rest.value]);
 
@@ -123,12 +164,18 @@ export function Datepicker({
 				popperClassName={styles.popper}
 				selected={startDate}
 				onChange={onChangeInternal}
-				locale={ptBr}
-				dateFormat={withoutDay ? 'MM/yyyy' : 'dd/MM/yyyy'}
+				locale={LANGUAGE_OPTION[currentLanguage as 'pt-BR' | 'en']}
+				dateFormat={dateFormat}
 				closeOnScroll
 				shouldCloseOnSelect
 				showMonthYearPicker={withoutDay}
-				customInput={<CustomInput withoutDay={withoutDay} ref={ref} />}
+				customInput={
+					<CustomInput
+						withoutDay={withoutDay}
+						dateFormat={dateFormat}
+						ref={ref}
+					/>
+				}
 			/>
 		</div>
 	);

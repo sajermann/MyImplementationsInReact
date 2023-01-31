@@ -15,8 +15,8 @@ export function DatepickerPage() {
 		<Main data-content="content-main">
 			<Section heading="Datepicker">
 				{`${translate('IMPLEMENTS_COMPONENT')} Datepicker ${translate(
-					'WITHOUT_USING_LIB'
-				)}`}
+					'USING_THE_LIB'
+				)} react-datepicker`}
 			</Section>
 
 			<Section subHeading={translate('CODES')}>
@@ -30,7 +30,7 @@ export function DatepickerPage() {
 					<Datepicker
 						label={translate('DATE')}
 						placeholder="dd/mm/aaaa"
-						id="Date"
+						id="Date1"
 					/>
 				</ComponentBlock>
 			</Section>
@@ -42,7 +42,7 @@ export function DatepickerPage() {
 							<Datepicker
 								label={translate('DATE')}
 								placeholder="dd/mm/aaaa"
-								id="Date"
+								id="Date2"
 								value={firstPicker}
 								onChange={e => setFirstPicker(e.target.value)}
 							/>
@@ -51,8 +51,7 @@ export function DatepickerPage() {
 								customDefaultValue={new Date()}
 								label={translate('DEFAULT_VALUE')}
 								placeholder="dd/mm/aaaa"
-								id="Date"
-								value={firstPicker}
+								id="Date3"
 								onChange={e => setFirstPicker(e.target.value)}
 							/>
 						</div>
@@ -61,6 +60,41 @@ export function DatepickerPage() {
 							<Button onClick={() => setFirstPicker('')}>Limpar</Button>
 						</div>
 					</div>
+				</ComponentBlock>
+			</Section>
+
+			<Section subHeading={translate('DATE_FORMAT')}>
+				<ComponentBlock>
+					<Datepicker
+						dateFormat="yyyy-MM-dd"
+						label={translate('DATE')}
+						placeholder="yyyy-MM-dd"
+						id="DateFormat1"
+					/>
+
+					<Datepicker
+						dateFormat="MM/yyyy"
+						label={translate('DATE')}
+						placeholder="MM/yyyy"
+						id="DateFormat2"
+						withoutDay
+					/>
+				</ComponentBlock>
+			</Section>
+
+			<Section subHeading={translate('CONTAINER')}>
+				<ComponentBlock>
+					<Datepicker
+						containerProps={{
+							style: {
+								width: 100,
+							},
+						}}
+						dateFormat="yyyy-MM-dd"
+						label={translate('DATE')}
+						placeholder="yyyy-MM-dd"
+						id="DateFormat1"
+					/>
 				</ComponentBlock>
 			</Section>
 		</Main>
