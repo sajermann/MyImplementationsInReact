@@ -1,4 +1,5 @@
 import { DemoButton } from '~/Components/DemoButton';
+import { DemoDatepicker } from '~/Components/DemoDatepicker';
 import { DemoDrawer } from '~/Components/DemoDrawer';
 import { DemoInput } from '~/Components/DemoInput';
 import { DemoModal } from '~/Components/DemoModal';
@@ -66,7 +67,7 @@ export function useRoutesMenu() {
 			docs_code:
 				'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/Datepicker',
 			element: <DatepickerPage />,
-			demo: <DemoInput />,
+			demo: <DemoDatepicker />,
 		},
 	];
 	return { options };
