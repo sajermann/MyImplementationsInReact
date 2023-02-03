@@ -1,5 +1,18 @@
 {
 	"translations": {
+		"LOADING...": "Carregando...",
+		"NO_DATA": "Sem Dados",
+		"SINGLE": "Único",
+		"VEHICLES": "Veículos",
+		"CHOOSE_VEHICLE": "Escolha um Veículo",
+		"CAR": "Carro",
+		"BUS": "Ônibus",
+		"TRAIN": "Trem",
+		"AIRPLANE": "Avião",
+		"SEARCHABLE": "Pesquisável",
+		"NOT_SEARCHABLE": "Não Pesquisável",
+		"CLEARABLE": "Eliminável",
+		"NOT_CLEARABLE": "Não Eliminável",
 		"DD/MM/YYYY": "dd/mm/aaaa",
 		"YYYY-MM-DD": "aaaa-mm-dd",
 		"MM/YYYY": "mm/aaaa",

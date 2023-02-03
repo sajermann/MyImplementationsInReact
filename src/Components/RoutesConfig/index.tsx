@@ -9,7 +9,7 @@ export default function RoutesConfig() {
 	const { options } = useRoutesMenu();
 	return (
 		<div className="flex max-w-[1330px] p-2 gap-5 my-0 mx-auto">
-			<div className="flex flex-col">
+			<div className="flex flex-col min-w-[495px]">
 				<Routes>
 					{options.map(item => (
 						<Route

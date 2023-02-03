@@ -3,12 +3,14 @@ import { DemoDatepicker } from '~/Components/DemoDatepicker';
 import { DemoDrawer } from '~/Components/DemoDrawer';
 import { DemoInput } from '~/Components/DemoInput';
 import { DemoModal } from '~/Components/DemoModal';
+import { DemoSelect } from '~/Components/DemoSelect';
 import { ButtonPage } from '~/Pages/Button';
 import { DatepickerPage } from '~/Pages/Datepicker';
 import { DrawerPage } from '~/Pages/Drawer';
 import { Home } from '~/Pages/Home';
 import { InputPage } from '~/Pages/Input';
 import { ModalPage } from '~/Pages/Modal';
+import { SelectPage } from '~/Pages/Select';
 
 export function useRoutesMenu() {
 	const options = [
@@ -68,6 +70,16 @@ export function useRoutesMenu() {
 				'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/Datepicker',
 			element: <DatepickerPage />,
 			demo: <DemoDatepicker />,
+		},
+		{
+			name: 'Select',
+			path: '/select',
+			implements_code:
+				'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Components/Select',
+			docs_code:
+				'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/Select',
+			element: <SelectPage />,
+			demo: <DemoSelect />,
 		},
 	];
 	return { options };
