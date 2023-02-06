@@ -1,5 +1,12 @@
 {
 	"translations": {
+		"SINGLE_SELECTION": "Seleção Única",
+		"SINGLE_SELECT_MODE": "Modo de Seleção Única",
+		"DEBOUNCE_ONE_SECOND": "Atraso",
+		"MIN_LENGTH": "Tamanho Mínimo",
+		"TYPE_AND_WAIT": "Tecle e Aguarde",
+		"MIN_THREE_CHARACTER": "Min Três Caracteres",
+		"ASYNC": "Assíncrono",
 		"LOADING...": "Carregando...",
 		"NO_DATA": "Sem Dados",
 		"SINGLE": "Único",

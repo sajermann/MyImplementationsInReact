@@ -3,7 +3,7 @@ import { useTranslation } from '~/Hooks/UseTranslation';
 import { ComponentBlock } from '~/Components/ComponentBlock';
 import Section from '~/Components/Section';
 import { QuickAccessGithub } from '~/Components/QuickAccessGithub';
-import { useEffect, useMemo, useState } from 'react';
+import { useMemo, useState } from 'react';
 import { Select } from '~/Components/Select';
 import { TVehicle } from '~/Types/TVehicle';
 import { delay } from '@sajermann/utils/Delay';
@@ -11,10 +11,15 @@ import { makeData } from '~/Utils/MakeData';
 
 export function SelectPage() {
 	const { translate, currentLanguage } = useTranslation();
-	const [valueControlled, setValueControlled] = useState('train');
-	const [asyncValue, setAsyncValue] = useState('');
-	const [asyncOptions, setAsyncOptions] = useState<TVehicle[]>([]);
 	const [isLoading, setIsLoading] = useState(false);
+	const [valueControlledSingle, setValueControlledSingle] = useState('train');
+	const [asyncValueSingle, setAsyncValueSingle] = useState('');
+	const [asyncOptionsSingle, setAsyncOptionsSingle] = useState<TVehicle[]>([]);
+	const [valueControlledMulti, setValueControlledMulti] = useState<string[]>(
+		[]
+	);
+	const [asyncOptionsMulti, setAsyncOptionsMulti] = useState<TVehicle[]>([]);
+	const [asyncValueMulti, setAsyncValueMulti] = useState<string[]>([]);
 
 	const OPTION = useMemo<TVehicle[]>(
 		() => [
@@ -26,17 +31,46 @@ export function SelectPage() {
 		[currentLanguage]
 	);
 
-	async function loadData() {
+	async function loadDataSingle(textFilter: string) {
 		setIsLoading(true);
 		await delay(2000);
-		const result = makeData.vehicles(20);
-		setAsyncOptions(result);
 		setIsLoading(false);
+		const result = makeData.vehicles(1000);
+		const resultFiltred = result.filter(item =>
+			item.label.toLowerCase().includes(textFilter.toLowerCase())
+		);
+		setAsyncOptionsSingle(resultFiltred);
 	}
 
-	useEffect(() => {
-		loadData();
-	}, [asyncValue]);
+	async function loadDataMult(textFilter: string) {
+		setIsLoading(true);
+		await delay(2000);
+		setIsLoading(false);
+
+		const oldSelecteds: TVehicle[] = [];
+
+		for (const selected of asyncValueMulti) {
+			const result = asyncOptionsMulti.find(item => item.value === selected);
+			if (result) {
+				oldSelecteds.push(result);
+			}
+		}
+
+		const result = makeData.vehicles(1000);
+		const resultFiltred = result.filter(item =>
+			item.label.toLowerCase().includes(textFilter.toLowerCase())
+		);
+		setAsyncOptionsMulti([...oldSelecteds, ...resultFiltred]);
+	}
+
+	function filter(textFilter: string, isMulti?: true) {
+		if (textFilter === '') return;
+		if (isMulti) {
+			loadDataMult(textFilter);
+			return;
+		}
+		loadDataSingle(textFilter);
+	}
 
 	return (
 		<Main data-content="content-main">
@@ -52,7 +86,7 @@ export function SelectPage() {
 				</div>
 			</Section>
 
-			<Section subHeading={translate('SINGLE')}>
+			<Section subHeading={translate('SINGLE_SELECTION')}>
 				<ComponentBlock>
 					<Select
 						id="vehicle"
@@ -68,85 +102,163 @@ export function SelectPage() {
 
 			<Section subHeading={translate('CONTROLLED')}>
 				<ComponentBlock>
-					<div className="flex w-full gap-2">
-						<Select
-							id="vehicle"
-							label={translate('VEHICLES')}
-							isClearable
-							options={OPTION}
-							placeholder={translate('CHOOSE_VEHICLE')}
-							onChange={e => setValueControlled(e.target.value)}
-							menuPosition="fixed"
-							value={valueControlled}
-						/>
-						<Select
-							id="vehicle"
-							label={translate('VEHICLES')}
-							isClearable
-							options={OPTION}
-							placeholder={translate('CHOOSE_VEHICLE')}
-							onChange={e => setValueControlled(e.target.value)}
-							menuPosition="fixed"
-							value={valueControlled}
-						/>
-					</div>
+					<Select
+						id="vehicle"
+						label={translate('VEHICLES')}
+						isClearable
+						options={OPTION}
+						placeholder={translate('CHOOSE_VEHICLE')}
+						onChange={e => setValueControlledSingle(e.target.value)}
+						menuPosition="fixed"
+						value={valueControlledSingle}
+					/>
+					<Select
+						id="vehicle"
+						label={translate('VEHICLES')}
+						isClearable
+						options={OPTION}
+						placeholder={translate('CHOOSE_VEHICLE')}
+						onChange={e => setValueControlledSingle(e.target.value)}
+						menuPosition="fixed"
+						value={valueControlledSingle}
+					/>
 				</ComponentBlock>
 			</Section>
 
 			<Section subHeading={translate('SEARCHABLE')}>
 				<ComponentBlock>
-					<div className="flex w-full gap-2">
-						<Select
-							label={translate('NOT_SEARCHABLE')}
-							options={OPTION}
-							placeholder={translate('CHOOSE_VEHICLE')}
-							menuPosition="fixed"
-							isSearchable={false}
-						/>
-						<Select
-							label={translate('SEARCHABLE')}
-							options={OPTION}
-							placeholder={translate('CHOOSE_VEHICLE')}
-							menuPosition="fixed"
-						/>
-					</div>
+					<Select
+						label={translate('NOT_SEARCHABLE')}
+						options={OPTION}
+						placeholder={translate('CHOOSE_VEHICLE')}
+						menuPosition="fixed"
+						isSearchable={false}
+					/>
+					<Select
+						label={translate('SEARCHABLE')}
+						options={OPTION}
+						placeholder={translate('CHOOSE_VEHICLE')}
+						menuPosition="fixed"
+					/>
 				</ComponentBlock>
 			</Section>
 
 			<Section subHeading={translate('CLEARABLE')}>
 				<ComponentBlock>
-					<div className="flex w-full gap-2">
-						<Select
-							label={translate('NOT_CLEARABLE')}
-							options={OPTION}
-							placeholder={translate('CHOOSE_VEHICLE')}
-							menuPosition="fixed"
-						/>
-						<Select
-							id="vehicle"
-							label={translate('CLEARABLE')}
-							isClearable
-							options={OPTION}
-							placeholder={translate('CHOOSE_VEHICLE')}
-							onChange={console.log}
-							menuPosition="fixed"
-						/>
-					</div>
+					<Select
+						label={translate('NOT_CLEARABLE')}
+						options={OPTION}
+						placeholder={translate('CHOOSE_VEHICLE')}
+						menuPosition="fixed"
+					/>
+					<Select
+						id="vehicle"
+						label={translate('CLEARABLE')}
+						isClearable
+						options={OPTION}
+						placeholder={translate('CHOOSE_VEHICLE')}
+						onChange={console.log}
+						menuPosition="fixed"
+					/>
 				</ComponentBlock>
 			</Section>
 
 			<Section subHeading={translate('ASYNC')}>
 				<ComponentBlock>
-					<div className="flex w-full gap-2">
-						<Select
-							isLoading={isLoading}
-							label={translate('NOT_CLEARABLE')}
-							options={asyncOptions}
-							value={asyncValue}
-							placeholder={translate('CHOOSE_VEHICLE')}
-							menuPosition="fixed"
-						/>
-					</div>
+					<Select
+						isClearable
+						async={{
+							callback: filter,
+							debounce: 1000,
+						}}
+						isLoading={isLoading}
+						label={translate('DEBOUNCE_ONE_SECOND')}
+						options={asyncOptionsSingle}
+						value={asyncValueSingle}
+						onChange={e => setAsyncValueSingle(e.target.value)}
+						placeholder={translate('TYPE_AND_WAIT')}
+						menuPosition="fixed"
+						menuPortalTarget={document.body}
+					/>
+					<Select
+						isClearable
+						async={{
+							callback: filter,
+							debounce: 0,
+							minLength: 3,
+						}}
+						isLoading={isLoading}
+						label={translate('MIN_LENGTH')}
+						options={asyncOptionsSingle}
+						value={asyncValueSingle}
+						onChange={e => setAsyncValueSingle(e.target.value)}
+						placeholder={translate('MIN_THREE_CHARACTER')}
+						menuPosition="fixed"
+						menuPortalTarget={document.body}
+					/>
+				</ComponentBlock>
+			</Section>
+
+			<Section heading="Multi Select" subHeading={translate('CONTROLLED')}>
+				<ComponentBlock>
+					<Select
+						id="vehicle"
+						label={translate('VEHICLES')}
+						isClearable
+						options={OPTION}
+						placeholder={translate('CHOOSE_VEHICLE')}
+						menuPosition="fixed"
+						isMulti={{
+							onChange: e => {
+								setValueControlledMulti(e.target.value);
+							},
+							value: valueControlledMulti,
+						}}
+					/>
+				</ComponentBlock>
+			</Section>
+
+			<Section subHeading={translate('ASYNC')}>
+				<ComponentBlock>
+					<Select
+						isLoading={isLoading}
+						id="vehicle"
+						label={translate('DEBOUNCE_ONE_SECOND')}
+						isClearable
+						options={asyncOptionsMulti}
+						placeholder={translate('TYPE_AND_WAIT')}
+						menuPosition="fixed"
+						isMulti={{
+							onChange: e => {
+								setAsyncValueMulti(e.target.value);
+							},
+							value: asyncValueMulti,
+						}}
+						async={{
+							callback: e => filter(e, true),
+							debounce: 1000,
+						}}
+					/>
+					<Select
+						isLoading={isLoading}
+						id="vehicle"
+						label={translate('MIN_LENGTH')}
+						isClearable
+						options={asyncOptionsMulti}
+						placeholder={translate('MIN_THREE_CHARACTER')}
+						menuPosition="fixed"
+						isMulti={{
+							onChange: e => {
+								setAsyncValueMulti(e.target.value);
+							},
+							value: asyncValueMulti,
+						}}
+						async={{
+							callback: e => filter(e, true),
+							debounce: 0,
+							minLength: 3,
+						}}
+					/>
 				</ComponentBlock>
 			</Section>
 		</Main>

@@ -1,5 +1,12 @@
 {
 	"translations": {
+		"SINGLE_SELECTION": "Single Selection",
+		"SINGLE_SELECT_MODE": "Single Select Mode",
+		"DEBOUNCE_ONE_SECOND": "Debounce one Second",
+		"MIN_LENGTH": "Min Length",
+		"TYPE_AND_WAIT": "Type and Wait",
+		"MIN_THREE_CHARACTER": "Min Three Character",
+		"ASYNC": "Async",
 		"LOADING...": "Loading...",
 		"NO_DATA": "No Data",
 		"SINGLE": "Single",

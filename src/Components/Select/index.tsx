@@ -1,4 +1,6 @@
+import { useEffect, useState } from 'react';
 import ReactSelect, { OptionsOrGroups } from 'react-select';
+
 import { useTranslation } from '~/Hooks/UseTranslation';
 
 type Props = {
@@ -11,7 +13,7 @@ type Props = {
 	placeholder?: string;
 	value?: unknown;
 	defaultValue?: string;
-	options: OptionsOrGroups<unknown, any>;
+	options?: OptionsOrGroups<unknown, any>;
 	onChange?: (data: { target: { id?: string; value: string } }) => void;
 	isMulti?: {
 		onChange: (data: { target: { id?: string; value: string[] } }) => void;
@@ -20,6 +22,11 @@ type Props = {
 
 	menuPosition?: 'fixed' | 'absolute';
 	menuPortalTarget?: HTMLElement | null;
+	async?: {
+		callback: (newValue: string) => void;
+		debounce: number;
+		minLength?: number;
+	};
 };
 
 export function Select({
@@ -37,9 +44,12 @@ export function Select({
 	isMulti,
 	menuPosition,
 	menuPortalTarget,
+	async,
 	...rest
 }: Props) {
-	const { translate, currentLanguage } = useTranslation();
+	const [inputValue, setInputValue] = useState('');
+	const { translate } = useTranslation();
+
 	function handleOnChange(e: unknown) {
 		if (!e && onChange) {
 			onChange({ target: { value: '', id } });
@@ -60,6 +70,7 @@ export function Select({
 	}
 
 	function getValue() {
+		if (!options) return undefined;
 		if (isMulti && isMulti.value) {
 			const optionsTemp: { value: string; label: string }[] = [];
 			for (const valueTemp of isMulti.value) {
@@ -74,6 +85,23 @@ export function Select({
 		return options.find(item => item.value === value);
 	}
 
+	function preInputChange(e: string) {
+		if (async && async.minLength && async.minLength > e.length) {
+			return;
+		}
+		setInputValue(e);
+	}
+
+	useEffect(() => {
+		const timer = setTimeout(() => {
+			if (async) {
+				async.callback(inputValue);
+			}
+		}, async?.debounce);
+
+		return () => clearTimeout(timer);
+	}, [inputValue]);
+
 	return (
 		<div {...rest} className="w-full">
 			{label && (
@@ -83,6 +111,7 @@ export function Select({
 			)}
 
 			<ReactSelect
+				onInputChange={preInputChange}
 				isMulti={!!isMulti}
 				menuPosition={menuPosition}
 				menuPortalTarget={menuPortalTarget}
@@ -92,7 +121,7 @@ export function Select({
 				id={id}
 				className="basic-single"
 				classNamePrefix="select"
-				defaultValue={options.find(item => item.value === defaultValue)}
+				defaultValue={options?.find(item => item.value === defaultValue)}
 				isDisabled={isDisabled}
 				isLoading={isLoading}
 				isClearable={isClearable}
@@ -104,7 +133,6 @@ export function Select({
 				styles={{
 					control: baseStyles => ({
 						...baseStyles,
-						height: 40,
 					}),
 					menu: baseStyles => ({
 						...baseStyles,
