@@ -1,5 +1,6 @@
 {
 	"translations": {
+		"SEARCH_MENU": "Search Menu",
 		"SINGLE_SELECTION": "Single Selection",
 		"SINGLE_SELECT_MODE": "Single Select Mode",
 		"DEBOUNCE_ONE_SECOND": "Debounce one Second",

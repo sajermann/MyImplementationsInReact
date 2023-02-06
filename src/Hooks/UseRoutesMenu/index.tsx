@@ -11,9 +11,12 @@ import { Home } from '~/Pages/Home';
 import { InputPage } from '~/Pages/Input';
 import { ModalPage } from '~/Pages/Modal';
 import { SelectPage } from '~/Pages/Select';
+import { TablePage } from '~/Pages/Table';
+import { FilterPage } from '~/Pages/Table/Filter';
+import { TRoutesMenu } from '~/Types/TRoutesMenu';
 
 export function useRoutesMenu() {
-	const options = [
+	const options: TRoutesMenu[] = [
 		{
 			name: 'Home',
 			path: '/',
@@ -80,6 +83,28 @@ export function useRoutesMenu() {
 				'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/Select',
 			element: <SelectPage />,
 			demo: <DemoSelect />,
+		},
+		{
+			name: 'Table',
+			path: '/table',
+			implements_code:
+				'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Components/Table',
+			docs_code:
+				'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/Table',
+			element: <TablePage />,
+			demo: <DemoSelect />,
+			subs: [
+				{
+					name: 'Filter',
+					path: '/table/filter',
+					implements_code:
+						'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Components/Select',
+					docs_code:
+						'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/Select',
+					element: <FilterPage />,
+					demo: <DemoSelect />,
+				},
+			],
 		},
 	];
 	return { options };

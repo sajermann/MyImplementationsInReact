@@ -12,7 +12,7 @@ export function DemoDrawer() {
 	return (
 		<div className="w-full h-64 flex items-center justify-center">
 			<Button
-				variant="Option"
+				variant="Outlined"
 				colorStyle="Success"
 				onClick={() => setIsOpen(true)}
 				className="!w-72 !h-12"

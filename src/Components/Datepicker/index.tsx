@@ -128,7 +128,6 @@ export function Datepicker({
 	}
 
 	useEffect(() => {
-		console.log(rest.value);
 		if (rest.value === '' || rest.value === undefined) {
 			setStartDate(null);
 		} else {

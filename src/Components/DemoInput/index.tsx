@@ -4,7 +4,7 @@ import { Input } from '../Input';
 export function DemoInput() {
 	const { translate } = useTranslation();
 	return (
-		<div className="w-full h-64 flex items-center justify-center">
+		<div className="w-[90%] m-auto h-64 flex items-center justify-center">
 			<Input
 				placeholder={translate('REMOVE_NUMBERS')}
 				id="Label"

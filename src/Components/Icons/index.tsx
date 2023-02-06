@@ -239,11 +239,12 @@ function Clear() {
 	);
 }
 
-function Search() {
+function Search({ color, width, height, ...rest }: Props) {
 	return (
 		<svg
-			width="100%"
-			height="100%"
+			{...rest}
+			width={width || '100%'}
+			height={height || '100%'}
 			viewBox="0 0 18 18"
 			fill="none"
 			xmlns="http://www.w3.org/2000/svg"
@@ -1651,6 +1652,50 @@ function Sun({ width, height, color, ...rest }: Props) {
 	);
 }
 
+function Triangle({ width, height, color, ...rest }: Props) {
+	return (
+		<svg
+			{...rest}
+			width={width || '100%'}
+			height={height || '100%'}
+			fill={color || 'currentColor'}
+			viewBox="0 0 256 256"
+		>
+			<rect width="256" height="256" fill="none" />
+			<path
+				d="M114.2,40l-88,152A16,16,0,0,0,40,216H216a16,16,0,0,0,13.8-24l-88-152A15.9,15.9,0,0,0,114.2,40Z"
+				fill="none"
+				stroke={color || 'currentColor'}
+				strokeLinecap="round"
+				strokeLinejoin="round"
+				strokeWidth="16"
+			/>
+		</svg>
+	);
+}
+
+function ArrowSingleDown({ width, height, color, ...rest }: Props) {
+	return (
+		<svg
+			{...rest}
+			width={width || '100%'}
+			height={height || '100%'}
+			fill={color || 'currentColor'}
+			viewBox="0 0 256 256"
+		>
+			<rect width="256" height="256" fill="none" />
+			<polyline
+				points="208 96 128 176 48 96"
+				fill="none"
+				stroke={color || 'currentColor'}
+				strokeLinecap="round"
+				strokeLinejoin="round"
+				strokeWidth="16"
+			/>
+		</svg>
+	);
+}
+
 export const Icons = {
 	Eye,
 	ShortList,
@@ -1691,4 +1736,6 @@ export const Icons = {
 	Gear,
 	Moon,
 	Sun,
+	Triangle,
+	ArrowSingleDown,
 };

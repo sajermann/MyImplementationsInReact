@@ -54,6 +54,7 @@ export default function TableOfContents() {
 	}
 
 	useEffect(() => load(), [scrollPosition, location.pathname, currentLanguage]);
+	// scrollPosition, location.pathname, currentLanguage
 
 	if (!optionsMenu.length) {
 		return null;

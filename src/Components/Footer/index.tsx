@@ -1,7 +1,7 @@
+import { delay } from '@sajermann/utils/Delay';
 import { GithubLogo, LinkedinLogo } from 'phosphor-react';
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import { delay } from '../Utils';
 import useWindow from '../../Hooks/UseWindow';
 import styles from './styles.module.css';
 
@@ -15,7 +15,7 @@ export default function Footer() {
 		setFooterFixed(false);
 		await delay(1);
 		const footerTop = document
-			.querySelector('footer')
+			.querySelector(`.${styles.footer}`)
 			?.getBoundingClientRect().top;
 		setFooterFixed(Number(footerTop) < view.height);
 	}
