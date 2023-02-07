@@ -1,10 +1,12 @@
-import { DemoButton } from '~/Components/DemoButton';
-import { DemoDatepicker } from '~/Components/DemoDatepicker';
-import { DemoDrawer } from '~/Components/DemoDrawer';
-import { DemoInput } from '~/Components/DemoInput';
-import { DemoModal } from '~/Components/DemoModal';
-import { DemoSelect } from '~/Components/DemoSelect';
+import { CheckboxDemo } from '~/Components/Demos/Checkbox';
+import { ButtonDemo } from '~/Components/Demos/Button';
+import { DatepickerDemo } from '~/Components/Demos/Datepicker';
+import { DrawerDemo } from '~/Components/Demos/Drawer';
+import { InputDemo } from '~/Components/Demos/Input';
+import { ModalDemo } from '~/Components/Demos/Modal';
+import { SelectDemo } from '~/Components/Demos/Select';
 import { ButtonPage } from '~/Pages/Button';
+import { CheckboxPage } from '~/Pages/Checkbox';
 import { DatepickerPage } from '~/Pages/Datepicker';
 import { DrawerPage } from '~/Pages/Drawer';
 import { Home } from '~/Pages/Home';
@@ -32,7 +34,7 @@ export function useRoutesMenu() {
 			docs_code:
 				'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/Button',
 			element: <ButtonPage />,
-			demo: <DemoButton />,
+			demo: <ButtonDemo />,
 		},
 		{
 			name: 'Modal',
@@ -42,7 +44,7 @@ export function useRoutesMenu() {
 			docs_code:
 				'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/Modal',
 			element: <ModalPage />,
-			demo: <DemoModal />,
+			demo: <ModalDemo />,
 		},
 		{
 			name: 'Drawer',
@@ -52,7 +54,7 @@ export function useRoutesMenu() {
 			docs_code:
 				'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/Drawer',
 			element: <DrawerPage />,
-			demo: <DemoDrawer />,
+			demo: <DrawerDemo />,
 		},
 		{
 			name: 'Input',
@@ -62,7 +64,7 @@ export function useRoutesMenu() {
 			docs_code:
 				'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/Input',
 			element: <InputPage />,
-			demo: <DemoInput />,
+			demo: <InputDemo />,
 		},
 		{
 			name: 'Datepicker',
@@ -72,7 +74,7 @@ export function useRoutesMenu() {
 			docs_code:
 				'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/Datepicker',
 			element: <DatepickerPage />,
-			demo: <DemoDatepicker />,
+			demo: <DatepickerDemo />,
 		},
 		{
 			name: 'Select',
@@ -82,7 +84,17 @@ export function useRoutesMenu() {
 			docs_code:
 				'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/Select',
 			element: <SelectPage />,
-			demo: <DemoSelect />,
+			demo: <SelectDemo />,
+		},
+		{
+			name: 'Checkbox',
+			path: '/checkbox',
+			implements_code:
+				'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Components/Checkbox',
+			docs_code:
+				'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/Checkbox',
+			element: <CheckboxPage />,
+			demo: <CheckboxDemo />,
 		},
 		{
 			name: 'Table',
@@ -92,7 +104,7 @@ export function useRoutesMenu() {
 			docs_code:
 				'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/Table',
 			element: <TablePage />,
-			demo: <DemoSelect />,
+			demo: <SelectDemo />,
 			subs: [
 				{
 					name: 'Filter',
@@ -102,7 +114,7 @@ export function useRoutesMenu() {
 					docs_code:
 						'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/Select',
 					element: <FilterPage />,
-					demo: <DemoSelect />,
+					demo: <SelectDemo />,
 				},
 			],
 		},

@@ -13,7 +13,7 @@ type Props = {
 	oneClickToClose?: boolean;
 };
 
-function Drawer({
+export function Drawer({
 	children,
 	openFrom,
 	isOpen,
@@ -131,5 +131,3 @@ function Drawer({
 		</main>
 	);
 }
-
-export { Drawer };

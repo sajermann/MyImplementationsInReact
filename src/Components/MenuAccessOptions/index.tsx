@@ -15,9 +15,14 @@ import { MenuCollapsible } from '../MenuCollapsible';
 import { Icons } from '../Icons';
 import { Input } from '../Input';
 
-function BuildNormalOption({ path, name }: Pick<TRoutesMenu, 'path' | 'name'>) {
+interface Props extends Pick<TRoutesMenu, 'path' | 'name'> {
+	onClick: () => void;
+}
+
+function BuildNormalOption({ path, name, onClick }: Props) {
 	return (
 		<NavLink
+			onClick={onClick}
 			key={generateGuid()}
 			to={path}
 			className={({ isActive }) =>
@@ -38,7 +43,11 @@ function buildTrigger({
 	isOpen,
 	path,
 	name,
-}: { isOpen: boolean } & Pick<TRoutesMenu, 'path' | 'name'>) {
+	onClick,
+}: { isOpen: boolean; onClick: () => void } & Pick<
+	TRoutesMenu,
+	'path' | 'name'
+>) {
 	const IS_OPEN: Record<string, React.ReactNode> = {
 		true: <Icons.ArrowSingleDown width="20" />,
 		false: <Icons.ArrowSingleRight width="20" />,
@@ -46,7 +55,7 @@ function buildTrigger({
 	return (
 		<div className="flex items-center justify-between w-full">
 			<div className="flex-1">
-				<BuildNormalOption name={name} path={path} />
+				<BuildNormalOption onClick={onClick} name={name} path={path} />
 			</div>
 			<div className="w-10 p-2  flex items-center justify-center">
 				{IS_OPEN[String(isOpen)]}
@@ -66,9 +75,10 @@ export default function MenuAccessOptions() {
 	const OPTIONS_FILTREDS = options.filter(
 		item =>
 			item.name.toLowerCase().indexOf(search.toLowerCase()) > -1 ||
-			item.subs?.filter(
-				sub => sub.name.toLowerCase().indexOf(search.toLowerCase()) > -1
-			)
+			(item.subs &&
+				item.subs?.filter(
+					sub => sub.name.toLowerCase().indexOf(search.toLowerCase()) > -1
+				).length > 0)
 	);
 
 	return (
@@ -138,11 +148,13 @@ export default function MenuAccessOptions() {
 												isOpen: triggerIsOpen,
 												name: menu.name,
 												path: menu.path,
+												onClick: () => setIsOpen(false),
 											})
 										}
 									>
 										{menu.subs.map(subMenu => (
 											<BuildNormalOption
+												onClick={() => setIsOpen(false)}
 												key={generateGuid()}
 												name={subMenu.name}
 												path={subMenu.path}
@@ -153,6 +165,7 @@ export default function MenuAccessOptions() {
 							}
 							return (
 								<BuildNormalOption
+									onClick={() => setIsOpen(false)}
 									key={generateGuid()}
 									name={menu.name}
 									path={menu.path}

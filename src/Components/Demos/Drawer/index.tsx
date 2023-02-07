@@ -1,11 +1,11 @@
 import { useState } from 'react';
 
 import { Button } from '~/Components/Button';
+import { Main } from '~/Components/Main';
+import { Drawer } from '~/Components/Drawer';
 import { useTranslation } from '~/Hooks/UseTranslation';
-import { Drawer } from '../Drawer';
-import { Main } from '../Main';
 
-export function DemoDrawer() {
+export function DrawerDemo() {
 	const { translate } = useTranslation();
 	const [isOpen, setIsOpen] = useState(false);
 

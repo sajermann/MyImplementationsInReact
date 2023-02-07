@@ -8,7 +8,7 @@ type Props = {
 	style: 'Primary' | 'Secondary' | 'Success' | 'Warning';
 };
 
-export function DemoButton() {
+export function ButtonDemo() {
 	const [config, setConfig] = useState<Props>({
 		variant: 'Default',
 		style: 'Primary',

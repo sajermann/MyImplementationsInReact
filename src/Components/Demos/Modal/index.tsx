@@ -2,9 +2,9 @@ import { useState } from 'react';
 
 import { Button } from '~/Components/Button';
 import { useTranslation } from '~/Hooks/UseTranslation';
-import { Modal } from '../Modal';
+import { Modal } from '../../Modal';
 
-export function DemoModal() {
+export function ModalDemo() {
 	const [isOpenModal, setIsOpenModal] = useState(false);
 	const { translate } = useTranslation();
 

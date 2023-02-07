@@ -1,7 +1,7 @@
+import { Datepicker } from '~/Components/Datepicker';
 import { useTranslation } from '~/Hooks/UseTranslation';
-import { Datepicker } from '../Datepicker';
 
-export function DemoDatepicker() {
+export function DatepickerDemo() {
 	const { translate } = useTranslation();
 	return (
 		<div className="w-full h-64 flex items-center justify-center">

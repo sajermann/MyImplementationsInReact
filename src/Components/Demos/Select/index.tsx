@@ -1,8 +1,8 @@
 import { useTranslation } from '~/Hooks/UseTranslation';
 import { makeData } from '~/Utils/MakeData';
-import { Select } from '../Select';
+import { Select } from '~/Components/Select';
 
-export function DemoSelect() {
+export function SelectDemo() {
 	const { translate } = useTranslation();
 	const result = makeData.vehicles(10);
 	return (
@@ -13,7 +13,6 @@ export function DemoSelect() {
 				isClearable
 				options={result}
 				placeholder={translate('CHOOSE_VEHICLE')}
-				onChange={console.log}
 				menuPosition="fixed"
 			/>
 		</main>
