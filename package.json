@@ -21,6 +21,8 @@
     "@sajermann/react-button": "^0.0.6",
     "@sajermann/react-input": "^0.0.9",
     "@sajermann/utils": "^0.0.10",
+    "@tanstack/react-table": "^8.7.9",
+    "@tanstack/react-virtual": "^3.0.0-beta.39",
     "clsx": "^1.2.1",
     "i18next": "^22.4.9",
     "i18next-browser-languagedetector": "^7.0.1",

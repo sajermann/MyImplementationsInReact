@@ -6,10 +6,21 @@ export function QuickAccessGithub({ name }: { name: string }) {
 	const LINK_CLASS =
 		'flex flex-col flex-1 items-center justify-center gap-1 p-1 text-sm text-white !bg-dark-700 hover:text-primary-700 transition-colors duration-500';
 
+	function getImplements(type: 'implements_code' | 'docs_code') {
+		const result = options.find(item => item.name === name);
+		if (result) return result[type];
+
+		const resultSub = options
+			.find(item => item.subs?.find(subItem => subItem.name === name))
+			?.subs?.find(itemSubItem => itemSubItem.name === name);
+		if (!resultSub) return undefined;
+		return resultSub[type];
+	}
+
 	return (
 		<>
 			<a
-				href={options.find(item => item.name === name)?.implements_code}
+				href={getImplements('implements_code')}
 				target="_blank"
 				className={LINK_CLASS}
 				rel="noreferrer"
@@ -18,7 +29,7 @@ export function QuickAccessGithub({ name }: { name: string }) {
 				Impl Code
 			</a>
 			<a
-				href={options.find(item => item.name === name)?.docs_code}
+				href={getImplements('docs_code')}
 				target="_blank"
 				className={LINK_CLASS}
 				rel="noreferrer"

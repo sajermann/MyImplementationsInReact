@@ -9,7 +9,7 @@ import Sidebar from '../Sidebar';
 export default function RoutesConfig() {
 	const { options } = useRoutesMenu();
 	return (
-		<div className="flex max-w-[1330px] p-2 gap-5 my-0 mx-auto">
+		<div className="flex max-w-full 2xl:max-w-[1330px] sm: p-2 gap-5 my-0 mx-auto">
 			<div className="flex flex-col w-full gap-2">
 				<Routes>
 					{options.map(route => (

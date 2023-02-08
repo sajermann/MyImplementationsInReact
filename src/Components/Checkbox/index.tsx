@@ -82,11 +82,11 @@ export function Checkbox({
 
 	function verifyClass() {
 		const classes = [
-			'rounded h-5 w-5 border-[1px] border-black disabled:cursor-not-allowed disabled:!opacity-50',
+			'rounded h-5 w-5 border-[1px] bg-white border-black disabled:cursor-not-allowed disabled:!opacity-50',
 		];
 
 		if (situation === 'checked' || situation === 'indeterminate') {
-			classes.push('bg-primary-500');
+			classes.push('!bg-primary-500');
 		}
 
 		return classes.join(' ');
@@ -124,7 +124,7 @@ export function Checkbox({
 				<CheckboxRadix.Indicator>
 					{situation === 'indeterminate' && (
 						<Container>
-							<div className="w-full h-1 bg-white rounded" />
+							<Icons.Indeterminate color="#fff" />
 						</Container>
 					)}
 					{situation === 'checked' && (

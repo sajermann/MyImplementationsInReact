@@ -16,6 +16,8 @@ import { SelectPage } from '~/Pages/Select';
 import { TablePage } from '~/Pages/Table';
 import { FilterPage } from '~/Pages/Table/Filter';
 import { TRoutesMenu } from '~/Types/TRoutesMenu';
+import SelectionPage from '~/Pages/Table/Selection';
+import ExpandedLinePage from '~/Pages/Table/ExpandedLine';
 
 export function useRoutesMenu() {
 	const options: TRoutesMenu[] = [
@@ -114,6 +116,26 @@ export function useRoutesMenu() {
 					docs_code:
 						'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/Select',
 					element: <FilterPage />,
+					demo: <SelectDemo />,
+				},
+				{
+					name: 'Selection',
+					path: '/table/selection',
+					implements_code:
+						'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Components/Table/Select',
+					docs_code:
+						'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/Table/Select',
+					element: <SelectionPage />,
+					demo: <SelectDemo />,
+				},
+				{
+					name: 'ExpandedLine',
+					path: '/table/expand-line',
+					implements_code:
+						'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Components/ExpandedLine',
+					docs_code:
+						'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/ExpandedLine',
+					element: <ExpandedLinePage />,
 					demo: <SelectDemo />,
 				},
 			],

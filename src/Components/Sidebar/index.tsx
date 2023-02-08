@@ -11,9 +11,9 @@ export default function Sidebar() {
 	}
 
 	return (
-		<div className={styles.container}>
+		<aside className={styles.container}>
 			<TableOfContents />
 			<PrevAndNext />
-		</div>
+		</aside>
 	);
 }
