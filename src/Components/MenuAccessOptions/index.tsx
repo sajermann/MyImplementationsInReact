@@ -14,6 +14,7 @@ import { Main } from '../Main';
 import { MenuCollapsible } from '../MenuCollapsible';
 import { Icons } from '../Icons';
 import { Input } from '../Input';
+import { BoxScroll } from '../BoxScroll';
 
 interface Props extends Pick<TRoutesMenu, 'path' | 'name'> {
 	onClick: () => void;
@@ -149,7 +150,7 @@ export default function MenuAccessOptions() {
 							</div>
 						</div>
 					</Nav>
-					<div>
+					<BoxScroll>
 						{mount().map(menu => {
 							if (menu.subs) {
 								return (
@@ -186,7 +187,7 @@ export default function MenuAccessOptions() {
 								/>
 							);
 						})}
-					</div>
+					</BoxScroll>
 				</Main>
 			</Drawer>
 		</>

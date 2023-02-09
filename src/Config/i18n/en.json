@@ -1,5 +1,6 @@
 {
 	"translations": {
+		"TABLE_OF_CONTENTS": "Table of Contents",
 		"SEARCH_OPTIONS": "Search Options",
 		"NO_VIEW": "No View",
 		"TABLE": "Table",
@@ -157,7 +158,7 @@
 		"TRADICIONAL_INPUT": "Tradicional Input",
 		"INPUT": "Input",
 		"OPEN": "Open",
-		"OTHERS_COMPONENTS": "Others Componets",
+		"OTHERS_COMPONENTS": "Others Components",
 		"QUICK_ACCESS": "Quick Access",
 		"OPEN_FROM": "Open From",
 		"OPEN_FROM_LEFT": "Open from left",

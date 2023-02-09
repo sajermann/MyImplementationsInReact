@@ -158,7 +158,7 @@ export function Datepicker({
 	}
 
 	return (
-		<div {...containerProps} className={containerProps?.className}>
+		<div {...containerProps}>
 			{label && (
 				<label htmlFor={rest.id} {...labelProps}>
 					{label}
@@ -186,6 +186,7 @@ export function Datepicker({
 				showMonthYearPicker={withoutDay}
 				customInput={
 					<CustomInput
+						// label="test"
 						withoutDay={withoutDay}
 						dateFormat={dateFormat}
 						ref={ref}

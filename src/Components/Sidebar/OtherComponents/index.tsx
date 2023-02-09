@@ -4,14 +4,14 @@ import { CaretLeft, CaretRight } from 'phosphor-react';
 
 import { useRoutesMenu } from '~/Hooks/UseRoutesMenu';
 import { useTranslation } from '~/Hooks/UseTranslation';
-import styles from './styles.module.css';
+import { Main } from '../Main';
 
 type Menu = {
 	name: string;
 	path: string;
 };
 
-export default function PrevAndNext() {
+export function OtherComponents() {
 	const { options } = useRoutesMenu();
 	const { translate } = useTranslation();
 	const location = useLocation();
@@ -39,21 +39,26 @@ export default function PrevAndNext() {
 	}
 
 	return (
-		<div className={styles.container}>
-			<strong>{translate('OTHERS_COMPONENTS')}</strong>
-			<div className={styles.subContainer}>
+		<Main heading={translate('OTHERS_COMPONENTS')}>
+			<div className="flex justify-between">
 				{prev && (
-					<Link to={prev.path}>
+					<Link
+						className="flex items-center justify-center hover:text-primary-700 transition-colors duration-500"
+						to={prev.path}
+					>
 						<CaretLeft /> {prev.name}
 					</Link>
 				)}
 				{next && (
-					<Link to={next.path}>
+					<Link
+						className="flex items-center justify-center hover:text-primary-700 transition-colors duration-500"
+						to={next.path}
+					>
 						{next.name}
 						<CaretRight />
 					</Link>
 				)}
 			</div>
-		</div>
+		</Main>
 	);
 }

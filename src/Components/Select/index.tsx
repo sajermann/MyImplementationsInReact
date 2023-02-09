@@ -138,18 +138,22 @@ export function Select({
 					}),
 					menu: baseStyles => ({
 						...baseStyles,
+						width: '100%',
 					}),
 					option: (baseStyles, state) => ({
 						...baseStyles,
 						color: state.isSelected ? '#fff' : '#6C757D',
+						width: '100%',
 					}),
 					singleValue: baseStyles => ({
 						...baseStyles,
 						color: '#6C757D',
+						width: '100%',
 					}),
 					input: baseStyles => ({
 						...baseStyles,
 						color: '#6C757D',
+						width: '100%',
 					}),
 				}}
 			/>

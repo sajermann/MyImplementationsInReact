@@ -1,5 +1,6 @@
 {
 	"translations": {
+		"TABLE_OF_CONTENTS": "Tabela de Conteúdos",
 		"SEARCH_OPTIONS": "Pesquisar Opções",
 		"NO_VIEW": "Sem Visualização",
 		"TABLE": "Tabela",
@@ -156,7 +157,7 @@
 		"TRADICIONAL_INPUT": "Tradicional Input",
 		"INPUT": "Input",
 		"OPEN": "Abrir",
-		"OTHERS_COMPONENTS": "Outros Components",
+		"OTHERS_COMPONENTS": "Outros Componentes",
 		"QUICK_ACCESS": "Acesso Rápido",
 		"OPEN_FROM": "Abrir De",
 		"OPEN_FROM_LEFT": "Abrir da esquerda",

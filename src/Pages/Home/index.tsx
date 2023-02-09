@@ -46,7 +46,7 @@ export function Home() {
 								<header className="border-b-2 p-2 flex justify-center items-center bg-dark-700 rounded-t-2xl text-white">
 									{opt.name}
 								</header>
-								<main className="flex items-center justify-center flex-1 m-auto">
+								<main className="w-full p-2 flex items-center justify-center flex-1 m-auto">
 									{opt.demo || translate('NO_VIEW')}
 								</main>
 

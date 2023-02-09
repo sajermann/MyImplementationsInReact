@@ -1,8 +1,10 @@
+import clsx from 'clsx';
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
+
 import { useTranslation } from '~/Hooks/UseTranslation';
-import useWindow from '../../Hooks/UseWindow';
-import styles from './styles.module.css';
+import useWindow from '~/Hooks/UseWindow';
+import { Main } from '../Main';
 
 type Menu = {
 	type: string;
@@ -12,7 +14,7 @@ type Menu = {
 	active: boolean;
 };
 
-export default function TableOfContents() {
+export function TableOfContents() {
 	const [optionsMenu, setOptionsMenu] = useState<Menu[]>([]);
 	const location = useLocation();
 	const { scrollPosition } = useWindow();
@@ -53,26 +55,54 @@ export default function TableOfContents() {
 		setOptionsMenu([...menusWithActive]);
 	}
 
+	async function handleClick(element: Menu) {
+		setOptionsMenu(prev => [
+			...prev.map(item => ({
+				...item,
+				active: item.anchor === element.anchor,
+			})),
+		]);
+		// if (element.top > 0) {
+		// 	await delay(1);
+		// 	window.scroll({
+		// 		top: element.top,
+		// 		behavior: 'smooth',
+		// 	});
+		// }
+	}
+
 	useEffect(() => load(), [scrollPosition, location.pathname, currentLanguage]);
-	// scrollPosition, location.pathname, currentLanguage
 
 	if (!optionsMenu.length) {
 		return null;
 	}
 
 	return (
-		<nav className={styles.container}>
-			<strong>{translate('QUICK_ACCESS')}</strong>
-			<ul>
-				{optionsMenu.map(item => (
-					<li
-						key={`#${item.anchor}`}
-						className={`${styles[item.type]} ${item.active && styles.active}`}
-					>
-						<a href={`#${item.anchor}`}>{item.title}</a>
-					</li>
-				))}
-			</ul>
-		</nav>
+		<Main heading={translate('TABLE_OF_CONTENTS')}>
+			<nav>
+				<ul>
+					{optionsMenu.map(item => (
+						<li
+							key={`#${item.anchor}`}
+							className={clsx({
+								'pl-6': item.type === 'H2',
+								'pl-12': item.type === 'H3',
+							})}
+						>
+							<a
+								className={clsx({
+									'!text-primary-700 border-l-4 border-primary-700 pl-1':
+										item.active,
+								})}
+								href={`#${item.anchor}`}
+								onClick={() => handleClick(item)}
+							>
+								{item.title}
+							</a>
+						</li>
+					))}
+				</ul>
+			</nav>
+		</Main>
 	);
 }
