@@ -1,7 +1,6 @@
 import { useLocation } from 'react-router-dom';
 import PrevAndNext from '../PrevAndNext';
 import TableOfContents from '../TableOfContents';
-import styles from './styles.module.css';
 
 export default function Sidebar() {
 	const location = useLocation();
@@ -11,7 +10,7 @@ export default function Sidebar() {
 	}
 
 	return (
-		<aside className={styles.container}>
+		<aside className="flex flex-col w-full gap-3 max-h-full sticky top-3 self-start overflow-y-auto">
 			<TableOfContents />
 			<PrevAndNext />
 		</aside>

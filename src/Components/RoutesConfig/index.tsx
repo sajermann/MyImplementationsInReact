@@ -9,8 +9,8 @@ import Sidebar from '../Sidebar';
 export default function RoutesConfig() {
 	const { options } = useRoutesMenu();
 	return (
-		<div className="flex max-w-full 2xl:max-w-[1330px] sm: p-2 gap-5 my-0 mx-auto">
-			<div className="flex flex-col w-full gap-2">
+		<div className="w-full 2xl:max-w-[1330px] sm: p-2 gap-5 flex  my-0 mx-auto">
+			<div className="w-full flex flex-col gap-2 flex-1">
 				<Routes>
 					{options.map(route => (
 						<Fragment key={generateGuid()}>
@@ -32,7 +32,9 @@ export default function RoutesConfig() {
 				</Routes>
 				<Footer />
 			</div>
-			<Sidebar />
+			<div className="hidden w-72 md:flex ">
+				<Sidebar />
+			</div>
 		</div>
 	);
 }
