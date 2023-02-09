@@ -9,7 +9,7 @@ export function ModalDemo() {
 	const { translate } = useTranslation();
 
 	return (
-		<div className="w-full h-64 flex items-center justify-center">
+		<>
 			<Button
 				variant="Outlined"
 				colorStyle="Secondary"
@@ -33,6 +33,6 @@ export function ModalDemo() {
 				blanditiis soluta nemo suscipit! Consequuntur recusandae repudiandae
 				tempora possimus earum.
 			</Modal>
-		</div>
+		</>
 	);
 }

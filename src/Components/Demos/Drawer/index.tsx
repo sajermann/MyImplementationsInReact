@@ -10,7 +10,7 @@ export function DrawerDemo() {
 	const [isOpen, setIsOpen] = useState(false);
 
 	return (
-		<div className="w-full h-64 flex items-center justify-center">
+		<>
 			<Button
 				variant="Outlined"
 				colorStyle="Success"
@@ -31,6 +31,6 @@ export function DrawerDemo() {
 					dolorem ex in est illo, cum quas obcaecati architecto.
 				</Main>
 			</Drawer>
-		</div>
+		</>
 	);
 }

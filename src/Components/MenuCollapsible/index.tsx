@@ -5,6 +5,7 @@ import React, { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 
 interface CollapsibleProps {
+	defaultIsOpen?: boolean;
 	pathChilds?: string[];
 
 	children: React.ReactNode;
@@ -15,11 +16,16 @@ export function MenuCollapsible({
 	pathChilds,
 	children,
 	trigger,
+	defaultIsOpen,
 }: CollapsibleProps) {
 	const [isOpen, setIsOpen] = React.useState(false);
 	const location = useLocation();
 
 	useEffect(() => {
+		if (defaultIsOpen) {
+			setIsOpen(defaultIsOpen);
+			return;
+		}
 		setIsOpen(pathChilds?.includes(location.pathname) || false);
 	}, []);
 

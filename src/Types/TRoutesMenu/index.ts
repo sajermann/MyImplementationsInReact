@@ -6,4 +6,5 @@ export type TRoutesMenu = {
 	element: React.ReactNode;
 	demo?: React.ReactNode;
 	subs?: TRoutesMenu[];
+	expandedMenu?: boolean;
 };

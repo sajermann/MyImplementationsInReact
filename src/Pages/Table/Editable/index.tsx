@@ -14,8 +14,11 @@ import { Datepicker } from '~/Components/Datepicker';
 import { ROLES } from '~/Constants/Roles';
 import { Checkbox } from '~/Components/Checkbox';
 import { Button } from '~/Components/Button';
+import { Main } from '~/Components/Main';
+import Section from '~/Components/Section';
+import { QuickAccessGithub } from '~/Components/QuickAccessGithub';
 
-export default function Editable() {
+export function EditablePage() {
 	const { translate } = useTranslation();
 	const [data, setData] = useState<TPerson[]>([]);
 	const [isLoading, setIsLoading] = useState(true);
@@ -54,44 +57,41 @@ export default function Editable() {
 				cell: info => (
 					<div className="w-full flex items-center justify-center">
 						<Button
-							style={{ minWidth: '50px', height: '50px', borderRadius: '50%' }}
+							style={{ width: '50px', height: '50px', borderRadius: '50%' }}
 							disabled={isLoading}
-							type="button"
+							colorStyle="Primary"
+							variant="Outlined"
 							onClick={() =>
 								setUpdateLine({
 									row: info.row.index,
 									data: { ...info.row.original },
 								})
 							}
-						>
-							<div className="w-7">
-								<Icons.Pen />
-							</div>
-						</Button>
+							endIcon={<Icons.Pen />}
+						/>
 					</div>
 				),
 				cellEdit: () => (
 					<div className="w-full flex items-center justify-center gap-2">
 						<Button
-							style={{ minWidth: '50px', height: '50px', borderRadius: '50%' }}
+							style={{ width: '50px', height: '50px', borderRadius: '50%' }}
 							disabled={isLoading}
+							colorStyle="Success"
+							variant="Outlined"
 							type="button"
 							onClick={handleSave}
-						>
-							<div className="w-7">
-								<Icons.Save />
-							</div>
-						</Button>
+							endIcon={<Icons.Save />}
+						/>
+
 						<Button
-							style={{ minWidth: '50px', height: '50px', borderRadius: '50%' }}
+							style={{ width: '50px', height: '50px', borderRadius: '50%' }}
 							disabled={isLoading}
+							colorStyle="Secondary"
+							variant="Outlined"
 							type="button"
 							onClick={() => setUpdateLine(null)}
-						>
-							<div className="w-7">
-								<Icons.Error />
-							</div>
-						</Button>
+							endIcon={<Icons.Error />}
+						/>
 					</div>
 				),
 			},
@@ -225,13 +225,23 @@ export default function Editable() {
 	}, []);
 
 	return (
-		<div className="p-4">
-			<Table
-				isLoading={isLoading}
-				columns={[...columnsInternal]}
-				data={data}
-				rowForUpdate={updateLine}
-			/>
-		</div>
+		<Main data-content="content-main">
+			<Section heading={translate('EDITABLE')}>
+				{translate('IMPLEMENTS_EDITABLE_MODE')}
+			</Section>
+			<Section subHeading={translate('CODES')}>
+				<div className="flex gap-2">
+					<QuickAccessGithub name="Editable" />
+				</div>
+			</Section>
+			<Section subHeading={translate('IMPLEMENTS')}>
+				<Table
+					isLoading={isLoading}
+					columns={[...columnsInternal]}
+					data={data}
+					rowForUpdate={updateLine}
+				/>
+			</Section>
+		</Main>
 	);
 }

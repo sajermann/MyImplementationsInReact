@@ -1,30 +1,52 @@
 import { Main } from '~/Components/Main';
 import { useTranslation } from '~/Hooks/UseTranslation';
-import { ComponentBlock } from '~/Components/ComponentBlock';
 import Section from '~/Components/Section';
 import { QuickAccessGithub } from '~/Components/QuickAccessGithub';
-import { useMemo, useState } from 'react';
-import { Select } from '~/Components/Select';
-import { TVehicle } from '~/Types/TVehicle';
-import { delay } from '@sajermann/utils/Delay';
-import { makeData } from '~/Utils/MakeData';
+import { CodeBlock } from '~/Components/CodeBlock';
+import { useRoutesMenu } from '~/Hooks/UseRoutesMenu';
+import { Link } from 'react-router-dom';
+import { Icons } from '~/Components/Icons';
 
 export function TablePage() {
-	const { translate, currentLanguage } = useTranslation();
+	const { translate } = useTranslation();
+	const { options } = useRoutesMenu();
+
+	const optionsSubTable = options.find(opt => opt.name === 'Table')?.subs;
+	const LINK_CLASS =
+		'flex flex-col flex-1 items-center justify-center gap-1 p-1 text-sm text-white  hover:text-primary-700 transition-colors duration-500';
 
 	return (
 		<Main data-content="content-main">
-			<Section heading="Select">
-				{`${translate('IMPLEMENTS_COMPONENT')} Select ${translate(
-					'USING_THE_LIB'
-				)} react-select`}
+			<Section heading={translate('TABLES')}>
+				{`${translate('IMPLEMENTS_COMPONENT')} ${translate(
+					'TABLE'
+				)} ${translate('USING_THE_LIB')} @tanstack/react-table`}
+			</Section>
+			<Section subHeading={translate('INSTALLATION_OF_LIB')}>
+				<CodeBlock>npm i @tanstack/react-table;</CodeBlock>
 			</Section>
 			<Section subHeading={translate('CODES')}>
 				<div className="flex gap-2">
 					<QuickAccessGithub name="Table" />
 				</div>
 			</Section>
-			Table
+			<Section subHeading={translate('IMPLEMENTS')}>
+				<div className="flex flex-col gap-2">
+					{optionsSubTable &&
+						optionsSubTable.map(opt => (
+							<div key={opt.name} className="border rounded flex">
+								<div className="flex w-full flex-1 items-center justify-center">
+									<div className="flex-1 ml-2">{opt.name}</div>
+									<Link to={opt.path} className={LINK_CLASS}>
+										<Icons.Eye width="30px" />
+										Demo
+									</Link>
+									<QuickAccessGithub name="Table" disableBgColor />
+								</div>
+							</div>
+						))}
+				</div>
+			</Section>
 		</Main>
 	);
 }

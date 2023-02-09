@@ -72,14 +72,28 @@ export default function MenuAccessOptions() {
 	const { options } = useRoutesMenu();
 	const refButtonSearch = useRef<HTMLInputElement>(null);
 
-	const OPTIONS_FILTREDS = options.filter(
-		item =>
-			item.name.toLowerCase().indexOf(search.toLowerCase()) > -1 ||
-			(item.subs &&
-				item.subs?.filter(
-					sub => sub.name.toLowerCase().indexOf(search.toLowerCase()) > -1
-				).length > 0)
-	);
+	function mount() {
+		const valueFilter = search.toLowerCase();
+		if (valueFilter === '') return options;
+		const newOptions: TRoutesMenu[] = [];
+		options.forEach(opt => {
+			const subOptions =
+				opt.subs?.filter(
+					subOpt => subOpt.name.toLowerCase().indexOf(valueFilter) > -1
+				) || [];
+			if (opt.name.toLowerCase().indexOf(valueFilter) > -1) {
+				newOptions.push(opt);
+			} else if (subOptions.length > 0) {
+				newOptions.push({
+					...opt,
+					expandedMenu: true,
+					subs: [...subOptions],
+				});
+			}
+		});
+
+		return newOptions;
+	}
 
 	return (
 		<>
@@ -108,7 +122,6 @@ export default function MenuAccessOptions() {
 											'opacity-100 w-full': isVisibleSearch,
 											'w-full': isVisibleSearch,
 										})}
-										autoFocus
 										type="search"
 										placeholder={translate('SEARCH_MENU')}
 										value={search}
@@ -137,10 +150,11 @@ export default function MenuAccessOptions() {
 						</div>
 					</Nav>
 					<div>
-						{OPTIONS_FILTREDS.map(menu => {
+						{mount().map(menu => {
 							if (menu.subs) {
 								return (
 									<MenuCollapsible
+										defaultIsOpen={menu.expandedMenu}
 										pathChilds={menu.subs.map(item => item.path)}
 										key={generateGuid()}
 										trigger={triggerIsOpen =>

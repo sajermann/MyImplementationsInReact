@@ -49,12 +49,12 @@
 
 .primaryOutlined {
 	color: #476fe6;
-	background-color: transparent;
+	background-color: transparent !important;
 	border: 1px solid rgb(29 78 216) !important;
 }
 
 .primaryOutlined:hover {
-	background-color: rgba(144, 202, 249, 0.08);
+	background-color: rgba(144, 202, 249, 0.08) !important;
 }
 
 .secondary {
@@ -74,11 +74,11 @@
 .secondaryOutlined {
 	color: rgb(239 68 68);
 	background-color: transparent !important;
-	border: 1px solid rgb(185 28 28);
+	border: 1px solid rgb(185 28 28) !important;
 }
 
 .secondaryOutlined:hover {
-	background-color: rgba(144, 202, 249, 0.08);
+	background-color: rgba(144, 202, 249, 0.08) !important;
 }
 
 .success {
@@ -131,7 +131,7 @@
 
 .option {
 	background-color: transparent !important;
-	border: 0;
+	border: 0 !important;
 }
 
 .option:hover {

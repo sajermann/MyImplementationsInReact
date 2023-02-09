@@ -25,6 +25,7 @@
 		"prettier"
 	],
 	"rules": {
+		"react/jsx-key": "error",
 		"react/no-unstable-nested-components": [0],
 		"no-alert": "off",
 		"import/prefer-default-export": "off",

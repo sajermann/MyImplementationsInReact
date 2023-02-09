@@ -9,6 +9,9 @@ import { Datepicker } from '~/Components/Datepicker';
 import { Input } from '~/Components/Input';
 import { Select } from '~/Components/Select';
 import { Checkbox } from '~/Components/Checkbox';
+import { Main } from '~/Components/Main';
+import Section from '~/Components/Section';
+import { QuickAccessGithub } from '~/Components/QuickAccessGithub';
 
 const DEFAULT_OPTIONS = [
 	{
@@ -25,7 +28,7 @@ const DEFAULT_OPTIONS = [
 	},
 ];
 
-export default function FullEditable() {
+export function FullEditablePage() {
 	const { translate } = useTranslation();
 	const [data, setData] = useState<TPerson[]>([]);
 	const [isLoading, setIsLoading] = useState(true);
@@ -174,7 +177,7 @@ export default function FullEditable() {
 
 	async function load() {
 		setIsLoading(true);
-		setData(makeData.person(2));
+		setData(makeData.person(10));
 		setIsLoading(false);
 	}
 
@@ -183,9 +186,19 @@ export default function FullEditable() {
 	}, []);
 
 	return (
-		<div className="p-4">
-			<Table isLoading={isLoading} columns={columns} data={data} />
-			{JSON.stringify(data, null, 2)}
-		</div>
+		<Main data-content="content-main">
+			<Section heading={translate('FULL_EDITABLE')}>
+				{translate('IMPLEMENTS_FULL_EDITABLE_MODE')}
+			</Section>
+			<Section subHeading={translate('CODES')}>
+				<div className="flex gap-2">
+					<QuickAccessGithub name="FullEditable" />
+				</div>
+			</Section>
+			<Section subHeading={translate('IMPLEMENTS')}>
+				<Table isLoading={isLoading} columns={columns} data={data} />
+				{JSON.stringify(data, null, 2)}
+			</Section>
+		</Main>
 	);
 }

@@ -10,8 +10,11 @@ import { formatDate } from '@sajermann/utils/FormatDate';
 import { DefProps, exportTo } from '~/Utils/Export';
 import { Icons } from '~/Components/Icons';
 import { Input } from '~/Components/Input';
+import { Main } from '~/Components/Main';
+import Section from '~/Components/Section';
+import { QuickAccessGithub } from '~/Components/QuickAccessGithub';
 
-export default function Export() {
+export function ExportPage() {
 	const { translate } = useTranslation();
 	const [data, setData] = useState<TPerson[]>([]);
 	const [isLoading, setIsLoading] = useState(true);
@@ -110,53 +113,63 @@ export default function Export() {
 	);
 
 	return (
-		<div className="p-4 flex flex-col gap-2">
-			<div className="flex flex-col gap-2 w-full">
-				{translate('UNDER_CONSTRUCTION')}
-				<div className="grid grid-cols-12 gap-2 w-full">
-					<div className="col-span-6">
-						<Input
-							value={globalFilter ?? ''}
-							onChange={e => setGlobalFilter(e.target.value)}
-							placeholder={translate('SEARCH_ALL_COLUMNS...')}
-							type="search"
-						/>
-					</div>
+		<Main data-content="content-main">
+			<Section heading={translate('EXPORT')}>
+				{translate('IMPLEMENTS_EXPORT_MODE')}
+			</Section>
+			<Section subHeading={translate('CODES')}>
+				<div className="flex gap-2">
+					<QuickAccessGithub name="Export" />
+				</div>
+			</Section>
+			<Section subHeading={translate('IMPLEMENTS')}>
+				<div className="flex flex-col gap-2">
+					<div className="flex flex-col gap-2 w-full">
+						{translate('UNDER_CONSTRUCTION')}
+						<div className="grid grid-cols-12 gap-2 w-full">
+							<div className="col-span-6">
+								<Input
+									value={globalFilter ?? ''}
+									onChange={e => setGlobalFilter(e.target.value)}
+									placeholder={translate('SEARCH_ALL_COLUMNS...')}
+									type="search"
+								/>
+							</div>
 
-					<div className="col-span-6">
-						<div className="flex gap-2 justify-end">
-							<Button
-								onClick={() =>
-									exportTo.excel({ data, defColumns: defForExcel })
-								}
-							>
-								<div className="w-5">
-									<Icons.Excel />
+							<div className="col-span-6">
+								<div className="flex gap-2 justify-end">
+									<Button
+										onClick={() =>
+											exportTo.excel({ data, defColumns: defForExcel })
+										}
+										startIcon={<Icons.Excel />}
+									>
+										Excel
+									</Button>
+									<Button
+										onClick={() =>
+											exportTo.csv({ data, defColumns: defForExcel })
+										}
+										startIcon={<Icons.Csv />}
+									>
+										Csv
+									</Button>
 								</div>
-								Excel
-							</Button>
-							<Button
-								onClick={() => exportTo.csv({ data, defColumns: defForExcel })}
-							>
-								<div className="w-7">
-									<Icons.Csv />
-								</div>
-								Csv
-							</Button>
+							</div>
 						</div>
 					</div>
-				</div>
-			</div>
 
-			<Table
-				isLoading={isLoading}
-				columns={columns}
-				data={data}
-				globalFilter={{
-					filter: globalFilter,
-					setFilter: setGlobalFilter,
-				}}
-			/>
-		</div>
+					<Table
+						isLoading={isLoading}
+						columns={columns}
+						data={data}
+						globalFilter={{
+							filter: globalFilter,
+							setFilter: setGlobalFilter,
+						}}
+					/>
+				</div>
+			</Section>
+		</Main>
 	);
 }

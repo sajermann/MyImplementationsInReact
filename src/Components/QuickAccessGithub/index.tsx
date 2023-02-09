@@ -1,10 +1,17 @@
 import { useRoutesMenu } from '~/Hooks/UseRoutesMenu';
 import { Icons } from '../Icons';
 
-export function QuickAccessGithub({ name }: { name: string }) {
+export function QuickAccessGithub({
+	name,
+	disableBgColor,
+}: {
+	name: string;
+	disableBgColor?: boolean;
+}) {
 	const { options } = useRoutesMenu();
-	const LINK_CLASS =
-		'flex flex-col flex-1 items-center justify-center gap-1 p-1 text-sm text-white !bg-dark-700 hover:text-primary-700 transition-colors duration-500';
+	const LINK_CLASS = `flex flex-col flex-1 items-center justify-center gap-1 p-1 text-sm text-white ${
+		disableBgColor ? '' : '!bg-dark-700'
+	}  hover:text-primary-700 transition-colors duration-500`;
 
 	function getImplements(type: 'implements_code' | 'docs_code') {
 		const result = options.find(item => item.name === name);

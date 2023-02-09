@@ -7,6 +7,7 @@ import {
 	DraggingStyle,
 	NotDraggingStyle,
 } from 'react-beautiful-dnd';
+import { BoxScroll } from '../BoxScroll';
 
 type Item = { id: string; content: string };
 
@@ -45,8 +46,11 @@ export function BeautifulDnd({ items, setItems }: Props) {
 	const getListStyle = (isDraggingOver: boolean) => ({
 		background: isDraggingOver ? 'lightblue' : 'lightgrey',
 		display: 'flex',
+		alignItems: 'center',
+		justifyContent: 'center',
 		padding: grid,
-		overflow: 'auto',
+		width: '100%',
+		// overflow: 'auto',
 	});
 
 	function onDragEnd(result: DropResult) {
@@ -68,7 +72,7 @@ export function BeautifulDnd({ items, setItems }: Props) {
 		<DragDropContext onDragEnd={onDragEnd}>
 			<Droppable droppableId="droppable" direction="horizontal">
 				{(providedExternal, snapshotExternal) => (
-					<div
+					<BoxScroll
 						{...providedExternal.droppableProps}
 						ref={providedExternal.innerRef}
 						style={getListStyle(snapshotExternal.isDraggingOver)}
@@ -91,7 +95,7 @@ export function BeautifulDnd({ items, setItems }: Props) {
 							</Draggable>
 						))}
 						{providedExternal.placeholder}
-					</div>
+					</BoxScroll>
 				)}
 			</Droppable>
 		</DragDropContext>

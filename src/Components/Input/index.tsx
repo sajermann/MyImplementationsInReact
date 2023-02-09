@@ -10,9 +10,9 @@ function Input({ ...props }: Props) {
 		<InputSajermann
 			{...props}
 			containerProps={{
-				className: `flex w-full flex-col ${props.containerProps?.className}`,
+				className: `flex w-full flex-col gap-2 ${props.containerProps?.className}`,
 			}}
-			className={`w-full py-1 px-2 rounded-md border dark:text-black ${
+			className={`w-full h-11 py-1 px-2 rounded-md border dark:text-black ${
 				props.className ? props.className : ''
 			}`}
 		/>

@@ -5,8 +5,11 @@ import { useTranslation } from '~/Hooks/UseTranslation';
 import { TPerson } from '~/Types/TPerson';
 import { makeData } from '~/Utils/MakeData';
 import { useColumns } from '~/Hooks/UseColumns';
+import { Main } from '~/Components/Main';
+import Section from '~/Components/Section';
+import { QuickAccessGithub } from '~/Components/QuickAccessGithub';
 
-export default function Sort() {
+export default function SortPage() {
 	const { translate } = useTranslation();
 	const [data, setData] = useState<TPerson[]>([]);
 
@@ -28,14 +31,24 @@ export default function Sort() {
 	);
 
 	useEffect(() => {
-		setData(makeData.person(5));
+		setData(makeData.person(10));
 	}, []);
 
 	return (
-		<div className="p-4 flex flex-col gap-2">
-			{translate('FRIENDS_IS_ARRAY_OF_OBJECT')}
+		<Main data-content="content-main">
+			<Section heading={translate('SORT')}>
+				{translate('IMPLEMENTS_SORT_MODE')}
+			</Section>
+			<Section subHeading={translate('CODES')}>
+				<div className="flex gap-2">
+					<QuickAccessGithub name="Sort" />
+				</div>
+			</Section>
+			<Section subHeading={translate('IMPLEMENTS')}>
+				{translate('FRIENDS_IS_ARRAY_OF_OBJECT')}
 
-			<Table columns={[...columns, ...columns2]} data={data} />
-		</div>
+				<Table columns={[...columns, ...columns2]} data={data} />
+			</Section>
+		</Main>
 	);
 }

@@ -7,8 +7,11 @@ import { useTranslation } from '~/Hooks/UseTranslation';
 import { TPerson } from '~/Types/TPerson';
 import { makeData } from '~/Utils/MakeData';
 import { Icons } from '~/Components/Icons';
+import { Main } from '~/Components/Main';
+import Section from '~/Components/Section';
+import { QuickAccessGithub } from '~/Components/QuickAccessGithub';
 
-export default function Favorites() {
+export function FavoritesPage() {
 	const { translate } = useTranslation();
 	const [data, setData] = useState<TPerson[]>([]);
 	const [selectedItems, setSelectedItems] = useState({});
@@ -47,18 +50,28 @@ export default function Favorites() {
 	}, []);
 
 	return (
-		<div className="p-4">
-			<Table
-				columns={columnsInternal}
-				data={data}
-				selection={{
-					rowSelection: selectedItems,
-					setRowSelection: setSelectedItems,
-					type: 'multi',
-					disableCheckbox: true,
-				}}
-			/>
-			{translate('FAVORITE_ROWS')}: {JSON.stringify(selectedItems, null, 2)}
-		</div>
+		<Main data-content="content-main">
+			<Section heading={translate('FAVORITES')}>
+				{translate('IMPLEMENTS_FAVORITES_MODE')}
+			</Section>
+			<Section subHeading={translate('CODES')}>
+				<div className="flex gap-2">
+					<QuickAccessGithub name="Favorites" />
+				</div>
+			</Section>
+			<Section subHeading={translate('IMPLEMENTS')}>
+				<Table
+					columns={columnsInternal}
+					data={data}
+					selection={{
+						rowSelection: selectedItems,
+						setRowSelection: setSelectedItems,
+						type: 'multi',
+						disableCheckbox: true,
+					}}
+				/>
+				{translate('FAVORITE_ROWS')}: {JSON.stringify(selectedItems, null, 2)}
+			</Section>
+		</Main>
 	);
 }

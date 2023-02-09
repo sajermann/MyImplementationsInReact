@@ -6,8 +6,11 @@ import { useTranslation } from '~/Hooks/UseTranslation';
 import { TPerson } from '~/Types/TPerson';
 import { makeData } from '~/Utils/MakeData';
 import { useColumns } from '~/Hooks/UseColumns';
+import { Main } from '~/Components/Main';
+import Section from '~/Components/Section';
+import { QuickAccessGithub } from '~/Components/QuickAccessGithub';
 
-export default function ColumnVisibility() {
+export function ColumnVisibilityPage() {
 	const { translate } = useTranslation();
 	const [data, setData] = useState<TPerson[]>([]);
 	const [hide, setHide] = useState<Record<string, boolean>>({
@@ -82,25 +85,37 @@ export default function ColumnVisibility() {
 	];
 
 	return (
-		<div className="p-4 flex flex-col gap-2">
-			{translate('COLUMN_VISIBILITY_WITH_STATE_FULLY_CONTROLLED')}
-
-			<div className="flex flex-col justify-center text-center">
-				<div>{translate('COLUMNS_VISIBLED')}</div>
-				<div className="flex gap-4">
-					{OPTIONS.map(item => (
-						<Checkbox
-							containerProps={{ className: 'items-center' }}
-							key={item.id}
-							checked={item.checked}
-							onCheckedChange={handleCheck}
-							id={item.id}
-							label={item.label}
-						/>
-					))}
+		<Main data-content="content-main">
+			<Section heading={translate('COLUMN_VISIBILITY')}>
+				{translate('IMPLEMENTS_COLUMN_VISIBILITY_MODE')}
+			</Section>
+			<Section subHeading={translate('CODES')}>
+				<div className="flex gap-2">
+					<QuickAccessGithub name="ColumnVisibility" />
 				</div>
-			</div>
-			<Table columns={columns} data={data} columnVisibility={hide} />
-		</div>
+			</Section>
+			<Section subHeading={translate('IMPLEMENTS')}>
+				<div className="flex flex-col gap-2">
+					{translate('COLUMN_VISIBILITY_WITH_STATE_FULLY_CONTROLLED')}
+
+					<div className="flex flex-col justify-center text-center">
+						<div>{translate('COLUMNS_VISIBLED')}</div>
+						<div className="flex gap-4">
+							{OPTIONS.map(item => (
+								<Checkbox
+									containerProps={{ className: 'items-center' }}
+									key={item.id}
+									checked={item.checked}
+									onCheckedChange={handleCheck}
+									id={item.id}
+									label={item.label}
+								/>
+							))}
+						</div>
+					</div>
+					<Table columns={columns} data={data} columnVisibility={hide} />
+				</div>
+			</Section>
+		</Main>
 	);
 }

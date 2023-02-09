@@ -133,6 +133,8 @@ export function Select({
 				styles={{
 					control: baseStyles => ({
 						...baseStyles,
+						height: 44,
+						width: '100%',
 					}),
 					menu: baseStyles => ({
 						...baseStyles,

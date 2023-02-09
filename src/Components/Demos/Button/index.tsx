@@ -38,15 +38,13 @@ export function ButtonDemo() {
 	}
 
 	return (
-		<main className="w-full flex items-center justify-center flex-1">
-			<Button
-				variant={config.variant}
-				colorStyle={config.style}
-				onClick={handleToggleVariant}
-				className="!w-72 !h-12"
-			>
-				{config.variant} | {config.style}
-			</Button>
-		</main>
+		<Button
+			variant={config.variant}
+			colorStyle={config.style}
+			onClick={handleToggleVariant}
+			className="!w-72 !h-12"
+		>
+			{config.variant} | {config.style}
+		</Button>
 	);
 }

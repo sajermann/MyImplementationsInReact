@@ -6,8 +6,11 @@ import { useTranslation } from '~/Hooks/UseTranslation';
 import { TPerson } from '~/Types/TPerson';
 import { makeData } from '~/Utils/MakeData';
 import { useColumns } from '~/Hooks/UseColumns';
+import { Main } from '~/Components/Main';
+import Section from '~/Components/Section';
+import { QuickAccessGithub } from '~/Components/QuickAccessGithub';
 
-export default function Ellipsis() {
+export function EllipsisPage() {
 	const { translate } = useTranslation();
 	const [data, setData] = useState<TPerson[]>([]);
 
@@ -33,9 +36,21 @@ export default function Ellipsis() {
 	}, []);
 
 	return (
-		<div className="p-4 flex flex-col gap-2">
-			{translate('DISPLAY_TITLE_ONLY_HOVER_ON_ELLIPSIS')}
-			<Table columns={[...columns2, ...columns]} data={data} />
-		</div>
+		<Main data-content="content-main">
+			<Section heading={translate('ELLIPSIS')}>
+				{translate('IMPLEMENTS_ELLIPSIS_MODE')}
+			</Section>
+			<Section subHeading={translate('CODES')}>
+				<div className="flex gap-2">
+					<QuickAccessGithub name="Ellipsis" />
+				</div>
+			</Section>
+			<Section subHeading={translate('IMPLEMENTS')}>
+				<div className="flex flex-col gap-2">
+					{translate('DISPLAY_TITLE_ONLY_HOVER_ON_ELLIPSIS')}
+					<Table columns={[...columns2, ...columns]} data={data} />
+				</div>
+			</Section>
+		</Main>
 	);
 }

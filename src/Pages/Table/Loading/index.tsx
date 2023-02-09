@@ -33,8 +33,8 @@ export default function LoadingPage() {
 
 	return (
 		<Main data-content="content-main">
-			<Section heading={translate('SELECTION')}>
-				{translate('IMPLEMENTS_SELECTION_MODE')}
+			<Section heading={translate('LOADING')}>
+				{translate('IMPLEMENTS_LOADING_MODE')}
 			</Section>
 			<Section subHeading={translate('CODES')}>
 				<div className="flex gap-2">
