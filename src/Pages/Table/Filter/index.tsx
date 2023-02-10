@@ -16,6 +16,7 @@ import { Popover } from '~/Components/Popover';
 import { Main } from '~/Components/Main';
 import Section from '~/Components/Section';
 import { QuickAccessGithub } from '~/Components/QuickAccessGithub';
+import { WarningInfo } from '~/Components/WarningInfo';
 
 type Props = {
 	column: Column<any, any>;
@@ -356,6 +357,10 @@ export function FilterPage() {
 
 	return (
 		<Main data-content="content-main">
+			<WarningInfo
+				type="warning"
+				msg={translate('IMPLEMENTS_UNDER_CONSTRUCTION')}
+			/>
 			<Section heading={translate('FILTER')}>
 				{translate('IMPLEMENTS_FILTER_MODE')}
 			</Section>
@@ -366,7 +371,6 @@ export function FilterPage() {
 			</Section>
 			<Section subHeading={translate('IMPLEMENTS')}>
 				<div className="flex flex-col gap-2">
-					<strong>{translate('UNDER_CONSTRUCTION')}</strong>
 					<div>
 						<SuperFilter
 							globalFilter={globalFilter}

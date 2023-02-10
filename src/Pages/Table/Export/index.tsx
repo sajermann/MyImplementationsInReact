@@ -13,6 +13,7 @@ import { Input } from '~/Components/Input';
 import { Main } from '~/Components/Main';
 import Section from '~/Components/Section';
 import { QuickAccessGithub } from '~/Components/QuickAccessGithub';
+import { WarningInfo } from '~/Components/WarningInfo';
 
 export function ExportPage() {
 	const { translate } = useTranslation();
@@ -114,6 +115,10 @@ export function ExportPage() {
 
 	return (
 		<Main data-content="content-main">
+			<WarningInfo
+				type="warning"
+				msg={translate('IMPLEMENTS_UNDER_CONSTRUCTION')}
+			/>
 			<Section heading={translate('EXPORT')}>
 				{translate('IMPLEMENTS_EXPORT_MODE')}
 			</Section>
@@ -125,7 +130,6 @@ export function ExportPage() {
 			<Section subHeading={translate('IMPLEMENTS')}>
 				<div className="flex flex-col gap-2">
 					<div className="flex flex-col gap-2 w-full">
-						{translate('UNDER_CONSTRUCTION')}
 						<div className="grid grid-cols-12 gap-2 w-full">
 							<div className="col-span-6">
 								<Input

@@ -1,5 +1,7 @@
-import { useEffect, useState } from 'react';
-import { Document, Page } from 'react-pdf';
+/* eslint-disable new-cap */
+import { useCallback, useEffect, useRef, useState } from 'react';
+import { toPng } from 'html-to-image';
+import { jsPDF } from 'jspdf';
 import { Table } from '~/Components/Table';
 import { useTranslation } from '~/Hooks/UseTranslation';
 import { TPerson } from '~/Types/TPerson';
@@ -9,19 +11,24 @@ import { Button } from '~/Components/Button';
 import { Main } from '~/Components/Main';
 import Section from '~/Components/Section';
 import { QuickAccessGithub } from '~/Components/QuickAccessGithub';
+import { WarningInfo } from '~/Components/WarningInfo';
 
 export function PdfPage() {
+	const ref = useRef<HTMLDivElement>(null);
 	const { translate } = useTranslation();
+	const { columns } = useColumns();
 	const [data, setData] = useState<TPerson[]>([]);
 	const [isLoading, setIsLoading] = useState(true);
-	const [virtualized, setVirtualized] = useState(false);
-	const { columns } = useColumns();
-	const [numPages, setNumPages] = useState(null);
-	const [pageNumber, setPageNumber] = useState(1);
-
-	function onDocumentLoadSuccess(a: any) {
-		setNumPages(a.numPages);
-	}
+	const [hide] = useState<Record<string, boolean>>({
+		id: true,
+		avatar: true,
+		name: true,
+		lastName: true,
+		birthday: true,
+		email: true,
+		role: true,
+		isActive: true,
+	});
 
 	async function load() {
 		setIsLoading(true);
@@ -33,10 +40,38 @@ export function PdfPage() {
 		load();
 	}, []);
 
+	const onButtonClick = useCallback(() => {
+		if (ref.current === null) {
+			return;
+		}
+
+		toPng(ref.current, { cacheBust: true })
+			.then(dataUrl => {
+				const pdf = new jsPDF({
+					orientation: 'p',
+					unit: 'mm',
+					format: 'a4',
+					putOnlyUsedFonts: true,
+					floatPrecision: 16, // or "smart", default is 16
+				});
+				pdf.addImage(dataUrl, 'PNG', 0, 0, 0, 0, 'batata');
+				pdf.addPage();
+				pdf.addImage(dataUrl, 'PNG', 0, 0, 0, 0, 'batata');
+				pdf.save('download.pdf');
+			})
+			.catch(err => {
+				console.log(err);
+			});
+	}, [ref]);
+
 	return (
 		<Main data-content="content-main">
-			<Section heading={translate('VIRTUALIZED')}>
-				{translate('IMPLEMENTS_VIRTUALIZED_MODE')}
+			<WarningInfo
+				type="warning"
+				msg={translate('IMPLEMENTS_UNDER_CONSTRUCTION')}
+			/>
+			<Section heading={translate('PDF')}>
+				{translate('IMPLEMENTS_PDF_MODE')}
 			</Section>
 			<Section subHeading={translate('CODES')}>
 				<div className="flex gap-2">
@@ -45,25 +80,22 @@ export function PdfPage() {
 			</Section>
 			<Section subHeading={translate('IMPLEMENTS')}>
 				<div className="flex flex-col gap-2">
-					<Button
-						onClick={() => setVirtualized(prev => !prev)}
-						className="w-44"
-					>
-						{translate(
-							virtualized ? 'DISABLED_VIRTUALIZATION' : 'ACTIVE_VIRTUALIZATION'
-						)}
+					<Button type="button" onClick={onButtonClick}>
+						Exportar
 					</Button>
 
-					<Document file="somefile.pdf" onLoadSuccess={onDocumentLoadSuccess}>
-						<Page pageNumber={pageNumber} />
-					</Document>
-
-					<Table
-						isLoading={isLoading}
-						columns={[...columns]}
-						data={data}
-						disabledVirtualization={!virtualized}
-					/>
+					<div ref={ref} id="myPage">
+						<Table
+							height="100%"
+							minHeight="100%"
+							maxHeight="100%"
+							isLoading={isLoading}
+							columns={[...columns]}
+							data={data}
+							disabledVirtualization
+							columnVisibility={hide}
+						/>
+					</div>
 				</div>
 			</Section>
 		</Main>

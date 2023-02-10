@@ -1,5 +1,8 @@
 {
 	"translations": {
+		"IMPLEMENTS_UNDER_CONSTRUCTION": "Essa Implementação está em Construção",
+		"IMPLEMENTS_PDF_MODE": "Implementação do Modo Pdf",
+		"PDF": "Pdf",
 		"I_AM_TOAST": "Eu sou um Toast!",
 		"INFO": "Info",
 		"WARNING": "Atenção",
