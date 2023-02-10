@@ -1,5 +1,9 @@
 {
 	"translations": {
+		"I_AM_TOAST": "Eu sou um Toast!",
+		"INFO": "Info",
+		"WARNING": "Atenção",
+		"ERROR": "Erro",
 		"TABLE_OF_CONTENTS": "Tabela de Conteúdos",
 		"SEARCH_OPTIONS": "Pesquisar Opções",
 		"NO_VIEW": "Sem Visualização",

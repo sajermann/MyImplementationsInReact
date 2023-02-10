@@ -1,5 +1,9 @@
 {
 	"translations": {
+		"I_AM_TOAST": "I am a Toast!",
+		"INFO": "Info",
+		"WARNING": "Warning",
+		"ERROR": "Error",
 		"TABLE_OF_CONTENTS": "Table of Contents",
 		"SEARCH_OPTIONS": "Search Options",
 		"NO_VIEW": "No View",

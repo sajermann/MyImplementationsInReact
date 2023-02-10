@@ -1,5 +1,6 @@
 import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
+import { Toaster } from 'react-hot-toast';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 import { DarkModeProvider } from '~/Hooks/DarkMode';
@@ -9,6 +10,7 @@ import '~/Config/i18n';
 export function InjectorProviders({ children }: { children: React.ReactNode }) {
 	return (
 		<BrowserRouter basename="MyImplementationsInReact/">
+			<Toaster position="top-right" />
 			<QueryClientProvider
 				client={
 					new QueryClient({

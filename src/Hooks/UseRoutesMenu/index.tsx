@@ -31,6 +31,9 @@ import { ResizingPage } from '~/Pages/Table/Resizing';
 import { ColumnVisibilityPage } from '~/Pages/Table/ColumnVisibility';
 import { PrintPage } from '~/Pages/Table/Print';
 import { ExportPage } from '~/Pages/Table/Export';
+import { ToastPage } from '~/Pages/Toast';
+import { ToastDemo } from '~/Components/Demos/Toast';
+import { PdfPage } from '~/Pages/Pdf';
 
 export function useRoutesMenu() {
 	const options: TRoutesMenu[] = [
@@ -119,7 +122,6 @@ export function useRoutesMenu() {
 			docs_code:
 				'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/Table',
 			element: <TablePage />,
-
 			subs: [
 				{
 					name: 'Filter',
@@ -266,6 +268,25 @@ export function useRoutesMenu() {
 					element: <ExportPage />,
 				},
 			],
+		},
+		{
+			name: 'Toast',
+			path: '/toast',
+			implements_code:
+				'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Components/Toast',
+			docs_code:
+				'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/Toast',
+			element: <ToastPage />,
+			demo: <ToastDemo />,
+		},
+		{
+			name: 'Pdf',
+			path: '/pdf',
+			implements_code:
+				'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Components/Pdf',
+			docs_code:
+				'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/Pdf',
+			element: <PdfPage />,
 		},
 	];
 	return { options };
