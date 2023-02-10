@@ -1,0 +1,6 @@
+.td {
+	padding: 6px;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}

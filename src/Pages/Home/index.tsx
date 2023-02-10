@@ -46,8 +46,9 @@ export function Home() {
 								<header className="border-b-2 p-2 flex justify-center items-center bg-dark-700 rounded-t-2xl text-white">
 									{opt.name}
 								</header>
-
-								{opt.demo}
+								<main className="w-full p-2 flex items-center justify-center flex-1 m-auto">
+									{opt.demo || translate('NO_VIEW')}
+								</main>
 
 								<footer className="border-t-2 flex !bg-dark-700">
 									<Link to={opt.path} className={LINK_CLASS}>

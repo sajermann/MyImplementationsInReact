@@ -34,6 +34,7 @@ module.exports = {
 				},
 				error: {
 					500: '#F8D7DA',
+					600: '#BF2E3A',
 					700: '#842029',
 				},
 				warning: {
@@ -53,7 +54,10 @@ module.exports = {
 			},
 		},
 	},
-	plugins: [require('tailwind-scrollbar')({ nocompatible: true })],
+	plugins: [
+		require('tailwind-scrollbar')({ nocompatible: true }),
+		require('tailwindcss-animate'),
+	],
 	variants: {
 		scrollbar: ['rounded'],
 	},

@@ -295,7 +295,7 @@ export function ButtonPage() {
 									isLoading,
 								},
 								failedOptions: {
-									failed: true,
+									failed,
 									customIcon: (
 										<TrendDown>
 											<animate

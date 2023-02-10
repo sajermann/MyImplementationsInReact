@@ -8,9 +8,13 @@ type Props = ISajermannReactInput;
 function Input({ ...props }: Props) {
 	return (
 		<InputSajermann
-			containerProps={{ className: 'flex w-full flex-col' }}
-			className="w-full py-1 px-2 rounded-md border dark:text-black"
 			{...props}
+			containerProps={{
+				className: `flex w-full flex-col gap-2 ${props.containerProps?.className}`,
+			}}
+			className={`w-full h-11 py-1 px-2 rounded-md border dark:text-black ${
+				props.className ? props.className : ''
+			}`}
 		/>
 	);
 }

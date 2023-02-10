@@ -3,8 +3,8 @@
 }
 
 .custom {
-	background-color: #f535e6;
-	border: 1px solid green;
+	background-color: #f535e6 !important;
+	border: 1px solid green !important;
 	border-radius: 0px;
 }
 
@@ -17,16 +17,16 @@
 }
 
 .custom:hover {
-	background-color: #f590e6;
+	background-color: #f590e6 !important;
 }
 
 .custom:focus {
-	outline: 2px solid green;
+	outline: 2px solid green !important;
 }
 
 .custom2 {
-	background-color: rgb(155, 165, 10);
-	border: 1px solid red;
+	background-color: rgb(155, 165, 10) !important;
+	border: 1px solid red !important;
 	border-radius: 30px;
 }
 
@@ -39,11 +39,11 @@
 }
 
 .custom2:hover {
-	background-color: rgb(155, 165, 120);
+	background-color: rgb(155, 165, 120) !important;
 }
 
 .custom2:focus {
-	outline: 2px solid red;
+	outline: 2px solid red !important;
 }
 
 .custom2:active {

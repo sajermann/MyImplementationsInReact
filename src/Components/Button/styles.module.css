@@ -35,36 +35,36 @@
 
 .primary {
 	color: rgb(255 255 255);
-	background-color: #476fe6;
-	border: 1px solid rgb(29 78 216);
+	background-color: #476fe6 !important;
+	border: 1px solid rgb(29 78 216) !important;
 }
 
 .primary:hover {
-	background-color: rgb(29 78 216);
+	background-color: rgb(29 78 216) !important;
 }
 
 .primary:focus {
-	outline: 2px solid rgb(29 78 216);
+	outline: 2px solid rgb(29 78 216) !important;
 }
 
 .primaryOutlined {
 	color: #476fe6;
-	background-color: transparent;
-	border: 1px solid rgb(29 78 216);
+	background-color: transparent !important;
+	border: 1px solid rgb(29 78 216) !important;
 }
 
 .primaryOutlined:hover {
-	background-color: rgba(144, 202, 249, 0.08);
+	background-color: rgba(144, 202, 249, 0.08) !important;
 }
 
 .secondary {
 	color: rgb(255 255 255);
-	background-color: rgb(239 68 68);
+	background-color: rgb(239 68 68) !important;
 	border: 1px solid rgb(185 28 28);
 }
 
 .secondary:hover {
-	background-color: rgb(185 28 28);
+	background-color: rgb(185 28 28) !important;
 }
 
 .secondary:focus {
@@ -73,22 +73,22 @@
 
 .secondaryOutlined {
 	color: rgb(239 68 68);
-	background-color: transparent;
-	border: 1px solid rgb(185 28 28);
+	background-color: transparent !important;
+	border: 1px solid rgb(185 28 28) !important;
 }
 
 .secondaryOutlined:hover {
-	background-color: rgba(144, 202, 249, 0.08);
+	background-color: rgba(144, 202, 249, 0.08) !important;
 }
 
 .success {
 	color: rgb(255 255 255);
-	background-color: rgb(34 197 94);
+	background-color: rgb(34 197 94) !important;
 	border: 1px solid rgb(21 128 61);
 }
 
 .success:hover {
-	background-color: rgb(21 128 61);
+	background-color: rgb(21 128 61) !important;
 }
 
 .success:focus {
@@ -97,22 +97,22 @@
 
 .successOutlined {
 	color: rgb(34 197 94);
-	background-color: transparent;
+	background-color: transparent !important;
 	border: 1px solid rgb(21 128 61);
 }
 
 .successOutlined:hover {
-	background-color: rgba(144, 202, 249, 0.08);
+	background-color: rgba(144, 202, 249, 0.08) !important;
 }
 
 .warning {
 	color: rgb(255 255 255);
-	background-color: rgb(234 179 8);
+	background-color: rgb(234 179 8) !important;
 	border: 1px solid rgb(161 98 7);
 }
 
 .warning:hover {
-	background-color: rgb(161 98 7);
+	background-color: rgb(161 98 7) !important;
 }
 
 .warning:focus {
@@ -121,24 +121,24 @@
 
 .warningOutlined {
 	color: rgb(234 179 8);
-	background-color: transparent;
+	background-color: transparent !important;
 	border: 1px solid rgb(161 98 7);
 }
 
 .warningOutlined:hover {
-	background-color: rgba(144, 202, 249, 0.08);
+	background-color: rgba(144, 202, 249, 0.08) !important;
 }
 
 .option {
-	background-color: transparent;
-	border: 0;
+	background-color: transparent !important;
+	border: 0 !important;
 }
 
 .option:hover {
-	background-color: rgba(144, 202, 249, 0.08);
+	background-color: rgba(144, 202, 249, 0.08) !important;
 }
 
 .option:focus {
 	outline: 0;
-	background-color: rgba(144, 202, 249, 0.08);
+	background-color: rgba(144, 202, 249, 0.08) !important;
 }
