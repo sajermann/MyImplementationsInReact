@@ -10,7 +10,7 @@ import Section from '~/Components/Section';
 import { QuickAccessGithub } from '~/Components/QuickAccessGithub';
 import { useTranslation } from '~/Hooks/UseTranslation';
 
-export default function ExpandedLinePage() {
+export function ExpandedLinePage() {
 	const { translate } = useTranslation();
 	const [data, setData] = useState<TPerson[]>([]);
 	const [isLoading, setIsLoading] = useState(true);

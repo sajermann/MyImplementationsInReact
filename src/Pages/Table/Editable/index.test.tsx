@@ -4,13 +4,13 @@
 import { render, waitFor } from '@testing-library/react';
 import { it, describe, expect } from 'vitest';
 import userEvent from '@testing-library/user-event';
-import Home from './index';
+import { EditablePage } from '.';
 
 function Mock() {
-	return <Home />;
+	return <EditablePage />;
 }
 
-describe('Pages/Home', () => {
+describe('Pages/Table/EditablePage', () => {
 	it(`should render list items`, () => {
 		const { getByText } = render(<Mock />);
 		expect(getByText('Bruno')).toBeInTheDocument();

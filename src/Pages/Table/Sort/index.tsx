@@ -9,7 +9,7 @@ import { Main } from '~/Components/Main';
 import Section from '~/Components/Section';
 import { QuickAccessGithub } from '~/Components/QuickAccessGithub';
 
-export default function SortPage() {
+export function SortPage() {
 	const { translate } = useTranslation();
 	const [data, setData] = useState<TPerson[]>([]);
 

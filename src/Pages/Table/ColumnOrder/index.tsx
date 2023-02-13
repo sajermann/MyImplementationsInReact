@@ -10,7 +10,7 @@ import { Main } from '~/Components/Main';
 import Section from '~/Components/Section';
 import { QuickAccessGithub } from '~/Components/QuickAccessGithub';
 
-export default function ColumnOrderPage() {
+export function ColumnOrderPage() {
 	const { translate } = useTranslation();
 	const [data, setData] = useState<TPerson[]>([]);
 	const [columnOrder, setColumnOrder] = useState([

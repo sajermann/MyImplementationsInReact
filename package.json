@@ -4,7 +4,8 @@
   "type": "module",
   "scripts": {
     "start": "vite --open",
-    "build": "npx rollup --config rollup.config.js",
+    "build": "tsc && vite build",
+		"preview": "vite preview",
     "copyRequiredsWindows": "@powershell copy './packageExclusive.json' './build/package.json' && @powershell copy './README.md' './build'",
     "copyRequiredsLinux": "cp './packageExclusive.json' './build/package.json' && cp './README.md' './build'",
     "test": "vitest run --coverage",

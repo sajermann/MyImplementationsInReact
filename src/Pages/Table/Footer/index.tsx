@@ -9,7 +9,7 @@ import { Input } from '~/Components/Input';
 
 type Game = { id: string; name: string; price: number };
 
-export default function Footer() {
+export function FooterPage() {
 	const { translate } = useTranslation();
 	const [data, setData] = useState<Game[]>([]);
 	const [globalFilter, setGlobalFilter] = useState('');
@@ -25,52 +25,48 @@ export default function Footer() {
 	}, []);
 
 	function getTotals(props: HeaderContext<Game, unknown>) {
-		try {
-			const identColumn = props.column.id as keyof Game;
-			const allItems = [...props.column.getFacetedRowModel().rows];
-			console.log(allItems);
-			const itemsFiltreds = [
-				...props.column
-					.getFacetedRowModel()
-					// eslint-disable-next-line no-underscore-dangle
-					.rows.filter(item => item.columnFilters.__global__ === true),
-			];
-			console.log({ itemsFiltreds });
-			console.log({ globalFilter });
-			if (globalFilter === '' && itemsFiltreds.length === 0) {
-				const totalValue = allItems.reduce(
-					(accumulator, currentValue) =>
-						accumulator +
-						Number(
-							unFormatFromReal(String(currentValue.original[identColumn]))
-						),
-					0
-				);
-
-				return formatForReal(totalValue);
-			}
-
-			if (globalFilter !== '' && itemsFiltreds.length > 0) {
-				const totalValue = itemsFiltreds.reduce(
-					(accumulator, currentValue) =>
-						accumulator +
-						Number(
-							unFormatFromReal(String(currentValue.original[identColumn]))
-						),
-					0
-				);
-
-				return formatForReal(totalValue);
-			}
-
-			// console.log(
-			//  props.column.getFacetedRowModel().rows[0].getVisibleCells() || ''
-			// );
-			return 'R$ 0,00';
-		} catch {
-			console.log('Error');
-			return 'R$ 0,00';
-		}
+		// try {
+		// 	const identColumn = props.column.id as keyof Game;
+		// 	const allItems = [...props.column.getFacetedRowModel().rows];
+		// 	console.log(allItems);
+		// 	const itemsFiltreds = [
+		// 		...props.column
+		// 			.getFacetedRowModel()
+		// 			// eslint-disable-next-line no-underscore-dangle
+		// 			.rows.filter(item => item.columnFilters.__global__ === true),
+		// 	];
+		// 	console.log({ itemsFiltreds });
+		// 	console.log({ globalFilter });
+		// 	if (globalFilter === '' && itemsFiltreds.length === 0) {
+		// 		const totalValue = allItems.reduce(
+		// 			(accumulator, currentValue) =>
+		// 				accumulator +
+		// 				Number(
+		// 					unFormatFromReal(String(currentValue.original[identColumn]))
+		// 				),
+		// 			0
+		// 		);
+		// 		return formatForReal(totalValue);
+		// 	}
+		// 	if (globalFilter !== '' && itemsFiltreds.length > 0) {
+		// 		const totalValue = itemsFiltreds.reduce(
+		// 			(accumulator, currentValue) =>
+		// 				accumulator +
+		// 				Number(
+		// 					unFormatFromReal(String(currentValue.original[identColumn]))
+		// 				),
+		// 			0
+		// 		);
+		// 		return formatForReal(totalValue);
+		// 	}
+		// 	// console.log(
+		// 	//  props.column.getFacetedRowModel().rows[0].getVisibleCells() || ''
+		// 	// );
+		// 	return 'R$ 0,00';
+		// } catch {
+		// 	console.log('Error');
+		// 	return 'R$ 0,00';
+		// }
 	}
 
 	const columns = useMemo<ColumnDef<Game>[]>(
