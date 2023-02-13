@@ -1,9 +1,9 @@
-import clsx from 'clsx';
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
 import { useTranslation } from '~/Hooks/UseTranslation';
-import useWindow from '~/Hooks/UseWindow';
+import useWindow from '~/Hooks/UseWindowNew';
+import { managerClassNames } from '~/Utils/ManagerClassNames';
 import { Main } from '../Main';
 
 type Menu = {
@@ -84,13 +84,13 @@ export function TableOfContents() {
 					{optionsMenu.map(item => (
 						<li
 							key={`#${item.anchor}`}
-							className={clsx({
+							className={managerClassNames({
 								'pl-6': item.type === 'H2',
 								'pl-12': item.type === 'H3',
 							})}
 						>
 							<a
-								className={clsx({
+								className={managerClassNames({
 									'!text-primary-700 border-l-4 border-primary-700 pl-1':
 										item.active,
 								})}
