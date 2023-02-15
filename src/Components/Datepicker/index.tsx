@@ -1,5 +1,4 @@
 /* eslint-disable import/no-extraneous-dependencies */
-// import ptBr from 'date-fns/locale/pt-BR';
 import { enUS, ptBR } from 'date-fns/locale';
 import {
 	useEffect,

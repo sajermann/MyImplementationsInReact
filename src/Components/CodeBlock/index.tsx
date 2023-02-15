@@ -20,7 +20,6 @@ export function CodeBlock({ children, language }: Props) {
 		setIsLoading(false);
 		setSuccess(true);
 		await delay(2000);
-		// setSuccess(false);
 	}
 
 	return (
