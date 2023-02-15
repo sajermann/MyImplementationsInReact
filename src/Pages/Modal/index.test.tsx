@@ -5,17 +5,16 @@ import { fireEvent, render, waitFor } from '@testing-library/react';
 import { useState } from 'react';
 import { it, describe } from 'vitest';
 import { Button } from '~/Components/Button';
-import { InjectorProviders } from '~/Components/InjectorProviders';
 import { Modal } from '~/Components/Modal';
 
-import { SortPage } from '.';
+import { ModalPage } from '.';
 
-describe('Pages/Table/SortPage', () => {
-	it(`must render `, async () => {
-		const { getAllByText } = render(
-			<InjectorProviders>
-				<SortPage />
-			</InjectorProviders>
-		);
+describe('Pages/ModalPage', () => {
+	it(`must render checkbox`, async () => {
+		const { getAllByText } = render(<ModalPage />);
+		await waitFor(() => {
+			const button = getAllByText('WITH_CLOSE_BUTTON')[0];
+			fireEvent.click(button);
+		});
 	});
 });

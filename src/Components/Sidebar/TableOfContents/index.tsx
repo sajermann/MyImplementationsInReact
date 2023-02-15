@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
 import { useTranslation } from '~/Hooks/UseTranslation';
-import useWindow from '~/Hooks/UseWindowNew';
+import useWindow from '~/Hooks/UseWindow';
 import { managerClassNames } from '~/Utils/ManagerClassNames';
 import { Main } from '../Main';
 

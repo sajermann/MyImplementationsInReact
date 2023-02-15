@@ -49,7 +49,7 @@ describe('Components/Select', () => {
 
 		fireEvent.keyDown(mySelectComponent.childNodes[1], { key: 'ArrowDown' });
 
-		await waitFor(() => getByText('Não há dados'));
+		await waitFor(() => getByText('NO_DATA'));
 	});
 
 	it(`must show text 'loading...'`, async () => {
@@ -72,6 +72,6 @@ describe('Components/Select', () => {
 
 		fireEvent.keyDown(mySelectComponent.childNodes[1], { key: 'ArrowDown' });
 
-		await waitFor(() => getByText('Carregando...'));
+		await waitFor(() => getByText('LOADING...'));
 	});
 });
