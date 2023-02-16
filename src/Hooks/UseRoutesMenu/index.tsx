@@ -34,6 +34,7 @@ import { ExportPage } from '~/Pages/Table/Export';
 import { ToastPage } from '~/Pages/Toast';
 import { ToastDemo } from '~/Components/Demos/Toast';
 import { PdfPage } from '~/Pages/Pdf';
+import { FooterPage } from '~/Pages/Table/Footer';
 
 export function useRoutesMenu() {
 	const options: TRoutesMenu[] = [
@@ -266,6 +267,15 @@ export function useRoutesMenu() {
 					docs_code:
 						'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/Export',
 					element: <ExportPage />,
+				},
+				{
+					name: 'Footer',
+					path: '/table/footer',
+					implements_code:
+						'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Components/Footer',
+					docs_code:
+						'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/Footer',
+					element: <FooterPage />,
 				},
 			],
 		},
