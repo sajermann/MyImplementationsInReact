@@ -1,3 +1,5 @@
+import { lazy } from 'react';
+
 import { CheckboxDemo } from '~/Components/Demos/Checkbox';
 import { ButtonDemo } from '~/Components/Demos/Button';
 import { DatepickerDemo } from '~/Components/Demos/Datepicker';
@@ -34,7 +36,13 @@ import { ExportPage } from '~/Pages/Table/Export';
 import { ToastPage } from '~/Pages/Toast';
 import { ToastDemo } from '~/Components/Demos/Toast';
 import { PdfPage } from '~/Pages/Pdf';
-import { FooterPage } from '~/Pages/Table/Footer';
+// import { FooterPage } from '~/Pages/Table/Footer';
+
+const FooterPage = lazy(() =>
+	import('~/Pages/Table/Footer').then(({ FooterPage: Footer }) => ({
+		default: Footer,
+	}))
+);
 
 export function useRoutesMenu() {
 	const options: TRoutesMenu[] = [
