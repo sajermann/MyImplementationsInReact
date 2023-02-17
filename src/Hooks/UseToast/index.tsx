@@ -13,7 +13,6 @@ type Props = {
 export function useToast() {
 	const { toasts, pausedAt } = useToasterStore();
 	const duration = 3000;
-	console.log({ toasts, pausedAt });
 
 	function customToast({ type, msg, enableProgress }: Props) {
 		const commonsType = {

@@ -183,9 +183,10 @@ function ArrowsInSimple({ width, height, color, ...rest }: Props) {
 	);
 }
 
-function Download({ width, height, color }: Props) {
+function Download({ width, height, color, ...rest }: Props) {
 	return (
 		<svg
+			{...rest}
 			width={width || '100%'}
 			height={height || '100%'}
 			viewBox="0 0 16 20"
@@ -202,11 +203,12 @@ function Download({ width, height, color }: Props) {
 	);
 }
 
-function Upload() {
+function Upload({ width, height, color, ...rest }: Props) {
 	return (
 		<svg
-			width="100%"
-			height="100%"
+			{...rest}
+			width={width || '100%'}
+			height={height || '100%'}
 			viewBox="0 0 16 20"
 			fill="none"
 			xmlns="http://www.w3.org/2000/svg"
@@ -215,24 +217,25 @@ function Upload() {
 				fillRule="evenodd"
 				clipRule="evenodd"
 				d="M7 8.825L3.757 12.067L2.343 10.653L8 4.996L13.657 10.653L12.243 12.067L9 8.825L9 20L7 20L7 8.825ZM16 6L14 6L14 2L2 2L2 6L-1.22392e-06 6L-1.57361e-06 2C-1.66978e-06 0.900001 0.899998 1.32008e-06 2 1.22392e-06L14 1.74846e-07C15.1 7.86805e-08 16 0.962999 16 2L16 6Z"
-				fill="white"
+				fill={color || 'currentColor'}
 			/>
 		</svg>
 	);
 }
 
-function Clear() {
+function Clear({ color, width, height, ...rest }: Props) {
 	return (
 		<svg
-			width="100%"
-			height="100%"
+			{...rest}
+			width={width || '100%'}
+			height={height || '100%'}
 			viewBox="0 0 16 18"
 			fill="none"
 			xmlns="http://www.w3.org/2000/svg"
 		>
 			<path
 				d="M1.47727 11.668C2.49736 14.3987 5.03327 16.3333 8 16.3333C11.8659 16.3333 15 13.05 15 9M14.5227 6.332C13.5039 3.60067 10.9674 1.66667 8 1.66667C4.13409 1.66667 1 4.95 1 9M6.09091 11.6667H1V17M15 1V6.33333H9.90909"
-				stroke="white"
+				stroke={color || 'currentColor'}
 				strokeWidth="2"
 			/>
 		</svg>
@@ -251,7 +254,7 @@ function Search({ color, width, height, ...rest }: Props) {
 		>
 			<path
 				d="M17 17L13.2223 13.2156M15.3158 8.15789C15.3158 10.0563 14.5617 11.8769 13.2193 13.2193C11.8769 14.5617 10.0563 15.3158 8.15789 15.3158C6.2595 15.3158 4.43886 14.5617 3.0965 13.2193C1.75413 11.8769 1 10.0563 1 8.15789C1 6.2595 1.75413 4.43886 3.0965 3.0965C4.43886 1.75413 6.2595 1 8.15789 1C10.0563 1 11.8769 1.75413 13.2193 3.0965C14.5617 4.43886 15.3158 6.2595 15.3158 8.15789V8.15789Z"
-				stroke="white"
+				stroke={color || 'currentColor'}
 				strokeWidth="2"
 				strokeLinecap="round"
 			/>
@@ -259,12 +262,12 @@ function Search({ color, width, height, ...rest }: Props) {
 	);
 }
 
-function Report({ color, ...rest }: Props) {
+function Report({ color, width, height, ...rest }: Props) {
 	return (
 		<svg
 			{...rest}
-			width="100%"
-			height="100%"
+			width={width || '100%'}
+			height={height || '100%'}
 			viewBox="0 0 16 18"
 			fill="none"
 			xmlns="http://www.w3.org/2000/svg"
@@ -273,35 +276,36 @@ function Report({ color, ...rest }: Props) {
 				fillRule="evenodd"
 				clipRule="evenodd"
 				d="M13 2H3C2.7378 2 2.48043 2.10536 2.29289 2.29289C2.10536 2.48043 2 2.73478 2 3V15C2 15.2652 2.10536 15.5196 2.29289 15.7071C2.48043 15.8946 2.73478 16 3 16H13C13.2652 16 13.5196 15.8946 13.7071 15.7071C13.8946 15.5196 14 15.2652 14 15V3C14 2.73478 13.8946 2.48043 13.7071 2.29289C13.5196 2.10536 13.2652 2 13 2ZM3 0C2.20435 0 1.44129 0.316071 0.87868 0.87868C0.316071 1.44129 0 2.20435 0 3V15C0 15.7956 0.316071 16.5587 0.87868 17.1213C1.44129 17.6839 2.20435 18 3 18H13C13.7956 18 14.5587 17.6839 15.1213 17.1213C15.6839 16.5587 16 15.7956 16 15V3C16 2.20435 15.6839 1.44129 15.1213 0.87868C14.5587 0.316071 13.7956 0 13 0H3Z"
-				fill={color || '#fff'}
+				fill={color || 'currentColor'}
 			/>
 			<path
 				d="M4 4H12V6H4V4ZM4 8H12V10H4V8ZM4 12H9V14H4V12Z"
-				fill={color || '#fff'}
+				fill={color || 'currentColor'}
 			/>
 		</svg>
 	);
 }
 
-function User({ color }: Props) {
+function User({ width, height, color, ...rest }: Props) {
 	return (
 		<svg
-			width="100%"
-			height="100%"
+			{...rest}
+			width={width || '100%'}
+			height={height || '100%'}
 			viewBox="0 0 25 25"
 			fill="none"
 			xmlns="http://www.w3.org/2000/svg"
 		>
 			<path
 				d="M12.5 1C6.14855 1 1 6.14855 1 12.5C1 18.8514 6.14855 24 12.5 24C18.8514 24 24 18.8514 24 12.5C24 6.14855 18.8514 1 12.5 1Z"
-				stroke={color}
+				stroke={color || 'currentColor'}
 				strokeWidth="1.5"
 				strokeLinecap="round"
 				strokeLinejoin="round"
 			/>
 			<path
 				d="M3.61157 19.7979C3.61157 19.7979 6.17492 16.525 12.4999 16.525C18.8249 16.525 21.3894 19.7979 21.3894 19.7979M12.4999 12.5C13.4149 12.5 14.2924 12.1366 14.9394 11.4896C15.5864 10.8426 15.9499 9.96503 15.9499 9.05004C15.9499 8.13504 15.5864 7.25752 14.9394 6.61052C14.2924 5.96352 13.4149 5.60004 12.4999 5.60004C11.5849 5.60004 10.7074 5.96352 10.0604 6.61052C9.4134 7.25752 9.04992 8.13504 9.04992 9.05004C9.04992 9.96503 9.4134 10.8426 10.0604 11.4896C10.7074 12.1366 11.5849 12.5 12.4999 12.5V12.5Z"
-				stroke={color}
+				stroke={color || 'currentColor'}
 				strokeWidth="1.5"
 				strokeLinecap="round"
 				strokeLinejoin="round"
@@ -328,23 +332,24 @@ function Close({ width, height, color, ...rest }: Props) {
 	);
 }
 
-function Info() {
+function Info({ width, height, color, ...rest }: Props) {
 	return (
 		<svg
-			width="100%"
-			height="100%"
+			{...rest}
+			width={width || '100%'}
+			height={height || '100%'}
 			viewBox="0 0 18 18"
 			fill="none"
 			xmlns="http://www.w3.org/2000/svg"
 		>
 			<path
 				d="M9 17C13.4183 17 17 13.4183 17 9C17 4.58172 13.4183 1 9 1C4.58172 1 1 4.58172 1 9C1 13.4183 4.58172 17 9 17Z"
-				stroke="currentColor"
+				stroke={color || 'currentColor'}
 				strokeWidth="2"
 			/>
 			<path
 				d="M9 5V9.8M9 12.6V13"
-				stroke="currentColor"
+				stroke={color || 'currentColor'}
 				strokeWidth="2"
 				strokeLinecap="round"
 			/>
@@ -984,7 +989,6 @@ function Pen({ width, height, color, ...rest }: Props) {
 	return (
 		<svg
 			{...rest}
-			xmlns="http://www.w3.org/2000/svg"
 			width={width || '100%'}
 			height={height || '100%'}
 			fill={color || 'currentColor'}
@@ -1033,9 +1037,12 @@ function Pen({ width, height, color, ...rest }: Props) {
 	);
 }
 
-function Brazil() {
+function Brazil({ width, height, ...rest }: Props) {
 	return (
 		<svg
+			{...rest}
+			width={width || '100%'}
+			height={height || '100%'}
 			textRendering="geometricPrecision"
 			fillRule="evenodd"
 			xmlSpace="preserve"
@@ -1066,9 +1073,9 @@ function Brazil() {
 	);
 }
 
-function Eua() {
+function Eua({ ...rest }: Props) {
 	return (
-		<svg viewBox="0 0 600 400">
+		<svg {...rest} viewBox="0 0 600 400">
 			<g id="imagebot_1">
 				<title>English</title>
 				<g
@@ -1076,11 +1083,7 @@ function Eua() {
 					transform="translate(0 .52632) matrix(2.9977 0 0 3.8541 0 -2.0285)"
 				>
 					<metadata id="imagebot_72">image/svg+xml</metadata>
-					<g
-						id="imagebot_70"
-						transform="scale(.52632)"
-						// label="bg_border"
-					>
+					<g id="imagebot_70" transform="scale(.52632)">
 						<rect
 							id="imagebot_71"
 							fillRule="evenodd"

@@ -13,9 +13,6 @@ export function ToastPage() {
 
 	function handleError(type: 'error' | 'info' | 'success' | 'warning') {
 		customToast({ msg: translate('I_AM_TOAST'), type });
-		// customToast({ msg: 'Nenhum item localizado!', type: 'success' });
-		// customToast({ msg: 'Nenhum item localizado!', type: 'warning' });
-		// customToast({ msg: 'Nenhum item localizado!', type: 'info' });
 	}
 
 	return (

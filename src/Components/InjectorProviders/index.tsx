@@ -9,7 +9,7 @@ import '~/Config/i18n';
 
 export function InjectorProviders({ children }: { children: React.ReactNode }) {
 	return (
-		<BrowserRouter basename="MyImplementationsInReact/">
+		<BrowserRouter basename={import.meta.env.VITE_URL_BASENAME}>
 			<Toaster position="top-right" />
 			<QueryClientProvider
 				client={

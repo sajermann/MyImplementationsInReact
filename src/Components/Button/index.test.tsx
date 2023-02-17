@@ -1,12 +1,14 @@
 /* eslint-disable import/no-extraneous-dependencies */
+import { vi } from 'vitest';
 import { render, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+
 import { delay } from '@sajermann/utils/Delay';
-import { Button } from './index';
+import { Button } from '.';
 
 describe('Components/Button', () => {
 	it(`should call function onClick`, async () => {
-		const onClick = jest.fn();
+		const onClick = vi.fn();
 		const { getByTestId } = render(
 			<Button
 				data-testid="Button"
@@ -25,7 +27,7 @@ describe('Components/Button', () => {
 	});
 
 	it(`should be disabled`, async () => {
-		const onClick = jest.fn();
+		const onClick = vi.fn();
 		const { getByTestId } = render(
 			<Button data-testid="Button" disabled type="button" onClick={onClick}>
 				Clique aqui
@@ -42,11 +44,11 @@ describe('Components/Button', () => {
 				isLoading: false,
 			},
 			successOptions: {
-				setSuccess: jest.fn(),
+				setSuccess: vi.fn(),
 				success: false,
 			},
 			failedOptions: {
-				setFailed: jest.fn(),
+				setFailed: vi.fn(),
 				failed: false,
 			},
 		};

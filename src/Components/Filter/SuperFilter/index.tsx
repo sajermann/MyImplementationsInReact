@@ -7,7 +7,7 @@ import { Select } from '~/Components/Select';
 import { useTranslation } from '~/Hooks/UseTranslation';
 import { generateGuid } from '@sajermann/utils/Random';
 import { TFilterActive } from '~/Types/TFilterActive';
-import Chip from '~/Components/Chip';
+import { Chip } from '~/Components/Chip';
 
 type Props = {
 	globalFilter: TFilterActive[];

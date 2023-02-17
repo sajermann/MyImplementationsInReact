@@ -6,7 +6,7 @@ interface ChipProps {
 	onRemove?: (id: string) => void;
 }
 
-function Chip({ value, id, onRemove }: ChipProps) {
+export function Chip({ value, id, onRemove }: ChipProps) {
 	return (
 		<div className="flex justify-between items-center gap-2 rounded-2xl bg-gray-600 py-1 px-4 w-fit text-white">
 			{value}
@@ -14,5 +14,3 @@ function Chip({ value, id, onRemove }: ChipProps) {
 		</div>
 	);
 }
-
-export default Chip;

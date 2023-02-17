@@ -34,16 +34,16 @@ const columns: ColumnDef<{ id: string; name: string }>[] = [
 ];
 
 describe('Components/Table', () => {
-	test(`should render text Sem Dados when data is empty`, async () => {
+	test(`should render text NO_DATA when data is empty`, async () => {
 		const { findByText } = render(<Table data={[]} columns={[]} />);
-		const result = await findByText('Sem Dados');
+		const result = await findByText('NO_DATA');
 		expect(result).not.toBeNull();
 	});
 
 	test(`should select an item - single`, async () => {
 		let resultMock = {};
 		const setRowSelectionMock = (s: any) => (resultMock = { ...s() });
-		const { container, findByText } = render(
+		const { container } = render(
 			<Table
 				data={DATA}
 				columns={columns}
@@ -65,7 +65,7 @@ describe('Components/Table', () => {
 	test(`should select an item - multi`, async () => {
 		let resultMock = {};
 		const setRowSelectionMock = (s: any) => (resultMock = { ...s() });
-		const { container, findByText } = render(
+		const { container } = render(
 			<Table
 				data={DATA}
 				columns={columns}
@@ -87,7 +87,7 @@ describe('Components/Table', () => {
 	test(`should select all items`, async () => {
 		let resultMock = {};
 		const setRowSelectionMock = (s: any) => (resultMock = { ...s() });
-		const { container, findByText } = render(
+		const { container } = render(
 			<Table
 				data={DATA}
 				columns={columns}
