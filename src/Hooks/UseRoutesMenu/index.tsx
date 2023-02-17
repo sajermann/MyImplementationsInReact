@@ -7,7 +7,7 @@ import { DrawerDemo } from '~/Components/Demos/Drawer';
 import { InputDemo } from '~/Components/Demos/Input';
 import { ModalDemo } from '~/Components/Demos/Modal';
 import { SelectDemo } from '~/Components/Demos/Select';
-import { ButtonPage } from '~/Pages/Button';
+// import { ButtonPage } from '~/Pages/Button';
 import { CheckboxPage } from '~/Pages/Checkbox';
 import { DatepickerPage } from '~/Pages/Datepicker';
 import { DrawerPage } from '~/Pages/Drawer';
@@ -41,6 +41,12 @@ import { PdfPage } from '~/Pages/Pdf';
 const FooterPage = lazy(() =>
 	import('~/Pages/Table/Footer').then(({ FooterPage: Footer }) => ({
 		default: Footer,
+	}))
+);
+
+const ButtonPage = lazy(() =>
+	import('~/Pages/Button').then(({ ButtonPage: Button }) => ({
+		default: Button,
 	}))
 );
 
