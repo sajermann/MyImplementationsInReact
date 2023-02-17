@@ -8,6 +8,12 @@ export function usePrinter() {
 	const handlePrint = useReactToPrint({
 		content: () => componentRef.current as ReactInstance,
 		onAfterPrint: () => setIsPrinting(false),
+		pageStyle: `
+		@media print {
+			@page {
+				margin: 10mm 0mm 10mm 0mm !important;
+			}
+		}`,
 	});
 
 	async function handlePreparePrint() {
