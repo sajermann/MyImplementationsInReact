@@ -142,16 +142,16 @@ export function useRoutesMenu() {
 					name: 'Filter',
 					path: '/table/filter',
 					implements_code:
-						'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Components/Filter',
+						'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Components/Table',
 					docs_code:
-						'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/Filter',
+						'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/Table/Filter',
 					element: <FilterPage />,
 				},
 				{
 					name: 'Selection',
 					path: '/table/selection',
 					implements_code:
-						'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Components/Table/Selection',
+						'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Components/Table',
 					docs_code:
 						'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/Table/Selection',
 					element: <SelectionPage />,
@@ -160,135 +160,135 @@ export function useRoutesMenu() {
 					name: 'ExpandedLine',
 					path: '/table/expand-line',
 					implements_code:
-						'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Components/ExpandedLine',
+						'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Components/Table',
 					docs_code:
-						'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/ExpandedLine',
+						'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/Table/ExpandedLine',
 					element: <ExpandedLinePage />,
 				},
 				{
 					name: 'Loading',
 					path: '/table/loading',
 					implements_code:
-						'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Components/Loading',
+						'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Components/Table',
 					docs_code:
-						'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/Loading',
+						'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/Table/Loading',
 					element: <LoadingPage />,
 				},
 				{
 					name: 'ColumnOrder',
 					path: '/table/column-order',
 					implements_code:
-						'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Components/ColumnOrder',
+						'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Components/Table',
 					docs_code:
-						'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/ColumnOrder',
+						'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/Table/ColumnOrder',
 					element: <ColumnOrderPage />,
 				},
 				{
 					name: 'Sort',
 					path: '/table/sort',
 					implements_code:
-						'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Components/Sort',
+						'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Components/Table',
 					docs_code:
-						'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/Sort',
+						'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/Table/Sort',
 					element: <SortPage />,
 				},
 				{
 					name: 'Editable',
 					path: '/table/editable',
 					implements_code:
-						'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Components/Editable',
+						'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Components/Table',
 					docs_code:
-						'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/Editable',
+						'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/Table/Editable',
 					element: <EditablePage />,
 				},
 				{
 					name: 'FullEditable',
 					path: '/table/full-editable',
 					implements_code:
-						'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Components/FullEditable',
+						'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Components/Table',
 					docs_code:
-						'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/FullEditable',
+						'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/Table/FullEditable',
 					element: <FullEditablePage />,
 				},
 				{
 					name: 'Virtualized',
 					path: '/table/virtualized',
 					implements_code:
-						'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Components/Virtualized',
+						'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Components/Table',
 					docs_code:
-						'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/Virtualized',
+						'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/Table/Virtualized',
 					element: <VirtualizedPage />,
 				},
 				{
 					name: 'Pagination',
 					path: '/table/pagination',
 					implements_code:
-						'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Components/Pagination',
+						'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Components/Table',
 					docs_code:
-						'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/Pagination',
+						'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/Table/Pagination',
 					element: <PaginationPage />,
 				},
 				{
 					name: 'Favorites',
 					path: '/table/favorites',
 					implements_code:
-						'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Components/Favorites',
+						'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Components/Table',
 					docs_code:
-						'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/Favorites',
+						'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/Table/Favorites',
 					element: <FavoritesPage />,
 				},
 				{
 					name: 'Ellipsis',
 					path: '/table/ellipsis',
 					implements_code:
-						'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Components/Ellipsis',
+						'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Components/Table',
 					docs_code:
-						'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/Ellipsis',
+						'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/Table/Ellipsis',
 					element: <EllipsisPage />,
 				},
 				{
 					name: 'Resizing',
 					path: '/table/resizing',
 					implements_code:
-						'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Components/Resizing',
+						'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Components/Table',
 					docs_code:
-						'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/Resizing',
+						'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/Table/Resizing',
 					element: <ResizingPage />,
 				},
 				{
 					name: 'ColumnVisibility',
 					path: '/table/column-visibility',
 					implements_code:
-						'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Components/ColumnVisibility',
+						'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Components/Table',
 					docs_code:
-						'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/ColumnVisibility',
+						'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/Table/ColumnVisibility',
 					element: <ColumnVisibilityPage />,
 				},
 				{
 					name: 'Print',
 					path: '/table/print',
 					implements_code:
-						'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Components/Print',
+						'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Components/Table',
 					docs_code:
-						'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/Print',
+						'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/Table/Print',
 					element: <PrintPage />,
 				},
 				{
 					name: 'Export',
 					path: '/table/export',
 					implements_code:
-						'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Components/Export',
+						'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Components/Table',
 					docs_code:
-						'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/Export',
+						'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/Table/Export',
 					element: <ExportPage />,
 				},
 				{
 					name: 'Footer',
 					path: '/table/footer',
 					implements_code:
-						'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Components/Footer',
+						'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Components/Table',
 					docs_code:
-						'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/Footer',
+						'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/Table/Footer',
 					element: <FooterPage />,
 				},
 			],
@@ -297,9 +297,9 @@ export function useRoutesMenu() {
 			name: 'Toast',
 			path: '/toast',
 			implements_code:
-				'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Components/Toast',
+				'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Components/Table',
 			docs_code:
-				'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/Toast',
+				'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/Table/Toast',
 			element: <ToastPage />,
 			demo: <ToastDemo />,
 		},
@@ -307,9 +307,9 @@ export function useRoutesMenu() {
 			name: 'Pdf',
 			path: '/pdf',
 			implements_code:
-				'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Components/Pdf',
+				'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Components/Table',
 			docs_code:
-				'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/Pdf',
+				'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/Table/Pdf',
 			element: <PdfPage />,
 		},
 	];

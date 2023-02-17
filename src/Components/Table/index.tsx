@@ -23,6 +23,7 @@ import { TSelection } from '~/Types/TSelection';
 import { useTranslation } from '~/Hooks/UseTranslation';
 import { Checkbox } from '~/Components/Checkbox';
 
+import { managerClassNames } from '~/Utils/ManagerClassNames';
 import { Thead } from './Thead';
 import { Tbody } from './Tbody';
 import { Pagination } from './Pagination';
@@ -60,6 +61,7 @@ type Props<T, U = undefined> = {
 	height?: string;
 	minHeight?: string;
 	maxHeight?: string;
+	showFooter?: boolean;
 };
 
 type PropsTableInternal = {
@@ -84,6 +86,7 @@ export function Table<T, U = undefined>({
 	height,
 	minHeight,
 	maxHeight,
+	showFooter,
 }: Props<T, U>) {
 	const [sorting, setSorting] = useState<SortingState>([]);
 
@@ -176,7 +179,6 @@ export function Table<T, U = undefined>({
 
 	const table = useReactTable({
 		data,
-		// initialState: { columnVisibility },
 		columns: buildColumns(),
 		getCoreRowModel: getCoreRowModel(),
 		columnResizeMode: 'onChange',
@@ -223,21 +225,18 @@ export function Table<T, U = undefined>({
 
 	const tableContainerRef = useRef<HTMLDivElement>(null);
 
-	function buildClass() {
-		const classes = [styles.customContainer];
-		classes.push('scrollbar-thin');
-		classes.push('scrollbar-thumb-gray-500');
-		classes.push('scrollbar-track-gray-300');
-		classes.push('scrollbar-thumb-rounded-full');
-		classes.push('scrollbar-track-rounded-full');
-		return classes.join(' ');
-	}
-
 	return (
 		<>
 			<div
 				ref={tableContainerRef}
-				className={buildClass()}
+				className={managerClassNames({
+					[styles.customContainer]: true,
+					'scrollbar-thin': true,
+					'scrollbar-thumb-gray-500': true,
+					'scrollbar-track-gray-300': true,
+					'scrollbar-thumb-rounded-full': true,
+					'scrollbar-track-rounded-full': true,
+				})}
 				style={{
 					overflow: isLoading ? 'hidden' : 'auto',
 					height: height || undefined,
@@ -259,7 +258,7 @@ export function Table<T, U = undefined>({
 						rowForUpdate={rowForUpdate}
 						disabledVirtualization={disabledVirtualization}
 					/>
-					<Tfoot table={table} />
+					<Tfoot table={table} showFooter={showFooter} />
 				</table>
 			</div>
 			{pagination && (

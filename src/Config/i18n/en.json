@@ -12,6 +12,7 @@
 		"NO_VIEW": "No View",
 		"TABLE": "Table",
 		"TABLES": "Tables",
+		"IMPLEMENTS_FOOTER_MODE": "Implements Footer Mode",
 		"IMPLEMENTS_VIRTUALIZED_MODE": "Implements Virtualized Mode",
 		"IMPLEMENTS_FULL_EDITABLE_MODE": "Implements Full Editable Mode",
 		"IMPLEMENTS_SORT_MODE": "Implements Sort Mode",
