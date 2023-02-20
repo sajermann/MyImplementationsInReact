@@ -7,7 +7,6 @@ import { DrawerDemo } from '~/Components/Demos/Drawer';
 import { InputDemo } from '~/Components/Demos/Input';
 import { ModalDemo } from '~/Components/Demos/Modal';
 import { SelectDemo } from '~/Components/Demos/Select';
-// import { ButtonPage } from '~/Pages/Button';
 import { CheckboxPage } from '~/Pages/Checkbox';
 import { DatepickerPage } from '~/Pages/Datepicker';
 import { DrawerPage } from '~/Pages/Drawer';
@@ -36,7 +35,7 @@ import { ExportPage } from '~/Pages/Table/Export';
 import { ToastPage } from '~/Pages/Toast';
 import { ToastDemo } from '~/Components/Demos/Toast';
 import { PdfPage } from '~/Pages/Pdf';
-// import { FooterPage } from '~/Pages/Table/Footer';
+import { useTranslation } from '../UseTranslation';
 
 const FooterPage = lazy(() =>
 	import('~/Pages/Table/Footer').then(({ FooterPage: Footer }) => ({
@@ -51,6 +50,7 @@ const ButtonPage = lazy(() =>
 );
 
 export function useRoutesMenu() {
+	const { translate } = useTranslation();
 	const options: TRoutesMenu[] = [
 		{
 			name: 'Home',
@@ -58,6 +58,7 @@ export function useRoutesMenu() {
 			implements_code: '',
 			docs_code: '',
 			element: <Home />,
+			label: 'Home',
 		},
 		{
 			name: 'Button',
@@ -68,6 +69,7 @@ export function useRoutesMenu() {
 				'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/Button',
 			element: <ButtonPage />,
 			demo: <ButtonDemo />,
+			label: translate('BUTTON'),
 		},
 		{
 			name: 'Modal',
@@ -78,6 +80,7 @@ export function useRoutesMenu() {
 				'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/Modal',
 			element: <ModalPage />,
 			demo: <ModalDemo />,
+			label: 'Modal',
 		},
 		{
 			name: 'Drawer',
@@ -88,6 +91,7 @@ export function useRoutesMenu() {
 				'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/Drawer',
 			element: <DrawerPage />,
 			demo: <DrawerDemo />,
+			label: 'Drawer',
 		},
 		{
 			name: 'Input',
@@ -98,6 +102,7 @@ export function useRoutesMenu() {
 				'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/Input',
 			element: <InputPage />,
 			demo: <InputDemo />,
+			label: 'Input',
 		},
 		{
 			name: 'Datepicker',
@@ -108,6 +113,7 @@ export function useRoutesMenu() {
 				'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/Datepicker',
 			element: <DatepickerPage />,
 			demo: <DatepickerDemo />,
+			label: 'Datepicker',
 		},
 		{
 			name: 'Select',
@@ -118,6 +124,7 @@ export function useRoutesMenu() {
 				'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/Select',
 			element: <SelectPage />,
 			demo: <SelectDemo />,
+			label: 'Select',
 		},
 		{
 			name: 'Checkbox',
@@ -128,6 +135,7 @@ export function useRoutesMenu() {
 				'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/Checkbox',
 			element: <CheckboxPage />,
 			demo: <CheckboxDemo />,
+			label: 'Checkbox',
 		},
 		{
 			name: 'Table',
@@ -137,6 +145,7 @@ export function useRoutesMenu() {
 			docs_code:
 				'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/Table',
 			element: <TablePage />,
+			label: translate('TABLE'),
 			subs: [
 				{
 					name: 'Filter',
@@ -146,6 +155,7 @@ export function useRoutesMenu() {
 					docs_code:
 						'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/Table/Filter',
 					element: <FilterPage />,
+					label: translate('FILTER'),
 				},
 				{
 					name: 'Selection',
@@ -155,6 +165,7 @@ export function useRoutesMenu() {
 					docs_code:
 						'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/Table/Selection',
 					element: <SelectionPage />,
+					label: translate('SELECTION'),
 				},
 				{
 					name: 'ExpandedLine',
@@ -164,6 +175,7 @@ export function useRoutesMenu() {
 					docs_code:
 						'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/Table/ExpandedLine',
 					element: <ExpandedLinePage />,
+					label: translate('EXPAND_LINE'),
 				},
 				{
 					name: 'Loading',
@@ -173,6 +185,7 @@ export function useRoutesMenu() {
 					docs_code:
 						'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/Table/Loading',
 					element: <LoadingPage />,
+					label: translate('LOADING'),
 				},
 				{
 					name: 'ColumnOrder',
@@ -182,6 +195,7 @@ export function useRoutesMenu() {
 					docs_code:
 						'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/Table/ColumnOrder',
 					element: <ColumnOrderPage />,
+					label: translate('COLUMN_ORDER'),
 				},
 				{
 					name: 'Sort',
@@ -191,6 +205,7 @@ export function useRoutesMenu() {
 					docs_code:
 						'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/Table/Sort',
 					element: <SortPage />,
+					label: translate('SORT'),
 				},
 				{
 					name: 'Editable',
@@ -200,6 +215,7 @@ export function useRoutesMenu() {
 					docs_code:
 						'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/Table/Editable',
 					element: <EditablePage />,
+					label: translate('EDITABLE'),
 				},
 				{
 					name: 'FullEditable',
@@ -209,6 +225,7 @@ export function useRoutesMenu() {
 					docs_code:
 						'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/Table/FullEditable',
 					element: <FullEditablePage />,
+					label: translate('FULL_EDITABLE'),
 				},
 				{
 					name: 'Virtualized',
@@ -218,6 +235,7 @@ export function useRoutesMenu() {
 					docs_code:
 						'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/Table/Virtualized',
 					element: <VirtualizedPage />,
+					label: translate('VIRTUALIZED'),
 				},
 				{
 					name: 'Pagination',
@@ -227,6 +245,7 @@ export function useRoutesMenu() {
 					docs_code:
 						'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/Table/Pagination',
 					element: <PaginationPage />,
+					label: translate('PAGINATION'),
 				},
 				{
 					name: 'Favorites',
@@ -236,6 +255,7 @@ export function useRoutesMenu() {
 					docs_code:
 						'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/Table/Favorites',
 					element: <FavoritesPage />,
+					label: translate('FAVORITES'),
 				},
 				{
 					name: 'Ellipsis',
@@ -245,6 +265,7 @@ export function useRoutesMenu() {
 					docs_code:
 						'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/Table/Ellipsis',
 					element: <EllipsisPage />,
+					label: 'Ellipsis',
 				},
 				{
 					name: 'Resizing',
@@ -254,6 +275,7 @@ export function useRoutesMenu() {
 					docs_code:
 						'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/Table/Resizing',
 					element: <ResizingPage />,
+					label: translate('RESIZING'),
 				},
 				{
 					name: 'ColumnVisibility',
@@ -263,6 +285,7 @@ export function useRoutesMenu() {
 					docs_code:
 						'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/Table/ColumnVisibility',
 					element: <ColumnVisibilityPage />,
+					label: translate('COLUMN_VISIBILITY'),
 				},
 				{
 					name: 'Print',
@@ -272,6 +295,7 @@ export function useRoutesMenu() {
 					docs_code:
 						'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/Table/Print',
 					element: <PrintPage />,
+					label: translate('PRINT'),
 				},
 				{
 					name: 'Export',
@@ -281,6 +305,7 @@ export function useRoutesMenu() {
 					docs_code:
 						'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/Table/Export',
 					element: <ExportPage />,
+					label: translate('EXPORT'),
 				},
 				{
 					name: 'Footer',
@@ -290,6 +315,7 @@ export function useRoutesMenu() {
 					docs_code:
 						'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/Table/Footer',
 					element: <FooterPage />,
+					label: translate('FOOTER'),
 				},
 			],
 		},
@@ -302,6 +328,7 @@ export function useRoutesMenu() {
 				'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/Table/Toast',
 			element: <ToastPage />,
 			demo: <ToastDemo />,
+			label: 'Toast',
 		},
 		{
 			name: 'Pdf',
@@ -311,6 +338,7 @@ export function useRoutesMenu() {
 			docs_code:
 				'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/Table/Pdf',
 			element: <PdfPage />,
+			label: 'Pdf',
 		},
 	];
 	return { options };

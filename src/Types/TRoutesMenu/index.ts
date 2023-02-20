@@ -7,4 +7,5 @@ export type TRoutesMenu = {
 	demo?: React.ReactNode;
 	subs?: TRoutesMenu[];
 	expandedMenu?: boolean;
+	label: string;
 };
