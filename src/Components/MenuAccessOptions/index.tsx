@@ -161,7 +161,7 @@ export default function MenuAccessOptions() {
 										trigger={triggerIsOpen =>
 											buildTrigger({
 												isOpen: triggerIsOpen,
-												name: menu.name,
+												name: menu.label,
 												path: menu.path,
 												onClick: () => setIsOpen(false),
 											})
@@ -171,7 +171,7 @@ export default function MenuAccessOptions() {
 											<BuildNormalOption
 												onClick={() => setIsOpen(false)}
 												key={generateGuid()}
-												name={subMenu.name}
+												name={subMenu.label}
 												path={subMenu.path}
 											/>
 										))}
@@ -182,7 +182,7 @@ export default function MenuAccessOptions() {
 								<BuildNormalOption
 									onClick={() => setIsOpen(false)}
 									key={generateGuid()}
-									name={menu.name}
+									name={menu.label}
 									path={menu.path}
 								/>
 							);
