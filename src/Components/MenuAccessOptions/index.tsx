@@ -80,9 +80,10 @@ export default function MenuAccessOptions() {
 		options.forEach(opt => {
 			const subOptions =
 				opt.subs?.filter(
-					subOpt => subOpt.name.toLowerCase().indexOf(valueFilter) > -1
+					subOpt =>
+						translate(subOpt.label).toLowerCase().indexOf(valueFilter) > -1
 				) || [];
-			if (opt.name.toLowerCase().indexOf(valueFilter) > -1) {
+			if (translate(opt.label).toLowerCase().indexOf(valueFilter) > -1) {
 				newOptions.push(opt);
 			} else if (subOptions.length > 0) {
 				newOptions.push({
