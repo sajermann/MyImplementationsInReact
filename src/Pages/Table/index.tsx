@@ -21,7 +21,8 @@ export function TablePage() {
 			return optionsSubTable;
 		}
 		return optionsSubTable?.filter(
-			opt => opt.name.toLowerCase().indexOf(search.toLowerCase()) > -1
+			opt =>
+				translate(opt.label).toLowerCase().indexOf(search.toLowerCase()) > -1
 		);
 	}
 
@@ -55,12 +56,12 @@ export function TablePage() {
 						getFiltreds()?.map(opt => (
 							<div key={opt.name} className="border rounded flex">
 								<div className="flex w-full flex-1 items-center justify-center">
-									<div className="flex-1 ml-2">{opt.name}</div>
+									<div className="flex-1 ml-2">{opt.label}</div>
 									<Link to={opt.path} className={LINK_CLASS}>
 										<Icons.Eye width="30px" />
 										Demo
 									</Link>
-									<QuickAccessGithub name="Table" disableBgColor />
+									<QuickAccessGithub name={opt.name} disableBgColor />
 								</div>
 							</div>
 						))}

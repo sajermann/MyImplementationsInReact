@@ -4,7 +4,6 @@ import { useEffect, useState, useMemo } from 'react';
 import { Table } from '~/Components/Table';
 import { useTranslation } from '~/Hooks/UseTranslation';
 import { makeData } from '~/Utils/MakeData';
-import { Input } from '~/Components/Input';
 import { TVehicle } from '~/Types/TVehicle';
 import { Main } from '~/Components/Main';
 import Section from '~/Components/Section';
@@ -68,24 +67,16 @@ export function FooterPage() {
 				</div>
 			</Section>
 			<Section subHeading={translate('IMPLEMENTS')}>
-				<div className="flex flex-col gap-2">
-					<Input
-						value={globalFilter ?? ''}
-						onChange={e => setGlobalFilter(e.target.value)}
-						placeholder={translate('SEARCH_ALL_COLUMNS...')}
-						type="search"
-					/>
-
-					<Table
-						columns={columns}
-						data={data}
-						globalFilter={{
-							filter: globalFilter,
-							setFilter: setGlobalFilter,
-						}}
-						showFooter
-					/>
-				</div>
+				<Table
+					columns={columns}
+					data={data}
+					globalFilter={{
+						filter: globalFilter,
+						setFilter: setGlobalFilter,
+					}}
+					showFooter
+					disabledVirtualization
+				/>
 			</Section>
 		</Main>
 	);

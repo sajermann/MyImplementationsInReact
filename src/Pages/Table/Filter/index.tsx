@@ -82,42 +82,28 @@ function FilterId({ column }: Props) {
 
 				<div className="w-full flex justify-center gap-4 mt-4">
 					<Button
-						style={{
-							borderRadius: '50%',
-							maxHeight: 50,
-							maxWidth: 50,
-							minWidth: 50,
-							width: 50,
-						}}
+						style={{ width: '50px', height: '50px', borderRadius: '50%' }}
+						colorStyle="Secondary"
+						variant="Outlined"
 						type="button"
 						onClick={() => {
 							setSelectType('');
 							setFilterValue('');
 						}}
-					>
-						<div className="w-7 h-7">
-							<Icons.Trash />
-						</div>
-					</Button>
+						endIcon={<Icons.Trash />}
+					/>
 
 					<Button
-						style={{
-							borderRadius: '50%',
-							maxHeight: 50,
-							maxWidth: 50,
-							minWidth: 50,
-							width: 50,
-						}}
+						style={{ width: '50px', height: '50px', borderRadius: '50%' }}
+						colorStyle="Primary"
+						variant="Outlined"
 						type="button"
 						onClick={() => {
 							column.setFilterValue([selectType, filterValue]);
 							setIsOpen(false);
 						}}
-					>
-						<div className="w-7 h-7">
-							<Icons.Save />
-						</div>
-					</Button>
+						endIcon={<Icons.Save />}
+					/>
 				</div>
 			</>
 		</Popover>
@@ -177,41 +163,27 @@ function FilterName({ column, data }: Props2) {
 
 				<div className="w-full flex justify-center gap-4 mt-4">
 					<Button
-						style={{
-							borderRadius: '50%',
-							maxHeight: 50,
-							maxWidth: 50,
-							minWidth: 50,
-							width: 50,
-						}}
+						style={{ width: '50px', height: '50px', borderRadius: '50%' }}
+						colorStyle="Secondary"
+						variant="Outlined"
 						type="button"
 						onClick={() => {
 							setFilterValue([]);
 						}}
-					>
-						<div className="w-7 h-7">
-							<Icons.Trash />
-						</div>
-					</Button>
+						endIcon={<Icons.Trash />}
+					/>
 
 					<Button
-						style={{
-							borderRadius: '50%',
-							maxHeight: 50,
-							maxWidth: 50,
-							minWidth: 50,
-							width: 50,
-						}}
+						style={{ width: '50px', height: '50px', borderRadius: '50%' }}
+						colorStyle="Primary"
+						variant="Outlined"
 						type="button"
 						onClick={() => {
 							column.setFilterValue(filterValue);
 							setIsOpen(false);
 						}}
-					>
-						<div className="w-7 h-7">
-							<Icons.Save />
-						</div>
-					</Button>
+						endIcon={<Icons.Save />}
+					/>
 				</div>
 			</>
 		</Popover>
@@ -389,6 +361,7 @@ export function FilterPage() {
 								}
 								return normalFluxFilter(rows, columnId, filters);
 							},
+							disableInput: true,
 						}}
 					/>
 				</div>

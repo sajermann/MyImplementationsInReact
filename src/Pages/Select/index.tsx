@@ -23,10 +23,10 @@ export function SelectPage() {
 
 	const OPTION = useMemo<TVehicle[]>(
 		() => [
-			{ id: '1', value: 'car', label: translate('CAR') },
-			{ id: '2', value: 'bus', label: translate('BUS') },
-			{ id: '3', value: 'train', label: translate('TRAIN') },
-			{ id: '4', value: 'airplane', label: translate('AIRPLANE') },
+			{ id: '1', value: 'car', label: translate('CAR'), price: 0 },
+			{ id: '2', value: 'bus', label: translate('BUS'), price: 0 },
+			{ id: '3', value: 'train', label: translate('TRAIN'), price: 0 },
+			{ id: '4', value: 'airplane', label: translate('AIRPLANE'), price: 0 },
 		],
 		[currentLanguage]
 	);

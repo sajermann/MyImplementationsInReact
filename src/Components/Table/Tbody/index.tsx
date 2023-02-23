@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/click-events-have-key-events */
 import { Fragment, RefObject } from 'react';
 import {
 	Table,
@@ -19,7 +18,7 @@ import { Td } from '../Td';
 import styles from './index.module.css';
 
 type Props<T> = {
-	table: Table<any>;
+	table: Table<T>;
 	tableContainerRef: RefObject<HTMLDivElement>;
 	data: T[];
 	isLoading?: boolean;
@@ -56,7 +55,6 @@ export function Tbody<T>({
 		getScrollElement: () => tableContainerRef.current,
 		count: rows.length,
 		estimateSize: () => 50,
-		// enableSmoothScroll: true,
 	});
 	const { getVirtualItems, getTotalSize } = rowVirtualizer;
 
@@ -82,6 +80,7 @@ export function Tbody<T>({
 
 	function verifyClassesRow(row: Row<T>, index: number) {
 		const classesTemp = [styles.tr];
+
 		if (index % 2 > 0) {
 			classesTemp.push(!darkMode ? styles.even : '!bg-dark-500');
 		}
@@ -120,7 +119,7 @@ export function Tbody<T>({
 	}
 
 	function buildNoData() {
-		if (data.length === 0 && !isLoading) {
+		if ((getVirtualItems().length === 0 || data.length === 0) && !isLoading) {
 			return (
 				<tr className={styles.tr}>
 					<Td
@@ -132,6 +131,37 @@ export function Tbody<T>({
 						{translate('NO_DATA')}
 					</Td>
 				</tr>
+			);
+		}
+		return null;
+	}
+
+	function buildLoading() {
+		if (isLoading) {
+			return (
+				<>
+					<tr style={{ height: '100%' }} className={styles.tr}>
+						<td
+							colSpan={countColSpan()}
+							className={styles.td}
+							style={{ textAlign: 'center', padding: 0 }}
+						>
+							<LoadingBar />
+						</td>
+					</tr>
+					{data.length === 0 && (
+						<tr className={styles.tr}>
+							<Td
+								{...{
+									colSpan: countColSpan(),
+									style: { textAlign: 'center' },
+								}}
+							>
+								{translate('LOADING...')}
+							</Td>
+						</tr>
+					)}
+				</>
 			);
 		}
 		return null;
@@ -183,32 +213,7 @@ export function Tbody<T>({
 	return (
 		<tbody style={{ opacity: isLoading ? 0.5 : 1 }} className={styles.tbody}>
 			{buildNoData()}
-
-			{isLoading && (
-				<tr style={{ height: '100%' }} className={styles.tr}>
-					<td
-						colSpan={countColSpan()}
-						className={styles.td}
-						style={{ textAlign: 'center', padding: 0 }}
-					>
-						<LoadingBar />
-					</td>
-				</tr>
-			)}
-
-			{data.length === 0 && isLoading && (
-				<tr className={styles.tr}>
-					<Td
-						{...{
-							colSpan: countColSpan(),
-							style: { textAlign: 'center' },
-						}}
-					>
-						{translate('LOADING...')}
-					</Td>
-				</tr>
-			)}
-
+			{buildLoading()}
 			{disabledVirtualization ? (
 				buildRowsNoVirtualization()
 			) : (

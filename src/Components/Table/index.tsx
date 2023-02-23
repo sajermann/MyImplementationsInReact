@@ -18,18 +18,20 @@ import {
 	ColumnSizingState,
 	ColumnSizingInfoState,
 } from '@tanstack/react-table';
+
 import { TPagination } from '~/Types/TPagination';
 import { TSelection } from '~/Types/TSelection';
 import { useTranslation } from '~/Hooks/UseTranslation';
 import { Checkbox } from '~/Components/Checkbox';
-
 import { managerClassNames } from '~/Utils/ManagerClassNames';
+import { DefProps } from '~/Utils/Export';
+import { Tfoot } from './Tfoot';
+import { Header } from './Header';
 import { Thead } from './Thead';
 import { Tbody } from './Tbody';
 import { Pagination } from './Pagination';
 
 import styles from './index.module.css';
-import { Tfoot } from './Tfoot';
 
 type Props<T, U = undefined> = {
 	selection?: TSelection<T>;
@@ -45,6 +47,7 @@ type Props<T, U = undefined> = {
 		filter: U;
 		setFilter: Dispatch<SetStateAction<U>>;
 		globalFilterFn?: FilterFnOption<T>;
+		disableInput?: boolean;
 	};
 
 	rowForUpdate?: { row: number; data: T } | null;
@@ -62,6 +65,11 @@ type Props<T, U = undefined> = {
 	minHeight?: string;
 	maxHeight?: string;
 	showFooter?: boolean;
+
+	tools?: {
+		defForExcel?: DefProps<T>[];
+		defForCsv?: DefProps<T>[];
+	};
 };
 
 type PropsTableInternal = {
@@ -87,6 +95,7 @@ export function Table<T, U = undefined>({
 	minHeight,
 	maxHeight,
 	showFooter,
+	tools,
 }: Props<T, U>) {
 	const [sorting, setSorting] = useState<SortingState>([]);
 
@@ -227,6 +236,7 @@ export function Table<T, U = undefined>({
 
 	return (
 		<>
+			<Header table={table} globalFilter={globalFilter} tools={tools} />
 			<div
 				ref={tableContainerRef}
 				className={managerClassNames({
@@ -261,13 +271,7 @@ export function Table<T, U = undefined>({
 					<Tfoot table={table} showFooter={showFooter} />
 				</table>
 			</div>
-			{pagination && (
-				<Pagination
-					table={table}
-					disabledActions={pagination.disabledActions}
-					disabledPageSize={pagination.disabledPageSize}
-				/>
-			)}
+			<Pagination table={table} pagination={pagination} />
 		</>
 	);
 }

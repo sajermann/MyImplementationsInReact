@@ -72,7 +72,7 @@ export function SelectionPage() {
 								/>
 							</div>
 						</div>
-						<div className="col-span-12 md:col-span-6 lg:col-span-6 xl:col-span-4 2xl:col-span-3">
+						<div className="col-span-12 md:col-span-6 lg:col-span-6 xl:col-span-4 2xl:col-span-4">
 							<Input
 								placeholder="Id"
 								id="disableSelection"
@@ -88,7 +88,7 @@ export function SelectionPage() {
 								onChange={e => setDisableSelectionForId(e.target.value)}
 							/>
 						</div>
-						<div className="col-span-12 md:col-span-12 lg:col-span-12 xl:col-span-4 2xl:col-span-6">
+						<div className="col-span-12 md:col-span-12 lg:col-span-12 xl:col-span-4 2xl:col-span-5">
 							<Input
 								value={globalFilter ?? ''}
 								onChange={e => setGlobalFilter(e.target.value)}

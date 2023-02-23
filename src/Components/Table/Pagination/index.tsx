@@ -9,13 +9,15 @@ import { Select } from '~/Components/Select';
 
 type Props<T> = {
 	table: Table<T>;
-	disabledActions?: boolean;
+	pagination?: {
+		disabledActions?: boolean;
+		disabledPageSize?: boolean;
+	};
 	propsButtonFirstPage?: Record<string, unknown>;
 	propsButtonPrevPage?: Record<string, unknown>;
 	propsButtonNextPage?: Record<string, unknown>;
 	propsButtonLastPage?: Record<string, unknown>;
 	propsInput?: Record<string, unknown>;
-	disabledPageSize?: boolean;
 };
 
 type PropsButtonPagination = {
@@ -71,14 +73,16 @@ const DEFAULT_OPTIONS = [
 
 export function Pagination<T>({
 	table,
-	disabledActions,
+	pagination,
+	// disabledActions,
+	// disabledPageSize,
 	propsButtonFirstPage,
 	propsButtonPrevPage,
 	propsButtonNextPage,
 	propsButtonLastPage,
 	propsInput,
-	disabledPageSize,
 }: Props<T>) {
+	if (!pagination) return null;
 	return (
 		<div>
 			<div className="h-2" />
@@ -86,28 +90,28 @@ export function Pagination<T>({
 				<ButtonPagination
 					{...propsButtonFirstPage}
 					onClick={() => table.setPageIndex(0)}
-					disabled={!table.getCanPreviousPage() || disabledActions}
+					disabled={!table.getCanPreviousPage() || pagination?.disabledActions}
 				>
 					<Icons.ArrowPairLeft color="#fff" />
 				</ButtonPagination>
 				<ButtonPagination
 					{...propsButtonPrevPage}
 					onClick={() => table.previousPage()}
-					disabled={!table.getCanPreviousPage() || disabledActions}
+					disabled={!table.getCanPreviousPage() || pagination?.disabledActions}
 				>
 					<Icons.ArrowSingleLeft color="#fff" />
 				</ButtonPagination>
 				<ButtonPagination
 					{...propsButtonNextPage}
 					onClick={() => table.nextPage()}
-					disabled={!table.getCanNextPage() || disabledActions}
+					disabled={!table.getCanNextPage() || pagination?.disabledActions}
 				>
 					<Icons.ArrowSingleRight color="#fff" />
 				</ButtonPagination>
 				<ButtonPagination
 					{...propsButtonLastPage}
 					onClick={() => table.setPageIndex(table.getPageCount() - 1)}
-					disabled={!table.getCanNextPage() || disabledActions}
+					disabled={!table.getCanNextPage() || pagination?.disabledActions}
 				>
 					<Icons.ArrowPairRight color="#fff" />
 				</ButtonPagination>
@@ -121,7 +125,7 @@ export function Pagination<T>({
 					<div className="w-20">
 						<Input
 							{...propsInput}
-							disabled={disabledActions}
+							disabled={pagination?.disabledActions}
 							type="number"
 							defaultValue={table.getState().pagination.pageIndex + 1}
 							onBlur={e => {
@@ -131,16 +135,16 @@ export function Pagination<T>({
 						/>
 					</div>
 				</span>
-				{disabledPageSize && (
+				{pagination?.disabledPageSize && (
 					<div>| {table.getRowModel().rows.length} Linhas</div>
 				)}
-				{!disabledPageSize && (
+				{!pagination?.disabledPageSize && (
 					<>
 						<div>Linhas</div>
 						<div>
 							<Select
 								isSearchable={false}
-								isDisabled={disabledActions}
+								isDisabled={pagination?.disabledActions}
 								value={
 									DEFAULT_OPTIONS.find(
 										item => item.value === table.getState().pagination.pageSize

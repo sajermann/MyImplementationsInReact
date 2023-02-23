@@ -1,5 +1,9 @@
 {
 	"translations": {
+		"SEARCH": "Pesquisar",
+		"EXPORT_TO_XML": "Exportar para XML",
+		"EXPORT_TO_CSV": "Exportar para CSV",
+		"EXPORT_TO_XLS": "Exportar para XLS",
 		"IMPLEMENTS_UNDER_CONSTRUCTION": "Essa Implementação está em Construção",
 		"IMPLEMENTS_PDF_MODE": "Implementação do Modo Pdf",
 		"PDF": "Pdf",
