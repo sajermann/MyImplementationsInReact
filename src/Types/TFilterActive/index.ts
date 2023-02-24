@@ -3,4 +3,6 @@ export type TFilterActive = {
 	column: string;
 	type: string;
 	value: string;
+	labelColumn?: string;
+	labelType?: string;
 };

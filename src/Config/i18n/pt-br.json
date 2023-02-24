@@ -1,5 +1,10 @@
 {
 	"translations": {
+		"TO": "Até",
+		"FROM": "De",
+		"NO_ACTIVE_FILTERS": "Sem Filtro Ativo",
+		"CONTAINS": "Contém",
+		"STARTS_WITH": "Começa com",
 		"SEARCH": "Pesquisar",
 		"EXPORT_TO_XML": "Exportar para XML",
 		"EXPORT_TO_CSV": "Exportar para CSV",
