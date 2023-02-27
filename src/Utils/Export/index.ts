@@ -1,4 +1,5 @@
 import * as XLSX from 'xlsx-js-style';
+import { toXML, XmlElement } from 'jstoxml';
 
 function download(blob: Blob, filemName: string) {
 	const link = document.createElement('a');
@@ -136,4 +137,13 @@ function csv<T>({ data, defColumns }: Props<T>) {
 	download(blob, `Data-${new Date().toISOString()}.csv`);
 }
 
-export const exportTo = { excel, csv };
+function xml<T>({ data }: Props<T>) {
+	const result = toXML(data as XmlElement[], {
+		indent: '    ',
+	});
+	const BOM = new Uint8Array([0xef, 0xbb, 0xbf]); // For special characteres
+	const blob = new Blob([BOM, result], { type: 'application/xml' });
+	download(blob, `Data-${new Date().toISOString()}.xml`);
+}
+
+export const exportTo = { excel, csv, xml };

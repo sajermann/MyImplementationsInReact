@@ -1,10 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
-import { Column, ColumnDef, Row } from '@tanstack/react-table';
+import { Column, ColumnDef, Row, Table as TTable } from '@tanstack/react-table';
 
-import { Select } from '~/Components/Select';
-import { Input } from '~/Components/Input';
-import { Button } from '~/Components/Button';
-import { Icons } from '~/Components/Icons';
 import { TFilterActive } from '~/Types/TFilterActive';
 import { Table } from '~/Components/Table';
 import { useTranslation } from '~/Hooks/UseTranslation';
@@ -12,211 +8,13 @@ import { TPerson } from '~/Types/TPerson';
 import { makeData } from '~/Utils/MakeData';
 import { useColumns } from '~/Hooks/UseColumns';
 import { SuperFilter } from '~/Components/Filter/SuperFilter';
-import { Popover } from '~/Components/Popover';
 import { Main } from '~/Components/Main';
 import Section from '~/Components/Section';
 import { QuickAccessGithub } from '~/Components/QuickAccessGithub';
-import { WarningInfo } from '~/Components/WarningInfo';
-
-type Props = {
-	column: Column<any, any>;
-};
-
-function FilterId({ column }: Props) {
-	const { translate } = useTranslation();
-	const [isOpen, setIsOpen] = useState(false);
-	const [selectType, setSelectType] = useState('');
-	const [filterValue, setFilterValue] = useState('');
-	const options = [
-		{ value: 'equals', label: translate('EQUAL') },
-		{ value: 'bigger', label: translate('BIGGER_THAN') },
-		{ value: 'smaller', label: translate('SMALLER_THAN') },
-	];
-
-	function verifyFillFilter() {
-		const filterValueTemp = column.getFilterValue() as string[];
-		if (
-			!filterValueTemp ||
-			filterValueTemp[0] === '' ||
-			filterValueTemp[1] === ''
-		) {
-			return false;
-		}
-		return true;
-	}
-
-	return (
-		<Popover
-			isOpen={isOpen}
-			onClose={() => setIsOpen(false)}
-			trigger={
-				<button
-					className="w-5 h-4 flex items-center justify-center"
-					type="button"
-					onClick={() => setIsOpen(true)}
-				>
-					<Icons.Funnel fullFill={verifyFillFilter()} />
-				</button>
-			}
-		>
-			<>
-				<div className="flex flex-col gap-4">
-					<div className="w-48">
-						<Select
-							isClearable
-							options={options}
-							value={options.find(item => item.value === selectType)?.value}
-							onChange={e => setSelectType(e.target.value)}
-							id="select_type"
-							placeholder={translate('FILTER_TYPE')}
-						/>
-					</div>
-					<div className="w-48">
-						<Input
-							placeholder={translate('TYPE_VALUE_FOR_FILTER')}
-							onChange={e => setFilterValue(e.target.value)}
-							value={filterValue}
-						/>
-					</div>
-				</div>
-
-				<div className="w-full flex justify-center gap-4 mt-4">
-					<Button
-						style={{
-							borderRadius: '50%',
-							maxHeight: 50,
-							maxWidth: 50,
-							minWidth: 50,
-							width: 50,
-						}}
-						type="button"
-						onClick={() => {
-							setSelectType('');
-							setFilterValue('');
-						}}
-					>
-						<div className="w-7 h-7">
-							<Icons.Trash />
-						</div>
-					</Button>
-
-					<Button
-						style={{
-							borderRadius: '50%',
-							maxHeight: 50,
-							maxWidth: 50,
-							minWidth: 50,
-							width: 50,
-						}}
-						type="button"
-						onClick={() => {
-							column.setFilterValue([selectType, filterValue]);
-							setIsOpen(false);
-						}}
-					>
-						<div className="w-7 h-7">
-							<Icons.Save />
-						</div>
-					</Button>
-				</div>
-			</>
-		</Popover>
-	);
-}
-
-type Props2 = {
-	column: Column<any, any>;
-	data: TPerson[];
-};
-
-function FilterName({ column, data }: Props2) {
-	const { translate } = useTranslation();
-	const [isOpen, setIsOpen] = useState(false);
-	const [filterValue, setFilterValue] = useState<string[]>([]);
-
-	function getNames() {
-		return data.map(item => ({ value: item.name, label: item.name }));
-	}
-
-	function verifyFillFilter() {
-		const filterValueTemp = column.getFilterValue();
-		if (!filterValueTemp || (filterValueTemp as string[]).length === 0) {
-			return false;
-		}
-		return true;
-	}
-
-	return (
-		<Popover
-			isOpen={isOpen}
-			onClose={() => setIsOpen(false)}
-			trigger={
-				<button
-					className="w-5 h-4 flex items-center justify-center"
-					type="button"
-					onClick={() => setIsOpen(true)}
-				>
-					<Icons.Funnel fullFill={verifyFillFilter()} />
-				</button>
-			}
-		>
-			<>
-				<Select
-					placeholder={translate('FILTER_NAMES')}
-					menuPosition="fixed"
-					menuPortalTarget={document.body}
-					options={getNames()}
-					isMulti={{
-						onChange: e => {
-							setFilterValue(e.target.value);
-						},
-						value: filterValue,
-					}}
-					id="filter_names"
-				/>
-
-				<div className="w-full flex justify-center gap-4 mt-4">
-					<Button
-						style={{
-							borderRadius: '50%',
-							maxHeight: 50,
-							maxWidth: 50,
-							minWidth: 50,
-							width: 50,
-						}}
-						type="button"
-						onClick={() => {
-							setFilterValue([]);
-						}}
-					>
-						<div className="w-7 h-7">
-							<Icons.Trash />
-						</div>
-					</Button>
-
-					<Button
-						style={{
-							borderRadius: '50%',
-							maxHeight: 50,
-							maxWidth: 50,
-							minWidth: 50,
-							width: 50,
-						}}
-						type="button"
-						onClick={() => {
-							column.setFilterValue(filterValue);
-							setIsOpen(false);
-						}}
-					>
-						<div className="w-7 h-7">
-							<Icons.Save />
-						</div>
-					</Button>
-				</div>
-			</>
-		</Popover>
-	);
-}
+import { formatDate, stringToDate } from '@sajermann/utils/FormatDate';
+import { FilterId } from '~/Components/TableExamples/FilterId';
+import { FilterBirthday } from '~/Components/TableExamples/FilterBirthday';
+import { FilterColumnBySelect } from '~/Components/TableExamples/FilterColumnBySelect';
 
 export function FilterPage() {
 	const { translate } = useTranslation();
@@ -233,11 +31,10 @@ export function FilterPage() {
 				minSize: 100,
 				size: 100,
 				align: 'center',
-				filterElement: (column: Column<any, any>, table: any) => (
+				filterElement: (column: Column<TPerson, string>) => (
 					<FilterId column={column} />
 				),
 				filterFn: (row, columnId, valueFilter) => {
-					console.log({ row, columnId, valueFilter });
 					if (valueFilter[0] === '' && valueFilter[1] === '') {
 						return true;
 					}
@@ -268,8 +65,15 @@ export function FilterPage() {
 				size: 100,
 				align: 'center',
 				enableSorting: true,
-				filterElement: (column: Column<any, any>, table: any) => (
-					<FilterName column={column} data={data} />
+				filterElement: (
+					column: Column<TPerson, string>,
+					table: TTable<TPerson>
+				) => (
+					<FilterColumnBySelect
+						column={column}
+						table={table}
+						propForFilter="name"
+					/>
 				),
 				filterFn: (row, columnId, valueFilter) => {
 					if (
@@ -282,8 +86,79 @@ export function FilterPage() {
 				},
 			},
 			columns[3],
-			columns[4],
-			columns[5],
+			{
+				accessorFn: row => formatDate(new Date(row.birthday)),
+				accessorKey: 'birthday',
+				header: translate('BIRTHDAY'),
+				minSize: 100,
+				size: 100,
+				align: 'center',
+				sortingFn: (rowA, rowB, columnId) => {
+					const dateA = stringToDate(rowA.getValue(columnId));
+					const dateB = stringToDate(rowB.getValue(columnId));
+					return dateB < dateA ? 1 : -1;
+				},
+				filterElement: (column: Column<TPerson, string>) => (
+					<FilterBirthday column={column} />
+				),
+				filterFn: (row, columnId, valueFilter) => {
+					if (valueFilter.from === '' && valueFilter.to === '') {
+						return true;
+					}
+
+					if (valueFilter.from !== '' && valueFilter.to !== '') {
+						if (
+							new Date(valueFilter.from) <=
+								stringToDate(row.getValue(columnId)) &&
+							new Date(valueFilter.to) >= stringToDate(row.getValue(columnId))
+						) {
+							return true;
+						}
+					}
+					if (
+						valueFilter.from === '' &&
+						new Date(valueFilter.to) >= stringToDate(row.getValue(columnId))
+					) {
+						return true;
+					}
+
+					if (
+						new Date(valueFilter.from) <=
+							stringToDate(row.getValue(columnId)) &&
+						valueFilter.to === ''
+					) {
+						return true;
+					}
+
+					return false;
+				},
+			},
+			{
+				accessorKey: 'email',
+				header: 'Email',
+				minSize: 100,
+				size: 100,
+				align: 'Center',
+				filterElement: (
+					column: Column<TPerson, string>,
+					table: TTable<TPerson>
+				) => (
+					<FilterColumnBySelect
+						column={column}
+						table={table}
+						propForFilter="email"
+					/>
+				),
+				filterFn: (row, columnId, valueFilter) => {
+					if (
+						valueFilter.length === 0 ||
+						valueFilter.includes(row.getValue(columnId))
+					) {
+						return true;
+					}
+					return false;
+				},
+			},
 			columns[6],
 			{
 				accessorKey: 'friends',
@@ -332,13 +207,31 @@ export function FilterPage() {
 			}
 		}
 
+		if (filterType === 'starts') {
+			if (valueCell.startsWith(filterValue)) {
+				return true;
+			}
+		}
+
+		if (filterType === 'ends') {
+			if (valueCell.endsWith(filterValue)) {
+				return true;
+			}
+		}
+
+		if (filterType === 'contains') {
+			if (valueCell.includes(filterValue)) {
+				return true;
+			}
+		}
+
 		return false;
 	}
 
 	function normalFluxFilter(
 		rows: Row<TPerson>,
 		columnId: string,
-		filters: any
+		filters: TFilterActive[]
 	) {
 		const valueCell = rows.getValue(columnId) as string;
 		const results: boolean[] = [];
@@ -357,10 +250,6 @@ export function FilterPage() {
 
 	return (
 		<Main data-content="content-main">
-			<WarningInfo
-				type="warning"
-				msg={translate('IMPLEMENTS_UNDER_CONSTRUCTION')}
-			/>
 			<Section heading={translate('FILTER')}>
 				{translate('IMPLEMENTS_FILTER_MODE')}
 			</Section>
@@ -372,10 +261,7 @@ export function FilterPage() {
 			<Section subHeading={translate('IMPLEMENTS')}>
 				<div className="flex flex-col gap-2">
 					<div>
-						<SuperFilter
-							globalFilter={globalFilter}
-							setGlobalFilter={setGlobalFilter}
-						/>
+						<SuperFilter onChange={setGlobalFilter} />
 					</div>
 					<Table
 						columns={[...columns2]}
@@ -389,6 +275,7 @@ export function FilterPage() {
 								}
 								return normalFluxFilter(rows, columnId, filters);
 							},
+							disableInput: true,
 						}}
 					/>
 				</div>

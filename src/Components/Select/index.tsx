@@ -133,7 +133,6 @@ export function Select({
 				styles={{
 					control: baseStyles => ({
 						...baseStyles,
-						height: 44,
 						width: '100%',
 					}),
 					menu: baseStyles => ({
@@ -153,7 +152,6 @@ export function Select({
 					input: baseStyles => ({
 						...baseStyles,
 						color: '#6C757D',
-						width: '100%',
 					}),
 				}}
 			/>

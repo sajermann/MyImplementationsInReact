@@ -72,7 +72,7 @@ const CustomInput = forwardRef(
 			props.dateFormat
 		);
 		delete newProps.dateFormat;
-		return <Input {...newProps} value={result} />;
+		return <Input {...newProps} value={result} tabIndex={-1} />;
 	}
 );
 

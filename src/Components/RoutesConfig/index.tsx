@@ -35,7 +35,7 @@ export default function RoutesConfig() {
 				</Suspense>
 			</div>
 			{location.pathname !== '/' && (
-				<div className="hidden min-w-[18rem] w-72 max-w-[18rem] md:flex">
+				<div className="hidden min-w-[18rem] w-72 max-w-[18rem] xl:flex">
 					<Sidebar />
 				</div>
 			)}

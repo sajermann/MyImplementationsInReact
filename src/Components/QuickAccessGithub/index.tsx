@@ -32,7 +32,7 @@ export function QuickAccessGithub({
 				className={LINK_CLASS}
 				rel="noreferrer"
 			>
-				<Icons.List width="30px" />
+				<Icons.ListFile width="30px" />
 				Impl Code
 			</a>
 			<a

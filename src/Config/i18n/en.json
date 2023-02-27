@@ -1,5 +1,15 @@
 {
 	"translations": {
+		"TO": "To",
+		"FROM": "From",
+		"NO_ACTIVE_FILTERS": "No Active Filters",
+		"CONTAINS": "Contains",
+		"ENDS_WITH": "Ends with",
+		"STARTS_WITH": "Starts with",
+		"SEARCH": "Search",
+		"EXPORT_TO_XML": "Export to XML",
+		"EXPORT_TO_CSV": "Export to CSV",
+		"EXPORT_TO_XLS": "Export to XLS",
 		"IMPLEMENTS_UNDER_CONSTRUCTION": "This Implements is Under Construction",
 		"IMPLEMENTS_PDF_MODE": "Implements Pdf Mode",
 		"PDF": "Pdf",
@@ -12,6 +22,7 @@
 		"NO_VIEW": "No View",
 		"TABLE": "Table",
 		"TABLES": "Tables",
+		"IMPLEMENTS_FOOTER_MODE": "Implements Footer Mode",
 		"IMPLEMENTS_VIRTUALIZED_MODE": "Implements Virtualized Mode",
 		"IMPLEMENTS_FULL_EDITABLE_MODE": "Implements Full Editable Mode",
 		"IMPLEMENTS_SORT_MODE": "Implements Sort Mode",

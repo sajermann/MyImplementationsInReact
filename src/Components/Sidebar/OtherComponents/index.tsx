@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
 import { useLocation, Link } from 'react-router-dom';
-import { CaretLeft, CaretRight } from 'phosphor-react';
 
 import { useRoutesMenu } from '~/Hooks/UseRoutesMenu';
 import { useTranslation } from '~/Hooks/UseTranslation';
+import { Icons } from '~/Components/Icons';
 import { Main } from '../Main';
 
 type Menu = {
@@ -40,13 +40,13 @@ export function OtherComponents() {
 
 	return (
 		<Main heading={translate('OTHERS_COMPONENTS')}>
-			<div className="flex justify-between">
+			<div className="flex justify-between items-center">
 				{prev && (
 					<Link
 						className="flex items-center justify-center hover:text-primary-700 transition-colors duration-500"
 						to={prev.path}
 					>
-						<CaretLeft /> {prev.name}
+						<Icons.ArrowSingleLeft width="15px" /> {prev.name}
 					</Link>
 				)}
 				{next && (
@@ -55,7 +55,7 @@ export function OtherComponents() {
 						to={next.path}
 					>
 						{next.name}
-						<CaretRight />
+						<Icons.ArrowSingleRight width="15px" />
 					</Link>
 				)}
 			</div>

@@ -46,7 +46,7 @@ export function FavoritesPage() {
 	);
 
 	useEffect(() => {
-		setData(makeData.person(10));
+		setData(makeData.person(3));
 	}, []);
 
 	return (

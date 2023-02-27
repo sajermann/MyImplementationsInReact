@@ -19,6 +19,7 @@ function vehicles(quantity = 0) {
 				id: String(i),
 				value: result,
 				label: result,
+				price: faker.datatype.number(),
 			};
 		});
 

@@ -64,7 +64,9 @@ function Mock() {
 	return (
 		<Pagination
 			table={table}
-			disabledActions={false}
+			pagination={{
+				disabledActions: false,
+			}}
 			propsButtonFirstPage={{
 				'data-testid': 'firstButton',
 			}}

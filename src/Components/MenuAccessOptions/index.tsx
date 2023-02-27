@@ -1,5 +1,4 @@
-import { List } from 'phosphor-react';
-import { useRef, useState } from 'react';
+import { useMemo, useRef, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { generateGuid } from '@sajermann/utils/Random';
 
@@ -71,18 +70,19 @@ export default function MenuAccessOptions() {
 	const [isVisibleSearch, setIsVisibleSearch] = useState(false);
 	const [search, setSearch] = useState('');
 	const { options } = useRoutesMenu();
-	const refButtonSearch = useRef<HTMLInputElement>(null);
+	const refInputSearch = useRef<HTMLInputElement>(null);
 
-	function mount() {
+	const mount = useMemo(() => {
 		const valueFilter = search.toLowerCase();
 		if (valueFilter === '') return options;
 		const newOptions: TRoutesMenu[] = [];
 		options.forEach(opt => {
 			const subOptions =
 				opt.subs?.filter(
-					subOpt => subOpt.name.toLowerCase().indexOf(valueFilter) > -1
+					subOpt =>
+						translate(subOpt.label).toLowerCase().indexOf(valueFilter) > -1
 				) || [];
-			if (opt.name.toLowerCase().indexOf(valueFilter) > -1) {
+			if (translate(opt.label).toLowerCase().indexOf(valueFilter) > -1) {
 				newOptions.push(opt);
 			} else if (subOptions.length > 0) {
 				newOptions.push({
@@ -94,12 +94,12 @@ export default function MenuAccessOptions() {
 		});
 
 		return newOptions;
-	}
+	}, [search]);
 
 	return (
 		<>
 			<HeaderButton onClick={() => setIsOpen(!isOpen)}>
-				<List size={22} />
+				<Icons.List width="22px" />
 			</HeaderButton>
 			<Drawer
 				openFrom="left"
@@ -114,28 +114,30 @@ export default function MenuAccessOptions() {
 								Menu
 							</h2>
 							<div className="flex items-center justify-center gap-2">
-								<div ref={refButtonSearch}>
-									<Input
+								<div ref={refInputSearch}>
+									<div
 										className={clsx({
-											'transition-all ease-linear origin-left duration-500':
-												true,
+											'duration-500': true,
 											'opacity-0 w-0': !isVisibleSearch,
 											'opacity-100 w-full': isVisibleSearch,
-											'w-full': isVisibleSearch,
+											// 'w-full': isVisibleSearch,
 										})}
-										type="search"
-										placeholder={translate('SEARCH_MENU')}
-										value={search}
-										onChange={({ target }) => setSearch(target.value)}
-									/>
+									>
+										<Input
+											type="search"
+											placeholder={translate('SEARCH_MENU')}
+											value={search}
+											onChange={({ target }) => setSearch(target.value)}
+										/>
+									</div>
 								</div>
 								<HeaderButton
 									onClick={() => {
 										setSearch('');
 										setIsVisibleSearch(!isVisibleSearch);
-										if (refButtonSearch && refButtonSearch.current) {
+										if (refInputSearch && refInputSearch.current) {
 											(
-												refButtonSearch.current.children[0]
+												refInputSearch.current.children[0].children[0]
 													.children[0] as HTMLElement
 											).focus();
 										}
@@ -151,7 +153,7 @@ export default function MenuAccessOptions() {
 						</div>
 					</Nav>
 					<BoxScroll>
-						{mount().map(menu => {
+						{mount.map(menu => {
 							if (menu.subs) {
 								return (
 									<MenuCollapsible
@@ -161,7 +163,7 @@ export default function MenuAccessOptions() {
 										trigger={triggerIsOpen =>
 											buildTrigger({
 												isOpen: triggerIsOpen,
-												name: menu.name,
+												name: menu.label,
 												path: menu.path,
 												onClick: () => setIsOpen(false),
 											})
@@ -171,7 +173,7 @@ export default function MenuAccessOptions() {
 											<BuildNormalOption
 												onClick={() => setIsOpen(false)}
 												key={generateGuid()}
-												name={subMenu.name}
+												name={subMenu.label}
 												path={subMenu.path}
 											/>
 										))}
@@ -182,7 +184,7 @@ export default function MenuAccessOptions() {
 								<BuildNormalOption
 									onClick={() => setIsOpen(false)}
 									key={generateGuid()}
-									name={menu.name}
+									name={menu.label}
 									path={menu.path}
 								/>
 							);

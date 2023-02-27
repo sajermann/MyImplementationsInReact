@@ -1,9 +1,10 @@
 import { delay } from '@sajermann/utils/Delay';
-import { ClipboardText } from 'phosphor-react';
 import { useState } from 'react';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { dracula } from 'react-syntax-highlighter/dist/esm/styles/prism';
+
 import { Button } from '../Button';
+import { Icons } from '../Icons';
 import styles from './styles.module.css';
 
 type Props = {
@@ -40,7 +41,7 @@ export function CodeBlock({ children, language }: Props) {
 							fullIcon: true,
 						},
 					}}
-					endIcon={<ClipboardText />}
+					endIcon={<Icons.ClipboardText color="#fff" />}
 				/>
 			</div>
 			<SyntaxHighlighter language={language || 'jsx'} style={dracula}>
