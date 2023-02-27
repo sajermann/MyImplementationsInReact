@@ -1,5 +1,8 @@
 import { lazy, useMemo } from 'react';
 
+import { Home } from '~/Pages/Home';
+import { TRoutesMenu } from '~/Types/TRoutesMenu';
+import { useTranslation } from '~/Hooks/UseTranslation';
 import { CheckboxDemo } from '~/Components/Demos/Checkbox';
 import { ButtonDemo } from '~/Components/Demos/Button';
 import { DatepickerDemo } from '~/Components/Demos/Datepicker';
@@ -7,35 +10,167 @@ import { DrawerDemo } from '~/Components/Demos/Drawer';
 import { InputDemo } from '~/Components/Demos/Input';
 import { ModalDemo } from '~/Components/Demos/Modal';
 import { SelectDemo } from '~/Components/Demos/Select';
-import { CheckboxPage } from '~/Pages/Checkbox';
-import { DatepickerPage } from '~/Pages/Datepicker';
-import { DrawerPage } from '~/Pages/Drawer';
-import { Home } from '~/Pages/Home';
-import { InputPage } from '~/Pages/Input';
-import { ModalPage } from '~/Pages/Modal';
-import { SelectPage } from '~/Pages/Select';
-import { TablePage } from '~/Pages/Table';
-import { FilterPage } from '~/Pages/Table/Filter';
-import { TRoutesMenu } from '~/Types/TRoutesMenu';
-import { SelectionPage } from '~/Pages/Table/Selection';
-import { ExpandedLinePage } from '~/Pages/Table/ExpandedLine';
-import { LoadingPage } from '~/Pages/Table/Loading';
-import { ColumnOrderPage } from '~/Pages/Table/ColumnOrder';
-import { SortPage } from '~/Pages/Table/Sort';
-import { EditablePage } from '~/Pages/Table/Editable';
-import { FullEditablePage } from '~/Pages/Table/FullEditable';
-import { VirtualizedPage } from '~/Pages/Table/Virtualized';
-import { PaginationPage } from '~/Pages/Table/Pagination';
-import { FavoritesPage } from '~/Pages/Table/Favorites';
-import { EllipsisPage } from '~/Pages/Table/Ellipsis';
-import { ResizingPage } from '~/Pages/Table/Resizing';
-import { ColumnVisibilityPage } from '~/Pages/Table/ColumnVisibility';
-import { PrintPage } from '~/Pages/Table/Print';
-import { ExportPage } from '~/Pages/Table/Export';
-import { ToastPage } from '~/Pages/Toast';
 import { ToastDemo } from '~/Components/Demos/Toast';
-import { PdfPage } from '~/Pages/Pdf';
-import { useTranslation } from '../UseTranslation';
+
+const ColumnVisibilityPage = lazy(() =>
+	import('~/Pages/Table/ColumnVisibility').then(
+		({ ColumnVisibilityPage: ColumnVisibility }) => ({
+			default: ColumnVisibility,
+		})
+	)
+);
+
+const PrintPage = lazy(() =>
+	import('~/Pages/Table/Print').then(({ PrintPage: Print }) => ({
+		default: Print,
+	}))
+);
+
+const ExportPage = lazy(() =>
+	import('~/Pages/Table/Export').then(({ ExportPage: Export }) => ({
+		default: Export,
+	}))
+);
+
+const ToastPage = lazy(() =>
+	import('~/Pages/Toast').then(({ ToastPage: Toast }) => ({
+		default: Toast,
+	}))
+);
+
+const PdfPage = lazy(() =>
+	import('~/Pages/Pdf').then(({ PdfPage: Pdf }) => ({
+		default: Pdf,
+	}))
+);
+
+const SortPage = lazy(() =>
+	import('~/Pages/Table/Sort').then(({ SortPage: Sort }) => ({
+		default: Sort,
+	}))
+);
+
+const EditablePage = lazy(() =>
+	import('~/Pages/Table/Editable').then(({ EditablePage: Editable }) => ({
+		default: Editable,
+	}))
+);
+
+const FullEditablePage = lazy(() =>
+	import('~/Pages/Table/FullEditable').then(
+		({ FullEditablePage: FullEditable }) => ({
+			default: FullEditable,
+		})
+	)
+);
+
+const VirtualizedPage = lazy(() =>
+	import('~/Pages/Table/Virtualized').then(
+		({ VirtualizedPage: Virtualized }) => ({
+			default: Virtualized,
+		})
+	)
+);
+
+const PaginationPage = lazy(() =>
+	import('~/Pages/Table/Pagination').then(({ PaginationPage: Pagination }) => ({
+		default: Pagination,
+	}))
+);
+
+const FavoritesPage = lazy(() =>
+	import('~/Pages/Table/Favorites').then(({ FavoritesPage: Favorites }) => ({
+		default: Favorites,
+	}))
+);
+
+const EllipsisPage = lazy(() =>
+	import('~/Pages/Table/Ellipsis').then(({ EllipsisPage: Ellipsis }) => ({
+		default: Ellipsis,
+	}))
+);
+
+const ResizingPage = lazy(() =>
+	import('~/Pages/Table/Resizing').then(({ ResizingPage: Resizing }) => ({
+		default: Resizing,
+	}))
+);
+
+const FilterPage = lazy(() =>
+	import('~/Pages/Table/Filter').then(({ FilterPage: Filter }) => ({
+		default: Filter,
+	}))
+);
+
+const SelectionPage = lazy(() =>
+	import('~/Pages/Table/Selection').then(({ SelectionPage: Selection }) => ({
+		default: Selection,
+	}))
+);
+
+const ExpandedLinePage = lazy(() =>
+	import('~/Pages/Table/ExpandedLine').then(
+		({ ExpandedLinePage: ExpandedLine }) => ({
+			default: ExpandedLine,
+		})
+	)
+);
+
+const LoadingPage = lazy(() =>
+	import('~/Pages/Table/Loading').then(({ LoadingPage: Loading }) => ({
+		default: Loading,
+	}))
+);
+
+const ColumnOrderPage = lazy(() =>
+	import('~/Pages/Table/ColumnOrder').then(
+		({ ColumnOrderPage: ColumnOrder }) => ({
+			default: ColumnOrder,
+		})
+	)
+);
+
+const InputPage = lazy(() =>
+	import('~/Pages/Input').then(({ InputPage: Input }) => ({
+		default: Input,
+	}))
+);
+
+const ModalPage = lazy(() =>
+	import('~/Pages/Modal').then(({ ModalPage: Modal }) => ({
+		default: Modal,
+	}))
+);
+
+const SelectPage = lazy(() =>
+	import('~/Pages/Select').then(({ SelectPage: Select }) => ({
+		default: Select,
+	}))
+);
+
+const TablePage = lazy(() =>
+	import('~/Pages/Table').then(({ TablePage: Table }) => ({
+		default: Table,
+	}))
+);
+
+const DrawerPage = lazy(() =>
+	import('~/Pages/Drawer').then(({ DrawerPage: Drawer }) => ({
+		default: Drawer,
+	}))
+);
+
+const CheckboxPage = lazy(() =>
+	import('~/Pages/Checkbox').then(({ CheckboxPage: Checkbox }) => ({
+		default: Checkbox,
+	}))
+);
+
+const DatepickerPage = lazy(() =>
+	import('~/Pages/Datepicker').then(({ DatepickerPage: Datepicker }) => ({
+		default: Datepicker,
+	}))
+);
 
 const FooterPage = lazy(() =>
 	import('~/Pages/Table/Footer').then(({ FooterPage: Footer }) => ({

@@ -1,4 +1,3 @@
-import { List } from 'phosphor-react';
 import { useMemo, useRef, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { generateGuid } from '@sajermann/utils/Random';
@@ -100,7 +99,7 @@ export default function MenuAccessOptions() {
 	return (
 		<>
 			<HeaderButton onClick={() => setIsOpen(!isOpen)}>
-				<List size={22} />
+				<Icons.List width="22px" />
 			</HeaderButton>
 			<Drawer
 				openFrom="left"

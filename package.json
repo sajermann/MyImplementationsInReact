@@ -32,7 +32,6 @@
     "i18next-browser-languagedetector": "^7.0.1",
     "jspdf": "^2.5.1",
     "jstoxml": "^3.2.6",
-    "phosphor-react": "^1.4.1",
     "react": "^18.2.0",
     "react-beautiful-dnd": "^13.1.1",
     "react-datepicker": "^4.8.0",

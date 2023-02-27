@@ -1,11 +1,4 @@
 import { useState } from 'react';
-import {
-	TelegramLogo,
-	TrendDown,
-	TrendUp,
-	WhatsappLogo,
-	YoutubeLogo,
-} from 'phosphor-react';
 
 import { CodeBlock } from '~/Components/CodeBlock';
 import { Button } from '~/Components/Button';
@@ -15,6 +8,7 @@ import { useTranslation } from '~/Hooks/UseTranslation';
 import CustomLoading from '~/Components/CustomLoading';
 import { Main } from '~/Components/Main';
 import { QuickAccessGithub } from '~/Components/QuickAccessGithub';
+import { Icons } from '~/Components/Icons';
 import styles from './styles.module.css';
 
 export function ButtonPage() {
@@ -98,22 +92,22 @@ export function ButtonPage() {
 					<Button
 						className={styles.btn}
 						colorStyle="Success"
-						startIcon={<WhatsappLogo size={30} />}
+						startIcon={<Icons.WhatsappLogo width="30px" />}
 					>
 						Whats
 					</Button>
 					<Button
 						className={styles.btn}
 						colorStyle="Primary"
-						endIcon={<TelegramLogo size={30} />}
+						endIcon={<Icons.TelegramLogo width="30px" />}
 					>
 						Telegram
 					</Button>
 					<Button
 						className={styles.btn}
 						colorStyle="Secondary"
-						startIcon={<YoutubeLogo size={30} />}
-						endIcon={<YoutubeLogo size={30} />}
+						startIcon={<Icons.YoutubeLogo width="30px" />}
+						endIcon={<Icons.YoutubeLogo width="30px" />}
 					>
 						Youtube
 					</Button>
@@ -232,14 +226,14 @@ export function ButtonPage() {
 								successOptions: {
 									success,
 									customIcon: (
-										<TrendUp>
+										<Icons.TrendUp>
 											<animate
 												attributeName="opacity"
 												values="0;1;0"
 												dur="1s"
 												repeatCount="indefinite"
 											/>
-										</TrendUp>
+										</Icons.TrendUp>
 									),
 								},
 							}}
@@ -297,14 +291,14 @@ export function ButtonPage() {
 								failedOptions: {
 									failed,
 									customIcon: (
-										<TrendDown>
+										<Icons.TrendDown>
 											<animate
 												attributeName="opacity"
 												values="0;1;0"
 												dur="1s"
 												repeatCount="indefinite"
 											/>
-										</TrendDown>
+										</Icons.TrendDown>
 									),
 								},
 							}}
@@ -391,7 +385,7 @@ export function ButtonPage() {
 									success: true,
 								},
 							}}
-							endIcon={<WhatsappLogo size={30} />}
+							endIcon={<Icons.WhatsappLogo width="30px" />}
 						/>
 						<Button
 							style={{ minWidth: '50px', height: '50px' }}
@@ -408,7 +402,7 @@ export function ButtonPage() {
 									success,
 								},
 							}}
-							endIcon={<YoutubeLogo size={30} />}
+							endIcon={<Icons.YoutubeLogo width="30px" />}
 						/>
 						<Button
 							style={{ minWidth: '50px', height: '50px', borderRadius: '50%' }}
@@ -425,7 +419,7 @@ export function ButtonPage() {
 									success,
 								},
 							}}
-							endIcon={<TelegramLogo size={30} />}
+							endIcon={<Icons.TelegramLogo width="30px" />}
 						/>
 					</ComponentBlock>
 				</div>
