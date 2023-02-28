@@ -1,21 +1,20 @@
 /**
  * @vitest-environment jsdom
  */
-import { fireEvent, render, waitFor } from '@testing-library/react';
-import { useState } from 'react';
+import { fireEvent, render } from '@testing-library/react';
 import { it, describe } from 'vitest';
-import { Button } from '~/Components/Button';
 import { InjectorProviders } from '~/Components/InjectorProviders';
-import { Modal } from '~/Components/Modal';
-
 import { PrintPage } from '.';
 
-describe('Pages/Table/PrintPage', () => {
-	it(`must render `, async () => {
+describe('Pages/PrintPage', () => {
+	it(`must change Select components`, async () => {
 		const { getAllByText } = render(
 			<InjectorProviders>
 				<PrintPage />
 			</InjectorProviders>
 		);
+		const printButton = await getAllByText('Print')[0];
+		expect(printButton).toBeInTheDocument();
+		fireEvent.click(printButton);
 	});
 });

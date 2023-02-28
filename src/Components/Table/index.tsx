@@ -24,7 +24,7 @@ import { TSelection } from '~/Types/TSelection';
 import { useTranslation } from '~/Hooks/UseTranslation';
 import { Checkbox } from '~/Components/Checkbox';
 import { managerClassNames } from '~/Utils/ManagerClassNames';
-import { DefProps } from '~/Utils/Export';
+import { TDefTools } from '~/Types/TExport';
 import { Tfoot } from './Tfoot';
 import { Header } from './Header';
 import { Thead } from './Thead';
@@ -66,10 +66,7 @@ type Props<T, U = undefined> = {
 	maxHeight?: string;
 	showFooter?: boolean;
 
-	tools?: {
-		defForExcel?: DefProps<T>[];
-		defForCsv?: DefProps<T>[];
-	};
+	tools?: TDefTools<T>;
 };
 
 type PropsTableInternal = {
