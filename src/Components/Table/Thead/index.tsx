@@ -15,7 +15,7 @@ export function Thead<T>({ table }: Props<T>) {
 		<thead
 			className={managerClassNames({
 				[styles.thead]: true,
-				'bg-dark-700': darkMode,
+				'!bg-dark-700': darkMode,
 			})}
 		>
 			{table.getHeaderGroups().map(headerGroup => (

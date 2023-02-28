@@ -65,7 +65,7 @@ function buildTrigger({
 }
 
 export default function MenuAccessOptions() {
-	const { translate } = useTranslation();
+	const { translate, currentLanguage } = useTranslation();
 	const [isOpen, setIsOpen] = useState(false);
 	const [isVisibleSearch, setIsVisibleSearch] = useState(false);
 	const [search, setSearch] = useState('');
@@ -94,7 +94,7 @@ export default function MenuAccessOptions() {
 		});
 
 		return newOptions;
-	}, [search]);
+	}, [search, currentLanguage]);
 
 	return (
 		<>

@@ -27,7 +27,7 @@
     "@tanstack/react-table": "^8.7.9",
     "@tanstack/react-virtual": "^3.0.0-beta.39",
     "clsx": "^1.2.1",
-    "html-to-image": "^1.11.11",
+    "html2canvas": "^1.4.1",
     "i18next": "^22.4.9",
     "i18next-browser-languagedetector": "^7.0.1",
     "jspdf": "^2.5.1",

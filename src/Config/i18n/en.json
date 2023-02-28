@@ -1,5 +1,14 @@
 {
 	"translations": {
+		"EXPORT_TO_PDF": "Export to Pdf",
+		"EXPORT_TO_PNG": "Export to Png",
+		"EXPORT_TO_PRINTER": "Export to printer",
+		"INFOS": "Infos",
+		"RECORDS": "Records",
+		"ACTIVES": "Actives",
+		"ADMIN_ROLE": "Admin",
+		"DEV_ROLE": "Developers",
+		"USER_ROLE": "Users",
 		"TO": "To",
 		"FROM": "From",
 		"NO_ACTIVE_FILTERS": "No Active Filters",

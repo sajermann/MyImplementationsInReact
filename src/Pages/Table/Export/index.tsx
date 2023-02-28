@@ -6,11 +6,10 @@ import { TPerson } from '~/Types/TPerson';
 import { makeData } from '~/Utils/MakeData';
 import { useColumns } from '~/Hooks/UseColumns';
 import { formatDate } from '@sajermann/utils/FormatDate';
-import { DefProps } from '~/Utils/Export';
 import { Main } from '~/Components/Main';
 import Section from '~/Components/Section';
 import { QuickAccessGithub } from '~/Components/QuickAccessGithub';
-import { WarningInfo } from '~/Components/WarningInfo';
+import { TDefXlsx, TDefPrintPdfPng, TDefCsv } from '~/Types/TExport';
 
 export function ExportPage() {
 	const { translate } = useTranslation();
@@ -42,17 +41,12 @@ export function ExportPage() {
 		},
 	};
 
-	const defForExcel = useMemo<DefProps<TPerson>[]>(
+	const defForExcel = useMemo<TDefXlsx<TPerson>[]>(
 		() => [
 			{
 				header: 'Id',
 				styleHeaderCellFn: () => headerStyles,
 				accessor: 'id',
-			},
-			{
-				header: 'Avatar',
-				styleHeaderCellFn: () => headerStyles,
-				accessor: 'avatar',
 			},
 			{
 				header: translate('NAME'),
@@ -110,12 +104,104 @@ export function ExportPage() {
 		[translate]
 	);
 
+	const defForCsvAndXml = useMemo<TDefCsv<TPerson>[]>(
+		() => [
+			{
+				header: 'Id',
+				accessor: 'id',
+			},
+			{
+				header: translate('NAME'),
+				accessor: 'name',
+			},
+			{
+				header: translate('LAST_NAME'),
+				accessor: 'lastName',
+			},
+			{
+				header: translate('BIRTHDAY'),
+				accessor: 'birthday',
+				accessorFn: ({ valueCell }) =>
+					formatDate(new Date(valueCell as string)),
+			},
+			{
+				header: 'Email',
+				accessor: 'email',
+			},
+			{
+				header: 'Role',
+				accessor: 'role',
+			},
+			{
+				header: translate('ACTIVE'),
+				accessor: 'isActive',
+				accessorFn: ({ valueCell }) =>
+					(valueCell as string) ? translate('YES') : translate('NO'),
+			},
+			{
+				header: translate('FRIENDS'),
+				accessor: 'friends',
+				accessorFn: ({ valueCell }) =>
+					(valueCell as { name: string }[]).map(item => item.name).join(' | '),
+			},
+		],
+		[translate]
+	);
+
+	const defForPrintAndPdfAndPng = useMemo<TDefPrintPdfPng<TPerson>[]>(
+		() => [
+			{
+				header: 'Id',
+				accessor: 'id',
+			},
+			{
+				header: translate('NAME'),
+				accessor: 'name',
+			},
+			{
+				header: translate('LAST_NAME'),
+				accessor: 'lastName',
+			},
+			{
+				header: translate('BIRTHDAY'),
+				accessor: 'birthday',
+				accessorFn: ({ valueCell }) =>
+					formatDate(new Date(valueCell as string)),
+				align: 'center',
+			},
+			{
+				header: 'Email',
+				accessor: 'email',
+			},
+			{
+				header: 'Role',
+				accessor: 'role',
+				align: 'center',
+			},
+			{
+				header: translate('ACTIVE'),
+				accessor: 'isActive',
+				accessorFn: ({ valueCell }) =>
+					(valueCell as string) ? translate('YES') : translate('NO'),
+				align: 'center',
+			},
+			{
+				header: translate('FRIENDS'),
+				accessor: 'friends',
+				accessorFn: ({ valueCell }) =>
+					(valueCell as { name: string }[]).map(item => item.name).join(' | '),
+				cellRender: dataT => `
+					<div style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; width: 50%; height: 100%;">
+						${dataT.valueCell}
+					</div>
+					`,
+			},
+		],
+		[translate]
+	);
+
 	return (
 		<Main data-content="content-main">
-			<WarningInfo
-				type="warning"
-				msg={translate('IMPLEMENTS_UNDER_CONSTRUCTION')}
-			/>
 			<Section heading={translate('EXPORT')}>
 				{translate('IMPLEMENTS_EXPORT_MODE')}
 			</Section>
@@ -134,8 +220,12 @@ export function ExportPage() {
 						setFilter: setGlobalFilter,
 					}}
 					tools={{
-						defForCsv: defForExcel,
+						defForCsv: defForCsvAndXml,
 						defForExcel,
+						defForPrint: defForPrintAndPdfAndPng,
+						defForPdf: defForPrintAndPdfAndPng,
+						defForPng: defForPrintAndPdfAndPng,
+						defForXml: defForCsvAndXml,
 					}}
 				/>
 			</Section>

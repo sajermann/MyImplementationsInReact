@@ -1,10 +1,20 @@
 import * as XLSX from 'xlsx-js-style';
-import { toXML, XmlElement } from 'jstoxml';
+import { toXML } from 'jstoxml';
+import { jsPDF as JsPdf } from 'jspdf';
+import html2canvas from 'html2canvas';
 
-function download(blob: Blob, filemName: string) {
+import {
+	TDefXlsx,
+	TCellProps,
+	TDefPrintPdfPng,
+	TDefCsv,
+	TDefXml,
+} from '~/Types/TExport';
+
+function download(blob: Blob | string, extension: string) {
 	const link = document.createElement('a');
-	link.href = URL.createObjectURL(blob);
-	link.download = filemName;
+	link.href = typeof blob === 'string' ? blob : URL.createObjectURL(blob);
+	link.download = `Data-${new Date().toISOString()}.${extension}`;
 	link.click();
 	URL.revokeObjectURL(link.href);
 }
@@ -12,35 +22,121 @@ function download(blob: Blob, filemName: string) {
 const EXCEL_TYPE =
 	'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
 
-type TCellProps<T> = {
-	valueCell: unknown;
-	row: T;
-	original: T[];
-	index: number;
-};
-
-type THeaderProps<T> = {
-	valueHeader: string;
-	currentDefinition: DefProps<T>;
-	definitions: DefProps<T>[];
-	index: number;
-};
-
-export type DefProps<T> = {
-	header: string;
-	accessor: keyof T;
-	typeCell?: 's' | 'b';
-	accessorFn?: (data: TCellProps<T>) => string;
-	styleCellFn?: (data: TCellProps<T>) => Record<string, unknown>;
-	styleHeaderCellFn?: (data: THeaderProps<T>) => Record<string, unknown>;
-};
-
-export type Props<T> = {
+type PropsXlsx<T> = {
 	data: T[];
-	defColumns: DefProps<T>[];
+	defColumns: TDefXlsx<T>[];
 };
 
-function excel<T>({ data, defColumns }: Props<T>) {
+type PropsCsv<T> = {
+	data: T[];
+	defColumns: TDefCsv<T>[];
+	delimiter?: string;
+};
+
+type PropsXml<T> = {
+	data: T[];
+	defColumns: TDefXml<T>[];
+};
+
+type PropsPrint<T> = {
+	data: T[];
+	defColumns: TDefPrintPdfPng<T>[];
+};
+
+function buildTable<T>({ data, defColumns }: PropsPrint<T>) {
+	const headerTemp: Record<string, unknown>[] = [];
+	const dataTemp: Record<string, unknown>[][] = [];
+
+	// Add Header
+	for (let i = 0; i < defColumns.length; i += 1) {
+		headerTemp.push({
+			value: defColumns[i].header,
+			align: defColumns[i].align,
+		});
+	}
+
+	// Add Rows
+	for (let i = 0; i < data.length; i += 1) {
+		const rowTemp: Record<string, unknown>[] = [];
+		for (const defCol of defColumns) {
+			const value = defCol.accessorFn
+				? defCol.accessorFn({
+						valueCell: data[i][defCol.accessor],
+						row: data[i],
+						original: data,
+						index: i,
+				  })
+				: data[i][defCol.accessor];
+			rowTemp.push({
+				value,
+				align: defCol.align,
+				cellRender: defCol.cellRender,
+			});
+		}
+		dataTemp.push(rowTemp);
+	}
+
+	// Mount HTML
+	const table = document.createElement('table');
+	table.setAttribute(
+		'style',
+		'border-collapse: collapse; width: 100%; color: black'
+	);
+
+	// Build THead
+	const thead = document.createElement('thead');
+	const trHead = document.createElement('tr');
+	trHead.setAttribute('style', 'border-bottom: 1px solid black; ');
+	for (const header of headerTemp) {
+		const th = document.createElement('th');
+		th.setAttribute(
+			'style',
+			`padding: 8px; text-align:${header.align || 'left'}`
+		);
+		th.textContent = header.value as string;
+		trHead.appendChild(th);
+	}
+	thead.appendChild(trHead);
+
+	// Build TBody
+	const tbody = document.createElement('tbody');
+	for (const [indexRow, row] of dataTemp.entries()) {
+		const trBody = document.createElement('tr');
+		trBody.setAttribute(
+			'style',
+			'border-bottom: 1px solid black; padding: 4px'
+		);
+		for (const cell of row) {
+			const { cellRender } = cell as unknown as {
+				cellRender: (dataForCellRender: TCellProps<T>) => string;
+			};
+			const td = document.createElement('td');
+			td.setAttribute(
+				'style',
+				`padding: 8px; text-align:${cell.align || 'left'}`
+			);
+
+			if (cellRender) {
+				td.innerHTML = cellRender({
+					valueCell: cell.value,
+					row: data[indexRow],
+					original: data,
+					index: indexRow,
+				});
+			} else {
+				td.textContent = cell.value as string;
+			}
+			trBody.appendChild(td);
+		}
+		tbody.appendChild(trBody);
+	}
+	table.appendChild(thead);
+	table.appendChild(tbody);
+
+	return table;
+}
+
+function excel<T>({ data, defColumns }: PropsXlsx<T>) {
 	const headerTemp: Record<string, unknown>[] = [];
 	const dataTemp: Record<string, unknown>[][] = [];
 
@@ -101,12 +197,11 @@ function excel<T>({ data, defColumns }: Props<T>) {
 
 	const eb = XLSX.write(wb, { bookType: 'xlsx', type: 'array' });
 	const blob = new Blob([eb], { type: EXCEL_TYPE });
-	download(blob, `Data-${new Date().toISOString()}.xlsx`);
+	download(blob, `xlsx`);
 }
 
-function csv<T>({ data, defColumns }: Props<T>) {
+function csv<T>({ data, defColumns, delimiter = ';' }: PropsCsv<T>) {
 	const resultFinal: Record<string, unknown>[] = [];
-
 	for (let i = 0; i < data.length; i += 1) {
 		let result: Record<string, unknown> = {};
 		for (const item of defColumns) {
@@ -118,32 +213,108 @@ function csv<T>({ data, defColumns }: Props<T>) {
 						index: i,
 				  })
 				: data[i][item.accessor];
-			const batata = {
+			const tempHeader = {
 				[item.header]: valueTemp,
 			};
 			result = {
 				...result,
-				...batata,
+				...tempHeader,
 			};
 		}
 		resultFinal.push(result);
 	}
 
 	const ws = XLSX.utils.json_to_sheet(resultFinal);
-	const csvOutput: string = XLSX.utils.sheet_to_csv(ws, { FS: ';' });
+	const csvOutput: string = XLSX.utils.sheet_to_csv(ws, { FS: delimiter });
 
 	const BOM = new Uint8Array([0xef, 0xbb, 0xbf]); // For special characteres
 	const blob = new Blob([BOM, csvOutput], { type: 'application/csv' });
-	download(blob, `Data-${new Date().toISOString()}.csv`);
+	download(blob, `csv`);
 }
 
-function xml<T>({ data }: Props<T>) {
-	const result = toXML(data as XmlElement[], {
+function xml<T>({ data, defColumns }: PropsXml<T>) {
+	const newData: Record<string, unknown>[] = [];
+
+	// Add Rows
+	for (let i = 0; i < data.length; i += 1) {
+		const rowTemp: Record<string, unknown>[] = [];
+		for (const defCol of defColumns) {
+			const value = defCol.accessorFn
+				? defCol.accessorFn({
+						valueCell: data[i][defCol.accessor],
+						row: data[i],
+						original: data,
+						index: i,
+				  })
+				: data[i][defCol.accessor];
+
+			rowTemp.push({
+				[defCol.header.replaceAll(' ', '')]: value,
+			});
+		}
+		newData.push({ item: rowTemp });
+	}
+
+	const tratedDate = {
+		data: newData,
+	};
+
+	const result = toXML(tratedDate, {
 		indent: '    ',
 	});
 	const BOM = new Uint8Array([0xef, 0xbb, 0xbf]); // For special characteres
 	const blob = new Blob([BOM, result], { type: 'application/xml' });
-	download(blob, `Data-${new Date().toISOString()}.xml`);
+	download(blob, `xml`);
 }
 
-export const exportTo = { excel, csv, xml };
+function print<T>({ data, defColumns }: PropsPrint<T>) {
+	const table = buildTable({ data, defColumns });
+
+	const windowForPrint = window.open('');
+	if (windowForPrint) {
+		windowForPrint.document.body.append(table);
+		setTimeout(() => {
+			windowForPrint.print();
+		}, 500);
+
+		// windowForPrint.onfocus = () => {
+		// 	setTimeout(() => {
+		// 		windowForPrint.close();
+		// 	}, 500);
+		// };
+	}
+}
+
+function pdf<T>({ data, defColumns }: PropsPrint<T>) {
+	const table = buildTable({ data, defColumns });
+
+	const doc = new JsPdf({
+		orientation: 'l',
+		unit: 'mm',
+		format: 'a4',
+		putOnlyUsedFonts: true,
+		floatPrecision: 16,
+	});
+
+	doc.html(table, {
+		callback: docTemp => {
+			docTemp.save(`Data-${new Date().toISOString()}.pdf`);
+		},
+		width: 190,
+		windowWidth: 700,
+	});
+}
+
+function png<T>({ data, defColumns }: PropsPrint<T>) {
+	const table = buildTable({ data, defColumns });
+	table.id = 'tempTable';
+	document.body.appendChild(table);
+
+	html2canvas(table).then(canvas => {
+		const blob = canvas.toDataURL('image/png', 1.0);
+		download(blob, `png`);
+		document.querySelector('#tempTable')?.remove();
+	});
+}
+
+export const exportTo = { excel, csv, xml, print, pdf, png };

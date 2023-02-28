@@ -1,6 +1,7 @@
 import { Table } from '@tanstack/react-table';
 import { Dispatch, SetStateAction } from 'react';
-import { DefProps } from '~/Utils/Export';
+import { TDefTools } from '~/Types/TExport';
+
 import { managerClassNames } from '~/Utils/ManagerClassNames';
 import { ExportButtons } from '../ExportButtons';
 import { Search } from '../Search';
@@ -12,16 +13,12 @@ type Props<T, U> = {
 		disableInput?: boolean;
 	};
 	table: Table<T>;
-	tools?: {
-		defForExcel?: DefProps<T>[];
-		defForCsv?: DefProps<T>[];
-		defForXml?: DefProps<T>[];
-		defForPrint?: DefProps<T>[];
-	};
+	tools?: TDefTools<T>;
 };
 
 export function Header<T, U>({ globalFilter, table, tools }: Props<T, U>) {
 	if (!tools && (!globalFilter || globalFilter?.disableInput)) return null;
+
 	return (
 		<div className="grid grid-cols-12 gap-2 w-full mb-1">
 			<div

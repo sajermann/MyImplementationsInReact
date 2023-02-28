@@ -20,12 +20,6 @@ const ColumnVisibilityPage = lazy(() =>
 	)
 );
 
-const PrintPage = lazy(() =>
-	import('~/Pages/Table/Print').then(({ PrintPage: Print }) => ({
-		default: Print,
-	}))
-);
-
 const ExportPage = lazy(() =>
 	import('~/Pages/Table/Export').then(({ ExportPage: Export }) => ({
 		default: Export,
@@ -35,12 +29,6 @@ const ExportPage = lazy(() =>
 const ToastPage = lazy(() =>
 	import('~/Pages/Toast').then(({ ToastPage: Toast }) => ({
 		default: Toast,
-	}))
-);
-
-const PdfPage = lazy(() =>
-	import('~/Pages/Pdf').then(({ PdfPage: Pdf }) => ({
-		default: Pdf,
 	}))
 );
 
@@ -181,6 +169,12 @@ const FooterPage = lazy(() =>
 const ButtonPage = lazy(() =>
 	import('~/Pages/Button').then(({ ButtonPage: Button }) => ({
 		default: Button,
+	}))
+);
+
+const PrintPage = lazy(() =>
+	import('~/Pages/Print').then(({ PrintPage: Print }) => ({
+		default: Print,
 	}))
 );
 
@@ -424,16 +418,6 @@ export function useRoutesMenu() {
 						label: translate('COLUMN_VISIBILITY'),
 					},
 					{
-						name: 'Print',
-						path: '/table/print',
-						implements_code:
-							'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Components/Table',
-						docs_code:
-							'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/Table/Print',
-						element: <PrintPage />,
-						label: translate('PRINT'),
-					},
-					{
 						name: 'Export',
 						path: '/table/export',
 						implements_code:
@@ -467,14 +451,14 @@ export function useRoutesMenu() {
 				label: 'Toast',
 			},
 			{
-				name: 'Pdf',
-				path: '/pdf',
+				name: 'Print',
+				path: '/print',
 				implements_code:
-					'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Components/Table',
+					'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Hooks/UsePrinter',
 				docs_code:
-					'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/Table/Pdf',
-				element: <PdfPage />,
-				label: 'Pdf',
+					'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/Print',
+				element: <PrintPage />,
+				label: translate('PRINT'),
 			},
 		],
 		[currentLanguage]
