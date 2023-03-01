@@ -4,7 +4,7 @@ import MenuSettings from '../MenuSettings';
 import MenuAccessOptions from '../MenuAccessOptions';
 import { Nav } from '../Nav';
 
-export default function Header() {
+export function Header() {
 	return (
 		<Nav>
 			<div className="w-full flex flex-wrap justify-between items-center mx-auto">

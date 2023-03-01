@@ -18,7 +18,48 @@ export function OtherComponents() {
 	const [prev, setPrev] = useState<Menu | null>(null);
 	const [next, setNext] = useState<Menu | null>(null);
 
+	function getIndex() {
+		const ocurrencies = (location.pathname.match(/\//g) || []).length; // Count Bars (/)
+		console.log({ location });
+		const routes = {
+			actualRoute: {},
+			prevRoute: {},
+			nextRoute: {},
+		};
+		const indexParent = options
+			.map(item => item.path)
+			.indexOf(location.pathname);
+		if (indexParent > -1) return indexParent;
+
+		options.forEach(opt => {
+			const subOptions = opt.subs?.filter(
+				subOpt => subOpt.path.indexOf(location.pathname) > -1
+			);
+
+			if (subOptions) {
+				routes.actualRoute = { ...subOptions };
+			}
+			// if (translate(opt.path).indexOf(location.pathname) > -1) {
+			// 	newOptions.push(opt);
+			// } else if (subOptions.length > 0) {
+			// 	newOptions.push({
+			// 		...opt,
+			// 		expandedMenu: true,
+			// 		subs: [...subOptions],
+			// 	});
+			// }
+			const t = options.findIndex((a, b, c) => {
+				console.log({ a, b, c });
+				return 1;
+			});
+			console.log({ subOptions });
+		});
+		return -1;
+	}
+
 	function load() {
+		const indexSub = getIndex();
+
 		const index = options.map(item => item.path).indexOf(location.pathname);
 		if (index - 1 < 0) {
 			setPrev(null);

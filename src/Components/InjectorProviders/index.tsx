@@ -4,8 +4,9 @@ import { Toaster } from 'react-hot-toast';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 import { DarkModeProvider } from '~/Hooks/DarkMode';
-import Header from '~/Components/Header';
+import { Header } from '~/Components/Header';
 import '~/Config/i18n';
+import { LoadingLazyProvider } from '~/Hooks/LoadingLazy';
 
 export function InjectorProviders({ children }: { children: React.ReactNode }) {
 	return (
@@ -23,10 +24,12 @@ export function InjectorProviders({ children }: { children: React.ReactNode }) {
 					})
 				}
 			>
-				<DarkModeProvider>
-					<Header />
-					{children}
-				</DarkModeProvider>
+				<LoadingLazyProvider>
+					<DarkModeProvider>
+						<Header />
+						{children}
+					</DarkModeProvider>
+				</LoadingLazyProvider>
 			</QueryClientProvider>
 		</BrowserRouter>
 	);

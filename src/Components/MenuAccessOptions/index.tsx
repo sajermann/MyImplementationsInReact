@@ -17,9 +17,10 @@ import { BoxScroll } from '../BoxScroll';
 
 interface Props extends Pick<TRoutesMenu, 'path' | 'name'> {
 	onClick: () => void;
+	isSub?: boolean;
 }
 
-function BuildNormalOption({ path, name, onClick }: Props) {
+function BuildNormalOption({ path, name, onClick, isSub }: Props) {
 	return (
 		<NavLink
 			onClick={onClick}
@@ -27,9 +28,11 @@ function BuildNormalOption({ path, name, onClick }: Props) {
 			to={path}
 			className={({ isActive }) =>
 				clsx({
-					[`flex p-2 hover:!bg-gray-500 hover:text-white transition-colors duration-300`]:
+					[`w-[90%] flex p-2 hover:text-violet-700  transition-colors duration-300`]:
 						true,
-					[` border-primary-700 !bg-gray-500 text-white`]: isActive,
+					[`border border-l-0 rounded-tr-3xl rounded-br-3xl border-violet-700 text-violet-700`]:
+						isActive,
+					'pl-12': isSub,
 				})
 			}
 			end
@@ -120,7 +123,6 @@ export default function MenuAccessOptions() {
 											'duration-500': true,
 											'opacity-0 w-0': !isVisibleSearch,
 											'opacity-100 w-full': isVisibleSearch,
-											// 'w-full': isVisibleSearch,
 										})}
 									>
 										<Input
@@ -175,6 +177,7 @@ export default function MenuAccessOptions() {
 												key={generateGuid()}
 												name={subMenu.label}
 												path={subMenu.path}
+												isSub
 											/>
 										))}
 									</MenuCollapsible>
