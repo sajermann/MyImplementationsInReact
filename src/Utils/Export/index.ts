@@ -277,11 +277,11 @@ function print<T>({ data, defColumns }: PropsPrint<T>) {
 			windowForPrint.print();
 		}, 500);
 
-		// windowForPrint.onfocus = () => {
-		// 	setTimeout(() => {
-		// 		windowForPrint.close();
-		// 	}, 500);
-		// };
+		windowForPrint.onfocus = () => {
+			setTimeout(() => {
+				windowForPrint.close();
+			}, 500);
+		};
 	}
 }
 
