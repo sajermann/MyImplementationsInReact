@@ -1,4 +1,4 @@
-import { useMemo, useRef, useState } from 'react';
+import { Fragment, useMemo, useRef, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { generateGuid } from '@sajermann/utils/Random';
 
@@ -16,42 +16,39 @@ import { Input } from '../Input';
 import { BoxScroll } from '../BoxScroll';
 import { BlockRightToLeftTransition } from '../BlockRightToLeftTransition';
 
-interface Props extends Pick<TRoutesMenu, 'path' | 'name'> {
+interface Props extends TRoutesMenu {
 	onClick: () => void;
-	isSub?: boolean;
 }
 
-function BuildNormalOption({ path, name, onClick, isSub }: Props) {
+function BuildNormalOption({ path, name, onClick, hideMenu }: Props) {
+	if (hideMenu) return null;
 	return (
-		<NavLink
-			onClick={onClick}
-			key={generateGuid()}
-			to={path}
-			className={({ isActive }) =>
-				clsx({
-					[`w-[90%] flex p-2 hover:text-violet-700  transition-colors duration-300`]:
-						true,
-					[`border border-l-0 rounded-tr-3xl rounded-br-3xl border-violet-700 text-violet-700`]:
-						isActive,
-					'pl-12': isSub,
-				})
-			}
-			end
-		>
-			{name}
-		</NavLink>
+		<li>
+			<NavLink
+				onClick={onClick}
+				key={generateGuid()}
+				to={path}
+				className={({ isActive }) =>
+					clsx({
+						[`w-[90%] flex p-2 hover:text-violet-700  transition-colors duration-300`]:
+							true,
+						[`border-2 border-x-0 border-t-0 border-violet-700 text-violet-700`]:
+							isActive,
+					})
+				}
+				end
+			>
+				{name}
+			</NavLink>
+		</li>
 	);
 }
 
 function buildTrigger({
 	isOpen,
-	path,
-	name,
 	onClick,
-}: { isOpen: boolean; onClick: () => void } & Pick<
-	TRoutesMenu,
-	'path' | 'name'
->) {
+	...rest
+}: { isOpen: boolean; onClick: () => void } & TRoutesMenu) {
 	const IS_OPEN: Record<string, React.ReactNode> = {
 		true: <Icons.ArrowSingleDown width="20" />,
 		false: <Icons.ArrowSingleRight width="20" />,
@@ -59,7 +56,7 @@ function buildTrigger({
 	return (
 		<div className="flex items-center justify-between w-full">
 			<div className="flex-1">
-				<BuildNormalOption onClick={onClick} name={name} path={path} />
+				<BuildNormalOption onClick={onClick} {...rest} />
 			</div>
 			<div className="w-10 p-2  flex items-center justify-center">
 				{IS_OPEN[String(isOpen)]}
@@ -99,6 +96,42 @@ export default function MenuAccessOptions() {
 
 		return newOptions;
 	}, [search, currentLanguage]);
+
+	function buildMenuWithSub(menu: TRoutesMenu) {
+		if (menu.subs && menu.subs.find(item => !item.hideMenu) && !menu.hideMenu) {
+			return (
+				<li>
+					<MenuCollapsible
+						defaultIsOpen={menu.expandedMenu}
+						pathChilds={menu.subs.map(item => item.path)}
+						trigger={triggerIsOpen =>
+							buildTrigger({
+								isOpen: triggerIsOpen,
+								onClick: () => setIsOpen(false),
+								...menu,
+							})
+						}
+					>
+						<ul>
+							{menu.subs.map(subMenu => (
+								<Fragment key={generateGuid()}>
+									{buildMenuWithSub(subMenu)}
+								</Fragment>
+							))}
+						</ul>
+					</MenuCollapsible>
+				</li>
+			);
+		}
+
+		return (
+			<BuildNormalOption
+				onClick={() => setIsOpen(false)}
+				key={generateGuid()}
+				{...menu}
+			/>
+		);
+	}
 
 	return (
 		<>
@@ -153,43 +186,24 @@ export default function MenuAccessOptions() {
 						</div>
 					</Nav>
 					<BoxScroll>
-						{mount.map(menu => {
-							if (menu.subs) {
+						<ul>
+							{mount.map(menu => {
+								if (menu.subs) {
+									return (
+										<Fragment key={generateGuid()}>
+											{buildMenuWithSub(menu)}
+										</Fragment>
+									);
+								}
 								return (
-									<MenuCollapsible
-										defaultIsOpen={menu.expandedMenu}
-										pathChilds={menu.subs.map(item => item.path)}
+									<BuildNormalOption
+										onClick={() => setIsOpen(false)}
 										key={generateGuid()}
-										trigger={triggerIsOpen =>
-											buildTrigger({
-												isOpen: triggerIsOpen,
-												name: menu.label,
-												path: menu.path,
-												onClick: () => setIsOpen(false),
-											})
-										}
-									>
-										{menu.subs.map(subMenu => (
-											<BuildNormalOption
-												onClick={() => setIsOpen(false)}
-												key={generateGuid()}
-												name={subMenu.label}
-												path={subMenu.path}
-												isSub
-											/>
-										))}
-									</MenuCollapsible>
+										{...menu}
+									/>
 								);
-							}
-							return (
-								<BuildNormalOption
-									onClick={() => setIsOpen(false)}
-									key={generateGuid()}
-									name={menu.label}
-									path={menu.path}
-								/>
-							);
-						})}
+							})}
+						</ul>
 					</BoxScroll>
 				</Main>
 			</Drawer>

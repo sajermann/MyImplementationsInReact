@@ -189,7 +189,7 @@ export function useRoutesMenu() {
 	const { translate, currentLanguage } = useTranslation();
 	const location = useLocation();
 	const options: TRoutesMenu[] = useMemo(
-		() => [
+		(): TRoutesMenu[] => [
 			{
 				name: 'Home',
 				path: '/',
@@ -316,6 +316,16 @@ export function useRoutesMenu() {
 								label: translate('Batata'),
 								subs: [
 									{
+										name: 'Create',
+										path: '/table/selection/batata/create',
+										implements_code:
+											'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Components/Table',
+										docs_code:
+											'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/Table/Selection',
+										element: <SelectionPage />,
+										label: translate('Create Batata'),
+									},
+									{
 										name: 'Update',
 										path: '/table/selection/batata/:id',
 										implements_code:
@@ -324,6 +334,7 @@ export function useRoutesMenu() {
 											'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/Table/Selection',
 										element: <SelectionPage />,
 										label: translate('Update Batata'),
+										hideMenu: true,
 									},
 								],
 							},
@@ -346,6 +357,7 @@ export function useRoutesMenu() {
 											'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/Table/Selection',
 										element: <SelectionPage />,
 										label: translate('Update Batata'),
+										hideMenu: true,
 									},
 								],
 							},
