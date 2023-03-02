@@ -27,7 +27,7 @@ export function TablePage() {
 	}
 
 	const LINK_CLASS =
-		'flex flex-col flex-1 items-center justify-center gap-1 p-1 text-sm text-white  hover:text-primary-700 transition-colors duration-500';
+		'flex flex-col flex-1 items-center justify-center gap-1 p-1 text-sm hover:text-primary-700 transition-colors duration-500';
 
 	return (
 		<Main data-content="content-main">

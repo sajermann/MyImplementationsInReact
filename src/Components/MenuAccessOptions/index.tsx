@@ -14,6 +14,7 @@ import { MenuCollapsible } from '../MenuCollapsible';
 import { Icons } from '../Icons';
 import { Input } from '../Input';
 import { BoxScroll } from '../BoxScroll';
+import { BlockRightToLeftTransition } from '../BlockRightToLeftTransition';
 
 interface Props extends Pick<TRoutesMenu, 'path' | 'name'> {
 	onClick: () => void;
@@ -118,12 +119,9 @@ export default function MenuAccessOptions() {
 							</h2>
 							<div className="flex items-center justify-center gap-2">
 								<div ref={refInputSearch}>
-									<div
-										className={clsx({
-											'duration-500': true,
-											'opacity-0 w-0': !isVisibleSearch,
-											'opacity-100 w-full': isVisibleSearch,
-										})}
+									<BlockRightToLeftTransition
+										width="150px"
+										show={isVisibleSearch}
 									>
 										<Input
 											type="search"
@@ -131,7 +129,7 @@ export default function MenuAccessOptions() {
 											value={search}
 											onChange={({ target }) => setSearch(target.value)}
 										/>
-									</div>
+									</BlockRightToLeftTransition>
 								</div>
 								<HeaderButton
 									onClick={() => {

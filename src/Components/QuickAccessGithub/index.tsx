@@ -9,8 +9,8 @@ export function QuickAccessGithub({
 	disableBgColor?: boolean;
 }) {
 	const { options } = useRoutesMenu();
-	const LINK_CLASS = `flex flex-col flex-1 items-center justify-center gap-1 p-1 text-sm text-white ${
-		disableBgColor ? '' : '!bg-dark-700'
+	const LINK_CLASS = `flex flex-col flex-1 items-center justify-center gap-1 p-1 text-sm ${
+		disableBgColor ? '' : '!bg-dark-700 text-white'
 	}  hover:text-primary-700 transition-colors duration-500`;
 
 	function getImplements(type: 'implements_code' | 'docs_code') {
