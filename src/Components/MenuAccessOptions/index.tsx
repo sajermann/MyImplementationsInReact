@@ -20,7 +20,7 @@ interface Props extends TRoutesMenu {
 	onClick: () => void;
 }
 
-function BuildNormalOption({ path, name, onClick, hideMenu }: Props) {
+function BuildNormalOption({ path, label, onClick, hideMenu }: Props) {
 	if (hideMenu) return null;
 	return (
 		<li>
@@ -38,7 +38,7 @@ function BuildNormalOption({ path, name, onClick, hideMenu }: Props) {
 				}
 				end
 			>
-				{name}
+				{label}
 			</NavLink>
 		</li>
 	);
@@ -73,28 +73,54 @@ export default function MenuAccessOptions() {
 	const { options } = useRoutesMenu();
 	const refInputSearch = useRef<HTMLInputElement>(null);
 
+	function filterSubs(
+		menu: TRoutesMenu,
+		valueFilter: string
+	): TRoutesMenu[] | null {
+		const newOptions: TRoutesMenu[] = [];
+		if (!menu.subs) return null;
+		for (const subs of menu.subs) {
+			const result = subs.label.toLowerCase().indexOf(valueFilter) > -1;
+			if (result) {
+				newOptions.push(subs);
+			}
+
+			if (subs.subs) {
+				const t = filterSubs(subs, valueFilter);
+				if (t) newOptions.push(...t);
+			}
+		}
+		return newOptions;
+	}
+
 	const mount = useMemo(() => {
 		const valueFilter = search.toLowerCase();
 		if (valueFilter === '') return options;
-		const newOptions: TRoutesMenu[] = [];
-		options.forEach(opt => {
-			const subOptions =
-				opt.subs?.filter(
-					subOpt =>
-						translate(subOpt.label).toLowerCase().indexOf(valueFilter) > -1
-				) || [];
-			if (translate(opt.label).toLowerCase().indexOf(valueFilter) > -1) {
-				newOptions.push(opt);
-			} else if (subOptions.length > 0) {
-				newOptions.push({
-					...opt,
-					expandedMenu: true,
-					subs: [...subOptions],
-				});
-			}
-		});
 
-		return newOptions;
+		const newOptions: TRoutesMenu[] = [];
+		const optionsWithChild: TRoutesMenu[] = [];
+
+		for (const menu of options) {
+			if (menu.label.toLowerCase().indexOf(valueFilter) > -1) {
+				newOptions.push(menu);
+			}
+			if (menu.subs) {
+				const result = filterSubs(menu, valueFilter);
+				if (result) {
+					newOptions.push(...result);
+				}
+			}
+		}
+
+		// remove childs
+		for (const opt of newOptions) {
+			const temp = { ...opt };
+			if (temp.subs) {
+				delete temp.subs;
+			}
+			optionsWithChild.push(temp);
+		}
+		return optionsWithChild;
 	}, [search, currentLanguage]);
 
 	function buildMenuWithSub(menu: TRoutesMenu) {

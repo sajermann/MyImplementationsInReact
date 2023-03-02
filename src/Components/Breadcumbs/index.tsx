@@ -12,7 +12,7 @@ export function Breadcrumbs() {
 	return (
 		<div className="flex gap-1 !text-primary-500">
 			{breadcrumbs.map((item, index) =>
-				item.link ? (
+				item.link && breadcrumbs[index + 1] ? (
 					<ol key={`${item.label}-${item.link}`}>
 						<Link to={item.link} className="hover:underline !text-primary-500">
 							{item.label}

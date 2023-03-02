@@ -12,6 +12,7 @@ import { ModalDemo } from '~/Components/Demos/Modal';
 import { SelectDemo } from '~/Components/Demos/Select';
 import { ToastDemo } from '~/Components/Demos/Toast';
 import { useLocation } from 'react-router-dom';
+import { NotFound } from '~/Pages/Demonstration';
 
 const ColumnVisibilityPage = lazy(() =>
 	import('~/Pages/Table/ColumnVisibility').then(
@@ -304,64 +305,6 @@ export function useRoutesMenu() {
 							'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/Table/Selection',
 						element: <SelectionPage />,
 						label: translate('SELECTION'),
-						subs: [
-							{
-								name: 'Batata',
-								path: '/table/selection/batata',
-								implements_code:
-									'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Components/Table',
-								docs_code:
-									'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/Table/Selection',
-								element: <SelectionPage />,
-								label: translate('Batata'),
-								subs: [
-									{
-										name: 'Create',
-										path: '/table/selection/batata/create',
-										implements_code:
-											'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Components/Table',
-										docs_code:
-											'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/Table/Selection',
-										element: <SelectionPage />,
-										label: translate('Create Batata'),
-									},
-									{
-										name: 'Update',
-										path: '/table/selection/batata/:id',
-										implements_code:
-											'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Components/Table',
-										docs_code:
-											'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/Table/Selection',
-										element: <SelectionPage />,
-										label: translate('Update Batata'),
-										hideMenu: true,
-									},
-								],
-							},
-							{
-								name: 'Batata2',
-								path: '/table/selection/batata2',
-								implements_code:
-									'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Components/Table',
-								docs_code:
-									'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/Table/Selection',
-								element: <SelectionPage />,
-								label: translate('Batata2'),
-								subs: [
-									{
-										name: 'Update',
-										path: '/table/selection/batata2/:id',
-										implements_code:
-											'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Components/Table',
-										docs_code:
-											'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/Table/Selection',
-										element: <SelectionPage />,
-										label: translate('Update Batata'),
-										hideMenu: true,
-									},
-								],
-							},
-						],
 					},
 					{
 						name: 'ExpandedLine',
@@ -525,6 +468,14 @@ export function useRoutesMenu() {
 					'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/Print',
 				element: <PrintPage />,
 				label: translate('PRINT'),
+			},
+			{
+				name: 'NotFound',
+				path: '*',
+				implements_code: '',
+				docs_code: '',
+				element: <NotFound />,
+				label: translate('NOT_FOUND'),
 			},
 		],
 		[currentLanguage]

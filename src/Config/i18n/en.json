@@ -1,5 +1,6 @@
 {
 	"translations": {
+		"NOT_FOUND_PAGE": "Not Found Page",
 		"EXPORT_TO_PDF": "Export to Pdf",
 		"EXPORT_TO_PNG": "Export to Png",
 		"EXPORT_TO_PRINTER": "Export to printer",
