@@ -6,7 +6,6 @@ import { CodeBlock } from '~/Components/CodeBlock';
 import { Button } from '~/Components/Button';
 import Section from '~/Components/Section';
 import { ComponentBlock } from '~/Components/ComponentBlock';
-
 import { Main } from '~/Components/Main';
 import { QuickAccessGithub } from '~/Components/QuickAccessGithub';
 import styles from './styles.module.css';

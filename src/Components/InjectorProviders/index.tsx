@@ -7,6 +7,7 @@ import { DarkModeProvider } from '~/Hooks/DarkMode';
 import { Header } from '~/Components/Header';
 import '~/Config/i18n';
 import { LoadingLazyProvider } from '~/Hooks/LoadingLazy';
+import { BreadcrumbsProvider } from '~/Hooks/UseBreadcrumbs';
 
 export function InjectorProviders({ children }: { children: React.ReactNode }) {
 	return (
@@ -24,12 +25,14 @@ export function InjectorProviders({ children }: { children: React.ReactNode }) {
 					})
 				}
 			>
-				<LoadingLazyProvider>
-					<DarkModeProvider>
-						<Header />
-						{children}
-					</DarkModeProvider>
-				</LoadingLazyProvider>
+				<BreadcrumbsProvider>
+					<LoadingLazyProvider>
+						<DarkModeProvider>
+							<Header />
+							{children}
+						</DarkModeProvider>
+					</LoadingLazyProvider>
+				</BreadcrumbsProvider>
 			</QueryClientProvider>
 		</BrowserRouter>
 	);

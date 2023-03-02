@@ -6,6 +6,7 @@ import { useRoutesMenu } from '~/Hooks/UseRoutesMenu';
 import { useTranslation } from '~/Hooks/UseTranslation';
 import { useLoadingLazy } from '~/Hooks/LoadingLazy';
 import Sidebar from '../Sidebar';
+import { Breadcrumbs } from '../Breadcumbs';
 
 function IsLoading() {
 	const { translate } = useTranslation();
@@ -20,13 +21,13 @@ function IsLoading() {
 
 export default function RoutesConfig() {
 	const { options } = useRoutesMenu();
-
 	const location = useLocation();
 
 	return (
 		<div className="w-full 2xl:max-w-[1330px] p-2 gap-5 flex  my-0 mx-auto">
 			<div className="w-full flex flex-col h-full gap-2 flex-1">
 				<Suspense fallback={<IsLoading />}>
+					<Breadcrumbs />
 					<Routes>
 						{options.map(route => (
 							<Fragment key={generateGuid()}>

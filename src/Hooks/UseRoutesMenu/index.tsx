@@ -11,6 +11,7 @@ import { InputDemo } from '~/Components/Demos/Input';
 import { ModalDemo } from '~/Components/Demos/Modal';
 import { SelectDemo } from '~/Components/Demos/Select';
 import { ToastDemo } from '~/Components/Demos/Toast';
+import { useLocation } from 'react-router-dom';
 
 const ColumnVisibilityPage = lazy(() =>
 	import('~/Pages/Table/ColumnVisibility').then(
@@ -178,8 +179,15 @@ const PrintPage = lazy(() =>
 	}))
 );
 
+type TTriRoutes = {
+	actual?: TRoutesMenu | null;
+	prev?: TRoutesMenu | null;
+	next?: TRoutesMenu | null;
+};
+
 export function useRoutesMenu() {
 	const { translate, currentLanguage } = useTranslation();
+	const location = useLocation();
 	const options: TRoutesMenu[] = useMemo(
 		() => [
 			{
@@ -296,6 +304,52 @@ export function useRoutesMenu() {
 							'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/Table/Selection',
 						element: <SelectionPage />,
 						label: translate('SELECTION'),
+						subs: [
+							{
+								name: 'Batata',
+								path: '/table/selection/batata',
+								implements_code:
+									'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Components/Table',
+								docs_code:
+									'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/Table/Selection',
+								element: <SelectionPage />,
+								label: translate('Batata'),
+								subs: [
+									{
+										name: 'Update',
+										path: '/table/selection/batata/:id',
+										implements_code:
+											'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Components/Table',
+										docs_code:
+											'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/Table/Selection',
+										element: <SelectionPage />,
+										label: translate('Update Batata'),
+									},
+								],
+							},
+							{
+								name: 'Batata2',
+								path: '/table/selection/batata2',
+								implements_code:
+									'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Components/Table',
+								docs_code:
+									'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/Table/Selection',
+								element: <SelectionPage />,
+								label: translate('Batata2'),
+								subs: [
+									{
+										name: 'Update',
+										path: '/table/selection/batata2/:id',
+										implements_code:
+											'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Components/Table',
+										docs_code:
+											'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/Table/Selection',
+										element: <SelectionPage />,
+										label: translate('Update Batata'),
+									},
+								],
+							},
+						],
 					},
 					{
 						name: 'ExpandedLine',
@@ -463,5 +517,43 @@ export function useRoutesMenu() {
 		],
 		[currentLanguage]
 	);
-	return { options };
+
+	const triRoutes: TTriRoutes = useMemo(() => {
+		const result: TTriRoutes = {
+			actual: null,
+			prev: null,
+			next: null,
+		};
+
+		options.forEach((opt, indexOpt) => {
+			if (opt.path === location.pathname) {
+				result.actual = opt;
+				result.next = options[indexOpt + 1];
+				if (indexOpt === 0) {
+					result.prev = null;
+				} else {
+					result.prev = options[indexOpt - 1];
+				}
+			}
+			if (opt.subs) {
+				opt.subs.forEach((optSub, indexOptSub) => {
+					if (optSub.path === location.pathname) {
+						result.actual = optSub;
+						result.next =
+							options[indexOpt].subs?.[indexOptSub + 1] ||
+							options[indexOpt + 1];
+						if (indexOptSub === 0) {
+							result.prev = opt;
+						} else {
+							result.prev = options[indexOpt].subs?.[indexOptSub - 1];
+						}
+					}
+				});
+			}
+		});
+
+		return { ...result };
+	}, [currentLanguage, location.pathname]);
+
+	return { options, triRoutes };
 }
