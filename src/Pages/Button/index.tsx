@@ -5,7 +5,7 @@ import { Button } from '~/Components/Button';
 import Section from '~/Components/Section';
 import { ComponentBlock } from '~/Components/ComponentBlock';
 import { useTranslation } from '~/Hooks/UseTranslation';
-import CustomLoading from '~/Components/CustomLoading';
+import { CustomLoading } from '~/Components/CustomLoading';
 import { Main } from '~/Components/Main';
 import { QuickAccessGithub } from '~/Components/QuickAccessGithub';
 import { Icons } from '~/Components/Icons';

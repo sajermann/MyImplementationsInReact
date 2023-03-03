@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
+import { useLoadingLazy } from '~/Hooks/LoadingLazy';
 
 import { useTranslation } from '~/Hooks/UseTranslation';
 import useWindow from '~/Hooks/UseWindow';
@@ -15,16 +16,17 @@ type Menu = {
 };
 
 export function TableOfContents() {
+	const { isLoadingLazy } = useLoadingLazy();
 	const [optionsMenu, setOptionsMenu] = useState<Menu[]>([]);
 	const location = useLocation();
 	const { scrollPosition } = useWindow();
 	const { translate, currentLanguage } = useTranslation();
 
 	function load() {
+		if (isLoadingLazy) return;
 		const menus: Menu[] = [];
-		const subs = document.querySelectorAll(
-			'[data-content="content-main"] h1,[data-content="content-main"] h2,[data-content="content-main"] h3'
-		);
+		const subs = document.querySelectorAll('[data-tableofcontents="true"]');
+
 		for (let i = 0; i < subs.length; i += 1) {
 			menus.push({
 				type: subs[i].nodeName,
@@ -71,7 +73,10 @@ export function TableOfContents() {
 		// }
 	}
 
-	useEffect(() => load(), [scrollPosition, location.pathname, currentLanguage]);
+	useEffect(
+		() => load(),
+		[scrollPosition, location.pathname, currentLanguage, isLoadingLazy]
+	);
 
 	if (!optionsMenu.length) {
 		return null;

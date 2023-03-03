@@ -6,6 +6,7 @@ import { QuickAccessGithub } from '~/Components/QuickAccessGithub';
 import { Datepicker } from '~/Components/Datepicker';
 import { useState } from 'react';
 import { Button } from '~/Components/Button';
+import { CodeBlock } from '~/Components/CodeBlock';
 
 export function DatepickerPage() {
 	const [firstPicker, setFirstPicker] = useState(new Date().toISOString());
@@ -17,6 +18,10 @@ export function DatepickerPage() {
 				{`${translate('IMPLEMENTS_COMPONENT')} Datepicker ${translate(
 					'USING_THE_LIB'
 				)} react-datepicker`}
+			</Section>
+
+			<Section subHeading={translate('INSTALLATION_OF_LIB')}>
+				<CodeBlock>npm i react-datepicker;</CodeBlock>
 			</Section>
 
 			<Section subHeading={translate('CODES')}>

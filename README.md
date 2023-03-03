@@ -1,20 +1,41 @@
+# My Implementations In React
 
-# @sajermann/ui-react
+Project for show my implementations in React.
 
-UI library created by Bruno Sajermann for the purpose of studies on developing NPM packages for React.
-
-## Installation
-
-```npm i @sajermann/ui-react```
-
-In your App.tsx import
-
-```import '@sajermann/ui-react/index.css';```
+Rate my implements or say hello in Linkedin 😀
 
 ## Links
 
-[Demo](https://sajermann.github.io/MyImplementationsInReact/)
+[Demo Live](https://sajermann.github.io/MyImplementationsInReact/)
+[My Linkedin](https://www.linkedin.com/in/devbrunosajermann/)
 
-[NPM](https://www.npmjs.com/package/@sajermann/ui-react)
+## Implements
 
-[Github](https://github.com/sajermann/MyImplementationsInReact)
+- [x] Buttons - With &nbsp;[@sajermann/react-button](https://www.npmjs.com/package/@sajermann/react-button)
+- [x] Input - With &nbsp;[@sajermann/react-input](https://www.npmjs.com/package/@sajermann/react-input)
+- [x] Modals - With &nbsp;[@radix-ui/react-dialog](https://www.npmjs.com/package/@radix-ui/react-dialog)
+- [x] Checkbox - With &nbsp;[@radix-ui/react-checkbox](https://www.npmjs.com/package/@radix-ui/react-checkbox)
+- [x] Datepicker - With &nbsp;[react-datepicker](https://www.npmjs.com/package/react-datepicker)
+- [x] Select - With &nbsp;[react-select](https://www.npmjs.com/package/react-select)
+- [x] Toast - With &nbsp;[react-hot-toast](https://www.npmjs.com/package/react-hot-toast)
+- [x] Print - With &nbsp;[react-to-print](https://www.npmjs.com/package/react-to-print)
+- [x] Drawer - Without third party
+- [x] Table - With &nbsp;[@tanstack/react-table](https://www.npmjs.com/package/@tanstack/react-table)
+    - [x] Filter
+    - [x] Selection
+    - [x] Expand Line
+    - [x] Loading
+    - [x] Column Order
+    - [x] Sort
+    - [x] Editable
+    - [x] Full Editable
+    - [x] Virtualized
+    - [x] Pagination
+    - [x] Favorites
+    - [x] Ellipsis
+    - [x] Resizing
+    - [x] Column Visibility
+    - [x] Export
+    - [x] Footer
+
+

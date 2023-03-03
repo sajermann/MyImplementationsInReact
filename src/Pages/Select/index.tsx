@@ -8,6 +8,7 @@ import { Select } from '~/Components/Select';
 import { TVehicle } from '~/Types/TVehicle';
 import { delay } from '@sajermann/utils/Delay';
 import { makeData } from '~/Utils/MakeData';
+import { CodeBlock } from '~/Components/CodeBlock';
 
 export function SelectPage() {
 	const { translate, currentLanguage } = useTranslation();
@@ -78,6 +79,10 @@ export function SelectPage() {
 				{`${translate('IMPLEMENTS_COMPONENT')} Select ${translate(
 					'USING_THE_LIB'
 				)} react-select`}
+			</Section>
+
+			<Section subHeading={translate('INSTALLATION_OF_LIB')}>
+				<CodeBlock>npm i react-select;</CodeBlock>
 			</Section>
 
 			<Section subHeading={translate('CODES')}>

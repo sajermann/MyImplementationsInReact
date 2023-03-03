@@ -38,7 +38,7 @@ export function MenuCollapsible({
 			>
 				{trigger(isOpen)}
 			</CollapsiblePrimitive.Trigger>
-			<CollapsiblePrimitive.Content className="flex flex-col p-2">
+			<CollapsiblePrimitive.Content className="flex flex-col">
 				{children}
 			</CollapsiblePrimitive.Content>
 		</CollapsiblePrimitive.Root>
