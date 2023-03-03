@@ -9,4 +9,5 @@ export type TRoutesMenu = {
 	expandedMenu?: boolean;
 	hideMenu?: boolean;
 	label: string;
+	hideTriRoutes?: boolean;
 };

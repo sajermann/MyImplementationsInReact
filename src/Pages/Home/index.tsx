@@ -8,7 +8,7 @@ import { QuickAccessGithub } from '~/Components/QuickAccessGithub';
 
 export function Home() {
 	const { translate } = useTranslation();
-	const { options } = useRoutesMenu();
+	const { globalRoutes: options } = useRoutesMenu();
 
 	const LINK_CLASS =
 		'flex flex-col flex-1 items-center justify-center gap-1 p-1 text-sm text-white !bg-dark-700 hover:text-primary-700 transition-colors duration-500';
@@ -38,7 +38,8 @@ export function Home() {
 			<div className="flex flex-wrap gap-2 items-center justify-center">
 				{options.map(
 					opt =>
-						opt.name !== 'Home' && (
+						opt.name !== 'Home' &&
+						opt.name !== 'NotFound' && (
 							<div
 								key={opt.path}
 								className="flex flex-col w-80 h-80 border border-solid rounded-2xl  dark:border-white text-xl overflow-auto"

@@ -1,4 +1,5 @@
 import { lazy, useMemo } from 'react';
+import { useLocation } from 'react-router-dom';
 
 import { Home } from '~/Pages/Home';
 import { TRoutesMenu } from '~/Types/TRoutesMenu';
@@ -11,8 +12,11 @@ import { InputDemo } from '~/Components/Demos/Input';
 import { ModalDemo } from '~/Components/Demos/Modal';
 import { SelectDemo } from '~/Components/Demos/Select';
 import { ToastDemo } from '~/Components/Demos/Toast';
-import { useLocation } from 'react-router-dom';
-import { NotFound } from '~/Pages/Demonstration';
+import { TTriRoutes } from '~/Types/TTriRoutes';
+import { triRoutes as triRoutesMount } from '~/Utils/TriRoutes';
+import { menus as menusMount } from '~/Utils/Menus';
+import { PrintDemo } from '~/Components/Demos/Print';
+import { TableDemo } from '~/Components/Demos/Table';
 
 const ColumnVisibilityPage = lazy(() =>
 	import('~/Pages/Table/ColumnVisibility').then(
@@ -180,16 +184,16 @@ const PrintPage = lazy(() =>
 	}))
 );
 
-type TTriRoutes = {
-	actual?: TRoutesMenu | null;
-	prev?: TRoutesMenu | null;
-	next?: TRoutesMenu | null;
-};
+const NotFoundPage = lazy(() =>
+	import('~/Pages/NotFound').then(({ NotFoundPage: NotFound }) => ({
+		default: NotFound,
+	}))
+);
 
 export function useRoutesMenu() {
 	const { translate, currentLanguage } = useTranslation();
 	const location = useLocation();
-	const options: TRoutesMenu[] = useMemo(
+	const globalRoutes: TRoutesMenu[] = useMemo(
 		(): TRoutesMenu[] => [
 			{
 				name: 'Home',
@@ -285,6 +289,7 @@ export function useRoutesMenu() {
 					'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/Table',
 				element: <TablePage />,
 				label: translate('TABLE'),
+				demo: <TableDemo />,
 				subs: [
 					{
 						name: 'Filter',
@@ -468,55 +473,30 @@ export function useRoutesMenu() {
 					'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/Print',
 				element: <PrintPage />,
 				label: translate('PRINT'),
+				demo: <PrintDemo />,
 			},
 			{
 				name: 'NotFound',
 				path: '*',
 				implements_code: '',
 				docs_code: '',
-				element: <NotFound />,
+				element: <NotFoundPage />,
 				label: translate('NOT_FOUND'),
+				hideTriRoutes: true,
+				hideMenu: true,
 			},
 		],
 		[currentLanguage]
 	);
 
-	const triRoutes: TTriRoutes = useMemo(() => {
-		const result: TTriRoutes = {
-			actual: null,
-			prev: null,
-			next: null,
-		};
+	const triRoutes: TTriRoutes = useMemo(
+		() => triRoutesMount.get(globalRoutes, location.pathname),
+		[currentLanguage, location.pathname]
+	);
 
-		options.forEach((opt, indexOpt) => {
-			if (opt.path === location.pathname) {
-				result.actual = opt;
-				result.next = options[indexOpt + 1];
-				if (indexOpt === 0) {
-					result.prev = null;
-				} else {
-					result.prev = options[indexOpt - 1];
-				}
-			}
-			if (opt.subs) {
-				opt.subs.forEach((optSub, indexOptSub) => {
-					if (optSub.path === location.pathname) {
-						result.actual = optSub;
-						result.next =
-							options[indexOpt].subs?.[indexOptSub + 1] ||
-							options[indexOpt + 1];
-						if (indexOptSub === 0) {
-							result.prev = opt;
-						} else {
-							result.prev = options[indexOpt].subs?.[indexOptSub - 1];
-						}
-					}
-				});
-			}
-		});
+	function globalMenus(filterValue: string) {
+		return menusMount.get(globalRoutes, filterValue);
+	}
 
-		return { ...result };
-	}, [currentLanguage, location.pathname]);
-
-	return { options, triRoutes };
+	return { globalRoutes, triRoutes, globalMenus };
 }

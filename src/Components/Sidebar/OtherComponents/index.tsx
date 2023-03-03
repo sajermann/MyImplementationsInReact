@@ -6,10 +6,10 @@ import { Icons } from '~/Components/Icons';
 import { Main } from '../Main';
 
 export function OtherComponents() {
-	const { options, triRoutes } = useRoutesMenu();
+	const { globalRoutes: options, triRoutes } = useRoutesMenu();
 	const { translate } = useTranslation();
 
-	if (!options.length) {
+	if (!options.length || (triRoutes.next === null && triRoutes.prev === null)) {
 		return null;
 	}
 

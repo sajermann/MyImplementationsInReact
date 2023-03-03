@@ -19,7 +19,6 @@ function get(urls: string[], options: TRoutesMenu[]) {
 	const final: TBreadcrumb[] = [];
 	for (const url of urls) {
 		const child = getMyChild(options, url);
-		console.log({ child });
 		const semiFinal = {
 			label: options.find(opt => opt.path === `/${url}`)?.label || child?.label,
 			link: options.find(opt => opt.path === `/${url}`)?.path || child?.path,
@@ -28,10 +27,6 @@ function get(urls: string[], options: TRoutesMenu[]) {
 			final.push(semiFinal);
 		}
 	}
-	console.log({ final });
-	// if (removeLastLink) {
-	// 	final[final.length - 1].link = undefined;
-	// }
 
 	return final;
 }

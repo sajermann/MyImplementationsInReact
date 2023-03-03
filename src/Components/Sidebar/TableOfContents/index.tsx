@@ -25,9 +25,8 @@ export function TableOfContents() {
 	function load() {
 		if (isLoadingLazy) return;
 		const menus: Menu[] = [];
-		const subs = document.querySelectorAll(
-			'[data-content="content-main"] h1,[data-content="content-main"] h2,[data-content="content-main"] h3'
-		);
+		const subs = document.querySelectorAll('[data-tableofcontents="true"]');
+
 		for (let i = 0; i < subs.length; i += 1) {
 			menus.push({
 				type: subs[i].nodeName,

@@ -38,7 +38,7 @@ export function BreadcrumbsProvider({ children }: Props) {
 	const [breadcrumbs, setBreadcrumbs] = useState<TBreadcrumb[]>([]);
 	const { currentLanguage } = useTranslation();
 	const location = useLocation();
-	const { options } = useRoutesMenu();
+	const { globalRoutes: options } = useRoutesMenu();
 
 	useEffect(() => {
 		const results = location.pathname.split('/');

@@ -27,6 +27,9 @@ export function ModalDemo() {
 				closeButton
 				closeByEsc
 				closeByBackdrop
+				expand={{
+					resetOnClose: false,
+				}}
 			>
 				Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repudiandae
 				corrupti illo iusto ipsum incidunt in! Nostrum laudantium, alias in iste

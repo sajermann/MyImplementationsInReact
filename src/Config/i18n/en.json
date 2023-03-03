@@ -1,5 +1,7 @@
 {
 	"translations": {
+		"PRINT_ONLY_THIS_CONTENT": "Print only this content",
+		"NOT_FOUND": "Not Found",
 		"NOT_FOUND_PAGE": "Not Found Page",
 		"EXPORT_TO_PDF": "Export to Pdf",
 		"EXPORT_TO_PNG": "Export to Png",

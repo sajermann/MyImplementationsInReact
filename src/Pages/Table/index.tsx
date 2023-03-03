@@ -11,7 +11,7 @@ import { Input } from '~/Components/Input';
 
 export function TablePage() {
 	const { translate } = useTranslation();
-	const { options } = useRoutesMenu();
+	const { globalRoutes: options } = useRoutesMenu();
 	const [search, setSearch] = useState('');
 
 	const optionsSubTable = options.find(opt => opt.name === 'Table')?.subs;
@@ -21,8 +21,7 @@ export function TablePage() {
 			return optionsSubTable;
 		}
 		return optionsSubTable?.filter(
-			opt =>
-				translate(opt.label).toLowerCase().indexOf(search.toLowerCase()) > -1
+			opt => opt.label.toLowerCase().indexOf(search.toLowerCase()) > -1
 		);
 	}
 

@@ -21,7 +21,7 @@ function IsLoading() {
 }
 
 export default function RoutesConfig() {
-	const { options } = useRoutesMenu();
+	const { globalRoutes: options } = useRoutesMenu();
 	const location = useLocation();
 
 	function mountRoutes(routes: TRoutesMenu[]) {
