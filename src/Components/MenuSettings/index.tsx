@@ -8,6 +8,7 @@ import { Nav } from '~/Components/Nav';
 import { Main } from '~/Components/Main';
 import { SwitchTheme } from '~/Components/SwitchTheme';
 import { SwitchLanguage } from '~/Components/SwitchLanguage';
+import { ButtonIcon } from '../ButtonIcon';
 
 export default function MenuSettings() {
 	const [isOpen, setIsOpen] = useState(false);
@@ -26,10 +27,17 @@ export default function MenuSettings() {
 				onClose={() => setIsOpen(false)}
 			>
 				<Main>
-					<Nav>
+					<Nav className="flex justify-between w-full">
 						<h2 className="text-xl whitespace-nowrap font-bold text-white">
 							{translate('SETTINGS')}
 						</h2>
+						<ButtonIcon
+							className="text-primary-500 hover:text-primary-300 hover:bg-slate-600"
+							onClick={() => setIsOpen(false)}
+							data-testid="closeButtonModal"
+						>
+							<Icons.Close width="1rem" />
+						</ButtonIcon>
 					</Nav>
 					<div className="flex flex-col p-4 gap-4">
 						<SwitchTheme />

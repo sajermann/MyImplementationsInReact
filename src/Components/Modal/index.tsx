@@ -1,9 +1,9 @@
 import { Transition } from '@headlessui/react';
 import * as Dialog from '@radix-ui/react-dialog';
 import { Fragment, useEffect, useState } from 'react';
+import { BoxScroll } from '../BoxScroll';
 import { ButtonIcon } from '../ButtonIcon';
 import { Icons } from '../Icons';
-import styles from './index.module.css';
 
 type Props = {
 	children: React.ReactNode;
@@ -59,7 +59,7 @@ export function Modal({
 					>
 						<Dialog.Overlay
 							{...overlayProps}
-							className={styles.overlay}
+							className="bg-black/60 inset-0 fixed z-[2]"
 							onClick={closeByBackdrop ? onClose : undefined}
 						/>
 					</Transition.Child>
@@ -80,10 +80,10 @@ export function Modal({
 								transition: '300ms',
 							}}
 							onEscapeKeyDown={closeByEsc ? onClose : undefined}
-							className={styles.content}
+							className="fixed bg-white top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded shadow-lg shadow-black/25 z-[3] dark:bg-slate-900"
 						>
 							{title && (
-								<Dialog.Title className={styles.header}>
+								<Dialog.Title className="h-12 px-6 py-3 text-primary-500 font-bold flex items-center dark:bg-slate-900 border-b-[#dee2e6] border-b-2">
 									{title}
 									{expand && (
 										<ButtonIcon
@@ -109,7 +109,9 @@ export function Modal({
 									)}
 								</Dialog.Title>
 							)}
-							<main className={styles.main}>{children}</main>
+							<main className="h-[calc(100%_-_48px)] dark:bg-gray-800">
+								<BoxScroll className="px-6 py-3">{children}</BoxScroll>
+							</main>
 						</Dialog.Content>
 					</Transition.Child>
 				</Transition.Root>
