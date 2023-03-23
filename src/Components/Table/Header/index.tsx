@@ -20,10 +20,10 @@ export function Header<T, U>({ globalFilter, table, tools }: Props<T, U>) {
 	if (!tools && (!globalFilter || globalFilter?.disableInput)) return null;
 
 	return (
-		<div className="grid grid-cols-12 gap-2 w-full mb-1">
+		<div className="grid grid-cols-12 gap-2 w-full mb-1 items-center">
 			<div
 				className={managerClassNames({
-					'col-span-6': tools,
+					'col-span-12 sm:col-span-6': tools,
 					'col-span-12': !tools,
 				})}
 			>
@@ -40,7 +40,8 @@ export function Header<T, U>({ globalFilter, table, tools }: Props<T, U>) {
 
 			<div
 				className={managerClassNames({
-					'col-span-6': globalFilter && !globalFilter.disableInput,
+					'col-span-12 sm:col-span-6':
+						globalFilter && !globalFilter.disableInput,
 					'col-span-12': !globalFilter,
 				})}
 			>

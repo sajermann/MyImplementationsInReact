@@ -57,10 +57,10 @@ export function Filter({
 				value={filter.name}
 				onChange={e => setFilter({ ...filter, name: e.target.value })}
 				containerProps={{
-					className: 'col-span-4 lg:col-span-4',
+					className: 'col-span-12 sm:col-span-4',
 				}}
 			/>
-			<div className="col-span-4 lg:col-span-4">
+			<div className="col-span-12 sm:col-span-4">
 				<Select
 					id="isActive"
 					menuPosition="fixed"
@@ -75,7 +75,7 @@ export function Filter({
 					onChange={e => handleInput(e as ChangeEvent<HTMLInputElement>)}
 				/>
 			</div>
-			<div className="col-span-4 lg:col-span-4 flex items-end justify-center gap-2">
+			<div className="col-span-12 sm:col-span-4 flex items-end justify-center gap-2">
 				<Button
 					disabled={filterParams === '' || isLoading}
 					onClick={handleClearFilter}

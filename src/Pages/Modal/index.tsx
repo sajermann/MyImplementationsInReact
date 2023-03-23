@@ -154,7 +154,14 @@ export function ModalPage() {
 							Accusamus. Lorem, ipsum dolor sit amet consectetur adipisicing
 							elit. Exercitationem laboriosam dolor autem illo nesciunt
 							distinctio sequi quisquam debitis illum modi? Enim quis dolorum
-							dolor nostrum pariatur quidem earum ratione a.
+							dolor nostrum pariatur quidem earum ratione a. Lorem ipsum dolor
+							sit amet consectetur adipisicing elit. Sunt assumenda, magni et
+							nam provident eveniet? Hic maiores tempore aut, aliquid id
+							quisquam? Dicta, laborum at earum ab totam quis? Accusamus. Lorem,
+							ipsum dolor sit amet consectetur adipisicing elit. Exercitationem
+							laboriosam dolor autem illo nesciunt distinctio sequi quisquam
+							debitis illum modi? Enim quis dolorum dolor nostrum pariatur
+							quidem earum ratione a.
 						</div>
 					</Modal>
 				</ComponentBlock>

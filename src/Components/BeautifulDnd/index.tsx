@@ -45,11 +45,11 @@ export function BeautifulDnd({ items, setItems }: Props) {
 
 	const getListStyle = (isDraggingOver: boolean) => ({
 		background: isDraggingOver ? 'lightblue' : 'lightgrey',
-		display: 'flex',
-		alignItems: 'center',
-		justifyContent: 'center',
-		padding: grid,
-		width: '100%',
+		// display: 'flex',
+		// alignItems: 'center',
+		// justifyContent: 'center',
+		// padding: grid,
+		// width: '100%',
 		// overflow: 'auto',
 	});
 
@@ -76,6 +76,7 @@ export function BeautifulDnd({ items, setItems }: Props) {
 						{...providedExternal.droppableProps}
 						ref={providedExternal.innerRef}
 						style={getListStyle(snapshotExternal.isDraggingOver)}
+						className="flex items-center justify-start md:justify-center w-full p-2"
 					>
 						{items.map((item, index) => (
 							<Draggable key={item.id} draggableId={item.id} index={index}>
