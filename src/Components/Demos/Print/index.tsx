@@ -14,6 +14,7 @@ export function PrintDemo() {
 				colorStyle="Primary"
 				variant="Outlined"
 				onClick={handlePreparePrint}
+				className="print:hidden"
 			>
 				{translate('PRINT')}
 			</Button>

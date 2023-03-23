@@ -100,16 +100,17 @@ export function ColumnVisibilityPage() {
 
 					<div className="flex flex-col justify-center text-center">
 						<div>{translate('COLUMNS_VISIBLED')}</div>
-						<div className="flex gap-4">
+						<div className="flex justify-center text-center gap-4 flex-wrap">
 							{OPTIONS.map(item => (
-								<Checkbox
-									containerProps={{ className: 'items-center' }}
-									key={item.id}
-									checked={item.checked}
-									onCheckedChange={handleCheck}
-									id={item.id}
-									label={item.label}
-								/>
+								<div key={item.id}>
+									<Checkbox
+										containerProps={{ className: 'items-center' }}
+										checked={item.checked}
+										onCheckedChange={handleCheck}
+										id={item.id}
+										label={item.label}
+									/>
+								</div>
 							))}
 						</div>
 					</div>

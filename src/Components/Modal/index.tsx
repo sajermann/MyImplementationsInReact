@@ -109,8 +109,8 @@ export function Modal({
 									)}
 								</Dialog.Title>
 							)}
-							<main className="h-[calc(100%_-_48px)] dark:bg-gray-800">
-								<BoxScroll className="px-6 py-3">{children}</BoxScroll>
+							<main className="h-[calc(100%_-_48px)] dark:bg-gray-800 py-2">
+								<BoxScroll className="px-6">{children}</BoxScroll>
 							</main>
 						</Dialog.Content>
 					</Transition.Child>

@@ -95,7 +95,7 @@ export function SuperFilter({ onChange }: Props) {
 				onClose={() => setIsOpenModal(false)}
 			>
 				<div className="grid grid-cols-12 gap-4">
-					<div className="col-span-3">
+					<div className="col-span-12 md:col-span-3">
 						<Select
 							label={translate('COLUMN')}
 							isClearable
@@ -109,7 +109,7 @@ export function SuperFilter({ onChange }: Props) {
 							placeholder={translate('FILTER_TYPE')}
 						/>
 					</div>
-					<div className="col-span-3">
+					<div className="col-span-12 md:col-span-3">
 						<Select
 							label={translate('TYPE_FILTER')}
 							isClearable
@@ -123,7 +123,7 @@ export function SuperFilter({ onChange }: Props) {
 							placeholder={translate('FILTER_TYPE')}
 						/>
 					</div>
-					<div className="col-span-3">
+					<div className="col-span-12 md:col-span-3">
 						<Input
 							id="valueFilter"
 							label={translate('VALUE')}
