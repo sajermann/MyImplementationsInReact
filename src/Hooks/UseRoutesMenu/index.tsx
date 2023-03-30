@@ -184,6 +184,12 @@ const PrintPage = lazy(() =>
 	}))
 );
 
+const CarouselPage = lazy(() =>
+	import('~/Pages/Carousel').then(({ CarouselPage: Carousel }) => ({
+		default: Carousel,
+	}))
+);
+
 const NotFoundPage = lazy(() =>
 	import('~/Pages/NotFound').then(({ NotFoundPage: NotFound }) => ({
 		default: NotFound,
@@ -474,6 +480,17 @@ export function useRoutesMenu() {
 				element: <PrintPage />,
 				label: translate('PRINT'),
 				demo: <PrintDemo />,
+			},
+			{
+				name: 'Carousel',
+				path: '/carousel',
+				implements_code:
+					'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Components/Carousel',
+				docs_code:
+					'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/Carousel',
+				element: <CarouselPage />,
+				label: translate('CAROUSEL'),
+				demo: <CarouselPage />,
 			},
 			{
 				name: 'NotFound',
