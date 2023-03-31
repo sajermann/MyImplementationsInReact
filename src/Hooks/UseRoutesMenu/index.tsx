@@ -17,6 +17,7 @@ import { triRoutes as triRoutesMount } from '~/Utils/TriRoutes';
 import { menus as menusMount } from '~/Utils/Menus';
 import { PrintDemo } from '~/Components/Demos/Print';
 import { TableDemo } from '~/Components/Demos/Table';
+import { CarouselDemo } from '~/Components/Demos/Carousel';
 
 const ColumnVisibilityPage = lazy(() =>
 	import('~/Pages/Table/ColumnVisibility').then(
@@ -490,7 +491,7 @@ export function useRoutesMenu() {
 					'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/Carousel',
 				element: <CarouselPage />,
 				label: translate('CAROUSEL'),
-				demo: <CarouselPage />,
+				demo: <CarouselDemo />,
 			},
 			{
 				name: 'NotFound',
