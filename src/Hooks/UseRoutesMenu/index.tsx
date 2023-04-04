@@ -191,6 +191,14 @@ const CarouselPage = lazy(() =>
 	}))
 );
 
+const AnimateInViewPage = lazy(() =>
+	import('~/Pages/AnimateInViewPage').then(
+		({ AnimateInViewPage: AnimateInView }) => ({
+			default: AnimateInView,
+		})
+	)
+);
+
 const NotFoundPage = lazy(() =>
 	import('~/Pages/NotFound').then(({ NotFoundPage: NotFound }) => ({
 		default: NotFound,
@@ -491,6 +499,17 @@ export function useRoutesMenu() {
 					'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/Carousel',
 				element: <CarouselPage />,
 				label: translate('CAROUSEL'),
+				demo: <CarouselDemo />,
+			},
+			{
+				name: 'AnimateInViewPage',
+				path: '/animate-in-view',
+				implements_code:
+					'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Components/AnimateInView',
+				docs_code:
+					'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/AnimateInView',
+				element: <AnimateInViewPage />,
+				label: translate('ANIMATE_IN_VIEW'),
 				demo: <CarouselDemo />,
 			},
 			{
