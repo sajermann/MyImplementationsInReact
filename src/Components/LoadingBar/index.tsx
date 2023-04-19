@@ -18,7 +18,7 @@ export function LoadingBar() {
 	return (
 		<div className="bg-gray-300 rounded-bl-sm rounded-br-sm">
 			<div
-				className="w3-container bg-gray-500 text-center h-1 rounded-bl-sm rounded-br-sm"
+				className="w3-container bg-gray-500 text-center h-1 rounded-bl-sm rounded-br-sm test"
 				style={{ width: `${customWidth}%` }}
 			/>
 		</div>
