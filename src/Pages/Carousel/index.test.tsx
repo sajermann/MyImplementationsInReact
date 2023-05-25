@@ -4,11 +4,11 @@
 import { fireEvent, render, waitFor } from '@testing-library/react';
 import { it, describe } from 'vitest';
 
-import { CheckboxPage } from '.';
+import { CarouselPage } from '.';
 
-describe('Pages/CheckboxPage', () => {
+describe('Pages/CarouselPage', () => {
 	it(`must render checkbox`, async () => {
-		const { getAllByText } = render(<CheckboxPage />);
+		const { getAllByText } = render(<CarouselPage />);
 		await waitFor(() => {
 			const button = getAllByText('Checkbox')[0];
 			fireEvent.click(button);
