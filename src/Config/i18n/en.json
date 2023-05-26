@@ -1,5 +1,11 @@
 {
 	"translations": {
+		"RESULTS": "Results",
+		"ABSOLUTE": "Absolute",
+		"SEARCH_COUNTRIES": "Search Countries",
+		"LOCKEDS_RESULTS": "Lockeds Results",
+		"SEARCH_BOX": "Search Box",
+		"ACCESSIBILITY": "Accessibility",
 		"CAROUSEL": "Carousel",
 		"PRINT_ONLY_THIS_CONTENT": "Print only this content",
 		"NOT_FOUND": "Not Found",

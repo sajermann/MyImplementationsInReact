@@ -1,5 +1,11 @@
 {
 	"translations": {
+		"RESULTS": "Resultados",
+		"ABSOLUTE": "Absoluto",
+		"SEARCH_COUNTRIES": "Pesquisar Países",
+		"LOCKEDS_RESULTS": "Resultados Fixos",
+		"SEARCH_BOX": "Caixa de Pesquisa",
+		"ACCESSIBILITY": "Acessibilidade",
 		"CAROUSEL": "Carrossel",
 		"PRINT_ONLY_THIS_CONTENT": "Imprimir apenas esse conteúdo",
 		"NOT_FOUND": "Não Encontrado",

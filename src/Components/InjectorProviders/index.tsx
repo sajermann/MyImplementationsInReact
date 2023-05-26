@@ -8,6 +8,7 @@ import { Header } from '~/Components/Header';
 import '~/Config/i18n';
 import { LoadingLazyProvider } from '~/Hooks/LoadingLazy';
 import { BreadcrumbsProvider } from '~/Hooks/UseBreadcrumbs';
+import { FontSizeProvider } from '~/Hooks/UseFontSize';
 
 export function InjectorProviders({ children }: { children: React.ReactNode }) {
 	return (
@@ -28,8 +29,10 @@ export function InjectorProviders({ children }: { children: React.ReactNode }) {
 				<BreadcrumbsProvider>
 					<LoadingLazyProvider>
 						<DarkModeProvider>
-							<Header />
-							{children}
+							<FontSizeProvider>
+								<Header />
+								{children}
+							</FontSizeProvider>
 						</DarkModeProvider>
 					</LoadingLazyProvider>
 				</BreadcrumbsProvider>

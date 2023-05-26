@@ -205,6 +205,12 @@ const NotFoundPage = lazy(() =>
 	}))
 );
 
+const SearchBoxPage = lazy(() =>
+	import('~/Pages/SearchBox').then(({ SearchBoxPage: SearchBox }) => ({
+		default: SearchBox,
+	}))
+);
+
 export function useRoutesMenu() {
 	const { translate, currentLanguage } = useTranslation();
 	const location = useLocation();
@@ -510,6 +516,17 @@ export function useRoutesMenu() {
 					'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/AnimateInView',
 				element: <AnimateInViewPage />,
 				label: translate('ANIMATE_IN_VIEW'),
+				demo: <CarouselDemo />,
+			},
+			{
+				name: 'SearchBox',
+				path: '/search-box',
+				implements_code:
+					'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Components/SearchBox',
+				docs_code:
+					'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/SearchBox',
+				element: <SearchBoxPage />,
+				label: translate('SEARCH_BOX'),
 				demo: <CarouselDemo />,
 			},
 			{
