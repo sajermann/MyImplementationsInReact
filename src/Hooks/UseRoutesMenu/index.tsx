@@ -18,6 +18,8 @@ import { menus as menusMount } from '~/Utils/Menus';
 import { PrintDemo } from '~/Components/Demos/Print';
 import { TableDemo } from '~/Components/Demos/Table';
 import { CarouselDemo } from '~/Components/Demos/Carousel';
+import { SearchBoxDemo } from '~/Components/Demos/SearchBox';
+import { AnimateInViewDemo } from '~/Components/Demos/AnimateInView';
 
 const ColumnVisibilityPage = lazy(() =>
 	import('~/Pages/Table/ColumnVisibility').then(
@@ -208,6 +210,12 @@ const NotFoundPage = lazy(() =>
 const SearchBoxPage = lazy(() =>
 	import('~/Pages/SearchBox').then(({ SearchBoxPage: SearchBox }) => ({
 		default: SearchBox,
+	}))
+);
+
+const CalendarPage = lazy(() =>
+	import('~/Pages/Calendar').then(({ CalendarPage: Calendar }) => ({
+		default: Calendar,
 	}))
 );
 
@@ -508,7 +516,7 @@ export function useRoutesMenu() {
 				demo: <CarouselDemo />,
 			},
 			{
-				name: 'AnimateInViewPage',
+				name: 'AnimateInView',
 				path: '/animate-in-view',
 				implements_code:
 					'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Components/AnimateInView',
@@ -516,7 +524,7 @@ export function useRoutesMenu() {
 					'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/AnimateInView',
 				element: <AnimateInViewPage />,
 				label: translate('ANIMATE_IN_VIEW'),
-				demo: <CarouselDemo />,
+				demo: <AnimateInViewDemo />,
 			},
 			{
 				name: 'SearchBox',
@@ -527,7 +535,18 @@ export function useRoutesMenu() {
 					'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/SearchBox',
 				element: <SearchBoxPage />,
 				label: translate('SEARCH_BOX'),
-				demo: <CarouselDemo />,
+				demo: <SearchBoxDemo />,
+			},
+			{
+				name: 'Calendar',
+				path: '/calendar',
+				implements_code:
+					'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Components/Calendar',
+				docs_code:
+					'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/Calendar',
+				element: <CalendarPage />,
+				label: translate('CALENDAR'),
+				// demo: <CalendarDemo />,
 			},
 			{
 				name: 'NotFound',

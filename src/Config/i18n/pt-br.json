@@ -1,9 +1,16 @@
 {
 	"translations": {
+		"CALENDAR": "Calendário",
+		"ANIMATE_IN_VIEW": "Animação na Visualização",
+		"DEFAULT": "Padrão",
+		"ALWAYS_OPENED": "Sempre aberto",
+		"SEARCH_BOX_DESCRIPTION_STATIC": "Geralmente utilizado em páginas de pesquisa ou modais onde não é necessário se preocupar com a altura do elemento pai.",
+		"SEARCH_BOX_DESCRIPTION_ABSOLUTE": "Geralmente utilizado em cabeçalhos onde a caixa de pesquisa deve ficar acima dos demais itens da página sem aumentar a altura do elemento pai.",
 		"RESULTS": "Resultados",
 		"ABSOLUTE": "Absoluto",
 		"SEARCH_COUNTRIES": "Pesquisar Países",
-		"LOCKEDS_RESULTS": "Resultados Fixos",
+		"CONSTANTS_RESULTS": "Resultados Constantes",
+		"ASYNC_RESULTS": "Resultados Assíncronos",
 		"SEARCH_BOX": "Caixa de Pesquisa",
 		"ACCESSIBILITY": "Acessibilidade",
 		"CAROUSEL": "Carrossel",

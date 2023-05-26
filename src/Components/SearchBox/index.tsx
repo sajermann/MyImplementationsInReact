@@ -1,4 +1,9 @@
-import { ChangeEvent, useState } from 'react';
+import {
+	ChangeEvent,
+	DetailedHTMLProps,
+	HTMLAttributes,
+	useState,
+} from 'react';
 import { useTranslation } from '~/Hooks/UseTranslation';
 import { managerClassNames } from '~/Utils/ManagerClassNames';
 import { BoxScroll } from '../BoxScroll';
@@ -11,6 +16,10 @@ type Props = {
 	isLoading?: boolean;
 	alwaysOpenedResult?: boolean;
 	searchValue: string;
+	containerProps?: DetailedHTMLProps<
+		HTMLAttributes<HTMLDivElement>,
+		HTMLDivElement
+	>;
 };
 export function SearchBox({
 	onChange,
@@ -19,6 +28,7 @@ export function SearchBox({
 	isLoading,
 	searchValue,
 	alwaysOpenedResult,
+	containerProps,
 }: Props) {
 	const { translate } = useTranslation();
 	const [inputIsFocused, setInputIsFocused] = useState(false);
@@ -42,10 +52,19 @@ export function SearchBox({
 	}
 
 	return (
-		<div className="w-full relative group">
+		<div
+			{...containerProps}
+			className={managerClassNames([
+				{ 'w-full relative group': true },
+				{ [containerProps?.className as string]: containerProps?.className },
+			])}
+		>
 			<div
 				className={managerClassNames([
-					{ 'w-full flex flex-col border p-4 rounded bg-dark-600': true },
+					{
+						'w-full flex flex-col border p-4 rounded bg-white  dark:bg-dark-600':
+							true,
+					},
 					{ 'absolute z-[1]': absolute },
 				])}
 			>
@@ -60,7 +79,7 @@ export function SearchBox({
 						onBlur={() => setInputIsFocused(false)}
 					/>
 					{isLoading && (
-						<Icons.LoadingCircle width="20px" height="20px" color="#000000" />
+						<Icons.LoadingCircle width="20px" height="20px" color="#44659d" />
 					)}
 				</div>
 
@@ -76,7 +95,7 @@ export function SearchBox({
 							{ 'transition-[max-height]': inputIsFocused },
 						])}
 					>
-						<div className="p-2 border-b-2 mb-2 w-full sticky top-0 bg-dark-600">
+						<div className="p-2 border-b-2 mb-2 w-full sticky top-0 bg-white dark:bg-dark-600">
 							{translate(results.length > 0 ? 'RESULTS' : 'NO_DATA')}
 						</div>
 						<ul>

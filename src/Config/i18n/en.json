@@ -1,9 +1,16 @@
 {
 	"translations": {
+		"CALENDAR": "Calendar",
+		"ANIMATE_IN_VIEW": "Animate in View",
+		"DEFAULT": "Default",
+		"ALWAYS_OPENED": "Always Opened",
+		"SEARCH_BOX_DESCRIPTION_STATIC": "Usually used in search or modal pages where you don't need to worry about the height of the parent element.",
+		"SEARCH_BOX_DESCRIPTION_ABSOLUTE": "Usually used in headers where the search box should be positioned above other items on the page without increasing the height of the parent element.",
 		"RESULTS": "Results",
 		"ABSOLUTE": "Absolute",
 		"SEARCH_COUNTRIES": "Search Countries",
-		"LOCKEDS_RESULTS": "Lockeds Results",
+		"CONSTANTS_RESULTS": "Constants Results",
+		"ASYNC_RESULTS": "Async Results",
 		"SEARCH_BOX": "Search Box",
 		"ACCESSIBILITY": "Accessibility",
 		"CAROUSEL": "Carousel",

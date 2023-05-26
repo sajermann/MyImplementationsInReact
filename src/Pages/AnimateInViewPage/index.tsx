@@ -1,16 +1,9 @@
-import { useEffect, useRef } from 'react';
+import { useRef } from 'react';
 
-import { Table } from '~/Components/Table';
 import { useTranslation } from '~/Hooks/UseTranslation';
-import { TPerson } from '~/Types/TPerson';
-import { makeData } from '~/Utils/MakeData';
-import { useColumns } from '~/Hooks/UseColumns';
-import { Button } from '~/Components/Button';
 import { Main } from '~/Components/Main';
 import Section from '~/Components/Section';
 import { QuickAccessGithub } from '~/Components/QuickAccessGithub';
-import { usePrinter } from '~/Hooks/UsePrinter';
-import { ToPrint } from '~/Components/ToPrint';
 import { useInView } from 'framer-motion';
 
 function Card({ children }: { children: React.ReactNode }) {
