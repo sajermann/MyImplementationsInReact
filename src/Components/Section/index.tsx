@@ -1,4 +1,4 @@
-import { DetailedHTMLProps, HTMLAttributes } from 'react';
+import { DetailedHTMLProps, HTMLAttributes, memo } from 'react';
 import { managerClassNames } from '~/Utils/ManagerClassNames';
 
 interface CustomHeadingProps {
@@ -29,15 +29,9 @@ type Props = DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> & {
 	variant?: 'h1' | 'h2' | 'h3';
 };
 
-export default function Section({
-	heading,
-	subHeading,
-	children,
-	className,
-	title,
-	variant,
-}: Props) {
-	return (
+const Section = memo(
+	({ heading, subHeading, children, className, title, variant }: Props) => (
+		// console.log({ heading, subHeading, children, className, title, variant });
 		<section
 			className={managerClassNames([
 				{ 'flex flex-col gap-2 w-full': true },
@@ -57,5 +51,7 @@ export default function Section({
 			{title && variant && <CustomHeading title={title} variant={variant} />}
 			<div>{children}</div>
 		</section>
-	);
-}
+	)
+);
+
+export default Section;

@@ -1,13 +1,10 @@
+import { memo } from 'react';
 import { useRoutesMenu } from '~/Hooks/UseRoutesMenu';
 import { Icons } from '../Icons';
 
-export function QuickAccessGithub({
-	name,
-	disableBgColor,
-}: {
-	name: string;
-	disableBgColor?: boolean;
-}) {
+type Props = { name: string; disableBgColor?: boolean };
+
+export const QuickAccessGithub = memo(({ name, disableBgColor }: Props) => {
 	const { globalRoutes: options } = useRoutesMenu();
 	const LINK_CLASS = `flex flex-col flex-1 items-center justify-center gap-1 p-1 text-sm ${
 		disableBgColor ? '' : '!bg-dark-700 text-white'
@@ -23,6 +20,8 @@ export function QuickAccessGithub({
 		if (!resultSub) return undefined;
 		return resultSub[type];
 	}
+
+	console.log('mexeu em mim');
 
 	return (
 		<>
@@ -46,4 +45,4 @@ export function QuickAccessGithub({
 			</a>
 		</>
 	);
-}
+});

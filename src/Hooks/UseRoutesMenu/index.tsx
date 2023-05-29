@@ -213,10 +213,12 @@ const SearchBoxPage = lazy(() =>
 	}))
 );
 
-const CalendarPage = lazy(() =>
-	import('~/Pages/Calendar').then(({ CalendarPage: Calendar }) => ({
-		default: Calendar,
-	}))
+const CalendarPickerPage = lazy(() =>
+	import('~/Pages/CalendarPicker').then(
+		({ CalendarPickerPage: CalendarPicker }) => ({
+			default: CalendarPicker,
+		})
+	)
 );
 
 export function useRoutesMenu() {
@@ -538,14 +540,14 @@ export function useRoutesMenu() {
 				demo: <SearchBoxDemo />,
 			},
 			{
-				name: 'Calendar',
-				path: '/calendar',
+				name: 'CalendarPicker',
+				path: '/calendar-picker',
 				implements_code:
-					'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Components/Calendar',
+					'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Components/CalendarPicker',
 				docs_code:
-					'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/Calendar',
-				element: <CalendarPage />,
-				label: translate('CALENDAR'),
+					'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/CalendarPicker',
+				element: <CalendarPickerPage />,
+				label: translate('CALENDAR_PICKER'),
 				// demo: <CalendarDemo />,
 			},
 			{

@@ -1,5 +1,9 @@
 {
 	"translations": {
+		"CALENDAR_PICKER": "Calendar Picker",
+		"DISABLED_DATES": "Datas Desabilitadas",
+		"MULTI_SELECTION": "Seleção Multipla",
+		"SELECTED": "Selecionado",
 		"SELECTEDS": "Selecionados",
 		"CALENDAR": "Calendário",
 		"ANIMATE_IN_VIEW": "Animação na Visualização",
