@@ -7,19 +7,21 @@ import { QuickAccessGithub } from '~/Components/QuickAccessGithub';
 
 import { Calendar } from '~/Components/Calendar';
 import { useState } from 'react';
-import { Button } from '~/Components/Button';
+import { addMonths } from 'date-fns';
 
 export function CalendarPage() {
 	const { translate } = useTranslation();
-	const [month, setMonth] = useState(5);
+	const [dateToStartCalendar, setDateToStartCalendar] = useState(
+		new Date(2023, 4)
+	);
+	const [selectedDates, setSelectedDates] = useState<Date[]>([]);
 
 	return (
 		<Main data-content="content-main">
 			<Section heading="Calendar">
-				{`${translate('IMPLEMENTS_COMPONENT')} Calendar`}
-			</Section>
-			<Section subHeading={translate('INSTALLATION_OF_LIB')}>
-				<CodeBlock>npm i nuka-carousel;</CodeBlock>
+				{`${translate('IMPLEMENTS_COMPONENT')} Calendar  ${translate(
+					'WITHOUT_USING_LIB'
+				)}`}
 			</Section>
 
 			<Section subHeading={translate('CODES')}>
@@ -28,18 +30,28 @@ export function CalendarPage() {
 				</div>
 			</Section>
 
-			<Section subHeading="Calendar">
+			<Section title="Calendar" variant="h2">
 				<ComponentBlock>
 					<div className="flex flex-col items-center justify-center">
-						<div className="flex gap-2">
-							<Button onClick={() => setMonth(m => m - 1)}>-</Button>
-							<Button onClick={() => setMonth(m => m + 1)}>+</Button>
-						</div>
 						<Calendar
-							year={2023}
-							month={month}
-							disabledDates={[new Date(2023, 4, 31)]}
+							selectedDates={selectedDates}
+							setSelectedDates={setSelectedDates}
+							onPrevClick={() =>
+								setDateToStartCalendar(prev => addMonths(prev, -1))
+							}
+							onNextClick={() =>
+								setDateToStartCalendar(prev => addMonths(prev, 1))
+							}
+							year={dateToStartCalendar.getFullYear()}
+							month={dateToStartCalendar.getMonth() + 1}
+							disabledDates={[new Date(2023, 4, 31), new Date(2023, 4, 24)]}
 						/>
+						{selectedDates.length > 0 && (
+							<div className="w-[220px] flex flex-col items-center">
+								<h2>{translate('SELECTEDS')}</h2>
+								{JSON.stringify(selectedDates, null, 2)}
+							</div>
+						)}
 					</div>
 				</ComponentBlock>
 			</Section>

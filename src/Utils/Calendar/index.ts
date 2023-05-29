@@ -1,4 +1,4 @@
-import { isToday } from 'date-fns';
+import { isSameDay, isSameMonth, isToday } from 'date-fns';
 import { Dispatch, SetStateAction } from 'react';
 
 function dateIsInArray(dateToVerify: Date, datesArray: Date[]) {
@@ -10,6 +10,7 @@ function dateIsInArray(dateToVerify: Date, datesArray: Date[]) {
 
 type PropsHandleToggleSelection = {
 	date: Date;
+	startDate: Date;
 	selectedDates: Date[];
 	setSelectedDates: Dispatch<SetStateAction<Date[]>>;
 	disabledDates?: Date[];
@@ -17,11 +18,16 @@ type PropsHandleToggleSelection = {
 
 function handleToggleSelection({
 	date,
+	startDate,
 	selectedDates,
 	setSelectedDates,
 	disabledDates,
 }: PropsHandleToggleSelection) {
-	if (disabledDates && dateIsInArray(date, disabledDates)) return;
+	if (
+		(disabledDates && dateIsInArray(date, disabledDates)) ||
+		!isSameMonth(date, startDate)
+	)
+		return;
 
 	const result = selectedDates.find(
 		item => item.toISOString() === date.toISOString()
@@ -65,7 +71,7 @@ function getClassNames({
 	if (disabledDates && dateIsInArray(day, disabledDates)) {
 		classToReturn.push('isDisabled bg-gray-500');
 	}
-	if (day.getMonth() === startDate.getMonth()) {
+	if (isSameMonth(day, startDate)) {
 		classToReturn.push('currentMonth');
 	}
 	if (day < startDate) {
@@ -79,8 +85,101 @@ function getClassNames({
 	return classToReturn.join(' ');
 }
 
+type PropsHandleToggleWeekly = {
+	dayOfWeek: number;
+	weeks: Array<Date[]>;
+	startDate: Date;
+	disabledDates?: Date[];
+	setSelectedDates: Dispatch<SetStateAction<Date[]>>;
+};
+function handleToggleWeekly({
+	dayOfWeek,
+	weeks,
+	startDate,
+	disabledDates,
+	setSelectedDates,
+}: PropsHandleToggleWeekly) {
+	const daysToAddOrRemove: Date[] = [];
+
+	for (const item of weeks) {
+		// Verify if is same month and if date is not disabled
+		if (
+			isSameMonth(item[dayOfWeek], startDate) &&
+			!dateIsInArray(item[dayOfWeek], disabledDates || [])
+		) {
+			daysToAddOrRemove.push(item[dayOfWeek]);
+		}
+	}
+
+	setSelectedDates(prev => {
+		const updatedDates = [...prev];
+
+		// Verify if all dates of week is selecteds
+		const allSelected = daysToAddOrRemove.every(day =>
+			updatedDates.some(date => isSameDay(date, day))
+		);
+
+		if (allSelected) {
+			// Is all dates of week is selecteds then remove all
+			return updatedDates.filter(item => {
+				if (
+					item.getDay() === dayOfWeek &&
+					item.getMonth() === startDate.getMonth() &&
+					item.getFullYear() === startDate.getFullYear()
+				) {
+					return false;
+				}
+				return item;
+			});
+		}
+		// Else, add dates not is selecteds
+		daysToAddOrRemove.forEach(day => {
+			if (!updatedDates.some(date => isSameDay(date, day))) {
+				updatedDates.push(day);
+			}
+		});
+
+		return updatedDates;
+	});
+}
+
+type PropsAllDatesIsSelecteds = {
+	dayOfWeek: number;
+	weeks: Array<Date[]>;
+	startDate: Date;
+	disabledDates?: Date[];
+	selectedDates: Date[];
+};
+function allDatesIsSelectedsByDayOfWeek({
+	dayOfWeek,
+	weeks,
+	startDate,
+	disabledDates,
+	selectedDates,
+}: PropsAllDatesIsSelecteds) {
+	const daysToAddOrRemove: Date[] = [];
+
+	for (const item of weeks) {
+		// Verify if is same month and if date is not disabled
+		if (
+			isSameMonth(item[dayOfWeek], startDate) &&
+			!dateIsInArray(item[dayOfWeek], disabledDates || [])
+		) {
+			daysToAddOrRemove.push(item[dayOfWeek]);
+		}
+	}
+
+	const result = daysToAddOrRemove.every(item =>
+		selectedDates.some(date => isSameDay(date, item))
+	);
+
+	return result;
+}
+
 export const calendar = {
 	handleToggleSelection,
 	getClassNames,
 	dateIsInArray,
+	handleToggleWeekly,
+	allDatesIsSelectedsByDayOfWeek,
 };
