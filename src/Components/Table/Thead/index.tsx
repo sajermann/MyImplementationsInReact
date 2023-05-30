@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import { Table, flexRender } from '@tanstack/react-table';
-import { useDarkMode } from '~/Hooks/DarkMode';
+import { useDarkModeZustand } from '~/Store/UseDarkMode';
 import { managerClassNames } from '~/Utils/ManagerClassNames';
 import styles from './index.module.css';
 
@@ -9,7 +9,7 @@ type Props<T> = {
 };
 
 export function Thead<T>({ table }: Props<T>) {
-	const { darkMode } = useDarkMode();
+	const { darkMode } = useDarkModeZustand();
 
 	return (
 		<thead

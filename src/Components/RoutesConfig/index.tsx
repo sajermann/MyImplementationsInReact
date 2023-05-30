@@ -4,8 +4,9 @@ import { generateGuid } from '@sajermann/utils/Random';
 
 import { useRoutesMenu } from '~/Hooks/UseRoutesMenu';
 import { useTranslation } from '~/Hooks/UseTranslation';
-import { useLoadingLazy } from '~/Hooks/LoadingLazy';
+
 import { TRoutesMenu } from '~/Types/TRoutesMenu';
+import { useLoadingLazy } from '~/Store/UseLoadingLazy';
 import Sidebar from '../Sidebar';
 import { Breadcrumbs } from '../Breadcumbs';
 

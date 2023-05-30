@@ -9,7 +9,7 @@ import {
 } from '@tanstack/react-table';
 import { useVirtualizer as useVirtual } from '@tanstack/react-virtual';
 
-import { useDarkMode } from '~/Hooks/DarkMode';
+import { useDarkModeZustand } from '~/Store/UseDarkMode';
 import { useTranslation } from '~/Hooks/UseTranslation';
 import { LoadingBar } from '~/Components/LoadingBar';
 import { log } from '~/Utils/Log';
@@ -48,7 +48,7 @@ export function Tbody<T>({
 	disabledVirtualization,
 }: Props<T>) {
 	const { translate } = useTranslation();
-	const { darkMode } = useDarkMode();
+	const { darkMode } = useDarkModeZustand();
 	const { rows } = table.getRowModel();
 
 	const rowVirtualizer = useVirtual({

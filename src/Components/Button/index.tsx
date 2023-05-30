@@ -2,6 +2,7 @@ import {
 	Button as ButtonSajermann,
 	ISajermannReactButton,
 } from '@sajermann/react-button';
+import { memo } from 'react';
 import styles from './styles.module.css';
 
 interface Props extends ISajermannReactButton {
@@ -9,7 +10,7 @@ interface Props extends ISajermannReactButton {
 	colorStyle?: 'Primary' | 'Secondary' | 'Success' | 'Warning';
 }
 
-function Button({ colorStyle, variant, ...props }: Props) {
+export const Button = memo(({ colorStyle, variant, ...props }: Props) => {
 	function verifyClasses() {
 		const classesToReturn = [styles.btn];
 
@@ -70,6 +71,4 @@ function Button({ colorStyle, variant, ...props }: Props) {
 			className={`${verifyClasses()} ${props.className}`}
 		/>
 	);
-}
-
-export { Button };
+});

@@ -1,19 +1,19 @@
-import clsx from 'clsx';
-
-import { useDarkMode } from '~/Hooks/DarkMode';
 import { useTranslation } from '~/Hooks/UseTranslation';
 import { Icons } from '~/Components/Icons';
+import { useDarkModeZustand } from '~/Store/UseDarkMode';
+import { managerClassNames } from '~/Utils/ManagerClassNames';
 
 export function SwitchTheme() {
-	const { darkMode, toggleDarkMode } = useDarkMode();
+	const { darkMode, toggleDarkMode } = useDarkModeZustand();
 	const { translate } = useTranslation();
 	return (
 		<div>
+			{JSON.stringify(darkMode)}
 			<div>{translate('THEME')}</div>
 			<div className="flex items-center justify-center">
 				<button
 					type="button"
-					className={clsx(
+					className={managerClassNames(
 						'h-16 border flex items-center justify-center gap-2 p-4 rounded-l-lg',
 						{
 							'border-violet-700': darkMode,
@@ -26,7 +26,7 @@ export function SwitchTheme() {
 				</button>
 				<button
 					type="button"
-					className={clsx(
+					className={managerClassNames(
 						'h-16 border flex items-center justify-center gap-2 p-4 rounded-r-lg',
 						{
 							'border-violet-700 cursor-pointer': !darkMode,

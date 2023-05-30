@@ -1,5 +1,7 @@
 {
 	"translations": {
+		"RANGE_UNSTABLE": "Range - Unstable",
+		"NORMAL": "Normal",
 		"CALENDAR_PICKER": "Calendar Picker",
 		"DISABLED_DATES": "Disabled Dates",
 		"MULTI_SELECTION": "Multi Selection",

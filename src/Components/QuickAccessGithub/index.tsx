@@ -21,8 +21,6 @@ export const QuickAccessGithub = memo(({ name, disableBgColor }: Props) => {
 		return resultSub[type];
 	}
 
-	console.log('mexeu em mim');
-
 	return (
 		<>
 			<a
