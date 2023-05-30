@@ -14,19 +14,12 @@ export function toggleMultiSelection({
 	selectOptions,
 }: Pick<PropsHandleToggleSelection, 'date' | 'selectOptions'>) {
 	const { multi } = selectOptions;
-	const result = multi?.selectedDates.find(
-		item => item.toISOString() === date.toISOString()
-	);
+	const dateSelected = multi?.selectedDates.find(item => isSameDay(item, date));
 
-	if (!result) {
+	if (!dateSelected) {
 		multi?.onSelectedDates(prev => [...prev, date]);
 	} else {
-		multi?.onSelectedDates(prev => {
-			const result2 = prev.filter(
-				item => item.toISOString() !== date.toISOString()
-			);
-			return result2;
-		});
+		multi?.onSelectedDates(prev => prev.filter(item => !isSameDay(item, date)));
 	}
 }
 

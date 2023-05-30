@@ -7,6 +7,7 @@ import { SearchBox } from '~/Components/SearchBox';
 import { ChangeEvent, useState } from 'react';
 import { makeData } from '~/Utils/MakeData';
 import { delay } from '@sajermann/utils/Delay';
+import { Popover } from '~/Components/Popover';
 
 export function SearchBoxPage() {
 	const data = makeData.countries();
@@ -172,6 +173,23 @@ export function SearchBoxPage() {
 						/>
 					</ComponentBlock>
 				</Section>
+			</Section>
+
+			<Section title={translate('BATATA')} variant="h2">
+				<Popover
+					isOpen={false}
+					trigger={
+						<button
+							className="w-5 h-4 flex items-center justify-center"
+							type="button"
+							onClick={console.log}
+						>
+							B
+						</button>
+					}
+				>
+					<div className="w-48 h-48">Test</div>
+				</Popover>
 			</Section>
 		</Main>
 	);

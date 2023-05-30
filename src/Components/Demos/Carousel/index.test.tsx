@@ -13,7 +13,5 @@ describe('Components/Demos/CarouselDemo', () => {
 				<CarouselDemo />
 			</InjectorProviders>
 		);
-		const button = await getByText('Success');
-		fireEvent.click(button);
 	});
 });

@@ -3,14 +3,19 @@
  */
 import { fireEvent, render, waitFor } from '@testing-library/react';
 import { it, describe } from 'vitest';
+import { InjectorProviders } from '~/Components/InjectorProviders';
 
 import { CheckboxPage } from '.';
 
 describe('Pages/CheckboxPage', () => {
 	it(`must render checkbox`, async () => {
-		const { getAllByText } = render(<CheckboxPage />);
+		const { getAllByLabelText } = render(
+			<InjectorProviders>
+				<CheckboxPage />
+			</InjectorProviders>
+		);
 		await waitFor(() => {
-			const button = getAllByText('Checkbox')[0];
+			const button = getAllByLabelText('Checkbox')[0];
 			fireEvent.click(button);
 		});
 	});

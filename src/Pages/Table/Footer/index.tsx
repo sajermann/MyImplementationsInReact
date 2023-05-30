@@ -14,6 +14,7 @@ export function FooterPage() {
 	const { translate, currentLanguage } = useTranslation();
 	const [data, setData] = useState<TVehicle[]>([]);
 	const [globalFilter, setGlobalFilter] = useState('');
+	console.log(currentLanguage);
 
 	useEffect(() => setData(makeData.vehicles(50)), []);
 
