@@ -18,6 +18,5 @@ export default defineConfig({
 		coverage: {
 			reporter: ['text', 'lcov', 'html'],
 		},
-		exclude: [...configDefaults.exclude, './src/Pages/**'],
 	},
 });

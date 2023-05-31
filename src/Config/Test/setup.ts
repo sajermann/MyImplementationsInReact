@@ -11,6 +11,8 @@ afterEach(() => {
 });
 
 beforeEach(() => {
+	global.URL.createObjectURL = vi.fn();
+	global.URL.revokeObjectURL = vi.fn();
 	global.ResizeObserver = vi.fn().mockImplementation(() => ({
 		observe: vi.fn(),
 		unobserve: vi.fn(),

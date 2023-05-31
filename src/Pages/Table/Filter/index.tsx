@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
-import { Column, ColumnDef, Row, Table as TTable } from '@tanstack/react-table';
+import { Column, ColumnDef, Table as TTable } from '@tanstack/react-table';
 
 import { TFilterActive } from '~/Types/TFilterActive';
 import { Table } from '~/Components/Table';
@@ -15,6 +15,7 @@ import { formatDate, stringToDate } from '@sajermann/utils/FormatDate';
 import { FilterId } from '~/Components/TableExamples/FilterId';
 import { FilterBirthday } from '~/Components/TableExamples/FilterBirthday';
 import { FilterColumnBySelect } from '~/Components/TableExamples/FilterColumnBySelect';
+import { tableUtils } from '~/Utils/Table';
 
 export function FilterPage() {
 	const { translate } = useTranslation();
@@ -35,26 +36,18 @@ export function FilterPage() {
 					<FilterId column={column} />
 				),
 				filterFn: (row, columnId, valueFilter) => {
-					if (valueFilter[0] === '' && valueFilter[1] === '') {
+					const columnValue = Number(row.getValue(columnId));
+					const [filterType, filterValue] = valueFilter;
+					if (filterValue === '' && filterType === '') {
 						return true;
 					}
-					if (valueFilter[0] === 'smaller') {
-						if (Number(row.getValue(columnId)) < Number(valueFilter[1])) {
-							return true;
-						}
-					}
-					if (valueFilter[0] === 'bigger') {
-						if (Number(row.getValue(columnId)) > Number(valueFilter[1])) {
-							return true;
-						}
-					}
-					if (valueFilter[0] === 'equals') {
-						if (Number(row.getValue(columnId)) === Number(valueFilter[1])) {
-							return true;
-						}
-					}
 
-					return false;
+					const config: Record<string, boolean> = {
+						smaller: columnValue < Number(filterValue),
+						bigger: columnValue > Number(filterValue),
+						equals: columnValue === Number(filterValue),
+					};
+					return config[filterType as string] || false;
 				},
 			},
 			columns[1],
@@ -75,15 +68,9 @@ export function FilterPage() {
 						propForFilter="name"
 					/>
 				),
-				filterFn: (row, columnId, valueFilter) => {
-					if (
-						valueFilter.length === 0 ||
-						valueFilter.includes(row.getValue(columnId))
-					) {
-						return true;
-					}
-					return false;
-				},
+				filterFn: (row, columnId, valueFilter) =>
+					valueFilter.length === 0 ||
+					valueFilter.includes(row.getValue(columnId)),
 			},
 			columns[3],
 			{
@@ -101,37 +88,8 @@ export function FilterPage() {
 				filterElement: (column: Column<TPerson, string>) => (
 					<FilterBirthday column={column} />
 				),
-				filterFn: (row, columnId, valueFilter) => {
-					if (valueFilter.from === '' && valueFilter.to === '') {
-						return true;
-					}
-
-					if (valueFilter.from !== '' && valueFilter.to !== '') {
-						if (
-							new Date(valueFilter.from) <=
-								stringToDate(row.getValue(columnId)) &&
-							new Date(valueFilter.to) >= stringToDate(row.getValue(columnId))
-						) {
-							return true;
-						}
-					}
-					if (
-						valueFilter.from === '' &&
-						new Date(valueFilter.to) >= stringToDate(row.getValue(columnId))
-					) {
-						return true;
-					}
-
-					if (
-						new Date(valueFilter.from) <=
-							stringToDate(row.getValue(columnId)) &&
-						valueFilter.to === ''
-					) {
-						return true;
-					}
-
-					return false;
-				},
+				filterFn: (row, columnId, valueFilter) =>
+					tableUtils.filterRangeDate({ row, columnId, valueFilter }),
 			},
 			{
 				accessorKey: 'email',
@@ -149,15 +107,9 @@ export function FilterPage() {
 						propForFilter="email"
 					/>
 				),
-				filterFn: (row, columnId, valueFilter) => {
-					if (
-						valueFilter.length === 0 ||
-						valueFilter.includes(row.getValue(columnId))
-					) {
-						return true;
-					}
-					return false;
-				},
+				filterFn: (row, columnId, valueFilter) =>
+					valueFilter.length === 0 ||
+					valueFilter.includes(row.getValue(columnId)),
 			},
 			columns[6],
 			{
@@ -177,76 +129,6 @@ export function FilterPage() {
 	useEffect(() => {
 		setData(makeData.person(10));
 	}, []);
-
-	function verifyFilter(
-		filterType: string,
-		filterValue: string,
-		valueCell: string
-	) {
-		if (filterType === 'equals') {
-			if (filterValue === valueCell) {
-				return true;
-			}
-		}
-
-		if (filterType === 'different') {
-			if (filterValue !== valueCell) {
-				return true;
-			}
-		}
-
-		if (filterType === 'bigger') {
-			if (Number(valueCell) > Number(filterValue)) {
-				return true;
-			}
-		}
-
-		if (filterType === 'smaller') {
-			if (Number(valueCell) < Number(filterValue)) {
-				return true;
-			}
-		}
-
-		if (filterType === 'starts') {
-			if (valueCell.startsWith(filterValue)) {
-				return true;
-			}
-		}
-
-		if (filterType === 'ends') {
-			if (valueCell.endsWith(filterValue)) {
-				return true;
-			}
-		}
-
-		if (filterType === 'contains') {
-			if (valueCell.includes(filterValue)) {
-				return true;
-			}
-		}
-
-		return false;
-	}
-
-	function normalFluxFilter(
-		rows: Row<TPerson>,
-		columnId: string,
-		filters: TFilterActive[]
-	) {
-		const valueCell = rows.getValue(columnId) as string;
-		const results: boolean[] = [];
-
-		for (const filter of filters) {
-			if (filter.column === columnId) {
-				results.push(verifyFilter(filter.type, filter.value, valueCell));
-			}
-		}
-		const result = results.find(item => item === true);
-		if (result) {
-			return true;
-		}
-		return false;
-	}
 
 	return (
 		<Main data-content="content-main">
@@ -270,10 +152,9 @@ export function FilterPage() {
 							filter: globalFilter,
 							setFilter: setGlobalFilter,
 							globalFilterFn: (rows, columnId, filters) => {
-								if (filters.length === 0) {
-									return true;
-								}
-								return normalFluxFilter(rows, columnId, filters);
+								if (filters.length === 0) return true;
+
+								return tableUtils.globalFilterFnCustom(rows, columnId, filters);
 							},
 							disableInput: true,
 						}}

@@ -18,6 +18,7 @@ import {
 	TSelectOptions,
 } from '~/Types/TCalendarPick';
 import { calendar } from '~/Utils/CalendarPicker';
+
 import { Thead } from './Thead';
 
 type Props = {
@@ -49,16 +50,20 @@ export const Calendar = memo(
 		setDefaultOptions({
 			locale: currentLanguage === 'pt-BR' ? ptBR : undefined,
 		});
-		const startDate = startOfMonth(new Date(year, month - 1));
-		const endDate = endOfMonth(startDate);
-		const startWeek = startOfWeek(startDate, { weekStartsOn: 0 });
-		const endWeek = endOfWeek(endDate, { weekStartsOn: 0 });
-		const days = eachDayOfInterval({ start: startWeek, end: endWeek });
+		const { startDate, endDate, weeks } = calendar.generateConfig({
+			year,
+			month,
+		});
+		// const startDate = startOfMonth(new Date(year, month - 1));
+		// const endDate = endOfMonth(startDate);
+		// const startWeek = startOfWeek(startDate, { weekStartsOn: 0 });
+		// const endWeek = endOfWeek(endDate, { weekStartsOn: 0 });
+		// const days = eachDayOfInterval({ start: startWeek, end: endWeek });
 
-		const weeks: Array<Date[]> = [];
-		for (let i = 0; i < days.length; i += 7) {
-			weeks.push(days.slice(i, i + 7));
-		}
+		// const weeks: Array<Date[]> = [];
+		// for (let i = 0; i < days.length; i += 7) {
+		// 	weeks.push(days.slice(i, i + 7));
+		// }
 
 		return (
 			<div>

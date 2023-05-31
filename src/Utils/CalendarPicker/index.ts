@@ -6,6 +6,7 @@ import { handleHoverRangeSelection } from './HandleHoverRangeSelection';
 import { handleSelectByRange } from './HandleSelectByRange';
 import { handleToggleHeader } from './HandleToggleHeader';
 import { handleToggleSelection } from './Toggle';
+import { generateConfig } from './GenerateConfig';
 
 export const calendar = {
 	handleToggleSelection,
@@ -16,4 +17,5 @@ export const calendar = {
 	handleSelectByRange,
 	handleHoverRangeSelection,
 	fixSelectionByRange,
+	generateConfig,
 };

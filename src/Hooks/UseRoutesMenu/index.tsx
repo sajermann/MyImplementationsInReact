@@ -539,7 +539,6 @@ export function useRoutesMenu() {
 				label: translate('ANIMATE_IN_VIEW'),
 				demo: <AnimateInViewDemo />,
 			},
-
 			{
 				name: 'CalendarPicker',
 				path: '/calendar-picker',

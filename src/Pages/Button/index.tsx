@@ -61,10 +61,14 @@ export function ButtonPage() {
 			<Section subHeading={translate('VARIANTS')}>
 				<ComponentBlock>
 					<Button className={styles.btn}>Default</Button>
-					<Button className={styles.btn} variant="Outlined">
+					<Button
+						className={styles.btn}
+						colorStyle="Secondary"
+						variant="Outlined"
+					>
 						Outlined
 					</Button>
-					<Button className={styles.btn} variant="Option">
+					<Button className={styles.btn} colorStyle="Success" variant="Option">
 						Option
 					</Button>
 				</ComponentBlock>

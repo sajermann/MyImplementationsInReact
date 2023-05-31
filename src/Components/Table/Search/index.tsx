@@ -15,12 +15,8 @@ export function Search({ globalFilter }: Props) {
 	if (!globalFilter || globalFilter.disableInput) return null;
 	return (
 		<Input
-			value={globalFilter.filter as string}
-			onChange={e =>
-				(globalFilter?.setFilter as Dispatch<SetStateAction<string>>)(
-					e.target.value
-				)
-			}
+			value={globalFilter.filter}
+			onChange={e => globalFilter?.setFilter(e.target.value)}
 			placeholder={translate('SEARCH')}
 			type="search"
 		/>

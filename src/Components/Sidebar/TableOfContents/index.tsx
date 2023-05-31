@@ -64,13 +64,6 @@ export function TableOfContents() {
 				active: item.anchor === element.anchor,
 			})),
 		]);
-		// if (element.top > 0) {
-		// 	await delay(1);
-		// 	window.scroll({
-		// 		top: element.top,
-		// 		behavior: 'smooth',
-		// 	});
-		// }
 	}
 
 	useEffect(
