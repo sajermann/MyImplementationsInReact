@@ -3,20 +3,17 @@ import { useTranslation } from '~/Hooks/UseTranslation';
 import Section from '~/Components/Section';
 import { ComponentBlock } from '~/Components/ComponentBlock';
 import { QuickAccessGithub } from '~/Components/QuickAccessGithub';
-import { SearchBox } from '~/Components/SearchBox';
+
 import { ChangeEvent, useState } from 'react';
 import { makeData } from '~/Utils/MakeData';
 import { delay } from '@sajermann/utils/Delay';
 import { Popover } from '~/Components/Popover';
+import { SearchBox } from '~/Components/SearchBox';
 
 export function SearchBoxPage() {
 	const data = makeData.countries();
 	const { translate } = useTranslation();
 	const [searchAbsoluteConstant, setSearchAbsoluteConstant] = useState('');
-	const [
-		searchAbsoluteConstantAlwaysOpened,
-		setSearchAbsoluteConstantAlwaysOpened,
-	] = useState('');
 
 	const [searchAbsoluteAsync, setSearchAbsoluteAsync] = useState('');
 	const [isLoadingAbsolute, setIsLoadingAbsolute] = useState(false);
@@ -25,10 +22,6 @@ export function SearchBoxPage() {
 	);
 
 	const [searchStaticConstant, setSearchStaticConstant] = useState('');
-	const [
-		searchStaticConstantAlwaysOpened,
-		setSearchStaticConstantAlwaysOpened,
-	] = useState('');
 
 	const [searchStaticAsync, setSearchStaticAsync] = useState('');
 	const [isLoadingStatic, setIsLoadingStatic] = useState(false);
@@ -87,26 +80,6 @@ export function SearchBoxPage() {
 							searchValue={searchAbsoluteConstant}
 							onChange={e => setSearchAbsoluteConstant(e.target.value)}
 							results={filterConstant(searchAbsoluteConstant)}
-							containerProps={{
-								className: 'z-[3]',
-							}}
-						/>
-					</ComponentBlock>
-				</Section>
-
-				<Section title={translate('ALWAYS_OPENED')} variant="h3">
-					<ComponentBlock className="min-h-[8rem] h-full !justify-start">
-						<SearchBox
-							alwaysOpenedResult
-							absolute
-							searchValue={searchAbsoluteConstantAlwaysOpened}
-							onChange={e =>
-								setSearchAbsoluteConstantAlwaysOpened(e.target.value)
-							}
-							results={filterConstant(searchAbsoluteConstantAlwaysOpened)}
-							containerProps={{
-								className: 'z-[2]',
-							}}
 						/>
 					</ComponentBlock>
 				</Section>
@@ -139,19 +112,6 @@ export function SearchBoxPage() {
 							searchValue={searchStaticConstant}
 							onChange={e => setSearchStaticConstant(e.target.value)}
 							results={filterConstant(searchStaticConstant)}
-						/>
-					</ComponentBlock>
-				</Section>
-
-				<Section title={translate('ALWAYS_OPENED')} variant="h3">
-					<ComponentBlock className="min-h-[8rem] h-full !justify-start">
-						<SearchBox
-							alwaysOpenedResult
-							searchValue={searchStaticConstantAlwaysOpened}
-							onChange={e =>
-								setSearchStaticConstantAlwaysOpened(e.target.value)
-							}
-							results={filterConstant(searchStaticConstantAlwaysOpened)}
 						/>
 					</ComponentBlock>
 				</Section>
