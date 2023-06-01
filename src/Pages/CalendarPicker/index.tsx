@@ -43,8 +43,12 @@ export function CalendarPickerPage() {
 									onSelectedDate: setSelectedDate,
 								},
 							}}
-							onPrevClick={() => addMonths(dateToStartCalendar, -1)}
-							onNextClick={() => addMonths(dateToStartCalendar, 1)}
+							onPrevClick={() =>
+								setDateToStartCalendar(prev => addMonths(prev, -1))
+							}
+							onNextClick={() =>
+								setDateToStartCalendar(prev => addMonths(prev, 1))
+							}
 							year={dateToStartCalendar.getFullYear()}
 							month={dateToStartCalendar.getMonth() + 1}
 						/>

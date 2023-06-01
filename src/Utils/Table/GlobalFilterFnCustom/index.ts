@@ -8,6 +8,7 @@ export function globalFilterFnCustom<T>(
 	filters: TFilterActive[]
 ) {
 	const valueCell: string = rows.getValue(columnId);
+	console.log({ valueCell });
 	const results: boolean[] = [];
 
 	for (const filter of filters) {

@@ -70,7 +70,8 @@ export const Thead = memo(
 						<button
 							type="button"
 							className={managerClassNames([
-								{ 'font-bold p-4 transition-all duration-500': true },
+								{ 'font-bold transition-all duration-500': true },
+								{ 'p-1 sm:p-4 ': true },
 								{ 'hover:text-primary-500': selectOptions.multi },
 								{ 'cursor-pointer': selectOptions.multi },
 								{ 'cursor-auto': selectOptions.single },

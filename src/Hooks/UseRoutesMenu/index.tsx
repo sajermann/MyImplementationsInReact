@@ -20,6 +20,7 @@ import { TableDemo } from '~/Components/Demos/Table';
 import { CarouselDemo } from '~/Components/Demos/Carousel';
 import { SearchBoxDemo } from '~/Components/Demos/SearchBox';
 import { AnimateInViewDemo } from '~/Components/Demos/AnimateInView';
+import { CalendarPickerDemo } from '~/Components/Demos/CalendarPicker';
 
 const ColumnVisibilityPage = lazy(() =>
 	import('~/Pages/Table/ColumnVisibility').then(
@@ -485,7 +486,7 @@ export function useRoutesMenu() {
 				],
 			},
 			{
-				name: 'SearchBox',
+				name: 'Search Box',
 				path: '/search-box',
 				implements_code:
 					'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Components/SearchBox',
@@ -540,7 +541,7 @@ export function useRoutesMenu() {
 				demo: <AnimateInViewDemo />,
 			},
 			{
-				name: 'CalendarPicker',
+				name: 'Calendar Picker',
 				path: '/calendar-picker',
 				implements_code:
 					'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Components/CalendarPicker',
@@ -548,7 +549,7 @@ export function useRoutesMenu() {
 					'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/CalendarPicker',
 				element: <CalendarPickerPage />,
 				label: translate('CALENDAR_PICKER'),
-				// demo: <CalendarDemo />,
+				demo: <CalendarPickerDemo />,
 			},
 			{
 				name: 'NotFound',

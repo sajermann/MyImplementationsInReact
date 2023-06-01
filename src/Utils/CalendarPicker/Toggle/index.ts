@@ -27,6 +27,7 @@ export function toggleSingleSelection({
 	date,
 	selectOptions,
 }: Pick<PropsHandleToggleSelection, 'date' | 'selectOptions'>) {
+	console.log('2sssss');
 	const { single } = selectOptions;
 
 	if (
