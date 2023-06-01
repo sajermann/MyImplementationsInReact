@@ -1,5 +1,6 @@
 {
 	"translations": {
+		"IMPLEMENTS_ANIMATE_IN_VIEW": "Implementação da Animação na Visualização",
 		"RANGE_UNSTABLE": "Range - Instável",
 		"NORMAL": "Normal",
 		"CALENDAR_PICKER": "Calendar Picker",

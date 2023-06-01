@@ -530,7 +530,7 @@ export function useRoutesMenu() {
 				demo: <CarouselDemo />,
 			},
 			{
-				name: 'AnimateInView',
+				name: 'Animate In View',
 				path: '/animate-in-view',
 				implements_code:
 					'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Components/AnimateInView',
@@ -550,6 +550,8 @@ export function useRoutesMenu() {
 				element: <CalendarPickerPage />,
 				label: translate('CALENDAR_PICKER'),
 				demo: <CalendarPickerDemo />,
+				className:
+					'col-span-12 sm:!col-span-12 lg:!col-span-8 xl:!col-span-6 h-[30rem] md:row-span-2 md:h-[40rem]',
 			},
 			{
 				name: 'NotFound',

@@ -10,6 +10,15 @@ afterEach(() => {
 	cleanup();
 });
 
+const intersectionObserverMock = () => ({
+	observe: () => null,
+	disconnect: () => null,
+	unobserve: () => null,
+});
+window.IntersectionObserver = vi
+	.fn()
+	.mockImplementation(intersectionObserverMock);
+
 beforeEach(() => {
 	global.URL.createObjectURL = vi.fn();
 	global.URL.revokeObjectURL = vi.fn();

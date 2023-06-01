@@ -29,7 +29,7 @@ export function CalendarPickerPage() {
 
 			<Section title={translate('CODES')} variant="h2">
 				<div className="flex gap-2">
-					<QuickAccessGithub name="CalendarPicker" />
+					<QuickAccessGithub name="Calendar Picker" />
 				</div>
 			</Section>
 

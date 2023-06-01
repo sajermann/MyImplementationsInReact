@@ -4,13 +4,13 @@
 import { fireEvent, render } from '@testing-library/react';
 import { it, describe } from 'vitest';
 import { InjectorProviders } from '~/Components/InjectorProviders';
-import { SearchBoxDemo } from '.';
+import { CalendarPickerDemo } from '.';
 
-describe('Components/Demos/SearchBoxDemo', () => {
+describe('Components/Demos/CalendarPickerDemo', () => {
 	it(`must open Modal`, async () => {
 		const { getAllByRole } = render(
 			<InjectorProviders>
-				<SearchBoxDemo />
+				<CalendarPickerDemo />
 			</InjectorProviders>
 		);
 	});

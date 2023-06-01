@@ -10,4 +10,5 @@ export type TRoutesMenu = {
 	hideMenu?: boolean;
 	label: string;
 	hideTriRoutes?: boolean;
+	className?: string;
 };

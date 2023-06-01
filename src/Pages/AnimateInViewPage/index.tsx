@@ -1,54 +1,51 @@
-import { useRef } from 'react';
-
 import { useTranslation } from '~/Hooks/UseTranslation';
 import { Main } from '~/Components/Main';
 import Section from '~/Components/Section';
 import { QuickAccessGithub } from '~/Components/QuickAccessGithub';
-import { useInView } from 'framer-motion';
+import { Icons } from '~/Components/Icons';
+import { AnimateInView } from '~/Components/AnimateInView';
 
-function Card({ children }: { children: React.ReactNode }) {
-	const ref = useRef(null);
-	const isInView = useInView(ref, { once: true });
-
-	return (
-		<section
-			ref={ref}
-			style={{
-				height: 500,
-			}}
-		>
-			<span
-				style={{
-					transform: isInView ? 'none' : 'translateX(-200px)',
-					opacity: isInView ? 1 : 0,
-					transition: 'all 0.9s cubic-bezier(0.17, 0.55, 0.55, 1) 0.5s',
-					height: 500,
-				}}
-			>
-				{children}
-			</span>
-		</section>
-	);
-}
+const config = {
+	en: <Icons.Eua />,
+	'pt-BR': <Icons.Brazil />,
+};
 
 export function AnimateInViewPage() {
-	const { translate } = useTranslation();
-
+	const { translate, currentLanguage } = useTranslation();
 	return (
 		<Main data-content="content-main">
-			<Section heading={translate('ANIMATE_IN_VIEW')}>
-				{translate('IMPLEMENTS_PRINT_MODE')}
+			<Section title={translate('ANIMATE_IN_VIEW')} variant="h1">
+				{translate('IMPLEMENTS_ANIMATE_IN_VIEW')}
 			</Section>
-			<Section subHeading={translate('CODES')}>
+			<Section title={translate('CODES')} variant="h2">
 				<div className="flex gap-2">
-					<QuickAccessGithub name="Print" />
+					<QuickAccessGithub name="Animate In View" />
 				</div>
 			</Section>
-			<Section subHeading={translate('IMPLEMENTS')}>
-				<Card>Animate</Card>
-				<Card>when</Card>
-				<Card>in</Card>
-				<Card>view!</Card>
+			<Section title="From Left" variant="h2">
+				<AnimateInView className="w-full" type="fromLeft">
+					{config[currentLanguage as 'en' | 'pt-BR']}
+				</AnimateInView>
+			</Section>
+			<Section title="From Right" variant="h2">
+				<AnimateInView className="w-full" type="fromRight">
+					{config[currentLanguage as 'en' | 'pt-BR']}
+				</AnimateInView>
+			</Section>
+			<Section title="From Bottom" variant="h2">
+				<AnimateInView className="w-full" type="fromBottom">
+					{config[currentLanguage as 'en' | 'pt-BR']}
+				</AnimateInView>
+			</Section>
+			<Section title="From Top" variant="h2">
+				<AnimateInView className="w-full" type="fromTop">
+					{config[currentLanguage as 'en' | 'pt-BR']}
+				</AnimateInView>
+			</Section>
+			<Section title="From Fade" variant="h2">
+				<AnimateInView className="w-full" type="fade">
+					{config[currentLanguage as 'en' | 'pt-BR']}
+				</AnimateInView>
 			</Section>
 		</Main>
 	);
