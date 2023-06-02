@@ -6,6 +6,7 @@ function currency(
 	const currencyStyle = {
 		'pt-BR': 'BRL',
 		en: 'USD',
+		'en-US': 'USD',
 	};
 
 	return new Intl.NumberFormat(language, {

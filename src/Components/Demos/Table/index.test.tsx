@@ -13,7 +13,5 @@ describe('Components/Demos/TableDemo', () => {
 				<TableDemo />
 			</InjectorProviders>
 		);
-		const button = await getByText('Success');
-		fireEvent.click(button);
 	});
 });

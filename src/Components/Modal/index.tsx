@@ -1,6 +1,6 @@
-import { Transition } from '@headlessui/react';
 import * as Dialog from '@radix-ui/react-dialog';
-import { Fragment, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
+import { managerClassNames } from '~/Utils/ManagerClassNames';
 import { BoxScroll } from '../BoxScroll';
 import { ButtonIcon } from '../ButtonIcon';
 import { Icons } from '../Icons';
@@ -46,75 +46,65 @@ export function Modal({
 
 	return (
 		<Dialog.Root open={isOpen}>
-			<Dialog.Portal forceMount>
-				<Transition.Root show={isOpen}>
-					<Transition.Child
-						as={Fragment}
-						enter="ease-out duration-300"
-						enterFrom="opacity-0"
-						enterTo="opacity-100"
-						leave="ease-in duration-200"
-						leaveFrom="opacity-100"
-						leaveTo="opacity-0"
-					>
-						<Dialog.Overlay
-							{...overlayProps}
-							className="bg-black/60 inset-0 fixed z-[2]"
-							onClick={closeByBackdrop ? onClose : undefined}
-						/>
-					</Transition.Child>
-					<Transition.Child
-						as={Fragment}
-						enter="ease-out duration-300"
-						enterFrom="opacity-0 scale-95"
-						enterTo="opacity-100 scale-100"
-						leave="ease-in duration-200"
-						leaveFrom="opacity-100 scale-100"
-						leaveTo="opacity-0 scale-95"
-					>
-						<Dialog.Content
-							{...contentProps}
-							style={{
-								width: isExpanded ? '100%' : width,
-								height: isExpanded ? '100%' : height,
-								transition: '300ms',
-							}}
-							onEscapeKeyDown={closeByEsc ? onClose : undefined}
-							className="fixed bg-white top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded shadow-lg shadow-black/25 z-[3] dark:bg-slate-900"
-						>
-							{title && (
-								<Dialog.Title className="h-12 px-6 py-3 text-primary-500 font-bold flex items-center dark:bg-slate-900 border-b-[#dee2e6] border-b-2">
-									{title}
-									{expand && (
-										<ButtonIcon
-											className="absolute top-2 right-16 text-primary-500 hover:text-primary-300 transition-colors duration-500"
-											onClick={() => setIsExpanded(prev => !prev)}
-										>
-											{!isExpanded ? (
-												<Icons.ArrowsOutSimple />
-											) : (
-												<Icons.ArrowsInSimple />
-											)}
-										</ButtonIcon>
+			<Dialog.Portal>
+				<Dialog.Overlay
+					{...overlayProps}
+					className={managerClassNames([
+						{ 'bg-black/60 inset-0 fixed z-[2]': true },
+						// Look tailwind.config.cjs
+						{ 'data-[state=open]:animate-overlayShow': true },
+						{ 'data-[state=closed]:animate-overlayClose': true },
+					])}
+					onClick={closeByBackdrop ? onClose : undefined}
+				/>
+				<Dialog.Content
+					{...contentProps}
+					style={{
+						width: isExpanded ? '100%' : width,
+						height: isExpanded ? '100%' : height,
+						transition: '300ms',
+					}}
+					onEscapeKeyDown={closeByEsc ? onClose : undefined}
+					className={managerClassNames([
+						{ 'top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 ': true },
+						{ 'shadow-lg shadow-black/25 z-[3] dark:bg-slate-900 ': true },
+						{ 'fixed rounded  bg-white ': true },
+						// Look tailwind.config.cjs
+						{ 'data-[state=open]:animate-contentShow': true },
+						{ 'data-[state=closed]:animate-contentClose': true },
+					])}
+				>
+					{title && (
+						<Dialog.Title className="h-12 px-6 py-3 text-primary-500 font-bold flex items-center dark:bg-slate-900 border-b-[#dee2e6] border-b-2">
+							{title}
+							{expand && (
+								<ButtonIcon
+									className="absolute top-2 right-16 text-primary-500 hover:text-primary-300 transition-colors duration-500"
+									onClick={() => setIsExpanded(prev => !prev)}
+								>
+									{!isExpanded ? (
+										<Icons.ArrowsOutSimple />
+									) : (
+										<Icons.ArrowsInSimple />
 									)}
-
-									{closeButton && (
-										<ButtonIcon
-											className="absolute top-2 right-6  text-primary-500 hover:text-primary-300 transition-colors duration-500"
-											onClick={onClose}
-											data-testid="closeButtonModal"
-										>
-											<Icons.Close width="1rem" />
-										</ButtonIcon>
-									)}
-								</Dialog.Title>
+								</ButtonIcon>
 							)}
-							<main className="h-[calc(100%_-_48px)] dark:bg-gray-800 py-2">
-								<BoxScroll className="px-6">{children}</BoxScroll>
-							</main>
-						</Dialog.Content>
-					</Transition.Child>
-				</Transition.Root>
+
+							{closeButton && (
+								<ButtonIcon
+									className="absolute top-2 right-6  text-primary-500 hover:text-primary-300 transition-colors duration-500"
+									onClick={onClose}
+									data-testid="closeButtonModal"
+								>
+									<Icons.Close width="1rem" />
+								</ButtonIcon>
+							)}
+						</Dialog.Title>
+					)}
+					<main className="h-[calc(100%_-_48px)] dark:bg-gray-800 py-2">
+						<BoxScroll className="px-6">{children}</BoxScroll>
+					</main>
+				</Dialog.Content>
 			</Dialog.Portal>
 		</Dialog.Root>
 	);

@@ -15,7 +15,6 @@
   },
   "dependencies": {
     "@faker-js/faker": "^7.6.0",
-    "@headlessui/react": "^1.7.7",
     "@radix-ui/react-checkbox": "^1.0.1",
     "@radix-ui/react-collapsible": "^1.0.1",
     "@radix-ui/react-dialog": "^1.0.2",
@@ -27,12 +26,14 @@
     "@tanstack/react-table": "^8.7.9",
     "@tanstack/react-virtual": "^3.0.0-beta.39",
     "clsx": "^1.2.1",
-    "framer-motion": "^10.0.1",
+    "date-fns": "^2.30.0",
+    "framer-motion": "^10.10.0",
     "html2canvas": "^1.4.1",
     "i18next": "^22.4.9",
     "i18next-browser-languagedetector": "^7.0.1",
     "jspdf": "^2.5.1",
     "jstoxml": "^3.2.6",
+    "nuka-carousel": "^5.5.1",
     "react": "^18.2.0",
     "react-beautiful-dnd": "^13.1.1",
     "react-datepicker": "^4.8.0",
@@ -43,7 +44,9 @@
     "react-select": "^5.7.0",
     "react-syntax-highlighter": "^15.5.0",
     "react-to-print": "^2.14.11",
-    "xlsx-js-style": "^1.2.0"
+    "xlsx-js-style": "^1.2.0",
+    "zukeeper": "^1.0.2",
+    "zustand": "^4.3.8"
   },
   "devDependencies": {
     "@rollup/plugin-image": "^2.1.1",
@@ -63,8 +66,8 @@
     "@types/react-syntax-highlighter": "^15.5.4",
     "@typescript-eslint/eslint-plugin": "^5.32.0",
     "@vitejs/plugin-react": "^2.0.0",
-    "@vitest/coverage-c8": "^0.26.3",
-    "@vitest/ui": "^0.24.3",
+    "@vitest/coverage-c8": "^0.31.2",
+    "@vitest/ui": "^0.31.2",
     "autoprefixer": "^10.4.8",
     "eslint": "^8.21.0",
     "eslint-config-airbnb": "^19.0.4",
@@ -89,6 +92,6 @@
     "typescript": "^4.6.4",
     "vite": "^3.0.0",
     "vite-plugin-pages": "^0.25.0",
-    "vitest": "^0.23.4"
+    "vitest": "^0.31.2"
   }
 }

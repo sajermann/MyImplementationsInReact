@@ -1,5 +1,5 @@
 /* eslint-disable react/button-has-type */
-import { toast, useToasterStore } from 'react-hot-toast';
+import { toast } from 'react-hot-toast';
 
 import { Icons } from '~/Components/Icons';
 import { managerClassNames } from '~/Utils/ManagerClassNames';
@@ -11,7 +11,6 @@ type Props = {
 };
 
 export function useToast() {
-	const { toasts, pausedAt } = useToasterStore();
 	const duration = 3000;
 
 	function customToast({ type, msg, enableProgress }: Props) {

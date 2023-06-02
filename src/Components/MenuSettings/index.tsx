@@ -9,6 +9,7 @@ import { Main } from '~/Components/Main';
 import { SwitchTheme } from '~/Components/SwitchTheme';
 import { SwitchLanguage } from '~/Components/SwitchLanguage';
 import { ButtonIcon } from '../ButtonIcon';
+import { SwitchAccessibility } from '../SwitchAccessibility';
 
 export default function MenuSettings() {
 	const [isOpen, setIsOpen] = useState(false);
@@ -43,6 +44,7 @@ export default function MenuSettings() {
 						<SwitchTheme />
 
 						<SwitchLanguage />
+						<SwitchAccessibility />
 					</div>
 				</Main>
 			</Drawer>

@@ -3,13 +3,8 @@ import { toXML } from 'jstoxml';
 import { jsPDF as JsPdf } from 'jspdf';
 import html2canvas from 'html2canvas';
 
-import {
-	TDefXlsx,
-	TCellProps,
-	TDefPrintPdfPng,
-	TDefCsv,
-	TDefXml,
-} from '~/Types/TExport';
+import { TDefXlsx, TDefPrintPdfPng, TDefCsv, TDefXml } from '~/Types/TExport';
+import { buildTable } from './BuildTable';
 
 function download(blob: Blob | string, extension: string) {
 	const link = document.createElement('a');
@@ -42,99 +37,6 @@ type PropsPrint<T> = {
 	data: T[];
 	defColumns: TDefPrintPdfPng<T>[];
 };
-
-function buildTable<T>({ data, defColumns }: PropsPrint<T>) {
-	const headerTemp: Record<string, unknown>[] = [];
-	const dataTemp: Record<string, unknown>[][] = [];
-
-	// Add Header
-	for (let i = 0; i < defColumns.length; i += 1) {
-		headerTemp.push({
-			value: defColumns[i].header,
-			align: defColumns[i].align,
-		});
-	}
-
-	// Add Rows
-	for (let i = 0; i < data.length; i += 1) {
-		const rowTemp: Record<string, unknown>[] = [];
-		for (const defCol of defColumns) {
-			const value = defCol.accessorFn
-				? defCol.accessorFn({
-						valueCell: data[i][defCol.accessor],
-						row: data[i],
-						original: data,
-						index: i,
-				  })
-				: data[i][defCol.accessor];
-			rowTemp.push({
-				value,
-				align: defCol.align,
-				cellRender: defCol.cellRender,
-			});
-		}
-		dataTemp.push(rowTemp);
-	}
-
-	// Mount HTML
-	const table = document.createElement('table');
-	table.setAttribute(
-		'style',
-		'border-collapse: collapse; width: 100%; color: black'
-	);
-
-	// Build THead
-	const thead = document.createElement('thead');
-	const trHead = document.createElement('tr');
-	trHead.setAttribute('style', 'border-bottom: 1px solid black; ');
-	for (const header of headerTemp) {
-		const th = document.createElement('th');
-		th.setAttribute(
-			'style',
-			`padding: 8px; text-align:${header.align || 'left'}`
-		);
-		th.textContent = header.value as string;
-		trHead.appendChild(th);
-	}
-	thead.appendChild(trHead);
-
-	// Build TBody
-	const tbody = document.createElement('tbody');
-	for (const [indexRow, row] of dataTemp.entries()) {
-		const trBody = document.createElement('tr');
-		trBody.setAttribute(
-			'style',
-			'border-bottom: 1px solid black; padding: 4px'
-		);
-		for (const cell of row) {
-			const { cellRender } = cell as unknown as {
-				cellRender: (dataForCellRender: TCellProps<T>) => string;
-			};
-			const td = document.createElement('td');
-			td.setAttribute(
-				'style',
-				`padding: 8px; text-align:${cell.align || 'left'}`
-			);
-
-			if (cellRender) {
-				td.innerHTML = cellRender({
-					valueCell: cell.value,
-					row: data[indexRow],
-					original: data,
-					index: indexRow,
-				});
-			} else {
-				td.textContent = cell.value as string;
-			}
-			trBody.appendChild(td);
-		}
-		tbody.appendChild(trBody);
-	}
-	table.appendChild(thead);
-	table.appendChild(tbody);
-
-	return table;
-}
 
 function excel<T>({ data, defColumns }: PropsXlsx<T>) {
 	const headerTemp: Record<string, unknown>[] = [];

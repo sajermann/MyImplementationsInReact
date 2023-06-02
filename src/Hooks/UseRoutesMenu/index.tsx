@@ -17,6 +17,10 @@ import { triRoutes as triRoutesMount } from '~/Utils/TriRoutes';
 import { menus as menusMount } from '~/Utils/Menus';
 import { PrintDemo } from '~/Components/Demos/Print';
 import { TableDemo } from '~/Components/Demos/Table';
+import { CarouselDemo } from '~/Components/Demos/Carousel';
+import { SearchBoxDemo } from '~/Components/Demos/SearchBox';
+import { AnimateInViewDemo } from '~/Components/Demos/AnimateInView';
+import { CalendarPickerDemo } from '~/Components/Demos/CalendarPicker';
 
 const ColumnVisibilityPage = lazy(() =>
 	import('~/Pages/Table/ColumnVisibility').then(
@@ -184,10 +188,38 @@ const PrintPage = lazy(() =>
 	}))
 );
 
+const CarouselPage = lazy(() =>
+	import('~/Pages/Carousel').then(({ CarouselPage: Carousel }) => ({
+		default: Carousel,
+	}))
+);
+
+const AnimateInViewPage = lazy(() =>
+	import('~/Pages/AnimateInViewPage').then(
+		({ AnimateInViewPage: AnimateInView }) => ({
+			default: AnimateInView,
+		})
+	)
+);
+
 const NotFoundPage = lazy(() =>
 	import('~/Pages/NotFound').then(({ NotFoundPage: NotFound }) => ({
 		default: NotFound,
 	}))
+);
+
+const SearchBoxPage = lazy(() =>
+	import('~/Pages/SearchBox').then(({ SearchBoxPage: SearchBox }) => ({
+		default: SearchBox,
+	}))
+);
+
+const CalendarPickerPage = lazy(() =>
+	import('~/Pages/CalendarPicker').then(
+		({ CalendarPickerPage: CalendarPicker }) => ({
+			default: CalendarPicker,
+		})
+	)
 );
 
 export function useRoutesMenu() {
@@ -454,6 +486,17 @@ export function useRoutesMenu() {
 				],
 			},
 			{
+				name: 'Search Box',
+				path: '/search-box',
+				implements_code:
+					'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Components/SearchBox',
+				docs_code:
+					'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/SearchBox',
+				element: <SearchBoxPage />,
+				label: translate('SEARCH_BOX'),
+				demo: <SearchBoxDemo />,
+			},
+			{
 				name: 'Toast',
 				path: '/toast',
 				implements_code:
@@ -474,6 +517,41 @@ export function useRoutesMenu() {
 				element: <PrintPage />,
 				label: translate('PRINT'),
 				demo: <PrintDemo />,
+			},
+			{
+				name: 'Carousel',
+				path: '/carousel',
+				implements_code:
+					'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Components/Carousel',
+				docs_code:
+					'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/Carousel',
+				element: <CarouselPage />,
+				label: translate('CAROUSEL'),
+				demo: <CarouselDemo />,
+			},
+			{
+				name: 'Animate In View',
+				path: '/animate-in-view',
+				implements_code:
+					'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Components/AnimateInView',
+				docs_code:
+					'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/AnimateInView',
+				element: <AnimateInViewPage />,
+				label: translate('ANIMATE_IN_VIEW'),
+				demo: <AnimateInViewDemo />,
+			},
+			{
+				name: 'Calendar Picker',
+				path: '/calendar-picker',
+				implements_code:
+					'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Components/CalendarPicker',
+				docs_code:
+					'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/CalendarPicker',
+				element: <CalendarPickerPage />,
+				label: translate('CALENDAR_PICKER'),
+				demo: <CalendarPickerDemo />,
+				className:
+					'col-span-12 sm:!col-span-12 lg:!col-span-8 xl:!col-span-6 h-[30rem] md:row-span-2 md:h-[40rem]',
 			},
 			{
 				name: 'NotFound',

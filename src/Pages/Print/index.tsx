@@ -12,6 +12,34 @@ import { QuickAccessGithub } from '~/Components/QuickAccessGithub';
 import { usePrinter } from '~/Hooks/UsePrinter';
 import { ToPrint } from '~/Components/ToPrint';
 
+function Card({
+	title,
+	data,
+	roleUser,
+}: {
+	title: string;
+	data: TPerson[];
+	roleUser: string;
+}) {
+	const { translate } = useTranslation();
+
+	const active = `${data.length} (${data.filter(row => row.isActive).length}`;
+	const comum = `${data.filter(row => row.role === roleUser).length} (${
+		data.filter(row => row.role === roleUser && row.isActive).length
+	}`;
+	return (
+		<div className="col-span-3 ">
+			<div className="bg-dark-700 font-bold text-center">
+				{translate(title)}
+			</div>
+			<div className="text-center">
+				{roleUser === 'IsActive' ? active : comum}
+				{translate('ACTIVES')})
+			</div>
+		</div>
+	);
+}
+
 export function PrintPage() {
 	const { isPrinting, componentRef, handlePreparePrint } = usePrinter();
 	const { translate } = useTranslation();
@@ -51,57 +79,13 @@ export function PrintPage() {
 								{translate('INFOS')}
 							</h1>
 
-							<div className="col-span-3 ">
-								<div className="bg-dark-700 font-bold text-center">
-									{translate('RECORDS')}
-								</div>
-								<div className="text-center">
-									{data.length} ({data.filter(row => row.isActive).length}{' '}
-									{translate('ACTIVES')})
-								</div>
-							</div>
+							<Card title="RECORDS" data={data} roleUser="IsActive" />
 
-							<div className="col-span-3">
-								<div className="bg-dark-700 font-bold text-center">
-									{translate('ADMIN_ROLE')}
-								</div>
-								<div className="text-center">
-									{data.filter(row => row.role === 'Admin').length} (
-									{
-										data.filter(row => row.role === 'Admin' && row.isActive)
-											.length
-									}{' '}
-									{translate('ACTIVES')})
-								</div>
-							</div>
+							<Card title="ADMIN_ROLE" data={data} roleUser="Admin" />
 
-							<div className="col-span-3">
-								<div className="bg-dark-700 font-bold text-center">
-									{translate('DEV_ROLE')}
-								</div>
-								<div className="text-center">
-									{data.filter(row => row.role === 'Dev').length} (
-									{
-										data.filter(row => row.role === 'Dev' && row.isActive)
-											.length
-									}{' '}
-									{translate('ACTIVES')})
-								</div>
-							</div>
+							<Card title="DEV_ROLE" data={data} roleUser="Dev" />
 
-							<div className="col-span-3">
-								<div className="bg-dark-700 font-bold text-center">
-									{translate('USER_ROLE')}
-								</div>
-								<div className="text-center">
-									{data.filter(row => row.role === 'User').length} (
-									{
-										data.filter(row => row.role === 'User' && row.isActive)
-											.length
-									}{' '}
-									{translate('ACTIVES')})
-								</div>
-							</div>
+							<Card title="USER_ROLE" data={data} roleUser="User" />
 						</div>
 						<Table
 							height={isPrinting ? '100%' : undefined}

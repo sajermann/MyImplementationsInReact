@@ -8,12 +8,12 @@ import { PrintDemo } from '.';
 
 describe('Components/Demos/PrintDemo', () => {
 	it(`must open Modal`, async () => {
-		const { getByText } = render(
+		const { getAllByText } = render(
 			<InjectorProviders>
 				<PrintDemo />
 			</InjectorProviders>
 		);
-		const button = await getByText('Print');
-		fireEvent.click(button);
+		const button = await getAllByText('Print');
+		fireEvent.click(button[0]);
 	});
 });

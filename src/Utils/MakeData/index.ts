@@ -81,6 +81,91 @@ function person(...lens: number[]) {
 	return makeDataLevel();
 }
 
+function countries() {
+	return [
+		{
+			id: 1,
+			name: 'China',
+		},
+		{
+			id: 2,
+			name: 'India',
+		},
+		{
+			id: 3,
+			name: 'United States',
+		},
+		{
+			id: 4,
+			name: 'Indonesia',
+		},
+		{
+			id: 5,
+			name: 'Pakistan',
+		},
+		{
+			id: 6,
+			name: 'Brazil',
+		},
+		{
+			id: 7,
+			name: 'Nigeria',
+		},
+		{
+			id: 8,
+			name: 'Bangladesh',
+		},
+		{
+			id: 9,
+			name: 'Ukraine',
+		},
+		{
+			id: 10,
+			name: 'Mexico',
+		},
+		{
+			id: 11,
+			name: 'Japan',
+		},
+		{
+			id: 12,
+			name: 'Ethiopia',
+		},
+		{
+			id: 13,
+			name: 'Philippines',
+		},
+		{
+			id: 14,
+			name: 'Egypt',
+		},
+		{
+			id: 15,
+			name: 'Vietnam',
+		},
+		{
+			id: 16,
+			name: 'South Africa',
+		},
+		{
+			id: 17,
+			name: 'Turkey',
+		},
+		{
+			id: 18,
+			name: 'Iran',
+		},
+		{
+			id: 19,
+			name: 'Germany',
+		},
+		{
+			id: 20,
+			name: 'Thailand',
+		},
+	];
+}
+
 type Props = {
 	pageSize: number;
 };
@@ -96,4 +181,10 @@ const random = {
 	number,
 };
 
-export const makeData = { random, vehicles, person, personWithPagination };
+export const makeData = {
+	random,
+	vehicles,
+	person,
+	personWithPagination,
+	countries,
+};
