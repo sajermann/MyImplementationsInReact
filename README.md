@@ -20,6 +20,10 @@ Rate my implements or say hello in Linkedin 😀
 - [x] Toast - With &nbsp;[react-hot-toast](https://www.npmjs.com/package/react-hot-toast)
 - [x] Print - With &nbsp;[react-to-print](https://www.npmjs.com/package/react-to-print)
 - [x] Drawer - Without third party
+- [x] Searchbox - Without third party
+- [x] Calendar Picker - With &nbsp;[nuka-carousel](https://www.npmjs.com/package/date-fns)
+- [x] Nuka Carousel - With &nbsp;[nuka-carousel](https://www.npmjs.com/package/nuka-carousel)
+- [x] Animate In View - With &nbsp;[framer-motion](https://www.npmjs.com/package/framer-motion)
 - [x] Table - With &nbsp;[@tanstack/react-table](https://www.npmjs.com/package/@tanstack/react-table)
     - [x] Filter
     - [x] Selection
