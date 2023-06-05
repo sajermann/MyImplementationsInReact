@@ -40,7 +40,7 @@ export const QuickAccessGithub = memo(({ name, disableBgColor }: Props) => {
 				className={getClassNames(disableBgColor)}
 				rel="noreferrer"
 			>
-				<Icons.ListFile width="30px" />
+				<Icons nameIcon="ListFile" width="30px" />
 				Impl Code
 			</a>
 			<a
@@ -49,7 +49,7 @@ export const QuickAccessGithub = memo(({ name, disableBgColor }: Props) => {
 				className={getClassNames(disableBgColor)}
 				rel="noreferrer"
 			>
-				<Icons.ShortList width="30px" />
+				<Icons nameIcon="ShortList" width="30px" />
 				Docs Code
 			</a>
 		</>

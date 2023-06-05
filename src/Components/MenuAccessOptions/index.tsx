@@ -50,8 +50,8 @@ function buildTrigger({
 	...rest
 }: { isOpen: boolean; onClick: () => void } & TRoutesMenu) {
 	const IS_OPEN: Record<string, React.ReactNode> = {
-		true: <Icons.ArrowSingleDown width="20" />,
-		false: <Icons.ArrowSingleRight width="20" />,
+		true: <Icons nameIcon="ArrowSingleDown" width="20" />,
+		false: <Icons nameIcon="ArrowSingleRight" width="20" />,
 	};
 	return (
 		<div className="flex items-center justify-between w-full">
@@ -114,7 +114,7 @@ export default function MenuAccessOptions() {
 	return (
 		<>
 			<HeaderButton onClick={() => setIsOpen(!isOpen)}>
-				<Icons.List width="22px" />
+				<Icons nameIcon="List" width="22px" />
 			</HeaderButton>
 			<Drawer
 				openFrom="left"
@@ -155,9 +155,9 @@ export default function MenuAccessOptions() {
 									}}
 								>
 									{isVisibleSearch ? (
-										<Icons.Close width="22" />
+										<Icons nameIcon="Close" width="22" />
 									) : (
-										<Icons.Search width="22" />
+										<Icons nameIcon="Search" width="22" />
 									)}
 								</HeaderButton>
 							</div>

@@ -50,7 +50,12 @@ export const Input = forwardRef((props: Props, ref) => {
 					onChange={onChange}
 				/>
 				{isLoading && (
-					<Icons.LoadingCircle width="20px" height="20px" color="#44659d" />
+					<Icons
+						nameIcon="LoadingCircle"
+						width="20px"
+						height="20px"
+						color="#44659d"
+					/>
 				)}
 			</div>
 		</div>

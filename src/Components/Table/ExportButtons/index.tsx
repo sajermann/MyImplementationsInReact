@@ -24,7 +24,7 @@ export function ExportButtons<T>({ tools, table }: Props<T>) {
 						})
 					}
 					title={translate('EXPORT_TO_PRINTER')}
-					startIcon={<Icons.Printer />}
+					startIcon={<Icons nameIcon="Printer" />}
 				/>
 			)}
 
@@ -37,7 +37,7 @@ export function ExportButtons<T>({ tools, table }: Props<T>) {
 						})
 					}
 					title={translate('EXPORT_TO_PDF')}
-					startIcon={<Icons.Pdf />}
+					startIcon={<Icons nameIcon="Pdf" />}
 				/>
 			)}
 
@@ -50,7 +50,7 @@ export function ExportButtons<T>({ tools, table }: Props<T>) {
 						})
 					}
 					title={translate('EXPORT_TO_PNG')}
-					startIcon={<Icons.Png />}
+					startIcon={<Icons nameIcon="Png" />}
 				/>
 			)}
 
@@ -63,7 +63,7 @@ export function ExportButtons<T>({ tools, table }: Props<T>) {
 						})
 					}
 					title={translate('EXPORT_TO_XLS')}
-					startIcon={<Icons.Xls />}
+					startIcon={<Icons nameIcon="Xls" />}
 				/>
 			)}
 
@@ -76,7 +76,7 @@ export function ExportButtons<T>({ tools, table }: Props<T>) {
 							delimiter: ',',
 						})
 					}
-					startIcon={<Icons.Csv />}
+					startIcon={<Icons nameIcon="Csv" />}
 					title={translate('EXPORT_TO_CSV')}
 				/>
 			)}
@@ -89,7 +89,7 @@ export function ExportButtons<T>({ tools, table }: Props<T>) {
 							defColumns: tools?.defForXml || [],
 						})
 					}
-					startIcon={<Icons.Xml />}
+					startIcon={<Icons nameIcon="Xml" />}
 					title={translate('EXPORT_TO_XML')}
 				/>
 			)}

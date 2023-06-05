@@ -21,7 +21,7 @@ export function SwitchLanguage() {
 					}
 				>
 					<div className="w-10">
-						<Icons.Eua />
+						<Icons nameIcon="Eua" />
 					</div>
 					{translate('ENGLISH')}
 				</button>
@@ -40,7 +40,7 @@ export function SwitchLanguage() {
 					}
 				>
 					<div className="w-10">
-						<Icons.Brazil />
+						<Icons nameIcon="Brazil" />
 					</div>
 					{translate('PORTUGUESE')}
 				</button>

@@ -124,12 +124,12 @@ export function Checkbox({
 				<CheckboxRadix.Indicator>
 					{situation === 'indeterminate' && (
 						<Container>
-							<Icons.Indeterminate color="#fff" />
+							<Icons nameIcon="Indeterminate" color="#fff" />
 						</Container>
 					)}
 					{situation === 'checked' && (
 						<Container>
-							<Icons.Checked color="#fff" />
+							<Icons nameIcon="Checked" color="#fff" />
 						</Container>
 					)}
 				</CheckboxRadix.Indicator>

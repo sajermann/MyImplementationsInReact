@@ -29,10 +29,10 @@ export function useToast() {
 		};
 
 		const icons = {
-			info: <Icons.Info />,
-			success: <Icons.Checked />,
-			error: <Icons.Error />,
-			warning: <Icons.Info />,
+			info: <Icons nameIcon="Info" />,
+			success: <Icons nameIcon="Checked" />,
+			error: <Icons nameIcon="Error" />,
+			warning: <Icons nameIcon="Info" />,
 		};
 
 		return toast.custom(
@@ -72,7 +72,7 @@ export function useToast() {
 									...commonsType,
 								})}
 							>
-								<Icons.Close />
+								<Icons nameIcon="Close" />
 							</button>
 						</div>
 					</div>
