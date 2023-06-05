@@ -41,7 +41,7 @@ export function CodeBlock({ children, language }: Props) {
 							fullIcon: true,
 						},
 					}}
-					endIcon={<Icons.ClipboardText color="#fff" />}
+					endIcon={<Icons nameIcon="ClipboardText" color="#fff" />}
 				/>
 			</div>
 			<SyntaxHighlighter language={language || 'jsx'} style={dracula}>

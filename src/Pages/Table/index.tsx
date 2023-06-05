@@ -57,7 +57,7 @@ export function TablePage() {
 								<div className="flex w-full flex-1 items-center justify-center">
 									<div className="flex-1 ml-2">{opt.label}</div>
 									<Link to={opt.path} className={LINK_CLASS}>
-										<Icons.Eye width="30px" />
+										<Icons nameIcon="Eye" width="30px" />
 										Demo
 									</Link>
 									<QuickAccessGithub name={opt.name} disableBgColor />

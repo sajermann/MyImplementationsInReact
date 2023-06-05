@@ -96,22 +96,22 @@ export function ButtonPage() {
 					<Button
 						className={styles.btn}
 						colorStyle="Success"
-						startIcon={<Icons.WhatsappLogo width="30px" />}
+						startIcon={<Icons nameIcon="WhatsappLogo" width="30px" />}
 					>
 						Whats
 					</Button>
 					<Button
 						className={styles.btn}
 						colorStyle="Primary"
-						endIcon={<Icons.TelegramLogo width="30px" />}
+						endIcon={<Icons nameIcon="TelegramLogo" width="30px" />}
 					>
 						Telegram
 					</Button>
 					<Button
 						className={styles.btn}
 						colorStyle="Secondary"
-						startIcon={<Icons.YoutubeLogo width="30px" />}
-						endIcon={<Icons.YoutubeLogo width="30px" />}
+						startIcon={<Icons nameIcon="YoutubeLogo" width="30px" />}
+						endIcon={<Icons nameIcon="YoutubeLogo" width="30px" />}
 					>
 						Youtube
 					</Button>
@@ -230,14 +230,14 @@ export function ButtonPage() {
 								successOptions: {
 									success,
 									customIcon: (
-										<Icons.TrendUp>
+										<Icons nameIcon="TrendUp">
 											<animate
 												attributeName="opacity"
 												values="0;1;0"
 												dur="1s"
 												repeatCount="indefinite"
 											/>
-										</Icons.TrendUp>
+										</Icons>
 									),
 								},
 							}}
@@ -295,14 +295,14 @@ export function ButtonPage() {
 								failedOptions: {
 									failed,
 									customIcon: (
-										<Icons.TrendDown>
+										<Icons nameIcon="TrendDown">
 											<animate
 												attributeName="opacity"
 												values="0;1;0"
 												dur="1s"
 												repeatCount="indefinite"
 											/>
-										</Icons.TrendDown>
+										</Icons>
 									),
 								},
 							}}
@@ -389,7 +389,7 @@ export function ButtonPage() {
 									success: true,
 								},
 							}}
-							endIcon={<Icons.WhatsappLogo width="30px" />}
+							endIcon={<Icons nameIcon="WhatsappLogo" width="30px" />}
 						/>
 						<Button
 							style={{ minWidth: '50px', height: '50px' }}
@@ -406,7 +406,7 @@ export function ButtonPage() {
 									success,
 								},
 							}}
-							endIcon={<Icons.YoutubeLogo width="30px" />}
+							endIcon={<Icons nameIcon="YoutubeLogo" width="30px" />}
 						/>
 						<Button
 							style={{ minWidth: '50px', height: '50px', borderRadius: '50%' }}
@@ -423,7 +423,7 @@ export function ButtonPage() {
 									success,
 								},
 							}}
-							endIcon={<Icons.TelegramLogo width="30px" />}
+							endIcon={<Icons nameIcon="TelegramLogo" width="30px" />}
 						/>
 					</ComponentBlock>
 				</div>

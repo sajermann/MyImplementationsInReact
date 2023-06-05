@@ -54,7 +54,7 @@ export function Home() {
 
 								<footer className="border-t-2 flex !bg-dark-700">
 									<Link to={opt.path} className={LINK_CLASS}>
-										<Icons.Eye width="30px" />
+										<Icons nameIcon="Eye width="30px" />
 										Demo
 									</Link>
 									<QuickAccessGithub name={opt.name} />
@@ -90,7 +90,7 @@ export function Home() {
 
 								<footer className="border-t-2 flex !bg-dark-700">
 									<Link to={opt.path} className={LINK_CLASS}>
-										<Icons.Eye width="30px" />
+										<Icons nameIcon="Eye" width="30px" />
 										Demo
 									</Link>
 									<QuickAccessGithub name={opt.name} />

@@ -42,7 +42,7 @@ export function FilterId({ column }: { column: Column<TPerson, string> }) {
 					type="button"
 					onClick={() => setIsOpen(true)}
 				>
-					<Icons.Funnel fullFill={verifyFillFilter()} />
+					<Icons nameIcon="Funnel" fullFill={verifyFillFilter()} />
 				</button>
 			}
 		>
@@ -77,7 +77,7 @@ export function FilterId({ column }: { column: Column<TPerson, string> }) {
 							setSelectType('');
 							setFilterValue('');
 						}}
-						endIcon={<Icons.Trash />}
+						endIcon={<Icons nameIcon="Trash" />}
 					/>
 
 					<Button
@@ -89,7 +89,7 @@ export function FilterId({ column }: { column: Column<TPerson, string> }) {
 							column.setFilterValue([selectType, filterValue]);
 							setIsOpen(false);
 						}}
-						endIcon={<Icons.Save />}
+						endIcon={<Icons nameIcon="Save" />}
 					/>
 				</div>
 			</>

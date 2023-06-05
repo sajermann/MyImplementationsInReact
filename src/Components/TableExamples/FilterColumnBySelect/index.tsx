@@ -45,7 +45,7 @@ export function FilterColumnBySelect({ column, table, propForFilter }: Props2) {
 					type="button"
 					onClick={() => setIsOpen(true)}
 				>
-					<Icons.Funnel fullFill={verifyFillFilter()} />
+					<Icons nameIcon="Funnel" fullFill={verifyFillFilter()} />
 				</button>
 			}
 		>
@@ -73,7 +73,7 @@ export function FilterColumnBySelect({ column, table, propForFilter }: Props2) {
 						onClick={() => {
 							setFilterValue([]);
 						}}
-						endIcon={<Icons.Trash />}
+						endIcon={<Icons nameIcon="Trash" />}
 					/>
 
 					<Button
@@ -85,7 +85,7 @@ export function FilterColumnBySelect({ column, table, propForFilter }: Props2) {
 							column.setFilterValue(filterValue);
 							setIsOpen(false);
 						}}
-						endIcon={<Icons.Save />}
+						endIcon={<Icons nameIcon="Save" />}
 					/>
 				</div>
 			</>

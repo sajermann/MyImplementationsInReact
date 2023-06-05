@@ -35,7 +35,7 @@ export function FilterBirthday({
 					type="button"
 					onClick={() => setIsOpen(true)}
 				>
-					<Icons.Funnel fullFill={verifyFillFilter()} />
+					<Icons nameIcon="Funnel" fullFill={verifyFillFilter()} />
 				</button>
 			}
 		>
@@ -72,7 +72,7 @@ export function FilterBirthday({
 						variant="Outlined"
 						type="button"
 						onClick={() => setDates({ from: '', to: '' })}
-						endIcon={<Icons.Trash />}
+						endIcon={<Icons nameIcon="Trash" />}
 					/>
 
 					<Button
@@ -84,7 +84,7 @@ export function FilterBirthday({
 							column.setFilterValue(dates);
 							setIsOpen(false);
 						}}
-						endIcon={<Icons.Save />}
+						endIcon={<Icons nameIcon="Save" />}
 					/>
 				</div>
 			</>

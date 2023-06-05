@@ -26,7 +26,7 @@ export function Popover({ children, isOpen, onClose, trigger }: Props) {
 							className="w-5 h-5 absolute top-3.5 right-3.5 inline-flex items-center justify-center rounded-full p-1 focus:outline-none focus-visible:ring focus-visible:ring-purple-500 focus-visible:ring-opacity-75"
 							aria-label="Close"
 						>
-							<Icons.Close />
+							<Icons nameIcon="Close" />
 						</PopoverRadix.Close>
 						<PopoverRadix.Arrow className="PopoverRadixArrow" />
 					</PopoverRadix.Content>

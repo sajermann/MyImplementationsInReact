@@ -86,11 +86,11 @@ export function useColumns(columnSizeDefault?: Record<string, number>) {
 				cell: ({ row }) =>
 					row.original.isActive ? (
 						<div className="flex items-center justify-center w-full h-6 text-green-500">
-							<Icons.Checked />
+							<Icons nameIcon="Checked" />
 						</div>
 					) : (
 						<div className="flex items-center justify-center w-full h-9 text-red-500">
-							<Icons.Error />
+							<Icons nameIcon="Error" />
 						</div>
 					),
 				enableResizing: false,

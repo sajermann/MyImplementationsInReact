@@ -15,10 +15,10 @@ export function WarningInfo({ type, msg }: Props) {
 	};
 
 	const icons = {
-		info: <Icons.Info />,
-		success: <Icons.Checked />,
-		error: <Icons.Error />,
-		warning: <Icons.Info />,
+		info: <Icons nameIcon="Info" />,
+		success: <Icons nameIcon="Checked" />,
+		error: <Icons nameIcon="Error" />,
+		warning: <Icons nameIcon="Info" />,
 	};
 
 	return (
