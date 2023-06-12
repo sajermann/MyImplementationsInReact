@@ -222,6 +222,12 @@ const CalendarPickerPage = lazy(() =>
 	)
 );
 
+const ChipPage = lazy(() =>
+	import('~/Pages/Chip').then(({ ChipPage: Chip }) => ({
+		default: Chip,
+	}))
+);
+
 export function useRoutesMenu() {
 	const { translate, currentLanguage } = useTranslation();
 	const location = useLocation();
@@ -550,6 +556,19 @@ export function useRoutesMenu() {
 				element: <CalendarPickerPage />,
 				label: translate('CALENDAR_PICKER'),
 				demo: <CalendarPickerDemo />,
+				className:
+					'col-span-12 sm:!col-span-12 lg:!col-span-8 xl:!col-span-6 h-[30rem] md:row-span-2 md:h-[40rem]',
+			},
+			{
+				name: 'Chip',
+				path: '/chip',
+				implements_code:
+					'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Components/Chip',
+				docs_code:
+					'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/Chip',
+				element: <ChipPage />,
+				label: 'Chip',
+				// demo: <ChipDemo />,
 				className:
 					'col-span-12 sm:!col-span-12 lg:!col-span-8 xl:!col-span-6 h-[30rem] md:row-span-2 md:h-[40rem]',
 			},

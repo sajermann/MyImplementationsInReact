@@ -1,5 +1,6 @@
 {
 	"translations": {
+		"IMPLEMENTS_CHIP": "Implements Chip",
 		"IMPLEMENTS_ANIMATE_IN_VIEW": "Implements Animate in View",
 		"RANGE_UNSTABLE": "Range - Unstable",
 		"NORMAL": "Normal",
