@@ -41,12 +41,22 @@ function change({ event, setValueEditing }: ChangeProps) {
 
 type KeyDownProps = {
 	event: KeyboardEvent<HTMLInputElement>;
-	setValueEditing: Dispatch<SetStateAction<string>>;
+	value: string;
+	valueEditing: string;
+	setEditing: Dispatch<SetStateAction<boolean>>;
+	onChange?: (oldValue: string, newValue: string) => void;
 };
-function keyDown(event: KeyboardEvent<HTMLInputElement>) {
-	if (event.key === ',' || event.key === 'Enter') {
+function keyDown({
+	event,
+	value,
+	valueEditing,
+	setEditing,
+	onChange,
+}: KeyDownProps) {
+	const keysToVerify = [',', 'Enter', 'Escape', 'Tab'];
+	if (keysToVerify.includes(event.key)) {
 		event.preventDefault();
-		console.log('aqui');
+		saveEditing({ value, valueEditing, setEditing, onChange });
 	}
 }
 
@@ -61,8 +71,6 @@ export function Chip({ value, onRemove, onChange }: ChipProps) {
 	const [editing, setEditing] = useState(false);
 	const [valueEditing, setValueEditing] = useState(value);
 
-	// criar funcao pra virgula ou enter ssalvar a edicao, e esc para cancelar
-
 	if (editing) {
 		return (
 			<div className="w-1 h-12 box-content">
@@ -75,7 +83,9 @@ export function Chip({ value, onRemove, onChange }: ChipProps) {
 						className="bg-slate-400 text-white outline-none p-2 absolute left-0 w-full rounded h-12"
 						value={editing ? valueEditing : value}
 						onChange={event => change({ event, setValueEditing })}
-						onKeyDown={keyDown}
+						onKeyDown={event =>
+							keyDown({ event, setEditing, value, valueEditing, onChange })
+						}
 						onBlur={() =>
 							saveEditing({ value, valueEditing, setEditing, onChange })
 						}
