@@ -74,7 +74,12 @@ export function Chip({ value, onRemove, onChange }: ChipProps) {
 	if (editing) {
 		return (
 			<div className="w-1 h-12 box-content">
-				<div className="relative w-min min-w-[1em]">
+				<div
+					className={managerClassNames([
+						{ 'relative w-min min-w-[1em] flex items-center': true },
+						{ 'pr-2': !!onRemove },
+					])}
+				>
 					<span className="invisible whitespace-pre p-2 h-12">
 						{editing ? valueEditing : value}
 					</span>
@@ -86,9 +91,13 @@ export function Chip({ value, onRemove, onChange }: ChipProps) {
 						onKeyDown={event =>
 							keyDown({ event, setEditing, value, valueEditing, onChange })
 						}
-						onBlur={() =>
-							saveEditing({ value, valueEditing, setEditing, onChange })
-						}
+						// onBlur={() =>
+						// 	saveEditing({ value, valueEditing, setEditing, onChange })
+						// }
+					/>
+					<ButtonRemove
+						show={!!onRemove}
+						onClick={() => onRemove && onRemove(value)}
 					/>
 				</div>
 			</div>
@@ -113,7 +122,7 @@ export function Chip({ value, onRemove, onChange }: ChipProps) {
 				if (onChange) setEditing(true);
 			}}
 		>
-			<span>{value}</span>
+			{!editing && <span>{value}</span>}
 
 			<ButtonRemove
 				show={!!onRemove}
