@@ -67,16 +67,17 @@ export function ChipPage() {
 			</Section>
 
 			<Section title={translate('CONTROLLED')} variant="h2">
-				<Section title={translate('SINGLE')} variant="h3">
+				<Section title={translate('EDITABLE')} variant="h3">
+					<span>{translate('EDITABLE_MODE_BY_CLICK')}</span>
 					<Chip value={valueChip1} onChange={(_, e) => setValueChip1(e)} />
 				</Section>
 
-				<Section title={translate('MULTI')} variant="h3">
+				<Section title={translate('CRUD')} variant="h3">
 					<div className="flex gap-2 items-center justify-center mb-2">
 						<Input
 							value={chipToAdd}
 							onChange={e => setChipToAdd(e.target.value)}
-							placeholder={translate('ADD_CHIP')}
+							placeholder={translate('CHIP_DESCRIPTION')}
 						/>
 						<Button
 							onClick={() => {
@@ -86,7 +87,36 @@ export function ChipPage() {
 							{translate('ADD')}
 						</Button>
 					</div>
-					<div className="flex gap-2">
+					<div className="flex gap-2 flex-wrap">
+						{chips.map(item => (
+							<Chip
+								key={item}
+								value={item}
+								onRemove={e => handleRemoveChip(e, setChips)}
+								onChange={(oldValue, newValue) =>
+									handleUpdateChip(oldValue, newValue, setChips)
+								}
+							/>
+						))}
+					</div>
+				</Section>
+
+				<Section title={translate('BOX_CHIPS_LIKE_YOUTUBE')} variant="h3">
+					<div className="flex gap-2 items-center justify-center mb-2">
+						<Input
+							value={chipToAdd}
+							onChange={e => setChipToAdd(e.target.value)}
+							placeholder={translate('CHIP_DESCRIPTION')}
+						/>
+						<Button
+							onClick={() => {
+								handleAddChip(chipToAdd, setChips, setChipToAdd);
+							}}
+						>
+							{translate('ADD')}
+						</Button>
+					</div>
+					<div className="flex gap-2 flex-wrap">
 						{chips.map(item => (
 							<Chip
 								key={item}

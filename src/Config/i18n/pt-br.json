@@ -1,5 +1,8 @@
 {
 	"translations": {
+		"CHIP_DESCRIPTION": "Descrição do Chip",
+		"CRUD": "Crud",
+		"EDITABLE_MODE_BY_CLICK": "Modo Editar por clique",
 		"IMPLEMENTS_CHIP": "Implementação do Chip",
 		"IMPLEMENTS_ANIMATE_IN_VIEW": "Implementação da Animação na Visualização",
 		"RANGE_UNSTABLE": "Range - Instável",

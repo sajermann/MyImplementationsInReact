@@ -48,7 +48,7 @@ const Section = memo(
 				</h2>
 			)}
 			{title && variant && <CustomHeading title={title} variant={variant} />}
-			<div>{children}</div>
+			{children}
 		</section>
 	)
 );

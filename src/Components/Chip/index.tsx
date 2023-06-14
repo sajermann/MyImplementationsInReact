@@ -73,33 +73,31 @@ export function Chip({ value, onRemove, onChange }: ChipProps) {
 
 	if (editing) {
 		return (
-			<div className="w-1 h-12 box-content">
-				<div
-					className={managerClassNames([
-						{ 'relative w-min min-w-[1em] flex items-center': true },
-						{ 'pr-2': !!onRemove },
-					])}
-				>
-					<span className="invisible whitespace-pre p-2 h-12">
-						{editing ? valueEditing : value}
-					</span>
-					<input
-						autoFocus
-						className="bg-slate-400 text-white outline-none p-2 absolute left-0 w-full rounded h-12"
-						value={editing ? valueEditing : value}
-						onChange={event => change({ event, setValueEditing })}
-						onKeyDown={event =>
-							keyDown({ event, setEditing, value, valueEditing, onChange })
-						}
-						// onBlur={() =>
-						// 	saveEditing({ value, valueEditing, setEditing, onChange })
-						// }
-					/>
-					<ButtonRemove
-						show={!!onRemove}
-						onClick={() => onRemove && onRemove(value)}
-					/>
-				</div>
+			<div
+				className={managerClassNames([
+					{ 'relative w-min min-w-[1em] flex items-center': true },
+					{ 'pr-2': !!onRemove },
+				])}
+			>
+				<span className="invisible whitespace-pre p-2 h-12">
+					{editing ? valueEditing : value}
+				</span>
+				<input
+					autoFocus
+					className="bg-slate-400 text-white outline-none p-2 absolute left-0 w-full rounded h-12 border"
+					value={editing ? valueEditing : value}
+					onChange={event => change({ event, setValueEditing })}
+					onKeyDown={event =>
+						keyDown({ event, setEditing, value, valueEditing, onChange })
+					}
+					onBlur={() =>
+						saveEditing({ value, valueEditing, setEditing, onChange })
+					}
+				/>
+				<ButtonRemove
+					show={!!onRemove}
+					onClick={() => onRemove && onRemove(value)}
+				/>
 			</div>
 		);
 	}
