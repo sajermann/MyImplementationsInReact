@@ -229,6 +229,12 @@ const ChipPage = lazy(() =>
 	}))
 );
 
+const DragAndDropPage = lazy(() =>
+	import('~/Pages/DragAndDrop').then(({ DragAndDropPage: DragAndDrop }) => ({
+		default: DragAndDrop,
+	}))
+);
+
 export function useRoutesMenu() {
 	const { translate, currentLanguage } = useTranslation();
 	const location = useLocation();
@@ -570,6 +576,17 @@ export function useRoutesMenu() {
 				element: <ChipPage />,
 				label: 'Chip',
 				demo: <ChipDemo />,
+			},
+			{
+				name: 'DragAndDrop',
+				path: '/drag-and-drop',
+				implements_code:
+					'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Components/DragAndDrop',
+				docs_code:
+					'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/DragAndDrop',
+				element: <DragAndDropPage />,
+				label: 'DND',
+				// demo: <ChipDemo />,
 			},
 			{
 				name: 'NotFound',
