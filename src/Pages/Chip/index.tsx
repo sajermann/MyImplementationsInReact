@@ -1,9 +1,15 @@
+import {
+	Dispatch,
+	SetStateAction,
+	useRef,
+	useState,
+	KeyboardEvent,
+} from 'react';
 import { useTranslation } from '~/Hooks/UseTranslation';
 import { Main } from '~/Components/Main';
 import Section from '~/Components/Section';
 import { QuickAccessGithub } from '~/Components/QuickAccessGithub';
 import { Chip } from '~/Components/Chip';
-import { Dispatch, SetStateAction, useState } from 'react';
 import { Input } from '~/Components/Input';
 import { Button } from '~/Components/Button';
 
@@ -41,11 +47,39 @@ function handleUpdateChip(
 	});
 }
 
+type KeyDownYoutubeProps = {
+	event: KeyboardEvent<HTMLInputElement>;
+	valueYoutube: string;
+	setChipsYoutube: Dispatch<SetStateAction<string[]>>;
+	setValueYoutube: Dispatch<SetStateAction<string>>;
+};
+function keyDownYoutube({
+	event,
+	valueYoutube,
+	setChipsYoutube,
+	setValueYoutube,
+}: KeyDownYoutubeProps) {
+	if (event.key === 'Backspace' && valueYoutube.trim() === '') {
+		console.log('TODO: Ativar Edição Por Backspace');
+	}
+	if (
+		(event.key === ',' || event.key === 'Enter') &&
+		valueYoutube.trim() !== ''
+	) {
+		event.preventDefault();
+		setChipsYoutube(prev => [...prev, valueYoutube.trim()]);
+		setValueYoutube('');
+	}
+}
+
 export function ChipPage() {
 	const { translate } = useTranslation();
 	const [valueChip1, setValueChip1] = useState('React');
 	const [chipToAdd, setChipToAdd] = useState('');
 	const [chips, setChips] = useState<string[]>([]);
+	const [valueYoutube, setValueYoutube] = useState('');
+	const [chipsYoutube, setChipsYoutube] = useState<string[]>([]);
+	const inputRef = useRef<HTMLInputElement>(null);
 
 	return (
 		<Main data-content="content-main">
@@ -101,32 +135,40 @@ export function ChipPage() {
 					</div>
 				</Section>
 
-				<Section title={translate('BOX_CHIPS_LIKE_YOUTUBE')} variant="h3">
-					<div className="flex gap-2 items-center justify-center mb-2">
-						<Input
-							value={chipToAdd}
-							onChange={e => setChipToAdd(e.target.value)}
-							placeholder={translate('CHIP_DESCRIPTION')}
-						/>
-						<Button
-							onClick={() => {
-								handleAddChip(chipToAdd, setChips, setChipToAdd);
-							}}
-						>
-							{translate('ADD')}
-						</Button>
-					</div>
-					<div className="flex gap-2 flex-wrap">
-						{chips.map(item => (
+				<Section title={translate('BOX_CHIPS_LIKE_TAGS_YOUTUBE')} variant="h3">
+					<div className="flex gap-2 items-center flex-wrap p-2 border bg-slate-900 rounded">
+						{chipsYoutube.map(tag => (
 							<Chip
-								key={item}
-								value={item}
-								onRemove={e => handleRemoveChip(e, setChips)}
+								key={tag}
+								value={tag}
 								onChange={(oldValue, newValue) =>
-									handleUpdateChip(oldValue, newValue, setChips)
+									handleUpdateChip(oldValue, newValue, setChipsYoutube)
 								}
+								onRemove={e => handleRemoveChip(e, setChipsYoutube)}
 							/>
 						))}
+
+						<input
+							className="p-2 outline-none overflow-hidden bg-slate-900 text-white flex-1 min-w-[30px]"
+							ref={inputRef}
+							value={valueYoutube}
+							onChange={event => {
+								setValueYoutube(event.target.value);
+							}}
+							onKeyDown={event =>
+								keyDownYoutube({
+									event,
+									setChipsYoutube,
+									setValueYoutube,
+									valueYoutube,
+								})
+							}
+							onBlur={() => {
+								if (valueYoutube === '') return;
+								setChipsYoutube(prev => [...prev, valueYoutube.trim()]);
+								setValueYoutube('');
+							}}
+						/>
 					</div>
 				</Section>
 			</Section>

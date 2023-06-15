@@ -21,6 +21,7 @@ import { CarouselDemo } from '~/Components/Demos/Carousel';
 import { SearchBoxDemo } from '~/Components/Demos/SearchBox';
 import { AnimateInViewDemo } from '~/Components/Demos/AnimateInView';
 import { CalendarPickerDemo } from '~/Components/Demos/CalendarPicker';
+import { ChipDemo } from '~/Components/Demos/Chip';
 
 const ColumnVisibilityPage = lazy(() =>
 	import('~/Pages/Table/ColumnVisibility').then(
@@ -568,9 +569,7 @@ export function useRoutesMenu() {
 					'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/Chip',
 				element: <ChipPage />,
 				label: 'Chip',
-				// demo: <ChipDemo />,
-				className:
-					'col-span-12 sm:!col-span-12 lg:!col-span-8 xl:!col-span-6 h-[30rem] md:row-span-2 md:h-[40rem]',
+				demo: <ChipDemo />,
 			},
 			{
 				name: 'NotFound',

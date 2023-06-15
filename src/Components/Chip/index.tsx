@@ -39,24 +39,51 @@ function change({ event, setValueEditing }: ChangeProps) {
 	setValueEditing(value);
 }
 
-type KeyDownProps = {
+type KeyDownInputProps = {
 	event: KeyboardEvent<HTMLInputElement>;
 	value: string;
 	valueEditing: string;
 	setEditing: Dispatch<SetStateAction<boolean>>;
 	onChange?: (oldValue: string, newValue: string) => void;
 };
-function keyDown({
+function keyDownInput({
 	event,
 	value,
 	valueEditing,
 	setEditing,
 	onChange,
-}: KeyDownProps) {
+}: KeyDownInputProps) {
 	const keysToVerify = [',', 'Enter', 'Escape', 'Tab'];
 	if (keysToVerify.includes(event.key)) {
 		event.preventDefault();
 		saveEditing({ value, valueEditing, setEditing, onChange });
+	}
+}
+
+type KeyDownButtonProps = {
+	event: KeyboardEvent<HTMLDivElement>;
+	value: string;
+	setEditing: Dispatch<SetStateAction<boolean>>;
+	onChange?: (oldValue: string, newValue: string) => void;
+	onRemove?: (id: string) => void;
+};
+
+function keyDownButton({
+	event,
+	value,
+	setEditing,
+	onChange,
+	onRemove,
+}: KeyDownButtonProps) {
+	const keysToVerify = [' ', 'Enter'];
+	const { tagName } = (event as unknown as { target: { tagName: string } })
+		.target;
+	if (tagName === 'BUTTON' && keysToVerify.includes(event.key) && onRemove) {
+		onRemove(value);
+		return;
+	}
+	if (tagName === 'DIV' && keysToVerify.includes(event.key) && onChange) {
+		setEditing(true);
 	}
 }
 
@@ -88,7 +115,7 @@ export function Chip({ value, onRemove, onChange }: ChipProps) {
 					value={editing ? valueEditing : value}
 					onChange={event => change({ event, setValueEditing })}
 					onKeyDown={event =>
-						keyDown({ event, setEditing, value, valueEditing, onChange })
+						keyDownInput({ event, setEditing, value, valueEditing, onChange })
 					}
 					onBlur={() =>
 						saveEditing({ value, valueEditing, setEditing, onChange })
@@ -113,12 +140,18 @@ export function Chip({ value, onRemove, onChange }: ChipProps) {
 			])}
 			role="button"
 			tabIndex={0}
-			onKeyDown={() => {
-				if (onChange) setEditing(true);
-			}}
 			onClick={() => {
 				if (onChange) setEditing(true);
 			}}
+			onKeyDown={event =>
+				keyDownButton({
+					event,
+					setEditing,
+					value,
+					onChange,
+					onRemove,
+				})
+			}
 		>
 			{!editing && <span>{value}</span>}
 
