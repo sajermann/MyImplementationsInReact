@@ -181,10 +181,23 @@ const random = {
 	number,
 };
 
+function technologies() {
+	return [
+		{ id: 'react', description: 'React' },
+		{ id: 'javascript', description: 'Javascript' },
+		{ id: 'typescript', description: 'Typescript' },
+		{ id: 'csharp', description: 'C#' },
+		{ id: 'tailwind', description: 'Tailwind' },
+		{ id: 'java', description: 'Java' },
+		{ id: 'node', description: 'Node' },
+	];
+}
+
 export const makeData = {
 	random,
 	vehicles,
 	person,
 	personWithPagination,
 	countries,
+	technologies,
 };
