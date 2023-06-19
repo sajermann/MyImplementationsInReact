@@ -1,13 +1,16 @@
 import { CSS } from '@dnd-kit/utilities';
 import { useDraggable } from '@dnd-kit/core';
-import { ReactNode } from 'react';
+import { ButtonHTMLAttributes, DetailedHTMLProps, ReactNode } from 'react';
 
-type Props = {
+type Props = DetailedHTMLProps<
+	ButtonHTMLAttributes<HTMLButtonElement>,
+	HTMLButtonElement
+> & {
 	id: string;
 	children: ReactNode;
 	data: object;
 };
-export function Draggable({ id, children, data }: Props) {
+export function Draggable({ id, children, data, ...rest }: Props) {
 	const { attributes, listeners, setNodeRef, transform } = useDraggable({
 		id,
 		data,
@@ -20,8 +23,8 @@ export function Draggable({ id, children, data }: Props) {
 
 	return (
 		<button
+			{...rest}
 			type="button"
-			className="p-2 border m-2 rounded"
 			ref={setNodeRef}
 			style={style}
 			{...listeners}

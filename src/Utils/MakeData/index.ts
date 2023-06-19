@@ -194,8 +194,8 @@ function technologies() {
 	];
 }
 
-function brawlers(): Array<TBrawler> {
-	return [
+function brawlers(quantity?: number): Array<TBrawler> {
+	const result = [
 		{ name: 'Hank', image: 'https://cdn-old.brawlify.com/brawler-bs/Hank.png' },
 		{
 			name: 'Maisie',
@@ -208,10 +208,6 @@ function brawlers(): Array<TBrawler> {
 		{
 			name: 'Willow',
 			image: 'https://cdn-old.brawlify.com/brawler-bs/Willow.png',
-		},
-		{
-			name: 'Maisie',
-			image: 'https://cdn-old.brawlify.com/brawler-bs/Maisie.png',
 		},
 		{ name: 'R-T', image: 'https://cdn-old.brawlify.com/brawler-bs/R-T.png' },
 		{
@@ -310,7 +306,7 @@ function brawlers(): Array<TBrawler> {
 			name: 'Ruffs',
 			image: 'https://cdn-old.brawlify.com/brawler-bs/Ruffs.png',
 		},
-		{ name: 'Gale', image: 'https://cdn-old.brawlify.com/brawler-bs/Tick.png' },
+		{ name: 'Gale', image: 'https://cdn-old.brawlify.com/brawler-bs/Gale.png' },
 		{ name: 'Carl', image: 'https://cdn-old.brawlify.com/brawler-bs/Carl.png' },
 		{ name: 'Mr.P', image: 'https://cdn-old.brawlify.com/brawler-bs/Mr.P.png' },
 		{ name: 'Rosa', image: 'https://cdn-old.brawlify.com/brawler-bs/Rosa.png' },
@@ -361,6 +357,7 @@ function brawlers(): Array<TBrawler> {
 			image: 'https://cdn-old.brawlify.com/brawler-bs/Shelly.png',
 		},
 	];
+	return result.slice(0, quantity);
 }
 
 export const makeData = {
