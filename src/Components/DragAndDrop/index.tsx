@@ -2,11 +2,15 @@ import { Dispatch, SetStateAction, useState } from 'react';
 import { DndContext, DragEndEvent, DragStartEvent } from '@dnd-kit/core';
 import { makeData } from '~/Utils/MakeData';
 import { TTechnology } from '~/Types/TTechnology';
+import { useTranslation } from '~/Hooks/UseTranslation';
 import { Draggable } from './Draggable';
 import { Droppable } from './Droppable';
 
+const TIERS = ['S', 'A', 'B', 'C'];
+
 export function DragAndDrop() {
-	const [items] = useState(makeData.technologies());
+	const { translate } = useTranslation();
+	const [items] = useState(makeData.brawlers());
 	const [sadTecnologies, setSadTecnologies] = useState<TTechnology[]>([]);
 	const [happyTecnologies, setHappyTecnologies] = useState<TTechnology[]>([]);
 	function handleDragStart(event: DragStartEvent) {
@@ -46,34 +50,36 @@ export function DragAndDrop() {
 
 	return (
 		<DndContext onDragStart={handleDragStart} onDragEnd={handleDragEnd}>
-			<div className="border p-2 max-w-sm">
+			<div className="border p-2 w-full items-center justify-center">
 				{items.map(item => (
-					<Draggable key={item.id} id={item.id} technologies={{ ...item }}>
-						{item.description}
+					<Draggable key={item.name} id={item.name} data={{ ...item }}>
+						<div className="w-max flex flex-col items-center justify-center">
+							<img
+								src={item.image}
+								alt={item.name}
+								className="rounded-full w-10"
+							/>
+							<span className="font-bold">{item.name}</span>
+						</div>
 					</Draggable>
 				))}
 			</div>
 
-			<div className="flex gap-2">
-				<div className="flex flex-col gap-2">
-					<span>😥</span>
-					<Droppable
-						id="sad"
-						technologies={sadTecnologies}
-						setTechnologies={setSadTecnologies}
-						onSave={save}
-					/>
-				</div>
-
-				<div className="flex flex-col gap-2">
-					<span>😀</span>
-					<Droppable
-						id="happy"
-						technologies={happyTecnologies}
-						setTechnologies={setHappyTecnologies}
-						onSave={save}
-					/>
-				</div>
+			<div className="flex flex-col gap-2">
+				<h1>{translate('MY_TIER_BRAWL_STARS')}</h1>
+				{TIERS.map(item => (
+					<div key={item} className="flex">
+						<span className="border w-10 h-full flex items-center justify-center">
+							{item}
+						</span>
+						<Droppable
+							id={item}
+							technologies={sadTecnologies}
+							setTechnologies={setSadTecnologies}
+							onSave={save}
+						/>
+					</div>
+				))}
 			</div>
 		</DndContext>
 	);

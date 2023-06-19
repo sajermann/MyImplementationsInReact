@@ -1,17 +1,16 @@
 import { CSS } from '@dnd-kit/utilities';
 import { useDraggable } from '@dnd-kit/core';
 import { ReactNode } from 'react';
-import { TTechnology } from '~/Types/TTechnology';
 
 type Props = {
 	id: string;
 	children: ReactNode;
-	technologies: TTechnology;
+	data: object;
 };
-export function Draggable({ id, children, technologies }: Props) {
+export function Draggable({ id, children, data }: Props) {
 	const { attributes, listeners, setNodeRef, transform } = useDraggable({
 		id,
-		data: technologies,
+		data,
 	});
 	const style = transform
 		? {
