@@ -578,7 +578,7 @@ export function useRoutesMenu() {
 				demo: <ChipDemo />,
 			},
 			{
-				name: 'DragAndDrop',
+				name: 'Drag And Drop',
 				path: '/drag-and-drop',
 				implements_code:
 					'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Components/DragAndDrop',

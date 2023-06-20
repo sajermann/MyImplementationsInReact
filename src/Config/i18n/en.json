@@ -1,5 +1,7 @@
 {
 	"translations": {
+		"IMPLEMENTS_DRAG_AND_DROP": "Implements Drag and Drop",
+		"MY_TIER_BRAWL_STARS": "My tier Brawl Stars",
 		"BOX_CHIPS_LIKE_TAGS_YOUTUBE": "Box Chips Like Tags Youtube",
 		"CHIP_DESCRIPTION": "Description of Chip",
 		"CRUD": "Crud",
