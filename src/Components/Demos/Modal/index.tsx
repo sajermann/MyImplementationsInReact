@@ -20,8 +20,9 @@ export function ModalDemo() {
 			</Button>
 			<Modal
 				title={translate('MODAL')}
-				width="70%"
-				height="50%"
+				contentProps={{
+					className: 'w-3/4 h-1/2',
+				}}
 				isOpen={isOpenModal}
 				onClose={() => setIsOpenModal(false)}
 				closeButton
