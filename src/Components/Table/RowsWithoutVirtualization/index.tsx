@@ -1,44 +1,30 @@
 import { flexRender, Row, Table } from '@tanstack/react-table';
 import { Fragment } from 'react';
-import { useDarkModeZustand } from '~/Store/UseDarkMode';
 import { TSelection } from '~/Types/TSelection';
-import { tableUtils } from '~/Utils/Table';
 import { ExpandLine } from '../ExpandLine';
 import { Td } from '../Td';
+import { Tr } from '../Tr';
 
 type Props<T> = {
 	table: Table<T>;
 	selection?: Omit<TSelection<T>, 'disableCheckbox'>;
-	styles: CSSModuleClasses;
 	expandLine?: {
 		render: (data: Row<T>) => React.ReactNode;
 	};
 	disabledVirtualization?: boolean;
 };
-export function BuildRowsNoVirtualization<T>({
+export function RowsWithoutVirtualization<T>({
 	table,
-	styles,
-
 	expandLine,
 	selection,
 	disabledVirtualization,
 }: Props<T>) {
-	const { darkMode } = useDarkModeZustand();
 	if (!disabledVirtualization) return null;
 	return (
 		<>
 			{table.getRowModel().rows.map(row => (
 				<Fragment key={row.id}>
-					<tr
-						className={tableUtils.verifyClassesRow({
-							darkMode,
-							row,
-							styles,
-							expandLine,
-							selection,
-						})}
-						onClick={() => tableUtils.onClickRow({ row, selection })}
-					>
+					<Tr row={row} selection={selection} expandLine={expandLine}>
 						{row.getVisibleCells().map(cell => (
 							<Td
 								key={cell.id}
@@ -56,8 +42,8 @@ export function BuildRowsNoVirtualization<T>({
 								{flexRender(cell.column.columnDef.cell, cell.getContext())}
 							</Td>
 						))}
-					</tr>
-					<ExpandLine row={row} styles={styles} expandLine={expandLine} />
+					</Tr>
+					<ExpandLine row={row} expandLine={expandLine} />
 				</Fragment>
 			))}
 		</>

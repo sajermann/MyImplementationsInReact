@@ -25,8 +25,8 @@ export function useColumns(columnSizeDefault?: Record<string, number>) {
 				size: 60,
 				align: 'left',
 				cell: ({ getValue }) => (
-					<div className="w-full h-full flex items-center justify-center">
-						<div className="w-14 h-14">
+					<div className="w-full flex items-center justify-center">
+						<div className="w-14 h-full">
 							<img className="rounded-full" src={getValue() as string} alt="" />
 						</div>
 					</div>

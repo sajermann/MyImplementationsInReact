@@ -1,13 +1,11 @@
 import { RefObject } from 'react';
 import { Table, ColumnDef, Row } from '@tanstack/react-table';
-import { useVirtualizer as useVirtual } from '@tanstack/react-virtual';
 import { TSelection } from '~/Types/TSelection';
 
 import { NoData } from '../NoData';
 import { IsLoading } from '../IsLoading';
-import { BuildRowsNoVirtualization } from '../BuildRowsNoVirtualization';
-import { BuildRowsVirtualization } from '../BuildRowsVirtualization';
-import styles from './index.module.css';
+import { RowsWithoutVirtualization } from '../RowsWithoutVirtualization';
+import { RowsWithVirtualization } from '../RowsWithVirtualization';
 
 type Props<T> = {
 	table: Table<T>;
@@ -35,21 +33,17 @@ export function Tbody<T>({
 	disabledVirtualization,
 }: Props<T>) {
 	const { rows } = table.getRowModel();
-	const rowVirtualizer = useVirtual({
-		getScrollElement: () => tableContainerRef.current,
-		count: rows.length,
-		estimateSize: () => 50,
-	});
-	const { getVirtualItems, getTotalSize } = rowVirtualizer;
 
 	return (
-		<tbody style={{ opacity: isLoading ? 0.5 : 1 }} className={styles.tbody}>
+		<tbody
+			style={{
+				opacity: isLoading ? 0.5 : 1,
+			}}
+		>
 			<NoData
 				columns={columns}
 				data={data}
-				getVirtualItems={getVirtualItems}
 				isLoading={isLoading}
-				styles={styles}
 				expandLine={expandLine}
 				selection={selection}
 			/>
@@ -57,23 +51,19 @@ export function Tbody<T>({
 				columns={columns}
 				data={data}
 				isLoading={isLoading}
-				styles={styles}
 				expandLine={expandLine}
 				selection={selection}
 			/>
-			<BuildRowsNoVirtualization
-				styles={styles}
+			<RowsWithoutVirtualization
 				table={table}
 				disabledVirtualization={disabledVirtualization}
 				expandLine={expandLine}
 				selection={selection}
 			/>
 
-			<BuildRowsVirtualization
-				getTotalSize={getTotalSize}
-				styles={styles}
+			<RowsWithVirtualization
+				tableContainerRef={tableContainerRef}
 				disabledVirtualization={disabledVirtualization}
-				getVirtualItems={getVirtualItems}
 				rows={rows}
 				expandLine={expandLine}
 				rowForUpdate={rowForUpdate}

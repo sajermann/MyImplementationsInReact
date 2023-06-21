@@ -1,14 +1,13 @@
 import { ColumnDef, Row } from '@tanstack/react-table';
-import { VirtualItem } from '@tanstack/react-virtual';
+
 import { useTranslation } from '~/Hooks/UseTranslation';
 import { TSelection } from '~/Types/TSelection';
 import { tableUtils } from '~/Utils/Table';
 import { Td } from '../Td';
+import { Tr } from '../Tr';
 
 type Props<T> = {
 	selection?: Omit<TSelection<T>, 'disableCheckbox'>;
-	styles: CSSModuleClasses;
-	getVirtualItems: () => VirtualItem[];
 	data: T[];
 	expandLine?: {
 		render: (data: Row<T>) => React.ReactNode;
@@ -17,8 +16,6 @@ type Props<T> = {
 	columns: ColumnDef<T>[];
 };
 export function NoData<T>({
-	getVirtualItems,
-	styles,
 	data,
 	isLoading,
 	expandLine,
@@ -26,12 +23,13 @@ export function NoData<T>({
 	columns,
 }: Props<T>) {
 	const { translate } = useTranslation();
-	if (!(getVirtualItems().length === 0 || data.length === 0) || isLoading) {
+
+	if (data.length !== 0 || isLoading) {
 		return null;
 	}
 
 	return (
-		<tr className={styles.tr}>
+		<Tr>
 			<Td
 				{...{
 					colSpan: tableUtils.countColSpan({
@@ -44,6 +42,6 @@ export function NoData<T>({
 			>
 				{translate('NO_DATA')}
 			</Td>
-		</tr>
+		</Tr>
 	);
 }

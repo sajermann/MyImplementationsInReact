@@ -4,10 +4,10 @@ import { useTranslation } from '~/Hooks/UseTranslation';
 import { TSelection } from '~/Types/TSelection';
 import { tableUtils } from '~/Utils/Table';
 import { Td } from '../Td';
+import { Tr } from '../Tr';
 
 type Props<T> = {
 	selection?: Omit<TSelection<T>, 'disableCheckbox'>;
-	styles: CSSModuleClasses;
 	data: T[];
 	expandLine?: {
 		render: (data: Row<T>) => React.ReactNode;
@@ -16,7 +16,6 @@ type Props<T> = {
 	columns: ColumnDef<T>[];
 };
 export function IsLoading<T>({
-	styles,
 	data,
 	isLoading,
 	expandLine,
@@ -27,34 +26,31 @@ export function IsLoading<T>({
 	if (!isLoading) return null;
 	return (
 		<>
-			<tr style={{ height: '100%' }} className={styles.tr}>
-				<td
+			<Tr className="h-full">
+				<Td
 					colSpan={tableUtils.countColSpan({
 						columns,
 						expandLine,
 						selection,
 					})}
-					className={styles.td}
-					style={{ textAlign: 'center', padding: 0 }}
+					style={{ padding: 0 }}
 				>
 					<LoadingBar />
-				</td>
-			</tr>
+				</Td>
+			</Tr>
 			{data.length === 0 && (
-				<tr className={styles.tr}>
+				<Tr>
 					<Td
-						{...{
-							colSpan: tableUtils.countColSpan({
-								columns,
-								expandLine,
-								selection,
-							}),
-							style: { textAlign: 'center' },
-						}}
+						colSpan={tableUtils.countColSpan({
+							columns,
+							expandLine,
+							selection,
+						})}
+						style={{ textAlign: 'center' }}
 					>
 						{translate('LOADING...')}
 					</Td>
-				</tr>
+				</Tr>
 			)}
 		</>
 	);

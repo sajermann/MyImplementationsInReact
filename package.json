@@ -27,7 +27,7 @@
     "@sajermann/utils": "^0.0.10",
     "@tanstack/react-query": "^4.24.4",
     "@tanstack/react-table": "^8.7.9",
-    "@tanstack/react-virtual": "^3.0.0-beta.39",
+    "@tanstack/react-virtual": "^3.0.0-beta.54",
     "clsx": "^1.2.1",
     "date-fns": "^2.30.0",
     "framer-motion": "^10.10.0",
