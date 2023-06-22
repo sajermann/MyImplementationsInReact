@@ -16,7 +16,6 @@
 }
 
 .isSelected {
-	border-color: #e5e7eb;
-	border-width: 2px;
-	border-bottom-width: 0px;
+	border-color: #08da1a;
+	border-width: 1px;
 }

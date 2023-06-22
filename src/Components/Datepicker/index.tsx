@@ -14,6 +14,7 @@ import {
 } from 'react';
 import DatePicker from 'react-datepicker';
 
+import { managerClassNames } from '~/Utils/ManagerClassNames';
 import { useTranslation } from '~/Hooks/UseTranslation';
 import { Input } from '../Input';
 import 'react-datepicker/dist/react-datepicker.css';
@@ -64,7 +65,7 @@ const CustomInput = forwardRef(
 	) => {
 		const newProps = { ...props };
 		delete newProps.withoutDay;
-		delete newProps.className;
+		// delete newProps.className;
 
 		const result = formatDataTemp(
 			newProps.value as string,
@@ -157,7 +158,13 @@ export function Datepicker({
 	}
 
 	return (
-		<div {...containerProps}>
+		<div
+			{...containerProps}
+			className={managerClassNames([
+				{ 'flex flex-col gap-2 justify-center': true },
+				{ [containerProps?.className as string]: containerProps?.className },
+			])}
+		>
 			{label && (
 				<label htmlFor={rest.id} {...labelProps}>
 					{label}

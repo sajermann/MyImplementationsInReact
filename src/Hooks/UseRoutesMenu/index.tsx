@@ -22,6 +22,8 @@ import { SearchBoxDemo } from '~/Components/Demos/SearchBox';
 import { AnimateInViewDemo } from '~/Components/Demos/AnimateInView';
 import { CalendarPickerDemo } from '~/Components/Demos/CalendarPicker';
 import { ChipDemo } from '~/Components/Demos/Chip';
+import { SwitchDemo } from '~/Components/Demos/Switch';
+import { RadioDemo } from '~/Components/Demos/Radio';
 
 const ColumnVisibilityPage = lazy(() =>
 	import('~/Pages/Table/ColumnVisibility').then(
@@ -232,6 +234,18 @@ const ChipPage = lazy(() =>
 const DragAndDropPage = lazy(() =>
 	import('~/Pages/DragAndDrop').then(({ DragAndDropPage: DragAndDrop }) => ({
 		default: DragAndDrop,
+	}))
+);
+
+const SwitchPage = lazy(() =>
+	import('~/Pages/Switch').then(({ SwitchPage: Switch }) => ({
+		default: Switch,
+	}))
+);
+
+const RadioPage = lazy(() =>
+	import('~/Pages/Radio').then(({ RadioPage: Radio }) => ({
+		default: Radio,
 	}))
 );
 
@@ -554,19 +568,6 @@ export function useRoutesMenu() {
 				demo: <AnimateInViewDemo />,
 			},
 			{
-				name: 'Calendar Picker',
-				path: '/calendar-picker',
-				implements_code:
-					'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Components/CalendarPicker',
-				docs_code:
-					'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/CalendarPicker',
-				element: <CalendarPickerPage />,
-				label: translate('CALENDAR_PICKER'),
-				demo: <CalendarPickerDemo />,
-				className:
-					'col-span-12 sm:!col-span-12 lg:!col-span-8 xl:!col-span-6 h-[30rem] md:row-span-2 md:h-[40rem]',
-			},
-			{
 				name: 'Chip',
 				path: '/chip',
 				implements_code:
@@ -578,6 +579,20 @@ export function useRoutesMenu() {
 				demo: <ChipDemo />,
 			},
 			{
+				name: 'Calendar Picker',
+				path: '/calendar-picker',
+				implements_code:
+					'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Components/CalendarPicker',
+				docs_code:
+					'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/CalendarPicker',
+				element: <CalendarPickerPage />,
+				label: translate('CALENDAR_PICKER'),
+				demo: <CalendarPickerDemo />,
+				className:
+					'col-span-12 sm:!col-span-12 lg:!col-span-8 xl:!col-span-6 h-full md:row-span-2 md:h-full',
+			},
+
+			{
 				name: 'Drag And Drop',
 				path: '/drag-and-drop',
 				implements_code:
@@ -587,6 +602,28 @@ export function useRoutesMenu() {
 				element: <DragAndDropPage />,
 				label: 'DND',
 				// demo: <ChipDemo />,
+			},
+			{
+				name: 'Switch',
+				path: '/switch',
+				implements_code:
+					'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Components/Switch',
+				docs_code:
+					'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/Switch',
+				element: <SwitchPage />,
+				label: 'Switch',
+				demo: <SwitchDemo />,
+			},
+			{
+				name: 'Radio',
+				path: '/radio',
+				implements_code:
+					'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Components/Radio',
+				docs_code:
+					'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/Radio',
+				element: <RadioPage />,
+				label: 'Radio',
+				demo: <RadioDemo />,
 			},
 			{
 				name: 'NotFound',

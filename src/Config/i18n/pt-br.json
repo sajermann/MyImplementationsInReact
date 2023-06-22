@@ -1,5 +1,10 @@
 {
 	"translations": {
+		"RADIO_TYPE": "Tipo Radio",
+		"COLORS": "Cores",
+		"FIXED": "Fixo",
+		"COMBINES": "Combinações",
+		"INACTIVE": "Desativado",
 		"IMPLEMENTS_DRAG_AND_DROP": "Implementação do Drag and Drop",
 		"MY_TIER_BRAWL_STARS": "Minha classificação Brawl Stars",
 		"BOX_CHIPS_LIKE_TAGS_YOUTUBE": "Caixa de Chips parecido com Categorias do Youtube",
@@ -226,7 +231,7 @@
 		"SIZE": "Tamanho",
 		"LEFT": "Esquerda",
 		"RIGHT": "Direita",
-		"BOTTON": "Rodapé",
+		"BOTTOM": "Rodapé",
 		"TOP": "Cabeçalho",
 		"BACKDROP": "Backdrop",
 		"WITH_BACKDROP": "Com Backdrop",

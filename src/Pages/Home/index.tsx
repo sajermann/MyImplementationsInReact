@@ -36,34 +36,7 @@ export function Home() {
 				</a>
 			</div>
 
-			{/* <div className="flex flex-wrap gap-2 items-center justify-center">
-				{options.map(
-					opt =>
-						opt.name !== 'Home' &&
-						opt.name !== 'NotFound' && (
-							<div
-								key={opt.path}
-								className="flex flex-col w-80 h-80 border border-solid rounded-2xl  dark:border-white text-xl overflow-auto"
-							>
-								<header className="border-b-2 p-2 flex justify-center items-center bg-dark-700 rounded-t-2xl text-white">
-									{opt.name}
-								</header>
-								<main className="w-full p-2 flex items-center justify-center flex-1 m-auto">
-									{opt.demo || translate('NO_VIEW')}
-								</main>
-
-								<footer className="border-t-2 flex !bg-dark-700">
-									<Link to={opt.path} className={LINK_CLASS}>
-										<Icons nameIcon="Eye width="30px" />
-										Demo
-									</Link>
-									<QuickAccessGithub name={opt.name} />
-								</footer>
-							</div>
-						)
-				)}
-			</div> */}
-			<div className="grid grid-cols-12 self-center gap-2">
+			<div className="grid grid-cols-12 gap-2">
 				{options.map(
 					opt =>
 						opt.name !== 'Home' &&
@@ -71,7 +44,7 @@ export function Home() {
 							<div
 								key={opt.path}
 								className={managerClassNames([
-									{ 'flex flex-col  border border-solid': true },
+									{ 'flex flex-col border border-solid': true },
 									{ 'w-full h-80 dark:border-white text-xl ': true },
 									{ 'overflow-auto rounded-2xl': true },
 									{

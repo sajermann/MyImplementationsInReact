@@ -9,7 +9,8 @@ import {
 	useCallback,
 	useState,
 } from 'react';
-import { ContainerInput } from '../ConainerInput';
+import { managerClassNames } from '~/Utils/ManagerClassNames';
+import { ContainerInput } from '../ContainerInput';
 
 import { Icons } from '../Icons';
 
@@ -21,6 +22,8 @@ interface Props
 		'checked' | 'defaultChecked' | '$$typeof' | 'onClick' | 'id'
 	> {
 	disabled?: boolean;
+	checkedIcon?: JSX.Element;
+	indeterminateIcon?: JSX.Element;
 	checked?: boolean | 'indeterminate';
 	defaultChecked?: boolean | 'indeterminate';
 	onClick?: (e?: MouseEvent<HTMLButtonElement, Event>) => void;
@@ -38,6 +41,7 @@ interface Props
 		HTMLAttributes<HTMLDivElement>,
 		HTMLDivElement
 	>;
+	className?: string;
 }
 
 function Container({ children }: { children: React.ReactNode }) {
@@ -57,6 +61,9 @@ export function Checkbox({
 	label,
 	id,
 	containerProps,
+	checkedIcon,
+	indeterminateIcon,
+	className,
 	...rest
 }: Props) {
 	const [situation, setSituation] = useState(() => {
@@ -79,18 +86,6 @@ export function Checkbox({
 			setSituation(attributes['data-state'].value);
 		}
 	}, []);
-
-	function verifyClass() {
-		const classes = [
-			'rounded h-5 w-5 border-[1px] bg-white border-black disabled:cursor-not-allowed disabled:!opacity-50',
-		];
-
-		if (situation === 'checked' || situation === 'indeterminate') {
-			classes.push('!bg-primary-500');
-		}
-
-		return classes.join(' ');
-	}
 
 	function handleCheckedChange(e: boolean | 'indeterminate') {
 		const result = {
@@ -117,19 +112,29 @@ export function Checkbox({
 				checked={checked}
 				defaultChecked={defaultChecked}
 				onCheckedChange={handleCheckedChange}
-				className={verifyClass()}
+				className={managerClassNames([
+					{ 'rounded h-7 w-7 border-[1px] bg-white border-black': true },
+					{ 'disabled:cursor-not-allowed disabled:!opacity-50': true },
+					{
+						'!bg-primary-500':
+							situation === 'checked' || situation === 'indeterminate',
+					},
+					{ [className as string]: className },
+				])}
 				id={id}
 				{...rest}
 			>
 				<CheckboxRadix.Indicator>
 					{situation === 'indeterminate' && (
 						<Container>
-							<Icons nameIcon="Indeterminate" color="#fff" />
+							{indeterminateIcon || (
+								<Icons nameIcon="Indeterminate" color="#fff" />
+							)}
 						</Container>
 					)}
 					{situation === 'checked' && (
 						<Container>
-							<Icons nameIcon="Checked" color="#fff" />
+							{checkedIcon || <Icons nameIcon="Checked" color="#fff" />}
 						</Container>
 					)}
 				</CheckboxRadix.Indicator>

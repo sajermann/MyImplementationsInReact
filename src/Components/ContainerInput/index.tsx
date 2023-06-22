@@ -4,6 +4,7 @@ import {
 	InputHTMLAttributes,
 	LabelHTMLAttributes,
 } from 'react';
+import { managerClassNames } from '~/Utils/ManagerClassNames';
 
 interface Props
 	extends DetailedHTMLProps<
@@ -28,27 +29,26 @@ export function ContainerInput({
 	containerProps,
 	labelProps,
 }: Props) {
-	function classContainer() {
-		if (containerProps?.className) {
-			return `flex flex-col w-full items-center ${containerProps?.className}`;
-		}
-		return `flex flex-col w-full items-center`;
-	}
-
 	function extractorIdChildren(child: React.ReactNode): string | undefined {
 		const { props } = child as { props: { id: string } };
 		return props.id || '';
 	}
 
 	return (
-		<div {...containerProps} className={classContainer()}>
+		<div
+			{...containerProps}
+			className={managerClassNames([
+				{ 'flex flex-col w-full items-center gap-2': true },
+				{ [containerProps?.className as string]: containerProps?.className },
+			])}
+		>
 			{label && (
 				<label
 					htmlFor={extractorIdChildren(children)}
 					{...labelProps}
-					className={`mb-2 ${
-						labelProps?.className ? labelProps?.className : ''
-					}`}
+					className={managerClassNames([
+						{ [labelProps?.className as string]: labelProps?.className },
+					])}
 				>
 					{label}
 				</label>

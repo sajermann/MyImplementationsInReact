@@ -1,5 +1,10 @@
 {
 	"translations": {
+		"RADIO_TYPE": "Radio Type",
+		"COLORS": "Colors",
+		"FIXED": "Fixed",
+		"COMBINES": "Combines",
+		"INACTIVE": "Inactive",
 		"IMPLEMENTS_DRAG_AND_DROP": "Implements Drag and Drop",
 		"MY_TIER_BRAWL_STARS": "My tier Brawl Stars",
 		"BOX_CHIPS_LIKE_TAGS_YOUTUBE": "Box Chips Like Tags Youtube",
@@ -227,7 +232,7 @@
 		"SIZE": "Size",
 		"LEFT": "Left",
 		"RIGHT": "Right",
-		"BOTTON": "Bottom",
+		"BOTTOM": "Bottom",
 		"TOP": "Top",
 		"BACKDROP": "Backdrop",
 		"WITH_BACKDROP": "With Backdrop",

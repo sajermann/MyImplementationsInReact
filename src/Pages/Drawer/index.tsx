@@ -141,7 +141,7 @@ export function DrawerPage() {
 					</Drawer>
 
 					<Button colorStyle="Success" onClick={() => setIsOpenBottom80(true)}>
-						{translate('BOTTON')} 80%
+						{translate('BOTTOM')} 80%
 					</Button>
 					<Drawer
 						openFrom="bottom"
