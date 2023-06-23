@@ -8,13 +8,13 @@ import { Button } from '~/Components/Button';
 import { InjectorProviders } from '~/Components/InjectorProviders';
 import { Modal } from '~/Components/Modal';
 
-import { ToastPage } from '.';
+import { SwitchPage } from '.';
 
-describe('Pages/ToastPage', () => {
+describe('Pages/SwitchPage', () => {
 	it(`must render checkbox`, async () => {
 		const { getAllByText } = render(
 			<InjectorProviders>
-				<ToastPage />
+				<SwitchPage />
 			</InjectorProviders>
 		);
 	});

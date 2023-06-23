@@ -249,6 +249,14 @@ const RadioPage = lazy(() =>
 	}))
 );
 
+// const VirtualizationPage = lazy(() =>
+// 	import('~/Pages/Virtualization').then(
+// 		({ VirtualizationPage: Virtualization }) => ({
+// 			default: Virtualization,
+// 		})
+// 	)
+// );
+
 export function useRoutesMenu() {
 	const { translate, currentLanguage } = useTranslation();
 	const location = useLocation();
@@ -591,7 +599,6 @@ export function useRoutesMenu() {
 				className:
 					'col-span-12 sm:!col-span-12 lg:!col-span-8 xl:!col-span-6 h-full md:row-span-2 md:h-full',
 			},
-
 			{
 				name: 'Drag And Drop',
 				path: '/drag-and-drop',
@@ -625,6 +632,17 @@ export function useRoutesMenu() {
 				label: 'Radio',
 				demo: <RadioDemo />,
 			},
+			// {
+			// 	name: 'Virtualization',
+			// 	path: '/virtualization',
+			// 	implements_code:
+			// 		'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Components/Virtualization',
+			// 	docs_code:
+			// 		'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/Virtualization',
+			// 	element: <VirtualizationPage />,
+			// 	label: translate('VIRTUALIZATION'),
+			// 	// demo: <RadioDemo />,
+			// },
 			{
 				name: 'NotFound',
 				path: '*',

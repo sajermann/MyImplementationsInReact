@@ -4,6 +4,8 @@ import { TAnimal } from '~/Types/TAnimal';
 import { TBrawler } from '~/Types/TBrawler';
 import { TPerson } from '~/Types/TPerson';
 import { TVehicle } from '~/Types/TVehicle';
+import { TChat } from '~/Types/TChat';
+import { createRef, ForwardedRef, RefObject } from 'react';
 
 const range = (len: number) => {
 	const arr = [];
@@ -78,6 +80,29 @@ function person(...lens: number[]) {
 				friends: animal(faker.helpers.arrayElement([1, 2, 3])),
 			};
 		});
+	};
+
+	return makeDataLevel();
+}
+
+function chat(quantity: number) {
+	const makeDataLevel = (): TChat[] => {
+		const idOne = uuidv4();
+		const userNameOne = faker.name.firstName();
+		const userAvatarOne = faker.internet.avatar();
+
+		const idTwo = uuidv4();
+		const userNameTwo = faker.name.firstName();
+		const userAvatarTwo = faker.internet.avatar();
+		return range(quantity).map(
+			(i): TChat => ({
+				id: i % 2 === 0 ? idOne : idTwo,
+				userName: i % 2 === 0 ? userNameOne : userNameTwo,
+				userAvatar: i % 2 === 0 ? userAvatarOne : userAvatarTwo,
+				message: faker.lorem.paragraphs(),
+				ref: createRef<ForwardedRef<unknown>>(),
+			})
+		);
 	};
 
 	return makeDataLevel();
@@ -374,4 +399,5 @@ export const makeData = {
 	technologies,
 	brawlers,
 	uuid,
+	chat,
 };

@@ -1,5 +1,7 @@
 {
 	"translations": {
+		"SAY": "Say:",
+		"VIRTUALIZATION": "Virtualization",
 		"RADIO_TYPE": "Radio Type",
 		"COLORS": "Colors",
 		"FIXED": "Fixed",

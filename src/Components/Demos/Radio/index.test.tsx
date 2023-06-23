@@ -4,16 +4,14 @@
 import { fireEvent, render } from '@testing-library/react';
 import { it, describe } from 'vitest';
 import { InjectorProviders } from '~/Components/InjectorProviders';
-import { SwitchDemo } from '.';
+import { RadioDemo } from '.';
 
-describe('Components/Demos/SwitchDemo', () => {
-	it(`must open Modal`, async () => {
+describe('Components/Demos/RadioDemo', () => {
+	it(`must open RadioDemo`, async () => {
 		const { getByLabelText } = render(
 			<InjectorProviders>
-				<SwitchDemo />
+				<RadioDemo />
 			</InjectorProviders>
 		);
-		const openButton = await getByLabelText('Switch');
-		fireEvent.click(openButton);
 	});
 });

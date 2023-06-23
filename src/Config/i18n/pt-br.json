@@ -1,5 +1,7 @@
 {
 	"translations": {
+		"SAY": "Diz:",
+		"VIRTUALIZATION": "Virtualização",
 		"RADIO_TYPE": "Tipo Radio",
 		"COLORS": "Cores",
 		"FIXED": "Fixo",

@@ -21,7 +21,9 @@ export function DrawerDemo() {
 			</Button>
 			<Drawer
 				openFrom="left"
-				size="50%"
+				sectionInternal={{
+					className: 'w-5/6 md:w-1/2',
+				}}
 				isOpen={isOpen}
 				onClose={() => setIsOpen(false)}
 			>
