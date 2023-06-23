@@ -70,9 +70,11 @@ export function DrawerPage() {
 					</Button>
 					<Drawer
 						openFrom="left"
-						size="50%"
 						isOpen={isOpenLeft}
 						onClose={() => setIsOpenLeft(false)}
+						sectionInternal={{
+							className: 'w-5/6 md:w-1/2',
+						}}
 					>
 						<Lorem />
 					</Drawer>
@@ -82,9 +84,11 @@ export function DrawerPage() {
 					</Button>
 					<Drawer
 						openFrom="right"
-						size="50%"
 						isOpen={isOpenRight}
 						onClose={() => setIsOpenRight(false)}
+						sectionInternal={{
+							className: 'w-5/6 md:w-1/2',
+						}}
 					>
 						<Lorem />
 					</Drawer>
@@ -94,9 +98,11 @@ export function DrawerPage() {
 					</Button>
 					<Drawer
 						openFrom="bottom"
-						size="50%"
 						isOpen={isOpenBotttom}
 						onClose={() => setIsOpenBottom(false)}
+						sectionInternal={{
+							className: 'top-5/6 md:top-1/2',
+						}}
 					>
 						<Lorem />
 					</Drawer>
@@ -105,9 +111,11 @@ export function DrawerPage() {
 					</Button>
 					<Drawer
 						openFrom="top"
-						size="50%"
 						isOpen={isOpenTop}
 						onClose={() => setIsOpenTop(false)}
+						sectionInternal={{
+							className: 'h-5/6 md:h-1/2',
+						}}
 					>
 						<Lorem />
 					</Drawer>
@@ -121,9 +129,11 @@ export function DrawerPage() {
 					</Button>
 					<Drawer
 						openFrom="left"
-						size="10%"
 						isOpen={isOpenLeft10}
 						onClose={() => setIsOpenLeft10(false)}
+						sectionInternal={{
+							className: 'w-[10%]',
+						}}
 					>
 						<Lorem />
 					</Drawer>
@@ -133,9 +143,11 @@ export function DrawerPage() {
 					</Button>
 					<Drawer
 						openFrom="right"
-						size="40%"
 						isOpen={isOpenRight40}
 						onClose={() => setIsOpenRight40(false)}
+						sectionInternal={{
+							className: 'w-[40%]',
+						}}
 					>
 						<Lorem />
 					</Drawer>
@@ -145,9 +157,11 @@ export function DrawerPage() {
 					</Button>
 					<Drawer
 						openFrom="bottom"
-						size="20%"
 						isOpen={isOpenBottom80}
 						onClose={() => setIsOpenBottom80(false)}
+						sectionInternal={{
+							className: 'top-[20%]',
+						}}
 					>
 						<Lorem />
 					</Drawer>
@@ -183,9 +197,11 @@ export function DrawerPage() {
 					</Button>
 					<Drawer
 						openFrom="left"
-						size="50%"
 						isOpen={isOpenBackDrop}
 						onClose={() => setIsOpenBackDrop(false)}
+						sectionInternal={{
+							className: 'w-1/2',
+						}}
 					>
 						<Lorem />
 					</Drawer>
@@ -198,10 +214,12 @@ export function DrawerPage() {
 					</Button>
 					<Drawer
 						openFrom="left"
-						size="50%"
 						isOpen={isOpenWithoutBackDrop}
 						onClose={() => setIsOpenWithoutBackDrop(false)}
 						disableBackdrop
+						sectionInternal={{
+							className: 'w-1/2',
+						}}
 					>
 						<Lorem />
 					</Drawer>
@@ -215,9 +233,11 @@ export function DrawerPage() {
 					</Button>
 					<Drawer
 						openFrom="left"
-						size="50%"
 						isOpen={isOpenEsc}
 						onClose={() => setIsOpenEsc(false)}
+						sectionInternal={{
+							className: 'w-1/2',
+						}}
 					>
 						<Lorem />
 					</Drawer>
@@ -231,10 +251,12 @@ export function DrawerPage() {
 					<Drawer
 						disableEsc
 						openFrom="left"
-						size="50%"
 						isOpen={isOpenEscDisabled}
 						onClose={() => setIsOpenEscDisabled(false)}
 						disableBackdrop
+						sectionInternal={{
+							className: 'w-1/2',
+						}}
 					>
 						<Lorem />
 					</Drawer>
@@ -251,9 +273,11 @@ export function DrawerPage() {
 					</Button>
 					<Drawer
 						openFrom="left"
-						size="50%"
 						isOpen={isOpenDisableClickOnBackdrop}
 						onClose={() => setIsOpenDisableClickOnBackdrop(false)}
+						sectionInternal={{
+							className: 'w-1/2',
+						}}
 					>
 						<Lorem />
 					</Drawer>
@@ -267,10 +291,12 @@ export function DrawerPage() {
 					<Drawer
 						disableClickOnBackdrop
 						openFrom="left"
-						size="50%"
 						isOpen={isOpenDisableClickOnBackdropDisabled}
 						onClose={() => setIsOpenDisableClickOnBackdropDisabled(false)}
 						disableBackdrop
+						sectionInternal={{
+							className: 'w-1/2',
+						}}
 					>
 						<Lorem />
 					</Drawer>
@@ -287,9 +313,11 @@ export function DrawerPage() {
 					</Button>
 					<Drawer
 						openFrom="left"
-						size="50%"
 						isOpen={isOpenOneClickToClose}
 						onClose={() => setIsOpenOneClickToClose(false)}
+						sectionInternal={{
+							className: 'w-1/2',
+						}}
 					>
 						<Lorem />
 					</Drawer>
@@ -303,10 +331,12 @@ export function DrawerPage() {
 					<Drawer
 						oneClickToClose
 						openFrom="left"
-						size="50%"
 						isOpen={isOpenOneClickToCloseDisabled}
 						onClose={() => setIsOpenOneClickToCloseDisabled(false)}
 						disableBackdrop
+						sectionInternal={{
+							className: 'w-1/2',
+						}}
 					>
 						<Lorem />
 					</Drawer>

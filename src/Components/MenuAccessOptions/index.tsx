@@ -118,9 +118,11 @@ export default function MenuAccessOptions() {
 			</HeaderButton>
 			<Drawer
 				openFrom="left"
-				size="400px"
 				isOpen={isOpen}
 				onClose={() => setIsOpen(false)}
+				sectionInternal={{
+					className: 'w-96',
+				}}
 			>
 				<Main>
 					<Nav>

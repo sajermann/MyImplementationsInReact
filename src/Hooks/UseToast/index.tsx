@@ -1,8 +1,10 @@
-/* eslint-disable react/button-has-type */
+import addMilliseconds from 'date-fns/addMilliseconds';
+
 import { toast } from 'react-hot-toast';
 
 import { Icons } from '~/Components/Icons';
 import { managerClassNames } from '~/Utils/ManagerClassNames';
+import useCountdown from '../UseCountdown2';
 
 type Props = {
 	type: 'info' | 'success' | 'error' | 'warning';
@@ -11,6 +13,8 @@ type Props = {
 };
 
 export function useToast() {
+	// const { timers, addCountdown } = useCountdown();
+	// console.log({ timers });
 	const duration = 3000;
 
 	function customToast({ type, msg, enableProgress }: Props) {
@@ -39,14 +43,24 @@ export function useToast() {
 			t => (
 				<div
 					className={managerClassNames({
-						'max-w-2xl w-full shadow-lg rounded pointer-events-auto flex': true,
+						'flex flex-col': true,
+						'max-w-2xl w-full shadow-lg rounded pointer-events-auto': true,
 						'ring-1 ring-black ring-opacity-5  font-bold gap-1': true,
-						' flex-col': true,
-						'animate-in fade-in zoom-in duration-500': t.visible,
-						// 'animate-out fade-out zoom-out duration-500': !t.visible,
+						'animate-enter': t.visible, // Look tailwind.config.cjs
+						'animate-leave': !t.visible, // Look tailwind.config.cjs
 						...commonsType,
 					})}
 				>
+					{/* <div className="flex gap-2 flex-col">
+						<span>Inicio: {new Date(t.createdAt).toLocaleString()}</span>
+						<span>
+							Termino:{' '}
+							{addMilliseconds(
+								new Date(t.createdAt),
+								t.duration as number
+							).toLocaleString()}
+						</span>
+					</div> */}
 					<div className="flex w-full py-4 px-3">
 						<div className="flex flex-1 w-0 items-center flex-row gap-2">
 							<div
@@ -63,10 +77,9 @@ export function useToast() {
 
 						<div className="flex items-center justify-center">
 							<button
+								type="button"
 								data-role="close"
-								onClick={() => {
-									toast.remove(t.id);
-								}}
+								onClick={() => toast.dismiss(t.id)}
 								className={managerClassNames({
 									'w-5 h-4 flex items-center justify-center': true,
 									...commonsType,
@@ -76,7 +89,6 @@ export function useToast() {
 							</button>
 						</div>
 					</div>
-
 					{enableProgress && (
 						<div className="w-full relative -top-2">
 							<div

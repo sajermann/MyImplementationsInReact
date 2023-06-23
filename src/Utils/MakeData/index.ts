@@ -1,3 +1,4 @@
+import { v4 as uuidv4 } from 'uuid';
 import { faker } from '@faker-js/faker';
 import { TAnimal } from '~/Types/TAnimal';
 import { TBrawler } from '~/Types/TBrawler';
@@ -360,6 +361,10 @@ function brawlers(quantity?: number): Array<TBrawler> {
 	return result.slice(0, quantity);
 }
 
+function uuid() {
+	return uuidv4();
+}
+
 export const makeData = {
 	random,
 	vehicles,
@@ -368,4 +373,5 @@ export const makeData = {
 	countries,
 	technologies,
 	brawlers,
+	uuid,
 };
