@@ -3,17 +3,16 @@
  */
 import { fireEvent, render, waitFor } from '@testing-library/react';
 import { it, describe, expect } from 'vitest';
-import { useState } from 'react';
+import { DetailedHTMLProps, HTMLAttributes, useState } from 'react';
 import { Modal } from './index';
 
 type Props = {
-	width?: string;
 	closeByBackdrop?: boolean;
 	closeByEsc?: boolean;
 	title?: string;
 };
 
-function Mock({ closeByBackdrop, closeByEsc, width, title }: Props) {
+function Mock({ closeByBackdrop, closeByEsc, title }: Props) {
 	const [isOpenModal, setIsOpenModal] = useState(false);
 	return (
 		<>
@@ -29,12 +28,13 @@ function Mock({ closeByBackdrop, closeByEsc, width, title }: Props) {
 				overlayProps={{
 					'data-testid': 'overlay',
 				}}
-				contentProps={{
-					'data-testid': 'modal',
-				}}
+				contentProps={
+					{
+						'data-testid': 'modal',
+					} as DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>
+				}
 				isOpen={isOpenModal}
 				onClose={() => setIsOpenModal(prev => !prev)}
-				width={width}
 				closeByBackdrop={closeByBackdrop}
 				closeByEsc={closeByEsc}
 			>

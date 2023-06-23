@@ -1,16 +1,12 @@
 import { flexRender, Row } from '@tanstack/react-table';
-import { Fragment } from 'react';
-import { VirtualItem } from '@tanstack/react-virtual';
-import { useDarkModeZustand } from '~/Store/UseDarkMode';
+import { Fragment, RefObject } from 'react';
+import { useVirtualizer } from '@tanstack/react-virtual';
 import { TSelection } from '~/Types/TSelection';
-import { tableUtils } from '~/Utils/Table';
 import { ExpandLine } from '../ExpandLine';
 import { Td } from '../Td';
+import { Tr } from '../Tr';
 
 type Props<T> = {
-	getTotalSize: () => number;
-	styles: CSSModuleClasses;
-	getVirtualItems: () => VirtualItem[];
 	selection?: Omit<TSelection<T>, 'disableCheckbox'>;
 	rows: Row<T>[];
 	disabledVirtualization?: boolean;
@@ -18,28 +14,33 @@ type Props<T> = {
 	expandLine?: {
 		render: (data: Row<T>) => React.ReactNode;
 	};
+	tableContainerRef: RefObject<HTMLDivElement>;
 };
-export function BuildRowsVirtualization<T>({
-	getTotalSize,
-	styles,
-	getVirtualItems,
+export function RowsWithVirtualization<T>({
 	selection,
 	rows,
 	disabledVirtualization,
 	rowForUpdate,
 	expandLine,
+	tableContainerRef,
 }: Props<T>) {
-	const { darkMode } = useDarkModeZustand();
 	if (disabledVirtualization) return null;
+
+	const rowVirtualizer = useVirtualizer({
+		count: rows.length,
+		getScrollElement: () => tableContainerRef.current,
+		estimateSize: () => 68,
+		overscan: 10,
+	});
+	const { getVirtualItems, getTotalSize } = rowVirtualizer;
 
 	const paddingTop =
 		getVirtualItems().length > 0 ? getVirtualItems()?.[0]?.start || 0 : 0;
 	const paddingBottom =
 		getVirtualItems().length > 0
 			? getTotalSize() -
-			  (getVirtualItems()?.[getVirtualItems().length - 1]?.end || 0) +
-			  13
-			: 0 + 13;
+					(getVirtualItems()?.[getVirtualItems().length - 1]?.end || 0) || 0
+			: 0;
 
 	return (
 		<>
@@ -52,21 +53,10 @@ export function BuildRowsVirtualization<T>({
 				const row = rows[virtualRow.index];
 				return (
 					<Fragment key={row.id}>
-						<tr
-							key={row.id}
-							className={tableUtils.verifyClassesRow({
-								darkMode,
-								row,
-								styles,
-								expandLine,
-								selection,
-							})}
-							onClick={() => tableUtils.onClickRow({ row, selection })}
-						>
+						<Tr row={row} selection={selection} expandLine={expandLine}>
 							{row.getVisibleCells().map(cell => (
 								<Td
 									{...{
-										className: styles.td,
 										style: {
 											// @ts-expect-error align exists
 											textAlign: cell.column.columnDef.align,
@@ -86,9 +76,9 @@ export function BuildRowsVirtualization<T>({
 										: flexRender(cell.column.columnDef.cell, cell.getContext())}
 								</Td>
 							))}
-						</tr>
+						</Tr>
 
-						<ExpandLine row={row} styles={styles} expandLine={expandLine} />
+						<ExpandLine row={row} expandLine={expandLine} />
 					</Fragment>
 				);
 			})}

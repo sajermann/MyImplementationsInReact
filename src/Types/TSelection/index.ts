@@ -6,4 +6,5 @@ export type TSelection<T> = {
 	setRowSelection: OnChangeFn<RowSelectionState>;
 	disableSelectionRow?: (data: Row<T>) => boolean;
 	disableCheckbox?: boolean;
+	singleRadio?: true;
 };

@@ -19,6 +19,7 @@ export function SelectionPage() {
 	const [selectionType, setSelecitonType] = useState<'single' | 'multi'>(
 		'single'
 	);
+	const [singleRadio, setSingleRadio] = useState<boolean>(false);
 	const [disableSelectionForId, setDisableSelectionForId] = useState('');
 	const [globalFilter, setGlobalFilter] = useState('');
 	const { columns } = useColumns();
@@ -39,6 +40,11 @@ export function SelectionPage() {
 		{ value: 'single', label: translate('SINGLE') },
 	];
 
+	const OPTIONS_LIST_RADIO = [
+		{ value: 'true', label: translate('YES') },
+		{ value: 'false', label: translate('NO') },
+	];
+
 	return (
 		<Main data-content="content-main">
 			<Section heading={translate('SELECTION')}>
@@ -52,7 +58,7 @@ export function SelectionPage() {
 			<Section subHeading={translate('IMPLEMENTS')}>
 				<div className="flex flex-col gap-2">
 					<div className="grid grid-cols-12 gap-2">
-						<div className="col-span-12 md:col-span-6 lg:col-span-6 xl:col-span-4 2xl:col-span-3">
+						<div className="col-span-12 md:col-span-4 lg:col-span-4">
 							<div className="flex items-center gap-2">
 								<div className="whitespace-nowrap ">
 									{translate('SELECTION_TYPE')}
@@ -66,13 +72,39 @@ export function SelectionPage() {
 											?.value
 									}
 									options={OPTIONS_LIST}
-									onChange={e =>
-										setSelecitonType(e.target.value as 'single' | 'multi')
-									}
+									onChange={e => {
+										setSelecitonType(e.target.value as 'single' | 'multi');
+										setSelectedItems({});
+										if (e.target.value === 'multi') {
+											setSingleRadio(false);
+										}
+									}}
 								/>
 							</div>
 						</div>
-						<div className="col-span-12 md:col-span-6 lg:col-span-6 xl:col-span-4 2xl:col-span-4">
+						<div className="col-span-12 md:col-span-3 lg:col-span-4">
+							<div className="flex items-center gap-2">
+								<div className="whitespace-nowrap ">
+									{translate('RADIO_TYPE')}
+								</div>
+
+								<Select
+									isDisabled={selectionType === 'multi'}
+									isSearchable={false}
+									menuPosition="fixed"
+									menuPortalTarget={document.body}
+									value={
+										OPTIONS_LIST_RADIO.find(item => {
+											const converted = item.value === 'true';
+											return converted === singleRadio;
+										})?.value
+									}
+									options={OPTIONS_LIST_RADIO}
+									onChange={e => setSingleRadio(e.target.value === 'true')}
+								/>
+							</div>
+						</div>
+						<div className="col-span-12 md:col-span-5 lg:col-span-4">
 							<Input
 								placeholder="Id"
 								id="disableSelection"
@@ -88,14 +120,6 @@ export function SelectionPage() {
 								onChange={e => setDisableSelectionForId(e.target.value)}
 							/>
 						</div>
-						<div className="col-span-12 md:col-span-12 lg:col-span-12 xl:col-span-4 2xl:col-span-5">
-							<Input
-								value={globalFilter ?? ''}
-								onChange={e => setGlobalFilter(e.target.value)}
-								placeholder={translate('SEARCH_ALL_COLUMNS...')}
-								type="search"
-							/>
-						</div>
 					</div>
 					<Table
 						columns={columns}
@@ -106,6 +130,7 @@ export function SelectionPage() {
 							type: selectionType,
 							disableSelectionRow:
 								disableSelectionForId !== '' ? verifyForDisable : undefined,
+							singleRadio: singleRadio ? true : undefined,
 						}}
 						globalFilter={{
 							filter: globalFilter,

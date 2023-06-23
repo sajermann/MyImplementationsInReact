@@ -1,4 +1,5 @@
-import { useEffect, useMemo } from 'react';
+import { DetailedHTMLProps, HTMLAttributes, useEffect } from 'react';
+import { managerClassNames } from '~/Utils/ManagerClassNames';
 import styles from './styles.module.css';
 
 type Props = {
@@ -6,11 +7,11 @@ type Props = {
 	isOpen: boolean;
 	onClose: () => void;
 	openFrom: 'left' | 'right' | 'bottom' | 'top';
-	size?: string;
 	disableBackdrop?: boolean;
 	disableEsc?: boolean;
 	disableClickOnBackdrop?: boolean;
 	oneClickToClose?: boolean;
+	sectionInternal?: DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement>;
 };
 
 export function Drawer({
@@ -18,56 +19,12 @@ export function Drawer({
 	openFrom,
 	isOpen,
 	onClose,
-	size,
 	disableBackdrop,
 	disableEsc,
 	disableClickOnBackdrop,
 	oneClickToClose,
+	sectionInternal,
 }: Props) {
-	const configSide = useMemo(() => {
-		if (openFrom === 'left') {
-			return {
-				openFrom: styles.leftZero,
-				translate: styles.translateLeft,
-				style: {
-					maxWidth: `${size || '100%'}`,
-					maxHeight: '100%',
-				},
-			};
-		}
-		if (openFrom === 'right') {
-			return {
-				openFrom: styles.rightZero,
-				translate: styles.translateRight,
-				style: {
-					maxWidth: `${size || '100%'}`,
-					maxHeight: '100%',
-				},
-			};
-		}
-		if (openFrom === 'bottom') {
-			return {
-				openFrom: '',
-				translate: styles.translateBottom,
-				style: {
-					maxWidth: '100%',
-					top: size,
-				},
-			};
-		}
-		if (openFrom === 'top') {
-			return {
-				openFrom: '',
-				translate: styles.translateTop,
-				style: {
-					maxWidth: '100%',
-					maxHeight: size,
-				},
-			};
-		}
-		return {};
-	}, [openFrom]);
-
 	useEffect(() => {
 		const body = document.querySelector('body');
 		if (isOpen) {
@@ -107,24 +64,43 @@ export function Drawer({
 
 	return (
 		<main
-			className={`${styles.container} ${
-				isOpen ? styles.containerOpen : styles.containerClose
-			}`}
+			className={managerClassNames([
+				{ [styles.container]: true },
+				{ [styles.containerOpen]: isOpen },
+				{ [styles.containerClose]: !isOpen },
+			])}
 			role="presentation"
 			onClick={oneClickToClose ? () => onClose() : () => null}
 		>
 			<section
-				className={`${isOpen && styles.backdropOpen}`}
-				style={{ background: !disableBackdrop ? 'black' : '' }}
+				className={managerClassNames([
+					{ [styles.backdropOpen]: isOpen },
+					{ [styles.black]: !disableBackdrop },
+				])}
 				role="presentation"
 				onClick={() => handleClose(false)}
 			/>
-
 			<section
-				className={`${styles.subContainer} ${configSide.openFrom} ${
-					isOpen ? styles.subContainerOpen : `${configSide.translate}`
-				}`}
-				style={configSide.style}
+				{...sectionInternal}
+				className={managerClassNames([
+					{ [styles.subContainer]: true },
+					{ [styles.leftZero as string]: openFrom === 'left' },
+					{ [styles.translateLeft as string]: openFrom === 'left' && !isOpen },
+					{ [styles.rightZero as string]: openFrom === 'right' },
+					{
+						[styles.translateRight as string]: openFrom === 'right' && !isOpen,
+					},
+					{
+						[styles.translateBottom as string]:
+							openFrom === 'bottom' && !isOpen,
+					},
+					{ [styles.translateTop as string]: openFrom === 'top' && !isOpen },
+
+					{ [styles.subContainerOpen]: isOpen },
+					{
+						[sectionInternal?.className as string]: sectionInternal?.className,
+					},
+				])}
 			>
 				{children}
 			</section>

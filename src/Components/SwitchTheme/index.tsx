@@ -8,7 +8,6 @@ export function SwitchTheme() {
 	const { translate } = useTranslation();
 	return (
 		<div>
-			{JSON.stringify(darkMode)}
 			<div>{translate('THEME')}</div>
 			<div className="flex items-center justify-center">
 				<button

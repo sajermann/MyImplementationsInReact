@@ -3,10 +3,10 @@ import { TSelection } from '~/Types/TSelection';
 
 type Props<T> = {
 	selection?: Omit<TSelection<T>, 'disableCheckbox'>;
-	row: Row<T>;
+	row?: Row<T>;
 };
 export function onClickRow<T>({ selection, row }: Props<T>) {
-	if (!selection) {
+	if (!selection || !row) {
 		return;
 	}
 	if (selection?.disableSelectionRow) {

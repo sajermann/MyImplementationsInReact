@@ -82,8 +82,9 @@ export function ModalPage() {
 					</Button>
 					<Modal
 						title={translate('COMUM_MODAL')}
-						width="70%"
-						height="50%"
+						contentProps={{
+							className: 'w-3/4 h-1/2',
+						}}
 						isOpen={isOpenModal1}
 						onClose={() => setIsOpenModal1(false)}
 						closeButton={withCloseButton}
@@ -138,8 +139,9 @@ export function ModalPage() {
 					</Button>
 					<Modal
 						title={translate('EXPAND_MODAL')}
-						width="70%"
-						height="50%"
+						contentProps={{
+							className: 'w-3/4 h-1/2',
+						}}
 						isOpen={isOpenModal2}
 						onClose={() => setIsOpenModal2(false)}
 						closeButton

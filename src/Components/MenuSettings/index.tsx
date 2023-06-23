@@ -23,9 +23,11 @@ export default function MenuSettings() {
 
 			<Drawer
 				openFrom="right"
-				size="500px"
 				isOpen={isOpen}
 				onClose={() => setIsOpen(false)}
+				sectionInternal={{
+					className: 'w-96',
+				}}
 			>
 				<Main>
 					<Nav className="flex justify-between w-full">

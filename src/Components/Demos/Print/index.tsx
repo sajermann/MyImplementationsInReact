@@ -8,7 +8,10 @@ export function PrintDemo() {
 	const { componentRef, handlePreparePrint } = usePrinter();
 
 	return (
-		<ToPrint ref={componentRef}>
+		<ToPrint
+			ref={componentRef}
+			className="flex items-center justify-center flex-col"
+		>
 			<span>{translate('PRINT_ONLY_THIS_CONTENT')}</span>
 			<Button
 				colorStyle="Primary"

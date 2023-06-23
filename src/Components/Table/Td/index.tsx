@@ -1,7 +1,10 @@
-import { useRef } from 'react';
+import { DetailedHTMLProps, TdHTMLAttributes, useRef } from 'react';
 import styles from './index.module.css';
 
-type Props = {
+type Props = DetailedHTMLProps<
+	TdHTMLAttributes<HTMLTableCellElement>,
+	HTMLTableCellElement
+> & {
 	children: React.ReactNode;
 	title?: string;
 };
@@ -18,8 +21,8 @@ export function Td({ children, title, ...rest }: Props) {
 
 	return (
 		<td
-			ref={ref}
 			{...rest}
+			ref={ref}
 			title={isEllipsisActive() ? title : ''}
 			className={styles.td}
 		>

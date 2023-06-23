@@ -1,5 +1,12 @@
 import * as Dialog from '@radix-ui/react-dialog';
-import { useEffect, useState } from 'react';
+import {
+	DetailedHTMLProps,
+	ForwardRefExoticComponent,
+	HTMLAttributes,
+	RefAttributes,
+	useEffect,
+	useState,
+} from 'react';
 import { managerClassNames } from '~/Utils/ManagerClassNames';
 import { BoxScroll } from '../BoxScroll';
 import { ButtonIcon } from '../ButtonIcon';
@@ -10,11 +17,12 @@ type Props = {
 	title?: string;
 	isOpen: boolean;
 	onClose: () => void;
-	width?: string;
-	height?: string;
 	closeByBackdrop?: boolean;
 	closeByEsc?: boolean;
-	contentProps?: object;
+	contentProps?: DetailedHTMLProps<
+		HTMLAttributes<HTMLDivElement>,
+		HTMLDivElement
+	>;
 	overlayProps?: object;
 	closeButton?: boolean;
 	expand?: {
@@ -29,8 +37,6 @@ export function Modal({
 	onClose,
 	closeByBackdrop,
 	closeByEsc,
-	width,
-	height,
 	contentProps,
 	overlayProps,
 	closeButton,
@@ -58,20 +64,20 @@ export function Modal({
 					onClick={closeByBackdrop ? onClose : undefined}
 				/>
 				<Dialog.Content
-					{...contentProps}
-					style={{
-						width: isExpanded ? '100%' : width,
-						height: isExpanded ? '100%' : height,
-						transition: '300ms',
-					}}
+					{...(contentProps as ForwardRefExoticComponent<
+						Dialog.DialogContentProps & RefAttributes<HTMLDivElement>
+					>)}
 					onEscapeKeyDown={closeByEsc ? onClose : undefined}
 					className={managerClassNames([
 						{ 'top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 ': true },
 						{ 'shadow-lg shadow-black/25 z-[3] dark:bg-slate-900 ': true },
-						{ 'fixed rounded  bg-white ': true },
+						{ 'fixed rounded bg-white ': true },
 						// Look tailwind.config.cjs
 						{ 'data-[state=open]:animate-contentShow': true },
 						{ 'data-[state=closed]:animate-contentClose': true },
+						{ 'transition-all duration-300': true },
+						{ '!w-full !h-full': isExpanded },
+						{ [contentProps?.className as string]: contentProps?.className },
 					])}
 				>
 					{title && (
@@ -92,7 +98,7 @@ export function Modal({
 
 							{closeButton && (
 								<ButtonIcon
-									className="absolute top-2 right-6  text-primary-500 hover:text-primary-300 transition-colors duration-500"
+									className="absolute top-2 right-6 text-primary-500 hover:text-primary-300 transition-colors duration-500"
 									onClick={onClose}
 									data-testid="closeButtonModal"
 								>

@@ -42,8 +42,8 @@ export function useToast() {
 						'max-w-2xl w-full shadow-lg rounded pointer-events-auto flex': true,
 						'ring-1 ring-black ring-opacity-5  font-bold gap-1': true,
 						' flex-col': true,
-						'animate-in fade-in zoom-in duration-500': t.visible,
-						// 'animate-out fade-out zoom-out duration-500': !t.visible,
+						'animate-enter': t.visible,
+						'animate-leave': !t.visible,
 						...commonsType,
 					})}
 				>
@@ -65,7 +65,7 @@ export function useToast() {
 							<button
 								data-role="close"
 								onClick={() => {
-									toast.remove(t.id);
+									toast.dismiss(t.id);
 								}}
 								className={managerClassNames({
 									'w-5 h-4 flex items-center justify-center': true,

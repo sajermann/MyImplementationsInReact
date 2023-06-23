@@ -107,3 +107,7 @@
 	height: 100%;
 	position: fixed;
 }
+
+.black {
+	background-color: black;
+}

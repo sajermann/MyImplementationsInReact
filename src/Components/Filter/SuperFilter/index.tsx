@@ -79,7 +79,11 @@ export function SuperFilter({ onChange }: Props) {
 	}
 
 	function handleRemoveFilter(id: string) {
-		setActiveFilters(old => old.filter(item => item.id !== id));
+		setActiveFilters(old =>
+			old.filter(
+				item => `${item.labelColumn} ${item.labelType} - ${item.value}` !== id
+			)
+		);
 	}
 
 	return (
@@ -90,7 +94,9 @@ export function SuperFilter({ onChange }: Props) {
 
 			<Modal
 				title={translate('CONFIGURE_SUPER_FILTER')}
-				width="70%"
+				contentProps={{
+					className: 'w-3/4 h-1/2',
+				}}
 				isOpen={isOpenModal}
 				onClose={() => setIsOpenModal(false)}
 			>
@@ -159,7 +165,7 @@ export function SuperFilter({ onChange }: Props) {
 										<Chip
 											key={item.id}
 											value={`${item.labelColumn} ${item.labelType} - ${item.value}`}
-											id={item.id}
+											// id={item.id}
 											onRemove={handleRemoveFilter}
 										/>
 									))}

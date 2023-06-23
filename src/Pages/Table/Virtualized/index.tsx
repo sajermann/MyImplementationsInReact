@@ -14,12 +14,12 @@ export function VirtualizedPage() {
 	const { translate } = useTranslation();
 	const [data, setData] = useState<TPerson[]>([]);
 	const [isLoading, setIsLoading] = useState(true);
-	const [virtualized, setVirtualized] = useState(false);
+	const [virtualized, setVirtualized] = useState(true);
 	const { columns } = useColumns();
 
 	async function load() {
 		setIsLoading(true);
-		setData(makeData.person(200));
+		setData(makeData.person(2000));
 		setIsLoading(false);
 	}
 

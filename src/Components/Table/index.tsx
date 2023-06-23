@@ -1,6 +1,3 @@
-/* eslint-disable react/button-has-type */
-/* eslint-disable @typescript-eslint/no-non-null-asserted-optional-chain */
-/* eslint-disable jsx-a11y/click-events-have-key-events */
 import { Dispatch, SetStateAction, useEffect, useRef, useState } from 'react';
 import {
 	CellContext,
@@ -22,9 +19,9 @@ import {
 import { TPagination } from '~/Types/TPagination';
 import { TSelection } from '~/Types/TSelection';
 import { useTranslation } from '~/Hooks/UseTranslation';
-import { Checkbox } from '~/Components/Checkbox';
 import { managerClassNames } from '~/Utils/ManagerClassNames';
 import { TDefTools } from '~/Types/TExport';
+import { tableUtils } from '~/Utils/Table';
 import { Tfoot } from './Tfoot';
 import { Header } from './Header';
 import { Thead } from './Thead';
@@ -32,6 +29,9 @@ import { Tbody } from './Tbody';
 import { Pagination } from './Pagination';
 
 import styles from './index.module.css';
+import { RadioGroup } from '../Radio';
+import { Selector } from './Selector';
+import { Expander } from './Expander';
 
 type Props<T, U = undefined> = {
 	selection?: TSelection<T>;
@@ -69,11 +69,6 @@ type Props<T, U = undefined> = {
 	tools?: TDefTools<T>;
 };
 
-type PropsTableInternal = {
-	getIsAllRowsSelected: () => boolean;
-	getIsSomeRowsSelected: () => boolean;
-};
-
 export function Table<T, U = undefined>({
 	selection,
 	columns,
@@ -98,18 +93,6 @@ export function Table<T, U = undefined>({
 
 	const { translate } = useTranslation();
 
-	function verifyIndeterminate(table: PropsTableInternal) {
-		if (table.getIsAllRowsSelected()) {
-			return true;
-		}
-
-		if (table.getIsSomeRowsSelected()) {
-			return 'indeterminate';
-		}
-
-		return false;
-	}
-
 	function buildColumns() {
 		const result: ColumnDef<T, unknown>[] = [];
 
@@ -117,17 +100,9 @@ export function Table<T, U = undefined>({
 			const t = [
 				{
 					id: 'select',
-					header: ({ table }: HeaderContext<T, unknown>) =>
-						selection.type === 'multi' && (
-							<Checkbox
-								containerProps={{
-									className: 'flex items-center justify-center',
-								}}
-								checked={verifyIndeterminate(table)}
-								onClick={table.getToggleAllRowsSelectedHandler()}
-								{...{ disabled: selection.disableSelectionRow !== undefined }}
-							/>
-						),
+					header: ({ table }: HeaderContext<T, unknown>) => (
+						<Selector selection={selection} table={table} />
+					),
 					size: 50,
 					minSize: 50,
 					maxSize: 50,
@@ -135,17 +110,7 @@ export function Table<T, U = undefined>({
 					enableSorting: false,
 					enableResizing: false,
 					cell: ({ row }: CellContext<T, unknown>) => (
-						<Checkbox
-							containerProps={{
-								className: 'flex items-center justify-center',
-							}}
-							{...{
-								disabled: selection.disableSelectionRow
-									? selection.disableSelectionRow(row)
-									: false,
-								checked: row.getIsSelected(),
-							}}
-						/>
+						<Selector row={row} selection={selection} />
 					),
 				},
 			];
@@ -161,19 +126,7 @@ export function Table<T, U = undefined>({
 					size: 50,
 					enableSorting: false,
 					enableResizing: false,
-					cell: ({ row }: CellContext<T, unknown>) => (
-						<div className="w-full flex items-center justify-center">
-							<button
-								type="button"
-								onClick={row.getToggleExpandedHandler()}
-								{...{
-									style: { cursor: 'pointer' },
-								}}
-							>
-								{row.getIsExpanded() ? '✏' : '📝'}
-							</button>
-						</div>
-					),
+					cell: ({ row }: CellContext<T, unknown>) => <Expander row={row} />,
 				},
 			];
 			result.push(t as unknown as ColumnDef<T, unknown>);
@@ -251,22 +204,24 @@ export function Table<T, U = undefined>({
 					maxHeight: maxHeight || undefined,
 				}}
 			>
-				<table className={styles.table}>
-					<Thead table={table} />
+				<RadioGroup value={tableUtils.getValueForRadio({ selection })}>
+					<table className={styles.table}>
+						<Thead table={table} />
 
-					<Tbody
-						table={table}
-						tableContainerRef={tableContainerRef}
-						data={data}
-						columns={columns}
-						isLoading={isLoading}
-						expandLine={expandLine}
-						selection={selection}
-						rowForUpdate={rowForUpdate}
-						disabledVirtualization={disabledVirtualization}
-					/>
-					<Tfoot table={table} showFooter={showFooter} />
-				</table>
+						<Tbody
+							table={table}
+							tableContainerRef={tableContainerRef}
+							data={data}
+							columns={columns}
+							isLoading={isLoading}
+							expandLine={expandLine}
+							selection={selection}
+							rowForUpdate={rowForUpdate}
+							disabledVirtualization={disabledVirtualization}
+						/>
+						<Tfoot table={table} showFooter={showFooter} />
+					</table>
+				</RadioGroup>
 			</div>
 			<Pagination table={table} pagination={pagination} />
 		</>

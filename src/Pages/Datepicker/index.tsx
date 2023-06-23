@@ -14,23 +14,23 @@ export function DatepickerPage() {
 
 	return (
 		<Main data-content="content-main">
-			<Section heading="Datepicker">
+			<Section title="Datepicker" variant="h1">
 				{`${translate('IMPLEMENTS_COMPONENT')} Datepicker ${translate(
 					'USING_THE_LIB'
 				)} react-datepicker`}
 			</Section>
 
-			<Section subHeading={translate('INSTALLATION_OF_LIB')}>
+			<Section title={translate('INSTALLATION_OF_LIB')} variant="h2">
 				<CodeBlock>npm i react-datepicker;</CodeBlock>
 			</Section>
 
-			<Section subHeading={translate('CODES')}>
+			<Section title={translate('CODES')} variant="h2">
 				<div className="flex gap-2">
 					<QuickAccessGithub name="Datepicker" />
 				</div>
 			</Section>
 
-			<Section subHeading={translate('DATE')}>
+			<Section title={translate('DATE')} variant="h2">
 				<ComponentBlock>
 					<Datepicker
 						label={translate('DATE')}
@@ -40,7 +40,7 @@ export function DatepickerPage() {
 				</ComponentBlock>
 			</Section>
 
-			<Section subHeading={translate('CONTROLLED')}>
+			<Section title={translate('CONTROLLED')} variant="h2">
 				<ComponentBlock>
 					<div className="flex flex-col gap-2">
 						<div className="flex gap-2">
@@ -68,7 +68,7 @@ export function DatepickerPage() {
 				</ComponentBlock>
 			</Section>
 
-			<Section subHeading={translate('DATE_FORMAT')}>
+			<Section title={translate('DATE_FORMAT')} variant="h2">
 				<ComponentBlock>
 					<Datepicker
 						dateFormat="yyyy-MM-dd"
@@ -87,17 +87,18 @@ export function DatepickerPage() {
 				</ComponentBlock>
 			</Section>
 
-			<Section subHeading={translate('CONTAINER_PROPS')}>
+			<Section title={translate('CONTAINER_PROPS')} variant="h2">
 				<ComponentBlock>
 					<Datepicker
 						containerProps={{
 							style: {
-								width: 120,
+								width: 160,
 							},
+							className: '!flex-row',
 						}}
 						label={translate('DATE')}
 						placeholder={translate('DD/MM/YYYY')}
-						id="DateFormat1"
+						id="DateFormat3"
 					/>
 				</ComponentBlock>
 			</Section>
