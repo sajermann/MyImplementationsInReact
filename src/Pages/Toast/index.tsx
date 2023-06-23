@@ -6,12 +6,10 @@ import { CodeBlock } from '~/Components/CodeBlock';
 import { QuickAccessGithub } from '~/Components/QuickAccessGithub';
 import { Button } from '~/Components/Button';
 import { useToast } from '~/Hooks/UseToast';
-import useCountdown from '~/Hooks/UseCountdown2';
 
 export function ToastPage() {
 	const { translate } = useTranslation();
 	const { customToast } = useToast();
-	const [timers, actionsCountdown] = useCountdown();
 
 	function handleError(type: 'error' | 'info' | 'success' | 'warning') {
 		customToast({ msg: translate('I_AM_TOAST'), type });
@@ -19,37 +17,6 @@ export function ToastPage() {
 
 	return (
 		<Main data-content="content-main">
-			<div className="border p-s">
-				{timers.map(timer => (
-					<div key={timer.id}>
-						ID {timer.id} - Time Left {(timer.timeLeft / 1000).toFixed()} -
-						Percentage {timer.percentage.toFixed(0)}%
-						<button
-							type="button"
-							onClick={() => {
-								actionsCountdown(
-									'TOGGLE_PLAY_PAUSE',
-									() => console.log(''),
-									timer.id
-								);
-							}}
-						>
-							Toggle
-						</button>
-					</div>
-				))}
-			</div>
-			<button
-				type="button"
-				onClick={() =>
-					actionsCountdown('ADD_TIMER', () => console.log(timers.length))
-				}
-			>
-				Add
-			</button>
-			<button type="button" onClick={() => console.log({ timers })}>
-				Log
-			</button>
 			<Section heading="Toast">
 				{`${translate('IMPLEMENTS_COMPONENT')} Toast ${translate(
 					'USING_THE_LIB'

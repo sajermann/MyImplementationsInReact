@@ -1,78 +1,130 @@
-import { useEffect, useRef, useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 
-type CountdownProps = {
+interface Timer {
+	id: string;
 	milliseconds: number;
 	onComplete: () => void;
+	isPaused: boolean;
+	timeLeft: number;
+	percentage: number;
+}
+
+const PARAMETER_TIME = 10;
+
+type AddTimerProps = {
+	milliseconds: number;
+	onComplete: () => void;
+	id?: string;
 };
 
-const useCountdown = ({ milliseconds, onComplete }: CountdownProps) => {
-	const intervalRef = useRef<NodeJS.Timeout>();
-	const [timeLeft, setTimeLeft] = useState(milliseconds);
-	const [percentage, setPercentage] = useState(0);
-	const [isPaused, setIsPaused] = useState(false);
-	const initialMilliseconds = useRef(milliseconds);
-	const isCompleteRef = useRef(false);
+export function useCountdown() {
+	const [timers, setTimers] = useState<Timer[]>([]);
+	const timerRefs = useRef<{ [id: string]: NodeJS.Timeout }>({});
 
-	const pauseCountdown = () => {
-		if (intervalRef.current) {
-			clearInterval(intervalRef.current);
-		}
-		setIsPaused(true);
-	};
+	function addTimer({
+		milliseconds,
+		onComplete,
+		id = `timer-${Date.now()}`,
+	}: AddTimerProps) {
+		const timer: Timer = {
+			id,
+			milliseconds,
+			onComplete,
+			isPaused: false,
+			timeLeft: milliseconds,
+			percentage: 100,
+		};
+		setTimers(prevTimers => [...prevTimers, timer]);
 
-	const resumeCountdown = () => {
-		setIsPaused(false);
-	};
+		timerRefs.current[id] = setInterval(() => {
+			setTimers(prevTimers =>
+				prevTimers.map(prevTimer => {
+					if (prevTimer.id === id) {
+						if (!prevTimer.isPaused) {
+							const timeLeft = prevTimer.timeLeft - PARAMETER_TIME;
+							const percentage = (timeLeft / milliseconds) * 100;
 
-	const toggleCountdown = () => {
-		if (isPaused) {
-			resumeCountdown();
-		} else {
-			pauseCountdown();
-		}
-	};
+							if (timeLeft <= 0) {
+								clearInterval(timerRefs.current[id]);
+								onComplete();
+								return {
+									...prevTimer,
+									timeLeft: 0,
+									percentage: 0,
+									isPaused: true,
+								};
+							}
 
-	useEffect(() => {
-		setTimeLeft(milliseconds);
-		initialMilliseconds.current = milliseconds;
-		isCompleteRef.current = false;
-	}, [milliseconds]);
-
-	useEffect(() => {
-		if (!isPaused) {
-			intervalRef.current = setInterval(() => {
-				setTimeLeft(prevTimeLeft => {
-					const newTimeLeft = prevTimeLeft - 10;
-					const newPercentage =
-						((initialMilliseconds.current - newTimeLeft) /
-							initialMilliseconds.current) *
-						100;
-					setPercentage(newPercentage);
-
-					if (newTimeLeft <= 0) {
-						clearInterval(intervalRef.current);
-						setTimeLeft(0);
-						if (!isCompleteRef.current) {
-							onComplete();
-							isCompleteRef.current = true;
+							return {
+								...prevTimer,
+								timeLeft,
+								percentage,
+							};
 						}
 					}
+					return prevTimer;
+				})
+			);
+		}, PARAMETER_TIME);
+	}
 
-					return newTimeLeft;
-				});
-			}, 10);
-		} else {
-			clearInterval(intervalRef.current);
-		}
+	function togglePlayPause(id: string) {
+		setTimers(prevTimers =>
+			prevTimers.map(prevTimer => {
+				if (prevTimer.id === id) {
+					const isPaused = !prevTimer.isPaused;
 
-		return () => {
-			if (intervalRef.current) {
-				clearInterval(intervalRef.current);
-			}
-		};
-	}, [isPaused, onComplete]);
+					if (isPaused) {
+						clearInterval(timerRefs.current[id]);
+					} else {
+						timerRefs.current[id] = setInterval(() => {
+							setTimers(currentTimers =>
+								currentTimers.map(currentTimer => {
+									if (currentTimer.id === id && !currentTimer.isPaused) {
+										const timeLeft = currentTimer.timeLeft - PARAMETER_TIME;
+										const percentage =
+											(timeLeft / currentTimer.milliseconds) * 100;
 
-	return { timeLeft, percentage, isPaused, toggleCountdown };
-};
+										if (timeLeft <= 0) {
+											clearInterval(timerRefs.current[id]);
+											currentTimer.onComplete();
+											return {
+												...currentTimer,
+												timeLeft: 0,
+												percentage: 0,
+												isPaused: true,
+											};
+										}
 
-export default useCountdown;
+										return {
+											...currentTimer,
+											timeLeft,
+											percentage,
+										};
+									}
+									return currentTimer;
+								})
+							);
+						}, PARAMETER_TIME);
+					}
+
+					return {
+						...prevTimer,
+						isPaused,
+					};
+				}
+				return prevTimer;
+			})
+		);
+	}
+
+	useEffect(
+		() => () => {
+			// Limpar os timers quando o componente é desmontado
+			Object.values(timerRefs.current).forEach(timer => clearInterval(timer));
+		},
+		[]
+	);
+
+	return { timers, addTimer, togglePlayPause };
+}
