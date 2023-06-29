@@ -24,6 +24,11 @@ Rate my implements or say hello in Linkedin 😀
 - [x] Calendar Picker - With &nbsp;[nuka-carousel](https://www.npmjs.com/package/date-fns)
 - [x] Nuka Carousel - With &nbsp;[nuka-carousel](https://www.npmjs.com/package/nuka-carousel)
 - [x] Animate In View - With &nbsp;[framer-motion](https://www.npmjs.com/package/framer-motion)
+- [x] Chip - Without third party
+- [x] Drag and Drop - With &nbsp;[dnd-kit](https://www.npmjs.com/package/@dnd-kit/core)
+- [x] Switch - With &nbsp;[react-switch](https://www.npmjs.com/package/react-switch)
+- [x] Calendar Picker - Without third party
+- [x] Radio - With &nbsp;[@radix-ui/react-radio-group](https://www.npmjs.com/package/@radix-ui/react-radio-group)
 - [x] Table - With &nbsp;[@tanstack/react-table](https://www.npmjs.com/package/@tanstack/react-table)
     - [x] Filter
     - [x] Selection
