@@ -1,10 +1,5 @@
 import { SVGProps } from 'react';
 
-type IconProps = SVGProps<SVGSVGElement> & {
-	nameIcon?: string;
-	fullFill?: boolean;
-};
-
 const ICONS = {
 	shortList: ({ width, height, color, ...rest }: IconProps) => (
 		<svg
@@ -1840,6 +1835,13 @@ const ICONS = {
 };
 
 export const keysIcons = Object.keys(ICONS);
+
+type AllowNames = keyof typeof ICONS;
+
+type IconProps = SVGProps<SVGSVGElement> & {
+	nameIcon?: AllowNames;
+	fullFill?: boolean;
+};
 
 export function Icons({ nameIcon, ...rest }: IconProps) {
 	if (!nameIcon) return null;
