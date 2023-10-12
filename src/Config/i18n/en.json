@@ -1,5 +1,9 @@
 {
 	"translations": {
+		"DISABLED_SORT": "Disabled Sort",
+		"THIS_IS_USEFUL_IF_YOU_ARE_DOING_SERVER_SIDE_SORTING": "This is useful if you are doing server-side sorting",
+		"MANUAL_SORT": "Manual Sort",
+		"AUTOMATIC_SORT": "Automatic Sort",
 		"SAY": "Say:",
 		"VIRTUALIZATION": "Virtualization",
 		"RADIO_TYPE": "Radio Type",
@@ -112,7 +116,7 @@
 		"SORT": "Sort",
 		"SORT_MODE": "Sort Mode",
 		"FRIENDS": "Friends",
-		"FRIENDS_IS_ARRAY_OF_OBJECT": "Friends is array of object",
+		"NOTE_FRIENDS_IS_ARRAY_OF_OBJECT": "Note: Friends is array of object",
 		"FILTER_MODE": "Filter Mode",
 		"FILTER": "Filter",
 		"EDITABLE": "Editable",

@@ -1,5 +1,9 @@
 {
 	"translations": {
+		"DISABLED_SORT": "Ordenação Desabilitada",
+		"THIS_IS_USEFUL_IF_YOU_ARE_DOING_SERVER_SIDE_SORTING": "Isso é útil se você for fazer ordenação no servidor",
+		"MANUAL_SORT": "Ordenação Manual",
+		"AUTOMATIC_SORT": "Ordenação Automática",
 		"SAY": "Diz:",
 		"VIRTUALIZATION": "Virtualização",
 		"RADIO_TYPE": "Tipo Radio",
@@ -111,7 +115,7 @@
 		"SORT": "Ordenação",
 		"SORT_MODE": "Modo Ordenação",
 		"FRIENDS": "Amigos",
-		"FRIENDS_IS_ARRAY_OF_OBJECT": "Amigos é um array de objetos",
+		"NOTE_FRIENDS_IS_ARRAY_OF_OBJECT": "Obs: Amigos é um array de objetos",
 		"FILTER_MODE": "Modo Filtro",
 		"FILTER": "Filtro",
 		"EDITABLE": "Editável",

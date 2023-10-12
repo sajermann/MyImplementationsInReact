@@ -67,6 +67,12 @@ type Props<T, U = undefined> = {
 	showFooter?: boolean;
 
 	tools?: TDefTools<T>;
+	sorting?: {
+		manualSorting?: {
+			fn: (data: Record<string, unknown>[]) => void;
+		};
+		disabled?: boolean;
+	};
 };
 
 export function Table<T, U = undefined>({
@@ -88,10 +94,11 @@ export function Table<T, U = undefined>({
 	maxHeight,
 	showFooter,
 	tools,
+	sorting,
 }: Props<T, U>) {
-	const [sorting, setSorting] = useState<SortingState>([]);
-
+	const [sortingInternal, setSortingInternal] = useState<SortingState>([]);
 	const { translate } = useTranslation();
+	console.log({ sortingInternal });
 
 	function buildColumns() {
 		const result: ColumnDef<T, unknown>[] = [];
@@ -148,7 +155,7 @@ export function Table<T, U = undefined>({
 				pageIndex: pagination?.pageIndex || 0,
 				pageSize: pagination?.pageSize || 0,
 			},
-			sorting,
+			sorting: sorting?.disabled ? undefined : sortingInternal,
 			rowSelection: selection?.rowSelection,
 			globalFilter: globalFilter?.filter,
 			columnVisibility,
@@ -158,15 +165,29 @@ export function Table<T, U = undefined>({
 		onRowSelectionChange: selection?.setRowSelection,
 		enableRowSelection: selection !== undefined,
 		enableMultiRowSelection: selection?.type === 'multi',
-		onSortingChange: setSorting,
+		onSortingChange: sorting?.disabled
+			? undefined
+			: funcUpdater => {
+					console.log({ funcUpdater });
+					if (sorting?.manualSorting) {
+						const resultSorts = (
+							funcUpdater as unknown as (
+								dataTempOldSort: SortingState
+							) => Record<string, unknown>[]
+						)(sortingInternal);
+						sorting.manualSorting.fn(resultSorts);
+					}
+					return setSortingInternal(funcUpdater);
+			  },
 		getSortedRowModel: getSortedRowModel(),
 		getRowCanExpand: () => !!expandLine,
 		getExpandedRowModel: getExpandedRowModel(),
 		manualPagination: true,
 		onPaginationChange: pagination?.setPagination,
 		meta,
-
 		globalFilterFn: globalFilter?.globalFilterFn || 'auto',
+		manualSorting: !!sorting?.manualSorting,
+		enableMultiSort: true,
 	});
 
 	useEffect(() => {
