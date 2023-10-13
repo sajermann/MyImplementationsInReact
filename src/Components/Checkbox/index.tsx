@@ -128,13 +128,13 @@ export function Checkbox({
 					{situation === 'indeterminate' && (
 						<Container>
 							{indeterminateIcon || (
-								<Icons nameIcon="Indeterminate" color="#fff" />
+								<Icons nameIcon="indeterminate" color="#fff" />
 							)}
 						</Container>
 					)}
 					{situation === 'checked' && (
 						<Container>
-							{checkedIcon || <Icons nameIcon="Checked" color="#fff" />}
+							{checkedIcon || <Icons nameIcon="checked" color="#fff" />}
 						</Container>
 					)}
 				</CheckboxRadix.Indicator>

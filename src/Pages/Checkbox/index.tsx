@@ -100,7 +100,7 @@ export function CheckboxPage() {
 								className: '!flex-row',
 							}}
 							checkedIcon={
-								<Icons nameIcon="Checked" className="text-yellow-500" />
+								<Icons nameIcon="checked" className="text-yellow-500" />
 							}
 						/>
 						<Checkbox

@@ -9,9 +9,13 @@ import { Main } from '~/Components/Main';
 import Section from '~/Components/Section';
 import { QuickAccessGithub } from '~/Components/QuickAccessGithub';
 
+const data = makeData.person(10);
+
 export function SortPage() {
+	const [sortingInternal, setSortingInternal] = useState<
+		Record<string, unknown>[]
+	>([]);
 	const { translate } = useTranslation();
-	const [data, setData] = useState<TPerson[]>([]);
 
 	const { columns } = useColumns();
 
@@ -30,10 +34,6 @@ export function SortPage() {
 		[translate]
 	);
 
-	useEffect(() => {
-		setData(makeData.person(10));
-	}, []);
-
 	return (
 		<Main data-content="content-main">
 			<Section heading={translate('SORT')}>
@@ -44,10 +44,34 @@ export function SortPage() {
 					<QuickAccessGithub name="Sort" />
 				</div>
 			</Section>
-			<Section subHeading={translate('IMPLEMENTS')}>
-				{translate('FRIENDS_IS_ARRAY_OF_OBJECT')}
+			<Section subHeading={translate('AUTOMATIC_SORT')}>
+				{translate('NOTE_FRIENDS_IS_ARRAY_OF_OBJECT')}
 
 				<Table columns={[...columns, ...columns2]} data={data} />
+			</Section>
+
+			<Section subHeading={translate('MANUAL_SORT')}>
+				{translate('THIS_IS_USEFUL_IF_YOU_ARE_DOING_SERVER_SIDE_SORTING')}
+				<p>State: {JSON.stringify(sortingInternal)}</p>
+				<Table
+					columns={[...columns, ...columns2]}
+					data={[data[0], data[1]]}
+					sorting={{
+						manualSorting: {
+							fn: setSortingInternal,
+						},
+					}}
+				/>
+			</Section>
+
+			<Section subHeading={translate('DISABLED_SORT')}>
+				<Table
+					columns={[...columns, ...columns2]}
+					data={[data[0], data[1]]}
+					sorting={{
+						disabled: true,
+					}}
+				/>
 			</Section>
 		</Main>
 	);

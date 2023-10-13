@@ -12,11 +12,13 @@ export function useColumns(columnSizeDefault?: Record<string, number>) {
 		() => [
 			{
 				accessorKey: 'id',
+				accessorFn: e => Number(e.id),
 				header: 'Id',
 				minSize: 100,
 				size: 100,
 				align: 'center',
 				enableResizing: false,
+				enableMultiSort: true,
 			},
 			{
 				accessorKey: 'avatar',
@@ -42,6 +44,7 @@ export function useColumns(columnSizeDefault?: Record<string, number>) {
 				size: columnSizeDefault ? columnSizeDefault?.name : 100,
 				align: 'center',
 				enableSorting: true,
+				enableMultiSort: true,
 			},
 			{
 				accessorKey: 'lastName',
@@ -86,11 +89,11 @@ export function useColumns(columnSizeDefault?: Record<string, number>) {
 				cell: ({ row }) =>
 					row.original.isActive ? (
 						<div className="flex items-center justify-center w-full h-6 text-green-500">
-							<Icons nameIcon="Checked" />
+							<Icons nameIcon="checked" />
 						</div>
 					) : (
 						<div className="flex items-center justify-center w-full h-9 text-red-500">
-							<Icons nameIcon="Error" />
+							<Icons nameIcon="error" />
 						</div>
 					),
 				enableResizing: false,

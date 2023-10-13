@@ -44,7 +44,7 @@ export function NotFoundPage() {
 					<div className="flex w-full flex-1 items-center justify-center">
 						<div className="flex-1 ml-2">{opt.label}</div>
 						<Link to={opt.path} className={LINK_CLASS}>
-							<Icons nameIcon="Eye" width="30px" />
+							<Icons nameIcon="eye" width="30px" />
 							Demo
 						</Link>
 					</div>

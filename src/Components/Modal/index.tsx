@@ -89,9 +89,9 @@ export function Modal({
 									onClick={() => setIsExpanded(prev => !prev)}
 								>
 									{!isExpanded ? (
-										<Icons nameIcon="ArrowsOutSimple" />
+										<Icons nameIcon="arrowsOutSimple" />
 									) : (
-										<Icons nameIcon="ArrowsInSimple" />
+										<Icons nameIcon="arrowsInSimple" />
 									)}
 								</ButtonIcon>
 							)}
@@ -102,7 +102,7 @@ export function Modal({
 									onClick={onClose}
 									data-testid="closeButtonModal"
 								>
-									<Icons nameIcon="Close" width="1rem" />
+									<Icons nameIcon="close" width="1rem" />
 								</ButtonIcon>
 							)}
 						</Dialog.Title>

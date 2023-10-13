@@ -2,6 +2,7 @@ import { delay } from '@sajermann/utils/Delay';
 import { useState } from 'react';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { dracula } from 'react-syntax-highlighter/dist/esm/styles/prism';
+import { useToast } from '~/Hooks/UseToast';
 
 import { Button } from '../Button';
 import { Icons } from '../Icons';
@@ -12,15 +13,25 @@ type Props = {
 	language?: 'jsx' | 'shell';
 };
 export function CodeBlock({ children, language }: Props) {
+	const { customToast } = useToast();
 	const [success, setSuccess] = useState(false);
 	const [isLoading, setIsLoading] = useState(false);
 
 	async function handleCopy() {
-		setIsLoading(true);
-		await navigator.clipboard.writeText(children);
-		setIsLoading(false);
-		setSuccess(true);
-		await delay(2000);
+		try {
+			setIsLoading(true);
+			await navigator.clipboard.writeText(children);
+			setSuccess(true);
+		} catch {
+			customToast({
+				msg: 'Modo copy só disponível em ambientes seguros (HTTPS)',
+				type: 'error',
+			});
+		} finally {
+			setIsLoading(false);
+			await delay(1000);
+			setSuccess(false);
+		}
 	}
 
 	return (
@@ -41,7 +52,7 @@ export function CodeBlock({ children, language }: Props) {
 							fullIcon: true,
 						},
 					}}
-					endIcon={<Icons nameIcon="ClipboardText" color="#fff" />}
+					endIcon={<Icons nameIcon="clipboardText" color="#fff" />}
 				/>
 			</div>
 			<SyntaxHighlighter language={language || 'jsx'} style={dracula}>
