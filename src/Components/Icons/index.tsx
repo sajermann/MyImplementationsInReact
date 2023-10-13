@@ -1836,7 +1836,7 @@ const ICONS = {
 
 export const keysIcons = Object.keys(ICONS);
 
-type AllowNames = keyof typeof ICONS;
+export type AllowNames = keyof typeof ICONS;
 
 type IconProps = SVGProps<SVGSVGElement> & {
 	nameIcon?: AllowNames;
@@ -1845,6 +1845,7 @@ type IconProps = SVGProps<SVGSVGElement> & {
 
 export function Icons({ nameIcon, ...rest }: IconProps) {
 	if (!nameIcon) return null;
-	const iconName = nameIcon.charAt(0).toLowerCase() + nameIcon.slice(1);
+	const iconName = (nameIcon.charAt(0).toLowerCase() +
+		nameIcon.slice(1)) as AllowNames;
 	return ICONS[iconName as 'shortList']({ ...rest }) || null;
 }

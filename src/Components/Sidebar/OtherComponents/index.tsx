@@ -21,7 +21,7 @@ export function OtherComponents() {
 						className="flex items-center justify-center hover:text-primary-700 transition-colors duration-500"
 						to={triRoutes.prev.path}
 					>
-						<Icons nameIcon="ArrowSingleLeft" width="15px" />{' '}
+						<Icons nameIcon="arrowSingleLeft" width="15px" />{' '}
 						{triRoutes.prev.label}
 					</Link>
 				)}
@@ -31,7 +31,7 @@ export function OtherComponents() {
 						to={triRoutes.next.path}
 					>
 						{triRoutes.next.label}
-						<Icons nameIcon="ArrowSingleRight" width="15px" />
+						<Icons nameIcon="arrowSingleRight" width="15px" />
 					</Link>
 				)}
 			</div>

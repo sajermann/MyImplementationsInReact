@@ -51,7 +51,7 @@ export const Input = forwardRef((props: Props, ref) => {
 				/>
 				{isLoading && (
 					<Icons
-						nameIcon="LoadingCircle"
+						nameIcon="loadingCircle"
 						width="20px"
 						height="20px"
 						color="#44659d"

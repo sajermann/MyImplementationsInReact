@@ -67,7 +67,7 @@ export function EditablePage() {
 									data: { ...info.row.original },
 								})
 							}
-							endIcon={<Icons nameIcon="Pen" />}
+							endIcon={<Icons nameIcon="pen" />}
 						/>
 					</div>
 				),
@@ -80,7 +80,7 @@ export function EditablePage() {
 							variant="Outlined"
 							type="button"
 							onClick={handleSave}
-							endIcon={<Icons nameIcon="Save" />}
+							endIcon={<Icons nameIcon="save" />}
 						/>
 
 						<Button
@@ -90,7 +90,7 @@ export function EditablePage() {
 							variant="Outlined"
 							type="button"
 							onClick={() => setUpdateLine(null)}
-							endIcon={<Icons nameIcon="Error" />}
+							endIcon={<Icons nameIcon="error" />}
 						/>
 					</div>
 				),
@@ -190,11 +190,11 @@ export function EditablePage() {
 				cell: ({ row }) =>
 					row.original.isActive ? (
 						<div className="flex items-center justify-center w-full h-6 text-green-500">
-							<Icons nameIcon="Checked" />
+							<Icons nameIcon="checked" />
 						</div>
 					) : (
 						<div className="flex items-center justify-center w-full h-9 text-red-500">
-							<Icons nameIcon="Error" />
+							<Icons nameIcon="error" />
 						</div>
 					),
 				cellEdit: () => (

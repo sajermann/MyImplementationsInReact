@@ -3,8 +3,8 @@ import { Icons } from '~/Components/Icons';
 import { useTranslation } from '~/Hooks/UseTranslation';
 
 const config = {
-	en: <Icons nameIcon="Eua" />,
-	'pt-BR': <Icons nameIcon="Brazil" />,
+	en: <Icons nameIcon="eua" />,
+	'pt-BR': <Icons nameIcon="brazil" />,
 };
 
 export function AnimateInViewDemo() {

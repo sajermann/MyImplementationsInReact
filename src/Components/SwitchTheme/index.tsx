@@ -20,7 +20,7 @@ export function SwitchTheme() {
 					)}
 					onClick={!darkMode ? toggleDarkMode : undefined}
 				>
-					<Icons nameIcon="Moon" />
+					<Icons nameIcon="moon" />
 					{translate('DARK')}
 				</button>
 				<button
@@ -33,7 +33,7 @@ export function SwitchTheme() {
 					)}
 					onClick={darkMode ? toggleDarkMode : undefined}
 				>
-					<Icons nameIcon="Sun" />
+					<Icons nameIcon="sun" />
 					{translate('LIGHT')}
 				</button>
 			</div>

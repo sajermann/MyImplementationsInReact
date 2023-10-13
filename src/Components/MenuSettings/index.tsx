@@ -18,7 +18,7 @@ export default function MenuSettings() {
 	return (
 		<>
 			<HeaderButton onClick={() => setIsOpen(!isOpen)}>
-				<Icons nameIcon="Gear" width="22" />
+				<Icons nameIcon="gear" width="22" />
 			</HeaderButton>
 
 			<Drawer
@@ -39,7 +39,7 @@ export default function MenuSettings() {
 							onClick={() => setIsOpen(false)}
 							data-testid="closeButtonModal"
 						>
-							<Icons nameIcon="Close" width="1rem" />
+							<Icons nameIcon="close" width="1rem" />
 						</ButtonIcon>
 					</Nav>
 					<div className="flex flex-col p-4 gap-4">

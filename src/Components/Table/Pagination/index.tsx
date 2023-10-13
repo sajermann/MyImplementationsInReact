@@ -92,28 +92,28 @@ export function Pagination<T>({
 					onClick={() => table.setPageIndex(0)}
 					disabled={!table.getCanPreviousPage() || pagination?.disabledActions}
 				>
-					<Icons nameIcon="ArrowPairLeft" color="#fff" />
+					<Icons nameIcon="arrowPairLeft" color="#fff" />
 				</ButtonPagination>
 				<ButtonPagination
 					{...propsButtonPrevPage}
 					onClick={() => table.previousPage()}
 					disabled={!table.getCanPreviousPage() || pagination?.disabledActions}
 				>
-					<Icons nameIcon="ArrowSingleLeft" color="#fff" />
+					<Icons nameIcon="arrowSingleLeft" color="#fff" />
 				</ButtonPagination>
 				<ButtonPagination
 					{...propsButtonNextPage}
 					onClick={() => table.nextPage()}
 					disabled={!table.getCanNextPage() || pagination?.disabledActions}
 				>
-					<Icons nameIcon="ArrowSingleRight" color="#fff" />
+					<Icons nameIcon="arrowSingleRight" color="#fff" />
 				</ButtonPagination>
 				<ButtonPagination
 					{...propsButtonLastPage}
 					onClick={() => table.setPageIndex(table.getPageCount() - 1)}
 					disabled={!table.getCanNextPage() || pagination?.disabledActions}
 				>
-					<Icons nameIcon="ArrowPairRight" color="#fff" />
+					<Icons nameIcon="arrowPairRight" color="#fff" />
 				</ButtonPagination>
 				<span className="flex items-center gap-1">
 					<div>Pág.</div>

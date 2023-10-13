@@ -3,13 +3,13 @@
  */
 import { render } from '@testing-library/react';
 import { it, describe, expect } from 'vitest';
-import { Icons, keysIcons } from '.';
+import { AllowNames, Icons, keysIcons } from '.';
 
 describe('Components/Icons', () => {
 	keysIcons.map(nameIcon =>
 		it(`should render ${nameIcon}`, async () => {
 			const { getByTestId } = render(
-				<Icons nameIcon={nameIcon} data-testid={nameIcon} />
+				<Icons nameIcon={nameIcon as AllowNames} data-testid={nameIcon} />
 			);
 			expect(getByTestId(nameIcon)).toBeInTheDocument();
 		})

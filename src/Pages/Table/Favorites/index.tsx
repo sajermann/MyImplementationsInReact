@@ -34,9 +34,9 @@ export function FavoritesPage() {
 				cell: ({ row }: CellContext<TPerson, unknown>) => (
 					<div className="w-full h-6 flex items-center justify-center hover:cursor-pointer">
 						{row.getIsSelected() ? (
-							<Icons nameIcon="Star" fill="#0054B6" stroke="#0054B6" />
+							<Icons nameIcon="star" fill="#0054B6" stroke="#0054B6" />
 						) : (
-							<Icons nameIcon="Star" stroke="#0054B6" />
+							<Icons nameIcon="star" stroke="#0054B6" />
 						)}
 					</div>
 				),

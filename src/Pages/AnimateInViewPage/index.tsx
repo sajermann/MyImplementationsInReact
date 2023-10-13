@@ -6,8 +6,8 @@ import { Icons } from '~/Components/Icons';
 import { AnimateInView } from '~/Components/AnimateInView';
 
 const config = {
-	en: <Icons nameIcon="Eua" />,
-	'pt-BR': <Icons nameIcon="Brazil" />,
+	en: <Icons nameIcon="eua" />,
+	'pt-BR': <Icons nameIcon="brazil" />,
 };
 
 export function AnimateInViewPage() {

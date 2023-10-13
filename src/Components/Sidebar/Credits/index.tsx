@@ -12,7 +12,7 @@ export default function Credits() {
 					rel="noopener noreferrer"
 				>
 					<div className="w-9 h-9">
-						<Icons nameIcon="Linkedin" />
+						<Icons nameIcon="linkedin" />
 					</div>
 				</a>
 				<a
@@ -22,7 +22,7 @@ export default function Credits() {
 					rel="noopener noreferrer"
 				>
 					<div className="w-9 h-9">
-						<Icons nameIcon="Github" />
+						<Icons nameIcon="github" />
 					</div>
 				</a>
 			</div>
