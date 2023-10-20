@@ -31,10 +31,12 @@ export function FilterPage() {
 				header: 'ID',
 				minSize: 100,
 				size: 100,
-				align: 'center',
-				filterElement: (column: Column<TPerson, string>) => (
-					<FilterId column={column} />
-				),
+				meta: {
+					align: 'center',
+					filterElement: (column: Column<TPerson, string>) => (
+						<FilterId column={column} />
+					),
+				},
 				filterFn: (row, columnId, valueFilter) => {
 					const columnValue = Number(row.getValue(columnId));
 					const [filterType, filterValue] = valueFilter;
@@ -56,18 +58,20 @@ export function FilterPage() {
 				header: translate('NAME'),
 				minSize: 100,
 				size: 100,
-				align: 'center',
 				enableSorting: true,
-				filterElement: (
-					column: Column<TPerson, string>,
-					table: TTable<TPerson>
-				) => (
-					<FilterColumnBySelect
-						column={column}
-						table={table}
-						propForFilter="name"
-					/>
-				),
+				meta: {
+					align: 'center',
+					filterElement: (
+						column: Column<TPerson, string>,
+						table: TTable<TPerson>
+					) => (
+						<FilterColumnBySelect
+							column={column}
+							table={table}
+							propForFilter="name"
+						/>
+					),
+				},
 				filterFn: (row, columnId, valueFilter) =>
 					valueFilter.length === 0 ||
 					valueFilter.includes(row.getValue(columnId)),
@@ -79,15 +83,17 @@ export function FilterPage() {
 				header: translate('BIRTHDAY'),
 				minSize: 100,
 				size: 100,
-				align: 'center',
 				sortingFn: (rowA, rowB, columnId) => {
 					const dateA = stringToDate(rowA.getValue(columnId));
 					const dateB = stringToDate(rowB.getValue(columnId));
 					return dateB < dateA ? 1 : -1;
 				},
-				filterElement: (column: Column<TPerson, string>) => (
-					<FilterBirthday column={column} />
-				),
+				meta: {
+					align: 'center',
+					filterElement: (column: Column<TPerson, string>) => (
+						<FilterBirthday column={column} />
+					),
+				},
 				filterFn: (row, columnId, valueFilter) =>
 					tableUtils.filterRangeDate({ row, columnId, valueFilter }),
 			},
@@ -96,17 +102,19 @@ export function FilterPage() {
 				header: 'Email',
 				minSize: 100,
 				size: 100,
-				align: 'Center',
-				filterElement: (
-					column: Column<TPerson, string>,
-					table: TTable<TPerson>
-				) => (
-					<FilterColumnBySelect
-						column={column}
-						table={table}
-						propForFilter="email"
-					/>
-				),
+				meta: {
+					align: 'center',
+					filterElement: (
+						column: Column<TPerson, string>,
+						table: TTable<TPerson>
+					) => (
+						<FilterColumnBySelect
+							column={column}
+							table={table}
+							propForFilter="email"
+						/>
+					),
+				},
 				filterFn: (row, columnId, valueFilter) =>
 					valueFilter.length === 0 ||
 					valueFilter.includes(row.getValue(columnId)),
@@ -118,7 +126,6 @@ export function FilterPage() {
 				header: translate('FRIENDS'),
 				minSize: 100,
 				size: 200,
-				align: 'left',
 				cell: info => info.getValue(),
 				enableGlobalFilter: false,
 			},

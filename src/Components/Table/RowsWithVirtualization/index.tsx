@@ -58,21 +58,15 @@ export function RowsWithVirtualization<T>({
 								<Td
 									{...{
 										style: {
-											// @ts-expect-error align exists
-											textAlign: cell.column.columnDef.align,
-											borderRight: cell.column.getIsResizing()
-												? '0.1px solid'
-												: 'none',
+											textAlign: cell.column.columnDef.meta?.align,
 										},
 									}}
 									title={cell.getContext().getValue() as string}
 									key={cell.id}
 								>
 									{rowForUpdate?.row === cell.row.index &&
-									// @ts-expect-error align cellEdit
-									cell.column.columnDef.cellEdit
-										? // @ts-expect-error align cellEdit
-										  cell.column.columnDef.cellEdit(cell.row)
+									cell.column.columnDef.meta?.cellEdit
+										? cell.column.columnDef.meta?.cellEdit(cell.row)
 										: flexRender(cell.column.columnDef.cell, cell.getContext())}
 								</Td>
 							))}

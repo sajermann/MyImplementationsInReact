@@ -132,6 +132,8 @@ export function Pagination<T>({
 								const page = e.target.value ? Number(e.target.value) - 1 : 0;
 								table.setPageIndex(page);
 							}}
+							min={1}
+							max={table.getPageCount()}
 						/>
 					</div>
 				</span>

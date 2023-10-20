@@ -16,7 +16,9 @@ export function useColumns(columnSizeDefault?: Record<string, number>) {
 				header: 'Id',
 				minSize: 100,
 				size: 100,
-				align: 'center',
+				meta: {
+					align: 'center',
+				},
 				enableResizing: false,
 				enableMultiSort: true,
 			},
@@ -25,7 +27,9 @@ export function useColumns(columnSizeDefault?: Record<string, number>) {
 				header: 'Avatar',
 				minSize: 60,
 				size: 60,
-				align: 'left',
+				meta: {
+					align: 'center',
+				},
 				cell: ({ getValue }) => (
 					<div className="w-full flex items-center justify-center">
 						<div className="w-14 h-full">
@@ -42,16 +46,20 @@ export function useColumns(columnSizeDefault?: Record<string, number>) {
 				header: translate('NAME'),
 				minSize: 100,
 				size: columnSizeDefault ? columnSizeDefault?.name : 100,
-				align: 'center',
 				enableSorting: true,
 				enableMultiSort: true,
+				meta: {
+					align: 'center',
+				},
 			},
 			{
 				accessorKey: 'lastName',
 				header: translate('LAST_NAME'),
 				minSize: 100,
 				size: columnSizeDefault ? columnSizeDefault?.lastName : 100,
-				align: 'center',
+				meta: {
+					align: 'center',
+				},
 			},
 			{
 				accessorFn: row => formatDate(new Date(row.birthday)),
@@ -59,7 +67,9 @@ export function useColumns(columnSizeDefault?: Record<string, number>) {
 				header: translate('BIRTHDAY'),
 				minSize: 100,
 				size: columnSizeDefault ? columnSizeDefault?.birthday : 100,
-				align: 'center',
+				meta: {
+					align: 'center',
+				},
 				sortingFn: (rowA, rowB, columnId) => {
 					const dateA = stringToDate(rowA.getValue(columnId));
 					const dateB = stringToDate(rowB.getValue(columnId));
@@ -71,21 +81,27 @@ export function useColumns(columnSizeDefault?: Record<string, number>) {
 				header: 'Email',
 				minSize: 100,
 				size: columnSizeDefault ? columnSizeDefault?.email : 100,
-				align: 'Center',
+				meta: {
+					align: 'center',
+				},
 			},
 			{
 				accessorKey: 'role',
 				header: 'Role',
 				minSize: 100,
 				size: columnSizeDefault?.role || 100,
-				align: 'center',
+				meta: {
+					align: 'center',
+				},
 			},
 			{
 				accessorKey: 'isActive',
 				header: translate('ACTIVE'),
 				minSize: 100,
 				size: 100,
-				align: 'center',
+				meta: {
+					align: 'center',
+				},
 				cell: ({ row }) =>
 					row.original.isActive ? (
 						<div className="flex items-center justify-center w-full h-6 text-green-500">

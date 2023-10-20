@@ -58,6 +58,7 @@ export function Tbody<T>({
 				table={table}
 				disabledVirtualization={disabledVirtualization}
 				expandLine={expandLine}
+				rowForUpdate={rowForUpdate}
 				selection={selection}
 			/>
 

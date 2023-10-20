@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useMemo, useState } from 'react';
 import { ColumnDef } from '@tanstack/react-table';
 import { Table } from '~/Components/Table';
 import { useTranslation } from '~/Hooks/UseTranslation';
@@ -47,13 +47,17 @@ export function SortPage() {
 			<Section subHeading={translate('AUTOMATIC_SORT')}>
 				{translate('NOTE_FRIENDS_IS_ARRAY_OF_OBJECT')}
 
-				<Table columns={[...columns, ...columns2]} data={data} />
+				{/* <Table
+					columns={[...columns, ...columns2]}
+					data={data}
+					disabledVirtualization
+				/> */}
 			</Section>
 
 			<Section subHeading={translate('MANUAL_SORT')}>
 				{translate('THIS_IS_USEFUL_IF_YOU_ARE_DOING_SERVER_SIDE_SORTING')}
 				<p>State: {JSON.stringify(sortingInternal)}</p>
-				<Table
+				{/* <Table
 					columns={[...columns, ...columns2]}
 					data={[data[0], data[1]]}
 					sorting={{
@@ -61,7 +65,7 @@ export function SortPage() {
 							fn: setSortingInternal,
 						},
 					}}
-				/>
+				/> */}
 			</Section>
 
 			<Section subHeading={translate('DISABLED_SORT')}>
