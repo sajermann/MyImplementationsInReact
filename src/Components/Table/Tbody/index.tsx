@@ -2,6 +2,8 @@ import { RefObject } from 'react';
 import { Table, ColumnDef, Row } from '@tanstack/react-table';
 import { TSelection } from '~/Types/TSelection';
 
+import { managerClassNames } from '~/Utils/ManagerClassNames';
+import { useDarkModeZustand } from '~/Store/UseDarkMode';
 import { NoData } from '../NoData';
 import { IsLoading } from '../IsLoading';
 import { RowsWithoutVirtualization } from '../RowsWithoutVirtualization';
@@ -33,9 +35,14 @@ export function Tbody<T>({
 	disabledVirtualization,
 }: Props<T>) {
 	const { rows } = table.getRowModel();
+	const { darkMode } = useDarkModeZustand();
 
 	return (
 		<tbody
+			className={managerClassNames({
+				'[&>*:nth-child(odd)]:bg-dark-500': darkMode,
+				'[&>*:nth-child(odd)]:bg-[#f2f2f2]': !darkMode,
+			})}
 			style={{
 				opacity: isLoading ? 0.5 : 1,
 			}}

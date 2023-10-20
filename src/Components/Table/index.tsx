@@ -112,7 +112,9 @@ export function Table<T, U = undefined>({
 					size: 50,
 					minSize: 50,
 					maxSize: 50,
-					align: 'center',
+					meta: {
+						align: 'center',
+					},
 					enableSorting: false,
 					enableResizing: false,
 					cell: ({ row }: CellContext<T, unknown>) => (

@@ -33,16 +33,11 @@ export function UpdateRowExpanded({ row, onSave }: Props) {
 		onSave(row, formData);
 	}
 
-	function onChange(e: { id: number; name: string }) {
-		console.log('result onchange', e);
-		setFormData({
-			...formData,
-			role: e.name,
-		});
-	}
-
 	return (
-		<form onSubmit={handleSave} className="p-2 flex flex-col gap-2 ">
+		<form
+			onSubmit={handleSave}
+			className="bg-green-500 p-2 flex flex-col gap-2 "
+		>
 			<div className="grid grid-cols-12 gap-6">
 				<Input
 					label="Nome"

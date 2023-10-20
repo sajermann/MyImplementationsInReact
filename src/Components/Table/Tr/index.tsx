@@ -1,6 +1,5 @@
 import { Row } from '@tanstack/react-table';
 import { DetailedHTMLProps, HTMLAttributes } from 'react';
-import { useDarkModeZustand } from '~/Store/UseDarkMode';
 import { TSelection } from '~/Types/TSelection';
 import { managerClassNames } from '~/Utils/ManagerClassNames';
 import { tableUtils } from '~/Utils/Table';
@@ -24,14 +23,11 @@ export function Tr<T>({
 	expandLine,
 	...rest
 }: Props<T>) {
-	const { darkMode } = useDarkModeZustand();
 	return (
 		<tr
 			{...rest}
 			className={managerClassNames([
 				{ [styles.tr]: true },
-				{ [styles.even]: row && row.index % 2 > 0 && !darkMode },
-				{ '!bg-dark-500': row && row.index % 2 > 0 && darkMode },
 				{ [styles.isSelected]: selection && row && row.getIsSelected() },
 				{ [styles.isExpanded]: expandLine && row && row.getIsExpanded() },
 				{ [rest.className as string]: rest.className },
