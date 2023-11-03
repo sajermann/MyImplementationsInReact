@@ -37,18 +37,25 @@ export function ReactDayPicker() {
 				name="dob"
 				render={({ field }) => (
 					<div className="flex flex-col">
-						{console.log({ field })}
+						{console.log({ field }, field.ref(console.log))}
 						<span>Date of birth</span>
 						<Popover>
 							<PopoverTrigger>
 								<Input
-									{...field}
+									onChange={field.onChange}
+									onBlur={field.onBlur}
+									name={field.name}
+									disabled={field.disabled}
+									value={field.value ? format(field.value, 'PPP') : undefined}
 									className={managerClassNames(
 										'w-[240px] pl-3 text-left font-normal'
 									)}
 								/>
 							</PopoverTrigger>
-							<PopoverContent className="w-auto p-0 border z-10" align="start">
+							<PopoverContent
+								className="w-auto p-0 border z-10 rounded-xl bg-slate-700"
+								align="start"
+							>
 								<DayPicker
 									mode="single"
 									selected={field.value}
