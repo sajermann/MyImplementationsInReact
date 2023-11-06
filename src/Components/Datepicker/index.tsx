@@ -17,7 +17,8 @@ import DatePicker from 'react-datepicker';
 import { managerClassNames } from '~/Utils/ManagerClassNames';
 import { useTranslation } from '~/Hooks/UseTranslation';
 import { Input } from '../Input';
-import 'react-datepicker/dist/react-datepicker.css';
+// import 'react-datepicker/dist/react-datepicker.css';
+import './index.css';
 
 const LANGUAGE_OPTION = {
 	'pt-BR': ptBR,
@@ -175,12 +176,12 @@ export function Datepicker({
 				id={rest.id}
 				disabled={rest.disabled}
 				placeholderText={rest.placeholder}
-				// fixedHeight
-				// calendarClassName="bg-zinc-900 text-white"
-				// weekDayClassName={() => 'bg-zinc-900 text-white'}
-				// wrapperClassName="bg-zinc-900 text-white"
-				// dayClassName={() => 'bg-zinc-900 text-white'}
-				// monthClassName={() => 'bg-zinc-900 text-white'}
+				fixedHeight
+				calendarClassName="bg-zinc-900 text-white"
+				weekDayClassName={() => 'bg-zinc-900 text-white'}
+				wrapperClassName="bg-zinc-900 text-white"
+				dayClassName={() => 'bg-zinc-900 text-white'}
+				monthClassName={() => 'bg-zinc-900 text-white'}
 				// className={styles.input}
 				// popperClassName={styles.popper}
 				selected={startDate}
@@ -198,25 +199,25 @@ export function Datepicker({
 						ref={ref}
 					/>
 				}
-				renderCustomHeader={({ date, decreaseMonth, increaseMonth }) => (
-					<div className="w-full flex justify-between">
-						<button
-							className="w-6 flex items-center justify-center"
-							type="button"
-							onClick={() => decreaseMonth()}
-						>
-							{'<'}
-						</button>
-						{formatMonthAndYear(date)}
-						<button
-							className="w-6 flex items-center justify-center"
-							type="button"
-							onClick={() => increaseMonth()}
-						>
-							{'>'}
-						</button>
-					</div>
-				)}
+				// renderCustomHeader={({ date, decreaseMonth, increaseMonth }) => (
+				// 	<div className="w-full flex justify-between">
+				// 		<button
+				// 			className="w-6 flex items-center justify-center"
+				// 			type="button"
+				// 			onClick={() => decreaseMonth()}
+				// 		>
+				// 			{'<'}
+				// 		</button>
+				// 		{formatMonthAndYear(date)}
+				// 		<button
+				// 			className="w-6 flex items-center justify-center"
+				// 			type="button"
+				// 			onClick={() => increaseMonth()}
+				// 		>
+				// 			{'>'}
+				// 		</button>
+				// 	</div>
+				// )}
 			/>
 		</div>
 	);

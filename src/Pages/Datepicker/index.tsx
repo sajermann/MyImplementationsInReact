@@ -7,7 +7,6 @@ import { Datepicker } from '~/Components/Datepicker';
 import { useState } from 'react';
 import { Button } from '~/Components/Button';
 import { CodeBlock } from '~/Components/CodeBlock';
-import { ReactDayPicker } from '~/Components/Datepicker/ReactDayPicker';
 
 export function DatepickerPage() {
 	const [firstPicker, setFirstPicker] = useState(new Date().toISOString());
@@ -15,7 +14,7 @@ export function DatepickerPage() {
 
 	return (
 		<Main data-content="content-main">
-			{/* <Section title="Datepicker" variant="h1">
+			<Section title="Datepicker" variant="h1">
 				{`${translate('IMPLEMENTS_COMPONENT')} Datepicker ${translate(
 					'USING_THE_LIB'
 				)} react-datepicker`}
@@ -102,9 +101,7 @@ export function DatepickerPage() {
 						id="DateFormat3"
 					/>
 				</ComponentBlock>
-			</Section> */}
-
-			<ReactDayPicker />
+			</Section>
 		</Main>
 	);
 }
