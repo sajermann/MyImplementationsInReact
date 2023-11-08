@@ -1,5 +1,6 @@
 {
 	"translations": {
+		"DISABLED": "Desabilitado",
 		"DISABLED_SORT": "Ordenação Desabilitada",
 		"THIS_IS_USEFUL_IF_YOU_ARE_DOING_SERVER_SIDE_SORTING": "Isso é útil se você for fazer ordenação no servidor",
 		"MANUAL_SORT": "Ordenação Manual",

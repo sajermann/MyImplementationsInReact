@@ -13,11 +13,9 @@ import {
 	forwardRef,
 } from 'react';
 import DatePicker from 'react-datepicker';
-
 import { managerClassNames } from '~/Utils/ManagerClassNames';
 import { useTranslation } from '~/Hooks/UseTranslation';
 import { Input } from '../Input';
-// import 'react-datepicker/dist/react-datepicker.css';
 import './index.css';
 
 const LANGUAGE_OPTION = {
@@ -95,6 +93,7 @@ interface Props
 		HTMLAttributes<HTMLDivElement>,
 		HTMLDivElement
 	>;
+	excludeDateIntervals?: Array<{ start: Date; end: Date }>;
 }
 
 export function Datepicker({
@@ -104,6 +103,7 @@ export function Datepicker({
 	customDefaultValue,
 	dateFormat = 'dd/MM/yyyy',
 	withoutDay,
+	excludeDateIntervals,
 	...rest
 }: Props) {
 	const [startDate, setStartDate] = useState<Date | null>(
@@ -177,13 +177,6 @@ export function Datepicker({
 				disabled={rest.disabled}
 				placeholderText={rest.placeholder}
 				fixedHeight
-				calendarClassName="bg-zinc-900 text-white"
-				weekDayClassName={() => 'bg-zinc-900 text-white'}
-				wrapperClassName="bg-zinc-900 text-white"
-				dayClassName={() => 'bg-zinc-900 text-white'}
-				monthClassName={() => 'bg-zinc-900 text-white'}
-				// className={styles.input}
-				// popperClassName={styles.popper}
 				selected={startDate}
 				onChange={onChangeInternal}
 				locale={LANGUAGE_OPTION[currentLanguage as 'pt-BR' | 'en']}
@@ -191,6 +184,7 @@ export function Datepicker({
 				closeOnScroll
 				shouldCloseOnSelect
 				showMonthYearPicker={withoutDay}
+				excludeDateIntervals={excludeDateIntervals}
 				customInput={
 					<CustomInput
 						// label="test"
@@ -199,6 +193,7 @@ export function Datepicker({
 						ref={ref}
 					/>
 				}
+				// showDisabledMonthNavigation
 				// renderCustomHeader={({ date, decreaseMonth, increaseMonth }) => (
 				// 	<div className="w-full flex justify-between">
 				// 		<button

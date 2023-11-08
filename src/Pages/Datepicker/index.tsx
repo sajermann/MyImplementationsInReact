@@ -7,6 +7,7 @@ import { Datepicker } from '~/Components/Datepicker';
 import { useState } from 'react';
 import { Button } from '~/Components/Button';
 import { CodeBlock } from '~/Components/CodeBlock';
+import { addDays, subDays } from 'date-fns';
 
 export function DatepickerPage() {
 	const [firstPicker, setFirstPicker] = useState(new Date().toISOString());
@@ -83,6 +84,19 @@ export function DatepickerPage() {
 						placeholder={translate('MM/YYYY')}
 						id="DateFormat2"
 						withoutDay
+					/>
+				</ComponentBlock>
+			</Section>
+
+			<Section title={translate('DISABLED_DATES')} variant="h2">
+				<ComponentBlock>
+					<Datepicker
+						label={translate('DISABLED')}
+						placeholder={translate('DD/MM/YYYY')}
+						id="Disabled"
+						excludeDateIntervals={[
+							{ start: subDays(new Date(), 5), end: addDays(new Date(), 5) },
+						]}
 					/>
 				</ComponentBlock>
 			</Section>
