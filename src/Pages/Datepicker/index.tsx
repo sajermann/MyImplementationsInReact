@@ -108,7 +108,7 @@ export function DatepickerPage() {
 							style: {
 								width: 160,
 							},
-							className: '!flex-row',
+							className: 'flex !flex-row items-center',
 						}}
 						label={translate('DATE')}
 						placeholder={translate('DD/MM/YYYY')}

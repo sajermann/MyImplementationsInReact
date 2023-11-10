@@ -43,7 +43,8 @@ export function InputPage() {
 						placeholder="Label Props"
 						labelProps={{
 							children: 'Label Props',
-							style: { color: 'red' },
+							style: { color: 'yellow' },
+							className: 'italic font-extrabold',
 						}}
 						id="Label Props"
 					/>
@@ -59,9 +60,17 @@ export function InputPage() {
 						containerProps={{
 							style: {
 								display: 'flex',
-								flexDirection: 'column',
+								flexDirection: 'row',
+								alignItems: 'center',
 								border: '1px solid',
-								width: 300,
+								width: 500,
+							},
+							className: 'p-5',
+						}}
+						labelProps={{
+							style: {
+								// textWrap: 'nowrap',
+								whiteSpace: 'nowrap',
 							},
 						}}
 					/>

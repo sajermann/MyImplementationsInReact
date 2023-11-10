@@ -1,4 +1,3 @@
-/* eslint-disable import/no-extraneous-dependencies */
 import { enUS, ptBR } from 'date-fns/locale';
 import {
 	useEffect,
@@ -16,6 +15,7 @@ import DatePicker from 'react-datepicker';
 import { managerClassNames } from '~/Utils/ManagerClassNames';
 import { useTranslation } from '~/Hooks/UseTranslation';
 import { Input } from '../Input';
+// import 'react-datepicker/dist/react-datepicker.css';
 import './index.css';
 
 const LANGUAGE_OPTION = {
@@ -54,11 +54,23 @@ function formatDataTemp(
 	return ob[dateFormat](value);
 }
 
+type TLabelProps = DetailedHTMLProps<
+	LabelHTMLAttributes<HTMLLabelElement>,
+	HTMLLabelElement
+>;
+
+type TContainerProps = DetailedHTMLProps<
+	HTMLAttributes<HTMLDivElement>,
+	HTMLDivElement
+>;
+
 const CustomInput = forwardRef(
 	(
 		props: HTMLProps<HTMLInputElement> & {
 			withoutDay?: boolean;
 			dateFormat?: TDateFormat;
+			labelProps?: TLabelProps;
+			containerProps?: TContainerProps;
 		},
 		ref
 	) => {
@@ -85,14 +97,8 @@ interface Props
 	label?: string;
 	customDefaultValue?: Date;
 	dateFormat?: TDateFormat;
-	labelProps?: DetailedHTMLProps<
-		LabelHTMLAttributes<HTMLLabelElement>,
-		HTMLLabelElement
-	>;
-	containerProps?: DetailedHTMLProps<
-		HTMLAttributes<HTMLDivElement>,
-		HTMLDivElement
-	>;
+	labelProps?: TLabelProps;
+	containerProps?: TContainerProps;
 	excludeDateIntervals?: Array<{ start: Date; end: Date }>;
 }
 
@@ -162,15 +168,15 @@ export function Datepicker({
 		<div
 			{...containerProps}
 			className={managerClassNames([
-				{ 'flex flex-col gap-2 justify-center': true },
 				{ [containerProps?.className as string]: containerProps?.className },
 			])}
 		>
-			{label && (
-				<label htmlFor={rest.id} {...labelProps}>
-					{label}
-				</label>
-			)}
+			{/* // 	{label && (
+		// 		<label htmlFor={rest.id} {...labelProps}>
+		// 			{label}
+		// 		</label>
+		// 	)} */}
+
 			<DatePicker
 				autoComplete="off"
 				id={rest.id}
@@ -187,32 +193,14 @@ export function Datepicker({
 				excludeDateIntervals={excludeDateIntervals}
 				customInput={
 					<CustomInput
-						// label="test"
+						containerProps={containerProps}
+						labelProps={labelProps}
+						label={label}
 						withoutDay={withoutDay}
 						dateFormat={dateFormat}
 						ref={ref}
 					/>
 				}
-				// showDisabledMonthNavigation
-				// renderCustomHeader={({ date, decreaseMonth, increaseMonth }) => (
-				// 	<div className="w-full flex justify-between">
-				// 		<button
-				// 			className="w-6 flex items-center justify-center"
-				// 			type="button"
-				// 			onClick={() => decreaseMonth()}
-				// 		>
-				// 			{'<'}
-				// 		</button>
-				// 		{formatMonthAndYear(date)}
-				// 		<button
-				// 			className="w-6 flex items-center justify-center"
-				// 			type="button"
-				// 			onClick={() => increaseMonth()}
-				// 		>
-				// 			{'>'}
-				// 		</button>
-				// 	</div>
-				// )}
 			/>
 		</div>
 	);
