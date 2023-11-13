@@ -1,5 +1,7 @@
 {
 	"translations": {
+		"ERROR_MODE": "Error Mode",
+		"ERRORS": "Errors",
 		"DISABLED": "Disabled",
 		"DISABLED_SORT": "Disabled Sort",
 		"THIS_IS_USEFUL_IF_YOU_ARE_DOING_SERVER_SIDE_SORTING": "This is useful if you are doing server-side sorting",

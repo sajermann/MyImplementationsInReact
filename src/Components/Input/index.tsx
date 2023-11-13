@@ -5,9 +5,7 @@ import {
 import { forwardRef } from 'react';
 import { tv } from 'tailwind-variants';
 
-type Props = ISajermannReactInput & {
-	error?: string;
-};
+type Props = ISajermannReactInput;
 
 const input = tv({
 	slots: {
@@ -31,7 +29,8 @@ const input = tv({
 			},
 			error: {
 				labelPropsInternal: 'text-red-500',
-				inputPropsInternal: 'outline-red-700 border-red-500',
+				inputPropsInternal:
+					'outline-none focus:ring-1 focus:ring-red-500 group-hover:border-red-500 focus:border-red-500',
 			},
 
 			normal: {
@@ -42,7 +41,6 @@ const input = tv({
 	},
 
 	defaultVariants: {
-		// size: 'md',
 		color: 'normal',
 	},
 });
@@ -50,32 +48,26 @@ const input = tv({
 const Input = forwardRef<HTMLInputElement, Props>((props, ref) => {
 	const { labelPropsInternal, inputPropsInternal, containerPropsInternal } =
 		input({
-			color: props?.error ? 'error' : 'primary',
+			color: props?.errors ? 'error' : 'primary',
 		});
 	return (
-		<div className="w-full">
-			<InputSajermann
-				{...props}
-				ref={ref}
-				containerProps={{
-					...props.containerProps,
-					// className: `flex w-full flex-col gap-2 ${props.containerProps?.className}`,
-					className: containerPropsInternal({
-						class: props.containerProps?.className,
-					}),
-				}}
-				labelProps={{
-					...props.labelProps,
-					className: labelPropsInternal({
-						class: props.labelProps?.className,
-					}),
-				}}
-				// className={`w-full h-11 py-1 px-2 rounded-md border dark:text-black outline-none focus:outline-2 ${
-				// 	props.className ? props.className : ''
-				// }`}
-				className={inputPropsInternal({ class: props?.className })}
-			/>
-		</div>
+		<InputSajermann
+			{...props}
+			ref={ref}
+			containerProps={{
+				...props.containerProps,
+				className: containerPropsInternal({
+					class: props.containerProps?.className,
+				}),
+			}}
+			labelProps={{
+				...props.labelProps,
+				className: labelPropsInternal({
+					class: props.labelProps?.className,
+				}),
+			}}
+			className={inputPropsInternal({ class: props?.className })}
+		/>
 	);
 });
 

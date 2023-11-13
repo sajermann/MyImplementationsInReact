@@ -5,9 +5,12 @@ import { ComponentBlock } from '~/Components/ComponentBlock';
 import { CodeBlock } from '~/Components/CodeBlock';
 import { Input } from '~/Components/Input';
 import { QuickAccessGithub } from '~/Components/QuickAccessGithub';
+import { useState } from 'react';
+import { Checkbox } from '~/Components/Checkbox';
 
 export function InputPage() {
 	const { translate } = useTranslation();
+	const [errorMode, setErrorMode] = useState(false);
 
 	function addMessage(valor: string) {
 		const result = valor.replace('Very Good - ', '');
@@ -178,6 +181,32 @@ export function InputPage() {
 						placeholder={translate('DEBOUNCE_2_SECONDS')}
 						onChange={console.log}
 						debounce={2000}
+					/>
+				</ComponentBlock>
+			</Section>
+
+			<Section subHeading={translate('ERRORS')}>
+				<ComponentBlock>
+					<Checkbox
+						id="error_mode_checkbox"
+						label={translate('ERROR_MODE')}
+						checked={errorMode}
+						onCheckedChange={e => setErrorMode(e.target.value as boolean)}
+					/>
+					<Input
+						label={translate('ERROR_MODE')}
+						placeholder={translate('ERROR_MODE')}
+						errors={
+							errorMode ? ['Required', 'Invalid email adress'] : undefined
+						}
+						errorContainerProps={{
+							style: {
+								display: 'flex',
+								flexDirection: 'column',
+								color: 'red',
+								fontSize: 14,
+							},
+						}}
 					/>
 				</ComponentBlock>
 			</Section>
