@@ -7,6 +7,9 @@ import { Input } from '~/Components/Input';
 import { QuickAccessGithub } from '~/Components/QuickAccessGithub';
 import { useState } from 'react';
 import { Checkbox } from '~/Components/Checkbox';
+import { ContainerInput } from '~/Components/ContainerInput';
+import { Label } from '~/Components/Label';
+import { ErrorsInput } from '~/Components/ErrorsInput';
 
 export function InputPage() {
 	const { translate } = useTranslation();
@@ -36,47 +39,44 @@ export function InputPage() {
 
 			<Section subHeading={translate('TRADICIONAL_INPUT')}>
 				<ComponentBlock>
-					<Input placeholder="Label" id="Label" label="Label" />
+					<ContainerInput>
+						<Label htmlFor="label">{translate('TRADICIONAL_INPUT')}</Label>
+						<Input placeholder={translate('TRADICIONAL_INPUT')} id="label" />
+					</ContainerInput>
 				</ComponentBlock>
 			</Section>
 
 			<Section subHeading="Label Props">
 				<ComponentBlock>
-					<Input
-						placeholder="Label Props"
-						labelProps={{
-							children: 'Label Props',
-							style: { color: 'yellow' },
-							className: 'italic font-extrabold',
-						}}
-						id="Label Props"
-					/>
+					<ContainerInput>
+						<Label
+							htmlFor="labelProps"
+							className="text-yellow-500 italic font-extrabold"
+						>
+							Label Props
+						</Label>
+						<Input placeholder="Label Props" id="labelProps" />
+					</ContainerInput>
 				</ComponentBlock>
 			</Section>
 
 			<Section subHeading="Container Props">
 				<ComponentBlock>
-					<Input
-						placeholder="Container Props"
-						id="Container Props"
-						label="Container Props"
-						containerProps={{
-							style: {
-								display: 'flex',
-								flexDirection: 'row',
-								alignItems: 'center',
-								border: '1px solid',
-								width: 500,
-							},
-							className: 'p-5',
+					<ContainerInput
+						style={{
+							display: 'flex',
+							flexDirection: 'row',
+							alignItems: 'center',
+							border: '1px solid',
+							width: 500,
 						}}
-						labelProps={{
-							style: {
-								// textWrap: 'nowrap',
-								whiteSpace: 'nowrap',
-							},
-						}}
-					/>
+						className="p-5"
+					>
+						<Label htmlFor="containerProps" style={{ whiteSpace: 'nowrap' }}>
+							Container Props
+						</Label>
+						<Input placeholder="Container Props" id="containerProps" />
+					</ContainerInput>
 				</ComponentBlock>
 			</Section>
 
@@ -186,28 +186,32 @@ export function InputPage() {
 			</Section>
 
 			<Section subHeading={translate('ERRORS')}>
-				<ComponentBlock>
-					<Checkbox
-						id="error_mode_checkbox"
-						label={translate('ERROR_MODE')}
-						checked={errorMode}
-						onCheckedChange={e => setErrorMode(e.target.value as boolean)}
-					/>
-					<Input
-						label={translate('ERROR_MODE')}
-						placeholder={translate('ERROR_MODE')}
-						errors={
-							errorMode ? ['Required', 'Invalid email adress'] : undefined
-						}
-						errorContainerProps={{
-							style: {
-								display: 'flex',
-								flexDirection: 'column',
-								color: 'red',
-								fontSize: 14,
-							},
-						}}
-					/>
+				<ComponentBlock className="flex-row !items-start">
+					<ContainerInput className="flex-1">
+						<Label htmlFor="errorMode" isError={errorMode}>
+							{translate('ERROR_MODE')}
+						</Label>
+						<Input
+							placeholder={translate('ERROR_MODE')}
+							id="errorMode"
+							iserror={errorMode}
+						/>
+						<ErrorsInput
+							errors={
+								errorMode ? ['Required', 'Invalid email adress'] : undefined
+							}
+						/>
+					</ContainerInput>
+					<ContainerInput className="w-max items-center">
+						<Label htmlFor="error_mode_checkbox">
+							{translate('ERROR_MODE')}
+						</Label>
+						<Checkbox
+							id="error_mode_checkbox"
+							checked={errorMode}
+							onCheckedChange={e => setErrorMode(e.target.value as boolean)}
+						/>
+					</ContainerInput>
 				</ComponentBlock>
 			</Section>
 		</Main>

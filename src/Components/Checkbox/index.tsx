@@ -1,16 +1,14 @@
-/* eslint-disable jsx-a11y/label-has-associated-control */
 import * as CheckboxRadix from '@radix-ui/react-checkbox';
 import {
 	DetailedHTMLProps,
+	forwardRef,
 	HTMLAttributes,
-	LabelHTMLAttributes,
 	MouseEvent,
 	Ref,
 	useCallback,
 	useState,
 } from 'react';
 import { managerClassNames } from '~/Utils/ManagerClassNames';
-import { ContainerInput } from '../ContainerInput';
 
 import { Icons } from '../Icons';
 
@@ -27,40 +25,36 @@ interface Props
 	checked?: boolean | 'indeterminate';
 	defaultChecked?: boolean | 'indeterminate';
 	onClick?: (e?: MouseEvent<HTMLButtonElement, Event>) => void;
-	labelProps?: DetailedHTMLProps<
-		LabelHTMLAttributes<HTMLLabelElement>,
-		HTMLLabelElement
-	>;
-	label?: string;
 	id?: string;
 	onCheckedChange?: (data: {
 		target: { value: boolean | 'indeterminate'; id: string | undefined };
 	}) => void;
-
-	containerProps?: DetailedHTMLProps<
-		HTMLAttributes<HTMLDivElement>,
-		HTMLDivElement
-	>;
 	className?: string;
 }
 
-function Container({ children }: { children: React.ReactNode }) {
-	return (
-		<div className="p-1 w-full h-full flex items-center justify-center">
-			{children}
-		</div>
-	);
-}
+type TContainer = DetailedHTMLProps<
+	HTMLAttributes<HTMLDivElement>,
+	HTMLDivElement
+>;
+export const Container = forwardRef<HTMLDivElement, TContainer>(
+	({ className, ...rest }, ref) => (
+		<div
+			ref={ref}
+			{...rest}
+			className={managerClassNames([
+				{ 'p-1 w-full h-full flex items-center justify-center': true },
+				{ [className as string]: className },
+			])}
+		/>
+	)
+);
 
 export function Checkbox({
 	checked,
 	onClick,
 	defaultChecked,
-	labelProps,
 	onCheckedChange,
-	label,
 	id,
-	containerProps,
 	checkedIcon,
 	indeterminateIcon,
 	className,
@@ -100,45 +94,40 @@ export function Checkbox({
 	}
 
 	return (
-		<ContainerInput
-			containerProps={containerProps}
-			label={label}
-			labelProps={labelProps}
+		<CheckboxRadix.Root
+			ref={ref as unknown as Ref<HTMLButtonElement> | undefined}
+			onClick={onClick}
+			checked={checked}
+			defaultChecked={defaultChecked}
+			onCheckedChange={handleCheckedChange}
+			className={managerClassNames([
+				{ 'rounded h-11 w-11 bg-white': true },
+				{ 'disabled:cursor-not-allowed disabled:!opacity-50': true },
+				{ 'outline-none focus:ring-1 focus:ring-blue-500': true },
+				{ 'group-hover:border-blue-500 focus:border-blue-500': true },
+				{
+					'!bg-primary-500':
+						situation === 'checked' || situation === 'indeterminate',
+				},
+				{ [className as string]: className },
+			])}
 			id={id}
+			{...rest}
 		>
-			<CheckboxRadix.Root
-				ref={ref as unknown as Ref<HTMLButtonElement> | undefined}
-				onClick={onClick}
-				checked={checked}
-				defaultChecked={defaultChecked}
-				onCheckedChange={handleCheckedChange}
-				className={managerClassNames([
-					{ 'rounded h-7 w-7 border-[1px] bg-white border-black': true },
-					{ 'disabled:cursor-not-allowed disabled:!opacity-50': true },
-					{
-						'!bg-primary-500':
-							situation === 'checked' || situation === 'indeterminate',
-					},
-					{ [className as string]: className },
-				])}
-				id={id}
-				{...rest}
-			>
-				<CheckboxRadix.Indicator>
-					{situation === 'indeterminate' && (
-						<Container>
-							{indeterminateIcon || (
-								<Icons nameIcon="indeterminate" color="#fff" />
-							)}
-						</Container>
-					)}
-					{situation === 'checked' && (
-						<Container>
-							{checkedIcon || <Icons nameIcon="checked" color="#fff" />}
-						</Container>
-					)}
-				</CheckboxRadix.Indicator>
-			</CheckboxRadix.Root>
-		</ContainerInput>
+			<CheckboxRadix.Indicator>
+				{situation === 'indeterminate' && (
+					<Container>
+						{indeterminateIcon || (
+							<Icons nameIcon="indeterminate" color="#fff" />
+						)}
+					</Container>
+				)}
+				{situation === 'checked' && (
+					<Container>
+						{checkedIcon || <Icons nameIcon="checked" color="#fff" />}
+					</Container>
+				)}
+			</CheckboxRadix.Indicator>
+		</CheckboxRadix.Root>
 	);
 }

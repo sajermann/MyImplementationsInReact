@@ -1,59 +1,21 @@
-import {
-	DetailedHTMLProps,
-	HTMLAttributes,
-	InputHTMLAttributes,
-	LabelHTMLAttributes,
-} from 'react';
+import { DetailedHTMLProps, forwardRef, HTMLAttributes } from 'react';
 import { managerClassNames } from '~/Utils/ManagerClassNames';
 
-interface Props
-	extends DetailedHTMLProps<
-		InputHTMLAttributes<HTMLInputElement>,
-		HTMLInputElement
-	> {
-	children: React.ReactNode;
-	label?: string;
-	customDefaultValue?: Date;
-	labelProps?: DetailedHTMLProps<
-		LabelHTMLAttributes<HTMLLabelElement>,
-		HTMLLabelElement
-	>;
-	containerProps?: DetailedHTMLProps<
-		HTMLAttributes<HTMLDivElement>,
-		HTMLDivElement
-	>;
-}
-export function ContainerInput({
-	children,
-	label,
-	containerProps,
-	labelProps,
-}: Props) {
-	function extractorIdChildren(child: React.ReactNode): string | undefined {
-		const { props } = child as { props: { id: string } };
-		return props.id || '';
-	}
-
-	return (
+type TContainerInput = DetailedHTMLProps<
+	HTMLAttributes<HTMLDivElement>,
+	HTMLDivElement
+>;
+const ContainerInput = forwardRef<HTMLDivElement, TContainerInput>(
+	(props, ref) => (
 		<div
-			{...containerProps}
+			{...props}
+			ref={ref}
 			className={managerClassNames([
-				{ 'flex flex-col w-full items-center gap-2': true },
-				{ [containerProps?.className as string]: containerProps?.className },
+				{ 'group flex flex-col gap-1 w-full': true },
+				{ [props?.className as string]: props?.className },
 			])}
-		>
-			{label && (
-				<label
-					htmlFor={extractorIdChildren(children)}
-					{...labelProps}
-					className={managerClassNames([
-						{ [labelProps?.className as string]: labelProps?.className },
-					])}
-				>
-					{label}
-				</label>
-			)}
-			{children}
-		</div>
-	);
-}
+		/>
+	)
+);
+
+export { ContainerInput };

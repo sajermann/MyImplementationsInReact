@@ -1,19 +1,32 @@
-import {
-	ISajermannReactInput,
-	Input as InputSajermann,
-} from '@sajermann/react-input';
-import { forwardRef } from 'react';
+import { forwardRef, InputHTMLAttributes, useEffect, useState } from 'react';
 import { tv } from 'tailwind-variants';
+import { TCep } from '~/Types/TCep';
+import { TCnpj } from '~/Types/TCnpj';
+import { TCpf } from '~/Types/TCpf';
+import { TCurrency } from '~/Types/TCurrency';
+import { mask } from '~/Utils/Mask';
 
-type Props = ISajermannReactInput;
+type TInput = React.DetailedHTMLProps<
+	InputHTMLAttributes<HTMLInputElement>,
+	HTMLInputElement
+> & {
+	iserror?: boolean;
+	onBeforeChange?: {
+		removeNumber?: boolean;
+		removeUpperCase?: boolean;
+		removeLowerCase?: boolean;
+		removeSpecialCharacter?: boolean;
+		regexForReplace?: RegExp;
+		fn?: (
+			e: React.ChangeEvent<HTMLInputElement>
+		) => React.ChangeEvent<HTMLInputElement>;
+		applyMask?: TCurrency | TCnpj | TCpf | TCep;
+	};
+	debounce?: number;
+};
 
 const input = tv({
 	slots: {
-		containerPropsInternal: 'group flex flex-col gap-1 w-full',
-		labelPropsInternal: [
-			'text-sm text-gray-500',
-			'transition-all duration-500',
-		],
 		inputPropsInternal: [
 			'group border h-11 py-1 px-2 rounded w-full text-black',
 			'transition-all duration-500',
@@ -22,19 +35,15 @@ const input = tv({
 	variants: {
 		color: {
 			primary: {
-				labelPropsInternal:
-					'group-hover:text-blue-500 group-focus-within:text-blue-500',
 				inputPropsInternal:
 					'outline-none focus:ring-1 focus:ring-blue-500 group-hover:border-blue-500 focus:border-blue-500',
 			},
 			error: {
-				labelPropsInternal: 'text-red-500',
 				inputPropsInternal:
 					'outline-none focus:ring-1 focus:ring-red-500 group-hover:border-red-500 focus:border-red-500',
 			},
 
 			normal: {
-				labelPropsInternal: '',
 				inputPropsInternal: '',
 			},
 		},
@@ -45,30 +54,108 @@ const input = tv({
 	},
 });
 
-const Input = forwardRef<HTMLInputElement, Props>((props, ref) => {
-	const { labelPropsInternal, inputPropsInternal, containerPropsInternal } =
-		input({
-			color: props?.errors ? 'error' : 'primary',
+export const Input = forwardRef<HTMLInputElement, TInput>(
+	(
+		{ iserror, onBeforeChange, onChange, debounce, className, ...rest },
+		ref
+	) => {
+		const [event, setEvent] = useState<React.ChangeEvent<HTMLInputElement>>();
+		const { inputPropsInternal } = input({
+			color: iserror ? 'error' : 'primary',
 		});
-	return (
-		<InputSajermann
-			{...props}
-			ref={ref}
-			containerProps={{
-				...props.containerProps,
-				className: containerPropsInternal({
-					class: props.containerProps?.className,
-				}),
-			}}
-			labelProps={{
-				...props.labelProps,
-				className: labelPropsInternal({
-					class: props.labelProps?.className,
-				}),
-			}}
-			className={inputPropsInternal({ class: props?.className })}
-		/>
-	);
-});
 
-export { Input };
+		async function onChangeCustom(e: React.ChangeEvent<HTMLInputElement>) {
+			if (!onBeforeChange && onChange) {
+				onChange(e);
+				return;
+			}
+
+			const temp = { ...e };
+			let valueTemp = temp.target.value;
+
+			if (onBeforeChange?.removeLowerCase) {
+				valueTemp = valueTemp.replace(/[a-z]/g, '');
+			}
+
+			if (onBeforeChange?.removeUpperCase) {
+				valueTemp = valueTemp.replace(/[A-Z]/g, '');
+			}
+
+			if (onBeforeChange?.removeNumber) {
+				valueTemp = valueTemp.replace(/\d/g, '');
+			}
+
+			if (onBeforeChange?.removeSpecialCharacter) {
+				valueTemp = valueTemp.replace(
+					/[!@#$%&*(),.?":{ }|<>'¨_=+[;^~´`°\]\\\-/]/g,
+					''
+				);
+			}
+
+			if (onBeforeChange?.regexForReplace) {
+				valueTemp = valueTemp.replace(onBeforeChange?.regexForReplace, '');
+			}
+
+			if ((onBeforeChange?.applyMask as TCurrency)?.currency) {
+				valueTemp = mask.real({
+					value: valueTemp,
+					decimalPlace: (onBeforeChange?.applyMask as TCurrency).currency
+						?.decimalPlace,
+				});
+			}
+
+			if ((onBeforeChange?.applyMask as TCnpj)?.cnpj) {
+				valueTemp = mask.cnpj(valueTemp);
+			}
+
+			if ((onBeforeChange?.applyMask as TCpf)?.cpf) {
+				valueTemp = mask.cpf(valueTemp);
+			}
+
+			if ((onBeforeChange?.applyMask as TCep)?.cep) {
+				valueTemp = mask.cep(valueTemp);
+			}
+
+			temp.target.value = valueTemp;
+
+			if (onBeforeChange?.fn && onChange) {
+				const newEvent = onBeforeChange?.fn(temp);
+				onChange(newEvent);
+				return;
+			}
+
+			if (onChange) {
+				onChange(temp);
+			}
+		}
+
+		async function preOnChange(e: React.ChangeEvent<HTMLInputElement>) {
+			if (!debounce) {
+				onChangeCustom(e);
+				return;
+			}
+			setEvent(e);
+		}
+
+		useEffect(() => {
+			const timer = setTimeout(() => {
+				if (debounce && event) {
+					onChangeCustom(event);
+				}
+			}, debounce);
+
+			return () => clearTimeout(timer);
+		}, [event]);
+
+		return (
+			<input
+				{...rest}
+				ref={ref}
+				className={inputPropsInternal({
+					class: className,
+				})}
+				onChange={preOnChange}
+			/>
+		);
+	}
+);
