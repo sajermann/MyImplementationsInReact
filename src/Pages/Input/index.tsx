@@ -5,15 +5,17 @@ import { ComponentBlock } from '~/Components/ComponentBlock';
 import { CodeBlock } from '~/Components/CodeBlock';
 import { Input } from '~/Components/Input';
 import { QuickAccessGithub } from '~/Components/QuickAccessGithub';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { Checkbox } from '~/Components/Checkbox';
 import { ContainerInput } from '~/Components/ContainerInput';
 import { Label } from '~/Components/Label';
 import { ErrorsInput } from '~/Components/ErrorsInput';
+import { Button } from '~/Components/Button';
 
 export function InputPage() {
 	const { translate } = useTranslation();
 	const [errorMode, setErrorMode] = useState(false);
+	const ref = useRef<HTMLInputElement>(null);
 
 	function addMessage(valor: string) {
 		const result = valor.replace('Very Good - ', '');
@@ -212,6 +214,22 @@ export function InputPage() {
 							onCheckedChange={e => setErrorMode(e.target.value as boolean)}
 						/>
 					</ContainerInput>
+				</ComponentBlock>
+			</Section>
+
+			<Section subHeading="Focus">
+				<ComponentBlock className="flex-row !items-end">
+					<ContainerInput className="flex-1">
+						<Label htmlFor="focus">{translate('Ref - Focus')}</Label>
+						<Input id="focus" ref={ref} placeholder="Ref - Focus" />
+					</ContainerInput>
+					<Button
+						type="button"
+						style={{ width: 173 }}
+						onClick={() => ref.current?.focus()}
+					>
+						Focus
+					</Button>
 				</ComponentBlock>
 			</Section>
 		</Main>

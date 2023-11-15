@@ -3,24 +3,33 @@ import {
 	useEffect,
 	useState,
 	DetailedHTMLProps,
-	HTMLAttributes,
 	InputHTMLAttributes,
-	LabelHTMLAttributes,
 	ChangeEvent,
 	HTMLProps,
 	useRef,
 	forwardRef,
+	Ref,
+	RefObject,
+	LegacyRef,
 } from 'react';
 import DatePicker from 'react-datepicker';
-import { managerClassNames } from '~/Utils/ManagerClassNames';
 import { useTranslation } from '~/Hooks/UseTranslation';
 import { Input } from '../Input';
-// import 'react-datepicker/dist/react-datepicker.css';
 import './index.css';
 
 const LANGUAGE_OPTION = {
 	'pt-BR': ptBR,
 	en: enUS,
+};
+
+type TInput = DetailedHTMLProps<
+	InputHTMLAttributes<HTMLInputElement>,
+	HTMLInputElement
+>;
+
+type TInputDatepicker = TInput & {
+	withoutDay?: boolean;
+	dateFormat?: TDateFormat;
 };
 
 type TDateFormat = 'dd/MM/yyyy' | 'yyyy-MM-dd' | 'MM/yyyy';
@@ -53,27 +62,8 @@ function formatDataTemp(
 
 	return ob[dateFormat](value);
 }
-
-type TLabelProps = DetailedHTMLProps<
-	LabelHTMLAttributes<HTMLLabelElement>,
-	HTMLLabelElement
->;
-
-type TContainerProps = DetailedHTMLProps<
-	HTMLAttributes<HTMLDivElement>,
-	HTMLDivElement
->;
-
-const CustomInput = forwardRef(
-	(
-		props: HTMLProps<HTMLInputElement> & {
-			withoutDay?: boolean;
-			dateFormat?: TDateFormat;
-			labelProps?: TLabelProps;
-			containerProps?: TContainerProps;
-		},
-		ref
-	) => {
+const CustomInput = forwardRef<HTMLInputElement, TInputDatepicker>(
+	(props, ref) => {
 		const newProps = { ...props };
 		delete newProps.withoutDay;
 		// delete newProps.className;
@@ -84,7 +74,14 @@ const CustomInput = forwardRef(
 			props.dateFormat
 		);
 		delete newProps.dateFormat;
-		return <Input {...newProps} value={result} tabIndex={-1} />;
+		return (
+			<Input
+				ref={ref as any}
+				{...(newProps as TInput)}
+				value={result}
+				tabIndex={-1}
+			/>
+		);
 	}
 );
 
@@ -94,18 +91,12 @@ interface Props
 		HTMLInputElement
 	> {
 	withoutDay?: boolean;
-	label?: string;
 	customDefaultValue?: Date;
 	dateFormat?: TDateFormat;
-	labelProps?: TLabelProps;
-	containerProps?: TContainerProps;
 	excludeDateIntervals?: Array<{ start: Date; end: Date }>;
 }
 
 export function Datepicker({
-	label,
-	containerProps,
-	labelProps,
 	customDefaultValue,
 	dateFormat = 'dd/MM/yyyy',
 	withoutDay,
@@ -165,43 +156,27 @@ export function Datepicker({
 	}
 
 	return (
-		<div
-			{...containerProps}
-			className={managerClassNames([
-				{ [containerProps?.className as string]: containerProps?.className },
-			])}
-		>
-			{/* // 	{label && (
-		// 		<label htmlFor={rest.id} {...labelProps}>
-		// 			{label}
-		// 		</label>
-		// 	)} */}
-
-			<DatePicker
-				autoComplete="off"
-				id={rest.id}
-				disabled={rest.disabled}
-				placeholderText={rest.placeholder}
-				fixedHeight
-				selected={startDate}
-				onChange={onChangeInternal}
-				locale={LANGUAGE_OPTION[currentLanguage as 'pt-BR' | 'en']}
-				dateFormat={dateFormat}
-				closeOnScroll
-				shouldCloseOnSelect
-				showMonthYearPicker={withoutDay}
-				excludeDateIntervals={excludeDateIntervals}
-				customInput={
-					<CustomInput
-						containerProps={containerProps}
-						labelProps={labelProps}
-						label={label}
-						withoutDay={withoutDay}
-						dateFormat={dateFormat}
-						ref={ref}
-					/>
-				}
-			/>
-		</div>
+		<DatePicker
+			autoComplete="off"
+			id={rest.id}
+			disabled={rest.disabled}
+			placeholderText={rest.placeholder}
+			fixedHeight
+			selected={startDate}
+			onChange={onChangeInternal}
+			locale={LANGUAGE_OPTION[currentLanguage as 'pt-BR' | 'en']}
+			dateFormat={dateFormat}
+			closeOnScroll
+			shouldCloseOnSelect
+			showMonthYearPicker={withoutDay}
+			excludeDateIntervals={excludeDateIntervals}
+			customInput={
+				<CustomInput
+					withoutDay={withoutDay}
+					dateFormat={dateFormat}
+					ref={ref}
+				/>
+			}
+		/>
 	);
 }

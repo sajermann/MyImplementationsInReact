@@ -4,16 +4,20 @@ import { ComponentBlock } from '~/Components/ComponentBlock';
 import Section from '~/Components/Section';
 import { QuickAccessGithub } from '~/Components/QuickAccessGithub';
 import { Datepicker } from '~/Components/Datepicker';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { Button } from '~/Components/Button';
 import { CodeBlock } from '~/Components/CodeBlock';
 import { addDays, subDays } from 'date-fns';
 import { ContainerInput } from '~/Components/ContainerInput';
 import { Label } from '~/Components/Label';
+import { ErrorsInput } from '~/Components/ErrorsInput';
+import { Checkbox } from '~/Components/Checkbox';
 
 export function DatepickerPage() {
 	const [firstPicker, setFirstPicker] = useState(new Date().toISOString());
+	const [errorMode, setErrorMode] = useState(false);
 	const { translate } = useTranslation();
+	const ref = useRef<HTMLInputElement>(null);
 
 	return (
 		<Main data-content="content-main">
@@ -125,18 +129,60 @@ export function DatepickerPage() {
 					>
 						<Label htmlFor="DateFormat3">{translate('DATE')}</Label>
 						<Datepicker
-							containerProps={{
-								style: {
-									width: 160,
-								},
-								className: 'flex !flex-row items-center',
-							}}
 							placeholder={translate('DD/MM/YYYY')}
 							id="DateFormat3"
 						/>
 					</ContainerInput>
 				</ComponentBlock>
 			</Section>
+
+			<Section subHeading={translate('ERRORS')}>
+				<ComponentBlock className="flex-row !items-start">
+					<ContainerInput className="flex-1">
+						<Label htmlFor="errorMode" isError={errorMode}>
+							{translate('ERROR_MODE')}
+						</Label>
+						<Datepicker placeholder={translate('DD/MM/YYYY')} id="errorMode" />
+						<ErrorsInput
+							errors={
+								errorMode ? ['Required', 'Invalid email adress'] : undefined
+							}
+						/>
+					</ContainerInput>
+					<ContainerInput className="w-max items-center">
+						<Label htmlFor="error_mode_checkbox">
+							{translate('ERROR_MODE')}
+						</Label>
+						<Checkbox
+							id="error_mode_checkbox"
+							checked={errorMode}
+							onCheckedChange={e => setErrorMode(e.target.value as boolean)}
+						/>
+					</ContainerInput>
+				</ComponentBlock>
+			</Section>
+
+			<Section subHeading="Focus">
+				<ComponentBlock className="flex-row !items-end">
+					<ContainerInput className="w-48">
+						<Label htmlFor="focus">{translate('Ref - Focus')}</Label>
+						<Datepicker
+							ref={ref}
+							placeholder={translate('DD/MM/YYYY')}
+							id="focus"
+						/>
+					</ContainerInput>
+					<Button
+						type="button"
+						style={{ width: 173 }}
+						onClick={() => ref.current?.focus()}
+					>
+						Focus
+					</Button>
+				</ComponentBlock>
+			</Section>
 		</Main>
 	);
 }
+
+// Arrumar o focus

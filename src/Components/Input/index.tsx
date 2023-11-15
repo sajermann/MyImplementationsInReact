@@ -1,4 +1,11 @@
-import { forwardRef, InputHTMLAttributes, useEffect, useState } from 'react';
+import {
+	ChangeEvent,
+	DetailedHTMLProps,
+	forwardRef,
+	InputHTMLAttributes,
+	useEffect,
+	useState,
+} from 'react';
 import { tv } from 'tailwind-variants';
 import { TCep } from '~/Types/TCep';
 import { TCnpj } from '~/Types/TCnpj';
@@ -6,7 +13,7 @@ import { TCpf } from '~/Types/TCpf';
 import { TCurrency } from '~/Types/TCurrency';
 import { mask } from '~/Utils/Mask';
 
-type TInput = React.DetailedHTMLProps<
+type TInput = DetailedHTMLProps<
 	InputHTMLAttributes<HTMLInputElement>,
 	HTMLInputElement
 > & {
@@ -17,9 +24,7 @@ type TInput = React.DetailedHTMLProps<
 		removeLowerCase?: boolean;
 		removeSpecialCharacter?: boolean;
 		regexForReplace?: RegExp;
-		fn?: (
-			e: React.ChangeEvent<HTMLInputElement>
-		) => React.ChangeEvent<HTMLInputElement>;
+		fn?: (e: ChangeEvent<HTMLInputElement>) => ChangeEvent<HTMLInputElement>;
 		applyMask?: TCurrency | TCnpj | TCpf | TCep;
 	};
 	debounce?: number;

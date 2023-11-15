@@ -11,11 +11,13 @@ const ContainerInput = forwardRef<HTMLDivElement, TContainerInput>(
 			{...props}
 			ref={ref}
 			className={managerClassNames([
-				{ 'group flex flex-col gap-1 w-full': true },
 				{ [props?.className as string]: props?.className },
+				{ 'group flex flex-col gap-1 w-full': true },
 			])}
 		/>
 	)
 );
 
 export { ContainerInput };
+
+// Aplicar o tailwind slots aqui pq as classes que vem das props nao sao respeitadas
