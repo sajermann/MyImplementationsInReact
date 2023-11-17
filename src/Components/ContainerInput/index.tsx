@@ -1,23 +1,39 @@
 import { DetailedHTMLProps, forwardRef, HTMLAttributes } from 'react';
-import { managerClassNames } from '~/Utils/ManagerClassNames';
+import { tv } from 'tailwind-variants';
+
+const container = tv({
+	slots: {
+		containerPropsInternal: ['group flex flex-col gap-1 w-full'],
+	},
+	variants: {
+		color: {
+			normal: {
+				inputPropsInternal: '',
+			},
+		},
+	},
+
+	defaultVariants: {
+		color: 'normal',
+	},
+});
 
 type TContainerInput = DetailedHTMLProps<
 	HTMLAttributes<HTMLDivElement>,
 	HTMLDivElement
 >;
-const ContainerInput = forwardRef<HTMLDivElement, TContainerInput>(
-	(props, ref) => (
-		<div
-			{...props}
-			ref={ref}
-			className={managerClassNames([
-				{ [props?.className as string]: props?.className },
-				{ 'group flex flex-col gap-1 w-full': true },
-			])}
-		/>
-	)
+export const ContainerInput = forwardRef<HTMLDivElement, TContainerInput>(
+	(props, ref) => {
+		const { containerPropsInternal } = container({});
+
+		return (
+			<div
+				{...props}
+				ref={ref}
+				className={containerPropsInternal({
+					class: props.className,
+				})}
+			/>
+		);
+	}
 );
-
-export { ContainerInput };
-
-// Aplicar o tailwind slots aqui pq as classes que vem das props nao sao respeitadas

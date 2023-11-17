@@ -5,12 +5,7 @@ import {
 	DetailedHTMLProps,
 	InputHTMLAttributes,
 	ChangeEvent,
-	HTMLProps,
-	useRef,
 	forwardRef,
-	Ref,
-	RefObject,
-	LegacyRef,
 } from 'react';
 import DatePicker from 'react-datepicker';
 import { useTranslation } from '~/Hooks/UseTranslation';
@@ -76,8 +71,8 @@ const CustomInput = forwardRef<HTMLInputElement, TInputDatepicker>(
 		delete newProps.dateFormat;
 		return (
 			<Input
-				ref={ref as any}
 				{...(newProps as TInput)}
+				ref={ref as any}
 				value={result}
 				tabIndex={-1}
 			/>
@@ -96,87 +91,95 @@ interface Props
 	excludeDateIntervals?: Array<{ start: Date; end: Date }>;
 }
 
-export function Datepicker({
-	customDefaultValue,
-	dateFormat = 'dd/MM/yyyy',
-	withoutDay,
-	excludeDateIntervals,
-	...rest
-}: Props) {
-	const [startDate, setStartDate] = useState<Date | null>(
-		customDefaultValue || null
-	);
-	const { currentLanguage } = useTranslation();
-	const ref = useRef(null);
+export const Datepicker = forwardRef<HTMLInputElement, Props>(
+	(
+		{
+			customDefaultValue,
+			dateFormat = 'dd/MM/yyyy',
+			withoutDay,
+			excludeDateIntervals,
+			...rest
+		},
+		ref
+	) => {
+		const [startDate, setStartDate] = useState<Date | null>(
+			customDefaultValue || null
+		);
+		const { currentLanguage } = useTranslation();
 
-	function onChangeInternal(date: Date | null) {
-		setStartDate(date);
+		console.log('datepicker', { ref });
 
-		const dataVerify = date ? date.toISOString() : '';
+		function onChangeInternal(date: Date | null) {
+			setStartDate(date);
 
-		if (rest.onChange) {
-			const t = {
-				target: {
-					value: dataVerify,
-					id: rest.id,
-				},
-			} as ChangeEvent<HTMLInputElement>;
-			rest.onChange(t);
+			const dataVerify = date ? date.toISOString() : '';
+
+			if (rest.onChange) {
+				const t = {
+					target: {
+						value: dataVerify,
+						id: rest.id,
+					},
+				} as ChangeEvent<HTMLInputElement>;
+				rest.onChange(t);
+			}
 		}
-	}
 
-	useEffect(() => {
-		if (rest.value === '' || rest.value === undefined) {
-			setStartDate(null);
-		} else {
-			setStartDate(new Date(rest.value as string));
-		}
-	}, [rest.value]);
+		useEffect(() => {
+			if (rest.value === '' || rest.value === undefined) {
+				setStartDate(null);
+			} else {
+				setStartDate(new Date(rest.value as string));
+			}
+		}, [rest.value]);
 
-	useEffect(() => {
-		if (customDefaultValue) {
-			onChangeInternal(customDefaultValue);
-		}
-	}, []);
+		useEffect(() => {
+			if (customDefaultValue) {
+				onChangeInternal(customDefaultValue);
+			}
+		}, []);
 
-	function formatMonthAndYear(date: Date): string {
-		try {
-			if (date.toISOString().indexOf('0001-01-01') === 0) {
+		function formatMonthAndYear(date: Date): string {
+			try {
+				if (date.toISOString().indexOf('0001-01-01') === 0) {
+					return '';
+				}
+				const result = new Intl.DateTimeFormat(currentLanguage, {
+					month: 'long',
+					year: 'numeric',
+					timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+				}).format(new Date(date));
+				return result;
+			} catch {
 				return '';
 			}
-			const result = new Intl.DateTimeFormat(currentLanguage, {
-				month: 'long',
-				year: 'numeric',
-				timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone,
-			}).format(new Date(date));
-			return result;
-		} catch {
-			return '';
 		}
-	}
 
-	return (
-		<DatePicker
-			autoComplete="off"
-			id={rest.id}
-			disabled={rest.disabled}
-			placeholderText={rest.placeholder}
-			fixedHeight
-			selected={startDate}
-			onChange={onChangeInternal}
-			locale={LANGUAGE_OPTION[currentLanguage as 'pt-BR' | 'en']}
-			dateFormat={dateFormat}
-			closeOnScroll
-			shouldCloseOnSelect
-			showMonthYearPicker={withoutDay}
-			excludeDateIntervals={excludeDateIntervals}
-			customInput={
-				<CustomInput
-					withoutDay={withoutDay}
+		return (
+			<div>
+				<DatePicker
+					autoComplete="off"
+					id={rest.id}
+					disabled={rest.disabled}
+					placeholderText={rest.placeholder}
+					fixedHeight
+					selected={startDate}
+					onChange={onChangeInternal}
+					locale={LANGUAGE_OPTION[currentLanguage as 'pt-BR' | 'en']}
 					dateFormat={dateFormat}
-					ref={ref}
+					closeOnScroll
+					shouldCloseOnSelect
+					showMonthYearPicker={withoutDay}
+					excludeDateIntervals={excludeDateIntervals}
+					customInput={
+						<CustomInput
+							ref={ref}
+							withoutDay={withoutDay}
+							dateFormat={dateFormat}
+						/>
+					}
 				/>
-			}
-		/>
-	);
-}
+			</div>
+		);
+	}
+);

@@ -39,7 +39,7 @@ export function DatepickerPage() {
 
 			<Section title={translate('DATE')} variant="h2">
 				<ComponentBlock>
-					<ContainerInput>
+					<ContainerInput className="w-48">
 						<Label htmlFor="Date1">{translate('DATE')}</Label>
 						<Datepicker placeholder={translate('DD/MM/YYYY')} id="Date1" />
 					</ContainerInput>
@@ -50,7 +50,7 @@ export function DatepickerPage() {
 				<ComponentBlock>
 					<div className="flex flex-col gap-2">
 						<div className="flex gap-2">
-							<ContainerInput>
+							<ContainerInput className="w-48">
 								<Label htmlFor="Date2">{translate('DATE')}</Label>
 								<Datepicker
 									placeholder={translate('DD/MM/YYYY')}
@@ -60,7 +60,7 @@ export function DatepickerPage() {
 								/>
 							</ContainerInput>
 
-							<ContainerInput>
+							<ContainerInput className="w-48">
 								<Label htmlFor="Date3">{translate('DEFAULT_VALUE')}</Label>
 								<Datepicker
 									customDefaultValue={new Date()}
@@ -80,7 +80,7 @@ export function DatepickerPage() {
 
 			<Section title={translate('DATE_FORMAT')} variant="h2">
 				<ComponentBlock>
-					<ContainerInput>
+					<ContainerInput className="w-48">
 						<Label htmlFor="DateFormat1">{translate('DATE')}</Label>
 						<Datepicker
 							dateFormat="yyyy-MM-dd"
@@ -88,7 +88,7 @@ export function DatepickerPage() {
 							id="DateFormat1"
 						/>
 					</ContainerInput>
-					<ContainerInput>
+					<ContainerInput className="w-48">
 						<Label htmlFor="DateFormat2">{translate('DATE')}</Label>
 						<Datepicker
 							dateFormat="MM/yyyy"
@@ -102,7 +102,7 @@ export function DatepickerPage() {
 
 			<Section title={translate('DISABLED_DATES')} variant="h2">
 				<ComponentBlock>
-					<ContainerInput>
+					<ContainerInput className="w-48">
 						<Label htmlFor="Disabled">{translate('DISABLED')}</Label>
 						<Datepicker
 							placeholder={translate('DD/MM/YYYY')}
@@ -125,7 +125,7 @@ export function DatepickerPage() {
 							border: '1px solid',
 							width: 500,
 						}}
-						className="p-5"
+						className="p-5 w-48"
 					>
 						<Label htmlFor="DateFormat3">{translate('DATE')}</Label>
 						<Datepicker
@@ -138,7 +138,7 @@ export function DatepickerPage() {
 
 			<Section subHeading={translate('ERRORS')}>
 				<ComponentBlock className="flex-row !items-start">
-					<ContainerInput className="flex-1">
+					<ContainerInput className="w-48">
 						<Label htmlFor="errorMode" isError={errorMode}>
 							{translate('ERROR_MODE')}
 						</Label>
@@ -162,10 +162,10 @@ export function DatepickerPage() {
 				</ComponentBlock>
 			</Section>
 
-			<Section subHeading="Focus">
+			<Section subHeading={`Focus - ${translate('UNDER_CONSTRUCTION')}`}>
 				<ComponentBlock className="flex-row !items-end">
 					<ContainerInput className="w-48">
-						<Label htmlFor="focus">{translate('Ref - Focus')}</Label>
+						<Label htmlFor="focus">Ref - Focus</Label>
 						<Datepicker
 							ref={ref}
 							placeholder={translate('DD/MM/YYYY')}

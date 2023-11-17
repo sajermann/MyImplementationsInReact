@@ -3,12 +3,17 @@ import { useTranslation } from '~/Hooks/UseTranslation';
 import { ComponentBlock } from '~/Components/ComponentBlock';
 import Section from '~/Components/Section';
 import { QuickAccessGithub } from '~/Components/QuickAccessGithub';
-import { useMemo, useState } from 'react';
+import { useMemo, useRef, useState } from 'react';
 import { Select } from '~/Components/Select';
 import { TVehicle } from '~/Types/TVehicle';
 import { delay } from '@sajermann/utils/Delay';
 import { makeData } from '~/Utils/MakeData';
 import { CodeBlock } from '~/Components/CodeBlock';
+import { ContainerInput } from '~/Components/ContainerInput';
+import { Label } from '~/Components/Label';
+import { Button } from '~/Components/Button';
+import { ErrorsInput } from '~/Components/ErrorsInput';
+import { Checkbox } from '~/Components/Checkbox';
 
 export function SelectPage() {
 	const { translate, currentLanguage } = useTranslation();
@@ -21,6 +26,8 @@ export function SelectPage() {
 	);
 	const [asyncOptionsMulti, setAsyncOptionsMulti] = useState<TVehicle[]>([]);
 	const [asyncValueMulti, setAsyncValueMulti] = useState<string[]>([]);
+	const [errorMode, setErrorMode] = useState(false);
+	const ref = useRef<HTMLSelectElement>(null);
 
 	const OPTION = useMemo<TVehicle[]>(
 		() => [
@@ -93,177 +100,272 @@ export function SelectPage() {
 
 			<Section subHeading={translate('SINGLE_SELECTION')}>
 				<ComponentBlock>
-					<Select
-						id="vehicle"
-						label={translate('VEHICLES')}
-						isClearable
-						options={OPTION}
-						placeholder={translate('CHOOSE_VEHICLE')}
-						onChange={console.log}
-						menuPosition="fixed"
-					/>
+					<ContainerInput>
+						<Label htmlFor="vehicle">{translate('VEHICLES')}</Label>
+						<Select
+							id="vehicle"
+							label={translate('VEHICLES')}
+							isClearable
+							options={OPTION}
+							placeholder={translate('CHOOSE_VEHICLE')}
+							onChange={console.log}
+							menuPosition="fixed"
+						/>
+					</ContainerInput>
 				</ComponentBlock>
 			</Section>
 
 			<Section subHeading={translate('CONTROLLED')}>
 				<ComponentBlock>
-					<Select
-						id="vehicle"
-						label={translate('VEHICLES')}
-						isClearable
-						options={OPTION}
-						placeholder={translate('CHOOSE_VEHICLE')}
-						onChange={e => setValueControlledSingle(e.target.value)}
-						menuPosition="fixed"
-						value={valueControlledSingle}
-					/>
-					<Select
-						id="vehicle"
-						label={translate('VEHICLES')}
-						isClearable
-						options={OPTION}
-						placeholder={translate('CHOOSE_VEHICLE')}
-						onChange={e => setValueControlledSingle(e.target.value)}
-						menuPosition="fixed"
-						value={valueControlledSingle}
-					/>
+					<ContainerInput>
+						<Label htmlFor="controlled1">{translate('CONTROLLED')}</Label>
+						<Select
+							id="controlled1"
+							isClearable
+							options={OPTION}
+							placeholder={translate('CHOOSE_VEHICLE')}
+							onChange={e => setValueControlledSingle(e.target.value)}
+							menuPosition="fixed"
+							value={valueControlledSingle}
+						/>
+					</ContainerInput>
+
+					<ContainerInput>
+						<Label htmlFor="controlled2">{translate('CONTROLLED')}</Label>
+						<Select
+							id="controlled2"
+							isClearable
+							options={OPTION}
+							placeholder={translate('CHOOSE_VEHICLE')}
+							onChange={e => setValueControlledSingle(e.target.value)}
+							menuPosition="fixed"
+							value={valueControlledSingle}
+						/>
+					</ContainerInput>
 				</ComponentBlock>
 			</Section>
 
 			<Section subHeading={translate('SEARCHABLE')}>
 				<ComponentBlock>
-					<Select
-						label={translate('NOT_SEARCHABLE')}
-						options={OPTION}
-						placeholder={translate('CHOOSE_VEHICLE')}
-						menuPosition="fixed"
-						isSearchable={false}
-					/>
-					<Select
-						label={translate('SEARCHABLE')}
-						options={OPTION}
-						placeholder={translate('CHOOSE_VEHICLE')}
-						menuPosition="fixed"
-					/>
+					<ContainerInput>
+						<Label htmlFor="searchable1">{translate('NOT_SEARCHABLE')}</Label>
+						<Select
+							id="searchable1"
+							options={OPTION}
+							placeholder={translate('CHOOSE_VEHICLE')}
+							menuPosition="fixed"
+							isSearchable={false}
+						/>
+					</ContainerInput>
+
+					<ContainerInput>
+						<Label htmlFor="searchable2">{translate('VEHICLES')}</Label>
+						<Select
+							id="searchable2"
+							label={translate('SEARCHABLE')}
+							options={OPTION}
+							placeholder={translate('CHOOSE_VEHICLE')}
+							menuPosition="fixed"
+						/>
+					</ContainerInput>
 				</ComponentBlock>
 			</Section>
 
 			<Section subHeading={translate('CLEARABLE')}>
 				<ComponentBlock>
-					<Select
-						label={translate('NOT_CLEARABLE')}
-						options={OPTION}
-						placeholder={translate('CHOOSE_VEHICLE')}
-						menuPosition="fixed"
-					/>
-					<Select
-						id="vehicle"
-						label={translate('CLEARABLE')}
-						isClearable
-						options={OPTION}
-						placeholder={translate('CHOOSE_VEHICLE')}
-						onChange={console.log}
-						menuPosition="fixed"
-					/>
+					<ContainerInput>
+						<Label htmlFor="clearable1">{translate('NOT_CLEARABLE')}</Label>
+						<Select
+							id="clearable1"
+							options={OPTION}
+							placeholder={translate('CHOOSE_VEHICLE')}
+							menuPosition="fixed"
+						/>
+					</ContainerInput>
+
+					<ContainerInput>
+						<Label htmlFor="clearable2">{translate('CLEARABLE')}</Label>
+						<Select
+							id="clearable2"
+							isClearable
+							options={OPTION}
+							placeholder={translate('CHOOSE_VEHICLE')}
+							onChange={console.log}
+							menuPosition="fixed"
+						/>
+					</ContainerInput>
 				</ComponentBlock>
 			</Section>
 
 			<Section subHeading={translate('ASYNC')}>
 				<ComponentBlock>
-					<Select
-						isClearable
-						async={{
-							callback: filter,
-							debounce: 1000,
-						}}
-						isLoading={isLoading}
-						label={translate('DEBOUNCE_ONE_SECOND')}
-						options={asyncOptionsSingle}
-						value={asyncValueSingle}
-						onChange={e => setAsyncValueSingle(e.target.value)}
-						placeholder={translate('TYPE_AND_WAIT')}
-						menuPosition="fixed"
-						menuPortalTarget={document.body}
-					/>
-					<Select
-						isClearable
-						async={{
-							callback: filter,
-							debounce: 0,
-							minLength: 3,
-						}}
-						isLoading={isLoading}
-						label={translate('MIN_LENGTH')}
-						options={asyncOptionsSingle}
-						value={asyncValueSingle}
-						onChange={e => setAsyncValueSingle(e.target.value)}
-						placeholder={translate('MIN_THREE_CHARACTER')}
-						menuPosition="fixed"
-						menuPortalTarget={document.body}
-					/>
+					<ContainerInput>
+						<Label htmlFor="async1">{translate('DEBOUNCE_ONE_SECOND')}</Label>
+						<Select
+							id="async1"
+							isClearable
+							async={{
+								callback: filter,
+								debounce: 1000,
+							}}
+							isLoading={isLoading}
+							options={asyncOptionsSingle}
+							value={asyncValueSingle}
+							onChange={e => setAsyncValueSingle(e.target.value)}
+							placeholder={translate('TYPE_AND_WAIT')}
+							menuPosition="fixed"
+							menuPortalTarget={document.body}
+						/>
+					</ContainerInput>
+
+					<ContainerInput>
+						<Label htmlFor="async2">{translate('MIN_LENGTH')}</Label>
+						<Select
+							id="async2"
+							isClearable
+							async={{
+								callback: filter,
+								debounce: 0,
+								minLength: 3,
+							}}
+							isLoading={isLoading}
+							options={asyncOptionsSingle}
+							value={asyncValueSingle}
+							onChange={e => setAsyncValueSingle(e.target.value)}
+							placeholder={translate('MIN_THREE_CHARACTER')}
+							menuPosition="fixed"
+							menuPortalTarget={document.body}
+						/>
+					</ContainerInput>
+				</ComponentBlock>
+			</Section>
+
+			<Section subHeading={translate('ERRORS')}>
+				<ComponentBlock className="flex-row !items-start">
+					<ContainerInput className="flex-1">
+						<Label htmlFor="errorMode" isError={errorMode}>
+							{translate('ERROR_MODE')}
+						</Label>
+						<Select
+							ref={ref}
+							isLoading={isLoading}
+							id="focus"
+							isClearable
+							options={asyncOptionsMulti}
+							placeholder="Focus"
+							menuPosition="fixed"
+							iserror={errorMode}
+						/>
+						<ErrorsInput
+							errors={
+								errorMode ? ['Required', 'Invalid email adress'] : undefined
+							}
+						/>
+					</ContainerInput>
+					<ContainerInput className="w-max items-center">
+						<Label htmlFor="error_mode_checkbox">
+							{translate('ERROR_MODE')}
+						</Label>
+						<Checkbox
+							id="error_mode_checkbox"
+							checked={errorMode}
+							onCheckedChange={e => setErrorMode(e.target.value as boolean)}
+						/>
+					</ContainerInput>
+				</ComponentBlock>
+			</Section>
+
+			<Section subHeading="Focus">
+				<ComponentBlock className="flex-row !items-end">
+					<ContainerInput className="flex-1">
+						<Label htmlFor="focus">{translate('Ref - Focus')}</Label>
+						<Select
+							ref={ref}
+							isLoading={isLoading}
+							id="focus"
+							isClearable
+							options={asyncOptionsMulti}
+							placeholder="Focus"
+							menuPosition="fixed"
+						/>
+					</ContainerInput>
+					<Button
+						type="button"
+						style={{ width: 173 }}
+						onClick={() => ref.current?.focus()}
+					>
+						Focus
+					</Button>
 				</ComponentBlock>
 			</Section>
 
 			<Section heading="Multi Select" subHeading={translate('CONTROLLED')}>
 				<ComponentBlock>
-					<Select
-						id="vehicle"
-						label={translate('VEHICLES')}
-						isClearable
-						options={OPTION}
-						placeholder={translate('CHOOSE_VEHICLE')}
-						menuPosition="fixed"
-						isMulti={{
-							onChange: e => {
-								setValueControlledMulti(e.target.value);
-							},
-							value: valueControlledMulti,
-						}}
-					/>
+					<ContainerInput>
+						<Label htmlFor="multi1">{translate('VEHICLES')}</Label>
+						<Select
+							id="multi1"
+							isClearable
+							options={OPTION}
+							placeholder={translate('CHOOSE_VEHICLE')}
+							menuPosition="fixed"
+							isMulti={{
+								onChange: e => {
+									setValueControlledMulti(e.target.value);
+								},
+								value: valueControlledMulti,
+							}}
+						/>
+					</ContainerInput>
 				</ComponentBlock>
 			</Section>
 
 			<Section subHeading={translate('ASYNC')}>
 				<ComponentBlock>
-					<Select
-						isLoading={isLoading}
-						id="vehicle"
-						label={translate('DEBOUNCE_ONE_SECOND')}
-						isClearable
-						options={asyncOptionsMulti}
-						placeholder={translate('TYPE_AND_WAIT')}
-						menuPosition="fixed"
-						isMulti={{
-							onChange: e => {
-								setAsyncValueMulti(e.target.value);
-							},
-							value: asyncValueMulti,
-						}}
-						async={{
-							callback: e => filter(e, true),
-							debounce: 1000,
-						}}
-					/>
-					<Select
-						isLoading={isLoading}
-						id="vehicle"
-						label={translate('MIN_LENGTH')}
-						isClearable
-						options={asyncOptionsMulti}
-						placeholder={translate('MIN_THREE_CHARACTER')}
-						menuPosition="fixed"
-						isMulti={{
-							onChange: e => {
-								setAsyncValueMulti(e.target.value);
-							},
-							value: asyncValueMulti,
-						}}
-						async={{
-							callback: e => filter(e, true),
-							debounce: 0,
-							minLength: 3,
-						}}
-					/>
+					<ContainerInput>
+						<Label htmlFor="async3">{translate('DEBOUNCE_ONE_SECOND')}</Label>
+						<Select
+							isLoading={isLoading}
+							id="async3"
+							isClearable
+							options={asyncOptionsMulti}
+							placeholder={translate('TYPE_AND_WAIT')}
+							menuPosition="fixed"
+							isMulti={{
+								onChange: e => {
+									setAsyncValueMulti(e.target.value);
+								},
+								value: asyncValueMulti,
+							}}
+							async={{
+								callback: e => filter(e, true),
+								debounce: 1000,
+							}}
+						/>
+					</ContainerInput>
+
+					<ContainerInput>
+						<Label htmlFor="async4">{translate('MIN_LENGTH')}</Label>
+						<Select
+							isLoading={isLoading}
+							id="async4"
+							isClearable
+							options={asyncOptionsMulti}
+							placeholder={translate('MIN_THREE_CHARACTER')}
+							menuPosition="fixed"
+							isMulti={{
+								onChange: e => {
+									setAsyncValueMulti(e.target.value);
+								},
+								value: asyncValueMulti,
+							}}
+							async={{
+								callback: e => filter(e, true),
+								debounce: 0,
+								minLength: 3,
+							}}
+						/>
+					</ContainerInput>
 				</ComponentBlock>
 			</Section>
 		</Main>
