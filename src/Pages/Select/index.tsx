@@ -252,15 +252,11 @@ export function SelectPage() {
 							id="focus"
 							isClearable
 							options={asyncOptionsMulti}
-							placeholder="Focus"
+							placeholder={translate('ERROR_MODE')}
 							menuPosition="fixed"
 							iserror={errorMode}
 						/>
-						<ErrorsInput
-							errors={
-								errorMode ? ['Required', 'Invalid email adress'] : undefined
-							}
-						/>
+						<ErrorsInput errors={errorMode ? ['Required'] : undefined} />
 					</ContainerInput>
 					<ContainerInput className="w-max items-center">
 						<Label htmlFor="error_mode_checkbox">
