@@ -1,34 +1,7 @@
 import { forwardRef, useEffect, useState } from 'react';
 import ReactSelect, { OptionsOrGroups } from 'react-select';
-import { tv } from 'tailwind-variants';
 
 import { useTranslation } from '~/Hooks/UseTranslation';
-
-const selectVariant = tv({
-	slots: {
-		inputPropsInternal: ['group border w-full', 'transition-all duration-500'],
-	},
-	variants: {
-		color: {
-			primary: {
-				inputPropsInternal:
-					'outline-none focus:ring-1 focus:ring-blue-500 group-hover:border-blue-500 focus:border-blue-500',
-			},
-			error: {
-				inputPropsInternal:
-					'outline-none focus:ring-1 focus:ring-red-500 group-hover:border-red-500 focus:border-red-500',
-			},
-
-			normal: {
-				inputPropsInternal: '',
-			},
-		},
-	},
-
-	defaultVariants: {
-		color: 'normal',
-	},
-});
 
 type Props = {
 	isClearable?: boolean;
@@ -36,7 +9,6 @@ type Props = {
 	isLoading?: boolean;
 	isSearchable?: boolean;
 	id?: string;
-	label?: string;
 	placeholder?: string;
 	value?: unknown;
 	defaultValue?: string;
@@ -67,7 +39,6 @@ export const Select = forwardRef<HTMLSelectElement, Props>(
 			options,
 			id,
 			placeholder,
-			label,
 			value,
 			defaultValue,
 			onChange,
@@ -81,9 +52,6 @@ export const Select = forwardRef<HTMLSelectElement, Props>(
 	) => {
 		const [inputValue, setInputValue] = useState('');
 		const { translate } = useTranslation();
-		const { inputPropsInternal } = selectVariant({
-			color: iserror ? 'error' : 'primary',
-		});
 
 		function handleOnChange(e: unknown) {
 			if (!e && onChange) {
@@ -144,10 +112,9 @@ export const Select = forwardRef<HTMLSelectElement, Props>(
 				isMulti={!!isMulti}
 				menuPosition={menuPosition}
 				menuPortalTarget={menuPortalTarget}
-				// components={{ Control }}
 				loadingMessage={() => translate('LOADING...')}
 				noOptionsMessage={() => translate('NO_DATA')}
-				key={`react-select-${value}-${label}`}
+				key={`react-select-${value}`}
 				inputId={id}
 				defaultValue={options?.find(item => item.value === defaultValue)}
 				isDisabled={isDisabled}
@@ -159,29 +126,16 @@ export const Select = forwardRef<HTMLSelectElement, Props>(
 				onChange={handleOnChange}
 				value={getValue()}
 				styles={{
-					control: (baseStyles, state) => {
-						console.log('styles', { baseStyles, state });
-						// TODO: Verificar o hover no label nao ta ativando no control
-						return {
-							...baseStyles,
-							width: '100%',
-							// 'transition-property': 'all',
-							// 'transition-duration': '500ms',
-							// '&:hover': {
-							// 	border: `1px solid ${
-							// 		iserror ? 'rgb(239 68 68)' : 'rgb(59 130 246)'
-							// 	}`,
-							// },
-							// border: state.isFocused
-							// 	? `1px solid ${iserror ? 'rgb(239 68 68)' : 'rgb(59 130 246)'}`
-							// 	: '',
-							boxShadow: state.isFocused
-								? `${
-										iserror ? 'rgb(239 68 68)' : 'rgb(59 130 246)'
-								  } 0px 0px 0px 1px`
-								: '',
-						};
-					},
+					control: (baseStyles, state) => ({
+						...baseStyles,
+						width: '100%',
+						height: '44px',
+						boxShadow: state.isFocused
+							? `${
+									iserror ? 'rgb(239 68 68)' : 'rgb(59 130 246)'
+							  } 0px 0px 0px 1px`
+							: '',
+					}),
 					menu: baseStyles => ({
 						...baseStyles,
 						width: '100%',
@@ -202,11 +156,9 @@ export const Select = forwardRef<HTMLSelectElement, Props>(
 					}),
 				}}
 				classNames={{
-					control: state => {
-						console.log(state.isFocused, { state, iserror });
-						// return inputPropsInternal();
-						return [
-							'group border outline-none !transition-all !duration-500',
+					control: state =>
+						[
+							'group border outline-none !transition-all !duration-500 w-full',
 							`${
 								state.isFocused
 									? `${iserror ? '!border-red-500' : 'border-blue-500'}`
@@ -217,8 +169,7 @@ export const Select = forwardRef<HTMLSelectElement, Props>(
 									? 'group-hover:border-red-500'
 									: 'group-hover:border-blue-500'
 							}`,
-						].join(' ');
-					},
+						].join(' '),
 				}}
 			/>
 		);

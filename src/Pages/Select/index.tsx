@@ -104,7 +104,6 @@ export function SelectPage() {
 						<Label htmlFor="vehicle">{translate('VEHICLES')}</Label>
 						<Select
 							id="vehicle"
-							label={translate('VEHICLES')}
 							isClearable
 							options={OPTION}
 							placeholder={translate('CHOOSE_VEHICLE')}
@@ -159,10 +158,9 @@ export function SelectPage() {
 					</ContainerInput>
 
 					<ContainerInput>
-						<Label htmlFor="searchable2">{translate('VEHICLES')}</Label>
+						<Label htmlFor="searchable2">{translate('SEARCHABLE')}</Label>
 						<Select
 							id="searchable2"
-							label={translate('SEARCHABLE')}
 							options={OPTION}
 							placeholder={translate('CHOOSE_VEHICLE')}
 							menuPosition="fixed"

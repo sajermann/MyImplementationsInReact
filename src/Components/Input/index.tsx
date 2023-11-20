@@ -33,7 +33,7 @@ type TInput = DetailedHTMLProps<
 const input = tv({
 	slots: {
 		inputPropsInternal: [
-			'group border h-11 py-1 px-2 rounded w-full text-black',
+			'group outline-none focus:ring-1 border h-11 py-1 px-2 rounded w-full text-black',
 			'transition-all duration-500',
 		],
 	},
@@ -41,11 +41,11 @@ const input = tv({
 		color: {
 			primary: {
 				inputPropsInternal:
-					'outline-none focus:ring-1 focus:ring-blue-500 group-hover:border-blue-500 focus:border-blue-500',
+					'focus:ring-blue-500 group-hover:border-blue-500 focus:border-blue-500',
 			},
 			error: {
 				inputPropsInternal:
-					'outline-none focus:ring-1 focus:ring-red-500 group-hover:border-red-500 focus:border-red-500',
+					'focus:ring-red-500 group-hover:border-red-500 focus:border-red-500',
 			},
 
 			normal: {

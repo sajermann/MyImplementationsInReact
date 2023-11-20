@@ -1,5 +1,7 @@
 {
 	"translations": {
+		"FIXED_COLOR": "Fixed Color",
+		"COMBINES_COLORS": "Combines Colors",
 		"ERROR_MODE": "Error Mode",
 		"ERRORS": "Errors",
 		"DISABLED": "Disabled",

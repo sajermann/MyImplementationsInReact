@@ -220,7 +220,7 @@ export function InputPage() {
 			<Section subHeading="Focus">
 				<ComponentBlock className="flex-row !items-end">
 					<ContainerInput className="flex-1">
-						<Label htmlFor="focus">{translate('Ref - Focus')}</Label>
+						<Label htmlFor="focus">Ref - Focus</Label>
 						<Input id="focus" ref={ref} placeholder="Ref - Focus" />
 					</ContainerInput>
 					<Button
