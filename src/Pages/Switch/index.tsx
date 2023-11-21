@@ -7,6 +7,8 @@ import { QuickAccessGithub } from '~/Components/QuickAccessGithub';
 import { Switch } from '~/Components/Switch';
 import { useState } from 'react';
 import { Icons } from '~/Components/Icons';
+import { ContainerInput } from '~/Components/ContainerInput';
+import { Label } from '~/Components/Label';
 
 export function SwitchPage() {
 	const { translate } = useTranslation();
@@ -32,41 +34,41 @@ export function SwitchPage() {
 			<Section title="Normal" variant="h2">
 				<ComponentBlock>
 					<div className="flex gap-2">
-						<Switch
-							label={translate('LEFT')}
-							id="left"
-							checked={checked}
-							onChangge={e => setChecked(e)}
-							containerProps={{
-								className: 'flex !flex-row',
-							}}
-						/>
-						<Switch
-							label={translate('TOP')}
-							id="top"
-							checked={checked}
-							onChangge={e => setChecked(e)}
-						/>
+						<ContainerInput className="flex-row items-center">
+							<Label htmlFor="left">{translate('LEFT')}</Label>
+							<Switch
+								id="left"
+								checked={checked}
+								onChangge={e => setChecked(e)}
+							/>
+						</ContainerInput>
 
-						<Switch
-							label={translate('BOTTOM')}
-							id="bottom"
-							checked={checked}
-							onChangge={e => setChecked(e)}
-							containerProps={{
-								className: 'flex-col-reverse',
-							}}
-						/>
+						<ContainerInput className="items-center">
+							<Label htmlFor="top">{translate('TOP')}</Label>
+							<Switch
+								id="top"
+								checked={checked}
+								onChangge={e => setChecked(e)}
+							/>
+						</ContainerInput>
 
-						<Switch
-							label={translate('RIGHT')}
-							id="right"
-							checked={checked}
-							onChangge={e => setChecked(e)}
-							containerProps={{
-								className: 'flex !flex-row-reverse',
-							}}
-						/>
+						<ContainerInput className="flex-col-reverse items-center">
+							<Label htmlFor="bottom">{translate('BOTTOM')}</Label>
+							<Switch
+								id="bottom"
+								checked={checked}
+								onChangge={e => setChecked(e)}
+							/>
+						</ContainerInput>
+
+						<ContainerInput className="flex-row-reverse items-center">
+							<Label htmlFor="right">{translate('RIGHT')}</Label>
+							<Switch
+								id="right"
+								checked={checked}
+								onChangge={e => setChecked(e)}
+							/>
+						</ContainerInput>
 					</div>
 				</ComponentBlock>
 			</Section>
@@ -74,70 +76,77 @@ export function SwitchPage() {
 			<Section title={translate('ICONS')} variant="h2">
 				<ComponentBlock>
 					<div className="flex gap-2">
-						<Switch
-							label={translate(checked ? 'LIGHT' : 'DARK')}
-							id="left"
-							checked={checked}
-							onChangge={e => setChecked(e)}
-							containerProps={{
-								className: 'flex !flex-row',
-							}}
-							checkedIcon={<Icons nameIcon="sun" />}
-							uncheckedIcon={<Icons nameIcon="moon" />}
-						/>
+						<ContainerInput className="flex-row items-center">
+							<Label htmlFor="left">
+								{translate(checked ? 'LIGHT' : 'DARK')}
+							</Label>
+							<Switch
+								id="left"
+								checked={checked}
+								onChangge={e => setChecked(e)}
+								checkedIcon={<Icons nameIcon="sun" />}
+								uncheckedIcon={<Icons nameIcon="moon" />}
+							/>
+						</ContainerInput>
 
-						<Switch
-							label={translate(checked ? 'LIGHT' : 'DARK')}
-							id="left"
-							checked={checked}
-							onChangge={e => setChecked(e)}
-							checkedHandleIcon={<Icons nameIcon="sun" color="#fff" />}
-							onHandleColor="#A0C40E"
-							uncheckedHandleIcon={<Icons nameIcon="moon" color="#fff" />}
-							offHandleColor="#DF2E38"
-						/>
+						<ContainerInput className="items-center">
+							<Label htmlFor="top">
+								{translate(checked ? 'LIGHT' : 'DARK')}
+							</Label>
+							<Switch
+								id="top"
+								checked={checked}
+								onChangge={e => setChecked(e)}
+								checkedHandleIcon={<Icons nameIcon="sun" color="#fff" />}
+								onHandleColor="#A0C40E"
+								uncheckedHandleIcon={<Icons nameIcon="moon" color="#fff" />}
+								offHandleColor="#DF2E38"
+							/>
+						</ContainerInput>
 
-						<Switch
-							label={translate(checked ? 'ACTIVE' : 'INACTIVE')}
-							id="left"
-							checked={checked}
-							onChangge={e => setChecked(e)}
-							containerProps={{
-								className: 'flex-col-reverse',
-							}}
-							checkedIcon={
-								<div className="flex items-center justify-center w-full h-full">
-									<Icons nameIcon="checked" className="w-5" color="#fff" />
-								</div>
-							}
-							uncheckedIcon={
-								<div className="flex items-center justify-center w-full h-full">
-									<Icons nameIcon="close" className="w-4" color="#fff" />
-								</div>
-							}
-						/>
+						<ContainerInput className="flex-col-reverse items-center">
+							<Label htmlFor="bottom">
+								{translate(checked ? 'ACTIVE' : 'INACTIVE')}
+							</Label>
+							<Switch
+								id="bottom"
+								checked={checked}
+								onChangge={e => setChecked(e)}
+								checkedIcon={
+									<div className="flex items-center justify-center w-full h-full">
+										<Icons nameIcon="checked" className="w-5" color="#fff" />
+									</div>
+								}
+								uncheckedIcon={
+									<div className="flex items-center justify-center w-full h-full">
+										<Icons nameIcon="close" className="w-4" color="#fff" />
+									</div>
+								}
+							/>
+						</ContainerInput>
 
-						<Switch
-							label={translate(checked ? 'ACTIVE' : 'INACTIVE')}
-							id="left"
-							checked={checked}
-							onChangge={e => setChecked(e)}
-							containerProps={{
-								className: 'flex !flex-row-reverse',
-							}}
-							checkedHandleIcon={
-								<div className="flex items-center justify-center w-full h-full">
-									<Icons nameIcon="checked" className="w-4" color="#fff" />
-								</div>
-							}
-							onHandleColor="#A0C40E"
-							uncheckedHandleIcon={
-								<div className="flex items-center justify-center w-full h-full">
-									<Icons nameIcon="close" className="w-4" color="#fff" />
-								</div>
-							}
-							offHandleColor="#DF2E38"
-						/>
+						<ContainerInput className="flex-row-reverse items-center">
+							<Label htmlFor="right">
+								{translate(checked ? 'ACTIVE' : 'INACTIVE')}
+							</Label>
+							<Switch
+								id="right"
+								checked={checked}
+								onChangge={e => setChecked(e)}
+								checkedHandleIcon={
+									<div className="flex items-center justify-center w-full h-full">
+										<Icons nameIcon="checked" className="w-4" color="#fff" />
+									</div>
+								}
+								onHandleColor="#A0C40E"
+								uncheckedHandleIcon={
+									<div className="flex items-center justify-center w-full h-full">
+										<Icons nameIcon="close" className="w-4" color="#fff" />
+									</div>
+								}
+								offHandleColor="#DF2E38"
+							/>
+						</ContainerInput>
 					</div>
 				</ComponentBlock>
 			</Section>

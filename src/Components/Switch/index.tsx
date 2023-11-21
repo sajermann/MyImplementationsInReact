@@ -1,6 +1,32 @@
-import { DetailedHTMLProps, HTMLAttributes, LabelHTMLAttributes } from 'react';
 import ReactSwitch from 'react-switch';
-import { ContainerInput } from '../ContainerInput';
+import { tv } from 'tailwind-variants';
+
+const switchVariants = tv({
+	slots: {
+		inputPropsInternal: [
+			'group outline-none focus:ring-1',
+			'transition-all duration-500',
+		],
+	},
+	variants: {
+		color: {
+			primary: {
+				inputPropsInternal: '',
+			},
+			error: {
+				inputPropsInternal: '',
+			},
+
+			normal: {
+				inputPropsInternal: '',
+			},
+		},
+	},
+
+	defaultVariants: {
+		color: 'normal',
+	},
+});
 
 type Props = {
 	onChangge: (data: boolean) => void;
@@ -14,15 +40,8 @@ type Props = {
 	checkedHandleIcon?: JSX.Element;
 	uncheckedHandleIcon?: JSX.Element;
 	id?: string;
-	label?: string;
-	containerProps?: DetailedHTMLProps<
-		HTMLAttributes<HTMLDivElement>,
-		HTMLDivElement
-	>;
-	labelProps?: DetailedHTMLProps<
-		LabelHTMLAttributes<HTMLLabelElement>,
-		HTMLLabelElement
-	>;
+	iserror?: boolean;
+	className?: string;
 };
 export function Switch({
 	onChangge,
@@ -32,34 +51,32 @@ export function Switch({
 	checkedIcon,
 	uncheckedIcon,
 	id,
-	label,
-	containerProps,
-	labelProps,
 	checkedHandleIcon,
 	uncheckedHandleIcon,
 	onHandleColor,
 	offHandleColor,
+	iserror,
+	className,
 }: Props) {
+	const { inputPropsInternal } = switchVariants({
+		color: iserror ? 'error' : 'primary',
+	});
 	return (
-		<ContainerInput
-			containerProps={containerProps}
-			label={label}
-			labelProps={labelProps}
+		<ReactSwitch
 			id={id}
-		>
-			<ReactSwitch
-				id={id}
-				onChange={onChangge}
-				checked={checked}
-				uncheckedIcon={uncheckedIcon || false}
-				checkedHandleIcon={checkedHandleIcon}
-				uncheckedHandleIcon={uncheckedHandleIcon}
-				checkedIcon={checkedIcon || false}
-				onColor={onColor || '#A0C40E'}
-				offColor={offColor || '#DF2E38'}
-				onHandleColor={onHandleColor}
-				offHandleColor={offHandleColor}
-			/>
-		</ContainerInput>
+			onChange={onChangge}
+			checked={checked}
+			uncheckedIcon={uncheckedIcon || false}
+			checkedHandleIcon={checkedHandleIcon}
+			uncheckedHandleIcon={uncheckedHandleIcon}
+			checkedIcon={checkedIcon || false}
+			onColor={onColor || '#A0C40E'}
+			offColor={offColor || '#DF2E38'}
+			onHandleColor={onHandleColor}
+			offHandleColor={offHandleColor}
+			className={inputPropsInternal({
+				class: className,
+			})}
+		/>
 	);
 }
