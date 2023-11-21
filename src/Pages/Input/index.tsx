@@ -2,7 +2,6 @@ import { Main } from '~/Components/Main';
 import { useTranslation } from '~/Hooks/UseTranslation';
 import Section from '~/Components/Section';
 import { ComponentBlock } from '~/Components/ComponentBlock';
-import { CodeBlock } from '~/Components/CodeBlock';
 import { Input } from '~/Components/Input';
 import { QuickAccessGithub } from '~/Components/QuickAccessGithub';
 import { useRef, useState } from 'react';
@@ -25,12 +24,9 @@ export function InputPage() {
 	return (
 		<Main data-content="content-main">
 			<Section heading={translate('INPUT')}>
-				{`${translate('IMPLEMENTS_COMPONENT')} ${translate(
-					'INPUT'
-				)} ${translate('USING_THE_MY_SELF_LIB')} @sajermann/react-input.`}
-			</Section>
-			<Section subHeading={translate('INSTALLATION_OF_LIB')}>
-				<CodeBlock>npm i @sajermann/react-input;</CodeBlock>
+				{`${translate('IMPLEMENTS_COMPONENT')} Input ${translate(
+					'WITHOUT_USING_LIB'
+				)}`}
 			</Section>
 
 			<Section subHeading={translate('CODES')}>
