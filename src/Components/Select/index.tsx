@@ -147,12 +147,10 @@ export const Select = forwardRef<HTMLSelectElement, Props>(
 					}),
 					singleValue: baseStyles => ({
 						...baseStyles,
-						color: '#6C757D',
 						width: '100%',
 					}),
 					input: baseStyles => ({
 						...baseStyles,
-						color: '#6C757D',
 					}),
 				}}
 				classNames={{
