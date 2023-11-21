@@ -25,6 +25,7 @@ type TInput = DetailedHTMLProps<
 type TInputDatepicker = TInput & {
 	withoutDay?: boolean;
 	dateFormat?: TDateFormat;
+	iserror?: boolean;
 };
 
 type TDateFormat = 'dd/MM/yyyy' | 'yyyy-MM-dd' | 'MM/yyyy';
@@ -75,6 +76,7 @@ const CustomInput = forwardRef<HTMLInputElement, TInputDatepicker>(
 				ref={ref as any}
 				value={result}
 				tabIndex={-1}
+				iserror={props.iserror}
 			/>
 		);
 	}
@@ -89,6 +91,7 @@ interface Props
 	customDefaultValue?: Date;
 	dateFormat?: TDateFormat;
 	excludeDateIntervals?: Array<{ start: Date; end: Date }>;
+	iserror?: boolean;
 }
 
 export const Datepicker = forwardRef<HTMLInputElement, Props>(
@@ -98,6 +101,7 @@ export const Datepicker = forwardRef<HTMLInputElement, Props>(
 			dateFormat = 'dd/MM/yyyy',
 			withoutDay,
 			excludeDateIntervals,
+			iserror,
 			...rest
 		},
 		ref
@@ -176,6 +180,7 @@ export const Datepicker = forwardRef<HTMLInputElement, Props>(
 							ref={ref}
 							withoutDay={withoutDay}
 							dateFormat={dateFormat}
+							iserror={iserror}
 						/>
 					}
 				/>

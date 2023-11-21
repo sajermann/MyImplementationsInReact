@@ -142,7 +142,11 @@ export function DatepickerPage() {
 						<Label htmlFor="errorMode" isError={errorMode}>
 							{translate('ERROR_MODE')}
 						</Label>
-						<Datepicker placeholder={translate('DD/MM/YYYY')} id="errorMode" />
+						<Datepicker
+							placeholder={translate('DD/MM/YYYY')}
+							id="errorMode"
+							iserror={errorMode}
+						/>
 						<ErrorsInput
 							errors={
 								errorMode ? ['Required', 'Invalid email adress'] : undefined
