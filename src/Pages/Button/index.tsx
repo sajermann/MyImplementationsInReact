@@ -60,15 +60,11 @@ export function ButtonPage() {
 
 			<Section subHeading={translate('VARIANTS')}>
 				<ComponentBlock>
-					<Button className={styles.btn}>Default</Button>
-					<Button
-						className={styles.btn}
-						colorStyle="Secondary"
-						variant="Outlined"
-					>
+					<Button>Default</Button>
+					<Button colorStyle="Secondary" variant="Outlined">
 						Outlined
 					</Button>
-					<Button className={styles.btn} colorStyle="Success" variant="Option">
+					<Button colorStyle="Success" variant="Option">
 						Option
 					</Button>
 				</ComponentBlock>
@@ -76,39 +72,28 @@ export function ButtonPage() {
 
 			<Section subHeading={translate('COLOR_STYLE')}>
 				<ComponentBlock>
-					<Button className={styles.btn} colorStyle="Primary">
-						Primary
-					</Button>
-					<Button className={styles.btn} colorStyle="Secondary">
-						Secondary
-					</Button>
-					<Button className={styles.btn} colorStyle="Success">
-						Success
-					</Button>
-					<Button className={styles.btn} colorStyle="Warning">
-						Warning
-					</Button>
+					<Button colorStyle="Primary">Primary</Button>
+					<Button colorStyle="Secondary">Secondary</Button>
+					<Button colorStyle="Success">Success</Button>
+					<Button colorStyle="Warning">Warning</Button>
 				</ComponentBlock>
 			</Section>
 
 			<Section subHeading={translate('ICONS')}>
 				<ComponentBlock>
 					<Button
-						className={styles.btn}
 						colorStyle="Success"
 						startIcon={<Icons nameIcon="whatsappLogo" width="30px" />}
 					>
 						Whats
 					</Button>
 					<Button
-						className={styles.btn}
 						colorStyle="Primary"
 						endIcon={<Icons nameIcon="telegramLogo" width="30px" />}
 					>
 						Telegram
 					</Button>
 					<Button
-						className={styles.btn}
 						colorStyle="Secondary"
 						startIcon={<Icons nameIcon="youtubeLogo" width="30px" />}
 						endIcon={<Icons nameIcon="youtubeLogo" width="30px" />}
@@ -125,7 +110,6 @@ export function ButtonPage() {
 						<Button
 							disabled
 							colorStyle="Primary"
-							className={styles.btn}
 							onClick={() => handleSave()}
 							withFeedback={{
 								loadingOptions: {
@@ -139,7 +123,6 @@ export function ButtonPage() {
 							disabled
 							colorStyle="Secondary"
 							variant="Outlined"
-							className={styles.btn}
 							onClick={() => handleSave()}
 							withFeedback={{
 								loadingOptions: {
@@ -154,7 +137,6 @@ export function ButtonPage() {
 							disabled
 							colorStyle="Success"
 							variant="Option"
-							className={styles.btn}
 							onClick={() => handleSave()}
 							withFeedback={{
 								loadingOptions: {
@@ -168,7 +150,6 @@ export function ButtonPage() {
 						<Button
 							disabled
 							colorStyle="Warning"
-							className={styles.btn}
 							onClick={() => handleSave()}
 							withFeedback={{
 								loadingOptions: {
@@ -187,7 +168,6 @@ export function ButtonPage() {
 						<Button
 							disabled={isLoading}
 							colorStyle="Primary"
-							className={styles.btn}
 							onClick={handleSave}
 							withFeedback={{
 								loadingOptions: {
@@ -204,7 +184,6 @@ export function ButtonPage() {
 							disabled={isLoading}
 							colorStyle="Success"
 							variant="Outlined"
-							className={styles.btn}
 							onClick={handleSave}
 							withFeedback={{
 								loadingOptions: {
@@ -221,7 +200,6 @@ export function ButtonPage() {
 						<Button
 							disabled={isLoading}
 							colorStyle="Warning"
-							className={styles.btn}
 							onClick={handleSave}
 							withFeedback={{
 								loadingOptions: {
@@ -252,7 +230,6 @@ export function ButtonPage() {
 						<Button
 							disabled={isLoading}
 							colorStyle="Primary"
-							className={styles.btn}
 							onClick={handleSaveFailed}
 							withFeedback={{
 								loadingOptions: {
@@ -269,7 +246,6 @@ export function ButtonPage() {
 							disabled={isLoading}
 							colorStyle="Secondary"
 							variant="Outlined"
-							className={styles.btn}
 							onClick={handleSaveFailed}
 							withFeedback={{
 								loadingOptions: {
@@ -286,7 +262,6 @@ export function ButtonPage() {
 						<Button
 							disabled={isLoading}
 							colorStyle="Warning"
-							className={styles.btn}
 							onClick={handleSaveFailed}
 							withFeedback={{
 								loadingOptions: {

@@ -19,17 +19,21 @@
 	position: relative;
 	overflow: hidden;
 	cursor: pointer;
-	width: 200px !important;
-	height: 40px !important;
+	width: 12.5rem !important;
+	height: 2.75rem !important;
 }
 
 .btn:disabled {
 	cursor: not-allowed;
 }
 
+.btn:active {
+	opacity: 0.9;
+}
+
 .onlyIcon {
-	min-width: 44px;
-	max-width: 44px;
+	min-width: 2.75rem;
+	max-width: 2.75rem;
 }
 
 .primary {

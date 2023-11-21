@@ -128,8 +128,6 @@ export const Select = forwardRef<HTMLSelectElement, Props>(
 				styles={{
 					control: (baseStyles, state) => ({
 						...baseStyles,
-						width: '100%',
-						height: '44px',
 						boxShadow: state.isFocused
 							? `${
 									iserror ? 'rgb(239 68 68)' : 'rgb(59 130 246)'
@@ -156,7 +154,7 @@ export const Select = forwardRef<HTMLSelectElement, Props>(
 				classNames={{
 					control: state =>
 						[
-							'group border outline-none !transition-all !duration-500 w-full',
+							'group border outline-none !transition-all !duration-500 w-full h-11',
 							`${
 								state.isFocused
 									? `${iserror ? '!border-red-500' : 'border-blue-500'}`
