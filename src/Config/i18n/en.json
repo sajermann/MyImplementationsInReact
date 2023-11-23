@@ -1,5 +1,6 @@
 {
 	"translations": {
+		"VARIANTS_AND_COLOR_STYLE": "Variants and Color Style",
 		"FIXED_COLOR": "Fixed Color",
 		"COMBINES_COLORS": "Combines Colors",
 		"ERROR_MODE": "Error Mode",
