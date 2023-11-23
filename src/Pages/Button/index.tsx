@@ -1,6 +1,4 @@
 import { useState } from 'react';
-
-import { CodeBlock } from '~/Components/CodeBlock';
 import { Button } from '~/Components/Button';
 import Section from '~/Components/Section';
 import { ComponentBlock } from '~/Components/ComponentBlock';
@@ -44,12 +42,9 @@ export function ButtonPage() {
 	return (
 		<Main data-content="content-main">
 			<Section heading={translate('BUTTONS')}>
-				{`${translate('IMPLEMENTS_COMPONENT')} ${translate(
-					'BUTTON'
-				)} ${translate('USING_THE_MY_SELF_LIB')} @sajermann/react-button.`}
-			</Section>
-			<Section subHeading={translate('INSTALLATION_OF_LIB')}>
-				<CodeBlock>npm i @sajermann/react-button;</CodeBlock>
+				{`${translate('IMPLEMENTS_COMPONENT')} Button ${translate(
+					'WITHOUT_USING_LIB'
+				)}`}
 			</Section>
 
 			<Section subHeading={translate('CODES')}>
@@ -60,41 +55,76 @@ export function ButtonPage() {
 
 			<Section subHeading={translate('VARIANTS')}>
 				<ComponentBlock>
-					<Button>Default</Button>
-					<Button colorStyle="Secondary" variant="Outlined">
-						Outlined
-					</Button>
-					<Button colorStyle="Success" variant="Option">
-						Option
-					</Button>
+					<Button variant="default">Default</Button>
+					<Button variant="outlined">Outlined</Button>
+					<Button variant="option">Option</Button>
 				</ComponentBlock>
 			</Section>
 
 			<Section subHeading={translate('COLOR_STYLE')}>
 				<ComponentBlock>
-					<Button colorStyle="Primary">Primary</Button>
-					<Button colorStyle="Secondary">Secondary</Button>
-					<Button colorStyle="Success">Success</Button>
-					<Button colorStyle="Warning">Warning</Button>
+					<Button colorStyle="primary">Primary</Button>
+					<Button colorStyle="secondary">Secondary</Button>
+					<Button colorStyle="success">Success</Button>
+					<Button colorStyle="warning">Warning</Button>
+				</ComponentBlock>
+			</Section>
+
+			<Section subHeading={translate('VARIANTS_AND_COLOR_STYLE')}>
+				<ComponentBlock>
+					<Button variant="default">Default</Button>
+					<Button variant="outlined">Outlined</Button>
+					<Button variant="option">Option</Button>
+
+					<Button variant="default" colorStyle="secondary">
+						Default
+					</Button>
+					<Button variant="outlined" colorStyle="secondary">
+						Outlined
+					</Button>
+					<Button variant="option" colorStyle="secondary">
+						Option
+					</Button>
+
+					<Button variant="default" colorStyle="success">
+						Default
+					</Button>
+					<Button variant="outlined" colorStyle="success">
+						Outlined
+					</Button>
+					<Button variant="option" colorStyle="success">
+						Option
+					</Button>
+
+					<Button variant="default" colorStyle="warning">
+						Default
+					</Button>
+					<Button variant="outlined" colorStyle="warning">
+						Outlined
+					</Button>
+					<Button variant="option" colorStyle="warning">
+						Option
+					</Button>
 				</ComponentBlock>
 			</Section>
 
 			<Section subHeading={translate('ICONS')}>
 				<ComponentBlock>
 					<Button
-						colorStyle="Success"
+						colorStyle="success"
 						startIcon={<Icons nameIcon="whatsappLogo" width="30px" />}
 					>
 						Whats
 					</Button>
 					<Button
-						colorStyle="Primary"
+						variant="outlined"
 						endIcon={<Icons nameIcon="telegramLogo" width="30px" />}
 					>
 						Telegram
 					</Button>
 					<Button
-						colorStyle="Secondary"
+						variant="option"
+						colorStyle="secondary"
 						startIcon={<Icons nameIcon="youtubeLogo" width="30px" />}
 						endIcon={<Icons nameIcon="youtubeLogo" width="30px" />}
 					>
@@ -109,7 +139,7 @@ export function ButtonPage() {
 					<ComponentBlock>
 						<Button
 							disabled
-							colorStyle="Primary"
+							colorStyle="primary"
 							onClick={() => handleSave()}
 							withFeedback={{
 								loadingOptions: {
@@ -121,8 +151,8 @@ export function ButtonPage() {
 						</Button>
 						<Button
 							disabled
-							colorStyle="Secondary"
-							variant="Outlined"
+							colorStyle="secondary"
+							variant="outlined"
 							onClick={() => handleSave()}
 							withFeedback={{
 								loadingOptions: {
@@ -135,8 +165,8 @@ export function ButtonPage() {
 						</Button>
 						<Button
 							disabled
-							colorStyle="Success"
-							variant="Option"
+							colorStyle="success"
+							variant="option"
 							onClick={() => handleSave()}
 							withFeedback={{
 								loadingOptions: {
@@ -149,7 +179,7 @@ export function ButtonPage() {
 						</Button>
 						<Button
 							disabled
-							colorStyle="Warning"
+							colorStyle="warning"
 							onClick={() => handleSave()}
 							withFeedback={{
 								loadingOptions: {
@@ -167,7 +197,6 @@ export function ButtonPage() {
 					<ComponentBlock>
 						<Button
 							disabled={isLoading}
-							colorStyle="Primary"
 							onClick={handleSave}
 							withFeedback={{
 								loadingOptions: {
@@ -182,8 +211,8 @@ export function ButtonPage() {
 						</Button>
 						<Button
 							disabled={isLoading}
-							colorStyle="Success"
-							variant="Outlined"
+							colorStyle="success"
+							variant="outlined"
 							onClick={handleSave}
 							withFeedback={{
 								loadingOptions: {
@@ -199,7 +228,7 @@ export function ButtonPage() {
 						</Button>
 						<Button
 							disabled={isLoading}
-							colorStyle="Warning"
+							colorStyle="warning"
 							onClick={handleSave}
 							withFeedback={{
 								loadingOptions: {
@@ -229,7 +258,6 @@ export function ButtonPage() {
 					<ComponentBlock>
 						<Button
 							disabled={isLoading}
-							colorStyle="Primary"
 							onClick={handleSaveFailed}
 							withFeedback={{
 								loadingOptions: {
@@ -244,8 +272,8 @@ export function ButtonPage() {
 						</Button>
 						<Button
 							disabled={isLoading}
-							colorStyle="Secondary"
-							variant="Outlined"
+							colorStyle="secondary"
+							variant="outlined"
 							onClick={handleSaveFailed}
 							withFeedback={{
 								loadingOptions: {
@@ -261,7 +289,7 @@ export function ButtonPage() {
 						</Button>
 						<Button
 							disabled={isLoading}
-							colorStyle="Warning"
+							colorStyle="warning"
 							onClick={handleSaveFailed}
 							withFeedback={{
 								loadingOptions: {
@@ -293,9 +321,7 @@ export function ButtonPage() {
 					<h3>{translate('WIDTHS')}</h3>
 					<ComponentBlock>
 						<Button
-							style={{ width: '250px', height: '50px' }}
 							disabled={isLoading}
-							colorStyle="Primary"
 							onClick={handleSave}
 							withFeedback={{
 								loadingOptions: {
@@ -307,13 +333,14 @@ export function ButtonPage() {
 									fullIcon: true,
 								},
 							}}
+							className="w-64 h-14"
 						>
 							{translate('FIXED_ONLY_ICON')}
 						</Button>
 						<Button
-							style={{ width: '250px', height: '50px' }}
+							className="w-64 h-10"
 							disabled={isLoading}
-							colorStyle="Secondary"
+							colorStyle="secondary"
 							onClick={handleSave}
 							withFeedback={{
 								loadingOptions: {
@@ -327,9 +354,9 @@ export function ButtonPage() {
 							{translate('FIXED_WITH_ICON')}
 						</Button>
 						<Button
-							style={{ width: '250px', height: '50px' }}
+							className="w-64 h-14"
 							disabled={isLoading}
-							colorStyle="Success"
+							colorStyle="success"
 							onClick={handleSave}
 							withFeedback={{
 								loadingOptions: {
@@ -351,26 +378,24 @@ export function ButtonPage() {
 					<h3>{translate('ICON_BUTTONS')}</h3>
 					<ComponentBlock>
 						<Button
-							style={{ minWidth: '50px', height: '50px' }}
+							iconButton="rounded"
 							disabled={isLoading}
-							colorStyle="Success"
-							variant="Outlined"
 							onClick={handleSave}
 							withFeedback={{
 								loadingOptions: {
 									isLoading,
 								},
 								successOptions: {
-									success: true,
+									success,
 								},
 							}}
-							endIcon={<Icons nameIcon="whatsappLogo" width="30px" />}
+							endIcon={<Icons nameIcon="telegramLogo" width="30px" />}
 						/>
 						<Button
-							style={{ minWidth: '50px', height: '50px' }}
+							iconButton="squared"
 							disabled={isLoading}
-							colorStyle="Secondary"
-							variant="Outlined"
+							colorStyle="secondary"
+							variant="outlined"
 							onClick={handleSave}
 							withFeedback={{
 								loadingOptions: {
@@ -384,31 +409,30 @@ export function ButtonPage() {
 							endIcon={<Icons nameIcon="youtubeLogo" width="30px" />}
 						/>
 						<Button
-							style={{ minWidth: '50px', height: '50px', borderRadius: '50%' }}
+							iconButton="rounded"
 							disabled={isLoading}
-							colorStyle="Primary"
-							variant="Outlined"
+							colorStyle="success"
+							variant="option"
 							onClick={handleSave}
 							withFeedback={{
 								loadingOptions: {
 									isLoading,
-									typeLoadingIcon: 'Points',
 								},
 								successOptions: {
 									success,
 								},
 							}}
-							endIcon={<Icons nameIcon="telegramLogo" width="30px" />}
+							endIcon={<Icons nameIcon="whatsappLogo" width="30px" />}
 						/>
 					</ComponentBlock>
 				</div>
 				<div className={styles.blockH3}>
 					<h3>{translate('CUSTOMIZATIONS')}</h3>
 					<ComponentBlock>
-						<Button variant="Outlined" className={styles.custom}>
+						<Button variant="outlined" className={styles.custom}>
 							Custom 1
 						</Button>
-						<Button variant="Outlined" className={styles.custom2}>
+						<Button variant="outlined" className={styles.custom2}>
 							Custom 2
 						</Button>
 					</ComponentBlock>

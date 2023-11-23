@@ -8,7 +8,7 @@ export function ToastDemo() {
 
 	return (
 		<Button
-			colorStyle="Success"
+			colorStyle="success"
 			onClick={() =>
 				customToast({ msg: translate('I_AM_TOAST'), type: 'success' })
 			}

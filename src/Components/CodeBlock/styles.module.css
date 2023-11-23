@@ -3,11 +3,9 @@
 	opacity: 0;
 	color: #fff;
 	position: absolute;
-	top: 9px;
-	right: 0;
+	top: 0.4375rem;
+	right: 0.0625rem;
 	transition: visibility 0s, opacity 0.5s linear;
-	width: 60px;
-	height: 40px;
 }
 
 .container:hover > .copy {

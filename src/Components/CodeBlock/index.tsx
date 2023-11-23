@@ -38,9 +38,11 @@ export function CodeBlock({ children, language }: Props) {
 		<div className={styles.container}>
 			<div className={styles.copy}>
 				<Button
+					iconButton="squared"
 					title="Copiar"
 					type="button"
-					variant="Option"
+					variant="option"
+					colorStyle={success ? 'success' : undefined}
 					onClick={handleCopy}
 					withFeedback={{
 						loadingOptions: {

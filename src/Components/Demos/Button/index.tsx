@@ -4,28 +4,28 @@ import { Button } from '~/Components/Button';
 import { makeData } from '~/Utils/MakeData';
 
 type Props = {
-	variant: 'Default' | 'Outlined' | 'Option';
-	style: 'Primary' | 'Secondary' | 'Success' | 'Warning';
+	variant: 'default' | 'outlined' | 'option';
+	style: 'primary' | 'secondary' | 'success' | 'warning';
 };
 
 export function ButtonDemo() {
 	const [config, setConfig] = useState<Props>({
-		variant: 'Default',
-		style: 'Primary',
+		variant: 'default',
+		style: 'primary',
 	});
 
-	const VARIANT: Record<number, 'Default' | 'Outlined' | 'Option'> = {
-		0: 'Default',
-		1: 'Outlined',
-		2: 'Option',
+	const VARIANT: Record<number, 'default' | 'outlined' | 'option'> = {
+		0: 'default',
+		1: 'outlined',
+		2: 'option',
 	};
 
-	const STYLE: Record<number, 'Primary' | 'Secondary' | 'Success' | 'Warning'> =
+	const STYLE: Record<number, 'primary' | 'secondary' | 'success' | 'warning'> =
 		{
-			0: 'Primary',
-			1: 'Secondary',
-			2: 'Success',
-			3: 'Warning',
+			0: 'primary',
+			1: 'secondary',
+			2: 'success',
+			3: 'warning',
 		};
 
 	function handleToggleVariant() {

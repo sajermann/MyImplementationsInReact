@@ -8,8 +8,8 @@ import { Nav } from '~/Components/Nav';
 import { Main } from '~/Components/Main';
 import { SwitchTheme } from '~/Components/SwitchTheme';
 import { SwitchLanguage } from '~/Components/SwitchLanguage';
-import { ButtonIcon } from '../ButtonIcon';
 import { SwitchAccessibility } from '../SwitchAccessibility';
+import { Button } from '../Button';
 
 export default function MenuSettings() {
 	const [isOpen, setIsOpen] = useState(false);
@@ -18,7 +18,7 @@ export default function MenuSettings() {
 	return (
 		<>
 			<HeaderButton onClick={() => setIsOpen(!isOpen)}>
-				<Icons nameIcon="gear" width="22" />
+				<Icons nameIcon="gear" width="1.5rem" />
 			</HeaderButton>
 
 			<Drawer
@@ -34,13 +34,14 @@ export default function MenuSettings() {
 						<h2 className="text-xl whitespace-nowrap font-bold text-white">
 							{translate('SETTINGS')}
 						</h2>
-						<ButtonIcon
-							className="text-primary-500 hover:text-primary-300 hover:bg-slate-600"
+						<Button
+							iconButton="rounded"
+							variant="option"
 							onClick={() => setIsOpen(false)}
 							data-testid="closeButtonModal"
 						>
 							<Icons nameIcon="close" width="1rem" />
-						</ButtonIcon>
+						</Button>
 					</Nav>
 					<div className="flex flex-col p-4 gap-4">
 						<SwitchTheme />
