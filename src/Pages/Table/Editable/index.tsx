@@ -17,6 +17,7 @@ import { Button } from '~/Components/Button';
 import { Main } from '~/Components/Main';
 import Section from '~/Components/Section';
 import { QuickAccessGithub } from '~/Components/QuickAccessGithub';
+import { ContainerInput } from '~/Components/ContainerInput';
 
 export function EditablePage() {
 	const { translate } = useTranslation();
@@ -56,10 +57,8 @@ export function EditablePage() {
 				cell: info => (
 					<div className="w-full flex items-center justify-center">
 						<Button
-							style={{ width: '50px', height: '50px', borderRadius: '50%' }}
-							disabled={isLoading}
-							colorStyle="Primary"
-							variant="Outlined"
+							iconButton="rounded"
+							variant="outlined"
 							onClick={() =>
 								setUpdateLine({
 									row: info.row.index,
@@ -75,21 +74,19 @@ export function EditablePage() {
 					cellEdit: () => (
 						<div className="w-full flex items-center justify-center gap-2">
 							<Button
-								style={{ width: '50px', height: '50px', borderRadius: '50%' }}
+								iconButton="rounded"
+								colorStyle="success"
+								variant="outlined"
 								disabled={isLoading}
-								colorStyle="Success"
-								variant="Outlined"
-								type="button"
 								onClick={handleSave}
 								endIcon={<Icons nameIcon="save" />}
 							/>
 
 							<Button
-								style={{ width: '50px', height: '50px', borderRadius: '50%' }}
+								iconButton="rounded"
+								colorStyle="secondary"
+								variant="outlined"
 								disabled={isLoading}
-								colorStyle="Secondary"
-								variant="Outlined"
-								type="button"
 								onClick={() => setUpdateLine(null)}
 								endIcon={<Icons nameIcon="error" />}
 							/>
@@ -211,16 +208,15 @@ export function EditablePage() {
 				meta: {
 					align: 'center',
 					cellEdit: () => (
-						<div className="w-full flex items-center justify-center">
+						<ContainerInput className="items-center">
 							<Checkbox
 								defaultChecked={updateLine?.data.isActive}
 								id="isActive"
-								containerProps={{ className: 'flex items-center' }}
 								onCheckedChange={e =>
 									handleInput(e as ChangeEvent<HTMLInputElement>)
 								}
 							/>
-						</div>
+						</ContainerInput>
 					),
 				},
 			},

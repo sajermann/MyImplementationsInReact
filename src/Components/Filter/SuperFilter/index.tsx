@@ -8,6 +8,8 @@ import { useTranslation } from '~/Hooks/UseTranslation';
 import { generateGuid } from '@sajermann/utils/Random';
 import { TFilterActive } from '~/Types/TFilterActive';
 import { Chip } from '~/Components/Chip';
+import { ContainerInput } from '~/Components/ContainerInput';
+import { Label } from '~/Components/Label';
 
 type Props = {
 	onChange: Dispatch<SetStateAction<TFilterActive[]>>;
@@ -102,45 +104,53 @@ export function SuperFilter({ onChange }: Props) {
 			>
 				<div className="grid grid-cols-12 gap-4">
 					<div className="col-span-12 md:col-span-3">
-						<Select
-							label={translate('COLUMN')}
-							isClearable
-							options={optionsColumns}
-							value={
-								optionsColumns.find(item => item.value === optionColumnSelected)
-									?.value
-							}
-							onChange={e => setOptionColumnSelected(e.target.value)}
-							id="select_type"
-							placeholder={translate('FILTER_TYPE')}
-						/>
+						<ContainerInput>
+							<Label htmlFor="select_column">{translate('COLUMN')}</Label>
+							<Select
+								isClearable
+								options={optionsColumns}
+								value={
+									optionsColumns.find(
+										item => item.value === optionColumnSelected
+									)?.value
+								}
+								onChange={e => setOptionColumnSelected(e.target.value)}
+								id="select_column"
+								placeholder={translate('FILTER_TYPE')}
+							/>
+						</ContainerInput>
 					</div>
 					<div className="col-span-12 md:col-span-3">
-						<Select
-							label={translate('TYPE_FILTER')}
-							isClearable
-							options={optionsType}
-							value={
-								optionsType.find(item => item.value === optionTypeSelected)
-									?.value
-							}
-							onChange={e => setOptionTypeSelected(e.target.value)}
-							id="select_type"
-							placeholder={translate('FILTER_TYPE')}
-						/>
+						<ContainerInput>
+							<Label htmlFor="select_type">{translate('TYPE_FILTER')}</Label>
+							<Select
+								isClearable
+								options={optionsType}
+								value={
+									optionsType.find(item => item.value === optionTypeSelected)
+										?.value
+								}
+								onChange={e => setOptionTypeSelected(e.target.value)}
+								id="select_type"
+								placeholder={translate('FILTER_TYPE')}
+							/>
+						</ContainerInput>
 					</div>
 					<div className="col-span-12 md:col-span-3">
-						<Input
-							id="valueFilter"
-							label={translate('VALUE')}
-							placeholder={translate('VALUE')}
-							value={valueSelected}
-							onChange={e => setValueSelected(e.target.value)}
-							type={
-								optionsColumns.find(item => item.value === optionColumnSelected)
-									?.type
-							}
-						/>
+						<ContainerInput>
+							<Label htmlFor="select_value">{translate('VALUE')}</Label>
+							<Input
+								id="select_value"
+								placeholder={translate('VALUE')}
+								value={valueSelected}
+								onChange={e => setValueSelected(e.target.value)}
+								type={
+									optionsColumns.find(
+										item => item.value === optionColumnSelected
+									)?.type
+								}
+							/>
+						</ContainerInput>
 					</div>
 					<div className="col-span-3">
 						<div className="flex w-full h-full items-end">

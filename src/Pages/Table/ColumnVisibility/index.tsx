@@ -9,6 +9,8 @@ import { useColumns } from '~/Hooks/UseColumns';
 import { Main } from '~/Components/Main';
 import Section from '~/Components/Section';
 import { QuickAccessGithub } from '~/Components/QuickAccessGithub';
+import { ContainerInput } from '~/Components/ContainerInput';
+import { Label } from '~/Components/Label';
 
 export function ColumnVisibilityPage() {
 	const { translate } = useTranslation();
@@ -102,15 +104,14 @@ export function ColumnVisibilityPage() {
 						<div>{translate('COLUMNS_VISIBLED')}</div>
 						<div className="flex justify-center text-center gap-4 flex-wrap">
 							{OPTIONS.map(item => (
-								<div key={item.id}>
+								<ContainerInput key={item.id} className="items-center w-28">
+									<Label htmlFor={item.id}>{item.label}</Label>
 									<Checkbox
-										containerProps={{ className: 'items-center' }}
 										checked={item.checked}
 										onCheckedChange={handleCheck}
 										id={item.id}
-										label={item.label}
 									/>
-								</div>
+								</ContainerInput>
 							))}
 						</div>
 					</div>

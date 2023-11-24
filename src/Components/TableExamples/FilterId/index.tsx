@@ -8,6 +8,7 @@ import { Popover } from '~/Components/Popover';
 import { Select } from '~/Components/Select';
 import { useTranslation } from '~/Hooks/UseTranslation';
 import { TPerson } from '~/Types/TPerson';
+import { ContainerInput } from '~/Components/ContainerInput';
 
 export function FilterId({ column }: { column: Column<TPerson, string> }) {
 	const { translate } = useTranslation();
@@ -49,30 +50,33 @@ export function FilterId({ column }: { column: Column<TPerson, string> }) {
 			<>
 				<div className="flex flex-col gap-4">
 					<div className="w-48">
-						<Select
-							isClearable
-							options={options}
-							value={options.find(item => item.value === selectType)?.value}
-							onChange={e => setSelectType(e.target.value)}
-							id="select_type"
-							placeholder={translate('FILTER_TYPE')}
-						/>
+						<ContainerInput>
+							<Select
+								isClearable
+								options={options}
+								value={options.find(item => item.value === selectType)?.value}
+								onChange={e => setSelectType(e.target.value)}
+								id="select_type"
+								placeholder={translate('FILTER_TYPE')}
+							/>
+						</ContainerInput>
 					</div>
 					<div className="w-48">
-						<Input
-							placeholder={translate('TYPE_VALUE_FOR_FILTER')}
-							onChange={e => setFilterValue(e.target.value)}
-							value={filterValue}
-						/>
+						<ContainerInput>
+							<Input
+								placeholder={translate('TYPE_VALUE_FOR_FILTER')}
+								onChange={e => setFilterValue(e.target.value)}
+								value={filterValue}
+							/>
+						</ContainerInput>
 					</div>
 				</div>
 
 				<div className="w-full flex justify-center gap-4 mt-4">
 					<Button
-						style={{ width: '50px', height: '50px', borderRadius: '50%' }}
-						colorStyle="Secondary"
-						variant="Outlined"
-						type="button"
+						iconButton="rounded"
+						colorStyle="secondary"
+						variant="outlined"
 						onClick={() => {
 							setSelectType('');
 							setFilterValue('');
@@ -81,10 +85,8 @@ export function FilterId({ column }: { column: Column<TPerson, string> }) {
 					/>
 
 					<Button
-						style={{ width: '50px', height: '50px', borderRadius: '50%' }}
-						colorStyle="Primary"
-						variant="Outlined"
-						type="button"
+						iconButton="rounded"
+						variant="outlined"
 						onClick={() => {
 							column.setFilterValue([selectType, filterValue]);
 							setIsOpen(false);

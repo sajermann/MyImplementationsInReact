@@ -1,5 +1,6 @@
 import { Row, Table } from '@tanstack/react-table';
 import { Checkbox } from '~/Components/Checkbox';
+import { ContainerInput } from '~/Components/ContainerInput';
 import { RadioItem } from '~/Components/Radio';
 import { TSelection } from '~/Types/TSelection';
 
@@ -28,40 +29,40 @@ type Props<T> = {
 export function Selector<T>({ selection, row, table }: Props<T>) {
 	if (selection.type === 'multi' && table) {
 		return (
-			<Checkbox
-				containerProps={{
-					className: 'flex items-center justify-center',
-				}}
-				checked={verifyIndeterminate(table)}
-				onClick={table.getToggleAllRowsSelectedHandler()}
-				{...{ disabled: selection.disableSelectionRow !== undefined }}
-			/>
+			<ContainerInput>
+				<Checkbox
+					checked={verifyIndeterminate(table)}
+					onClick={table.getToggleAllRowsSelectedHandler()}
+					{...{ disabled: selection.disableSelectionRow !== undefined }}
+				/>
+			</ContainerInput>
 		);
 	}
 	if (!row) return null;
 	if (selection.type === 'single' && selection.singleRadio) {
 		return (
-			<RadioItem
-				value={row.id}
-				disabled={
-					selection.disableSelectionRow
-						? selection.disableSelectionRow(row)
-						: false
-				}
-			/>
+			<ContainerInput>
+				<RadioItem
+					value={row.id}
+					disabled={
+						selection.disableSelectionRow
+							? selection.disableSelectionRow(row)
+							: false
+					}
+				/>
+			</ContainerInput>
 		);
 	}
 	return (
-		<Checkbox
-			containerProps={{
-				className: 'flex items-center justify-center',
-			}}
-			{...{
-				disabled: selection.disableSelectionRow
-					? selection.disableSelectionRow(row)
-					: false,
-				checked: row.getIsSelected(),
-			}}
-		/>
+		<ContainerInput>
+			<Checkbox
+				{...{
+					disabled: selection.disableSelectionRow
+						? selection.disableSelectionRow(row)
+						: false,
+					checked: row.getIsSelected(),
+				}}
+			/>
+		</ContainerInput>
 	);
 }

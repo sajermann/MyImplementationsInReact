@@ -47,6 +47,7 @@ export const Select = forwardRef<HTMLSelectElement, Props>(
 			menuPortalTarget,
 			async,
 			iserror,
+			...rest
 		},
 		ref
 	) => {
@@ -107,6 +108,7 @@ export const Select = forwardRef<HTMLSelectElement, Props>(
 
 		return (
 			<ReactSelect
+				{...rest}
 				ref={ref as any}
 				onInputChange={preInputChange}
 				isMulti={!!isMulti}

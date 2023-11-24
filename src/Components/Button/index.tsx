@@ -15,7 +15,9 @@ const buttonVariants = tv({
 		buttonPropsInternal: [
 			'py-1 px-4 w-52 h-11 border-0 font-bold flex items-center justify-center text-lg',
 			'relative overflow-hidden cursor-pointer disabled:cursor-not-allowed rounded-lg',
+			'outline-none',
 			'active:opacity-50 focus:ring-2 hover:opacity-70',
+			'disabled:opacity-50 disabled:active:opacity-50 disabled:hover:opacity-50',
 			'transition-all duration-500',
 		],
 		containerInsideInternal: [

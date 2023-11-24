@@ -11,6 +11,8 @@ import { useColumns } from '~/Hooks/UseColumns';
 import { Main } from '~/Components/Main';
 import Section from '~/Components/Section';
 import { QuickAccessGithub } from '~/Components/QuickAccessGithub';
+import { ContainerInput } from '~/Components/ContainerInput';
+import { Label } from '~/Components/Label';
 
 export function SelectionPage() {
 	const { translate } = useTranslation();
@@ -58,68 +60,62 @@ export function SelectionPage() {
 			<Section subHeading={translate('IMPLEMENTS')}>
 				<div className="flex flex-col gap-2">
 					<div className="grid grid-cols-12 gap-2">
-						<div className="col-span-12 md:col-span-4 lg:col-span-4">
-							<div className="flex items-center gap-2">
-								<div className="whitespace-nowrap ">
-									{translate('SELECTION_TYPE')}
-								</div>
-								<Select
-									isSearchable={false}
-									menuPosition="fixed"
-									menuPortalTarget={document.body}
-									defaultValue={
-										OPTIONS_LIST.find(item => item.value === selectionType)
-											?.value
+						<ContainerInput className="col-span-12 md:col-span-4 lg:col-span-4">
+							<Label className="whitespace-nowrap" htmlFor="selection_type">
+								{translate('SELECTION_TYPE')}
+							</Label>
+							<Select
+								id="selection_type"
+								isSearchable={false}
+								menuPosition="fixed"
+								menuPortalTarget={document.body}
+								defaultValue={
+									OPTIONS_LIST.find(item => item.value === selectionType)?.value
+								}
+								options={OPTIONS_LIST}
+								onChange={e => {
+									setSelecitonType(e.target.value as 'single' | 'multi');
+									setSelectedItems({});
+									if (e.target.value === 'multi') {
+										setSingleRadio(false);
 									}
-									options={OPTIONS_LIST}
-									onChange={e => {
-										setSelecitonType(e.target.value as 'single' | 'multi');
-										setSelectedItems({});
-										if (e.target.value === 'multi') {
-											setSingleRadio(false);
-										}
-									}}
-								/>
-							</div>
-						</div>
-						<div className="col-span-12 md:col-span-3 lg:col-span-4">
-							<div className="flex items-center gap-2">
-								<div className="whitespace-nowrap ">
-									{translate('RADIO_TYPE')}
-								</div>
+								}}
+							/>
+						</ContainerInput>
 
-								<Select
-									isDisabled={selectionType === 'multi'}
-									isSearchable={false}
-									menuPosition="fixed"
-									menuPortalTarget={document.body}
-									value={
-										OPTIONS_LIST_RADIO.find(item => {
-											const converted = item.value === 'true';
-											return converted === singleRadio;
-										})?.value
-									}
-									options={OPTIONS_LIST_RADIO}
-									onChange={e => setSingleRadio(e.target.value === 'true')}
-								/>
-							</div>
-						</div>
-						<div className="col-span-12 md:col-span-5 lg:col-span-4">
+						<ContainerInput className="col-span-12 md:col-span-3 lg:col-span-4">
+							<Label className="whitespace-nowrap" htmlFor="radio_type">
+								{translate('RADIO_TYPE')}
+							</Label>
+							<Select
+								id="radio_type"
+								isDisabled={selectionType === 'multi'}
+								isSearchable={false}
+								menuPosition="fixed"
+								menuPortalTarget={document.body}
+								value={
+									OPTIONS_LIST_RADIO.find(item => {
+										const converted = item.value === 'true';
+										return converted === singleRadio;
+									})?.value
+								}
+								options={OPTIONS_LIST_RADIO}
+								onChange={e => setSingleRadio(e.target.value === 'true')}
+							/>
+						</ContainerInput>
+
+						<ContainerInput className="col-span-12 md:col-span-5 lg:col-span-4">
+							<Label htmlFor="disableSelection">
+								{translate('DISABLE_SELECTION_WHEN_ID_GREATER_THAN')}
+							</Label>
 							<Input
 								placeholder="Id"
 								id="disableSelection"
-								containerProps={{
-									className: 'flex !flex-row items-center',
-								}}
-								labelProps={{
-									className: 'm-0 mr-2',
-								}}
-								label={translate('DISABLE_SELECTION_WHEN_ID_GREATER_THAN')}
 								className="flex-1"
 								value={disableSelectionForId}
 								onChange={e => setDisableSelectionForId(e.target.value)}
 							/>
-						</div>
+						</ContainerInput>
 					</div>
 					<Table
 						columns={columns}

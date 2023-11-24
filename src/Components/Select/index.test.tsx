@@ -4,23 +4,28 @@
 import { fireEvent, render, waitFor } from '@testing-library/react';
 import { it, describe, vi } from 'vitest';
 import { Select } from '.';
+import { ContainerInput } from '../ContainerInput';
+import { Label } from '../Label';
 
 describe('Components/Select', () => {
 	it(`must change Select components`, async () => {
 		const mock = vi.fn();
 		const mockOnChange = (e: any) => mock(e.target.value);
-		const { queryByTestId, getByText } = render(
-			<Select
-				data-testid="Test"
-				id="state"
-				label="Estado Label"
-				isClearable
-				options={[{ value: 'sp', label: 'São Paulo' }]}
-				placeholder="Estado"
-				onChange={mockOnChange}
-			/>
+		const { getByText, getByLabelText } = render(
+			<ContainerInput>
+				<Label htmlFor="state">Test</Label>
+				<Select
+					data-testid="Test"
+					id="state"
+					isClearable
+					options={[{ value: 'sp', label: 'São Paulo' }]}
+					placeholder="Estado"
+					onChange={mockOnChange}
+				/>
+			</ContainerInput>
 		);
-		const mySelectComponent = queryByTestId('Test');
+		const mySelectComponent = getByLabelText('Test');
+		console.log({ mySelectComponent });
 		expect(mySelectComponent).toBeDefined();
 		expect(mySelectComponent).not.toBeNull();
 		if (!mySelectComponent || !mySelectComponent.firstChild) return;
@@ -31,18 +36,20 @@ describe('Components/Select', () => {
 	});
 
 	it(`must show text 'not data'`, async () => {
-		const { queryByTestId, getByText } = render(
-			<Select
-				data-testid="Test"
-				id="state"
-				label="Estado Label"
-				isClearable
-				options={[]}
-				placeholder="Estado"
-				onChange={vi.fn()}
-			/>
+		const { getByLabelText, getByText } = render(
+			<ContainerInput>
+				<Label htmlFor="state">Test</Label>
+				<Select
+					data-testid="Test"
+					id="state"
+					isClearable
+					options={[]}
+					placeholder="Estado"
+					onChange={vi.fn()}
+				/>
+			</ContainerInput>
 		);
-		const mySelectComponent = queryByTestId('Test');
+		const mySelectComponent = getByLabelText('Test');
 		expect(mySelectComponent).toBeDefined();
 		expect(mySelectComponent).not.toBeNull();
 		if (!mySelectComponent || !mySelectComponent.firstChild) return;
@@ -53,19 +60,21 @@ describe('Components/Select', () => {
 	});
 
 	it(`must show text 'loading...'`, async () => {
-		const { queryByTestId, getByText } = render(
-			<Select
-				data-testid="Test"
-				id="state"
-				label="Estado Label"
-				isClearable
-				isLoading
-				options={[]}
-				placeholder="Estado"
-				onChange={vi.fn()}
-			/>
+		const { getByLabelText, getByText } = render(
+			<ContainerInput>
+				<Label htmlFor="state">Test</Label>
+				<Select
+					data-testid="Test"
+					id="state"
+					isClearable
+					isLoading
+					options={[]}
+					placeholder="Estado"
+					onChange={vi.fn()}
+				/>
+			</ContainerInput>
 		);
-		const mySelectComponent = queryByTestId('Test');
+		const mySelectComponent = getByLabelText('Test');
 		expect(mySelectComponent).toBeDefined();
 		expect(mySelectComponent).not.toBeNull();
 		if (!mySelectComponent || !mySelectComponent.firstChild) return;

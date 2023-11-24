@@ -5,6 +5,8 @@ import { objectToQuery } from '~/Utils/ObjectToQuery';
 import { Button } from '~/Components/Button';
 import { Input } from '~/Components/Input';
 import { Select } from '~/Components/Select';
+import { ContainerInput } from '~/Components/ContainerInput';
+import { Label } from '~/Components/Label';
 
 const DEFAULT_FILTER = {
 	name: '',
@@ -50,33 +52,33 @@ export function Filter({
 
 	return (
 		<div className="w-full grid grid-cols-12 gap-6">
-			<Input
-				label={translate('NAME')}
-				placeholder={translate('NAME')}
-				id="name"
-				value={filter.name}
-				onChange={e => setFilter({ ...filter, name: e.target.value })}
-				containerProps={{
-					className: 'col-span-12 sm:col-span-4',
-				}}
-			/>
-			<div className="col-span-12 sm:col-span-4">
+			<ContainerInput className="col-span-12 sm:col-span-4">
+				<Label htmlFor="name">{translate('NAME')}</Label>
+				<Input
+					placeholder={translate('NAME')}
+					id="name"
+					value={filter.name}
+					onChange={e => setFilter({ ...filter, name: e.target.value })}
+				/>
+			</ContainerInput>
+			<ContainerInput className="col-span-12 sm:col-span-4">
+				<Label htmlFor="isActive">{translate('IS_ACTIVE')}</Label>
 				<Select
 					id="isActive"
 					menuPosition="fixed"
 					menuPortalTarget={document.body}
 					placeholder={translate('IS_ACTIVE')}
 					isSearchable={false}
-					label={translate('IS_ACTIVE')}
 					value={
 						DEFAULT_OPTIONS.find(item => item.value === filter.isActive)?.value
 					}
 					options={DEFAULT_OPTIONS}
 					onChange={e => handleInput(e as ChangeEvent<HTMLInputElement>)}
 				/>
-			</div>
+			</ContainerInput>
 			<div className="col-span-12 sm:col-span-4 flex items-end justify-center gap-2">
 				<Button
+					variant="outlined"
 					disabled={filterParams === '' || isLoading}
 					onClick={handleClearFilter}
 				>

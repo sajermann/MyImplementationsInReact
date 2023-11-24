@@ -7,12 +7,8 @@ export function DatepickerDemo() {
 	const { translate } = useTranslation();
 	return (
 		<ContainerInput>
-			<Label htmlFor="Label">{translate('REMOVE_NUMBERS')}</Label>
-			<Datepicker
-				label={translate('DATE')}
-				placeholder={translate('DD/MM/YYYY')}
-				id="Date1"
-			/>
+			<Label htmlFor="Date1">{translate('DATE')}</Label>
+			<Datepicker placeholder={translate('DD/MM/YYYY')} id="Date1" />
 		</ContainerInput>
 	);
 }
