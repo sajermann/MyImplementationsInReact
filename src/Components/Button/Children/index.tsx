@@ -19,8 +19,6 @@ export function Children({ withFeedback, ...rest }: IChildren) {
 	const ref = useRef<HTMLDivElement>(null);
 	const size = useWindowSize();
 
-	console.log(rest.children);
-
 	useEffect(() => {
 		const element = ref.current;
 
