@@ -19,5 +19,6 @@ export function handleHoverRangeSelection({
 		end: date < selectionByRange.start ? selectionByRange.start : date,
 	});
 	console.log({ daysPorra });
+	console.log(typeof daysPorra[0]);
 	setSemiSelecteds([...daysPorra]);
 }

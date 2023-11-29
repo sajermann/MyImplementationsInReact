@@ -2,7 +2,7 @@
  * @vitest-environment jsdom
  */
 import { fireEvent, render } from '@testing-library/react';
-import { it, describe, vi } from 'vitest';
+import { it, describe } from 'vitest';
 import { ChipDemo } from '.';
 
 describe('Components/Demos/ChipDemo', () => {
@@ -17,7 +17,7 @@ describe('Components/Demos/ChipDemo', () => {
 	});
 
 	it(`should update chip by enter key`, async () => {
-		const { queryByText, getByText, getAllByRole } = render(<ChipDemo />);
+		const { queryByText, getAllByRole } = render(<ChipDemo />);
 
 		const resultBefore = queryByText('React');
 		expect(resultBefore).not.toBeNull();

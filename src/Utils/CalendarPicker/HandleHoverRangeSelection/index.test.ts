@@ -2,53 +2,48 @@
  * @vitest-environment jsdom
  */
 
-import { addDays } from 'date-fns';
+import { addDays, startOfDay } from 'date-fns';
 import { it, describe, expect, vi } from 'vitest';
 import { handleHoverRangeSelection } from '.';
 
-const dateMock = new Date();
+const today = startOfDay(new Date());
+const yesterday = startOfDay(addDays(new Date(), -1));
+const tomorrow = startOfDay(addDays(new Date(), 1));
 
 describe('Utils/CalendarPicker/HandleHoverRangeSelection', () => {
 	it(`should select 2 dates`, async () => {
 		const spy = vi.fn();
 		handleHoverRangeSelection({
-			date: dateMock,
+			date: today,
 			selectionByRange: {
-				start: addDays(dateMock, -1),
+				start: yesterday,
 				end: null,
 			},
 			setSemiSelecteds: spy,
 		});
-		expect(spy).toBeCalledWith([
-			new Date('2023-11-26T03:00:00.000Z'),
-			new Date('2023-11-27T03:00:00.000Z'),
-		]);
+		expect(spy).toBeCalledWith([yesterday, today]);
 	});
 
 	it(`should select 3 dates`, async () => {
 		const spy = vi.fn();
 		handleHoverRangeSelection({
-			date: dateMock,
+			date: today,
 			selectionByRange: {
-				start: addDays(dateMock, 2),
+				start: addDays(today, 2),
 				end: null,
 			},
 			setSemiSelecteds: spy,
 		});
-		expect(spy).toBeCalledWith([
-			new Date('2023-11-27T03:00:00.000Z'),
-			new Date('2023-11-28T03:00:00.000Z'),
-			new Date('2023-11-29T03:00:00.000Z'),
-		]);
+		expect(spy).toBeCalledWith([today, tomorrow, addDays(today, 2)]);
 	});
 
 	it(`should not called setSemiSelecteds`, async () => {
 		const spy = vi.fn();
 		handleHoverRangeSelection({
-			date: dateMock,
+			date: today,
 			selectionByRange: {
 				start: null,
-				end: addDays(dateMock, 2),
+				end: addDays(today, 2),
 			},
 			setSemiSelecteds: spy,
 		});
