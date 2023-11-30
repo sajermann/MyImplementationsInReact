@@ -12,10 +12,11 @@ import { EditablePage } from '.';
 
 describe('Pages/Table/EditablePage', () => {
 	it(`must render `, async () => {
-		const { getAllByText } = render(
+		const { getAllByRole } = render(
 			<InjectorProviders>
 				<EditablePage />
 			</InjectorProviders>
 		);
+		const result = getAllByRole('button');
 	});
 });

@@ -19,26 +19,26 @@ const EXCEL_TYPE =
 
 type PropsXlsx<T> = {
 	data: T[];
-	defColumns: TDefXlsx<T>[];
+	defColumns?: TDefXlsx<T>[];
 };
 
 type PropsCsv<T> = {
 	data: T[];
-	defColumns: TDefCsv<T>[];
+	defColumns?: TDefCsv<T>[];
 	delimiter?: string;
 };
 
 type PropsXml<T> = {
 	data: T[];
-	defColumns: TDefXml<T>[];
+	defColumns?: TDefXml<T>[];
 };
 
 type PropsPrint<T> = {
 	data: T[];
-	defColumns: TDefPrintPdfPng<T>[];
+	defColumns?: TDefPrintPdfPng<T>[];
 };
 
-function excel<T>({ data, defColumns }: PropsXlsx<T>) {
+function excel<T>({ data, defColumns = [] }: PropsXlsx<T>) {
 	const headerTemp: Record<string, unknown>[] = [];
 	const dataTemp: Record<string, unknown>[][] = [];
 
@@ -102,7 +102,7 @@ function excel<T>({ data, defColumns }: PropsXlsx<T>) {
 	download(blob, `xlsx`);
 }
 
-function csv<T>({ data, defColumns, delimiter = ';' }: PropsCsv<T>) {
+function csv<T>({ data, defColumns = [], delimiter = ';' }: PropsCsv<T>) {
 	const resultFinal: Record<string, unknown>[] = [];
 	for (let i = 0; i < data.length; i += 1) {
 		let result: Record<string, unknown> = {};
@@ -134,7 +134,7 @@ function csv<T>({ data, defColumns, delimiter = ';' }: PropsCsv<T>) {
 	download(blob, `csv`);
 }
 
-function xml<T>({ data, defColumns }: PropsXml<T>) {
+function xml<T>({ data, defColumns = [] }: PropsXml<T>) {
 	const newData: Record<string, unknown>[] = [];
 
 	// Add Rows
@@ -169,7 +169,7 @@ function xml<T>({ data, defColumns }: PropsXml<T>) {
 	download(blob, `xml`);
 }
 
-function print<T>({ data, defColumns }: PropsPrint<T>) {
+function print<T>({ data, defColumns = [] }: PropsPrint<T>) {
 	const table = buildTable({ data, defColumns });
 
 	const windowForPrint = window.open('');
@@ -187,7 +187,7 @@ function print<T>({ data, defColumns }: PropsPrint<T>) {
 	}
 }
 
-function pdf<T>({ data, defColumns }: PropsPrint<T>) {
+function pdf<T>({ data, defColumns = [] }: PropsPrint<T>) {
 	const table = buildTable({ data, defColumns });
 
 	const doc = new JsPdf({
@@ -207,7 +207,7 @@ function pdf<T>({ data, defColumns }: PropsPrint<T>) {
 	});
 }
 
-function png<T>({ data, defColumns }: PropsPrint<T>) {
+function png<T>({ data, defColumns = [] }: PropsPrint<T>) {
 	const table = buildTable({ data, defColumns });
 	table.id = 'tempTable';
 	document.body.appendChild(table);
