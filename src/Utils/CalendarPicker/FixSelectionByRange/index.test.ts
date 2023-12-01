@@ -6,7 +6,7 @@ import { addDays } from 'date-fns';
 import { it, describe, expect, vi } from 'vitest';
 import { fixSelectionByRange } from '.';
 
-const dateMock = new Date();
+const dateMock = new Date(2023, 1, 15);
 
 describe('Utils/CalendarPicker/FixSelectionByRange', () => {
 	it(`should result start as date mock and end as null`, async () => {
@@ -81,27 +81,26 @@ describe('Utils/CalendarPicker/FixSelectionByRange', () => {
 	});
 
 	it(`should result start as date mock and end as date mock + 1 day`, async () => {
-		const dateToMock = new Date(2023, 1, 15);
 		const result4 = fixSelectionByRange({
 			selectionByRange: {
-				start: dateToMock,
+				start: dateMock,
 				end: null,
 			},
-			date: addDays(dateToMock, 1),
+			date: addDays(dateMock, 1),
 			selectOptions: {
 				single: {
-					selectedDate: dateToMock,
+					selectedDate: dateMock,
 					onSelectedDate: () => vi.fn(),
 				},
 			},
 			onSemiSelectedsChange: () => vi.fn(),
-			startDate: dateToMock,
+			startDate: dateMock,
 		});
 
 		expect(JSON.stringify(result4)).toEqual(
 			JSON.stringify({
-				start: dateToMock,
-				end: addDays(dateToMock, 1),
+				start: dateMock,
+				end: addDays(dateMock, 1),
 			})
 		);
 	});

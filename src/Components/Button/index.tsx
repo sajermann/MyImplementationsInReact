@@ -1,5 +1,5 @@
 /* eslint-disable react/button-has-type */
-import { ButtonHTMLAttributes, AllHTMLAttributes } from 'react';
+import { ButtonHTMLAttributes, AllHTMLAttributes, ReactNode } from 'react';
 import { tv } from 'tailwind-variants';
 import { TFeedbackProps } from '~/Types/TFeedbackProps';
 import { showInDevelopment } from '~/Utils/ShowInDevelopment';
@@ -107,8 +107,8 @@ const buttonVariants = tv({
 });
 
 interface IButton extends ButtonHTMLAttributes<HTMLButtonElement> {
-	startIcon?: JSX.Element;
-	endIcon?: JSX.Element;
+	startIcon?: ReactNode;
+	endIcon?: ReactNode;
 	containerIconsProps?: AllHTMLAttributes<HTMLDivElement>;
 	containerInsideProps?: AllHTMLAttributes<HTMLDivElement>;
 	containerChildrenProps?: AllHTMLAttributes<HTMLDivElement>;

@@ -1,5 +1,4 @@
-function error(...args: any[]) {
-	// TODO: Change this ANY for example string[]
+function error(...args: string[]) {
 	if (!import.meta.env.DEV) return;
 	console.error([...args]);
 }

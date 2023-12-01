@@ -1,18 +1,20 @@
+import { ReactElement } from 'react';
+
 export type TFeedbackProps = {
 	loadingOptions: {
 		isLoading: boolean;
 		typeLoadingIcon?: 'Default' | 'Points';
-		customIcon?: JSX.Element;
+		customIcon?: ReactElement;
 		fullIcon?: boolean;
 	};
 	successOptions?: {
 		success: boolean;
-		customIcon?: JSX.Element;
+		customIcon?: ReactElement;
 		fullIcon?: boolean;
 	};
 	failedOptions?: {
 		failed: boolean;
-		customIcon?: JSX.Element;
+		customIcon?: ReactElement;
 		fullIcon?: boolean;
 	};
 };

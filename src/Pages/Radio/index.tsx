@@ -51,11 +51,7 @@ export function RadioPage() {
 					<div className="flex flex-col gap-2 items-center justify-center">
 						<div className="w-32 h-32">
 							{value && (
-								<img
-									src={CONFIG[value as TPokemon]}
-									alt={value}
-									className="w-28 h-28"
-								/>
+								<img src={CONFIG[value]} alt={value} className="w-28 h-28" />
 							)}
 						</div>
 						<RadioGroup

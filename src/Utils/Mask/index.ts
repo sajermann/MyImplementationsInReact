@@ -1,5 +1,31 @@
 import { TRealFormat } from '../../Types/TRealFormat';
 
+// function real({
+// 	value = '',
+// 	decimalPlace = 2,
+// 	thousandSeparator = '.',
+// 	decimalSeparator = ',',
+// }: TRealFormat) {
+// 	try {
+// 		const decimalsElement = 10 ** decimalPlace;
+// 		const thousandSeparatorFormatted = `$1${thousandSeparator}`;
+// 		let v = value.replace(/\D/g, '');
+// 		v = `${(+v / decimalsElement).toFixed(decimalPlace)}`;
+// 		const splits = v.split('.');
+// 		const partOne = splits[0]
+// 			.toString()
+// 			.replace(/(\d)(?=(\d{3})+(?!\d))/g, thousandSeparatorFormatted);
+// 		const final =
+// 			typeof splits[1] === 'undefined'
+// 				? partOne
+// 				: partOne + decimalSeparator + splits[1];
+
+// 		return `R$ ${final}`;
+// 	} catch {
+// 		return 'R$ 0,00';
+// 	}
+// }
+
 function real({
 	value = '',
 	decimalPlace = 2,
@@ -8,17 +34,20 @@ function real({
 }: TRealFormat) {
 	try {
 		const decimalsElement = 10 ** decimalPlace;
-		const thousandSeparatorFormatted = `$1${thousandSeparator}`;
 		let v = value.replace(/\D/g, '');
 		v = `${(+v / decimalsElement).toFixed(decimalPlace)}`;
-		const splits = v.split('.');
-		const partOne = splits[0]
-			.toString()
-			.replace(/(\d)(?=(\d{3})+(?!\d))/g, thousandSeparatorFormatted);
-		const final =
-			typeof splits[1] === 'undefined'
-				? partOne
-				: partOne + decimalSeparator + splits[1];
+
+		const [integerPart, decimalPart] = v.split('.');
+		const reversedIntegerPart = integerPart.split('').reverse().join('');
+		const formattedIntegerPart = reversedIntegerPart
+			.replace(/(\d{3})/g, `$1${thousandSeparator}`)
+			.split('')
+			.reverse()
+			.join('');
+
+		const final = decimalPart
+			? `${formattedIntegerPart}${decimalSeparator}${decimalPart}`
+			: formattedIntegerPart;
 
 		return `R$ ${final}`;
 	} catch {

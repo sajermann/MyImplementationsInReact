@@ -84,17 +84,16 @@ export function Drawer({
 				{...sectionInternal}
 				className={managerClassNames([
 					{ [styles.subContainer]: true },
-					{ [styles.leftZero as string]: openFrom === 'left' },
-					{ [styles.translateLeft as string]: openFrom === 'left' && !isOpen },
-					{ [styles.rightZero as string]: openFrom === 'right' },
+					{ [styles.leftZero]: openFrom === 'left' },
+					{ [styles.translateLeft]: openFrom === 'left' && !isOpen },
+					{ [styles.rightZero]: openFrom === 'right' },
 					{
-						[styles.translateRight as string]: openFrom === 'right' && !isOpen,
+						[styles.translateRight]: openFrom === 'right' && !isOpen,
 					},
 					{
-						[styles.translateBottom as string]:
-							openFrom === 'bottom' && !isOpen,
+						[styles.translateBottom]: openFrom === 'bottom' && !isOpen,
 					},
-					{ [styles.translateTop as string]: openFrom === 'top' && !isOpen },
+					{ [styles.translateTop]: openFrom === 'top' && !isOpen },
 
 					{ [styles.subContainerOpen]: isOpen },
 					{

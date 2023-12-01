@@ -1,3 +1,4 @@
+import { ReactElement } from 'react';
 import ReactSwitch from 'react-switch';
 import { tv } from 'tailwind-variants';
 
@@ -35,10 +36,10 @@ type Props = {
 	offColor?: string;
 	onHandleColor?: string;
 	offHandleColor?: string;
-	checkedIcon?: JSX.Element;
-	uncheckedIcon?: JSX.Element;
-	checkedHandleIcon?: JSX.Element;
-	uncheckedHandleIcon?: JSX.Element;
+	checkedIcon?: ReactElement;
+	uncheckedIcon?: ReactElement;
+	checkedHandleIcon?: ReactElement;
+	uncheckedHandleIcon?: ReactElement;
 	id?: string;
 	iserror?: boolean;
 	className?: string;

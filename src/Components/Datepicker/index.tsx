@@ -62,7 +62,6 @@ const CustomInput = forwardRef<HTMLInputElement, TInputDatepicker>(
 	(props, ref) => {
 		const newProps = { ...props };
 		delete newProps.withoutDay;
-		// delete newProps.className;
 
 		const result = formatDataTemp(
 			newProps.value as string,

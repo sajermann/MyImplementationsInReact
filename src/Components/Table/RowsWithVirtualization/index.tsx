@@ -24,8 +24,6 @@ export function RowsWithVirtualization<T>({
 	expandLine,
 	tableContainerRef,
 }: Props<T>) {
-	if (disabledVirtualization) return null;
-
 	const rowVirtualizer = useVirtualizer({
 		count: rows.length,
 		getScrollElement: () => tableContainerRef.current,
@@ -33,7 +31,7 @@ export function RowsWithVirtualization<T>({
 		overscan: 10,
 	});
 	const { getVirtualItems, getTotalSize } = rowVirtualizer;
-
+	if (disabledVirtualization) return null;
 	const paddingTop =
 		getVirtualItems().length > 0 ? getVirtualItems()?.[0]?.start || 0 : 0;
 	const paddingBottom =

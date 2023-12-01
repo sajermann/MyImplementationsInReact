@@ -4,6 +4,7 @@ import {
 	forwardRef,
 	HTMLAttributes,
 	MouseEvent,
+	ReactNode,
 	Ref,
 	useCallback,
 	useState,
@@ -25,8 +26,8 @@ interface Props
 		'checked' | 'defaultChecked' | '$$typeof' | 'onClick' | 'id'
 	> {
 	disabled?: boolean;
-	checkedIcon?: JSX.Element;
-	indeterminateIcon?: JSX.Element;
+	checkedIcon?: ReactNode;
+	indeterminateIcon?: ReactNode;
 	checked?: boolean | 'indeterminate';
 	defaultChecked?: boolean | 'indeterminate';
 	onClick?: (e?: MouseEvent<HTMLButtonElement, Event>) => void;
@@ -159,11 +160,19 @@ export const Checkbox = forwardRef<HTMLButtonElement, Props>(
 				defaultChecked={defaultChecked}
 				onCheckedChange={handleCheckedChange}
 				className={checkboxPropsInternal({
-					class: `${className} ${
-						situation === 'checked' || situation === 'indeterminate'
-							? `${iserror ? 'bg-red-500' : 'bg-primary-500'}`
-							: ''
-					}`,
+					class: managerClassNames([
+						{ [className as string]: className },
+						{
+							'bg-red-500':
+								(situation === 'checked' || situation === 'indeterminate') &&
+								iserror,
+						},
+						{
+							'bg-primary-500':
+								(situation === 'checked' || situation === 'indeterminate') &&
+								!iserror,
+						},
+					]),
 				})}
 				id={id}
 				{...rest}

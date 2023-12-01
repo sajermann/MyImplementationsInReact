@@ -247,7 +247,7 @@ export function SelectPage() {
 						<Select
 							ref={ref}
 							isLoading={isLoading}
-							id="focus"
+							id="errorMode"
 							isClearable
 							options={asyncOptionsMulti}
 							placeholder={translate('ERROR_MODE')}

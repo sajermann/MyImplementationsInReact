@@ -2,6 +2,7 @@ import { forwardRef, useEffect, useState } from 'react';
 import ReactSelect, { OptionsOrGroups } from 'react-select';
 
 import { useTranslation } from '~/Hooks/UseTranslation';
+import { format } from './Utils';
 
 type Props = {
 	isClearable?: boolean;
@@ -134,11 +135,10 @@ export const Select = forwardRef<HTMLSelectElement, Props>(
 				styles={{
 					control: (baseStyles, state) => ({
 						...baseStyles,
-						boxShadow: state.isFocused
-							? `${
-									iserror ? 'rgb(239 68 68)' : 'rgb(59 130 246)'
-							  } 0px 0px 0px 1px`
-							: '',
+						boxShadow: format.stylesControl({
+							isFocused: state.isFocused,
+							iserror,
+						}),
 					}),
 					menu: baseStyles => ({
 						...baseStyles,
@@ -159,19 +159,7 @@ export const Select = forwardRef<HTMLSelectElement, Props>(
 				}}
 				classNames={{
 					control: state =>
-						[
-							'group border outline-none !transition-all !duration-500 w-full h-11',
-							`${
-								state.isFocused
-									? `${iserror ? '!border-red-500' : 'border-blue-500'}`
-									: ''
-							}`,
-							`${
-								iserror
-									? 'group-hover:border-red-500'
-									: 'group-hover:border-blue-500'
-							}`,
-						].join(' '),
+						format.classNamesControl({ isFocused: state.isFocused, iserror }),
 				}}
 			/>
 		);

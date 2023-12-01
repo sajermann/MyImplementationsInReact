@@ -148,9 +148,7 @@ export function DatepickerPage() {
 							iserror={errorMode}
 						/>
 						<ErrorsInput
-							errors={
-								errorMode ? ['Required', 'Invalid email adress'] : undefined
-							}
+							errors={errorMode ? ['Required', 'Invalid Date'] : undefined}
 						/>
 					</ContainerInput>
 					<ContainerInput className="w-max items-center">
