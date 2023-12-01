@@ -2,10 +2,10 @@ import { Dispatch, SetStateAction, useState } from 'react';
 import { Chip } from '~/Components/Chip';
 
 function handleRemoveChip(
-	chipToRemove: string,
+	chipToDelete: string,
 	setChips: Dispatch<SetStateAction<string[]>>
 ) {
-	setChips(prev => prev.filter(item => item !== chipToRemove));
+	setChips(oldChip => oldChip.filter(item => item !== chipToDelete));
 }
 
 function handleUpdateChip(
@@ -13,16 +13,14 @@ function handleUpdateChip(
 	newValue: string,
 	setChips: Dispatch<SetStateAction<string[]>>
 ) {
-	setChips(prev => {
-		const t = prev.map(item => {
+	setChips(prev =>
+		prev.map(item => {
 			if (item === oldValue) {
 				return newValue;
 			}
 			return item;
-		});
-
-		return t;
-	});
+		})
+	);
 }
 
 export function ChipDemo() {

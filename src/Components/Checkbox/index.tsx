@@ -13,6 +13,7 @@ import { tv } from 'tailwind-variants';
 import { managerClassNames } from '~/Utils/ManagerClassNames';
 
 import { Icons } from '../Icons';
+import { handleCheckedChange, onClickInternal } from './Utils';
 
 type PropsNode = {
 	attributes: Record<string, { value: string }>;
@@ -123,42 +124,21 @@ export const Checkbox = forwardRef<HTMLButtonElement, Props>(
 			}
 		}, []);
 
-		function handleCheckedChange(e: boolean | 'indeterminate') {
-			const result = {
-				target: {
-					value: e,
-					id,
-				},
-			};
-			if (onCheckedChange) {
-				onCheckedChange(result);
-			}
-		}
-
-		function onClickInternal(e?: MouseEvent<HTMLButtonElement, Event>) {
-			if (ref) {
-				const { attributes } = (ref as any).current;
-				if (
-					attributes['data-state'].value === 'unchecked' ||
-					attributes['data-state'].value === 'indeterminate'
-				) {
-					setSituation('checked');
-				} else {
-					setSituation('unchecked');
-				}
-			}
-			if (onClick) onClick(e);
-		}
-
 		return (
 			<CheckboxRadix.Root
 				ref={
 					ref || (refInternal as unknown as Ref<HTMLButtonElement> | undefined)
 				}
-				onClick={onClickInternal}
+				onClick={e => onClickInternal({ e, setSituation, onClick, ref })}
 				checked={checked}
 				defaultChecked={defaultChecked}
-				onCheckedChange={handleCheckedChange}
+				onCheckedChange={e =>
+					handleCheckedChange({
+						e,
+						id,
+						onCheckedChange,
+					})
+				}
 				className={checkboxPropsInternal({
 					class: managerClassNames([
 						{ [className as string]: className },
