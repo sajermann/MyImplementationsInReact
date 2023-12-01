@@ -13,7 +13,7 @@ describe('Components/Button', () => {
 			<Button
 				data-testid="Button"
 				disabled={false}
-				colorStyle="Warning"
+				colorStyle="warning"
 				type="button"
 				onClick={onClick}
 			>
@@ -62,7 +62,7 @@ describe('Components/Button', () => {
 		const { getByTestId } = render(
 			<Button
 				data-testid="Button"
-				colorStyle="Warning"
+				colorStyle="warning"
 				type="button"
 				onClick={onClick}
 				withFeedback={{

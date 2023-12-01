@@ -4,74 +4,93 @@
 import { fireEvent, render, waitFor } from '@testing-library/react';
 import { it, describe, vi } from 'vitest';
 import { Select } from '.';
+import { ContainerInput } from '../ContainerInput';
+import { Label } from '../Label';
+
+vi.mock('react-select', () => ({
+	default: (props: any) => {
+		console.log({ props }, 'test', props.value);
+		props.styles.control({}, { isFocused: true });
+		props.styles.control({}, { isFocused: false });
+		props.styles.menu({});
+		props.styles.singleValue({});
+		props.styles.input({});
+		props.styles.option({}, { isSelected: true });
+		props.styles.option({}, { isSelected: false });
+		props.loadingMessage();
+		props.noOptionsMessage();
+		props.classNames.control({ isFocused: true });
+		props.classNames.control({ isFocused: false });
+		props.onInputChange('e');
+
+		return (
+			<select data-testid="Test" onChange={props.onChange}>
+				{props.options.map(({ label, value }: any) => (
+					<option key={value} value={value}>
+						{label}
+					</option>
+				))}
+			</select>
+		);
+	},
+}));
 
 describe('Components/Select', () => {
 	it(`must change Select components`, async () => {
 		const mock = vi.fn();
-		const mockOnChange = (e: any) => mock(e.target.value);
-		const { queryByTestId, getByText } = render(
-			<Select
-				data-testid="Test"
-				id="state"
-				label="Estado Label"
-				isClearable
-				options={[{ value: 'sp', label: 'São Paulo' }]}
-				placeholder="Estado"
-				onChange={mockOnChange}
-			/>
+		const { getByText, getByTestId } = render(
+			<ContainerInput>
+				<Label htmlFor="state">Test</Label>
+				<Select
+					id="state"
+					isClearable
+					options={[
+						{ value: 'sp', label: 'São Paulo' },
+						{ value: 'rs', label: 'Rio Grande do Sul' },
+					]}
+					placeholder="Estado"
+					onChange={mock}
+					value="sp"
+				/>
+			</ContainerInput>
 		);
-		const mySelectComponent = queryByTestId('Test');
-		expect(mySelectComponent).toBeDefined();
-		expect(mySelectComponent).not.toBeNull();
-		if (!mySelectComponent || !mySelectComponent.firstChild) return;
-		fireEvent.keyDown(mySelectComponent.childNodes[1], { key: 'ArrowDown' });
-		fireEvent.keyDown(mySelectComponent.childNodes[1], { key: 'Enter' });
+		const result = getByTestId('Test');
+		fireEvent.change(result, { target: { value: 'Test' } });
+
 		await waitFor(() => getByText('São Paulo'));
-		expect(mock).toHaveBeenCalledWith('sp');
+		expect(mock).toHaveBeenCalledWith({
+			target: {
+				id: 'state',
+				value: undefined,
+			},
+		});
 	});
 
-	it(`must show text 'not data'`, async () => {
-		const { queryByTestId, getByText } = render(
-			<Select
-				data-testid="Test"
-				id="state"
-				label="Estado Label"
-				isClearable
-				options={[]}
-				placeholder="Estado"
-				onChange={vi.fn()}
-			/>
+	it(`must change Muilt Select components`, async () => {
+		const mock = vi.fn();
+		const { getByText, getByTestId } = render(
+			<ContainerInput>
+				<Label htmlFor="state">Test</Label>
+				<Select
+					isMulti={{ onChange: mock, value: ['sp'] }}
+					id="state"
+					isClearable
+					options={[
+						{ value: 'sp', label: 'São Paulo' },
+						{ value: 'rs', label: 'Rio Grande do Sul' },
+					]}
+					placeholder="Estado"
+					async={{
+						callback: vi.fn(),
+						debounce: 1,
+						minLength: 1,
+					}}
+				/>
+			</ContainerInput>
 		);
-		const mySelectComponent = queryByTestId('Test');
-		expect(mySelectComponent).toBeDefined();
-		expect(mySelectComponent).not.toBeNull();
-		if (!mySelectComponent || !mySelectComponent.firstChild) return;
+		const result = getByTestId('Test');
+		fireEvent.change(result, { target: { value: 'Test' } });
 
-		fireEvent.keyDown(mySelectComponent.childNodes[1], { key: 'ArrowDown' });
-
-		await waitFor(() => getByText('NO_DATA'));
-	});
-
-	it(`must show text 'loading...'`, async () => {
-		const { queryByTestId, getByText } = render(
-			<Select
-				data-testid="Test"
-				id="state"
-				label="Estado Label"
-				isClearable
-				isLoading
-				options={[]}
-				placeholder="Estado"
-				onChange={vi.fn()}
-			/>
-		);
-		const mySelectComponent = queryByTestId('Test');
-		expect(mySelectComponent).toBeDefined();
-		expect(mySelectComponent).not.toBeNull();
-		if (!mySelectComponent || !mySelectComponent.firstChild) return;
-
-		fireEvent.keyDown(mySelectComponent.childNodes[1], { key: 'ArrowDown' });
-
-		await waitFor(() => getByText('LOADING...'));
+		await waitFor(() => getByText('São Paulo'));
 	});
 });

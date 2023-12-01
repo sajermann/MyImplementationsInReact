@@ -9,7 +9,7 @@ import {
 } from 'react';
 import { managerClassNames } from '~/Utils/ManagerClassNames';
 import { BoxScroll } from '../BoxScroll';
-import { ButtonIcon } from '../ButtonIcon';
+import { Button } from '../Button';
 import { Icons } from '../Icons';
 
 type Props = {
@@ -81,30 +81,34 @@ export function Modal({
 					])}
 				>
 					{title && (
-						<Dialog.Title className="h-12 px-6 py-3 text-primary-500 font-bold flex items-center dark:bg-slate-900 border-b-[#dee2e6] border-b-2">
-							{title}
-							{expand && (
-								<ButtonIcon
-									className="absolute top-2 right-16 text-primary-500 hover:text-primary-300 transition-colors duration-500"
-									onClick={() => setIsExpanded(prev => !prev)}
-								>
-									{!isExpanded ? (
-										<Icons nameIcon="arrowsOutSimple" />
-									) : (
-										<Icons nameIcon="arrowsInSimple" />
-									)}
-								</ButtonIcon>
-							)}
+						<Dialog.Title className="h-14 px-6 py-3 text-primary-500 font-bold flex items-center dark:bg-slate-900 border-b-[#dee2e6] border-b-2">
+							<h1 className="flex-1">{title}</h1>
+							<div className="flex gap-4 items-center">
+								{expand && (
+									<Button
+										iconButton="rounded"
+										variant="option"
+										onClick={() => setIsExpanded(prev => !prev)}
+									>
+										{!isExpanded ? (
+											<Icons nameIcon="arrowsOutSimple" />
+										) : (
+											<Icons nameIcon="arrowsInSimple" />
+										)}
+									</Button>
+								)}
 
-							{closeButton && (
-								<ButtonIcon
-									className="absolute top-2 right-6 text-primary-500 hover:text-primary-300 transition-colors duration-500"
-									onClick={onClose}
-									data-testid="closeButtonModal"
-								>
-									<Icons nameIcon="close" width="1rem" />
-								</ButtonIcon>
-							)}
+								{closeButton && (
+									<Button
+										iconButton="rounded"
+										variant="option"
+										onClick={onClose}
+										data-testid="closeButtonModal"
+									>
+										<Icons nameIcon="close" width="1rem" />
+									</Button>
+								)}
+							</div>
 						</Dialog.Title>
 					)}
 					<main className="h-[calc(100%_-_48px)] dark:bg-gray-800 py-2">

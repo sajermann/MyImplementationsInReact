@@ -48,6 +48,7 @@ export const Input = forwardRef((props: Props, ref) => {
 					className="text-black rounded outline-none flex-1"
 					value={searchValue}
 					onChange={onChange}
+					aria-busy={isLoading}
 				/>
 				{isLoading && (
 					<Icons

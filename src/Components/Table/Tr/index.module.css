@@ -4,15 +4,12 @@
 	min-height: 68px;
 }
 
-.even {
-	background-color: #f2f2f2;
-	color: #000;
-}
-
 .isExpanded {
 	border-color: #e5e7eb;
 	border-width: 2px;
 	border-bottom-width: 0px;
+	background: rgb(34 197 94) !important;
+	color: black;
 }
 
 .isSelected {

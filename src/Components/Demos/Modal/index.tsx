@@ -11,8 +11,8 @@ export function ModalDemo() {
 	return (
 		<>
 			<Button
-				variant="Outlined"
-				colorStyle="Secondary"
+				variant="outlined"
+				colorStyle="secondary"
 				onClick={() => setIsOpenModal(true)}
 				className="!w-72 !h-12"
 			>

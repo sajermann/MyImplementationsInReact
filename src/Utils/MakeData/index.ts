@@ -5,7 +5,7 @@ import { TBrawler } from '~/Types/TBrawler';
 import { TPerson } from '~/Types/TPerson';
 import { TVehicle } from '~/Types/TVehicle';
 import { TChat } from '~/Types/TChat';
-import { createRef, ForwardedRef, RefObject } from 'react';
+import { createRef, ForwardedRef } from 'react';
 
 const range = (len: number) => {
 	const arr = [];

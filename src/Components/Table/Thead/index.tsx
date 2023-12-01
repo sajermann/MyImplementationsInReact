@@ -1,14 +1,19 @@
-/* eslint-disable jsx-a11y/click-events-have-key-events */
 import { Table, flexRender } from '@tanstack/react-table';
 import { useDarkModeZustand } from '~/Store/UseDarkMode';
 import { managerClassNames } from '~/Utils/ManagerClassNames';
+import { Filter } from './Filter';
+import { Resizing } from './Resizing';
+import { SortIcon } from './SortIcon';
 import styles from './index.module.css';
 
 type Props<T> = {
 	table: Table<T>;
+	sorting?: {
+		disabled?: boolean;
+	};
 };
 
-export function Thead<T>({ table }: Props<T>) {
+export function Thead<T>({ table, sorting }: Props<T>) {
 	const { darkMode } = useDarkModeZustand();
 
 	return (
@@ -27,65 +32,41 @@ export function Thead<T>({ table }: Props<T>) {
 							colSpan={header.colSpan}
 							style={{
 								width: header.getSize(),
-								// @ts-expect-error align exists
-								textAlign: header.getContext().column.columnDef.align,
 							}}
 						>
 							{header.isPlaceholder ? null : (
 								<>
-									<div className="flex justify-center items-center gap-1">
-										<div
-											{...{
-												className: header.column.getCanSort()
-													? 'cursor-pointer select-none'
-													: '',
-												onClick: header.column.getToggleSortingHandler(),
-											}}
+									<div
+										className={managerClassNames({
+											'flex items-center gap-1': true,
+											'justify-center':
+												header.getContext().column.columnDef.meta?.align ===
+												'center',
+											'justify-end':
+												header.getContext().column.columnDef.meta?.align ===
+												'right',
+										})}
+									>
+										<button
+											type="button"
+											className={managerClassNames({
+												'cursor-pointer select-none':
+													header.column.getCanSort() && !sorting,
+												'cursor-default outline-0 tab select-none':
+													!header.column.getCanSort() || sorting?.disabled,
+											})}
+											tabIndex={header.column.getCanSort() ? undefined : -1}
+											onClick={header.column.getToggleSortingHandler()}
 										>
 											{flexRender(
 												header.column.columnDef.header,
 												header.getContext()
 											)}
-											{{
-												asc: ' 🔼',
-												desc: ' 🔽',
-											}[header.column.getIsSorted() as string] ?? null}
-										</div>
-										{/* @ts-expect-error onResizing exists */}
-										{header.getContext().column.columnDef.onResizing &&
-											header
-												.getContext()
-												// @ts-expect-error onResizing exists
-												.column.columnDef.onResizing(
-													header.column.getSize(),
-													header.id
-												)}
-
-										{/* Filter */}
-										{header.column.getCanFilter() &&
-										// @ts-expect-error filterElement exists
-										header.getContext().column.columnDef.filterElement
-											? header
-													.getContext()
-													// @ts-expect-error filterElement exists
-													.column.columnDef.filterElement(
-														header.getContext().column,
-														table
-													)
-											: null}
+											<SortIcon header={header} />
+										</button>
+										<Filter header={header} table={table} />
 									</div>
-									{/* SizingMode */}
-									{header.column.getCanResize() && (
-										<div
-											{...{
-												onMouseDown: header.getResizeHandler(),
-												onTouchStart: header.getResizeHandler(),
-												className: `${styles.resizer} ${
-													header.column.getIsResizing() ? styles.isResizing : ''
-												}`,
-											}}
-										/>
-									)}
+									<Resizing header={header} />
 								</>
 							)}
 						</th>

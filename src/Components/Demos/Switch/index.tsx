@@ -1,19 +1,21 @@
 import { useState } from 'react';
+import { ContainerInput } from '~/Components/ContainerInput';
 import { Icons } from '~/Components/Icons';
+import { Label } from '~/Components/Label';
 import { Switch } from '~/Components/Switch';
 
 export function SwitchDemo() {
 	const [checked, setChecked] = useState(false);
 	return (
-		<div className="w-full h-full flex items-center justify-center">
+		<ContainerInput className="items-center">
+			<Label htmlFor="right">Switch</Label>
 			<Switch
-				label="Switch"
-				id="left"
+				id="right"
 				checked={checked}
 				onChangge={e => setChecked(e)}
 				checkedIcon={<Icons nameIcon="sun" />}
 				uncheckedIcon={<Icons nameIcon="moon" />}
 			/>
-		</div>
+		</ContainerInput>
 	);
 }

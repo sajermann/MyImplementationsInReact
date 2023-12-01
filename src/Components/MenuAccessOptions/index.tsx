@@ -114,7 +114,7 @@ export default function MenuAccessOptions() {
 	return (
 		<>
 			<HeaderButton onClick={() => setIsOpen(!isOpen)}>
-				<Icons nameIcon="list" width="22px" />
+				<Icons nameIcon="list" width="1.5rem" />
 			</HeaderButton>
 			<Drawer
 				openFrom="left"
@@ -157,9 +157,9 @@ export default function MenuAccessOptions() {
 									}}
 								>
 									{isVisibleSearch ? (
-										<Icons nameIcon="close" width="22" />
+										<Icons nameIcon="close" width="1.5rem" />
 									) : (
-										<Icons nameIcon="search" width="22" />
+										<Icons nameIcon="search" width="1.5rem" />
 									)}
 								</HeaderButton>
 							</div>

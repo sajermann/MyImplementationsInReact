@@ -7,6 +7,8 @@ import { Popover } from '~/Components/Popover';
 import { useTranslation } from '~/Hooks/UseTranslation';
 import { TPerson } from '~/Types/TPerson';
 import { Datepicker } from '~/Components/Datepicker';
+import { ContainerInput } from '~/Components/ContainerInput';
+import { Label } from '~/Components/Label';
 
 export function FilterBirthday({
 	column,
@@ -42,44 +44,45 @@ export function FilterBirthday({
 			<>
 				<div className="flex flex-col gap-4">
 					<div className="w-48">
-						<Datepicker
-							label={translate('FROM')}
-							placeholder={translate('DD/MM/YYYY')}
-							id="from"
-							value={dates.from}
-							onChange={e =>
-								setDates(prev => ({ ...prev, from: e.target.value }))
-							}
-						/>
+						<ContainerInput>
+							<Label htmlFor="from">{translate('FROM')}</Label>
+							<Datepicker
+								placeholder={translate('DD/MM/YYYY')}
+								id="from"
+								value={dates.from}
+								onChange={e =>
+									setDates(prev => ({ ...prev, from: e.target.value }))
+								}
+							/>
+						</ContainerInput>
 					</div>
 					<div className="w-48">
-						<Datepicker
-							label={translate('TO')}
-							placeholder={translate('DD/MM/YYYY')}
-							id="to"
-							value={dates.to}
-							onChange={e =>
-								setDates(prev => ({ ...prev, to: e.target.value }))
-							}
-						/>
+						<ContainerInput>
+							<Label htmlFor="to">{translate('TO')}</Label>
+							<Datepicker
+								placeholder={translate('DD/MM/YYYY')}
+								id="to"
+								value={dates.to}
+								onChange={e =>
+									setDates(prev => ({ ...prev, to: e.target.value }))
+								}
+							/>
+						</ContainerInput>
 					</div>
 				</div>
 
 				<div className="w-full flex justify-center gap-4 mt-4">
 					<Button
-						style={{ width: '50px', height: '50px', borderRadius: '50%' }}
-						colorStyle="Secondary"
-						variant="Outlined"
-						type="button"
+						iconButton="rounded"
+						colorStyle="secondary"
+						variant="outlined"
 						onClick={() => setDates({ from: '', to: '' })}
 						endIcon={<Icons nameIcon="trash" />}
 					/>
 
 					<Button
-						style={{ width: '50px', height: '50px', borderRadius: '50%' }}
-						colorStyle="Primary"
-						variant="Outlined"
-						type="button"
+						iconButton="rounded"
+						variant="outlined"
 						onClick={() => {
 							column.setFilterValue(dates);
 							setIsOpen(false);

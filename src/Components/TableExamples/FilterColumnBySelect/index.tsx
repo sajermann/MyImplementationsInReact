@@ -7,6 +7,7 @@ import { Popover } from '~/Components/Popover';
 import { useTranslation } from '~/Hooks/UseTranslation';
 import { TPerson } from '~/Types/TPerson';
 import { Select } from '~/Components/Select';
+import { ContainerInput } from '~/Components/ContainerInput';
 
 type Props2 = {
 	column: Column<TPerson, string>;
@@ -49,7 +50,7 @@ export function FilterColumnBySelect({ column, table, propForFilter }: Props2) {
 				</button>
 			}
 		>
-			<>
+			<ContainerInput>
 				<Select
 					placeholder={translate('FILTER')}
 					menuPosition="fixed"
@@ -63,32 +64,29 @@ export function FilterColumnBySelect({ column, table, propForFilter }: Props2) {
 					}}
 					id="filter"
 				/>
+			</ContainerInput>
 
-				<div className="w-full flex justify-center gap-4 mt-4">
-					<Button
-						style={{ width: '50px', height: '50px', borderRadius: '50%' }}
-						colorStyle="Secondary"
-						variant="Outlined"
-						type="button"
-						onClick={() => {
-							setFilterValue([]);
-						}}
-						endIcon={<Icons nameIcon="trash" />}
-					/>
+			<div className="w-full flex justify-center gap-4 mt-4">
+				<Button
+					iconButton="rounded"
+					colorStyle="secondary"
+					variant="outlined"
+					onClick={() => {
+						setFilterValue([]);
+					}}
+					endIcon={<Icons nameIcon="trash" />}
+				/>
 
-					<Button
-						style={{ width: '50px', height: '50px', borderRadius: '50%' }}
-						colorStyle="Primary"
-						variant="Outlined"
-						type="button"
-						onClick={() => {
-							column.setFilterValue(filterValue);
-							setIsOpen(false);
-						}}
-						endIcon={<Icons nameIcon="save" />}
-					/>
-				</div>
-			</>
+				<Button
+					iconButton="rounded"
+					variant="outlined"
+					onClick={() => {
+						column.setFilterValue(filterValue);
+						setIsOpen(false);
+					}}
+					endIcon={<Icons nameIcon="save" />}
+				/>
+			</div>
 		</Popover>
 	);
 }

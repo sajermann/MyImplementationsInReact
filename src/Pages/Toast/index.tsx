@@ -34,16 +34,16 @@ export function ToastPage() {
 
 			<Section subHeading="Toast">
 				<ComponentBlock>
-					<Button colorStyle="Success" onClick={() => handleError('success')}>
+					<Button colorStyle="success" onClick={() => handleError('success')}>
 						{translate('SUCCESS')}
 					</Button>
-					<Button colorStyle="Secondary" onClick={() => handleError('error')}>
+					<Button colorStyle="secondary" onClick={() => handleError('error')}>
 						{translate('ERROR')}
 					</Button>
-					<Button colorStyle="Warning" onClick={() => handleError('warning')}>
+					<Button colorStyle="warning" onClick={() => handleError('warning')}>
 						{translate('WARNING')}
 					</Button>
-					<Button colorStyle="Primary" onClick={() => handleError('info')}>
+					<Button onClick={() => handleError('info')}>
 						{translate('INFO')}
 					</Button>
 				</ComponentBlock>

@@ -5,9 +5,12 @@ import { ComponentBlock } from '~/Components/ComponentBlock';
 import { CodeBlock } from '~/Components/CodeBlock';
 import { QuickAccessGithub } from '~/Components/QuickAccessGithub';
 import { RadioGroup, RadioItem } from '~/Components/Radio';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { RadioDemo } from '~/Components/Demos/Radio';
 import { Button } from '~/Components/Button';
+import { ContainerInput } from '~/Components/ContainerInput';
+import { Label } from '~/Components/Label';
+import { Checkbox } from '~/Components/Checkbox';
 
 type TPokemon = 'Charmander' | 'Charmeleon' | 'Charizard';
 
@@ -23,6 +26,8 @@ const CONFIG = {
 export function RadioPage() {
 	const { translate } = useTranslation();
 	const [value, setValue] = useState<TPokemon | null>(null);
+	const [errorMode, setErrorMode] = useState(false);
+	const ref = useRef<HTMLButtonElement>(null);
 
 	return (
 		<Main data-content="content-main">
@@ -46,11 +51,7 @@ export function RadioPage() {
 					<div className="flex flex-col gap-2 items-center justify-center">
 						<div className="w-32 h-32">
 							{value && (
-								<img
-									src={CONFIG[value as TPokemon]}
-									alt={value}
-									className="w-28 h-28"
-								/>
+								<img src={CONFIG[value]} alt={value} className="w-28 h-28" />
 							)}
 						</div>
 						<RadioGroup
@@ -58,20 +59,106 @@ export function RadioPage() {
 							onValueChange={e => setValue(e as TPokemon)}
 							value={value}
 						>
-							<RadioItem
-								id="Charmander"
-								value="Charmander"
-								label="Charmander"
-							/>
-							<RadioItem
-								id="Charmeleon"
-								value="Charmeleon"
-								label="Charmeleon"
-							/>
-							<RadioItem id="Charizard" value="Charizard" label="Charizard" />
+							<ContainerInput className="items-center">
+								<Label htmlFor="Charmander">Charmander</Label>
+								<RadioItem id="Charmander" value="Charmander" />
+							</ContainerInput>
+
+							<ContainerInput className="items-center">
+								<Label htmlFor="Charmeleon">Charmeleon</Label>
+								<RadioItem id="Charmeleon" value="Charmeleon" />
+							</ContainerInput>
+
+							<ContainerInput className="items-center">
+								<Label htmlFor="Charizard">Charizard</Label>
+								<RadioItem id="Charizard" value="Charizard" />
+							</ContainerInput>
 						</RadioGroup>
 						<Button onClick={() => setValue(null)}>{translate('CLEAR')}</Button>
 					</div>
+				</ComponentBlock>
+			</Section>
+
+			<Section title={translate('ERRORS')} variant="h2">
+				<ComponentBlock>
+					<div className="flex gap-2 items-center justify-center">
+						<RadioGroup className="flex gap-2">
+							<ContainerInput className="items-center">
+								<Label htmlFor="Charmander_Error" isError={errorMode}>
+									Charmander
+								</Label>
+								<RadioItem
+									id="Charmander_Error"
+									value="Charmander_Error"
+									iserror={errorMode}
+								/>
+							</ContainerInput>
+
+							<ContainerInput className="items-center">
+								<Label htmlFor="Charmeleon_Error" isError={errorMode}>
+									Charmeleon
+								</Label>
+								<RadioItem
+									id="Charmeleon_Error"
+									value="Charmeleon_Error"
+									iserror={errorMode}
+								/>
+							</ContainerInput>
+
+							<ContainerInput className="items-center">
+								<Label htmlFor="Charizard_Error" isError={errorMode}>
+									Charizard
+								</Label>
+								<RadioItem
+									id="Charizard_Error"
+									value="Charizard_Error"
+									iserror={errorMode}
+								/>
+							</ContainerInput>
+						</RadioGroup>
+						<ContainerInput className="w-max items-center">
+							<Label htmlFor="error_mode_checkbox">
+								{translate('ERROR_MODE')}
+							</Label>
+							<Checkbox
+								id="error_mode_checkbox"
+								checked={errorMode}
+								onCheckedChange={e => setErrorMode(e.target.value as boolean)}
+							/>
+						</ContainerInput>
+					</div>
+				</ComponentBlock>
+			</Section>
+
+			<Section subHeading="Focus">
+				<ComponentBlock className="flex-row !items-end">
+					<RadioGroup className="flex gap-2">
+						<ContainerInput className="items-center">
+							<Label htmlFor="Charmander_Focus">Charmander</Label>
+							<RadioItem
+								id="Charmander_Focus"
+								value="Charmander_Focus"
+								ref={ref}
+							/>
+						</ContainerInput>
+
+						<ContainerInput className="items-center">
+							<Label htmlFor="Charmeleon_Focus">Charmeleon</Label>
+							<RadioItem id="Charmeleon_Focus" value="Charmeleon_Focus" />
+						</ContainerInput>
+
+						<ContainerInput className="items-center">
+							<Label htmlFor="Charizard_Focus">Charizard</Label>
+							<RadioItem id="Charizard_Focus" value="Charizard_Focus" />
+						</ContainerInput>
+					</RadioGroup>
+					<Button
+						type="button"
+						style={{ width: 173 }}
+						onClick={() => ref.current?.focus()}
+					>
+						Focus
+					</Button>
 				</ComponentBlock>
 			</Section>
 

@@ -15,7 +15,7 @@ describe('Pages/CheckboxPage', () => {
 			</InjectorProviders>
 		);
 		await waitFor(() => {
-			const input = getAllByLabelText('Label')[0];
+			const input = getAllByLabelText('Label Props')[0];
 			fireEvent.change(input, { target: { value: 'Test' } });
 		});
 	});

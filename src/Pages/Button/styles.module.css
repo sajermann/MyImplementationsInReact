@@ -49,8 +49,3 @@
 .custom2:active {
 	transform: scale(0.98);
 }
-
-.btn {
-	width: 200px !important;
-	height: 40px !important;
-}

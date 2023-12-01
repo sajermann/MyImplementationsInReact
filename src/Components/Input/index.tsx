@@ -1,22 +1,78 @@
-import {
-	ISajermannReactInput,
-	Input as InputSajermann,
-} from '@sajermann/react-input';
+import { forwardRef, useEffect, useState } from 'react';
+import { tv } from 'tailwind-variants';
+import { TInput } from './Types/TInput';
+import { onChangeCustom, preOnChange } from './Utils';
 
-type Props = ISajermannReactInput;
+const input = tv({
+	slots: {
+		inputPropsInternal: [
+			'group outline-none focus:ring-1 border h-11 py-1 px-2 rounded w-full text-black',
+			'transition-all duration-500',
+		],
+	},
+	variants: {
+		color: {
+			primary: {
+				inputPropsInternal:
+					'focus:ring-blue-500 group-hover:border-blue-500 focus:border-blue-500',
+			},
+			error: {
+				inputPropsInternal:
+					'focus:ring-red-500 group-hover:border-red-500 focus:border-red-500',
+			},
 
-function Input({ ...props }: Props) {
-	return (
-		<InputSajermann
-			{...props}
-			containerProps={{
-				className: `flex w-full flex-col gap-2 ${props.containerProps?.className}`,
-			}}
-			className={`w-full h-11 py-1 px-2 rounded-md border dark:text-black ${
-				props.className ? props.className : ''
-			}`}
-		/>
-	);
-}
+			normal: {
+				inputPropsInternal: '',
+			},
+		},
+	},
 
-export { Input };
+	defaultVariants: {
+		color: 'normal',
+	},
+});
+
+export const Input = forwardRef<HTMLInputElement, TInput>(
+	(
+		{ iserror, onBeforeChange, onChange, debounce, className, ...rest },
+		ref
+	) => {
+		const [event, setEvent] = useState<React.ChangeEvent<HTMLInputElement>>();
+		const { inputPropsInternal } = input({
+			color: iserror ? 'error' : 'primary',
+		});
+
+		useEffect(() => {
+			const timer = setTimeout(() => {
+				if (debounce && event) {
+					onChangeCustom({
+						e: event,
+						onBeforeChange,
+						onChange,
+					});
+				}
+			}, debounce);
+
+			return () => clearTimeout(timer);
+		}, [event]);
+
+		return (
+			<input
+				{...rest}
+				ref={ref}
+				className={inputPropsInternal({
+					class: className,
+				})}
+				onChange={e =>
+					preOnChange({
+						e,
+						setEvent,
+						debounce,
+						onBeforeChange,
+						onChange,
+					})
+				}
+			/>
+		);
+	}
+);

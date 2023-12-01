@@ -98,7 +98,6 @@ export function Table<T, U = undefined>({
 }: Props<T, U>) {
 	const [sortingInternal, setSortingInternal] = useState<SortingState>([]);
 	const { translate } = useTranslation();
-	console.log({ sortingInternal });
 
 	function buildColumns() {
 		const result: ColumnDef<T, unknown>[] = [];
@@ -113,7 +112,9 @@ export function Table<T, U = undefined>({
 					size: 50,
 					minSize: 50,
 					maxSize: 50,
-					align: 'center',
+					meta: {
+						align: 'center',
+					},
 					enableSorting: false,
 					enableResizing: false,
 					cell: ({ row }: CellContext<T, unknown>) => (
@@ -168,7 +169,6 @@ export function Table<T, U = undefined>({
 		onSortingChange: sorting?.disabled
 			? undefined
 			: funcUpdater => {
-					console.log({ funcUpdater });
 					if (sorting?.manualSorting) {
 						const resultSorts = (
 							funcUpdater as unknown as (
@@ -227,7 +227,7 @@ export function Table<T, U = undefined>({
 			>
 				<RadioGroup value={tableUtils.getValueForRadio({ selection })}>
 					<table className={styles.table}>
-						<Thead table={table} />
+						<Thead table={table} sorting={sorting} />
 
 						<Tbody
 							table={table}

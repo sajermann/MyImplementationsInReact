@@ -1,5 +1,6 @@
 /* eslint-disable react/button-has-type */
 import { ButtonHTMLAttributes, DetailedHTMLProps } from 'react';
+import { Button } from '../Button';
 
 type Props = DetailedHTMLProps<
 	ButtonHTMLAttributes<HTMLButtonElement>,
@@ -8,13 +9,13 @@ type Props = DetailedHTMLProps<
 
 export function HeaderButton({ children, ...rest }: Props) {
 	return (
-		<button
-			className="inline-flex text-sm bg-[#1f2937] border-[#c2e0ff14] border-2 rounded-lg p-2 transition-all duration-500 text-white
-			focus:outline-2 focus:outline-offset-2
-			hover:bg-[#374151]"
+		<Button
+			iconButton="squared"
+			variant="option"
 			{...rest}
+			className="bg-dark-600 text-white"
 		>
 			{children}
-		</button>
+		</Button>
 	);
 }

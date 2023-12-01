@@ -14,8 +14,7 @@ export function PrintDemo() {
 		>
 			<span>{translate('PRINT_ONLY_THIS_CONTENT')}</span>
 			<Button
-				colorStyle="Primary"
-				variant="Outlined"
+				variant="outlined"
 				onClick={handlePreparePrint}
 				className="print:hidden"
 			>

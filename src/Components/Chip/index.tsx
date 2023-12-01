@@ -78,6 +78,7 @@ function keyDownButton({
 	const keysToVerify = [' ', 'Enter'];
 	const { tagName } = (event as unknown as { target: { tagName: string } })
 		.target;
+	console.log({ tagName });
 	if (tagName === 'BUTTON' && keysToVerify.includes(event.key) && onRemove) {
 		onRemove(value);
 		return;
@@ -121,10 +122,7 @@ export function Chip({ value, onRemove, onChange }: ChipProps) {
 						saveEditing({ value, valueEditing, setEditing, onChange })
 					}
 				/>
-				<ButtonRemove
-					show={!!onRemove}
-					onClick={() => onRemove && onRemove(value)}
-				/>
+				<ButtonRemove show={!!onRemove} />
 			</div>
 		);
 	}

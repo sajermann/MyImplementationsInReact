@@ -12,6 +12,7 @@ import { Checkbox } from '~/Components/Checkbox';
 import { Main } from '~/Components/Main';
 import Section from '~/Components/Section';
 import { QuickAccessGithub } from '~/Components/QuickAccessGithub';
+import { ContainerInput } from '~/Components/ContainerInput';
 
 const DEFAULT_OPTIONS = [
 	{
@@ -56,7 +57,9 @@ export function FullEditablePage() {
 				header: 'ID',
 				minSize: 100,
 				size: 100,
-				align: 'center',
+				meta: {
+					align: 'center',
+				},
 			},
 			{
 				accessorKey: 'avatar',
@@ -82,7 +85,9 @@ export function FullEditablePage() {
 				header: translate('NAME'),
 				minSize: 100,
 				size: 100,
-				align: 'center',
+				meta: {
+					align: 'center',
+				},
 				enableSorting: true,
 				cell: info => (
 					<Input
@@ -98,7 +103,9 @@ export function FullEditablePage() {
 				header: translate('LAST_NAME'),
 				minSize: 100,
 				size: 100,
-				align: 'center',
+				meta: {
+					align: 'center',
+				},
 				cell: info => (
 					<Input
 						type="text"
@@ -113,7 +120,9 @@ export function FullEditablePage() {
 				header: translate('BIRTHDAY'),
 				minSize: 100,
 				size: 100,
-				align: 'center',
+				meta: {
+					align: 'center',
+				},
 				cell: info => (
 					<Datepicker
 						id="birthday"
@@ -128,14 +137,18 @@ export function FullEditablePage() {
 				header: 'Email',
 				minSize: 100,
 				size: 100,
-				align: 'center',
+				meta: {
+					align: 'center',
+				},
 			},
 			{
 				accessorKey: 'role',
 				header: 'Role',
 				minSize: 100,
 				size: 100,
-				align: 'center',
+				meta: {
+					align: 'center',
+				},
 				cell: info => (
 					<Select
 						menuPosition="fixed"
@@ -157,18 +170,19 @@ export function FullEditablePage() {
 				header: translate('ACTIVE'),
 				minSize: 100,
 				size: 100,
-				align: 'center',
+				meta: {
+					align: 'center',
+				},
 				cell: info => (
-					<div className="w-full flex items-center justify-center">
+					<ContainerInput className="items-center">
 						<Checkbox
 							defaultChecked={info.getValue() as boolean}
 							id="isActive"
-							containerProps={{ className: 'flex items-center' }}
 							onCheckedChange={e =>
 								handleInput(e as ChangeEvent<HTMLInputElement>, info.row.index)
 							}
 						/>
-					</div>
+					</ContainerInput>
 				),
 			},
 		],

@@ -2,12 +2,19 @@ import { Main } from '~/Components/Main';
 import { useTranslation } from '~/Hooks/UseTranslation';
 import Section from '~/Components/Section';
 import { ComponentBlock } from '~/Components/ComponentBlock';
-import { CodeBlock } from '~/Components/CodeBlock';
 import { Input } from '~/Components/Input';
 import { QuickAccessGithub } from '~/Components/QuickAccessGithub';
+import { useRef, useState } from 'react';
+import { Checkbox } from '~/Components/Checkbox';
+import { ContainerInput } from '~/Components/ContainerInput';
+import { Label } from '~/Components/Label';
+import { ErrorsInput } from '~/Components/ErrorsInput';
+import { Button } from '~/Components/Button';
 
 export function InputPage() {
 	const { translate } = useTranslation();
+	const [errorMode, setErrorMode] = useState(false);
+	const ref = useRef<HTMLInputElement>(null);
 
 	function addMessage(valor: string) {
 		const result = valor.replace('Very Good - ', '');
@@ -17,12 +24,9 @@ export function InputPage() {
 	return (
 		<Main data-content="content-main">
 			<Section heading={translate('INPUT')}>
-				{`${translate('IMPLEMENTS_COMPONENT')} ${translate(
-					'INPUT'
-				)} ${translate('USING_THE_MY_SELF_LIB')} @sajermann/react-input.`}
-			</Section>
-			<Section subHeading={translate('INSTALLATION_OF_LIB')}>
-				<CodeBlock>npm i @sajermann/react-input;</CodeBlock>
+				{`${translate('IMPLEMENTS_COMPONENT')} Input ${translate(
+					'WITHOUT_USING_LIB'
+				)}`}
 			</Section>
 
 			<Section subHeading={translate('CODES')}>
@@ -33,38 +37,44 @@ export function InputPage() {
 
 			<Section subHeading={translate('TRADICIONAL_INPUT')}>
 				<ComponentBlock>
-					<Input placeholder="Label" id="Label" label="Label" />
+					<ContainerInput>
+						<Label htmlFor="label">{translate('TRADICIONAL_INPUT')}</Label>
+						<Input placeholder={translate('TRADICIONAL_INPUT')} id="label" />
+					</ContainerInput>
 				</ComponentBlock>
 			</Section>
 
 			<Section subHeading="Label Props">
 				<ComponentBlock>
-					<Input
-						placeholder="Label Props"
-						labelProps={{
-							children: 'Label Props',
-							style: { color: 'red' },
-						}}
-						id="Label Props"
-					/>
+					<ContainerInput>
+						<Label
+							htmlFor="labelProps"
+							className="text-yellow-500 italic font-extrabold"
+						>
+							Label Props
+						</Label>
+						<Input placeholder="Label Props" id="labelProps" />
+					</ContainerInput>
 				</ComponentBlock>
 			</Section>
 
 			<Section subHeading="Container Props">
 				<ComponentBlock>
-					<Input
-						placeholder="Container Props"
-						id="Container Props"
-						label="Container Props"
-						containerProps={{
-							style: {
-								display: 'flex',
-								flexDirection: 'column',
-								border: '1px solid',
-								width: 300,
-							},
+					<ContainerInput
+						style={{
+							display: 'flex',
+							flexDirection: 'row',
+							alignItems: 'center',
+							border: '1px solid',
+							width: 500,
 						}}
-					/>
+						className="p-5"
+					>
+						<Label htmlFor="containerProps" style={{ whiteSpace: 'nowrap' }}>
+							Container Props
+						</Label>
+						<Input placeholder="Container Props" id="containerProps" />
+					</ContainerInput>
 				</ComponentBlock>
 			</Section>
 
@@ -170,6 +180,52 @@ export function InputPage() {
 						onChange={console.log}
 						debounce={2000}
 					/>
+				</ComponentBlock>
+			</Section>
+
+			<Section subHeading={translate('ERRORS')}>
+				<ComponentBlock className="flex-row !items-start">
+					<ContainerInput className="flex-1">
+						<Label htmlFor="errorMode" isError={errorMode}>
+							{translate('ERROR_MODE')}
+						</Label>
+						<Input
+							placeholder={translate('ERROR_MODE')}
+							id="errorMode"
+							iserror={errorMode}
+						/>
+						<ErrorsInput
+							errors={
+								errorMode ? ['Required', 'Invalid email adress'] : undefined
+							}
+						/>
+					</ContainerInput>
+					<ContainerInput className="w-max items-center">
+						<Label htmlFor="error_mode_checkbox">
+							{translate('ERROR_MODE')}
+						</Label>
+						<Checkbox
+							id="error_mode_checkbox"
+							checked={errorMode}
+							onCheckedChange={e => setErrorMode(e.target.value as boolean)}
+						/>
+					</ContainerInput>
+				</ComponentBlock>
+			</Section>
+
+			<Section subHeading="Focus">
+				<ComponentBlock className="flex-row !items-end">
+					<ContainerInput className="flex-1">
+						<Label htmlFor="focus">Ref - Focus</Label>
+						<Input id="focus" ref={ref} placeholder="Ref - Focus" />
+					</ContainerInput>
+					<Button
+						type="button"
+						style={{ width: 173 }}
+						onClick={() => ref.current?.focus()}
+					>
+						Focus
+					</Button>
 				</ComponentBlock>
 			</Section>
 		</Main>

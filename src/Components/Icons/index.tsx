@@ -1832,6 +1832,120 @@ const ICONS = {
 			<path d="M140,180a12,12,0,1,1-12-12A12,12,0,0,1,140,180ZM128,72c-22.06,0-40,16.15-40,36v4a8,8,0,0,0,16,0v-4c0-11,10.77-20,24-20s24,9,24,20-10.77,20-24,20a8,8,0,0,0-8,8v8a8,8,0,0,0,16,0v-.72c18.24-3.35,32-17.9,32-35.28C168,88.15,150.06,72,128,72Zm104,56A104,104,0,1,1,128,24,104.11,104.11,0,0,1,232,128Zm-16,0a88,88,0,1,0-88,88A88.1,88.1,0,0,0,216,128Z" />
 		</svg>
 	),
+	loadingPoints: ({ width, height, color, ...rest }: IconProps) => (
+		<svg
+			viewBox="-20 -25 100 100"
+			{...rest}
+			width={width || '100%'}
+			height={height || '100%'}
+			fill={color || 'currentColor'}
+		>
+			<circle fill="currentColor" stroke="none" cx="6" cy="25" r="6">
+				<animateTransform
+					attributeName="transform"
+					dur="1s"
+					type="translate"
+					values="0 15 ; 0 -15; 0 15"
+					repeatCount="indefinite"
+					begin="0.1"
+				/>
+				<animate
+					attributeName="opacity"
+					dur="1s"
+					values="0;1;0"
+					repeatCount="indefinite"
+					begin="0.1"
+				/>
+			</circle>
+			<circle fill="currentColor" stroke="none" cx="30" cy="25" r="6">
+				<animateTransform
+					attributeName="transform"
+					dur="1s"
+					type="translate"
+					values="0 10 ; 0 -10; 0 10"
+					repeatCount="indefinite"
+					begin="0.2"
+				/>
+				<animate
+					attributeName="opacity"
+					dur="1s"
+					values="0;1;0"
+					repeatCount="indefinite"
+					begin="0.2"
+				/>
+			</circle>
+			<circle fill="currentColor" stroke="none" cx="54" cy="25" r="6">
+				<animateTransform
+					attributeName="transform"
+					dur="1s"
+					type="translate"
+					values="0 5 ; 0 -5; 0 5"
+					repeatCount="indefinite"
+					begin="0.3"
+				/>
+				<animate
+					attributeName="opacity"
+					dur="1s"
+					values="0;1;0"
+					repeatCount="indefinite"
+					begin="0.3"
+				/>
+			</circle>
+		</svg>
+	),
+	success: ({ width, height, color, ...rest }: IconProps) => (
+		<svg
+			xmlns="http://www.w3.org/2000/svg"
+			{...rest}
+			width={width || '100%'}
+			height={height || '100%'}
+			fill={color || 'currentColor'}
+			viewBox="0 0 256 256"
+		>
+			<rect width="256" height="256" fill="none" />
+			<polyline
+				points="216 72 104 184 48 128"
+				fill="none"
+				stroke={color || 'currentColor'}
+				strokeLinecap="round"
+				strokeLinejoin="round"
+				strokeWidth="16"
+			/>
+		</svg>
+	),
+
+	failed: ({ width, height, color, ...rest }: IconProps) => (
+		<svg
+			xmlns="http://www.w3.org/2000/svg"
+			{...rest}
+			width={width || '100%'}
+			height={height || '100%'}
+			fill={color || 'currentColor'}
+			viewBox="0 0 256 256"
+		>
+			<rect width="256" height="256" fill="none" />
+			<line
+				x1="200"
+				y1="56"
+				x2="56"
+				y2="200"
+				stroke={color || 'currentColor'}
+				strokeLinecap="round"
+				strokeLinejoin="round"
+				strokeWidth="16"
+			/>
+			<line
+				x1="200"
+				y1="200"
+				x2="56"
+				y2="56"
+				stroke={color || 'currentColor'}
+				strokeLinecap="round"
+				strokeLinejoin="round"
+				strokeWidth="16"
+			/>
+		</svg>
+	),
 };
 
 export const keysIcons = Object.keys(ICONS);

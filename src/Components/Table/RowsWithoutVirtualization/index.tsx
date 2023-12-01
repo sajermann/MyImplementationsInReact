@@ -8,6 +8,7 @@ import { Tr } from '../Tr';
 type Props<T> = {
 	table: Table<T>;
 	selection?: Omit<TSelection<T>, 'disableCheckbox'>;
+	rowForUpdate?: { row: number; data: T } | null;
 	expandLine?: {
 		render: (data: Row<T>) => React.ReactNode;
 	};
@@ -15,6 +16,7 @@ type Props<T> = {
 };
 export function RowsWithoutVirtualization<T>({
 	table,
+	rowForUpdate,
 	expandLine,
 	selection,
 	disabledVirtualization,
@@ -30,16 +32,15 @@ export function RowsWithoutVirtualization<T>({
 								key={cell.id}
 								{...{
 									style: {
-										// @ts-expect-error align exists
-										textAlign: cell.column.columnDef.align,
-										borderRight: cell.column.getIsResizing()
-											? '0.1px solid'
-											: 'none',
+										textAlign: cell.column.columnDef.meta?.align,
 									},
 								}}
 								title={cell.getContext().getValue() as string}
 							>
-								{flexRender(cell.column.columnDef.cell, cell.getContext())}
+								{rowForUpdate?.row === cell.row.index &&
+								cell.column.columnDef.meta?.cellEdit
+									? cell.column.columnDef.meta?.cellEdit(cell.row)
+									: flexRender(cell.column.columnDef.cell, cell.getContext())}
 							</Td>
 						))}
 					</Tr>

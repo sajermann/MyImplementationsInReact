@@ -12,8 +12,8 @@ export function DrawerDemo() {
 	return (
 		<>
 			<Button
-				variant="Outlined"
-				colorStyle="Success"
+				variant="outlined"
+				colorStyle="success"
 				onClick={() => setIsOpen(true)}
 				className="!w-72 !h-12"
 			>

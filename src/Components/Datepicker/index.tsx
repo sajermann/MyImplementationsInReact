@@ -1,27 +1,31 @@
-/* eslint-disable import/no-extraneous-dependencies */
 import { enUS, ptBR } from 'date-fns/locale';
 import {
 	useEffect,
 	useState,
 	DetailedHTMLProps,
-	HTMLAttributes,
 	InputHTMLAttributes,
-	LabelHTMLAttributes,
 	ChangeEvent,
-	HTMLProps,
-	useRef,
 	forwardRef,
 } from 'react';
 import DatePicker from 'react-datepicker';
-
-import { managerClassNames } from '~/Utils/ManagerClassNames';
 import { useTranslation } from '~/Hooks/UseTranslation';
 import { Input } from '../Input';
-import 'react-datepicker/dist/react-datepicker.css';
+import './index.css';
 
 const LANGUAGE_OPTION = {
 	'pt-BR': ptBR,
 	en: enUS,
+};
+
+type TInput = DetailedHTMLProps<
+	InputHTMLAttributes<HTMLInputElement>,
+	HTMLInputElement
+>;
+
+type TInputDatepicker = TInput & {
+	withoutDay?: boolean;
+	dateFormat?: TDateFormat;
+	iserror?: boolean;
 };
 
 type TDateFormat = 'dd/MM/yyyy' | 'yyyy-MM-dd' | 'MM/yyyy';
@@ -54,18 +58,10 @@ function formatDataTemp(
 
 	return ob[dateFormat](value);
 }
-
-const CustomInput = forwardRef(
-	(
-		props: HTMLProps<HTMLInputElement> & {
-			withoutDay?: boolean;
-			dateFormat?: TDateFormat;
-		},
-		ref
-	) => {
+const CustomInput = forwardRef<HTMLInputElement, TInputDatepicker>(
+	(props, ref) => {
 		const newProps = { ...props };
 		delete newProps.withoutDay;
-		// delete newProps.className;
 
 		const result = formatDataTemp(
 			newProps.value as string,
@@ -73,7 +69,15 @@ const CustomInput = forwardRef(
 			props.dateFormat
 		);
 		delete newProps.dateFormat;
-		return <Input {...newProps} value={result} tabIndex={-1} />;
+		return (
+			<Input
+				{...(newProps as TInput)}
+				ref={ref as any}
+				value={result}
+				tabIndex={-1}
+				iserror={props.iserror}
+			/>
+		);
 	}
 );
 
@@ -83,141 +87,103 @@ interface Props
 		HTMLInputElement
 	> {
 	withoutDay?: boolean;
-	label?: string;
 	customDefaultValue?: Date;
 	dateFormat?: TDateFormat;
-	labelProps?: DetailedHTMLProps<
-		LabelHTMLAttributes<HTMLLabelElement>,
-		HTMLLabelElement
-	>;
-	containerProps?: DetailedHTMLProps<
-		HTMLAttributes<HTMLDivElement>,
-		HTMLDivElement
-	>;
+	excludeDateIntervals?: Array<{ start: Date; end: Date }>;
+	iserror?: boolean;
 }
 
-export function Datepicker({
-	label,
-	containerProps,
-	labelProps,
-	customDefaultValue,
-	dateFormat = 'dd/MM/yyyy',
-	withoutDay,
-	...rest
-}: Props) {
-	const [startDate, setStartDate] = useState<Date | null>(
-		customDefaultValue || null
-	);
-	const { currentLanguage } = useTranslation();
-	const ref = useRef(null);
+export const Datepicker = forwardRef<HTMLInputElement, Props>(
+	(
+		{
+			customDefaultValue,
+			dateFormat = 'dd/MM/yyyy',
+			withoutDay,
+			excludeDateIntervals,
+			iserror,
+			...rest
+		},
+		ref
+	) => {
+		const [startDate, setStartDate] = useState<Date | null>(
+			customDefaultValue || null
+		);
+		const { currentLanguage } = useTranslation();
 
-	function onChangeInternal(date: Date | null) {
-		setStartDate(date);
+		console.log('datepicker', { ref });
 
-		const dataVerify = date ? date.toISOString() : '';
+		function onChangeInternal(date: Date | null) {
+			setStartDate(date);
 
-		if (rest.onChange) {
-			const t = {
-				target: {
-					value: dataVerify,
-					id: rest.id,
-				},
-			} as ChangeEvent<HTMLInputElement>;
-			rest.onChange(t);
+			const dataVerify = date ? date.toISOString() : '';
+
+			if (rest.onChange) {
+				const t = {
+					target: {
+						value: dataVerify,
+						id: rest.id,
+					},
+				} as ChangeEvent<HTMLInputElement>;
+				rest.onChange(t);
+			}
 		}
-	}
 
-	useEffect(() => {
-		if (rest.value === '' || rest.value === undefined) {
-			setStartDate(null);
-		} else {
-			setStartDate(new Date(rest.value as string));
-		}
-	}, [rest.value]);
+		useEffect(() => {
+			if (rest.value === '' || rest.value === undefined) {
+				setStartDate(null);
+			} else {
+				setStartDate(new Date(rest.value as string));
+			}
+		}, [rest.value]);
 
-	useEffect(() => {
-		if (customDefaultValue) {
-			onChangeInternal(customDefaultValue);
-		}
-	}, []);
+		useEffect(() => {
+			if (customDefaultValue) {
+				onChangeInternal(customDefaultValue);
+			}
+		}, []);
 
-	function formatMonthAndYear(date: Date): string {
-		try {
-			if (date.toISOString().indexOf('0001-01-01') === 0) {
+		function formatMonthAndYear(date: Date): string {
+			try {
+				if (date.toISOString().indexOf('0001-01-01') === 0) {
+					return '';
+				}
+				const result = new Intl.DateTimeFormat(currentLanguage, {
+					month: 'long',
+					year: 'numeric',
+					timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+				}).format(new Date(date));
+				return result;
+			} catch {
 				return '';
 			}
-			const result = new Intl.DateTimeFormat(currentLanguage, {
-				month: 'long',
-				year: 'numeric',
-				timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone,
-			}).format(new Date(date));
-			return result;
-		} catch {
-			return '';
 		}
-	}
 
-	return (
-		<div
-			{...containerProps}
-			className={managerClassNames([
-				{ 'flex flex-col gap-2 justify-center': true },
-				{ [containerProps?.className as string]: containerProps?.className },
-			])}
-		>
-			{label && (
-				<label htmlFor={rest.id} {...labelProps}>
-					{label}
-				</label>
-			)}
-			<DatePicker
-				autoComplete="off"
-				id={rest.id}
-				disabled={rest.disabled}
-				placeholderText={rest.placeholder}
-				// fixedHeight
-				// calendarClassName="bg-zinc-900 text-white"
-				// weekDayClassName={() => 'bg-zinc-900 text-white'}
-				// wrapperClassName="bg-zinc-900 text-white"
-				// dayClassName={() => 'bg-zinc-900 text-white'}
-				// monthClassName={() => 'bg-zinc-900 text-white'}
-				// className={styles.input}
-				// popperClassName={styles.popper}
-				selected={startDate}
-				onChange={onChangeInternal}
-				locale={LANGUAGE_OPTION[currentLanguage as 'pt-BR' | 'en']}
-				dateFormat={dateFormat}
-				closeOnScroll
-				shouldCloseOnSelect
-				showMonthYearPicker={withoutDay}
-				customInput={
-					<CustomInput
-						// label="test"
-						withoutDay={withoutDay}
-						dateFormat={dateFormat}
-						ref={ref}
-					/>
-				}
-				renderCustomHeader={({ date, decreaseMonth, increaseMonth }) => (
-					<div className="w-full flex justify-between">
-						<button
-							className="w-6 flex items-center justify-center"
-							type="button"
-							onClick={() => decreaseMonth()}
-						>
-							{'<'}
-						</button>
-						{formatMonthAndYear(date)}
-						<button
-							className="w-6 flex items-center justify-center"
-							type="button"
-							onClick={() => increaseMonth()}
-						>
-							{'>'}
-						</button>
-					</div>
-				)}
-			/>
-		</div>
-	);
-}
+		return (
+			<div>
+				<DatePicker
+					autoComplete="off"
+					id={rest.id}
+					disabled={rest.disabled}
+					placeholderText={rest.placeholder}
+					fixedHeight
+					selected={startDate}
+					onChange={onChangeInternal}
+					locale={LANGUAGE_OPTION[currentLanguage as 'pt-BR' | 'en']}
+					dateFormat={dateFormat}
+					closeOnScroll
+					shouldCloseOnSelect
+					showMonthYearPicker={withoutDay}
+					excludeDateIntervals={excludeDateIntervals}
+					customInput={
+						<CustomInput
+							ref={ref}
+							withoutDay={withoutDay}
+							dateFormat={dateFormat}
+							iserror={iserror}
+						/>
+					}
+				/>
+			</div>
+		);
+	}
+);

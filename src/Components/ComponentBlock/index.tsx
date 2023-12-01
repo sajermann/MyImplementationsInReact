@@ -1,14 +1,17 @@
-import { DetailedHTMLProps, HTMLAttributes, memo } from 'react';
+import { DetailedHTMLProps, forwardRef, HTMLAttributes } from 'react';
 import { managerClassNames } from '~/Utils/ManagerClassNames';
 
 type Props = DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>;
-export const ComponentBlock = memo(({ children, className }: Props) => (
-	<div
-		className={managerClassNames([
-			{ componentBlock: true },
-			{ [className as string]: className },
-		])}
-	>
-		<div className="children">{children}</div>
-	</div>
-));
+export const ComponentBlock = forwardRef<HTMLDivElement, Props>(
+	({ className, ...rest }, ref) => (
+		<div
+			ref={ref}
+			{...rest}
+			className={managerClassNames([
+				{ componentBlock: true },
+				{ children: true },
+				{ [className as string]: className },
+			])}
+		/>
+	)
+);

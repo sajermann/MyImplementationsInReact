@@ -1,5 +1,14 @@
 {
 	"translations": {
+		"ROWS": "Linhas",
+		"GO_TO_PAGE": "Ir para pág.",
+		"ACTIVE_USER": "Usuário Ativo",
+		"VARIANTS_AND_COLOR_STYLE": "Variantes e Estilo de Cor",
+		"FIXED_COLOR": "Cor Fixa",
+		"COMBINES_COLORS": "Combinação de Cores",
+		"ERROR_MODE": "Modo Erro",
+		"ERRORS": "Erros",
+		"DISABLED": "Desabilitado",
 		"DISABLED_SORT": "Ordenação Desabilitada",
 		"THIS_IS_USEFUL_IF_YOU_ARE_DOING_SERVER_SIDE_SORTING": "Isso é útil se você for fazer ordenação no servidor",
 		"MANUAL_SORT": "Ordenação Manual",

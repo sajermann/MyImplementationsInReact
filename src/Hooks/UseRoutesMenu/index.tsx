@@ -249,14 +249,6 @@ const RadioPage = lazy(() =>
 	}))
 );
 
-// const VirtualizationPage = lazy(() =>
-// 	import('~/Pages/Virtualization').then(
-// 		({ VirtualizationPage: Virtualization }) => ({
-// 			default: Virtualization,
-// 		})
-// 	)
-// );
-
 export function useRoutesMenu() {
 	const { translate, currentLanguage } = useTranslation();
 	const location = useLocation();
