@@ -81,26 +81,27 @@ describe('Utils/CalendarPicker/FixSelectionByRange', () => {
 	});
 
 	it(`should result start as date mock and end as date mock + 1 day`, async () => {
+		const dateToMock = new Date(2023, 1, 15);
 		const result4 = fixSelectionByRange({
 			selectionByRange: {
-				start: dateMock,
+				start: dateToMock,
 				end: null,
 			},
-			date: addDays(dateMock, 1),
+			date: addDays(dateToMock, 1),
 			selectOptions: {
 				single: {
-					selectedDate: dateMock,
+					selectedDate: dateToMock,
 					onSelectedDate: () => vi.fn(),
 				},
 			},
 			onSemiSelectedsChange: () => vi.fn(),
-			startDate: dateMock,
+			startDate: dateToMock,
 		});
 
 		expect(JSON.stringify(result4)).toEqual(
 			JSON.stringify({
-				start: dateMock,
-				end: addDays(dateMock, 1),
+				start: dateToMock,
+				end: addDays(dateToMock, 1),
 			})
 		);
 	});

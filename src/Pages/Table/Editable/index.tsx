@@ -18,6 +18,7 @@ import { Main } from '~/Components/Main';
 import Section from '~/Components/Section';
 import { QuickAccessGithub } from '~/Components/QuickAccessGithub';
 import { ContainerInput } from '~/Components/ContainerInput';
+import { showInDevelopment } from '~/Utils/ShowInDevelopment';
 
 export function EditablePage() {
 	const { translate } = useTranslation();
@@ -31,6 +32,7 @@ export function EditablePage() {
 	const { columns } = useColumns();
 
 	function handleInput(e: ChangeEvent<HTMLInputElement>) {
+		console.log({ e });
 		const { id, value } = e.target;
 		if (!updateLine) return;
 		setUpdateLine(prev => {
@@ -57,6 +59,9 @@ export function EditablePage() {
 				cell: info => (
 					<div className="w-full flex items-center justify-center">
 						<Button
+							{...showInDevelopment({
+								'data-testid': `update-button-${info.row.index}`,
+							})}
 							iconButton="rounded"
 							variant="outlined"
 							onClick={() =>
@@ -74,6 +79,9 @@ export function EditablePage() {
 					cellEdit: () => (
 						<div className="w-full flex items-center justify-center gap-2">
 							<Button
+								{...showInDevelopment({
+									'data-testid': `save-button`,
+								})}
 								iconButton="rounded"
 								colorStyle="success"
 								variant="outlined"
@@ -83,6 +91,9 @@ export function EditablePage() {
 							/>
 
 							<Button
+								{...showInDevelopment({
+									'data-testid': `cancel-button`,
+								})}
 								iconButton="rounded"
 								colorStyle="secondary"
 								variant="outlined"
@@ -106,6 +117,9 @@ export function EditablePage() {
 					align: 'center',
 					cellEdit: () => (
 						<Input
+							{...showInDevelopment({
+								'data-testid': `update-input`,
+							})}
 							type="text"
 							id="name"
 							onChange={handleInput}

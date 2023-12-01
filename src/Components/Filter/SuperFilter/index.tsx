@@ -10,6 +10,7 @@ import { TFilterActive } from '~/Types/TFilterActive';
 import { Chip } from '~/Components/Chip';
 import { ContainerInput } from '~/Components/ContainerInput';
 import { Label } from '~/Components/Label';
+import { showInDevelopment } from '~/Utils/ShowInDevelopment';
 
 type Props = {
 	onChange: Dispatch<SetStateAction<TFilterActive[]>>;
@@ -90,7 +91,10 @@ export function SuperFilter({ onChange }: Props) {
 
 	return (
 		<>
-			<Button onClick={() => setIsOpenModal(true)}>
+			<Button
+				{...showInDevelopment({ 'data-testid': 'test' })}
+				onClick={() => setIsOpenModal(true)}
+			>
 				{translate('SUPER_FILTER')}
 			</Button>
 

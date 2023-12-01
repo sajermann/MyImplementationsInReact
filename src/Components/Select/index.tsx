@@ -74,7 +74,10 @@ export const Select = forwardRef<HTMLSelectElement, Props>(
 		}
 
 		function getValue() {
-			if (!options) return undefined;
+			if (!options) {
+				return undefined;
+			}
+
 			if (isMulti && isMulti.value) {
 				const optionsTemp: { value: string; label: string }[] = [];
 				for (const valueTemp of isMulti.value) {
@@ -86,6 +89,7 @@ export const Select = forwardRef<HTMLSelectElement, Props>(
 
 				return optionsTemp;
 			}
+
 			return options.find(item => item.value === value);
 		}
 
