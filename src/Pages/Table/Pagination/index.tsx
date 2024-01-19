@@ -7,7 +7,7 @@ import { useTranslation } from '~/Hooks/UseTranslation';
 import { TPerson } from '~/Types/TPerson';
 import { makeData } from '~/Utils/MakeData';
 import { useColumns } from '~/Hooks/UseColumns';
-import { Filter } from '~/Components/Pagination/Filter';
+import { Search } from '~/Components/Filter/Search';
 import Section from '~/Components/Section';
 import { Main } from '~/Components/Main';
 import { QuickAccessGithub } from '~/Components/QuickAccessGithub';
@@ -60,7 +60,7 @@ export function PaginationPage() {
 						<span>{translate('NOTE_PAGINATION_MODE')} </span>
 						<span>{JSON.stringify({ backQuery })}</span>
 					</div>
-					<Filter
+					<Search
 						filterParams={filterQuery}
 						setFilterParams={setFilterQuery}
 						isLoading={isFetching}

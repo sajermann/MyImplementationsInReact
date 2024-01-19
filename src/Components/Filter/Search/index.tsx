@@ -13,7 +13,7 @@ const DEFAULT_FILTER = {
 	isActive: '',
 };
 
-export function Filter({
+export function Search({
 	filterParams,
 	setFilterParams,
 	isLoading,
