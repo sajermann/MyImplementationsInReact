@@ -17,6 +17,14 @@ export function PaginationPage() {
 				<span>{currentPage}</span>
 				<Button onClick={() => onChange(currentPage + 1)}>Avancar</Button>
 			</div>
+
+			<div className="flex gap-2">
+				{pageNumbers.map((item, i) => (
+					<div key={`${item}-${i * 1}`}>
+						<Button className="w-20">{item}</Button>
+					</div>
+				))}
+			</div>
 		</div>
 	);
 }
