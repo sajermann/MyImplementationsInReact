@@ -1,5 +1,8 @@
 import { DetailedHTMLProps, HTMLAttributes } from 'react';
-import { createUltimatePagination } from 'react-ultimate-pagination';
+import {
+	createUltimatePagination,
+	PaginationComponentProps,
+} from 'react-ultimate-pagination';
 import { Button } from '../Button';
 import { Icons } from '../Icons';
 
@@ -28,11 +31,20 @@ export function Pagination({
 			/>
 		),
 		itemTypeToComponent: {
-			PAGE: e => <Button {...e} disabled={disabled} />,
-			ELLIPSIS: () => <Button value="..." />,
+			PAGE: ({ value, ...rest }: PaginationComponentProps) => (
+				<Button className="w-20" {...rest} disabled={disabled}>
+					{value}
+				</Button>
+			),
+			ELLIPSIS: () => (
+				<Button className="w-20 hover:cursor-default hover:opacity-100">
+					...
+				</Button>
+			),
 			FIRST_PAGE_LINK: () => null,
 			PREVIOUS_PAGE_LINK: () => (
 				<Button
+					className="w-20"
 					onClick={() => onPageChange(page - 1)}
 					disabled={(page || 1) === 1 || disabled}
 				>
@@ -41,6 +53,7 @@ export function Pagination({
 			),
 			NEXT_PAGE_LINK: () => (
 				<Button
+					className="w-20"
 					onClick={() => onPageChange(page + 1)}
 					disabled={(page || 1) === total || disabled}
 				>
@@ -57,6 +70,8 @@ export function Pagination({
 			totalPages={total || 1}
 			currentPage={page || 1}
 			onChange={onPageChange}
+			siblingPagesRange={2}
+			boundaryPagesRange={1}
 		/>
 	);
 }
