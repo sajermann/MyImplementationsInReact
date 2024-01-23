@@ -31,7 +31,7 @@ export function usePagination({
 	siblingPagesRange = 1,
 	boundaryPagesRange = 1,
 }: TProps) {
-	const [currentPage, setCurrentPage] = useState(1);
+	const [currentPage, setCurrentPage] = useState(999);
 	const [pages, setPages] = useState<string[]>([]);
 	const [config, setConfig] = useState<TConfig>({
 		first: [1],
@@ -96,7 +96,12 @@ export function usePagination({
 
 		const nonDuplicateds = demoveDuplicateds(pagesInternal);
 		const withEllipsis = addEllipsis(nonDuplicateds);
-		const final = fill(withEllipsis, maxButton);
+		const final = fill({
+			dataToFill: withEllipsis,
+			quantityButtons: maxButton,
+			currentPage,
+			totalPages,
+		});
 
 		setPages(final);
 	}, [config]);

@@ -19,7 +19,7 @@ export function addBoundaryLeft({
 			boundariesToReturn.length < boundaryPagesRange && i < currentPage;
 			i += 1
 		) {
-			console.log(i, numberToVoid.includes(i));
+			// console.log(i, numberToVoid.includes(i));
 			if (!numberToVoid.includes(i)) {
 				boundariesToReturn.push(i);
 			}
