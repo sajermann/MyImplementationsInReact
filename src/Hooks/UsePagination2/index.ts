@@ -1,9 +1,29 @@
 import { useState, useEffect } from 'react';
+import {
+	addBoundaryLeft,
+	addBoundaryRight,
+	addSiblingLeft,
+	addSiblingRight,
+} from './Utils';
+import { addEllipsis } from './Utils/AddEllipsis';
+import { fill } from './Utils/Fill';
+import { getQuantityButtons } from './Utils/GetQuantityButtons';
+import { demoveDuplicateds } from './Utils/RemoveDuplicateds';
 
 type TProps = {
 	totalPages: number;
 	siblingPagesRange?: number;
 	boundaryPagesRange?: number;
+};
+
+type TConfig = {
+	first: number[];
+	boundaryLeft: number[];
+	siblingLeft: number[];
+	current: number[];
+	siblingRight: number[];
+	boundaryRight: number[];
+	last: number[];
 };
 
 export function usePagination({
@@ -12,49 +32,79 @@ export function usePagination({
 	boundaryPagesRange = 1,
 }: TProps) {
 	const [currentPage, setCurrentPage] = useState(1);
-	const [pageNumbers, setPageNumbers] = useState<(number | string)[]>([]);
+	const [pages, setPages] = useState<string[]>([]);
+	const [config, setConfig] = useState<TConfig>({
+		first: [1],
+		boundaryLeft: [],
+		siblingLeft: [],
+		current: [currentPage],
+		siblingRight: [],
+		boundaryRight: [],
+		last: [totalPages],
+	});
 
 	useEffect(() => {
-		const totalNumbers = siblingPagesRange * 2 + boundaryPagesRange * 2 + 3;
-		const totalBlocks = totalNumbers + 2;
+		let configInternal = { ...config };
+		configInternal = {
+			...configInternal,
+			boundaryLeft: addBoundaryLeft({
+				boundaryPagesRange,
+				currentPage,
+				totalPages,
+			}),
+			siblingLeft: addSiblingLeft({
+				siblingPagesRange,
+				currentPage,
+				totalPages,
+			}),
+			current:
+				currentPage === 1 || currentPage === totalPages ? [] : [currentPage],
+			siblingRight: addSiblingRight({
+				siblingPagesRange,
+				boundaryPagesRange,
+				currentPage,
+				totalPages,
+			}),
+			boundaryRight: addBoundaryRight({
+				boundaryPagesRange,
+				siblingPagesRange,
+				currentPage,
+				totalPages,
+			}),
+		};
 
-		if (totalPages > totalBlocks) {
-			const pages = [];
-
-			const leftBound = currentPage - siblingPagesRange;
-			const rightBound = currentPage + siblingPagesRange;
-
-			const startPage = 1;
-			const endPage = totalPages;
-
-			let isStartEllipsisAdded = false;
-			let isEndEllipsisAdded = false;
-
-			for (let i = 1; i <= totalPages; i += 1) {
-				if (
-					i === startPage ||
-					i === endPage ||
-					(i >= leftBound && i <= rightBound)
-				) {
-					pages.push(i);
-				} else if (i < leftBound && !isStartEllipsisAdded) {
-					pages.push('...');
-					isStartEllipsisAdded = true;
-				} else if (i > rightBound && !isEndEllipsisAdded) {
-					pages.push('...');
-					isEndEllipsisAdded = true;
-				}
-			}
-
-			setPageNumbers(pages);
-		} else {
-			setPageNumbers([...Array(totalPages).keys()].map(i => i + 1));
-		}
+		setConfig({ ...configInternal });
 	}, [totalPages, currentPage, siblingPagesRange, boundaryPagesRange]);
 
+	useEffect(() => {
+		const maxButton = getQuantityButtons({
+			siblingPagesRange,
+			boundaryPagesRange,
+			totalPages,
+			currentPage,
+		});
+
+		console.log({ maxButton });
+
+		const pagesInternal: string[] = [];
+		for (const item of Object.keys(config)) {
+			const t = config[item as 'first'];
+			for (const subItem of t) {
+				pagesInternal.push(String(subItem));
+			}
+		}
+
+		const nonDuplicateds = demoveDuplicateds(pagesInternal);
+		const withEllipsis = addEllipsis(nonDuplicateds);
+		const final = fill(withEllipsis, maxButton);
+
+		setPages(final);
+	}, [config]);
+
 	function onChange(page: number) {
+		if (page < 1 || page > totalPages || Number.isNaN(Number(page))) return;
 		setCurrentPage(page);
 	}
 
-	return { currentPage, onChange, pageNumbers };
+	return { currentPage, onChange, config, pages };
 }
