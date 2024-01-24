@@ -1,5 +1,8 @@
 {
 	"translations": {
+		"WITHOUT_NUMBERS": "Without Numbers",
+		"WITH_NUMBERS": "With Numbers",
+		"PARAMS": "Params",
 		"ROWS": "Rows",
 		"GO_TO_PAGE": "Go to page",
 		"ACTIVE_USER": "Active User",
