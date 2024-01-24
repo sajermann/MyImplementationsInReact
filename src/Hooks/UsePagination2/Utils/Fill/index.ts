@@ -1,17 +1,18 @@
 function fillLeft(dataToFill: string[], quantityButtons: number): string[] {
 	const final: string[] = [];
-	const quantoFalta = quantityButtons - dataToFill.length + 1; // 1 Ellipsis
-	// console.log('fillLeft', { dataToFill, quantityButtons, quantoFalta });
+	const quantoFalta = quantityButtons - dataToFill.length; // 1 Ellipsis
+	// console.log({ dataToFill, quantoFalta });
+	console.log('fillLeft', { dataToFill, quantityButtons, quantoFalta });
 
 	for (const [index, item] of dataToFill.entries()) {
 		// console.log(Number(dataToFill[index - 1]));
 		if (item === '...') {
 			for (
 				let i = Number(dataToFill[index - 1]) + 1;
-				i <= quantoFalta + Number(dataToFill[index - 1]) + 1;
+				i <= quantoFalta + Number(dataToFill[index - 1]);
 				i += 1
 			) {
-				// console.log('Add', i);
+				console.log('Add', i);
 				final.push(String(i));
 			}
 			// console.log({ item });
@@ -27,7 +28,7 @@ function fillLeft(dataToFill: string[], quantityButtons: number): string[] {
 
 function fillRight(dataToFill: string[], quantityButtons: number): string[] {
 	const final: string[] = [];
-	const quantoFalta = quantityButtons - dataToFill.length + 2; // 1 Ellipsis
+	const quantoFalta = quantityButtons - dataToFill.length; // 1 Ellipsis
 	console.log('fillRight', { dataToFill, quantoFalta }, dataToFill.length);
 	for (const [index, item] of dataToFill.entries()) {
 		if (item === '...') {
@@ -80,6 +81,7 @@ export function fill({
 }: TProps): string[] {
 	// console.log({ quantityButtons }, dataToFill.length);
 	const quantityEllipsis = dataToFill.filter(item => item === '...').length;
+	console.log({ dataToFill });
 	if (quantityEllipsis === 2) return dataToFill;
 	const resultIsBegin = isBegin({ currentPage, totalPages });
 	if (resultIsBegin) return fillLeft(dataToFill, quantityButtons);

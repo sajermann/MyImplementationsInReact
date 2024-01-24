@@ -31,7 +31,7 @@ export function usePagination({
 	siblingPagesRange = 1,
 	boundaryPagesRange = 1,
 }: TProps) {
-	const [currentPage, setCurrentPage] = useState(999);
+	const [currentPage, setCurrentPage] = useState(1);
 	const [pages, setPages] = useState<string[]>([]);
 	const [config, setConfig] = useState<TConfig>({
 		first: [1],

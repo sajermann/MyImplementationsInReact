@@ -9,6 +9,8 @@ import { Icons } from '../Icons';
 type Props = {
 	page: number;
 	total: number;
+	siblingPagesRange?: number;
+	boundaryPagesRange?: number;
 	onPageChange: (data: number) => void;
 	disabled?: boolean;
 	hide?: boolean;
@@ -20,6 +22,8 @@ export function Pagination({
 	onPageChange,
 	disabled,
 	hide,
+	siblingPagesRange,
+	boundaryPagesRange,
 }: Props) {
 	const PaginatedPage = createUltimatePagination({
 		WrapperComponent: ({
@@ -70,8 +74,8 @@ export function Pagination({
 			totalPages={total || 1}
 			currentPage={page || 1}
 			onChange={onPageChange}
-			siblingPagesRange={2}
-			boundaryPagesRange={1}
+			siblingPagesRange={siblingPagesRange}
+			boundaryPagesRange={boundaryPagesRange}
 		/>
 	);
 }

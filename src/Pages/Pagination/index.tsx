@@ -7,16 +7,24 @@ import { Pagination } from '~/Components/Pagination';
 import { usePagination } from '~/Hooks/UsePagination2';
 
 export function PaginationPage() {
-	const [boundaryPagesRange, setBoundaryPagesRange] = useState(2);
-	const [siblingPagesRange, setSiblingPagesRange] = useState(2);
-	const { config, currentPage, onChange, pages } = usePagination({
-		boundaryPagesRange,
-		siblingPagesRange,
-		totalPages: 1000,
-	});
+	const [boundaryPagesRange, setBoundaryPagesRange] = useState(3);
+	const [siblingPagesRange, setSiblingPagesRange] = useState(3);
+	const [currentPage, setCurrentPage] = useState(1);
+	const [totalPages, setTotalPages] = useState(1000);
+	// const { config, currentPage, onChange, pages } = usePagination({
+	// 	boundaryPagesRange,
+	// 	siblingPagesRange,
+	// 	totalPages,
+	// });
 	return (
 		<div>
-			{/* <Pagination onPageChange={console.log} page={10} total={100} /> */}
+			<Pagination
+				onPageChange={setCurrentPage}
+				page={currentPage}
+				total={totalPages}
+				siblingPagesRange={siblingPagesRange}
+				boundaryPagesRange={boundaryPagesRange}
+			/>
 			<div className="flex gap-4 my-4">
 				<ContainerInput>
 					<Label>Boundary</Label>
@@ -46,7 +54,16 @@ export function PaginationPage() {
 						onChange={({ target }) => onChange(Number(target.value))}
 					/>
 				</ContainerInput>
+				<ContainerInput>
+					<Label>Max Pages</Label>
+					<Input
+						type="number"
+						value={totalPages}
+						onChange={({ target }) => setTotalPages(Number(target.value))}
+					/>
+				</ContainerInput>
 			</div>
+			{/* 
 			<div className="flex gap-2">
 				<Button onClick={() => onChange(currentPage - 1)}>Voltar</Button>
 				<span>{currentPage}</span>
@@ -74,7 +91,7 @@ export function PaginationPage() {
 						</Button>
 					</div>
 				))}
-			</div>
+			</div> */}
 		</div>
 	);
 }
