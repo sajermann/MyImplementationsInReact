@@ -7,7 +7,7 @@ import { Input } from '~/Components/Input';
 import { Label } from '~/Components/Label';
 import { Main } from '~/Components/Main';
 import { QuickAccessGithub } from '~/Components/QuickAccessGithub';
-import Section from '~/Components/Section';
+import { Section } from '~/Components/SectionNew';
 import { Select } from '~/Components/Select';
 import { usePaginationModel } from '~/Hooks/UsePaginationModel';
 import { useTranslation } from '~/Hooks/UseTranslation';
@@ -39,7 +39,7 @@ export function PaginationPage() {
 
 	return (
 		<Main data-content="content-main">
-			<Section heading={translate('PAGINATION')}>
+			<Section title={translate('PAGINATION')}>
 				{`${translate('IMPLEMENTS_COMPONENT')} ${translate(
 					'PAGINATION'
 				)} ${translate('USING_THE_LIB')}`}{' '}

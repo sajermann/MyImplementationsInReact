@@ -81,11 +81,17 @@ export function UpdateRowExpanded({ row, onSave }: Props) {
 					<Select
 						menuPosition="fixed"
 						menuPortalTarget={document.body}
-						defaultValue={
-							ROLES.find(item => item.value === formData.role)?.value
-						}
+						defaultValue={ROLES.find(item => item.value === formData.role)}
 						options={ROLES}
-						onChange={e => handleChange(e as ChangeEvent<HTMLInputElement>)}
+						onChange={e => {
+							const event = {
+								target: {
+									id: 'role',
+									value: e?.value,
+								},
+							};
+							handleChange(event as ChangeEvent<HTMLInputElement>);
+						}}
 						id="role"
 					/>
 				</ContainerInput>

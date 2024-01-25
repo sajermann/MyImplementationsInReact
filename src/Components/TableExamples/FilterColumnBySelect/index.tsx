@@ -18,7 +18,9 @@ type Props2 = {
 export function FilterColumnBySelect({ column, table, propForFilter }: Props2) {
 	const { translate } = useTranslation();
 	const [isOpen, setIsOpen] = useState(false);
-	const [filterValue, setFilterValue] = useState<string[]>([]);
+	const [filterValue, setFilterValue] = useState<
+		{ value: string; label: string }[]
+	>([]);
 
 	function getProps() {
 		const myRows = table.getRowModel().rows.map(item => item.original);
@@ -55,13 +57,13 @@ export function FilterColumnBySelect({ column, table, propForFilter }: Props2) {
 					placeholder={translate('FILTER')}
 					menuPosition="fixed"
 					menuPortalTarget={document.body}
-					options={getProps()}
-					isMulti={{
-						onChange: e => {
-							setFilterValue(e.target.value);
-						},
-						value: filterValue,
+					options={getProps() as { value: string; label: string }[]}
+					isMulti
+					onChange={e => {
+						console.log({ e });
+						setFilterValue(e as { value: string; label: string }[]);
 					}}
+					value={filterValue}
 					id="filter"
 				/>
 			</ContainerInput>
@@ -81,7 +83,7 @@ export function FilterColumnBySelect({ column, table, propForFilter }: Props2) {
 					iconButton="rounded"
 					variant="outlined"
 					onClick={() => {
-						column.setFilterValue(filterValue);
+						column.setFilterValue(filterValue.map(item => item.value));
 						setIsOpen(false);
 					}}
 					endIcon={<Icons nameIcon="save" />}

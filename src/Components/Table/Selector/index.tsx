@@ -41,7 +41,7 @@ export function Selector<T>({ selection, row, table }: Props<T>) {
 	if (!row) return null;
 	if (selection.type === 'single' && selection.singleRadio) {
 		return (
-			<ContainerInput>
+			<ContainerInput className="items-center">
 				<RadioItem
 					value={row.id}
 					disabled={
@@ -54,7 +54,7 @@ export function Selector<T>({ selection, row, table }: Props<T>) {
 		);
 	}
 	return (
-		<ContainerInput>
+		<ContainerInput className="items-center">
 			<Checkbox
 				{...{
 					disabled: selection.disableSelectionRow

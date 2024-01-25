@@ -14,13 +14,21 @@ import { QuickAccessGithub } from '~/Components/QuickAccessGithub';
 import { ContainerInput } from '~/Components/ContainerInput';
 import { Label } from '~/Components/Label';
 
+type TOptions<T> = {
+	value: T;
+	label: string;
+};
+
 export function SelectionPage() {
 	const { translate } = useTranslation();
 	const [data, setData] = useState<TPerson[]>([]);
 	const [selectedItems, setSelectedItems] = useState({});
-	const [selectionType, setSelecitonType] = useState<'single' | 'multi'>(
-		'single'
-	);
+	const [selectionType, setSelecitonType] = useState<TOptions<
+		'single' | 'multi'
+	> | null>({
+		value: 'single',
+		label: translate('SINGLE'),
+	});
 	const [singleRadio, setSingleRadio] = useState<boolean>(false);
 	const [disableSelectionForId, setDisableSelectionForId] = useState('');
 	const [globalFilter, setGlobalFilter] = useState('');
@@ -37,12 +45,12 @@ export function SelectionPage() {
 		return false;
 	}
 
-	const OPTIONS_LIST = [
+	const OPTIONS_LIST: TOptions<'single' | 'multi'>[] = [
 		{ value: 'multi', label: translate('MULTI') },
 		{ value: 'single', label: translate('SINGLE') },
 	];
 
-	const OPTIONS_LIST_RADIO = [
+	const OPTIONS_LIST_RADIO: TOptions<'true' | 'false'>[] = [
 		{ value: 'true', label: translate('YES') },
 		{ value: 'false', label: translate('NO') },
 	];
@@ -69,14 +77,14 @@ export function SelectionPage() {
 								isSearchable={false}
 								menuPosition="fixed"
 								menuPortalTarget={document.body}
-								defaultValue={
-									OPTIONS_LIST.find(item => item.value === selectionType)?.value
-								}
+								defaultValue={OPTIONS_LIST.find(
+									item => item.value === selectionType?.value
+								)}
 								options={OPTIONS_LIST}
 								onChange={e => {
-									setSelecitonType(e.target.value as 'single' | 'multi');
+									setSelecitonType(e);
 									setSelectedItems({});
-									if (e.target.value === 'multi') {
+									if (e?.value === 'multi') {
 										setSingleRadio(false);
 									}
 								}}
@@ -89,18 +97,16 @@ export function SelectionPage() {
 							</Label>
 							<Select
 								id="radio_type"
-								isDisabled={selectionType === 'multi'}
+								isDisabled={selectionType?.value === 'multi'}
 								isSearchable={false}
 								menuPosition="fixed"
 								menuPortalTarget={document.body}
-								value={
-									OPTIONS_LIST_RADIO.find(item => {
-										const converted = item.value === 'true';
-										return converted === singleRadio;
-									})?.value
-								}
+								value={OPTIONS_LIST_RADIO.find(item => {
+									const converted = item.value === 'true';
+									return converted === singleRadio;
+								})}
 								options={OPTIONS_LIST_RADIO}
-								onChange={e => setSingleRadio(e.target.value === 'true')}
+								onChange={e => setSingleRadio(e?.value === 'true')}
 							/>
 						</ContainerInput>
 
@@ -123,7 +129,7 @@ export function SelectionPage() {
 						selection={{
 							rowSelection: selectedItems,
 							setRowSelection: setSelectedItems,
-							type: selectionType,
+							type: selectionType ? selectionType?.value : 'single',
 							disableSelectionRow:
 								disableSelectionForId !== '' ? verifyForDisable : undefined,
 							singleRadio: singleRadio ? true : undefined,
