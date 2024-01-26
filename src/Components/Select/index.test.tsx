@@ -50,7 +50,7 @@ describe('Components/Select', () => {
 					]}
 					placeholder="Estado"
 					onChange={mock}
-					value="sp"
+					value={{ value: 'sp', label: 'São Paulo' }}
 				/>
 			</ContainerInput>
 		);
@@ -72,7 +72,8 @@ describe('Components/Select', () => {
 			<ContainerInput>
 				<Label htmlFor="state">Test</Label>
 				<Select
-					isMulti={{ onChange: mock, value: ['sp'] }}
+					isMulti
+					onChange={mock}
 					id="state"
 					isClearable
 					options={[

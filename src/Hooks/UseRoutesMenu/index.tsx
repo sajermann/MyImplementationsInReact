@@ -24,6 +24,7 @@ import { CalendarPickerDemo } from '~/Components/Demos/CalendarPicker';
 import { ChipDemo } from '~/Components/Demos/Chip';
 import { SwitchDemo } from '~/Components/Demos/Switch';
 import { RadioDemo } from '~/Components/Demos/Radio';
+import { PaginationDemo } from '~/Components/Demos/Pagination';
 
 const ColumnVisibilityPage = lazy(() =>
 	import('~/Pages/Table/ColumnVisibility').then(
@@ -639,7 +640,7 @@ export function useRoutesMenu() {
 					'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/Pagination',
 				element: <PaginationPage />,
 				label: translate('PAGINATION'),
-				demo: <RadioDemo />,
+				demo: <PaginationDemo />,
 			},
 			// {
 			// 	name: 'Virtualization',

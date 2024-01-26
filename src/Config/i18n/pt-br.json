@@ -1,5 +1,9 @@
 {
 	"translations": {
+		"WITHOUT_NUMBERS_WITH_SELECT": "Sem Números Com Select",
+		"OF": "de",
+		"PAGE": "Pág.",
+		"WITHOUT_NUMBERS_WITH_SELECTORS": "Sem Números Com Seletores",
 		"WITHOUT_NUMBERS": "Sem Números",
 		"WITH_NUMBERS": "Com Números",
 		"PARAMS": "Parâmetros",

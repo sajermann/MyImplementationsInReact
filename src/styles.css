@@ -57,6 +57,7 @@ pre {
 	width: 100%;
 	gap: 10px;
 	flex-wrap: wrap;
+	overflow: auto;
 }
 
 .toggleCode {

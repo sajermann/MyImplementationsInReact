@@ -113,12 +113,10 @@ export function SuperFilter({ onChange }: Props) {
 							<Select
 								isClearable
 								options={optionsColumns}
-								value={
-									optionsColumns.find(
-										item => item.value === optionColumnSelected
-									)?.value
-								}
-								onChange={e => setOptionColumnSelected(e.target.value)}
+								value={optionsColumns.find(
+									item => item.value === optionColumnSelected
+								)}
+								onChange={e => setOptionColumnSelected(e?.value || '')}
 								id="select_column"
 								placeholder={translate('FILTER_TYPE')}
 							/>
@@ -130,11 +128,10 @@ export function SuperFilter({ onChange }: Props) {
 							<Select
 								isClearable
 								options={optionsType}
-								value={
-									optionsType.find(item => item.value === optionTypeSelected)
-										?.value
-								}
-								onChange={e => setOptionTypeSelected(e.target.value)}
+								value={optionsType.find(
+									item => item.value === optionTypeSelected
+								)}
+								onChange={e => setOptionTypeSelected(e?.value || '')}
 								id="select_type"
 								placeholder={translate('FILTER_TYPE')}
 							/>
