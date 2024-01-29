@@ -1,21 +1,76 @@
 /**
  * @vitest-environment jsdom
  */
-import { fireEvent, render } from '@testing-library/react';
-import { it, describe } from 'vitest';
-import { InjectorProviders } from '~/Components/InjectorProviders';
-import { ButtonDemo } from '.';
+import { fireEvent, render, waitFor } from '@testing-library/react';
+import { getPaginationModel } from 'ultimate-pagination';
+import { it, describe, vi } from 'vitest';
+import { PaginationDemo } from '.';
 
-describe('Components/Demos/ButtonDemo', () => {
-	it(`must open Modal`, async () => {
-		const { getAllByRole } = render(
-			<InjectorProviders>
-				<ButtonDemo />
-			</InjectorProviders>
+describe('Components/Demos/PaginationDemo', () => {
+	it(`must change pagination`, async () => {
+		const { getAllByRole, getByText } = render(<PaginationDemo />);
+		expect(getByText('1 OF 9'));
+		const buttons = await getAllByRole('button');
+
+		fireEvent.click(buttons[3]);
+		await waitFor(() => {
+			expect(getByText('9 OF 9'));
+		});
+
+		fireEvent.click(buttons[1]);
+		await waitFor(() => {
+			expect(getByText('8 OF 9'));
+		});
+
+		fireEvent.click(buttons[0]);
+		await waitFor(() => {
+			expect(getByText('1 OF 9'));
+		});
+
+		fireEvent.click(buttons[2]);
+		await waitFor(() => {
+			expect(getByText('2 OF 9'));
+		});
+	});
+
+	it(`must change pagination with onChange`, async () => {
+		const paginationModel = getPaginationModel({
+			currentPage: 5,
+			totalPages: 9,
+			hideEllipsis: false,
+			hidePreviousAndNextPageLinks: false,
+			hideFirstAndLastPageLinks: false,
+		});
+		const spy = vi.fn();
+		const { getAllByRole, getByText } = render(
+			<PaginationDemo
+				onChange={spy}
+				currentPage={5}
+				totalPages={9}
+				paginationModel={paginationModel}
+			/>
 		);
-		const openButton = await getAllByRole('button')[0];
-		fireEvent.click(openButton);
-		fireEvent.click(openButton);
-		fireEvent.click(openButton);
+		expect(getByText('5 OF 9'));
+		const buttons = await getAllByRole('button');
+
+		fireEvent.click(buttons[3]);
+		await waitFor(() => {
+			expect(spy).toBeCalledWith(9);
+		});
+
+		fireEvent.click(buttons[1]);
+		await waitFor(() => {
+			expect(spy).toBeCalledWith(9);
+		});
+
+		fireEvent.click(buttons[0]);
+		await waitFor(() => {
+			expect(spy).toBeCalledWith(9);
+		});
+
+		fireEvent.click(buttons[2]);
+		await waitFor(() => {
+			expect(spy).toBeCalledWith(9);
+		});
 	});
 });

@@ -28,8 +28,6 @@ export function usePaginationModel({
 		hideFirstAndLastPageLinks: false,
 	});
 
-	console.log({ paginationModel });
-
 	function onChange(page: number) {
 		if (page < 1 || page > totalPages || Number.isNaN(Number(page))) return;
 		setCurrentPage(page);
