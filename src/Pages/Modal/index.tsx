@@ -6,8 +6,8 @@ import { CodeBlock } from '~/Components/CodeBlock';
 import { Button } from '~/Components/Button';
 import { Section } from '~/Components/SectionNew';
 import { ComponentBlock } from '~/Components/ComponentBlock';
-import { Main } from '~/Components/Main';
 import { QuickAccessGithub } from '~/Components/QuickAccessGithub';
+import { Main } from '~/Components/Main';
 import styles from './styles.module.css';
 
 export function ModalPage() {
