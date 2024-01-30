@@ -25,7 +25,7 @@ export function Select<
 	const { translate } = useTranslation();
 
 	function preInputChange(e: string) {
-		if (async && async.minLength && async.minLength > e.length) {
+		if (async?.minLength && async?.minLength > e.length) {
 			return;
 		}
 		setInputValue(e);

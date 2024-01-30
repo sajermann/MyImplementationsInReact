@@ -23,7 +23,7 @@ export function SelectionPage() {
 	const { translate } = useTranslation();
 	const [data, setData] = useState<TPerson[]>([]);
 	const [selectedItems, setSelectedItems] = useState({});
-	const [selectionType, setSelecitonType] = useState<TOptions<
+	const [selectionType, setSelectionType] = useState<TOptions<
 		'single' | 'multi'
 	> | null>({
 		value: 'single',
@@ -82,7 +82,7 @@ export function SelectionPage() {
 								)}
 								options={OPTIONS_LIST}
 								onChange={e => {
-									setSelecitonType(e);
+									setSelectionType(e);
 									setSelectedItems({});
 									if (e?.value === 'multi') {
 										setSingleRadio(false);

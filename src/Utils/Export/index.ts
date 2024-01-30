@@ -47,14 +47,12 @@ function excel<T>({ data, defColumns = [] }: PropsXlsx<T>) {
 		const styleFn = defColumns[i].styleHeaderCellFn;
 		headerTemp.push({
 			v: defColumns[i].header,
-			s:
-				styleFn &&
-				styleFn({
-					valueHeader: defColumns[i].header,
-					currentDefinition: defColumns[i],
-					definitions: defColumns,
-					index: i,
-				}),
+			s: styleFn?.({
+				valueHeader: defColumns[i].header,
+				currentDefinition: defColumns[i],
+				definitions: defColumns,
+				index: i,
+			}),
 		});
 	}
 

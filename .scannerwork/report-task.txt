@@ -1,0 +1,6 @@
+projectKey=MyImplementationsInReact
+serverUrl=https://sonar.sajermann.com
+serverVersion=10.3.0.82913
+dashboardUrl=https://sonar.sajermann.com/dashboard?id=MyImplementationsInReact
+ceTaskId=AY1Xy5E2pNA8Owdaj2C0
+ceTaskUrl=https://sonar.sajermann.com/api/ce/task?id=AY1Xy5E2pNA8Owdaj2C0

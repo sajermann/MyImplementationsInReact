@@ -14,7 +14,7 @@ export function usePaginationModel({
 	siblingPagesRange,
 	boundaryPagesRange,
 }: TProps) {
-	const [currentPage, setCurrentPage] = useState(defaultCurrentPage || 1);
+	const [currentPage, setCurrentPage] = useState(defaultCurrentPage ?? 1);
 	const paginationModel = getPaginationModel({
 		// Required
 		currentPage,

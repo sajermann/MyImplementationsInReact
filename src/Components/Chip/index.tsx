@@ -153,10 +153,7 @@ export function Chip({ value, onRemove, onChange }: ChipProps) {
 		>
 			{!editing && <span>{value}</span>}
 
-			<ButtonRemove
-				show={!!onRemove}
-				onClick={() => onRemove && onRemove(value)}
-			/>
+			<ButtonRemove show={!!onRemove} onClick={() => onRemove?.(value)} />
 		</div>
 	);
 }

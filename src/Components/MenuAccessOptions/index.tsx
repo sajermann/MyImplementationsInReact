@@ -76,7 +76,7 @@ export default function MenuAccessOptions() {
 	const mount = useMemo(() => globalMenus(search), [search, currentLanguage]);
 
 	function buildMenuWithSub(menu: TRoutesMenu) {
-		if (menu.subs && menu.subs.find(item => !item.hideMenu) && !menu.hideMenu) {
+		if (menu.subs?.find(item => !item.hideMenu) && !menu.hideMenu) {
 			return (
 				<li>
 					<MenuCollapsible
@@ -148,7 +148,7 @@ export default function MenuAccessOptions() {
 									onClick={() => {
 										setSearch('');
 										setIsVisibleSearch(!isVisibleSearch);
-										if (refInputSearch && refInputSearch.current) {
+										if (refInputSearch?.current) {
 											(
 												refInputSearch.current.children[0].children[0]
 													.children[0] as HTMLElement

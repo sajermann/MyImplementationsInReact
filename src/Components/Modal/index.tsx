@@ -45,7 +45,7 @@ export function Modal({
 	const [isExpanded, setIsExpanded] = useState(false);
 
 	useEffect(() => {
-		if (expand && expand.resetOnClose && !isOpen) {
+		if (expand?.resetOnClose && !isOpen) {
 			setIsExpanded(false);
 		}
 	}, [isOpen]);

@@ -144,7 +144,7 @@ export const Datepicker = forwardRef<HTMLInputElement, Props>(
 
 		function formatMonthAndYear(date: Date): string {
 			try {
-				if (date.toISOString().indexOf('0001-01-01') === 0) {
+				if (date.toISOString().startsWith('0001-01-01')) {
 					return '';
 				}
 				const result = new Intl.DateTimeFormat(currentLanguage, {
