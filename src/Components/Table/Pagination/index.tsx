@@ -120,9 +120,9 @@ export function Pagination<T>({
 					<Icons nameIcon="arrowPairRight" color="#fff" />
 				</ButtonPagination>
 				<span className="flex items-center gap-1">
-					<div>Pág.</div>
+					<span>{translate('PAGE')}</span>
 					<strong>{table.getState().pagination.pageIndex + 1}</strong>
-					de <strong>{table.getPageCount()}</strong>
+					<span>{translate('OF')}</span> <strong>{table.getPageCount()}</strong>
 				</span>
 				<ContainerInput className="w-max flex-row items-center">
 					<Label className="whitespace-nowrap" htmlFor="pageNumber">
@@ -153,14 +153,12 @@ export function Pagination<T>({
 							menuPosition="fixed"
 							isSearchable={false}
 							isDisabled={pagination?.disabledActions}
-							value={
-								DEFAULT_OPTIONS.find(
-									item => item.value === table.getState().pagination.pageSize
-								)?.value
-							}
+							value={DEFAULT_OPTIONS.find(
+								item => item.value === table.getState().pagination.pageSize
+							)}
 							options={DEFAULT_OPTIONS}
 							onChange={e => {
-								table.setPageSize(Number(e.target.value));
+								table.setPageSize(Number(e?.value));
 							}}
 							id="isActive"
 						/>

@@ -4,10 +4,10 @@ import { Modal } from '~/Components/Modal';
 import { useTranslation } from '~/Hooks/UseTranslation';
 import { CodeBlock } from '~/Components/CodeBlock';
 import { Button } from '~/Components/Button';
-import Section from '~/Components/Section';
+import { Section } from '~/Components/SectionNew';
 import { ComponentBlock } from '~/Components/ComponentBlock';
-import { Main } from '~/Components/Main';
 import { QuickAccessGithub } from '~/Components/QuickAccessGithub';
+import { Main } from '~/Components/Main';
 import styles from './styles.module.css';
 
 export function ModalPage() {
@@ -21,22 +21,22 @@ export function ModalPage() {
 
 	return (
 		<Main data-content="content-main">
-			<Section heading={translate('MODALS')}>
+			<Section title={translate('MODALS')} variant="h1">
 				{`${translate('IMPLEMENTS_COMPONENT')} ${translate(
 					'MODAL'
 				)} ${translate('USING_THE_LIB')} @radix-ui/react-dialog.`}
 			</Section>
-			<Section subHeading={translate('INSTALLATION_OF_LIB')}>
+			<Section title={translate('INSTALLATION_OF_LIB')} variant="h2">
 				<CodeBlock>npm i @radix-ui/react-dialog;</CodeBlock>
 			</Section>
 
-			<Section subHeading={translate('CODES')}>
+			<Section title={translate('CODES')} variant="h2">
 				<div className="flex gap-2">
 					<QuickAccessGithub name="Modal" />
 				</div>
 			</Section>
 
-			<Section subHeading={translate('CLOSE_OPTIONS')}>
+			<Section title={translate('CLOSE_OPTIONS')} variant="h2">
 				{translate('COMUM_MODAL_WITH_OPIONS_FOR_CLOSING')}
 				<ComponentBlock>
 					<Button
@@ -116,7 +116,7 @@ export function ModalPage() {
 				</ComponentBlock>
 			</Section>
 
-			<Section subHeading={translate('EXPAND_OPTIONS')}>
+			<Section title={translate('EXPAND_OPTIONS')} variant="h2">
 				{translate('OPTION_FOR_EXPAND_MODAL_FOR_FULL_SCREEN')}
 				<ComponentBlock>
 					<Button

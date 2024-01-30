@@ -1,3 +1,4 @@
+import { delay } from '@sajermann/utils/Delay';
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
@@ -57,13 +58,22 @@ export function TableOfContents() {
 		setOptionsMenu([...menusWithActive]);
 	}
 
-	async function handleClick(element: Menu) {
+	async function handleClick(element: Menu, e: any) {
+		console.log({ element });
+		e.preventDefault();
 		setOptionsMenu(prev => [
 			...prev.map(item => ({
 				...item,
 				active: item.anchor === element.anchor,
 			})),
 		]);
+		// if (element.top > 0) {
+		await delay(1);
+		window.scroll({
+			top: element.top,
+			behavior: 'smooth',
+		});
+		// }
 	}
 
 	useEffect(
@@ -93,7 +103,7 @@ export function TableOfContents() {
 										item.active,
 								})}
 								href={`#${item.anchor}`}
-								onClick={() => handleClick(item)}
+								onClick={e => handleClick(item, e)}
 							>
 								{item.title}
 							</a>

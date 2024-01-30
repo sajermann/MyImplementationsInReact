@@ -45,7 +45,7 @@ export function Modal({
 	const [isExpanded, setIsExpanded] = useState(false);
 
 	useEffect(() => {
-		if (expand && expand.resetOnClose && !isOpen) {
+		if (expand?.resetOnClose && !isOpen) {
 			setIsExpanded(false);
 		}
 	}, [isOpen]);
@@ -82,7 +82,7 @@ export function Modal({
 				>
 					{title && (
 						<Dialog.Title className="h-14 px-6 py-3 text-primary-500 font-bold flex items-center dark:bg-slate-900 border-b-[#dee2e6] border-b-2">
-							<h1 className="flex-1">{title}</h1>
+							<span className="flex-1">{title}</span>
 							<div className="flex gap-4 items-center">
 								{expand && (
 									<Button

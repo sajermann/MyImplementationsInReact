@@ -194,10 +194,16 @@ export function EditablePage() {
 							menuPosition="fixed"
 							menuPortalTarget={document.body}
 							options={ROLES}
-							value={
-								ROLES.find(item => item.value === updateLine?.data.role)?.value
-							}
-							onChange={e => handleInput(e as ChangeEvent<HTMLInputElement>)}
+							value={ROLES.find(item => item.value === updateLine?.data.role)}
+							onChange={e => {
+								const event = {
+									target: {
+										id: 'role',
+										value: e?.value,
+									},
+								};
+								handleInput(event as ChangeEvent<HTMLInputElement>);
+							}}
 							id="role"
 							placeholder={translate('FILTER_TYPE')}
 						/>

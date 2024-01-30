@@ -153,14 +153,23 @@ export function FullEditablePage() {
 					<Select
 						menuPosition="fixed"
 						menuPortalTarget={document.body}
-						defaultValue={
-							DEFAULT_OPTIONS.find(item => item.value === info.getValue())
-								?.value
-						}
+						defaultValue={DEFAULT_OPTIONS.find(
+							item => item.value === info.getValue()
+						)}
 						options={DEFAULT_OPTIONS}
-						onChange={e =>
-							handleInput(e as ChangeEvent<HTMLInputElement>, info.row.index)
-						}
+						onChange={e => {
+							const event = {
+								target: {
+									id: 'role',
+									value: DEFAULT_OPTIONS.find(item => item.value === e?.value)
+										?.value,
+								},
+							};
+							handleInput(
+								event as ChangeEvent<HTMLInputElement>,
+								info.row.index
+							);
+						}}
 						id="role"
 					/>
 				),
@@ -211,7 +220,7 @@ export function FullEditablePage() {
 			</Section>
 			<Section subHeading={translate('IMPLEMENTS')}>
 				<Table isLoading={isLoading} columns={columns} data={data} />
-				{JSON.stringify(data, null, 2)}
+				<pre>{JSON.stringify(data, null, 2)}</pre>
 			</Section>
 		</Main>
 	);

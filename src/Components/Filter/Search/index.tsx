@@ -13,7 +13,7 @@ const DEFAULT_FILTER = {
 	isActive: '',
 };
 
-export function Filter({
+export function Search({
 	filterParams,
 	setFilterParams,
 	isLoading,
@@ -69,11 +69,16 @@ export function Filter({
 					menuPortalTarget={document.body}
 					placeholder={translate('IS_ACTIVE')}
 					isSearchable={false}
-					value={
-						DEFAULT_OPTIONS.find(item => item.value === filter.isActive)?.value
-					}
+					value={DEFAULT_OPTIONS.find(item => item.value === filter.isActive)}
 					options={DEFAULT_OPTIONS}
-					onChange={e => handleInput(e as ChangeEvent<HTMLInputElement>)}
+					onChange={e => {
+						const event = {
+							target: {
+								value: e?.value,
+							},
+						};
+						handleInput(event as ChangeEvent<HTMLInputElement>);
+					}}
 				/>
 			</ContainerInput>
 			<div className="col-span-12 sm:col-span-4 flex items-end justify-center gap-2">

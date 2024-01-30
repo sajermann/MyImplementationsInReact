@@ -10,12 +10,17 @@ import { useTranslation } from '~/Hooks/UseTranslation';
 import { TPerson } from '~/Types/TPerson';
 import { ContainerInput } from '~/Components/ContainerInput';
 
+type TOptionsProps = {
+	value: string;
+	label: string;
+};
+
 export function FilterId({ column }: { column: Column<TPerson, string> }) {
 	const { translate } = useTranslation();
 	const [isOpen, setIsOpen] = useState(false);
-	const [selectType, setSelectType] = useState('');
+	const [selectType, setSelectType] = useState<TOptionsProps | null>(null);
 	const [filterValue, setFilterValue] = useState('');
-	const options = [
+	const OPTIONS: TOptionsProps[] = [
 		{ value: 'equals', label: translate('EQUAL') },
 		{ value: 'bigger', label: translate('BIGGER_THAN') },
 		{ value: 'smaller', label: translate('SMALLER_THAN') },
@@ -53,9 +58,9 @@ export function FilterId({ column }: { column: Column<TPerson, string> }) {
 						<ContainerInput>
 							<Select
 								isClearable
-								options={options}
-								value={options.find(item => item.value === selectType)?.value}
-								onChange={e => setSelectType(e.target.value)}
+								options={OPTIONS}
+								value={OPTIONS.find(item => item.value === selectType?.value)}
+								onChange={setSelectType}
 								id="select_type"
 								placeholder={translate('FILTER_TYPE')}
 							/>
@@ -78,7 +83,7 @@ export function FilterId({ column }: { column: Column<TPerson, string> }) {
 						colorStyle="secondary"
 						variant="outlined"
 						onClick={() => {
-							setSelectType('');
+							setSelectType(null);
 							setFilterValue('');
 						}}
 						endIcon={<Icons nameIcon="trash" />}
@@ -88,7 +93,7 @@ export function FilterId({ column }: { column: Column<TPerson, string> }) {
 						iconButton="rounded"
 						variant="outlined"
 						onClick={() => {
-							column.setFilterValue([selectType, filterValue]);
+							column.setFilterValue([selectType?.value, filterValue]);
 							setIsOpen(false);
 						}}
 						endIcon={<Icons nameIcon="save" />}

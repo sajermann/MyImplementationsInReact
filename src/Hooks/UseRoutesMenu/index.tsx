@@ -24,6 +24,7 @@ import { CalendarPickerDemo } from '~/Components/Demos/CalendarPicker';
 import { ChipDemo } from '~/Components/Demos/Chip';
 import { SwitchDemo } from '~/Components/Demos/Switch';
 import { RadioDemo } from '~/Components/Demos/Radio';
+import { PaginationDemo } from '~/Components/Demos/Pagination';
 
 const ColumnVisibilityPage = lazy(() =>
 	import('~/Pages/Table/ColumnVisibility').then(
@@ -73,7 +74,7 @@ const VirtualizedPage = lazy(() =>
 	)
 );
 
-const PaginationPage = lazy(() =>
+const PaginationTablePage = lazy(() =>
 	import('~/Pages/Table/Pagination').then(({ PaginationPage: Pagination }) => ({
 		default: Pagination,
 	}))
@@ -246,6 +247,12 @@ const SwitchPage = lazy(() =>
 const RadioPage = lazy(() =>
 	import('~/Pages/Radio').then(({ RadioPage: Radio }) => ({
 		default: Radio,
+	}))
+);
+
+const PaginationPage = lazy(() =>
+	import('~/Pages/Pagination').then(({ PaginationPage: Pagination }) => ({
+		default: Pagination,
 	}))
 );
 
@@ -447,7 +454,7 @@ export function useRoutesMenu() {
 							'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Components/Table',
 						docs_code:
 							'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/Table/Pagination',
-						element: <PaginationPage />,
+						element: <PaginationTablePage />,
 						label: translate('PAGINATION'),
 					},
 					{
@@ -623,6 +630,17 @@ export function useRoutesMenu() {
 				element: <RadioPage />,
 				label: 'Radio',
 				demo: <RadioDemo />,
+			},
+			{
+				name: 'Pagination',
+				path: '/pagination',
+				implements_code:
+					'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Components/Pagination',
+				docs_code:
+					'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/Pagination',
+				element: <PaginationPage />,
+				label: translate('PAGINATION'),
+				demo: <PaginationDemo />,
 			},
 			// {
 			// 	name: 'Virtualization',

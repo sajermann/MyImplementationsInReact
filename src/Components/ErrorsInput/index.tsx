@@ -19,7 +19,9 @@ export const ErrorsInput = forwardRef<HTMLDivElement, TErrorsInput>(
 					{ [className as string]: className },
 				])}
 			>
-				{errors && errors?.map(error => <span key={error}>{error}</span>)}
+				{errors?.map(error => (
+					<span key={error}>{error}</span>
+				))}
 			</div>
 		);
 	}

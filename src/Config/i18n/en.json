@@ -1,5 +1,12 @@
 {
 	"translations": {
+		"WITHOUT_NUMBERS_WITH_SELECT": "Without Numbers With Select",
+		"OF": "of",
+		"PAGE": "Page",
+		"WITHOUT_NUMBERS_WITH_SELECTORS": "Without Numbers With Selectors",
+		"WITHOUT_NUMBERS": "Without Numbers",
+		"WITH_NUMBERS": "With Numbers",
+		"PARAMS": "Params",
 		"ROWS": "Rows",
 		"GO_TO_PAGE": "Go to page",
 		"ACTIVE_USER": "Active User",

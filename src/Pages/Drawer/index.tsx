@@ -22,7 +22,7 @@ function Lorem() {
 export function DrawerPage() {
 	const [isOpenLeft, setIsOpenLeft] = useState(false);
 	const [isOpenRight, setIsOpenRight] = useState(false);
-	const [isOpenBotttom, setIsOpenBottom] = useState(false);
+	const [isOpenBottom, setIsOpenBottom] = useState(false);
 	const [isOpenTop, setIsOpenTop] = useState(false);
 
 	const [isOpenLeft10, setIsOpenLeft10] = useState(false);
@@ -98,7 +98,7 @@ export function DrawerPage() {
 					</Button>
 					<Drawer
 						openFrom="bottom"
-						isOpen={isOpenBotttom}
+						isOpen={isOpenBottom}
 						onClose={() => setIsOpenBottom(false)}
 						sectionInternal={{
 							className: 'top-5/6 md:top-1/2',

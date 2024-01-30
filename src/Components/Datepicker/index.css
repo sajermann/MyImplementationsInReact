@@ -562,8 +562,6 @@
 .react-datepicker__quarter-text--keyboard-selected,
 .react-datepicker__year-text--keyboard-selected {
 	border-radius: 0.3rem;
-	/* background-color: #bad9f1;
-	color: rgb(0, 0, 0); */
 	border: 0.5px solid;
 	@apply dark:text-white;
 }

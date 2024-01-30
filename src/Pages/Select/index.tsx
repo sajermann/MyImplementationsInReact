@@ -17,19 +17,7 @@ import { Checkbox } from '~/Components/Checkbox';
 
 export function SelectPage() {
 	const { translate, currentLanguage } = useTranslation();
-	const [isLoading, setIsLoading] = useState(false);
-	const [valueControlledSingle, setValueControlledSingle] = useState('train');
-	const [asyncValueSingle, setAsyncValueSingle] = useState('');
-	const [asyncOptionsSingle, setAsyncOptionsSingle] = useState<TVehicle[]>([]);
-	const [valueControlledMulti, setValueControlledMulti] = useState<string[]>(
-		[]
-	);
-	const [asyncOptionsMulti, setAsyncOptionsMulti] = useState<TVehicle[]>([]);
-	const [asyncValueMulti, setAsyncValueMulti] = useState<string[]>([]);
-	const [errorMode, setErrorMode] = useState(false);
-	const ref = useRef<HTMLSelectElement>(null);
-
-	const OPTION = useMemo<TVehicle[]>(
+	const OPTIONS = useMemo<TVehicle[]>(
 		() => [
 			{ id: '1', value: 'car', label: translate('CAR'), price: 0 },
 			{ id: '2', value: 'bus', label: translate('BUS'), price: 0 },
@@ -38,6 +26,20 @@ export function SelectPage() {
 		],
 		[currentLanguage]
 	);
+	const [isLoading, setIsLoading] = useState(false);
+	const [valueControlledSingle, setValueControlledSingle] =
+		useState<TVehicle | null>(OPTIONS[1]);
+	const [asyncValueSingle, setAsyncValueSingle] = useState<TVehicle | null>(
+		null
+	);
+	const [asyncOptionsSingle, setAsyncOptionsSingle] = useState<TVehicle[]>([]);
+	const [valueControlledMulti, setValueControlledMulti] = useState<TVehicle[]>(
+		[]
+	);
+	const [asyncOptionsMulti, setAsyncOptionsMulti] = useState<TVehicle[]>([]);
+	const [asyncValueMulti, setAsyncValueMulti] = useState<TVehicle[]>([]);
+	const [errorMode, setErrorMode] = useState(false);
+	const ref = useRef<HTMLSelectElement>(null);
 
 	async function loadDataSingle(textFilter: string) {
 		setIsLoading(true);
@@ -58,7 +60,7 @@ export function SelectPage() {
 		const oldSelecteds: TVehicle[] = [];
 
 		for (const selected of asyncValueMulti) {
-			const result = asyncOptionsMulti.find(item => item.value === selected);
+			const result = asyncOptionsMulti.find(item => item === selected);
 			if (result) {
 				oldSelecteds.push(result);
 			}
@@ -103,10 +105,10 @@ export function SelectPage() {
 					<ContainerInput>
 						<Label htmlFor="vehicle">{translate('VEHICLES')}</Label>
 						<Select
+							placeholder={translate('CHOOSE_VEHICLE')}
 							id="vehicle"
 							isClearable
-							options={OPTION}
-							placeholder={translate('CHOOSE_VEHICLE')}
+							options={OPTIONS}
 							onChange={console.log}
 							menuPosition="fixed"
 						/>
@@ -121,9 +123,9 @@ export function SelectPage() {
 						<Select
 							id="controlled1"
 							isClearable
-							options={OPTION}
+							options={OPTIONS}
 							placeholder={translate('CHOOSE_VEHICLE')}
-							onChange={e => setValueControlledSingle(e.target.value)}
+							onChange={setValueControlledSingle}
 							menuPosition="fixed"
 							value={valueControlledSingle}
 						/>
@@ -134,9 +136,9 @@ export function SelectPage() {
 						<Select
 							id="controlled2"
 							isClearable
-							options={OPTION}
+							options={OPTIONS}
 							placeholder={translate('CHOOSE_VEHICLE')}
-							onChange={e => setValueControlledSingle(e.target.value)}
+							onChange={setValueControlledSingle}
 							menuPosition="fixed"
 							value={valueControlledSingle}
 						/>
@@ -150,7 +152,7 @@ export function SelectPage() {
 						<Label htmlFor="searchable1">{translate('NOT_SEARCHABLE')}</Label>
 						<Select
 							id="searchable1"
-							options={OPTION}
+							options={OPTIONS}
 							placeholder={translate('CHOOSE_VEHICLE')}
 							menuPosition="fixed"
 							isSearchable={false}
@@ -161,7 +163,7 @@ export function SelectPage() {
 						<Label htmlFor="searchable2">{translate('SEARCHABLE')}</Label>
 						<Select
 							id="searchable2"
-							options={OPTION}
+							options={OPTIONS}
 							placeholder={translate('CHOOSE_VEHICLE')}
 							menuPosition="fixed"
 						/>
@@ -175,7 +177,7 @@ export function SelectPage() {
 						<Label htmlFor="clearable1">{translate('NOT_CLEARABLE')}</Label>
 						<Select
 							id="clearable1"
-							options={OPTION}
+							options={OPTIONS}
 							placeholder={translate('CHOOSE_VEHICLE')}
 							menuPosition="fixed"
 						/>
@@ -186,7 +188,7 @@ export function SelectPage() {
 						<Select
 							id="clearable2"
 							isClearable
-							options={OPTION}
+							options={OPTIONS}
 							placeholder={translate('CHOOSE_VEHICLE')}
 							onChange={console.log}
 							menuPosition="fixed"
@@ -209,7 +211,7 @@ export function SelectPage() {
 							isLoading={isLoading}
 							options={asyncOptionsSingle}
 							value={asyncValueSingle}
-							onChange={e => setAsyncValueSingle(e.target.value)}
+							onChange={setAsyncValueSingle}
 							placeholder={translate('TYPE_AND_WAIT')}
 							menuPosition="fixed"
 							menuPortalTarget={document.body}
@@ -223,13 +225,13 @@ export function SelectPage() {
 							isClearable
 							async={{
 								callback: filter,
-								debounce: 0,
+								debounce: 1000,
 								minLength: 3,
 							}}
 							isLoading={isLoading}
 							options={asyncOptionsSingle}
 							value={asyncValueSingle}
-							onChange={e => setAsyncValueSingle(e.target.value)}
+							onChange={setAsyncValueSingle}
 							placeholder={translate('MIN_THREE_CHARACTER')}
 							menuPosition="fixed"
 							menuPortalTarget={document.body}
@@ -245,7 +247,6 @@ export function SelectPage() {
 							{translate('ERROR_MODE')}
 						</Label>
 						<Select
-							ref={ref}
 							isLoading={isLoading}
 							id="errorMode"
 							isClearable
@@ -274,7 +275,7 @@ export function SelectPage() {
 					<ContainerInput className="flex-1">
 						<Label htmlFor="focus">{translate('Ref - Focus')}</Label>
 						<Select
-							ref={ref}
+							innerRef={ref}
 							isLoading={isLoading}
 							id="focus"
 							isClearable
@@ -300,14 +301,13 @@ export function SelectPage() {
 						<Select
 							id="multi1"
 							isClearable
-							options={OPTION}
+							options={OPTIONS}
 							placeholder={translate('CHOOSE_VEHICLE')}
 							menuPosition="fixed"
-							isMulti={{
-								onChange: e => {
-									setValueControlledMulti(e.target.value);
-								},
-								value: valueControlledMulti,
+							isMulti
+							value={valueControlledMulti}
+							onChange={e => {
+								setValueControlledMulti(e as TVehicle[]);
 							}}
 						/>
 					</ContainerInput>
@@ -325,12 +325,9 @@ export function SelectPage() {
 							options={asyncOptionsMulti}
 							placeholder={translate('TYPE_AND_WAIT')}
 							menuPosition="fixed"
-							isMulti={{
-								onChange: e => {
-									setAsyncValueMulti(e.target.value);
-								},
-								value: asyncValueMulti,
-							}}
+							isMulti
+							value={asyncValueMulti}
+							onChange={e => setAsyncValueMulti(e as TVehicle[])}
 							async={{
 								callback: e => filter(e, true),
 								debounce: 1000,
@@ -347,15 +344,12 @@ export function SelectPage() {
 							options={asyncOptionsMulti}
 							placeholder={translate('MIN_THREE_CHARACTER')}
 							menuPosition="fixed"
-							isMulti={{
-								onChange: e => {
-									setAsyncValueMulti(e.target.value);
-								},
-								value: asyncValueMulti,
-							}}
+							isMulti
+							value={asyncValueMulti}
+							onChange={e => setAsyncValueMulti(e as TVehicle[])}
 							async={{
 								callback: e => filter(e, true),
-								debounce: 0,
+								debounce: 1000,
 								minLength: 3,
 							}}
 						/>

@@ -21,7 +21,7 @@ function get(options: TRoutesMenu[], url: string) {
 				if (optSub.path === url) {
 					result.actual = optSub;
 					result.next =
-						options[indexOpt].subs?.[indexOptSub + 1] || options[indexOpt + 1];
+						options[indexOpt].subs?.[indexOptSub + 1] ?? options[indexOpt + 1];
 					if (indexOptSub === 0) {
 						result.prev = opt;
 					} else {

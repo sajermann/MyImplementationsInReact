@@ -50,18 +50,3 @@ export const format = {
 	stylesControl,
 	classNamesControl,
 };
-
-// control: state =>
-// [
-//   'group border outline-none !transition-all !duration-500 w-full h-11',
-//   `${
-//     state.isFocused
-//       ? `${iserror ? '!border-red-500' : 'border-blue-500'}`
-//       : ''
-//   }`,
-//   `${
-//     iserror
-//       ? 'group-hover:border-red-500'
-//       : 'group-hover:border-blue-500'
-//   }`,
-// ].join(' '),
