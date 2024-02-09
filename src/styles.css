@@ -10,7 +10,7 @@
 }
 
 a {
-	color: black;
+	color: inherit;
 }
 
 body {
@@ -18,13 +18,13 @@ body {
 	width: 100%;
 	font-family: 'Roboto', sans-serif;
 	line-height: 1.9rem;
+	@apply bg-white dark:bg-dark-500 text-black dark:text-white;
 }
-
-.dark,
-.dark a {
+/* 
+.dark {
 	color: #fff;
 	background-color: rgb(31 41 55 / 1);
-}
+} */
 
 pre {
 	color: #fff;

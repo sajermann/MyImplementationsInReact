@@ -1,4 +1,5 @@
 import { DetailedHTMLProps, HTMLAttributes, useEffect } from 'react';
+import ReactDOM from 'react-dom';
 import { managerClassNames } from '~/Utils/ManagerClassNames';
 import styles from './styles.module.css';
 
@@ -62,7 +63,7 @@ export function Drawer({
 		};
 	}, []);
 
-	return (
+	return ReactDOM.createPortal(
 		<main
 			className={managerClassNames([
 				{ [styles.container]: true },
@@ -103,6 +104,7 @@ export function Drawer({
 			>
 				{children}
 			</section>
-		</main>
+		</main>,
+		document.body
 	);
 }
