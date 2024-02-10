@@ -84,6 +84,7 @@ export function Drawer({
 			<section
 				{...sectionInternal}
 				className={managerClassNames([
+					{ 'bg-white dark:bg-dark-500 backdrop-blur-md': true },
 					{ [styles.subContainer]: true },
 					{ [styles.leftZero]: openFrom === 'left' },
 					{ [styles.translateLeft]: openFrom === 'left' && !isOpen },
