@@ -15,7 +15,7 @@ type Props = {
 	sectionInternal?: DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement>;
 };
 
-export function Drawer({
+export function DrawerNew({
 	children,
 	openFrom,
 	isOpen,
@@ -63,49 +63,50 @@ export function Drawer({
 		};
 	}, []);
 
-	// return (
-	// 	<main
-	// 		className={managerClassNames([
-	// 			{ [styles.container]: true },
-	// 			{ [styles.containerOpen]: isOpen },
-	// 			{ [styles.containerClose]: !isOpen },
-	// 		])}
-	// 		role="presentation"
-	// 		onClick={oneClickToClose ? () => onClose() : () => null}
-	// 	>
-	// 		<section
-	// 			className={managerClassNames([
-	// 				{ [styles.backdropOpen]: isOpen },
-	// 				{ [styles.black]: !disableBackdrop },
-	// 			])}
-	// 			role="presentation"
-	// 			onClick={() => handleClose(false)}
-	// 		/>
-	// 		<section
-	// 			{...sectionInternal}
-	// 			className={managerClassNames([
-	// 				{ [styles.subContainer]: true },
-	// 				{ [styles.leftZero]: openFrom === 'left' },
-	// 				{ [styles.translateLeft]: openFrom === 'left' && !isOpen },
-	// 				{ [styles.rightZero]: openFrom === 'right' },
-	// 				{
-	// 					[styles.translateRight]: openFrom === 'right' && !isOpen,
-	// 				},
-	// 				{
-	// 					[styles.translateBottom]: openFrom === 'bottom' && !isOpen,
-	// 				},
-	// 				{ [styles.translateTop]: openFrom === 'top' && !isOpen },
+	return (
+		<main
+			className={managerClassNames([
+				{ [styles.container]: true },
+				{ [styles.containerOpen]: isOpen },
+				{ [styles.containerClose]: !isOpen },
+			])}
+			role="presentation"
+			onClick={oneClickToClose ? () => onClose() : () => null}
+		>
+			<section
+				className={managerClassNames([
+					{ [styles.backdropOpen]: isOpen },
+					{ [styles.black]: !disableBackdrop },
+				])}
+				role="presentation"
+				onClick={() => handleClose(false)}
+			/>
+			<section
+				{...sectionInternal}
+				className={managerClassNames([
+					// { 'backdrop-blur-md': true },
+					{ [styles.subContainer]: true },
+					{ [styles.leftZero]: openFrom === 'left' },
+					{ [styles.translateLeft]: openFrom === 'left' && !isOpen },
+					{ [styles.rightZero]: openFrom === 'right' },
+					{
+						[styles.translateRight]: openFrom === 'right' && !isOpen,
+					},
+					{
+						[styles.translateBottom]: openFrom === 'bottom' && !isOpen,
+					},
+					{ [styles.translateTop]: openFrom === 'top' && !isOpen },
 
-	// 				{ [styles.subContainerOpen]: isOpen },
-	// 				{
-	// 					[sectionInternal?.className as string]: sectionInternal?.className,
-	// 				},
-	// 			])}
-	// 		>
-	// 			{children}
-	// 		</section>
-	// 	</main>
-	// );
+					{ [styles.subContainerOpen]: isOpen },
+					{
+						[sectionInternal?.className as string]: sectionInternal?.className,
+					},
+				])}
+			>
+				{children}
+			</section>
+		</main>
+	);
 
 	return ReactDOM.createPortal(
 		<main
@@ -128,6 +129,7 @@ export function Drawer({
 			<section
 				{...sectionInternal}
 				className={managerClassNames([
+					// { 'backdrop-blur-md': true },
 					{ [styles.subContainer]: true },
 					{ [styles.leftZero]: openFrom === 'left' },
 					{ [styles.translateLeft]: openFrom === 'left' && !isOpen },

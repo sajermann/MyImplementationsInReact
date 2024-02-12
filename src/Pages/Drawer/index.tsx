@@ -7,6 +7,7 @@ import { Drawer } from '~/Components/Drawer';
 import { ComponentBlock } from '~/Components/ComponentBlock';
 import Section from '~/Components/Section';
 import { QuickAccessGithub } from '~/Components/QuickAccessGithub';
+import { DrawerNew } from '~/Components/DrawerNew';
 
 function Lorem() {
 	return (
@@ -51,7 +52,7 @@ export function DrawerPage() {
 
 	return (
 		<Main data-content="content-main">
-			<Section heading="Drawer">
+			{/* <Section heading="Drawer">
 				{`${translate('IMPLEMENTS_COMPONENT')} Drawer ${translate(
 					'WITHOUT_USING_LIB'
 				)}`}
@@ -333,6 +334,26 @@ export function DrawerPage() {
 					>
 						<Lorem />
 					</Drawer>
+				</ComponentBlock>
+			</Section> */}
+
+			<span>BAtata</span>
+
+			<Section subHeading={translate('OPEN_FROM')}>
+				<ComponentBlock>
+					<Button onClick={() => setIsOpenLeft(true)}>
+						{translate('OPEN_FROM_LEFT')}
+					</Button>
+					<DrawerNew
+						openFrom="left"
+						isOpen={isOpenLeft}
+						onClose={() => setIsOpenLeft(false)}
+						sectionInternal={{
+							className: 'w-5/6 md:w-1/2',
+						}}
+					>
+						<Lorem />
+					</DrawerNew>
 				</ComponentBlock>
 			</Section>
 		</Main>
