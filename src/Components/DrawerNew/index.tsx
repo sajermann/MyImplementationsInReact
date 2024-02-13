@@ -64,7 +64,8 @@ export function DrawerNew({
 	}, []);
 
 	return (
-		<main
+		<>
+			{/* <main
 			className={managerClassNames([
 				{ [styles.container]: true },
 				{ [styles.containerOpen]: isOpen },
@@ -105,7 +106,24 @@ export function DrawerNew({
 			>
 				{children}
 			</section>
-		</main>
+		</main> */}
+
+			<section
+				{...sectionInternal}
+				className={managerClassNames([
+					{ 'hidden ': !isOpen },
+					{ 'h-full w-full bg-white': isOpen },
+					{ 'fixed top-0 left-0 z-50': true },
+					{ 'border-8 border-yellow-600 z-50': true },
+
+					{
+						[sectionInternal?.className as string]: sectionInternal?.className,
+					},
+				])}
+			>
+				{children}
+			</section>
+		</>
 	);
 
 	return ReactDOM.createPortal(
