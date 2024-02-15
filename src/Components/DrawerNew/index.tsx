@@ -1,7 +1,6 @@
 import { DetailedHTMLProps, HTMLAttributes, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import { managerClassNames } from '~/Utils/ManagerClassNames';
-import styles from './styles.module.css';
 
 type Props = {
 	children: React.ReactNode;
@@ -12,7 +11,10 @@ type Props = {
 	disableEsc?: boolean;
 	disableClickOnBackdrop?: boolean;
 	oneClickToClose?: boolean;
-	sectionInternal?: DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement>;
+	sectionInternal?: DetailedHTMLProps<
+		HTMLAttributes<HTMLDivElement>,
+		HTMLDivElement
+	>;
 };
 
 export function DrawerNew({
@@ -63,112 +65,34 @@ export function DrawerNew({
 		};
 	}, []);
 
-	return (
-		<>
-			{/* <main
-			className={managerClassNames([
-				{ [styles.container]: true },
-				{ [styles.containerOpen]: isOpen },
-				{ [styles.containerClose]: !isOpen },
-			])}
-			role="presentation"
-			onClick={oneClickToClose ? () => onClose() : () => null}
-		>
-			<section
-				className={managerClassNames([
-					{ [styles.backdropOpen]: isOpen },
-					{ [styles.black]: !disableBackdrop },
-				])}
-				role="presentation"
-				onClick={() => handleClose(false)}
-			/>
-			<section
-				{...sectionInternal}
-				className={managerClassNames([
-					// { 'backdrop-blur-md': true },
-					{ [styles.subContainer]: true },
-					{ [styles.leftZero]: openFrom === 'left' },
-					{ [styles.translateLeft]: openFrom === 'left' && !isOpen },
-					{ [styles.rightZero]: openFrom === 'right' },
-					{
-						[styles.translateRight]: openFrom === 'right' && !isOpen,
-					},
-					{
-						[styles.translateBottom]: openFrom === 'bottom' && !isOpen,
-					},
-					{ [styles.translateTop]: openFrom === 'top' && !isOpen },
-
-					{ [styles.subContainerOpen]: isOpen },
-					{
-						[sectionInternal?.className as string]: sectionInternal?.className,
-					},
-				])}
-			>
-				{children}
-			</section>
-		</main> */}
-
-			<section
-				{...sectionInternal}
-				className={managerClassNames([
-					{ 'hidden ': !isOpen },
-					{ 'h-full w-full bg-white': isOpen },
-					{ 'fixed top-0 left-0 z-50': true },
-					{ 'border-8 border-yellow-600 z-50': true },
-
-					{
-						[sectionInternal?.className as string]: sectionInternal?.className,
-					},
-				])}
-			>
-				{children}
-			</section>
-		</>
-	);
-
 	return ReactDOM.createPortal(
-		<main
-			className={managerClassNames([
-				{ [styles.container]: true },
-				{ [styles.containerOpen]: isOpen },
-				{ [styles.containerClose]: !isOpen },
-			])}
-			role="presentation"
-			onClick={oneClickToClose ? () => onClose() : () => null}
-		>
-			<section
+		<>
+			<div
 				className={managerClassNames([
-					{ [styles.backdropOpen]: isOpen },
-					{ [styles.black]: !disableBackdrop },
+					{ 'opacity-0 transition-opacity duration-500': true },
+					{ '-z-50  inset-0 fixed': true },
+					{ 'opacity-50 z-[9998]': isOpen },
+					{ 'bg-black': !disableBackdrop },
 				])}
 				role="presentation"
 				onClick={() => handleClose(false)}
 			/>
-			<section
-				{...sectionInternal}
+			<div
 				className={managerClassNames([
-					// { 'backdrop-blur-md': true },
-					{ [styles.subContainer]: true },
-					{ [styles.leftZero]: openFrom === 'left' },
-					{ [styles.translateLeft]: openFrom === 'left' && !isOpen },
-					{ [styles.rightZero]: openFrom === 'right' },
-					{
-						[styles.translateRight]: openFrom === 'right' && !isOpen,
-					},
-					{
-						[styles.translateBottom]: openFrom === 'bottom' && !isOpen,
-					},
-					{ [styles.translateTop]: openFrom === 'top' && !isOpen },
-
-					{ [styles.subContainerOpen]: isOpen },
+					{ 'fixed inset-0': true },
+					{ 'z-[9999]': true },
+					{ '-translate-x-full': !isOpen },
+					{ 'transition-all duration-500': true },
 					{
 						[sectionInternal?.className as string]: sectionInternal?.className,
 					},
 				])}
+				role="presentation"
+				onClick={oneClickToClose ? () => onClose() : () => null}
 			>
 				{children}
-			</section>
-		</main>,
+			</div>
+		</>,
 		document.body
 	);
 }

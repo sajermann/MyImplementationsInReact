@@ -11,12 +11,12 @@ import { DrawerNew } from '~/Components/DrawerNew';
 
 function Lorem() {
 	return (
-		<Main>
+		<div className="bg-white w-full h-full overflow-auto">
 			Lorem ipsum dolor sit, amet consectetur adipisicing elit. Assumenda ab,
 			adipisci dolore iste accusamus quas nemo exercitationem delectus sed quod
 			magni? Accusantium ad quibusdam blanditiis dolorum vitae voluptas pariatur
 			ipsa.
-		</Main>
+		</div>
 	);
 }
 
@@ -128,7 +128,7 @@ export function DrawerPage() {
 					<Button onClick={() => setIsOpenLeft10(true)}>
 						{translate('LEFT')} 10%
 					</Button>
-					<Drawer
+					<DrawerNew
 						openFrom="left"
 						isOpen={isOpenLeft10}
 						onClose={() => setIsOpenLeft10(false)}
@@ -137,7 +137,7 @@ export function DrawerPage() {
 						}}
 					>
 						<Lorem />
-					</Drawer>
+					</DrawerNew>
 
 					<Button colorStyle="secondary" onClick={() => setIsOpenRight40(true)}>
 						{translate('RIGHT')} 40%
@@ -195,7 +195,7 @@ export function DrawerPage() {
 					<Button onClick={() => setIsOpenBackDrop(true)}>
 						{translate('WITH_BACKDROP')}
 					</Button>
-					<Drawer
+					<DrawerNew
 						openFrom="left"
 						isOpen={isOpenBackDrop}
 						onClose={() => setIsOpenBackDrop(false)}
@@ -204,7 +204,7 @@ export function DrawerPage() {
 						}}
 					>
 						<Lorem />
-					</Drawer>
+					</DrawerNew>
 
 					<Button
 						colorStyle="secondary"
@@ -212,7 +212,7 @@ export function DrawerPage() {
 					>
 						{translate('WITHOUT_BACKDROP')}
 					</Button>
-					<Drawer
+					<DrawerNew
 						openFrom="left"
 						isOpen={isOpenWithoutBackDrop}
 						onClose={() => setIsOpenWithoutBackDrop(false)}
@@ -222,7 +222,7 @@ export function DrawerPage() {
 						}}
 					>
 						<Lorem />
-					</Drawer>
+					</DrawerNew>
 				</ComponentBlock>
 			</Section>
 
@@ -231,7 +231,7 @@ export function DrawerPage() {
 					<Button onClick={() => setIsOpenEsc(true)}>
 						{translate('ENABLED_ESC')}
 					</Button>
-					<Drawer
+					<DrawerNew
 						openFrom="left"
 						isOpen={isOpenEsc}
 						onClose={() => setIsOpenEsc(false)}
@@ -240,7 +240,7 @@ export function DrawerPage() {
 						}}
 					>
 						<Lorem />
-					</Drawer>
+					</DrawerNew>
 
 					<Button
 						colorStyle="secondary"
@@ -248,7 +248,7 @@ export function DrawerPage() {
 					>
 						{translate('DISABLED_ESC')}
 					</Button>
-					<Drawer
+					<DrawerNew
 						disableEsc
 						openFrom="left"
 						isOpen={isOpenEscDisabled}
@@ -259,7 +259,7 @@ export function DrawerPage() {
 						}}
 					>
 						<Lorem />
-					</Drawer>
+					</DrawerNew>
 				</ComponentBlock>
 			</Section>
 
@@ -268,7 +268,7 @@ export function DrawerPage() {
 					<Button onClick={() => setIsOpenDisableClickOnBackdrop(true)}>
 						{translate('CLICK_OUT')}
 					</Button>
-					<Drawer
+					<DrawerNew
 						openFrom="left"
 						isOpen={isOpenDisableClickOnBackdrop}
 						onClose={() => setIsOpenDisableClickOnBackdrop(false)}
@@ -277,7 +277,7 @@ export function DrawerPage() {
 						}}
 					>
 						<Lorem />
-					</Drawer>
+					</DrawerNew>
 
 					<Button
 						colorStyle="secondary"
@@ -285,7 +285,7 @@ export function DrawerPage() {
 					>
 						{translate('WITHOUT_CLICK_OUT')}
 					</Button>
-					<Drawer
+					<DrawerNew
 						disableClickOnBackdrop
 						openFrom="left"
 						isOpen={isOpenDisableClickOnBackdropDisabled}
@@ -296,16 +296,16 @@ export function DrawerPage() {
 						}}
 					>
 						<Lorem />
-					</Drawer>
+					</DrawerNew>
 				</ComponentBlock>
-			</Section>
+			</Section> */}
 
 			<Section subHeading={translate('CLOSE_BY_ONE_CLICK')}>
 				<ComponentBlock>
 					<Button onClick={() => setIsOpenOneClickToClose(true)}>
 						{translate('DISABLED_CLOSE_BY_ONE_CLICK')}
 					</Button>
-					<Drawer
+					<DrawerNew
 						openFrom="left"
 						isOpen={isOpenOneClickToClose}
 						onClose={() => setIsOpenOneClickToClose(false)}
@@ -314,7 +314,7 @@ export function DrawerPage() {
 						}}
 					>
 						<Lorem />
-					</Drawer>
+					</DrawerNew>
 
 					<Button
 						colorStyle="secondary"
@@ -322,7 +322,7 @@ export function DrawerPage() {
 					>
 						{translate('ENABLED_CLOSE_BY_ONE_CLICK')}
 					</Button>
-					<Drawer
+					<DrawerNew
 						oneClickToClose
 						openFrom="left"
 						isOpen={isOpenOneClickToCloseDisabled}
@@ -333,9 +333,9 @@ export function DrawerPage() {
 						}}
 					>
 						<Lorem />
-					</Drawer>
+					</DrawerNew>
 				</ComponentBlock>
-			</Section> */}
+			</Section>
 
 			<span>BAtata</span>
 
@@ -352,7 +352,10 @@ export function DrawerPage() {
 							className: 'w-5/6 md:w-1/2',
 						}}
 					>
-						<Lorem />
+						<div className="backdrop-blur-md w-full h-full">
+							{/* <Lorem /> */}
+							glo
+						</div>
 					</DrawerNew>
 				</ComponentBlock>
 			</Section>
