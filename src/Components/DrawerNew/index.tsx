@@ -48,13 +48,13 @@ export function DrawerNew({
 			setIInDom(isOpen);
 			const resultTimer = setTimeout(() => {
 				setIsOpenInternal(isOpen);
-			}, 100);
+			}, 10);
 			setTimer(resultTimer);
 		} else {
 			setIsOpenInternal(isOpen);
 			const resultTimer = setTimeout(() => {
 				setIInDom(isOpen);
-			}, 1000);
+			}, 501);
 			setTimer(resultTimer);
 		}
 	}, [isOpen]);
@@ -85,8 +85,8 @@ export function DrawerNew({
 			<div
 				className={managerClassNames([
 					{ 'opacity-0 transition-opacity duration-500': true },
-					{ '-z-50  inset-0 fixed': true },
-					{ 'opacity-50 z-[9998]': isOpenInternal },
+					{ 'inset-0 fixed z-[9998]': true },
+					{ 'opacity-50 ': isOpenInternal },
 					{ 'bg-black': !disableBackdrop },
 				])}
 				role="presentation"
@@ -94,12 +94,16 @@ export function DrawerNew({
 			/>
 			<div
 				className={managerClassNames([
-					{ 'fixed inset-0': true },
-					{ 'z-[9999]': true },
+					{ 'fixed inset-0 transition-all duration-500 z-[9999]': true },
+					// Left
 					{ '-translate-x-full': !isOpenInternal && openFrom === 'left' },
+					// Right
+					{ 'left-auto': openFrom === 'right' },
 					{ 'translate-x-full': !isOpenInternal && openFrom === 'right' },
-					{ 'left-0': !isOpenInternal && openFrom === 'right' },
-					{ 'transition-all duration-500': true },
+					// Bottom
+					{ 'translate-y-full': !isOpenInternal && openFrom === 'bottom' },
+					// Top
+					{ '-translate-y-full': !isOpenInternal && openFrom === 'top' },
 					{
 						[sectionInternal?.className as string]: sectionInternal?.className,
 					},
