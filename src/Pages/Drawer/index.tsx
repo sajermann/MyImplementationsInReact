@@ -52,7 +52,7 @@ export function DrawerPage() {
 
 	return (
 		<Main data-content="content-main">
-			{/* <Section heading="Drawer">
+			<Section heading="Drawer">
 				{`${translate('IMPLEMENTS_COMPONENT')} Drawer ${translate(
 					'WITHOUT_USING_LIB'
 				)}`}
@@ -69,7 +69,7 @@ export function DrawerPage() {
 					<Button onClick={() => setIsOpenLeft(true)}>
 						{translate('OPEN_FROM_LEFT')}
 					</Button>
-					<Drawer
+					<DrawerNew
 						openFrom="left"
 						isOpen={isOpenLeft}
 						onClose={() => setIsOpenLeft(false)}
@@ -78,12 +78,12 @@ export function DrawerPage() {
 						}}
 					>
 						<Lorem />
-					</Drawer>
+					</DrawerNew>
 
 					<Button colorStyle="secondary" onClick={() => setIsOpenRight(true)}>
 						{translate('OPEN_FROM_RIGHT')}
 					</Button>
-					<Drawer
+					<DrawerNew
 						openFrom="right"
 						isOpen={isOpenRight}
 						onClose={() => setIsOpenRight(false)}
@@ -92,7 +92,7 @@ export function DrawerPage() {
 						}}
 					>
 						<Lorem />
-					</Drawer>
+					</DrawerNew>
 
 					<Button colorStyle="success" onClick={() => setIsOpenBottom(true)}>
 						{translate('OPEN_FROM_BOTTOM')}
@@ -122,7 +122,7 @@ export function DrawerPage() {
 					</Drawer>
 				</ComponentBlock>
 			</Section>
-
+			{/* 
 			<Section subHeading={translate('SIZE')}>
 				<ComponentBlock>
 					<Button onClick={() => setIsOpenLeft10(true)}>
@@ -345,7 +345,7 @@ export function DrawerPage() {
 						{translate('OPEN_FROM_LEFT')}
 					</Button>
 					<DrawerNew
-						openFrom="left"
+						openFrom="right"
 						isOpen={isOpenLeft}
 						onClose={() => setIsOpenLeft(false)}
 						sectionInternal={{
