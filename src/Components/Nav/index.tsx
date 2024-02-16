@@ -8,9 +8,7 @@ export function Nav({ children, className }: Props) {
 			className={managerClassNames({
 				'h-16 flex items-center justify-center p-4': true,
 				'border-b border-b-dark-400': true,
-				'backdrop-blur-md z-50 sticky top-0': true,
-				'bg-white dark:bg-dark-500/70': true,
-				'text-black dark:text-white': true,
+				'dark:bg-dark-500/70': true,
 				[className as string]: className,
 			})}
 		>

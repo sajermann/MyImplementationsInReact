@@ -8,7 +8,7 @@ import { TPerson } from '~/Types/TPerson';
 import { makeData } from '~/Utils/MakeData';
 import { Icons } from '~/Components/Icons';
 import { Main } from '~/Components/Main';
-import Section from '~/Components/Section';
+import { Section } from '~/Components/Section';
 import { QuickAccessGithub } from '~/Components/QuickAccessGithub';
 
 export function FavoritesPage() {
@@ -51,15 +51,15 @@ export function FavoritesPage() {
 
 	return (
 		<Main data-content="content-main">
-			<Section heading={translate('FAVORITES')}>
+			<Section title={translate('FAVORITES')} variant="h1">
 				{translate('IMPLEMENTS_FAVORITES_MODE')}
 			</Section>
-			<Section subHeading={translate('CODES')}>
-				<div className="flex gap-2">
+			<Section title={translate('CODES')} variant="h2">
+				<div className="flex gap-2 bg-dark-400">
 					<QuickAccessGithub name="Favorites" />
 				</div>
 			</Section>
-			<Section subHeading={translate('IMPLEMENTS')}>
+			<Section title={translate('IMPLEMENTS')} variant="h2">
 				<Table
 					columns={columnsInternal}
 					data={data}

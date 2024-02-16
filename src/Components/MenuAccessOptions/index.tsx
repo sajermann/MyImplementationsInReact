@@ -1,11 +1,11 @@
 import { Fragment, useMemo, useRef, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { generateGuid } from '@sajermann/utils/Random';
-import clsx from 'clsx';
 
 import { useRoutesMenu } from '~/Hooks/UseRoutesMenu';
 import { TRoutesMenu } from '~/Types/TRoutesMenu';
 import { useTranslation } from '~/Hooks/UseTranslation';
+import { managerClassNames } from '~/Utils/ManagerClassNames';
 
 import { Nav } from '../Nav';
 import { HeaderButton } from '../HeaderButton';
@@ -29,12 +29,12 @@ function BuildNormalOption({ path, label, onClick, hideMenu }: TProps) {
 				key={generateGuid()}
 				to={path}
 				className={({ isActive }) =>
-					clsx({
-						[`w-[90%] flex p-2 hover:text-violet-700  transition-colors duration-300`]:
-							true,
-						[`border-2 border-x-0 border-t-0 border-violet-700 text-violet-700`]:
-							isActive,
-					})
+					managerClassNames([
+						{ 'w-[90%] flex p-2 hover:text-violet-700': true },
+						{ 'transition-colors duration-300': true },
+						{ 'border-2 border-x-0 border-t-0 border-violet-700': isActive },
+						{ 'text-violet-700': isActive },
+					])
 				}
 				end
 			>
@@ -109,28 +109,23 @@ export default function MenuAccessOptions({
 	const mount = useMemo(() => globalMenus(search), [search, currentLanguage]);
 
 	return (
-		<Main>
+		<Main className="backdrop-blur-md text-white">
 			{!hideHeader && (
 				<Nav>
 					<div className="w-full flex items-center justify-between gap-2">
-						<h2 className="text-xl whitespace-nowrap font-bold text-white">
-							Menu
-						</h2>
-						<div className="flex items-center justify-center gap-2">
-							<div>
-								<BlockRightToLeftTransition
-									width="150px"
-									show={isVisibleSearch}
-								>
-									<Input
-										ref={refInputSearch}
-										type="search"
-										placeholder={translate('SEARCH_MENU')}
-										value={search}
-										onChange={({ target }) => setSearch(target.value)}
-									/>
-								</BlockRightToLeftTransition>
-							</div>
+						<h2 className="text-xl whitespace-nowrap font-bold">Menu</h2>
+						<div className="flex items-center justify-end gap-2">
+							<BlockRightToLeftTransition width="9rem" show={isVisibleSearch}>
+								<Input
+									ref={refInputSearch}
+									type="search"
+									placeholder={translate('SEARCH_MENU')}
+									value={search}
+									onChange={({ target }) => setSearch(target.value)}
+									className="w-36"
+								/>
+							</BlockRightToLeftTransition>
+
 							<HeaderButton
 								onClick={() => {
 									setSearch('');

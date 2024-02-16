@@ -1,7 +1,7 @@
 import { useRef, useState } from 'react';
 import { Main } from '~/Components/Main';
 import { useTranslation } from '~/Hooks/UseTranslation';
-import Section from '~/Components/Section';
+import { Section } from '~/Components/Section';
 import { ComponentBlock } from '~/Components/ComponentBlock';
 import { CodeBlock } from '~/Components/CodeBlock';
 import { QuickAccessGithub } from '~/Components/QuickAccessGithub';
@@ -32,7 +32,7 @@ export function CheckboxPage() {
 			</Section>
 
 			<Section title={translate('CODES')} variant="h2">
-				<div className="flex gap-2">
+				<div className="flex gap-2 bg-dark-400">
 					<QuickAccessGithub name="Checkbox" />
 				</div>
 			</Section>
@@ -137,7 +137,7 @@ export function CheckboxPage() {
 				</ComponentBlock>
 			</Section>
 
-			<Section subHeading={translate('ERRORS')}>
+			<Section title={translate('ERRORS')}>
 				<ComponentBlock className="flex-row !items-start">
 					<ContainerInput className="w-24 items-center">
 						<Label htmlFor="errors" isError={errorMode}>
@@ -159,7 +159,7 @@ export function CheckboxPage() {
 				</ComponentBlock>
 			</Section>
 
-			<Section subHeading="Focus">
+			<Section title="Focus">
 				<ComponentBlock className="flex-row !items-end">
 					<ContainerInput className="w-24 items-center">
 						<Label htmlFor="focus">Ref - Focus</Label>

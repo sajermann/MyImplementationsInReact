@@ -29,9 +29,9 @@ export default function MenuSettings() {
 					className: 'w-96',
 				}}
 			>
-				<Main>
+				<Main className="backdrop-blur-md text-white">
 					<Nav className="flex justify-between w-full">
-						<h2 className="text-xl whitespace-nowrap font-bold text-white">
+						<h2 className="text-xl whitespace-nowrap font-bold">
 							{translate('SETTINGS')}
 						</h2>
 						<Button
@@ -39,6 +39,7 @@ export default function MenuSettings() {
 							variant="option"
 							onClick={() => setIsOpen(false)}
 							data-testid="closeButtonModal"
+							className="text-white"
 						>
 							<Icons nameIcon="close" width="1rem" />
 						</Button>

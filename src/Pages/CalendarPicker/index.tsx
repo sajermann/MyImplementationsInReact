@@ -7,7 +7,7 @@ import { QuickAccessGithub } from '~/Components/QuickAccessGithub';
 import { Calendar } from '~/Components/Calendar';
 import { useState } from 'react';
 import { addMonths } from 'date-fns';
-import { Section } from '~/Components/SectionNew';
+import { Section } from '~/Components/Section';
 
 export function CalendarPickerPage() {
 	const { translate } = useTranslation();
@@ -28,7 +28,7 @@ export function CalendarPickerPage() {
 			</Section>
 
 			<Section title={translate('CODES')} variant="h2">
-				<div className="flex gap-2">
+				<div className="flex gap-2 bg-dark-400">
 					<QuickAccessGithub name="Calendar Picker" />
 				</div>
 			</Section>

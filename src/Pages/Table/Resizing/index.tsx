@@ -7,7 +7,7 @@ import { TPerson } from '~/Types/TPerson';
 import { makeData } from '~/Utils/MakeData';
 import { useColumns } from '~/Hooks/UseColumns';
 import { Main } from '~/Components/Main';
-import Section from '~/Components/Section';
+import { Section } from '~/Components/Section';
 import { QuickAccessGithub } from '~/Components/QuickAccessGithub';
 
 const DEFAULT = {
@@ -68,15 +68,15 @@ export function ResizingPage() {
 
 	return (
 		<Main data-content="content-main">
-			<Section heading={translate('RESIZING')}>
+			<Section title={translate('RESIZING')} variant="h1">
 				{translate('IMPLEMENTS_RESIZING_MODE')}
 			</Section>
-			<Section subHeading={translate('CODES')}>
-				<div className="flex gap-2">
+			<Section title={translate('CODES')} variant="h2">
+				<div className="flex gap-2 bg-dark-400">
 					<QuickAccessGithub name="Resizing" />
 				</div>
 			</Section>
-			<Section subHeading={translate('IMPLEMENTS')}>
+			<Section title={translate('IMPLEMENTS')} variant="h2">
 				<div className="flex flex-col gap-2">
 					{translate(
 						'SAVE_COLUMN_SIZE_STATE_AFTER_ONE_SECOND_IN_LOCAL_STORAGE'

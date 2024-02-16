@@ -1,4 +1,3 @@
-/* eslint-disable react/button-has-type */
 import { ButtonHTMLAttributes, DetailedHTMLProps } from 'react';
 import { Button } from '../Button';
 
@@ -13,7 +12,7 @@ export function HeaderButton({ children, ...rest }: Props) {
 			iconButton="squared"
 			variant="option"
 			{...rest}
-			className="bg-dark-600 text-white"
+			className="border border-dark-400 bg-dark-500 hover:bg-dark-400 hover:opacity-90 text-white"
 		>
 			{children}
 		</Button>

@@ -11,9 +11,6 @@ export function Home() {
 	const { translate } = useTranslation();
 	const { globalRoutes: options } = useRoutesMenu();
 
-	const LINK_CLASS =
-		'flex flex-col flex-1 items-center justify-center gap-1 p-1 text-sm text-white !bg-dark-700 hover:text-primary-700 transition-colors duration-500';
-
 	return (
 		<Main>
 			<div className="flex flex-col items-center justify-center">
@@ -54,15 +51,23 @@ export function Home() {
 									{ [opt.className as string]: opt.className },
 								])}
 							>
-								<header className="border-b-2 p-2 flex justify-center items-center bg-dark-700 rounded-t-2xl text-white">
+								<header className="border-b-2 p-2 flex justify-center items-center bg-dark-500 rounded-t-2xl text-white">
 									{opt.name}
 								</header>
 								<main className="w-full p-2 flex items-center justify-center flex-1 m-auto">
 									{opt.demo || translate('NO_VIEW')}
 								</main>
 
-								<footer className="border-t-2 flex !bg-dark-700">
-									<Link to={opt.path} className={LINK_CLASS}>
+								<footer className="border-t-2 flex bg-dark-500">
+									<Link
+										to={opt.path}
+										className={managerClassNames([
+											{ 'flex flex-col flex-1 items-center': true },
+											{ 'justify-center gap-1 p-1 text-sm': true },
+											{ 'text-white duration-500 transition-colors': true },
+											{ 'hover:text-primary-700 ': true },
+										])}
+									>
 										<Icons nameIcon="eye" width="30px" />
 										Demo
 									</Link>

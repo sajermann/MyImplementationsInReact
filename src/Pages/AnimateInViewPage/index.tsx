@@ -1,6 +1,6 @@
 import { useTranslation } from '~/Hooks/UseTranslation';
 import { Main } from '~/Components/Main';
-import Section from '~/Components/Section';
+import { Section } from '~/Components/Section';
 import { QuickAccessGithub } from '~/Components/QuickAccessGithub';
 import { Icons } from '~/Components/Icons';
 import { AnimateInView } from '~/Components/AnimateInView';
@@ -18,7 +18,7 @@ export function AnimateInViewPage() {
 				{translate('IMPLEMENTS_ANIMATE_IN_VIEW')}
 			</Section>
 			<Section title={translate('CODES')} variant="h2">
-				<div className="flex gap-2">
+				<div className="flex gap-2  bg-dark-400">
 					<QuickAccessGithub name="Animate In View" />
 				</div>
 			</Section>

@@ -7,7 +7,7 @@ import {
 } from 'react';
 import { useTranslation } from '~/Hooks/UseTranslation';
 import { Main } from '~/Components/Main';
-import Section from '~/Components/Section';
+import { Section } from '~/Components/Section';
 import { QuickAccessGithub } from '~/Components/QuickAccessGithub';
 import { Chip } from '~/Components/Chip';
 import { Input } from '~/Components/Input';
@@ -87,7 +87,7 @@ export function ChipPage() {
 				{translate('IMPLEMENTS_CHIP')}
 			</Section>
 			<Section title={translate('CODES')} variant="h2">
-				<div className="flex gap-2">
+				<div className="flex gap-2 bg-dark-400">
 					<QuickAccessGithub name="Chip" />
 				</div>
 			</Section>

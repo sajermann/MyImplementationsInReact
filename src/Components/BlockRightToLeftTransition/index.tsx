@@ -10,7 +10,7 @@ export function BlockRightToLeftTransition({ show, children, width }: Props) {
 	return (
 		<motion.div
 			animate={{ width: show ? width : 0 }}
-			transition={{ duration: 1, origin: 100 }}
+			transition={{ duration: 0.1, origin: 0 }}
 			style={{ overflow: 'hidden' }}
 		>
 			{children}

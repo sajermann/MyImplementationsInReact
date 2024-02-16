@@ -78,7 +78,6 @@ function keyDownButton({
 	const keysToVerify = [' ', 'Enter'];
 	const { tagName } = (event as unknown as { target: { tagName: string } })
 		.target;
-	console.log({ tagName });
 	if (tagName === 'BUTTON' && keysToVerify.includes(event.key) && onRemove) {
 		onRemove(value);
 		return;

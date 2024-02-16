@@ -1,6 +1,6 @@
 import { Main } from '~/Components/Main';
 import { useTranslation } from '~/Hooks/UseTranslation';
-import Section from '~/Components/Section';
+import { Section } from '~/Components/Section';
 import { ComponentBlock } from '~/Components/ComponentBlock';
 import { CodeBlock } from '~/Components/CodeBlock';
 import { QuickAccessGithub } from '~/Components/QuickAccessGithub';
@@ -26,7 +26,7 @@ export function SwitchPage() {
 			</Section>
 
 			<Section title={translate('CODES')} variant="h2">
-				<div className="flex gap-2">
+				<div className="flex gap-2 bg-dark-400">
 					<QuickAccessGithub name="Switch" />
 				</div>
 			</Section>

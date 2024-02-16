@@ -5,7 +5,7 @@ import { useTranslation } from '~/Hooks/UseTranslation';
 import { Button } from '~/Components/Button';
 import { Drawer } from '~/Components/Drawer';
 import { ComponentBlock } from '~/Components/ComponentBlock';
-import Section from '~/Components/Section';
+import { Section } from '~/Components/Section';
 import { QuickAccessGithub } from '~/Components/QuickAccessGithub';
 
 function Lorem({ children }: { children?: React.ReactNode }) {
@@ -52,19 +52,19 @@ export function DrawerPage() {
 
 	return (
 		<Main data-content="content-main">
-			<Section heading="Drawer">
+			<Section title="Drawer" variant="h1">
 				{`${translate('IMPLEMENTS_COMPONENT')} Drawer ${translate(
 					'WITHOUT_USING_LIB'
 				)}`}
 			</Section>
 
-			<Section subHeading={translate('CODES')}>
-				<div className="flex gap-2">
+			<Section title={translate('CODES')}>
+				<div className="flex gap-2 bg-dark-400">
 					<QuickAccessGithub name="Drawer" />
 				</div>
 			</Section>
 
-			<Section subHeading={translate('OPEN_FROM')}>
+			<Section title={translate('OPEN_FROM')} variant="h2">
 				<ComponentBlock>
 					<Button onClick={() => setIsOpenLeft(true)}>
 						{translate('OPEN_FROM_LEFT')}
@@ -124,7 +124,7 @@ export function DrawerPage() {
 				</ComponentBlock>
 			</Section>
 
-			<Section subHeading={translate('SIZE')}>
+			<Section title={translate('SIZE')} variant="h2">
 				<ComponentBlock>
 					<Button onClick={() => setIsOpenLeft10(true)}>
 						{translate('LEFT')} 10%
@@ -187,7 +187,7 @@ export function DrawerPage() {
 				</ComponentBlock>
 			</Section>
 
-			<Section subHeading={translate('BACKDROP')}>
+			<Section title={translate('BACKDROP')} variant="h2">
 				<ComponentBlock>
 					<Button onClick={() => setIsOpenBackDrop(true)}>
 						{translate('WITH_BACKDROP')}
@@ -223,7 +223,7 @@ export function DrawerPage() {
 				</ComponentBlock>
 			</Section>
 
-			<Section subHeading={translate('CLOSE_BY_ESC')}>
+			<Section title={translate('CLOSE_BY_ESC')} variant="h2">
 				<ComponentBlock>
 					<Button onClick={() => setIsOpenEsc(true)}>
 						{translate('ENABLED_ESC')}
@@ -260,7 +260,7 @@ export function DrawerPage() {
 				</ComponentBlock>
 			</Section>
 
-			<Section subHeading={translate('CLOSE_BY_CLICK_OUT')}>
+			<Section title={translate('CLOSE_BY_CLICK_OUT')} variant="h2">
 				<ComponentBlock>
 					<Button onClick={() => setIsOpenDisableClickOnBackdrop(true)}>
 						{translate('CLICK_OUT')}
@@ -297,7 +297,7 @@ export function DrawerPage() {
 				</ComponentBlock>
 			</Section>
 
-			<Section subHeading={translate('CLOSE_BY_ONE_CLICK')}>
+			<Section title={translate('CLOSE_BY_ONE_CLICK')} variant="h2">
 				<ComponentBlock>
 					<Button onClick={() => setIsOpenOneClickToClose(true)}>
 						{translate('DISABLED_CLOSE_BY_ONE_CLICK')}
