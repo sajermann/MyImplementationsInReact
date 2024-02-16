@@ -27,11 +27,13 @@ export function DrawerDemo() {
 				isOpen={isOpen}
 				onClose={() => setIsOpen(false)}
 			>
-				<Main>
-					Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore maxime
-					qui enim ipsa cupiditate aut provident ad eos consectetur vitae ullam
-					dolorem ex in est illo, cum quas obcaecati architecto.
-				</Main>
+				<div className="bg-white text-black dark:bg-slate-800 dark:text-white w-full h-full overflow-auto">
+					<Main>
+						Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore
+						maxime qui enim ipsa cupiditate aut provident ad eos consectetur
+						vitae ullam dolorem ex in est illo, cum quas obcaecati architecto.
+					</Main>
+				</div>
 			</Drawer>
 		</>
 	);

@@ -77,7 +77,7 @@ export function DrawerPage() {
 							className: 'w-5/6 md:w-1/2',
 						}}
 					>
-						<div className="backdrop-blur-md w-full h-full">glo</div>
+						<Lorem />
 					</Drawer>
 
 					<Button colorStyle="secondary" onClick={() => setIsOpenRight(true)}>
