@@ -12,7 +12,7 @@ import { SearchBoxPage } from '.';
 describe('Pages/SearchBoxPage', () => {
 	it(`must show result by onChange`, async () => {
 		const { findAllByRole, findAllByText } = render(
-			<InjectorProviders>
+			<InjectorProviders noLayout>
 				<SearchBoxPage />
 			</InjectorProviders>
 		);
@@ -25,8 +25,6 @@ describe('Pages/SearchBoxPage', () => {
 		fireEvent.change(input2, { target: { value: 'Braz' } });
 		const input3 = (await findAllByRole('searchbox'))[3];
 		fireEvent.change(input3, { target: { value: 'Braz' } });
-		const input4 = (await findAllByRole('searchbox'))[4];
-		fireEvent.change(input4, { target: { value: 'Braz' } });
 		await delay(3000);
 		const resultText = await findAllByText('Braz');
 		expect(resultText.length).toBe(4);

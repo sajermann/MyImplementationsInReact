@@ -1,14 +1,13 @@
-import { delay } from '@sajermann/utils/Delay';
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
 import { useTranslation } from '~/Hooks/UseTranslation';
-import useWindow from '~/Hooks/UseWindow';
+import { useWindow } from '~/Hooks/UseWindow';
 import { useLoadingLazy } from '~/Store/UseLoadingLazy';
 import { managerClassNames } from '~/Utils/ManagerClassNames';
 import { Main } from '../Main';
 
-type Menu = {
+type TMenu = {
 	type: string;
 	title: string;
 	anchor: string;
@@ -18,14 +17,19 @@ type Menu = {
 
 export function TableOfContents() {
 	const { isLoadingLazy } = useLoadingLazy();
-	const [optionsMenu, setOptionsMenu] = useState<Menu[]>([]);
+	const [optionsMenu, setOptionsMenu] = useState<TMenu[]>([]);
 	const location = useLocation();
 	const { scrollPosition } = useWindow();
 	const { translate, currentLanguage } = useTranslation();
+	const [scrollByClick, setScrollByClick] = useState(false);
 
 	function load() {
 		if (isLoadingLazy) return;
-		const menus: Menu[] = [];
+		if (scrollByClick) {
+			setScrollByClick(false);
+			return;
+		}
+		const menus: TMenu[] = [];
 		const subs = document.querySelectorAll('[data-tableofcontents="true"]');
 
 		for (let i = 0; i < subs.length; i += 1) {
@@ -58,27 +62,6 @@ export function TableOfContents() {
 		setOptionsMenu([...menusWithActive]);
 	}
 
-	async function handleClick(element: Menu, e: any) {
-		console.log({ element });
-		e.preventDefault();
-		setOptionsMenu(prev => [
-			...prev.map(item => ({
-				...item,
-				active: item.anchor === element.anchor,
-			})),
-		]);
-		const heightHeader = 64;
-		// TODO: refazer esse lixo
-		if (element.top > heightHeader + 5) {
-			await delay(1);
-			console.log('Aqui');
-			window.scroll({
-				top: element.top - heightHeader,
-				// behavior: 'smooth',
-			});
-		}
-	}
-
 	useEffect(
 		() => load(),
 		[scrollPosition, location.pathname, currentLanguage, isLoadingLazy]
@@ -106,7 +89,6 @@ export function TableOfContents() {
 										item.active,
 								})}
 								href={`#${item.anchor}`}
-								// onClick={e => handleClick(item, e)}
 							>
 								{item.title}
 							</a>

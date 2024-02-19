@@ -21,8 +21,8 @@ export function OtherComponents() {
 						className="flex items-center justify-center hover:text-primary-700 transition-colors duration-500"
 						to={triRoutes.prev.path}
 					>
-						<Icons nameIcon="arrowSingleLeft" width="15px" />{' '}
-						{triRoutes.prev.label}
+						<Icons nameIcon="arrowSingleLeft" width="2rem" />
+						<span>{triRoutes.prev.label}</span>
 					</Link>
 				)}
 				{triRoutes.next && (
@@ -31,7 +31,7 @@ export function OtherComponents() {
 						to={triRoutes.next.path}
 					>
 						{triRoutes.next.label}
-						<Icons nameIcon="arrowSingleRight" width="15px" />
+						<Icons nameIcon="arrowSingleRight" width="2rem" />
 					</Link>
 				)}
 			</div>
