@@ -67,13 +67,16 @@ export function TableOfContents() {
 				active: item.anchor === element.anchor,
 			})),
 		]);
-		// if (element.top > 0) {
-		await delay(1);
-		window.scroll({
-			top: element.top,
-			behavior: 'smooth',
-		});
-		// }
+		const heightHeader = 64;
+		// TODO: refazer esse lixo
+		if (element.top > heightHeader + 5) {
+			await delay(1);
+			console.log('Aqui');
+			window.scroll({
+				top: element.top - heightHeader,
+				// behavior: 'smooth',
+			});
+		}
 	}
 
 	useEffect(
@@ -103,7 +106,7 @@ export function TableOfContents() {
 										item.active,
 								})}
 								href={`#${item.anchor}`}
-								onClick={e => handleClick(item, e)}
+								// onClick={e => handleClick(item, e)}
 							>
 								{item.title}
 							</a>

@@ -3,7 +3,7 @@
 	opacity: 0;
 	color: #fff;
 	position: absolute;
-	top: 0.4375rem;
+	top: 0.0625rem;
 	right: 0.0625rem;
 	transition: visibility 0s, opacity 0.5s linear;
 }

@@ -13,6 +13,10 @@ a {
 	color: inherit;
 }
 
+html {
+	scroll-behavior: smooth;
+}
+
 body {
 	height: 100%;
 	width: 100%;
@@ -35,7 +39,7 @@ pre {
 	background-color: rgb(15 25 38);
 	margin: 10px 0;
 }
-
+/* 
 .componentBlock {
 	display: flex;
 	align-items: center;
@@ -47,9 +51,9 @@ pre {
 	margin: 10px 0;
 	gap: 10px;
 	width: 100%;
-}
+} */
 
-.children {
+/* .children {
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -58,15 +62,15 @@ pre {
 	gap: 10px;
 	flex-wrap: wrap;
 	overflow: auto;
-}
+} */
 
-.toggleCode {
+/* .toggleCode {
 	width: 100%;
-}
+} */
 
-.darkMode > .componentBlock {
+/* .darkMode > .componentBlock {
 	border: 1px solid rgb(15 25 38);
-}
+} */
 
 .highlight {
 	color: #fff;
