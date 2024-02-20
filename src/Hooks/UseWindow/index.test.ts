@@ -1,7 +1,7 @@
 import { renderHook } from '@testing-library/react';
 import { it, describe, expect } from 'vitest';
 
-import useWindow from '.';
+import { useWindow } from '.';
 
 describe('Hooks/UseWindow', () => {
 	it(`must render data`, async () => {

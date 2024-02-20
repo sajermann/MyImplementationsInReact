@@ -38,7 +38,7 @@ export function Main({ searchValue, results, isLoading }: Props) {
 		>
 			{searchValue !== '' && !isLoading && (
 				<>
-					<div className="py-2 border-b-2 mb-2 w-full sticky top-0 bg-white dark:bg-dark-600">
+					<div className="py-2 border-b-2 mb-2 w-full sticky top-0 bg-white dark:bg-dark-500">
 						{translate(results.length > 0 ? 'RESULTS' : 'NO_DATA')}
 					</div>
 					<ul className="m-0">

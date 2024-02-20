@@ -1,21 +1,21 @@
 import { delay } from '@sajermann/utils/Delay';
 import { useState } from 'react';
-import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { dracula } from 'react-syntax-highlighter/dist/esm/styles/prism';
+
 import { useToast } from '~/Hooks/UseToast';
+import { useTranslation } from '~/Hooks/UseTranslation';
 
 import { Button } from '../Button';
 import { Icons } from '../Icons';
 import styles from './styles.module.css';
 
-type Props = {
+type TProps = {
 	children: string;
-	language?: 'jsx' | 'shell';
 };
-export function CodeBlock({ children, language }: Props) {
+export function CodeBlock({ children }: TProps) {
 	const { customToast } = useToast();
 	const [success, setSuccess] = useState(false);
 	const [isLoading, setIsLoading] = useState(false);
+	const { translate } = useTranslation();
 
 	async function handleCopy() {
 		try {
@@ -39,7 +39,7 @@ export function CodeBlock({ children, language }: Props) {
 			<div className={styles.copy}>
 				<Button
 					iconButton="squared"
-					title="Copiar"
+					title={translate('COPY')}
 					type="button"
 					variant="option"
 					colorStyle={success ? 'success' : undefined}
@@ -57,9 +57,7 @@ export function CodeBlock({ children, language }: Props) {
 					endIcon={<Icons nameIcon="clipboardText" color="#fff" />}
 				/>
 			</div>
-			<SyntaxHighlighter language={language ?? 'jsx'} style={dracula}>
-				{children}
-			</SyntaxHighlighter>
+			<div className="p-2 rounded bg-dark-400 text-white">{children}</div>
 		</div>
 	);
 }

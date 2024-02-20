@@ -6,7 +6,7 @@ import { useTranslation } from '~/Hooks/UseTranslation';
 import { makeData } from '~/Utils/MakeData';
 import { TVehicle } from '~/Types/TVehicle';
 import { Main } from '~/Components/Main';
-import Section from '~/Components/Section';
+import { Section } from '~/Components/Section';
 import { QuickAccessGithub } from '~/Components/QuickAccessGithub';
 import { mask } from '~/Utils/Mask';
 
@@ -59,15 +59,15 @@ export function FooterPage() {
 
 	return (
 		<Main data-content="content-main">
-			<Section heading={translate('FOOTER')}>
+			<Section title={translate('FOOTER')} variant="h1">
 				{translate('IMPLEMENTS_FOOTER_MODE')}
 			</Section>
-			<Section subHeading={translate('CODES')}>
-				<div className="flex gap-2">
+			<Section title={translate('CODES')} variant="h2">
+				<div className="flex gap-2 bg-dark-400">
 					<QuickAccessGithub name="Footer" />
 				</div>
 			</Section>
-			<Section subHeading={translate('IMPLEMENTS')}>
+			<Section title={translate('IMPLEMENTS')} variant="h2">
 				<Table
 					columns={columns}
 					data={data}

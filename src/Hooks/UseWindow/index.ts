@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-function useWindow() {
+export function useWindow() {
 	const [scrollPosition, setScrollPosition] = useState(0);
 	const [view] = useState({
 		width: Math.max(
@@ -25,5 +25,3 @@ function useWindow() {
 
 	return { scrollPosition, view };
 }
-
-export default useWindow;

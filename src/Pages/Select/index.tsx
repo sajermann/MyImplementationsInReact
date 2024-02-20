@@ -1,7 +1,7 @@
 import { Main } from '~/Components/Main';
 import { useTranslation } from '~/Hooks/UseTranslation';
 import { ComponentBlock } from '~/Components/ComponentBlock';
-import Section from '~/Components/Section';
+import { Section } from '~/Components/Section';
 import { QuickAccessGithub } from '~/Components/QuickAccessGithub';
 import { useMemo, useRef, useState } from 'react';
 import { Select } from '~/Components/Select';
@@ -84,23 +84,23 @@ export function SelectPage() {
 
 	return (
 		<Main data-content="content-main">
-			<Section heading="Select">
+			<Section title="Select" variant="h1">
 				{`${translate('IMPLEMENTS_COMPONENT')} Select ${translate(
 					'USING_THE_LIB'
 				)} react-select`}
 			</Section>
 
-			<Section subHeading={translate('INSTALLATION_OF_LIB')}>
+			<Section title={translate('INSTALLATION_OF_LIB')} variant="h2">
 				<CodeBlock>npm i react-select;</CodeBlock>
 			</Section>
 
-			<Section subHeading={translate('CODES')}>
-				<div className="flex gap-2">
+			<Section title={translate('CODES')} variant="h2">
+				<div className="flex gap-2 bg-dark-400">
 					<QuickAccessGithub name="Select" />
 				</div>
 			</Section>
 
-			<Section subHeading={translate('SINGLE_SELECTION')}>
+			<Section title={translate('SINGLE_SELECTION')} variant="h2">
 				<ComponentBlock>
 					<ContainerInput>
 						<Label htmlFor="vehicle">{translate('VEHICLES')}</Label>
@@ -116,7 +116,7 @@ export function SelectPage() {
 				</ComponentBlock>
 			</Section>
 
-			<Section subHeading={translate('CONTROLLED')}>
+			<Section title={translate('CONTROLLED')} variant="h2">
 				<ComponentBlock>
 					<ContainerInput>
 						<Label htmlFor="controlled1">{translate('CONTROLLED')}</Label>
@@ -146,7 +146,7 @@ export function SelectPage() {
 				</ComponentBlock>
 			</Section>
 
-			<Section subHeading={translate('SEARCHABLE')}>
+			<Section title={translate('SEARCHABLE')} variant="h2">
 				<ComponentBlock>
 					<ContainerInput>
 						<Label htmlFor="searchable1">{translate('NOT_SEARCHABLE')}</Label>
@@ -171,7 +171,7 @@ export function SelectPage() {
 				</ComponentBlock>
 			</Section>
 
-			<Section subHeading={translate('CLEARABLE')}>
+			<Section title={translate('CLEARABLE')} variant="h2">
 				<ComponentBlock>
 					<ContainerInput>
 						<Label htmlFor="clearable1">{translate('NOT_CLEARABLE')}</Label>
@@ -197,7 +197,7 @@ export function SelectPage() {
 				</ComponentBlock>
 			</Section>
 
-			<Section subHeading={translate('ASYNC')}>
+			<Section title={translate('ASYNC')} variant="h2">
 				<ComponentBlock>
 					<ContainerInput>
 						<Label htmlFor="async1">{translate('DEBOUNCE_ONE_SECOND')}</Label>
@@ -240,7 +240,7 @@ export function SelectPage() {
 				</ComponentBlock>
 			</Section>
 
-			<Section subHeading={translate('ERRORS')}>
+			<Section title={translate('ERRORS')} variant="h2">
 				<ComponentBlock className="flex-row !items-start">
 					<ContainerInput className="flex-1">
 						<Label htmlFor="errorMode" isError={errorMode}>
@@ -270,7 +270,7 @@ export function SelectPage() {
 				</ComponentBlock>
 			</Section>
 
-			<Section subHeading="Focus">
+			<Section title="Focus" variant="h2">
 				<ComponentBlock className="flex-row !items-end">
 					<ContainerInput className="flex-1">
 						<Label htmlFor="focus">{translate('Ref - Focus')}</Label>
@@ -294,7 +294,11 @@ export function SelectPage() {
 				</ComponentBlock>
 			</Section>
 
-			<Section heading="Multi Select" subHeading={translate('CONTROLLED')}>
+			<Section
+				title="Multi Select"
+				// subHeading={translate('CONTROLLED')}
+				variant="h1"
+			>
 				<ComponentBlock>
 					<ContainerInput>
 						<Label htmlFor="multi1">{translate('VEHICLES')}</Label>
@@ -314,7 +318,7 @@ export function SelectPage() {
 				</ComponentBlock>
 			</Section>
 
-			<Section subHeading={translate('ASYNC')}>
+			<Section title={translate('ASYNC')} variant="h2">
 				<ComponentBlock>
 					<ContainerInput>
 						<Label htmlFor="async3">{translate('DEBOUNCE_ONE_SECOND')}</Label>

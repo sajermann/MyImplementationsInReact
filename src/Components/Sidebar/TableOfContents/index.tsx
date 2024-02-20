@@ -1,14 +1,13 @@
-import { delay } from '@sajermann/utils/Delay';
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
 import { useTranslation } from '~/Hooks/UseTranslation';
-import useWindow from '~/Hooks/UseWindow';
+import { useWindow } from '~/Hooks/UseWindow';
 import { useLoadingLazy } from '~/Store/UseLoadingLazy';
 import { managerClassNames } from '~/Utils/ManagerClassNames';
 import { Main } from '../Main';
 
-type Menu = {
+type TMenu = {
 	type: string;
 	title: string;
 	anchor: string;
@@ -18,14 +17,15 @@ type Menu = {
 
 export function TableOfContents() {
 	const { isLoadingLazy } = useLoadingLazy();
-	const [optionsMenu, setOptionsMenu] = useState<Menu[]>([]);
+	const [optionsMenu, setOptionsMenu] = useState<TMenu[]>([]);
 	const location = useLocation();
 	const { scrollPosition } = useWindow();
 	const { translate, currentLanguage } = useTranslation();
 
 	function load() {
 		if (isLoadingLazy) return;
-		const menus: Menu[] = [];
+
+		const menus: TMenu[] = [];
 		const subs = document.querySelectorAll('[data-tableofcontents="true"]');
 
 		for (let i = 0; i < subs.length; i += 1) {
@@ -42,7 +42,7 @@ export function TableOfContents() {
 			);
 		}
 
-		const goal = 0;
+		const goal = 72; /* Height Header */
 
 		if (menus.length === 0) return;
 		const closest = menus.reduce((prev, curr) =>
@@ -56,24 +56,6 @@ export function TableOfContents() {
 		});
 
 		setOptionsMenu([...menusWithActive]);
-	}
-
-	async function handleClick(element: Menu, e: any) {
-		console.log({ element });
-		e.preventDefault();
-		setOptionsMenu(prev => [
-			...prev.map(item => ({
-				...item,
-				active: item.anchor === element.anchor,
-			})),
-		]);
-		// if (element.top > 0) {
-		await delay(1);
-		window.scroll({
-			top: element.top,
-			behavior: 'smooth',
-		});
-		// }
 	}
 
 	useEffect(
@@ -103,7 +85,6 @@ export function TableOfContents() {
 										item.active,
 								})}
 								href={`#${item.anchor}`}
-								onClick={e => handleClick(item, e)}
 							>
 								{item.title}
 							</a>

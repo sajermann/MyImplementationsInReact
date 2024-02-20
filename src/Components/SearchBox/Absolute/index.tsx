@@ -40,7 +40,7 @@ export function Absolute({ onChange, results, isLoading, searchValue }: Props) {
 					className={managerClassNames([
 						{ 'opacity-0': searchValue === '' || isLoading },
 						{ 'border w-full rounded-lg p-2': true },
-						{ 'bg-white dark:bg-gray-800 ': true },
+						{ 'bg-white dark:bg-dark-500 ': true },
 						{ 'rounded-b-none border-b-0': currentSide === 'top' },
 						{
 							'rounded-t-none border-t-0':

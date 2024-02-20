@@ -9,7 +9,7 @@ import { Select } from '~/Components/Select';
 import { TPerson } from '~/Types/TPerson';
 import { useColumns } from '~/Hooks/UseColumns';
 import { Main } from '~/Components/Main';
-import Section from '~/Components/Section';
+import { Section } from '~/Components/Section';
 import { QuickAccessGithub } from '~/Components/QuickAccessGithub';
 import { ContainerInput } from '~/Components/ContainerInput';
 import { Label } from '~/Components/Label';
@@ -57,15 +57,15 @@ export function SelectionPage() {
 
 	return (
 		<Main data-content="content-main">
-			<Section heading={translate('SELECTION')}>
+			<Section title={translate('SELECTION')} variant="h1">
 				{translate('IMPLEMENTS_SELECTION_MODE')}
 			</Section>
-			<Section subHeading={translate('CODES')}>
-				<div className="flex gap-2">
+			<Section title={translate('CODES')} variant="h2">
+				<div className="flex gap-2 bg-dark-400">
 					<QuickAccessGithub name="Selection" />
 				</div>
 			</Section>
-			<Section subHeading={translate('IMPLEMENTS')}>
+			<Section title={translate('IMPLEMENTS')} variant="h2">
 				<div className="flex flex-col gap-2">
 					<div className="grid grid-cols-12 gap-2">
 						<ContainerInput className="col-span-12 md:col-span-4 lg:col-span-4">

@@ -6,7 +6,7 @@ import { TPerson } from '~/Types/TPerson';
 import { makeData } from '~/Utils/MakeData';
 import { useColumns } from '~/Hooks/UseColumns';
 import { Main } from '~/Components/Main';
-import Section from '~/Components/Section';
+import { Section } from '~/Components/Section';
 import { QuickAccessGithub } from '~/Components/QuickAccessGithub';
 
 const data = makeData.person(10);
@@ -36,15 +36,15 @@ export function SortPage() {
 
 	return (
 		<Main data-content="content-main">
-			<Section heading={translate('SORT')}>
+			<Section title={translate('SORT')} variant="h1">
 				{translate('IMPLEMENTS_SORT_MODE')}
 			</Section>
-			<Section subHeading={translate('CODES')}>
-				<div className="flex gap-2">
+			<Section title={translate('CODES')} variant="h2">
+				<div className="flex gap-2 bg-dark-400">
 					<QuickAccessGithub name="Sort" />
 				</div>
 			</Section>
-			<Section subHeading={translate('AUTOMATIC_SORT')}>
+			<Section title={translate('AUTOMATIC_SORT')} variant="h2">
 				{translate('NOTE_FRIENDS_IS_ARRAY_OF_OBJECT')}
 
 				<Table
@@ -54,7 +54,7 @@ export function SortPage() {
 				/>
 			</Section>
 
-			<Section subHeading={translate('MANUAL_SORT')}>
+			<Section title={translate('MANUAL_SORT')} variant="h2">
 				{translate('THIS_IS_USEFUL_IF_YOU_ARE_DOING_SERVER_SIDE_SORTING')}
 				<p>State: {JSON.stringify(sortingInternal)}</p>
 				<Table
@@ -68,7 +68,7 @@ export function SortPage() {
 				/>
 			</Section>
 
-			<Section subHeading={translate('DISABLED_SORT')}>
+			<Section title={translate('DISABLED_SORT')} variant="h2">
 				<Table
 					columns={[...columns, ...columns2]}
 					data={[data[0], data[1]]}

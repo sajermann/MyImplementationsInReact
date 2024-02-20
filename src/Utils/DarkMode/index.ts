@@ -1,5 +1,5 @@
 export function handleChangeDarkModeInDom(darkModeNow: boolean) {
-	const body = document.querySelector('body');
+	const body = document.querySelector('html');
 	if (!darkModeNow) {
 		if (body) {
 			body.classList.remove('dark');

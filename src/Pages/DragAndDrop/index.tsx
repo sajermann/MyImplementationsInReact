@@ -2,7 +2,7 @@ import { CodeBlock } from '~/Components/CodeBlock';
 import { BrawlStar } from '~/Components/DragAndDrop/BrawlStars';
 import { Main } from '~/Components/Main';
 import { QuickAccessGithub } from '~/Components/QuickAccessGithub';
-import Section from '~/Components/Section';
+import { Section } from '~/Components/Section';
 import { useTranslation } from '~/Hooks/UseTranslation';
 
 export function DragAndDropPage() {
@@ -18,7 +18,7 @@ export function DragAndDropPage() {
 				<CodeBlock>npm i @dnd-kit/core;</CodeBlock>
 			</Section>
 			<Section title={translate('CODES')} variant="h2">
-				<div className="flex gap-2">
+				<div className="flex gap-2 bg-dark-400">
 					<QuickAccessGithub name="Drag And Drop" />
 				</div>
 			</Section>

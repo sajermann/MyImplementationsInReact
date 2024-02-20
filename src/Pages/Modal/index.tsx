@@ -4,7 +4,7 @@ import { Modal } from '~/Components/Modal';
 import { useTranslation } from '~/Hooks/UseTranslation';
 import { CodeBlock } from '~/Components/CodeBlock';
 import { Button } from '~/Components/Button';
-import { Section } from '~/Components/SectionNew';
+import { Section } from '~/Components/Section';
 import { ComponentBlock } from '~/Components/ComponentBlock';
 import { QuickAccessGithub } from '~/Components/QuickAccessGithub';
 import { Main } from '~/Components/Main';
@@ -31,7 +31,7 @@ export function ModalPage() {
 			</Section>
 
 			<Section title={translate('CODES')} variant="h2">
-				<div className="flex gap-2">
+				<div className="flex gap-2 bg-dark-400">
 					<QuickAccessGithub name="Modal" />
 				</div>
 			</Section>

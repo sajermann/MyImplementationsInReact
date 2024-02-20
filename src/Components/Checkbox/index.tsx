@@ -48,7 +48,7 @@ type TContainer = DetailedHTMLProps<
 const checkboxVariants = tv({
 	slots: {
 		checkboxPropsInternal: [
-			'group outline-none focus:ring-1 border rounded h-11 w-11 bg-white',
+			'group outline-none focus:ring-1 border rounded h-11 w-11 bg-transparent',
 			'transition-all duration-500',
 			'disabled:cursor-not-allowed disabled:!opacity-50 focus:ring-1',
 		],

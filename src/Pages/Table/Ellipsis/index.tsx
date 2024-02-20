@@ -7,7 +7,7 @@ import { TPerson } from '~/Types/TPerson';
 import { makeData } from '~/Utils/MakeData';
 import { useColumns } from '~/Hooks/UseColumns';
 import { Main } from '~/Components/Main';
-import Section from '~/Components/Section';
+import { Section } from '~/Components/Section';
 import { QuickAccessGithub } from '~/Components/QuickAccessGithub';
 
 export function EllipsisPage() {
@@ -37,15 +37,15 @@ export function EllipsisPage() {
 
 	return (
 		<Main data-content="content-main">
-			<Section heading={translate('ELLIPSIS')}>
+			<Section title={translate('ELLIPSIS')} variant="h1">
 				{translate('IMPLEMENTS_ELLIPSIS_MODE')}
 			</Section>
-			<Section subHeading={translate('CODES')}>
-				<div className="flex gap-2">
+			<Section title={translate('CODES')} variant="h2">
+				<div className="flex gap-2 bg-dark-400">
 					<QuickAccessGithub name="Ellipsis" />
 				</div>
 			</Section>
-			<Section subHeading={translate('IMPLEMENTS')}>
+			<Section title={translate('IMPLEMENTS')} variant="h2">
 				<div className="flex flex-col gap-2">
 					{translate('DISPLAY_TITLE_ONLY_HOVER_ON_ELLIPSIS')}
 					<Table columns={[...columns2, ...columns]} data={data} />

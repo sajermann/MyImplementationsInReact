@@ -38,14 +38,14 @@ export const Input = forwardRef((props: Props, ref) => {
 		>
 			<div
 				className={managerClassNames([
-					{ 'flex items-center bg-white w-full': true },
+					{ 'flex items-center bg-transparent w-full': true },
 					{ 'overflow-hidden rounded p-2 w-full': true },
 				])}
 			>
 				<input
 					type="search"
 					placeholder={translate('SEARCH_COUNTRIES')}
-					className="text-black rounded outline-none flex-1"
+					className="bg-transparent rounded outline-none flex-1"
 					value={searchValue}
 					onChange={onChange}
 					aria-busy={isLoading}

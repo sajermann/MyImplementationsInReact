@@ -1,7 +1,7 @@
 import { Main } from '~/Components/Main';
 import { useTranslation } from '~/Hooks/UseTranslation';
 import { ComponentBlock } from '~/Components/ComponentBlock';
-import Section from '~/Components/Section';
+import { Section } from '~/Components/Section';
 import { QuickAccessGithub } from '~/Components/QuickAccessGithub';
 import { Datepicker } from '~/Components/Datepicker';
 import { useRef, useState } from 'react';
@@ -32,7 +32,7 @@ export function DatepickerPage() {
 			</Section>
 
 			<Section title={translate('CODES')} variant="h2">
-				<div className="flex gap-2">
+				<div className="flex gap-2 bg-dark-400">
 					<QuickAccessGithub name="Datepicker" />
 				</div>
 			</Section>
@@ -136,7 +136,7 @@ export function DatepickerPage() {
 				</ComponentBlock>
 			</Section>
 
-			<Section subHeading={translate('ERRORS')}>
+			<Section title={translate('ERRORS')} variant="h2">
 				<ComponentBlock className="flex-row !items-start">
 					<ContainerInput className="w-48">
 						<Label htmlFor="errorMode" isError={errorMode}>
@@ -164,7 +164,10 @@ export function DatepickerPage() {
 				</ComponentBlock>
 			</Section>
 
-			<Section subHeading={`Focus - ${translate('UNDER_CONSTRUCTION')}`}>
+			<Section
+				title={`Focus - ${translate('UNDER_CONSTRUCTION')}`}
+				variant="h2"
+			>
 				<ComponentBlock className="flex-row !items-end">
 					<ContainerInput className="w-48">
 						<Label htmlFor="focus">Ref - Focus</Label>

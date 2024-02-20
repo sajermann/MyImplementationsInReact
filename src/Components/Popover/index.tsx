@@ -17,7 +17,7 @@ export function Popover({ children, isOpen, onClose, trigger }: Props) {
 					<PopoverRadix.Content
 						align="center"
 						sideOffset={4}
-						className="radix-side-top:animate-slide-up radix-side-bottom:animate-slide-down w-48 rounded-lg p-4 pt-10 shadow-md md:w-56 bg-white dark:bg-gray-800 z-[1]"
+						className="radix-side-top:animate-slide-up radix-side-bottom:animate-slide-down w-48 rounded-lg p-4 pt-10 shadow-md md:w-56 bg-white dark:bg-dark-400 z-[1]"
 						style={{ border: '1px solid' }}
 					>
 						{children}

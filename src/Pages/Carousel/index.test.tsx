@@ -9,14 +9,15 @@ import { CarouselPage } from '.';
 
 describe('Pages/CarouselPage', () => {
 	it(`must render checkbox`, async () => {
-		const { getAllByText } = render(
-			<InjectorProviders>
+		const { getAllByRole } = render(
+			<InjectorProviders noLayout>
 				<CarouselPage />
 			</InjectorProviders>
 		);
 		await waitFor(() => {
-			const button = getAllByText('Checkbox')[0];
-			fireEvent.click(button);
+			const buttons = getAllByRole('button');
+			console.log({ buttons });
+			fireEvent.click(buttons[0]);
 		});
 	});
 });

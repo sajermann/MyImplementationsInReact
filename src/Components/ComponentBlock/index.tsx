@@ -8,8 +8,11 @@ export const ComponentBlock = forwardRef<HTMLDivElement, Props>(
 			ref={ref}
 			{...rest}
 			className={managerClassNames([
-				{ componentBlock: true },
-				{ children: true },
+				// { componentBlock: true },
+				{ 'flex items-center justify-center p-7 border': true },
+				{ 'rounded my-2 gap-2 w-full': true },
+				// { children: true },
+				{ 'flex-wrap overflow-auto': true },
 				{ [className as string]: className },
 			])}
 		/>
