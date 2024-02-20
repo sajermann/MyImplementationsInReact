@@ -19,17 +19,17 @@ function getImplements(
 	return resultSub[type];
 }
 
-function getClassNames(disableBgColor?: boolean) {
+function getClassNames() {
 	return managerClassNames([
 		{ 'flex flex-col flex-1 items-center justify-center gap-1 p-1': true },
 		{ 'hover:text-primary-700 transition-colors duration-500 text-sm': true },
-		{ '!bg-dark-700 text-white': !disableBgColor },
+		{ 'text-white': true },
 	]);
 }
 
-type Props = { name: string; disableBgColor?: boolean };
+type TProps = { name: string };
 
-export const QuickAccessGithub = memo(({ name, disableBgColor }: Props) => {
+export const QuickAccessGithub = memo(({ name }: TProps) => {
 	const { globalRoutes } = useRoutesMenu();
 
 	return (
@@ -37,7 +37,7 @@ export const QuickAccessGithub = memo(({ name, disableBgColor }: Props) => {
 			<a
 				href={getImplements('implements_code', name, globalRoutes)}
 				target="_blank"
-				className={getClassNames(disableBgColor)}
+				className={getClassNames()}
 				rel="noreferrer"
 			>
 				<Icons nameIcon="listFile" width="30px" />
@@ -46,7 +46,7 @@ export const QuickAccessGithub = memo(({ name, disableBgColor }: Props) => {
 			<a
 				href={getImplements('docs_code', name, globalRoutes)}
 				target="_blank"
-				className={getClassNames(disableBgColor)}
+				className={getClassNames()}
 				rel="noreferrer"
 			>
 				<Icons nameIcon="shortList" width="30px" />

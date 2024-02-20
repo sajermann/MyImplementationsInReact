@@ -3,15 +3,21 @@ import { BrowserRouter } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
-import { Header } from '~/Components/Header';
 import { BreadcrumbsProvider } from '~/Hooks/UseBreadcrumbs';
 import { FontSizeProvider } from '~/Hooks/UseFontSize';
 import { useDarkModeZustand } from '~/Store/UseDarkMode';
 import { handleChangeDarkModeInDom } from '~/Utils/DarkMode';
 
 import '~/Config/i18n';
+import { Layout } from '../Layout';
 
-export function InjectorProviders({ children }: { children: React.ReactNode }) {
+export function InjectorProviders({
+	children,
+	noLayout,
+}: {
+	children: React.ReactNode;
+	noLayout?: true;
+}) {
 	const { darkMode } = useDarkModeZustand();
 	useEffect(() => handleChangeDarkModeInDom(darkMode), []);
 	return (
@@ -31,8 +37,8 @@ export function InjectorProviders({ children }: { children: React.ReactNode }) {
 			>
 				<BreadcrumbsProvider>
 					<FontSizeProvider>
-						<Header />
-						{children}
+						{noLayout && children}
+						{!noLayout && <Layout>{children}</Layout>}
 					</FontSizeProvider>
 				</BreadcrumbsProvider>
 			</QueryClientProvider>

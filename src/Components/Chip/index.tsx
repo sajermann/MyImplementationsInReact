@@ -78,7 +78,6 @@ function keyDownButton({
 	const keysToVerify = [' ', 'Enter'];
 	const { tagName } = (event as unknown as { target: { tagName: string } })
 		.target;
-	console.log({ tagName });
 	if (tagName === 'BUTTON' && keysToVerify.includes(event.key) && onRemove) {
 		onRemove(value);
 		return;
@@ -112,7 +111,7 @@ export function Chip({ value, onRemove, onChange }: ChipProps) {
 				</span>
 				<input
 					autoFocus
-					className="bg-slate-400 text-white outline-none p-2 absolute left-0 w-full rounded h-12 border"
+					className="bg-dark-400 text-white outline-none p-2 absolute left-0 w-full rounded h-12 border"
 					value={editing ? valueEditing : value}
 					onChange={event => change({ event, setValueEditing })}
 					onKeyDown={event =>
@@ -131,7 +130,7 @@ export function Chip({ value, onRemove, onChange }: ChipProps) {
 		<div
 			className={managerClassNames([
 				{ 'flex items-center gap-2 w-max h-12': true },
-				{ 'bg-slate-400 p-2 rounded text-white': true },
+				{ 'bg-dark-400 p-2 rounded text-white': true },
 				{ 'hover:cursor-default': !onChange },
 				{ 'hover:cursor-pointer': onChange },
 				{ invisible: editing },

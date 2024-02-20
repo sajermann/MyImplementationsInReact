@@ -4,7 +4,7 @@
 
 module.exports = {
 	darkMode: 'class',
-	content: ['./src/**/*.tsx', './src/**/*.ts', './index.html'],
+	content: ['./src/**/*.tsx', './src/**/*.ts', '**.html'],
 
 	theme: {
 		extend: {
@@ -43,7 +43,8 @@ module.exports = {
 					700: '#664D03',
 				},
 				dark: {
-					500: '#3C3C3C',
+					400: '#18181b',
+					500: '#09090b',
 					600: '#1f2937',
 					700: '#0f1926',
 				},

@@ -6,7 +6,7 @@ import { makeData } from '~/Utils/MakeData';
 import { UpdateRowExpanded } from '~/Components/UpdateRowExpanded';
 import { useColumns } from '~/Hooks/UseColumns';
 import { Main } from '~/Components/Main';
-import Section from '~/Components/Section';
+import { Section } from '~/Components/Section';
 import { QuickAccessGithub } from '~/Components/QuickAccessGithub';
 import { useTranslation } from '~/Hooks/UseTranslation';
 
@@ -35,15 +35,15 @@ export function ExpandedLinePage() {
 
 	return (
 		<Main data-content="content-main">
-			<Section heading={translate('EXPAND_LINE')}>
+			<Section title={translate('EXPAND_LINE')} variant="h2">
 				{translate('IMPLEMENTS_EXPAND_LINE_MODE')}
 			</Section>
-			<Section subHeading={translate('CODES')}>
-				<div className="flex gap-2">
+			<Section title={translate('CODES')} variant="h2">
+				<div className="flex gap-2 bg-dark-400">
 					<QuickAccessGithub name="ExpandedLine" />
 				</div>
 			</Section>
-			<Section subHeading={translate('IMPLEMENTS')}>
+			<Section title={translate('IMPLEMENTS')} variant="h2">
 				<Table
 					isLoading={isLoading}
 					columns={columns}

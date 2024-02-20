@@ -15,7 +15,7 @@ import { ROLES } from '~/Constants/Roles';
 import { Checkbox } from '~/Components/Checkbox';
 import { Button } from '~/Components/Button';
 import { Main } from '~/Components/Main';
-import Section from '~/Components/Section';
+import { Section } from '~/Components/Section';
 import { QuickAccessGithub } from '~/Components/QuickAccessGithub';
 import { ContainerInput } from '~/Components/ContainerInput';
 import { showInDevelopment } from '~/Utils/ShowInDevelopment';
@@ -256,15 +256,15 @@ export function EditablePage() {
 
 	return (
 		<Main data-content="content-main">
-			<Section heading={translate('EDITABLE')}>
+			<Section title={translate('EDITABLE')} variant="h1">
 				{translate('IMPLEMENTS_EDITABLE_MODE')}
 			</Section>
-			<Section subHeading={translate('CODES')}>
-				<div className="flex gap-2">
+			<Section title={translate('CODES')} variant="h2">
+				<div className="flex gap-2 bg-dark-400">
 					<QuickAccessGithub name="Editable" />
 				</div>
 			</Section>
-			<Section subHeading={translate('IMPLEMENTS')}>
+			<Section title={translate('IMPLEMENTS')} variant="h2">
 				<Table
 					disabledVirtualization
 					isLoading={isLoading}

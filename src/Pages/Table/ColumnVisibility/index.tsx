@@ -7,7 +7,7 @@ import { TPerson } from '~/Types/TPerson';
 import { makeData } from '~/Utils/MakeData';
 import { useColumns } from '~/Hooks/UseColumns';
 import { Main } from '~/Components/Main';
-import Section from '~/Components/Section';
+import { Section } from '~/Components/Section';
 import { QuickAccessGithub } from '~/Components/QuickAccessGithub';
 import { ContainerInput } from '~/Components/ContainerInput';
 import { Label } from '~/Components/Label';
@@ -88,15 +88,15 @@ export function ColumnVisibilityPage() {
 
 	return (
 		<Main data-content="content-main">
-			<Section heading={translate('COLUMN_VISIBILITY')}>
+			<Section title={translate('COLUMN_VISIBILITY')} variant="h1">
 				{translate('IMPLEMENTS_COLUMN_VISIBILITY_MODE')}
 			</Section>
-			<Section subHeading={translate('CODES')}>
-				<div className="flex gap-2">
+			<Section title={translate('CODES')} variant="h2">
+				<div className="flex gap-2 bg-dark-400">
 					<QuickAccessGithub name="ColumnVisibility" />
 				</div>
 			</Section>
-			<Section subHeading={translate('IMPLEMENTS')}>
+			<Section title={translate('IMPLEMENTS')} variant="h2">
 				<div className="flex flex-col gap-2">
 					{translate('COLUMN_VISIBILITY_WITH_STATE_FULLY_CONTROLLED')}
 

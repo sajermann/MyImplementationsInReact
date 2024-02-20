@@ -10,7 +10,7 @@ import { Input } from '~/Components/Input';
 import { Select } from '~/Components/Select';
 import { Checkbox } from '~/Components/Checkbox';
 import { Main } from '~/Components/Main';
-import Section from '~/Components/Section';
+import { Section } from '~/Components/Section';
 import { QuickAccessGithub } from '~/Components/QuickAccessGithub';
 import { ContainerInput } from '~/Components/ContainerInput';
 
@@ -210,15 +210,15 @@ export function FullEditablePage() {
 
 	return (
 		<Main data-content="content-main">
-			<Section heading={translate('FULL_EDITABLE')}>
+			<Section title={translate('FULL_EDITABLE')} variant="h1">
 				{translate('IMPLEMENTS_FULL_EDITABLE_MODE')}
 			</Section>
-			<Section subHeading={translate('CODES')}>
-				<div className="flex gap-2">
+			<Section title={translate('CODES')} variant="h2">
+				<div className="flex gap-2 bg-dark-400">
 					<QuickAccessGithub name="FullEditable" />
 				</div>
 			</Section>
-			<Section subHeading={translate('IMPLEMENTS')}>
+			<Section title={translate('IMPLEMENTS')} variant="h2">
 				<Table isLoading={isLoading} columns={columns} data={data} />
 				<pre>{JSON.stringify(data, null, 2)}</pre>
 			</Section>

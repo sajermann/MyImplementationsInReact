@@ -56,7 +56,7 @@ export function Modal({
 				<Dialog.Overlay
 					{...overlayProps}
 					className={managerClassNames([
-						{ 'bg-black/60 inset-0 fixed z-[2]': true },
+						{ 'bg-black/60 inset-0 fixed z-[9998]': true },
 						// Look tailwind.config.cjs
 						{ 'data-[state=open]:animate-overlayShow': true },
 						{ 'data-[state=closed]:animate-overlayClose': true },
@@ -70,8 +70,8 @@ export function Modal({
 					onEscapeKeyDown={closeByEsc ? onClose : undefined}
 					className={managerClassNames([
 						{ 'top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 ': true },
-						{ 'shadow-lg shadow-black/25 z-[3] dark:bg-slate-900 ': true },
-						{ 'fixed rounded bg-white ': true },
+						{ 'shadow-lg shadow-black/25 z-[9999] fixed rounded': true },
+						{ ' bg-transparent backdrop-blur-md text-white': true },
 						// Look tailwind.config.cjs
 						{ 'data-[state=open]:animate-contentShow': true },
 						{ 'data-[state=closed]:animate-contentClose': true },
@@ -81,7 +81,7 @@ export function Modal({
 					])}
 				>
 					{title && (
-						<Dialog.Title className="h-14 px-6 py-3 text-primary-500 font-bold flex items-center dark:bg-slate-900 border-b-[#dee2e6] border-b-2">
+						<Dialog.Title className="h-14 px-6 py-3 font-bold text-3xl flex items-center border-b-2">
 							<span className="flex-1">{title}</span>
 							<div className="flex gap-4 items-center">
 								{expand && (
@@ -89,6 +89,7 @@ export function Modal({
 										iconButton="rounded"
 										variant="option"
 										onClick={() => setIsExpanded(prev => !prev)}
+										className="text-white"
 									>
 										{!isExpanded ? (
 											<Icons nameIcon="arrowsOutSimple" />
@@ -104,6 +105,7 @@ export function Modal({
 										variant="option"
 										onClick={onClose}
 										data-testid="closeButtonModal"
+										className="text-white"
 									>
 										<Icons nameIcon="close" width="1rem" />
 									</Button>
@@ -111,7 +113,7 @@ export function Modal({
 							</div>
 						</Dialog.Title>
 					)}
-					<main className="h-[calc(100%_-_48px)] dark:bg-gray-800 py-2">
+					<main className="h-[calc(100%_-_48px)]  py-2">
 						<BoxScroll className="px-6">{children}</BoxScroll>
 					</main>
 				</Dialog.Content>

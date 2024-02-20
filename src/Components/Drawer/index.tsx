@@ -1,6 +1,13 @@
-import { DetailedHTMLProps, HTMLAttributes, useEffect } from 'react';
+import {
+	DetailedHTMLProps,
+	HTMLAttributes,
+	useCallback,
+	useEffect,
+	useState,
+} from 'react';
+import ReactDOM from 'react-dom';
 import { managerClassNames } from '~/Utils/ManagerClassNames';
-import styles from './styles.module.css';
+import { managerOverflowBody } from './Utils';
 
 type Props = {
 	children: React.ReactNode;
@@ -11,7 +18,10 @@ type Props = {
 	disableEsc?: boolean;
 	disableClickOnBackdrop?: boolean;
 	oneClickToClose?: boolean;
-	sectionInternal?: DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement>;
+	sectionInternal?: DetailedHTMLProps<
+		HTMLAttributes<HTMLDivElement>,
+		HTMLDivElement
+	>;
 };
 
 export function Drawer({
@@ -25,29 +35,35 @@ export function Drawer({
 	oneClickToClose,
 	sectionInternal,
 }: Props) {
+	const [isOpenInternal, setIsOpenInternal] = useState(false);
+	const [inDom, setIInDom] = useState(false);
+	const [timer, setTimer] = useState<NodeJS.Timeout>();
+
 	useEffect(() => {
-		const body = document.querySelector('body');
+		managerOverflowBody(isOpen, document.querySelector('body'));
+		if (timer) {
+			clearTimeout(timer);
+		}
 		if (isOpen) {
-			if (body) {
-				body.style.overflow = 'hidden';
-			}
-		} else if (body) {
-			body.style.overflow = '';
+			setIInDom(isOpen);
+			const resultTimer = setTimeout(() => {
+				setIsOpenInternal(isOpen);
+			}, 10);
+			setTimer(resultTimer);
+		} else {
+			setIsOpenInternal(isOpen);
+			const resultTimer = setTimeout(() => {
+				setIInDom(isOpen);
+			}, 501);
+			setTimer(resultTimer);
 		}
 	}, [isOpen]);
 
-	function handleClose(esc: boolean) {
-		// Verify if caller is ESC and user allow ESC
-		if (esc && !disableEsc) {
-			onClose();
-			return;
-		}
-
-		// Verify if caller is click in back drop and user allow backdrop
-		if (!esc && !disableClickOnBackdrop) {
+	const handleClose = useCallback((esc: boolean) => {
+		if ((esc && !disableEsc) || (!esc && !disableClickOnBackdrop)) {
 			onClose();
 		}
-	}
+	}, []);
 
 	useEffect(() => {
 		const handleEsc = (event: { keyCode: number }) => {
@@ -62,47 +78,42 @@ export function Drawer({
 		};
 	}, []);
 
-	return (
-		<main
-			className={managerClassNames([
-				{ [styles.container]: true },
-				{ [styles.containerOpen]: isOpen },
-				{ [styles.containerClose]: !isOpen },
-			])}
-			role="presentation"
-			onClick={oneClickToClose ? () => onClose() : () => null}
-		>
-			<section
+	if (!inDom) return null;
+
+	return ReactDOM.createPortal(
+		<>
+			<div
 				className={managerClassNames([
-					{ [styles.backdropOpen]: isOpen },
-					{ [styles.black]: !disableBackdrop },
+					{ 'opacity-0 transition-opacity duration-500': true },
+					{ 'inset-0 fixed z-[9998]': true },
+					{ 'opacity-50 ': isOpenInternal },
+					{ 'bg-black': !disableBackdrop },
 				])}
 				role="presentation"
 				onClick={() => handleClose(false)}
 			/>
-			<section
-				{...sectionInternal}
+			<div
 				className={managerClassNames([
-					{ [styles.subContainer]: true },
-					{ [styles.leftZero]: openFrom === 'left' },
-					{ [styles.translateLeft]: openFrom === 'left' && !isOpen },
-					{ [styles.rightZero]: openFrom === 'right' },
-					{
-						[styles.translateRight]: openFrom === 'right' && !isOpen,
-					},
-					{
-						[styles.translateBottom]: openFrom === 'bottom' && !isOpen,
-					},
-					{ [styles.translateTop]: openFrom === 'top' && !isOpen },
-
-					{ [styles.subContainerOpen]: isOpen },
+					{ 'fixed inset-0 transition-all duration-500 z-[9999]': true },
+					// Left
+					{ '-translate-x-full': !isOpenInternal && openFrom === 'left' },
+					// Right
+					{ 'left-auto': openFrom === 'right' },
+					{ 'translate-x-full': !isOpenInternal && openFrom === 'right' },
+					// Bottom
+					{ 'translate-y-full': !isOpenInternal && openFrom === 'bottom' },
+					// Top
+					{ '-translate-y-full': !isOpenInternal && openFrom === 'top' },
 					{
 						[sectionInternal?.className as string]: sectionInternal?.className,
 					},
 				])}
+				role="presentation"
+				onClick={oneClickToClose ? () => onClose() : () => null}
 			>
 				{children}
-			</section>
-		</main>
+			</div>
+		</>,
+		document.body
 	);
 }

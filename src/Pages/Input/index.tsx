@@ -1,6 +1,6 @@
 import { Main } from '~/Components/Main';
 import { useTranslation } from '~/Hooks/UseTranslation';
-import Section from '~/Components/Section';
+import { Section } from '~/Components/Section';
 import { ComponentBlock } from '~/Components/ComponentBlock';
 import { Input } from '~/Components/Input';
 import { QuickAccessGithub } from '~/Components/QuickAccessGithub';
@@ -23,19 +23,19 @@ export function InputPage() {
 
 	return (
 		<Main data-content="content-main">
-			<Section heading={translate('INPUT')}>
+			<Section title={translate('INPUT')} variant="h1">
 				{`${translate('IMPLEMENTS_COMPONENT')} Input ${translate(
 					'WITHOUT_USING_LIB'
 				)}`}
 			</Section>
 
-			<Section subHeading={translate('CODES')}>
-				<div className="flex gap-2">
+			<Section title={translate('CODES')} variant="h2">
+				<div className="flex gap-2 bg-dark-400">
 					<QuickAccessGithub name="Input" />
 				</div>
 			</Section>
 
-			<Section subHeading={translate('TRADICIONAL_INPUT')}>
+			<Section title={translate('TRADICIONAL_INPUT')} variant="h2">
 				<ComponentBlock>
 					<ContainerInput>
 						<Label htmlFor="label">{translate('TRADICIONAL_INPUT')}</Label>
@@ -44,7 +44,7 @@ export function InputPage() {
 				</ComponentBlock>
 			</Section>
 
-			<Section subHeading="Label Props">
+			<Section title="Label Props" variant="h2">
 				<ComponentBlock>
 					<ContainerInput>
 						<Label
@@ -58,7 +58,7 @@ export function InputPage() {
 				</ComponentBlock>
 			</Section>
 
-			<Section subHeading="Container Props">
+			<Section title="Container Props" variant="h2">
 				<ComponentBlock>
 					<ContainerInput
 						style={{
@@ -78,7 +78,7 @@ export function InputPage() {
 				</ComponentBlock>
 			</Section>
 
-			<Section subHeading="On Change">
+			<Section title="On Change" variant="h2">
 				<ComponentBlock>
 					<Input
 						placeholder={translate('ON_CHANGE_LOOK_CONSOLE')}
@@ -87,7 +87,7 @@ export function InputPage() {
 				</ComponentBlock>
 			</Section>
 
-			<Section subHeading="On Before Change">
+			<Section title="On Before Change" variant="h2">
 				<ComponentBlock>
 					<Input
 						placeholder={translate('REMOVE_NUMBERS')}
@@ -173,7 +173,7 @@ export function InputPage() {
 				</ComponentBlock>
 			</Section>
 
-			<Section subHeading="Debounce">
+			<Section title="Debounce" variant="h2">
 				<ComponentBlock>
 					<Input
 						placeholder={translate('DEBOUNCE_2_SECONDS')}
@@ -183,7 +183,7 @@ export function InputPage() {
 				</ComponentBlock>
 			</Section>
 
-			<Section subHeading={translate('ERRORS')}>
+			<Section title={translate('ERRORS')} variant="h2">
 				<ComponentBlock className="flex-row !items-start">
 					<ContainerInput className="flex-1">
 						<Label htmlFor="errorMode" isError={errorMode}>
@@ -213,7 +213,7 @@ export function InputPage() {
 				</ComponentBlock>
 			</Section>
 
-			<Section subHeading="Focus">
+			<Section title="Focus" variant="h2">
 				<ComponentBlock className="flex-row !items-end">
 					<ContainerInput className="flex-1">
 						<Label htmlFor="focus">Ref - Focus</Label>

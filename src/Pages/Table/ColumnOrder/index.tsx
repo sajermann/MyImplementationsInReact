@@ -7,7 +7,7 @@ import { TPerson } from '~/Types/TPerson';
 import { makeData } from '~/Utils/MakeData';
 import { useColumns } from '~/Hooks/UseColumns';
 import { Main } from '~/Components/Main';
-import Section from '~/Components/Section';
+import { Section } from '~/Components/Section';
 import { QuickAccessGithub } from '~/Components/QuickAccessGithub';
 
 export function ColumnOrderPage() {
@@ -32,15 +32,15 @@ export function ColumnOrderPage() {
 
 	return (
 		<Main data-content="content-main">
-			<Section heading={translate('COLUMNS_ORDER')}>
+			<Section title={translate('COLUMNS_ORDER')} variant="h1">
 				{translate('IMPLEMENTS_COLUMNS_ORDER_MODE')}
 			</Section>
-			<Section subHeading={translate('CODES')}>
-				<div className="flex gap-2">
+			<Section title={translate('CODES')} variant="h2">
+				<div className="flex gap-2 bg-dark-400">
 					<QuickAccessGithub name="ColumnOrder" />
 				</div>
 			</Section>
-			<Section subHeading={translate('IMPLEMENTS')}>
+			<Section title={translate('IMPLEMENTS')} variant="h2">
 				<div>{translate('COLUMN_ORDER_WITH_STATE_FULLY_CONTROLLED')}</div>
 
 				<div className="flex flex-col justify-center items-center">

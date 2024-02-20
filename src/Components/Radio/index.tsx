@@ -7,7 +7,7 @@ const radioVariants = tv({
 		radioItemPropsInternal: [
 			'group outline-none focus:ring-1 border',
 			'transition-all duration-500',
-			'hover:cursor-pointer bg-white w-11 h-11',
+			'hover:cursor-pointer bg-transparent w-11 h-11',
 			'rounded-full focus:shadow-[0_0_0_2px]',
 			'outline-none cursor-default',
 			'disabled:cursor-not-allowed disabled:!opacity-50',

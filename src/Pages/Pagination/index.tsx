@@ -10,7 +10,7 @@ import { Input } from '~/Components/Input';
 import { Label } from '~/Components/Label';
 import { Main } from '~/Components/Main';
 import { QuickAccessGithub } from '~/Components/QuickAccessGithub';
-import { Section } from '~/Components/SectionNew';
+import { Section } from '~/Components/Section';
 import { Select } from '~/Components/Select';
 import { usePaginationModel } from '~/Hooks/UsePaginationModel';
 import { useTranslation } from '~/Hooks/UseTranslation';
@@ -52,7 +52,7 @@ export function PaginationPage() {
 				<CodeBlock>npm i ultimate-pagination;</CodeBlock>
 			</Section>
 			<Section title={translate('CODES')} variant="h2">
-				<div className="flex gap-2">
+				<div className="flex gap-2 bg-dark-400">
 					<QuickAccessGithub name="Pagination" />
 				</div>
 			</Section>

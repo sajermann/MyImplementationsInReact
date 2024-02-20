@@ -1,6 +1,6 @@
 import { Main } from '~/Components/Main';
 import { useTranslation } from '~/Hooks/UseTranslation';
-import Section from '~/Components/Section';
+import { Section } from '~/Components/Section';
 import { QuickAccessGithub } from '~/Components/QuickAccessGithub';
 import { CodeBlock } from '~/Components/CodeBlock';
 import { useRoutesMenu } from '~/Hooks/UseRoutesMenu';
@@ -30,20 +30,20 @@ export function TablePage() {
 
 	return (
 		<Main data-content="content-main">
-			<Section heading={translate('TABLES')}>
+			<Section title={translate('TABLES')} variant="h1">
 				{`${translate('IMPLEMENTS_COMPONENT')} ${translate(
 					'TABLE'
 				)} ${translate('USING_THE_LIB')} @tanstack/react-table`}
 			</Section>
-			<Section subHeading={translate('INSTALLATION_OF_LIB')}>
+			<Section title={translate('INSTALLATION_OF_LIB')} variant="h2">
 				<CodeBlock>npm i @tanstack/react-table;</CodeBlock>
 			</Section>
-			<Section subHeading={translate('CODES')}>
-				<div className="flex gap-2">
+			<Section title={translate('CODES')} variant="h2">
+				<div className="flex gap-2 bg-dark-400">
 					<QuickAccessGithub name="Table" />
 				</div>
 			</Section>
-			<Section subHeading={translate('IMPLEMENTS')}>
+			<Section title={translate('IMPLEMENTS')} variant="h2">
 				<div className="flex flex-col gap-2">
 					<Input
 						type="search"
@@ -53,14 +53,17 @@ export function TablePage() {
 					/>
 					{optionsSubTable &&
 						getFiltreds()?.map(opt => (
-							<div key={opt.name} className="border rounded flex">
+							<div
+								key={opt.name}
+								className="border rounded flex bg-dark-400 text-white"
+							>
 								<div className="flex w-full flex-1 items-center justify-center">
 									<div className="flex-1 ml-2">{opt.label}</div>
 									<Link to={opt.path} className={LINK_CLASS}>
 										<Icons nameIcon="eye" width="30px" />
 										Demo
 									</Link>
-									<QuickAccessGithub name={opt.name} disableBgColor />
+									<QuickAccessGithub name={opt.name} />
 								</div>
 							</div>
 						))}

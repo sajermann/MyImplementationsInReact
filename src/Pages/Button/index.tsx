@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Button } from '~/Components/Button';
-import Section from '~/Components/Section';
+import { Section } from '~/Components/Section';
 import { ComponentBlock } from '~/Components/ComponentBlock';
 import { useTranslation } from '~/Hooks/UseTranslation';
 import { CustomLoading } from '~/Components/CustomLoading';
@@ -41,19 +41,19 @@ export function ButtonPage() {
 
 	return (
 		<Main data-content="content-main">
-			<Section heading={translate('BUTTONS')}>
+			<Section title={translate('BUTTONS')} variant="h1">
 				{`${translate('IMPLEMENTS_COMPONENT')} Button ${translate(
 					'WITHOUT_USING_LIB'
 				)}`}
 			</Section>
 
-			<Section subHeading={translate('CODES')}>
-				<div className="flex gap-2">
+			<Section title={translate('CODES')} variant="h2">
+				<div className="flex gap-2 bg-dark-400">
 					<QuickAccessGithub name="Button" />
 				</div>
 			</Section>
 
-			<Section subHeading={translate('VARIANTS')}>
+			<Section title={translate('VARIANTS')} variant="h2">
 				<ComponentBlock>
 					<Button variant="default">Default</Button>
 					<Button variant="outlined">Outlined</Button>
@@ -61,7 +61,7 @@ export function ButtonPage() {
 				</ComponentBlock>
 			</Section>
 
-			<Section subHeading={translate('COLOR_STYLE')}>
+			<Section title={translate('COLOR_STYLE')} variant="h2">
 				<ComponentBlock>
 					<Button colorStyle="primary">Primary</Button>
 					<Button colorStyle="secondary">Secondary</Button>
@@ -70,7 +70,7 @@ export function ButtonPage() {
 				</ComponentBlock>
 			</Section>
 
-			<Section subHeading={translate('VARIANTS_AND_COLOR_STYLE')}>
+			<Section title={translate('VARIANTS_AND_COLOR_STYLE')} variant="h2">
 				<ComponentBlock>
 					<Button variant="default">Default</Button>
 					<Button variant="outlined">Outlined</Button>
@@ -108,7 +108,7 @@ export function ButtonPage() {
 				</ComponentBlock>
 			</Section>
 
-			<Section subHeading={translate('ICONS')}>
+			<Section title={translate('ICONS')} variant="h2">
 				<ComponentBlock>
 					<Button
 						colorStyle="success"
@@ -133,7 +133,7 @@ export function ButtonPage() {
 				</ComponentBlock>
 			</Section>
 
-			<Section subHeading={translate('WITH_FEEDBACKS')}>
+			<Section title={translate('WITH_FEEDBACKS')} variant="h2">
 				<div className={styles.blockH3}>
 					<h3>{translate('LOADING_OPTIONS')}</h3>
 					<ComponentBlock>
@@ -316,7 +316,7 @@ export function ButtonPage() {
 				</div>
 			</Section>
 
-			<Section subHeading={translate('OTHERS')}>
+			<Section title={translate('OTHERS')} variant="h2">
 				<div className={styles.blockH3}>
 					<h3>{translate('WIDTHS')}</h3>
 					<ComponentBlock>

@@ -6,7 +6,7 @@ import { onChangeCustom, preOnChange } from './Utils';
 const input = tv({
 	slots: {
 		inputPropsInternal: [
-			'group outline-none focus:ring-1 border h-11 py-1 px-2 rounded w-full text-black',
+			'group outline-none focus:ring-1 border h-11 py-1 px-2 rounded w-full bg-transparent',
 			'transition-all duration-500',
 		],
 	},

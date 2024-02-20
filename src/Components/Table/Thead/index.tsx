@@ -20,7 +20,7 @@ export function Thead<T>({ table, sorting }: Props<T>) {
 		<thead
 			className={managerClassNames({
 				[styles.thead]: true,
-				'!bg-dark-700': darkMode,
+				'!bg-dark-400': darkMode,
 			})}
 		>
 			{table.getHeaderGroups().map(headerGroup => (
