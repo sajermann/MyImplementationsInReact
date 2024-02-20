@@ -21,14 +21,10 @@ export function TableOfContents() {
 	const location = useLocation();
 	const { scrollPosition } = useWindow();
 	const { translate, currentLanguage } = useTranslation();
-	const [scrollByClick, setScrollByClick] = useState(false);
 
 	function load() {
 		if (isLoadingLazy) return;
-		if (scrollByClick) {
-			setScrollByClick(false);
-			return;
-		}
+
 		const menus: TMenu[] = [];
 		const subs = document.querySelectorAll('[data-tableofcontents="true"]');
 
@@ -46,7 +42,7 @@ export function TableOfContents() {
 			);
 		}
 
-		const goal = 0;
+		const goal = 72; /* Height Header */
 
 		if (menus.length === 0) return;
 		const closest = menus.reduce((prev, curr) =>

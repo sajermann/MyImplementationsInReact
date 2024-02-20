@@ -26,7 +26,7 @@ export function classNamesControl({
 	iserror?: boolean;
 }) {
 	const result = [
-		'group border outline-none !transition-all !duration-500 w-full h-11',
+		'group border outline-none !transition-all !duration-500 w-full',
 	];
 
 	if (isFocused) {

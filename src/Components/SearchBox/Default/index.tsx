@@ -14,7 +14,7 @@ export function Default({ onChange, results, isLoading, searchValue }: Props) {
 		<div
 			className={managerClassNames([
 				{ 'w-full flex flex-col border rounded-lg': true },
-				{ 'bg-white dark:bg-dark-600': true },
+				{ 'bg-transparent': true },
 			])}
 		>
 			<Input
@@ -25,7 +25,7 @@ export function Default({ onChange, results, isLoading, searchValue }: Props) {
 
 			<div
 				className={managerClassNames([
-					{ 'p-2': searchValue !== '' },
+					{ 'p-2': searchValue !== '' && !isLoading },
 					{ 'opacity-0': searchValue === '' || isLoading },
 				])}
 			>
