@@ -13,8 +13,8 @@ export function SwitchDemo() {
 				id="right"
 				checked={checked}
 				onChangge={e => setChecked(e)}
-				checkedIcon={<Icons nameIcon="sun" />}
-				uncheckedIcon={<Icons nameIcon="moon" />}
+				checkedIcon={<Icons nameIcon="sun" color="#fff" />}
+				uncheckedIcon={<Icons nameIcon="moon" color="#fff" />}
 			/>
 		</ContainerInput>
 	);

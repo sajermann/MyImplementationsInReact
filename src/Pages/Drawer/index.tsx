@@ -10,7 +10,7 @@ import { QuickAccessGithub } from '~/Components/QuickAccessGithub';
 
 function Lorem({ children }: { children?: React.ReactNode }) {
 	return (
-		<div className="bg-white text-black dark:bg-slate-800 dark:text-white w-full h-full overflow-auto">
+		<div className="backdrop-blur-md text-white w-full h-full overflow-auto">
 			Lorem ipsum dolor sit, amet consectetur adipisicing elit. Assumenda ab,
 			adipisci dolore iste accusamus quas nemo exercitationem delectus sed quod
 			magni? Accusantium ad quibusdam blanditiis dolorum vitae voluptas pariatur

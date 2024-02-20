@@ -53,7 +53,10 @@ export function TablePage() {
 					/>
 					{optionsSubTable &&
 						getFiltreds()?.map(opt => (
-							<div key={opt.name} className="border rounded flex">
+							<div
+								key={opt.name}
+								className="border rounded flex bg-dark-400 text-white"
+							>
 								<div className="flex w-full flex-1 items-center justify-center">
 									<div className="flex-1 ml-2">{opt.label}</div>
 									<Link to={opt.path} className={LINK_CLASS}>
