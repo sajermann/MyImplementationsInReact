@@ -13,7 +13,7 @@ Rate my implements or say hello in Linkedin 😀
 
 - [x] Animate In View - With &nbsp;[framer-motion](https://www.npmjs.com/package/framer-motion)
 - [x] Buttons - With &nbsp;[@sajermann/react-button](https://www.npmjs.com/package/@sajermann/react-button)
-- [x] Calendar Picker - With &nbsp;[nuka-carousel](https://www.npmjs.com/package/date-fns)
+- [x] Carousel - With &nbsp;[nuka-carousel](https://www.npmjs.com/package/date-fns)
 - [x] Calendar Picker - Without third party
 - [x] Checkbox - With &nbsp;[@radix-ui/react-checkbox](https://www.npmjs.com/package/@radix-ui/react-checkbox)
 - [x] Chip - Without third party
@@ -22,7 +22,6 @@ Rate my implements or say hello in Linkedin 😀
 - [x] Drawer - Without third party
 - [x] Input - With &nbsp;[@sajermann/react-input](https://www.npmjs.com/package/@sajermann/react-input)
 - [x] Modals - With &nbsp;[@radix-ui/react-dialog](https://www.npmjs.com/package/@radix-ui/react-dialog)
-- [x] Nuka Carousel - With &nbsp;[nuka-carousel](https://www.npmjs.com/package/nuka-carousel)
 - [x] Print - With &nbsp;[react-to-print](https://www.npmjs.com/package/react-to-print)
 - [x] Radio - With &nbsp;[@radix-ui/react-radio-group](https://www.npmjs.com/package/@radix-ui/react-radio-group)
 - [x] Searchbox - Without third party
@@ -46,6 +45,6 @@ Rate my implements or say hello in Linkedin 😀
     - [x] Selection
     - [x] Sort
     - [x] Virtualized
-
+- [x] Pagination - With &nbsp;[ultimate-pagination](https://www.npmjs.com/package/ultimate-pagination)
 
 
