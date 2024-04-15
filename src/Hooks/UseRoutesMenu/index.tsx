@@ -25,6 +25,7 @@ import { ChipDemo } from '~/Components/Demos/Chip';
 import { SwitchDemo } from '~/Components/Demos/Switch';
 import { RadioDemo } from '~/Components/Demos/Radio';
 import { PaginationDemo } from '~/Components/Demos/Pagination';
+import { FloatingVideoPage } from '~/Pages/FloatingVideo';
 
 const ColumnVisibilityPage = lazy(() =>
 	import('~/Pages/Table/ColumnVisibility').then(
@@ -641,6 +642,17 @@ export function useRoutesMenu() {
 				element: <PaginationPage />,
 				label: translate('PAGINATION'),
 				demo: <PaginationDemo />,
+			},
+			{
+				name: 'Floating Video',
+				path: '/floating-video',
+				implements_code:
+					'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Components/FloatingVideo',
+				docs_code:
+					'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/FloatingVideo',
+				element: <FloatingVideoPage />,
+				label: translate('FLOATING_VIDEO'),
+				// demo: <PaginationDemo />,
 			},
 			// {
 			// 	name: 'Virtualization',

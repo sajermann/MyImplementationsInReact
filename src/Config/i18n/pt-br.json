@@ -1,5 +1,8 @@
 {
 	"translations": {
+		"DISABLED_DRAGGABLE": "Arrastável Desabilitado",
+		"DRAGGABLE": "Arrastável",
+		"FLOATING_VIDEO": "Vídeo Flutuante",
 		"COPY": "Copiar",
 		"WITHOUT_NUMBERS_WITH_SELECT": "Sem Números Com Select",
 		"OF": "de",
