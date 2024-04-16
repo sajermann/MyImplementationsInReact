@@ -25,6 +25,7 @@ import { ChipDemo } from '~/Components/Demos/Chip';
 import { SwitchDemo } from '~/Components/Demos/Switch';
 import { RadioDemo } from '~/Components/Demos/Radio';
 import { PaginationDemo } from '~/Components/Demos/Pagination';
+import { PictureAnnotationPage } from '~/Pages/PictureAnnotation';
 
 const ColumnVisibilityPage = lazy(() =>
 	import('~/Pages/Table/ColumnVisibility').then(
@@ -641,6 +642,17 @@ export function useRoutesMenu() {
 				element: <PaginationPage />,
 				label: translate('PAGINATION'),
 				demo: <PaginationDemo />,
+			},
+			{
+				name: 'PictureAnnotation',
+				path: '/picture-annotation',
+				implements_code:
+					'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Components/PictureAnnotation',
+				docs_code:
+					'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/PictureAnnotation',
+				element: <PictureAnnotationPage />,
+				label: translate('PictureAnnotation'),
+				// demo: <PictureAnnotationDemo />,
 			},
 			// {
 			// 	name: 'Virtualization',
