@@ -48,20 +48,19 @@ export function PictureAnnotationPage() {
 				stroke: 'red',
 				strokeWidth: 2,
 				selectable: true,
+				name: 'fdsaf',
 			});
 			canvas.add(rect);
 			isDrawing = true; // Ativa o estado de desenho
 		});
 
 		canvas.on('mouse:move', options => {
-			if (!rect || !isDrawing) return;
+			if (!isDrawing || !rect) return;
 			const pointer = canvas.getPointer(options.e);
-			const { x } = pointer;
-			const { y } = pointer;
-			rect.set({
-				width: Math.abs(x - startX),
-				height: Math.abs(y - startY),
-			});
+			const width = pointer.x - startX;
+			const height = pointer.y - startY;
+			rect.set({ width, height });
+			rect.setCoords(); // Atualiza as coordenadas do retângulo
 			canvas.renderAll();
 		});
 
@@ -102,6 +101,7 @@ export function PictureAnnotationPage() {
 		});
 
 		canvas.on('object:scaling', e => {
+			if (!e || !e.target) return;
 			const scalingProperties = {
 				left: 0,
 				top: 0,
@@ -111,11 +111,11 @@ export function PictureAnnotationPage() {
 
 			const shape = e.target;
 			if (!shape) return;
-			const maxWidth = shape.canvas.width;
-			const maxHeight = shape.canvas.height;
+			const maxWidth = shape.canvas?.width;
+			const maxHeight = shape.canvas?.height;
 
 			// left border
-			if (shape.left < 0) {
+			if (shape.left && shape.left < 0) {
 				shape.left = scalingProperties.left;
 				shape.scaleX = scalingProperties.scaleX;
 			} else {
