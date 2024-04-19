@@ -66,7 +66,7 @@ function excel<T>({ data, defColumns = [] }: PropsXlsx<T>) {
 						row: data[i],
 						original: data,
 						index: i,
-				  })
+					})
 				: data[i][defCol.accessor];
 
 			const style = defCol.styleCellFn
@@ -75,7 +75,7 @@ function excel<T>({ data, defColumns = [] }: PropsXlsx<T>) {
 						row: data[i],
 						original: data,
 						index: i,
-				  })
+					})
 				: {};
 
 			rowTemp.push({ v: value, t: defCol.typeCell, s: style });
@@ -111,7 +111,7 @@ function csv<T>({ data, defColumns = [], delimiter = ';' }: PropsCsv<T>) {
 						row: data[i],
 						valueCell: data[i][item.accessor],
 						index: i,
-				  })
+					})
 				: data[i][item.accessor];
 			const tempHeader = {
 				[item.header]: valueTemp,
@@ -145,7 +145,7 @@ function xml<T>({ data, defColumns = [] }: PropsXml<T>) {
 						row: data[i],
 						original: data,
 						index: i,
-				  })
+					})
 				: data[i][defCol.accessor];
 
 			rowTemp.push({
