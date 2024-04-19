@@ -1,7 +1,7 @@
 /**
  * @vitest-environment jsdom
  */
-import { it, describe, expect } from 'vitest';
+import { it, describe } from 'vitest';
 import { exportTo } from '.';
 
 describe('Utils/Export', () => {

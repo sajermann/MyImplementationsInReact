@@ -1,6 +1,6 @@
 /// <reference types="vitest" />
 /* eslint-disable import/no-extraneous-dependencies */
-import { configDefaults, defineConfig } from 'vitest/config';
+import { defineConfig } from 'vitest/config';
 import react from '@vitejs/plugin-react';
 import * as path from 'path';
 
@@ -17,6 +17,7 @@ export default defineConfig({
 		setupFiles: './src/Config/Test/setup.ts',
 		coverage: {
 			reporter: ['text', 'lcov', 'html'],
+			exclude: ['**/main.tsx', '**/*.config.cjs', '**/*.d.ts']
 		},
 	},
 });
