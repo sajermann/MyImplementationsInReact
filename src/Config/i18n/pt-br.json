@@ -1,5 +1,9 @@
 {
 	"translations": {
+		"FROM_TOP_TO_BOTTOM": "De Cima para Baixo",
+		"FROM_BOTTOM_TO_TOP": "De baixo para cima",
+		"FROM_RIGHT_TO_LEFT": "Da direita para esquerda",
+		"FROM_LEFT_TO_RIGHT": "Da esquerda para direita",
 		"COPY": "Copiar",
 		"WITHOUT_NUMBERS_WITH_SELECT": "Sem Números Com Select",
 		"OF": "de",
