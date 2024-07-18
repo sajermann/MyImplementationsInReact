@@ -1,5 +1,6 @@
 {
 	"translations": {
+		"TEXT_EDITOR": "Text Editor",
 		"FROM_TOP_TO_BOTTOM": "From top to bottom",
 		"FROM_BOTTOM_TO_TOP": "From bottom to top",
 		"FROM_RIGHT_TO_LEFT": "From right to left",
