@@ -5,6 +5,7 @@ import { toBold } from './toBold';
 import { toItalic } from './toItalic';
 import { toLink } from './toLink';
 import { toHtml } from './toHtml';
+import { toList } from './toList';
 
 export const textEditorMdUtils = {
 	toLink,
@@ -14,4 +15,5 @@ export const textEditorMdUtils = {
 	removeInvalidTags,
 	handleJump,
 	toHtml,
+	toList,
 };

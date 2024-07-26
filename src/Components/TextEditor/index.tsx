@@ -5,12 +5,15 @@ import { textEditorMdUtils } from './utils';
 type TProps = 'bold' | 'italic' | 'link' | 'list';
 
 function MarkdownViewer({ text }: { text: string }) {
-	const html = textEditorMdUtils.toHtml(text);
-	return <div dangerouslySetInnerHTML={{ __html: html }} />;
+	return (
+		<div dangerouslySetInnerHTML={{ __html: textEditorMdUtils.toHtml(text) }} />
+	);
 }
 
 export function TextEditor() {
-	const [textContent, setTextContent] = useState('');
+	const [textContent, setTextContent] = useState(
+		'Lista de supermercado \n\n* Batata \n* Le**g**umes \n* Macarrão de Batata\n\nEspero que vc compre tudo!',
+	);
 	const ref = useRef<HTMLTextAreaElement>(null);
 
 	function handleAddTag({ tag, event }: { tag: TProps; event: MouseEvent }) {
@@ -82,7 +85,7 @@ export function TextEditor() {
 	}
 
 	return (
-		<div className="w-full bg-zinc-700 h-96 flex gap-2 flex-col p-2">
+		<div className="w-full bg-zinc-700 flex gap-2 flex-col p-2">
 			<div className="flex gap-2">
 				<button
 					type="button"
@@ -125,12 +128,14 @@ export function TextEditor() {
 			</div>
 			<textarea
 				ref={ref}
-				className="bg-transparent border w-full h-72"
+				className="bg-transparent border w-full min-h-64"
 				onChange={onChange}
+				value={textContent}
 			>
-				Bruno Sajermann
+				Lista de supermercado * Batata * Le**g**umes * Macarrão Bom dia * Linda
+				Noite
 			</textarea>
-			<p>{JSON.stringify({ textContent })}</p>
+			<code>{JSON.stringify({ textContent }, null, 2)}</code>
 			<MarkdownViewer text={ref.current?.value || ''} />
 		</div>
 	);
