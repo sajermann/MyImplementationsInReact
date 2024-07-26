@@ -9,7 +9,7 @@ function toItalic(text: string) {
 function toLink(text: string) {
 	return text.replace(
 		/\[(.*?)\]\((.*?)\)/g,
-		'<a class="underline text-blue-500" href="$2">$1</a>',
+		'<a class="underline text-blue-500" href="$2" target="_blank">$1</a>',
 	);
 }
 
@@ -17,41 +17,36 @@ function toLink(text: string) {
 // 	return text.replace(/\n\* ([^\s]+)/g, '<li class="ml-6">$1</li>');
 // }
 
-function toList(texto: string) {
-	let listaAberta = false;
-	let listaHtml = '';
+function toList(text: string) {
+	let htmlMounted = '';
+	let listOpened = false;
 
-	// Processar cada linha do texto
-	texto.split('\n').forEach((linha, index) => {
+	// Processar cada linha do text
+	text.split('\n').forEach((linha, index) => {
 		// Verifica se a linha é o início de um item da lista
-		if (/^\*\s/.test(linha)) {
-			// Se a lista já está aberta, adiciona uma nova linha ao HTML da lista
-			if (listaAberta) {
-				listaHtml += '\n';
+		if (/^\*\s(.+)/.test(linha)) {
+			// Remove o asterisco e os espaços iniciais do item
+			const item = linha.slice(2);
+			// Se a lista ainda não foi aberta, inicia a lista com <ul>
+			if (!listOpened) {
+				htmlMounted += '<ul>\n';
+				listOpened = true;
 			}
-
-			// Marca a lista como aberta e adiciona o item da lista
-			listaAberta = true;
-			listaHtml += `<li>${linha.slice(2)}</li>`;
+			// Adiciona o item como um elemento <li> ao HTML da lista
+			htmlMounted += `<li>${item}</li>\n`;
 		} else {
-			// Se a linha não é o início de um item da lista, fecha a lista se ela estiver aberta
-			if (listaAberta) {
-				listaHtml += '</ul>';
-				listaAberta = false;
-			}
-
-			// Adiciona a linha ao HTML como está
-			listaHtml += `${linha}\n`;
+			// Se a linha não é o início de um item da lista, adiciona-a ao HTML como está
+			htmlMounted += `${linha}\n`;
 		}
 
 		// Se for a última linha, fecha a lista
-		if (index === texto.split('\n').length - 1 && listaAberta) {
-			listaHtml += '</ul>';
+		if (index === text.split('\n').length - 1 && listOpened) {
+			htmlMounted += '</ul>';
 		}
 	});
 
 	// Retorna o HTML da lista
-	return listaHtml;
+	return htmlMounted;
 }
 
 function toEnter(text: string) {
@@ -64,7 +59,7 @@ export function toHtml(markdownText: string) {
 	html = toItalic(html);
 	html = toLink(html);
 	html = toList(html);
-	console.log({ html });
+	console.log({ markdownText, html });
 	html = toEnter(html);
 	return html;
 }
