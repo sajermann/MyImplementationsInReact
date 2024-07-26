@@ -13,36 +13,38 @@ function toLink(text: string) {
 	);
 }
 
-// function toList(text: string) {
-// 	return text.replace(/\n\* ([^\s]+)/g, '<li class="ml-6">$1</li>');
-// }
-
 function toList(text: string) {
 	let htmlMounted = '';
 	let listOpened = false;
 
 	// Processar cada linha do text
-	text.split('\n').forEach((linha, index) => {
+	text.split('\n').forEach((row, index) => {
+		console.log({ row, index }, row.substring(0, 2) === '* ');
 		// Verifica se a linha é o início de um item da lista
-		if (/^\*\s(.+)/.test(linha)) {
+		if (row.substring(0, 2) === '* ') {
 			// Remove o asterisco e os espaços iniciais do item
-			const item = linha.slice(2);
+			const item = row.slice(2);
 			// Se a lista ainda não foi aberta, inicia a lista com <ul>
 			if (!listOpened) {
-				htmlMounted += '<ul>\n';
+				htmlMounted += '<ul class="ml-8 list-disc">\n';
 				listOpened = true;
 			}
 			// Adiciona o item como um elemento <li> ao HTML da lista
 			htmlMounted += `<li>${item}</li>\n`;
 		} else {
+			// Se caiu no else é porque a não é lista, então precisamos ver se a lista está aberta e fecha-la
+			if (listOpened) {
+				htmlMounted += '</ul>';
+				listOpened = false;
+			}
 			// Se a linha não é o início de um item da lista, adiciona-a ao HTML como está
-			htmlMounted += `${linha}\n`;
+			htmlMounted += `${row}\n`;
 		}
 
-		// Se for a última linha, fecha a lista
-		if (index === text.split('\n').length - 1 && listOpened) {
-			htmlMounted += '</ul>';
-		}
+		// // Se for a última linha, fecha a lista
+		// if (index === text.split('\n').length - 1 && listOpened) {
+		// 	htmlMounted += '</ul>';
+		// }
 	});
 
 	// Retorna o HTML da lista

@@ -1,5 +1,6 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 import { ChangeEvent, useRef, useState } from 'react';
+import { Icons } from '~/Components/Icons';
 import { textEditorMdUtils } from './utils';
 
 type TProps = 'bold' | 'italic' | 'link' | 'list';
@@ -85,50 +86,54 @@ export function TextEditor() {
 	}
 
 	return (
-		<div className="w-full bg-zinc-700 flex gap-2 flex-col p-2">
+		<div className="w-full flex gap-2 flex-col p-2">
 			<div className="flex gap-2">
 				<button
+					aria-label="bold"
 					type="button"
 					onMouseDown={e =>
 						handleAddTag({ event: e as unknown as MouseEvent, tag: 'bold' })
 					}
 					className="font-bold p-2 border rounded w-8 h-8 flex items-center justify-center"
 				>
-					B
+					<Icons nameIcon="bold" />
 				</button>
 
 				<button
+					aria-label="italic"
 					type="button"
 					onMouseDown={e =>
 						handleAddTag({ event: e as unknown as MouseEvent, tag: 'italic' })
 					}
 					className="italic p-2 border rounded w-8 h-8 flex items-center justify-center"
 				>
-					I
+					<Icons nameIcon="italic" />
 				</button>
 
 				<button
+					aria-label="link"
 					type="button"
 					onMouseDown={e =>
 						handleAddTag({ event: e as unknown as MouseEvent, tag: 'link' })
 					}
 					className="p-2 border rounded w-8 h-8 flex items-center justify-center"
 				>
-					L
+					<Icons nameIcon="link" />
 				</button>
 				<button
+					aria-label="list"
 					type="button"
 					onMouseDown={e =>
 						handleAddTag({ event: e as unknown as MouseEvent, tag: 'list' })
 					}
 					className="p-2 border rounded w-8 h-8 flex items-center justify-center"
 				>
-					Li
+					<Icons nameIcon="listUnordered" />
 				</button>
 			</div>
 			<textarea
 				ref={ref}
-				className="bg-transparent border w-full min-h-64"
+				className="bg-transparent border w-full min-h-64 p-2 rounded"
 				onChange={onChange}
 				value={textContent}
 			>
