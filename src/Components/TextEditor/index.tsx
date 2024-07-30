@@ -1,6 +1,7 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
-import { ChangeEvent, useRef, useState } from 'react';
+import { ChangeEvent, RefObject, useRef, useState } from 'react';
 import { Icons } from '~/Components/Icons';
+import { TReturnInfos } from './types/TReturn';
 import { textEditorMdUtils } from './utils';
 
 type TProps = 'bold' | 'italic' | 'link' | 'list';
@@ -16,6 +17,24 @@ export function TextEditor() {
 		'Lista de supermercado \n\n* Batata \n* Le**g**umes \n* Macarrão de Batata\n\nEspero que vc compre tudo!',
 	);
 	const ref = useRef<HTMLTextAreaElement>(null);
+
+	function getInfos(refTextArea: RefObject<HTMLTextAreaElement>): TReturnInfos {
+		const { selectionStart, selectionEnd } = refTextArea.current!;
+		const completeText = refTextArea.current!.value;
+		const selectedText = completeText.substring(selectionStart, selectionEnd);
+
+		const beforeText = completeText.substring(0, selectionStart);
+		const afterText = completeText.substring(selectionEnd, completeText.length);
+
+		return {
+			selectedText,
+			completeText,
+			beforeText,
+			afterText,
+			selectionStart,
+			selectionEnd,
+		};
+	}
 
 	function handleAddTag({ tag, event }: { tag: TProps; event: MouseEvent }) {
 		event.preventDefault();
@@ -37,30 +56,37 @@ export function TextEditor() {
 			return;
 		}
 
-		const selectedText = ref.current.value.substring(
-			ref.current.selectionStart,
-			ref.current.selectionEnd,
-		);
+		const {
+			afterText,
+			beforeText,
+			completeText,
+			selectedText,
+			selectionEnd,
+			selectionStart,
+		} = getInfos(ref);
 
-		if (!selectedText) {
-			console.log('Nenhum texto selecionado.');
-			return;
-		}
-		const first = window.getSelection()?.anchorOffset;
-		const last = window.getSelection()?.focusOffset;
-		const textOnTextArea = ref.current?.value;
-		if (first === undefined || last === undefined || !textOnTextArea) {
-			console.log(`Um desses não tava selecionado`, {
-				first,
-				last,
-				textOnTextArea,
+		console.log({
+			afterText,
+			beforeText,
+			completeText,
+			selectedText,
+			selectionEnd,
+			selectionStart,
+		});
+
+		if (tag === 'list') {
+			textEditorMdUtils.toList({
+				afterText,
+				beforeText,
+				completeText,
+				selectedText,
+				selectionEnd,
+				selectionStart,
+				ref,
+				callback: setTextContent,
 			});
 			return;
 		}
-		const start = ref.current.selectionStart;
-		const end = ref.current.selectionEnd;
-		const before = textOnTextArea.substring(0, start);
-		const after = textOnTextArea.substring(end, textOnTextArea.length);
 
 		const {
 			text: wrappedText,
@@ -68,11 +94,11 @@ export function TextEditor() {
 			endForSelection,
 		} = CONFIG[tag]({
 			text: selectedText,
-			startSelected: start,
-			endSelected: end,
+			startSelected: selectionStart,
+			endSelected: selectionEnd,
 		});
-		ref.current.value = `${before}${wrappedText}${after}`;
-		setTextContent(`${before}${wrappedText}${after}`);
+		ref.current.value = `${beforeText}${wrappedText}${afterText}`;
+		setTextContent(`${beforeText}${wrappedText}${afterText}`);
 		textEditorMdUtils.selectInTextAreaByRange({
 			ref,
 			start: startForSelection,
@@ -94,7 +120,7 @@ export function TextEditor() {
 					onMouseDown={e =>
 						handleAddTag({ event: e as unknown as MouseEvent, tag: 'bold' })
 					}
-					className="font-bold p-2 border rounded w-8 h-8 flex items-center justify-center"
+					className="font-bold p-2 border rounded w-8 h-8 flex items-center justify-center hover:border-blue-800 hover:text-blue-800 transition-colors duration-500"
 				>
 					<Icons nameIcon="bold" />
 				</button>
@@ -105,7 +131,7 @@ export function TextEditor() {
 					onMouseDown={e =>
 						handleAddTag({ event: e as unknown as MouseEvent, tag: 'italic' })
 					}
-					className="italic p-2 border rounded w-8 h-8 flex items-center justify-center"
+					className="font-bold p-2 border rounded w-8 h-8 flex items-center justify-center hover:border-blue-800 hover:text-blue-800 transition-colors duration-500"
 				>
 					<Icons nameIcon="italic" />
 				</button>
@@ -116,7 +142,7 @@ export function TextEditor() {
 					onMouseDown={e =>
 						handleAddTag({ event: e as unknown as MouseEvent, tag: 'link' })
 					}
-					className="p-2 border rounded w-8 h-8 flex items-center justify-center"
+					className="font-bold p-2 border rounded w-8 h-8 flex items-center justify-center hover:border-blue-800 hover:text-blue-800 transition-colors duration-500"
 				>
 					<Icons nameIcon="link" />
 				</button>
@@ -126,7 +152,7 @@ export function TextEditor() {
 					onMouseDown={e =>
 						handleAddTag({ event: e as unknown as MouseEvent, tag: 'list' })
 					}
-					className="p-2 border rounded w-8 h-8 flex items-center justify-center"
+					className="font-bold p-2 border rounded w-8 h-8 flex items-center justify-center hover:border-blue-800 hover:text-blue-800 transition-colors duration-500"
 				>
 					<Icons nameIcon="listUnordered" />
 				</button>

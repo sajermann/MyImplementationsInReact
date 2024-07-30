@@ -18,8 +18,7 @@ function toList(text: string) {
 	let listOpened = false;
 
 	// Processar cada linha do text
-	text.split('\n').forEach((row, index) => {
-		console.log({ row, index }, row.substring(0, 2) === '* ');
+	text.split('\n').forEach(row => {
 		// Verifica se a linha é o início de um item da lista
 		if (row.substring(0, 2) === '* ') {
 			// Remove o asterisco e os espaços iniciais do item
@@ -40,11 +39,6 @@ function toList(text: string) {
 			// Se a linha não é o início de um item da lista, adiciona-a ao HTML como está
 			htmlMounted += `${row}\n`;
 		}
-
-		// // Se for a última linha, fecha a lista
-		// if (index === text.split('\n').length - 1 && listOpened) {
-		// 	htmlMounted += '</ul>';
-		// }
 	});
 
 	// Retorna o HTML da lista
@@ -61,7 +55,6 @@ export function toHtml(markdownText: string) {
 	html = toItalic(html);
 	html = toLink(html);
 	html = toList(html);
-	console.log({ markdownText, html });
 	html = toEnter(html);
 	return html;
 }

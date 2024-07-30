@@ -7,6 +7,7 @@ type TProps = {
 };
 export function selectInTextAreaByRange({ ref, start, end }: TProps) {
 	const selection = window.getSelection();
+	console.log({ selection, ref });
 	if (!selection || !ref.current) {
 		return;
 	}
@@ -25,5 +26,6 @@ export function selectInTextAreaByRange({ ref, start, end }: TProps) {
 		console.error('Índices inválidos.');
 		return;
 	}
+	console.log('Aqui', start, end);
 	ref.current.setSelectionRange(start, end, 'forward');
 }
