@@ -1,19 +1,20 @@
 import { handleJump } from './handleJump';
 import { removeInvalidTags } from './removeInvalidTags';
 import { selectInTextAreaByRange } from './selectInTextAreaByRange';
-import { toBold } from './toBold';
-import { toItalic } from './toItalic';
-import { toLink } from './toLink';
+import { handleBold } from './handleBold';
+import { handleItalic } from './handleItalic';
+import { handleLink } from './handleLink';
+import { handleList } from './handleList';
+
 import { toHtml } from './toHtml';
-import { toList } from './toList';
 
 export const textEditorMdUtils = {
-	toLink,
-	toBold,
-	toItalic,
-	selectInTextAreaByRange,
+	handleLink,
+	handleBold,
+	handleItalic,
 	removeInvalidTags,
 	handleJump,
 	toHtml,
-	toList,
+	handleList,
+	selectInTextAreaByRange,
 };

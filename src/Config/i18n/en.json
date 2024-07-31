@@ -1,5 +1,9 @@
 {
 	"translations": {
+		"ITALIC": "Italic",
+		"BOLD": "Bold",
+		"LIST": "List",
+		"CHANGE_PREVIEW_MODE": "Change preview mode",
 		"TEXT_EDITOR": "Text Editor",
 		"FROM_TOP_TO_BOTTOM": "From top to bottom",
 		"FROM_BOTTOM_TO_TOP": "From bottom to top",
