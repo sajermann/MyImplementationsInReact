@@ -25,6 +25,8 @@
 		"prettier"
 	],
 	"rules": {
+		"no-shadow": "off",
+    "@typescript-eslint/no-shadow": "error",
 		"react/jsx-key": "error",
 		"react/no-unstable-nested-components": [0],
 		"no-alert": "off",
@@ -67,9 +69,7 @@
 		],
 		"no-console": "off",
 		"no-use-before-define": "off",
-		"@typescript-eslint/no-use-before-define": [
-			"error"
-		],
+		"@typescript-eslint/no-use-before-define": ["error"],
 		"react/react-in-jsx-scope": "off",
 		"react/jsx-props-no-spreading": "off",
 		"import/extensions": [

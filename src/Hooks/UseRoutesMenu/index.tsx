@@ -25,7 +25,6 @@ import { ChipDemo } from '~/Components/Demos/Chip';
 import { SwitchDemo } from '~/Components/Demos/Switch';
 import { RadioDemo } from '~/Components/Demos/Radio';
 import { PaginationDemo } from '~/Components/Demos/Pagination';
-import { TextEditorPage } from '~/Pages/TextEditor';
 
 const ColumnVisibilityPage = lazy(() =>
 	import('~/Pages/Table/ColumnVisibility').then(
@@ -257,10 +256,12 @@ const PaginationPage = lazy(() =>
 	})),
 );
 
-const EditorTextPage = lazy(() =>
-	import('~/Pages/TextEditor').then(({ EditorTextPage: EditorText }) => ({
-		default: EditorText,
-	})),
+const SimpleMdTextEditorPage = lazy(() =>
+	import('~/Pages/SimpleMdTextEditor').then(
+		({ SimpleMdTextEditorPage: SimpleMdTextEditor }) => ({
+			default: SimpleMdTextEditor,
+		}),
+	),
 );
 
 export function useRoutesMenu() {
@@ -650,14 +651,14 @@ export function useRoutesMenu() {
 				demo: <PaginationDemo />,
 			},
 			{
-				name: 'Text Editor',
-				path: '/text-editor',
+				name: 'Simple Md Text Editor',
+				path: '/simplet-md-text-editor',
 				implements_code:
-					'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Components/TextEditor',
+					'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Components/SimpleMdTextEditor',
 				docs_code:
-					'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/TextEditor',
-				element: <TextEditorPage />,
-				label: translate('TEXT_EDITOR'),
+					'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/SimpleMdTextEditor',
+				element: <SimpleMdTextEditorPage />,
+				label: translate('SIMPLE_MD_TEXT_EDITOR'),
 				// demo: <PaginationDemo />,
 			},
 			// {

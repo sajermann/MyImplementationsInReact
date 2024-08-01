@@ -1,20 +1,20 @@
-import { useState } from 'react';
 import { Main } from '~/Components/Main';
 import { useTranslation } from '~/Hooks/UseTranslation';
 import { Section } from '~/Components/Section';
 import { ComponentBlock } from '~/Components/ComponentBlock';
 import { QuickAccessGithub } from '~/Components/QuickAccessGithub';
-import { TextEditor } from '~/Components/TextEditor';
+import { SimpleMdTextEditor } from '~/Components/SimpleMdTextEditor';
 
-export function TextEditorPage() {
+export function SimpleMdTextEditorPage() {
 	const { translate } = useTranslation();
-	const [checked, setChecked] = useState(false);
-	const [errorMode, setErrorMode] = useState(false);
 
 	return (
 		<Main data-content="content-main">
-			<Section title={translate('TEXT_EDITOR')} variant="h1">
-				{`${translate('IMPLEMENTS_COMPONENT')} ${translate('TEXT_EDITOR')}`}
+			<Section title={translate('SIMPLE_MD_TEXT_EDITOR')} variant="h1">
+				{`${translate('IMPLEMENTS_COMPONENT')} ${translate('SIMPLE_MD_TEXT_EDITOR')} ${translate(
+					'WITHOUT_USING_LIB',
+				)}`}
+				.
 			</Section>
 
 			<Section title={translate('CODES')} variant="h2">
@@ -25,7 +25,7 @@ export function TextEditorPage() {
 
 			<Section title="Normal" variant="h2">
 				<ComponentBlock>
-					<TextEditor />
+					<SimpleMdTextEditor />
 				</ComponentBlock>
 			</Section>
 		</Main>

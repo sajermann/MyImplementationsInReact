@@ -1,10 +1,12 @@
 {
 	"translations": {
+		"MINIMIZE": "Minimize",
+		"MAXIMIZE": "Maximize",
 		"ITALIC": "Italic",
 		"BOLD": "Bold",
 		"LIST": "List",
 		"CHANGE_PREVIEW_MODE": "Change preview mode",
-		"TEXT_EDITOR": "Text Editor",
+		"SIMPLE_MD_TEXT_EDITOR": "Simple MD Text Editor",
 		"FROM_TOP_TO_BOTTOM": "From top to bottom",
 		"FROM_BOTTOM_TO_TOP": "From bottom to top",
 		"FROM_RIGHT_TO_LEFT": "From right to left",
