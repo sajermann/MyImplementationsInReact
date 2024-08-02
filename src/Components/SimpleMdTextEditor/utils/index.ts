@@ -1,5 +1,4 @@
 import { handleJump } from './handleJump';
-import { removeInvalidTags } from './removeInvalidTags';
 import { selectInTextAreaByRange } from './selectInTextAreaByRange';
 import { handleBold } from './handleBold';
 import { handleItalic } from './handleItalic';
@@ -12,7 +11,6 @@ export const textEditorMdUtils = {
 	handleLink,
 	handleBold,
 	handleItalic,
-	removeInvalidTags,
 	handleJump,
 	toHtml,
 	handleList,

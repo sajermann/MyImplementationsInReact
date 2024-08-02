@@ -13,7 +13,7 @@ type SaveProps<T> = {
 const handleKeyUp = (
 	event: KeyboardEvent,
 	isHoverMouse: boolean,
-	saveData: () => void
+	saveData: () => void,
 ) => {
 	const allowKeys = ['Control', 'Enter'];
 	if (allowKeys.includes(event.key) && isHoverMouse) {
@@ -71,6 +71,7 @@ export function Droppable<T>({
 				{ [rest.className as string]: rest.className },
 				{ 'bg-green-300 transition-colors duration-500': isOver },
 			])}
+			data-droppableid={`droppable-${id}`}
 		>
 			{children}
 			{isOver &&

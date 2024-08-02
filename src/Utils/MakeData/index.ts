@@ -45,7 +45,7 @@ function animal(...lens: number[]) {
 					faker.animal.cat(),
 					faker.animal.bird(),
 				]),
-			})
+			}),
 		);
 	};
 
@@ -101,7 +101,7 @@ function chat(quantity: number) {
 				userAvatar: i % 2 === 0 ? userAvatarOne : userAvatarTwo,
 				message: faker.lorem.paragraphs(),
 				ref: createRef<ForwardedRef<unknown>>(),
-			})
+			}),
 		);
 	};
 

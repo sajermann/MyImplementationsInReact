@@ -7,7 +7,7 @@ import { useTranslation } from '~/Hooks/UseTranslation';
 
 import { TRoutesMenu } from '~/Types/TRoutesMenu';
 import { useLoadingLazy } from '~/Store/UseLoadingLazy';
-import Sidebar from '../Sidebar';
+import { Sidebar } from '../Sidebar';
 import { Breadcrumbs } from '../Breadcumbs';
 
 function IsLoading() {
@@ -21,7 +21,7 @@ function IsLoading() {
 	return <p>{translate('LOADING...')}</p>;
 }
 
-export default function RoutesConfig() {
+export function RoutesConfig() {
 	const { globalRoutes: options } = useRoutesMenu();
 	const location = useLocation();
 
