@@ -7,8 +7,8 @@ import { Datepicker } from '~/Components/Datepicker';
 import { Input } from '~/Components/Input';
 import { Select } from '~/Components/Select';
 import { useTranslation } from '~/Hooks/UseTranslation';
-import { ContainerInput } from '../ContainerInput';
-import { Label } from '../Label';
+import { ContainerInput } from '../../ContainerInput';
+import { Label } from '../../Label';
 
 type Props = {
 	row: any;

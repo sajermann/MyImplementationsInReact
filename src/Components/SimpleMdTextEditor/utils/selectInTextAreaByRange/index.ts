@@ -13,7 +13,7 @@ export function selectInTextAreaByRange({ ref, start, end }: TProps) {
 	}
 
 	if (ref.current.value === '') {
-		console.error('Textarea está vazio.');
+		console.error('Textarea is empty.');
 		return;
 	}
 
@@ -23,7 +23,7 @@ export function selectInTextAreaByRange({ ref, start, end }: TProps) {
 		start >= ref.current.value.length ||
 		end > ref.current.value.length
 	) {
-		console.error('Índices inválidos.');
+		console.error('Invalid Index.');
 		return;
 	}
 	console.log('Aqui', start, end);

@@ -11,6 +11,7 @@ import { useRef, useState } from 'react';
 import { Icons } from '~/Components/Icons';
 import { useTranslation } from '~/Hooks/UseTranslation';
 import { managerClassNames } from '~/Utils/ManagerClassNames';
+import { showInDevelopment } from '~/Utils/ShowInDevelopment';
 import { MarkdownViewer } from './components/MarkdownViewer';
 import { Minibutton } from './components/MiniButton';
 import { EPreview } from './enum/EPreview';
@@ -19,9 +20,11 @@ import { textEditorMdUtils } from './utils';
 import { getInfos } from './utils/getInfos';
 
 export function SimpleMdTextEditor() {
-	const { translate } = useTranslation();
+	const { translate, currentLanguage } = useTranslation();
 	const [textContent, setTextContent] = useState(
-		'Lista de supermercado \n\n* Batata \n* Le**g**umes \n* Macarrão de Batata\n\nEspero que vc compre tudo!',
+		currentLanguage === 'pt-BR'
+			? 'Lista de supermercado \n\n* Batata \n* Al**fa**ceSpaguetti \n* Macarrão Pena\n\nTenha um ótimo dia!'
+			: 'Grocery List \n\n* Potato \n* Aspar**a**gus \n* Spaguetti\n\nHave a nice day!',
 	);
 	const [previewMode, setPreviewMode] = useState(EPreview.row);
 	const [isFullScreen, setIsFullScreen] = useState(false);
@@ -49,7 +52,7 @@ export function SimpleMdTextEditor() {
 			!document.activeElement ||
 			!ref.current.contains(document.activeElement)
 		) {
-			console.log('O elemento de entrada não está focado.');
+			console.log('Element is not focused');
 			return;
 		}
 
@@ -100,6 +103,7 @@ export function SimpleMdTextEditor() {
 			<div className="flex justify-between">
 				<div className="flex gap-2">
 					<Minibutton
+						{...showInDevelopment({ 'data-testid': 'button-bold' })}
 						title={translate('BOLD')}
 						aria-label="bold"
 						type="button"
@@ -176,6 +180,7 @@ export function SimpleMdTextEditor() {
 			>
 				<textarea
 					ref={ref}
+					{...showInDevelopment({ 'data-testid': 'textarea-md' })}
 					className={managerClassNames([
 						{ 'bg-transparent border w-full min-h-64 p-2 rounded': true },
 						{ hidden: previewMode === EPreview.onlyPreview },
