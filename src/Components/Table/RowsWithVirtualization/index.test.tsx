@@ -1,3 +1,4 @@
+/* eslint-disable react/button-has-type */
 /* eslint-disable no-return-assign */
 /**
  * @vitest-environment jsdom
@@ -11,29 +12,25 @@ import {
 	getFilteredRowModel,
 	Row,
 } from '@tanstack/react-table';
-import { describe, expect } from 'vitest';
-import { RefObject, useRef, useState } from 'react';
+import { describe, expect, vi } from 'vitest';
+import { RefObject, useEffect, useRef, useState } from 'react';
 
-import { DEFAULT_PAG } from '~/Constants/Others';
 import { TSelection } from '~/Types/TSelection';
-import { useColumns } from '~/Hooks/UseColumns';
 import { makeData } from '~/Utils/MakeData';
+
+import * as useVirtualizerMock from '@tanstack/react-virtual';
 import { RowsWithVirtualization } from '.';
 
-const data = makeData.randomObject(['id', 'name'], 100);
+const fallback: Record<string, string>[] = [];
 
-const columns: ColumnDef<{ id: string; name: string }>[] = [
+const columns: ColumnDef<Record<string, string>>[] = [
 	{
 		accessorKey: 'id',
 		header: 'Id',
-		minSize: 100,
-		size: 100,
 	},
 	{
 		accessorKey: 'name',
 		header: 'Nome',
-		minSize: 100,
-		size: 100,
 	},
 ];
 
@@ -52,84 +49,77 @@ function Mock<T>({
 	rowForUpdate,
 	selection,
 }: TProps<T>) {
+	const [data, setData] = useState<Record<string, string>[]>([]);
 	const tableContainerRef = useRef<HTMLDivElement>(null);
-
 	const table = useReactTable({
-		data,
+		data: data || fallback,
 		columns,
 		getCoreRowModel: getCoreRowModel(),
-		columnResizeMode: 'onChange',
-		getFilteredRowModel: getFilteredRowModel(),
-		// pageCount: pagination?.pageCount,
-		// state: {
-		// 	pagination: {
-		// 		pageIndex: pagination?.pageIndex || 0,
-		// 		pageSize: pagination?.pageSize || 0,
-		// 	},
-		// 	sorting: sorting?.disabled ? undefined : sortingInternal,
-		// 	rowSelection: selection?.rowSelection,
-		// 	globalFilter: globalFilter?.filter,
-		// 	columnVisibility,
-		// 	columnOrder,
-		// },
-		// onGlobalFilterChange: globalFilter?.setFilter,
-		// onRowSelectionChange: selection?.setRowSelection,
-		// enableRowSelection: selection !== undefined,
-		// enableMultiRowSelection: selection?.type === 'multi',
-		// onSortingChange: sorting?.disabled
-		// 	? undefined
-		// 	: funcUpdater => {
-		// 			if (sorting?.manualSorting) {
-		// 				const resultSorts = (
-		// 					funcUpdater as unknown as (
-		// 						dataTempOldSort: SortingState
-		// 					) => Record<string, unknown>[]
-		// 				)(sortingInternal);
-		// 				sorting.manualSorting.fn(resultSorts);
-		// 			}
-		// 			return setSortingInternal(funcUpdater);
-		// 	  },
-		// getSortedRowModel: getSortedRowModel(),
-		// getRowCanExpand: () => !!expandLine,
-		// getExpandedRowModel: getExpandedRowModel(),
-		// manualPagination: true,
-		// onPaginationChange: pagination?.setPagination,
-		// meta,
-		// globalFilterFn: globalFilter?.globalFilterFn || 'auto',
-		// manualSorting: !!sorting?.manualSorting,
-		// enableMultiSort: true,
 	});
 
+	async function load() {
+		setData(makeData.randomObject(['id', 'name'], 50));
+	}
+
+	useEffect(() => {
+		load();
+	}, []);
+
 	const { rows } = table.getRowModel();
-	console.log({ tableContainerRef });
 	return (
-		<div className="w-14 h-14" ref={tableContainerRef}>
-			<RowsWithVirtualization
-				tableContainerRef={tableContainerRef}
-				disabledVirtualization={disabledVirtualization}
-				rows={rows}
-				expandLine={expandLine}
-				rowForUpdate={rowForUpdate}
-				selection={selection}
-			/>
+		<div className="w-full h-96">
+			<div
+				className="w-full h-80 p-4 border rounded-lg overflow-auto"
+				ref={tableContainerRef}
+			>
+				<RowsWithVirtualization
+					tableContainerRef={tableContainerRef}
+					disabledVirtualization={disabledVirtualization}
+					rows={rows}
+					expandLine={expandLine}
+					rowForUpdate={rowForUpdate}
+					selection={selection}
+				/>
+			</div>
 		</div>
 	);
 }
 
 describe('Components/Table/RowsWithVirtualization', () => {
-	it(`must ...`, async () => {
-		console.log(JSON.stringify({ data }, null, 2));
-		const { findByText, queryByText, queryAllByText, getAllByText } = render(
-			<Mock />,
-		);
-		// const first = queryAllByText('name-0');
-		// const last = queryAllByText(`name-${data.length}`);
-		// console.log({ first, last });
+	afterEach(() => {
+		vi.clearAllMocks();
+		vi.resetAllMocks();
 
-		// await waitFor(async () => {
-		// 	const text = await findByText('name-0');
-		// 	console.log({ text });
-		// 	expect(text).not.toBeUndefined();
-		// });
+		vi.mock('react-router-dom', async () => ({
+			__esModule: true,
+			...(await vi.importActual('@tanstack/react-virtual')),
+		}));
+	});
+
+	it(`must ...`, async () => {
+		vi.spyOn(useVirtualizerMock, 'useVirtualizer').mockImplementation(() => {
+			console.log('Aquuiii');
+			return {
+				getVirtualItems: () => [
+					{ index: 1, lane: 1, end: 1, key: 1, size: 10, start: 10 },
+				],
+				getTotalSize: () => 2000,
+			} as any;
+		});
+		const { findByText, queryByText, queryAllByText, getAllByText, getByText } =
+			render(<Mock />);
+		fireEvent.click(getByText('Test Button'));
+		const first = getAllByText(`name-0`);
+		// const last = queryAllByText(`name-${data.length}`);
+		console.log({ first });
+
+		// await waitFor(
+		// 	async () => {
+		// 		const text = await findByText('name-0');
+		// 		console.log({ text });
+		// 		expect(text).not.toBeUndefined();
+		// 	},
+
+		// );
 	});
 });
