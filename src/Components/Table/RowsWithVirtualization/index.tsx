@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/control-has-associated-label */
 import { flexRender, Row } from '@tanstack/react-table';
 import { Fragment, RefObject } from 'react';
 import { useVirtualizer } from '@tanstack/react-virtual';
@@ -24,13 +25,12 @@ export function RowsWithVirtualization<T>({
 	expandLine,
 	tableContainerRef,
 }: Props<T>) {
-	const rowVirtualizer = useVirtualizer({
+	const { getVirtualItems, getTotalSize } = useVirtualizer({
 		count: rows.length,
 		getScrollElement: () => tableContainerRef.current,
 		estimateSize: () => 68,
 		overscan: 10,
 	});
-	const { getVirtualItems, getTotalSize } = rowVirtualizer;
 	if (disabledVirtualization) return null;
 	const paddingTop =
 		getVirtualItems().length > 0 ? getVirtualItems()?.[0]?.start || 0 : 0;
@@ -49,6 +49,7 @@ export function RowsWithVirtualization<T>({
 			)}
 			{getVirtualItems().map(virtualRow => {
 				const row = rows[virtualRow.index];
+				// console.log('batata', row.getVisibleCells(), { row });
 				return (
 					<Fragment key={row.id}>
 						<Tr row={row} selection={selection} expandLine={expandLine}>

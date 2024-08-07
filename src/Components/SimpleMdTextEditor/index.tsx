@@ -113,6 +113,7 @@ export function SimpleMdTextEditor() {
 					</Minibutton>
 
 					<Minibutton
+						{...showInDevelopment({ 'data-testid': 'button-italic' })}
 						title={translate('ITALIC')}
 						aria-label="italic"
 						type="button"
@@ -122,6 +123,7 @@ export function SimpleMdTextEditor() {
 					</Minibutton>
 
 					<Minibutton
+						{...showInDevelopment({ 'data-testid': 'button-link' })}
 						title="Link"
 						aria-label="link"
 						type="button"
@@ -131,6 +133,7 @@ export function SimpleMdTextEditor() {
 					</Minibutton>
 
 					<Minibutton
+						{...showInDevelopment({ 'data-testid': 'button-list' })}
 						title={translate('LIST')}
 						aria-label="list"
 						type="button"
@@ -142,21 +145,32 @@ export function SimpleMdTextEditor() {
 
 				<div className="flex gap-2">
 					<Minibutton
-						title={translate(isFullScreen ? 'MAXIMIZE' : 'MINIMIZE')}
+						{...showInDevelopment({ 'data-testid': 'button-fullscreen-mode' })}
+						title={translate(!isFullScreen ? 'MAXIMIZE' : 'MINIMIZE')}
 						aria-label="fullscreen-mode"
 						type="button"
 						onClick={() => setIsFullScreen(prev => !prev)}
 					>
-						{!isFullScreen && <MaximizeIcon />}
-						{isFullScreen && <MinimizeIcon />}
+						{!isFullScreen && (
+							<MaximizeIcon
+								{...showInDevelopment({ 'data-testid': 'maximize-mode' })}
+							/>
+						)}
+						{isFullScreen && (
+							<MinimizeIcon
+								{...showInDevelopment({ 'data-testid': 'minimize-mode' })}
+							/>
+						)}
 					</Minibutton>
 
 					<Minibutton
+						{...showInDevelopment({ 'data-testid': 'button-preview-mode' })}
 						title={translate('CHANGE_PREVIEW_MODE')}
 						aria-label="preview-mode"
 						type="button"
 						onClick={() => {
 							setPreviewMode(prev => {
+								console.log({ prev });
 								if (prev === 3) {
 									return 0;
 								}
@@ -164,10 +178,26 @@ export function SimpleMdTextEditor() {
 							});
 						}}
 					>
-						{previewMode === EPreview.row && <Columns2Icon />}
-						{previewMode === EPreview.column && <Rows2Icon />}
-						{previewMode === EPreview.onlyPreview && <FileSlidersIcon />}
-						{previewMode === EPreview.onlyEditor && <FilePenLineIcon />}
+						{previewMode === EPreview.row && (
+							<Columns2Icon
+								{...showInDevelopment({ 'data-testid': 'row-mode' })}
+							/>
+						)}
+						{previewMode === EPreview.column && (
+							<Rows2Icon
+								{...showInDevelopment({ 'data-testid': 'column-mode' })}
+							/>
+						)}
+						{previewMode === EPreview.onlyEditor && (
+							<FilePenLineIcon
+								{...showInDevelopment({ 'data-testid': 'only-editor-mode' })}
+							/>
+						)}
+						{previewMode === EPreview.onlyPreview && (
+							<FileSlidersIcon
+								{...showInDevelopment({ 'data-testid': 'only-preview-mode' })}
+							/>
+						)}
 					</Minibutton>
 				</div>
 			</div>

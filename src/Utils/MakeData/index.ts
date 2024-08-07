@@ -390,6 +390,16 @@ function uuid() {
 	return uuidv4();
 }
 
+function randomObject(keys: string[], quantity = 1) {
+	return range(quantity).map((i): Record<string, string> => {
+		let t = {};
+		for (const key of keys) {
+			t = { ...t, [key]: `${key}-${i}` };
+		}
+		return { ...t };
+	});
+}
+
 export const makeData = {
 	random,
 	vehicles,
@@ -400,4 +410,5 @@ export const makeData = {
 	brawlers,
 	uuid,
 	chat,
+	randomObject,
 };

@@ -1,10 +1,4 @@
-import {
-	Dispatch,
-	SetStateAction,
-	useRef,
-	useState,
-	KeyboardEvent,
-} from 'react';
+import { useRef, useState } from 'react';
 import { useTranslation } from '~/Hooks/UseTranslation';
 import { Main } from '~/Components/Main';
 import { Section } from '~/Components/Section';
@@ -12,65 +6,8 @@ import { QuickAccessGithub } from '~/Components/QuickAccessGithub';
 import { Chip } from '~/Components/Chip';
 import { Input } from '~/Components/Input';
 import { Button } from '~/Components/Button';
-
-function handleAddChip(
-	chipToAdd: string,
-	setChips: Dispatch<SetStateAction<string[]>>,
-	setChipToAdd: Dispatch<SetStateAction<string>>
-) {
-	if (!chipToAdd) return;
-	setChips(prev => [...prev, chipToAdd]);
-	setChipToAdd('');
-}
-
-function handleRemoveChip(
-	chipToRemove: string,
-	setChips: Dispatch<SetStateAction<string[]>>
-) {
-	setChips(prev => prev.filter(item => item !== chipToRemove));
-}
-
-function handleUpdateChip(
-	oldValue: string,
-	newValue: string,
-	setChips: Dispatch<SetStateAction<string[]>>
-) {
-	setChips(prev => {
-		const t = prev.map(item => {
-			if (item === oldValue) {
-				return newValue;
-			}
-			return item;
-		});
-
-		return t;
-	});
-}
-
-type KeyDownYoutubeProps = {
-	event: KeyboardEvent<HTMLInputElement>;
-	valueYoutube: string;
-	setChipsYoutube: Dispatch<SetStateAction<string[]>>;
-	setValueYoutube: Dispatch<SetStateAction<string>>;
-};
-function keyDownYoutube({
-	event,
-	valueYoutube,
-	setChipsYoutube,
-	setValueYoutube,
-}: KeyDownYoutubeProps) {
-	if (event.key === 'Backspace' && valueYoutube.trim() === '') {
-		console.log('TODO: Ativar Edição Por Backspace');
-	}
-	if (
-		(event.key === ',' || event.key === 'Enter') &&
-		valueYoutube.trim() !== ''
-	) {
-		event.preventDefault();
-		setChipsYoutube(prev => [...prev, valueYoutube.trim()]);
-		setValueYoutube('');
-	}
-}
+import { utilsChip } from '~/Utils/Chips';
+import { showInDevelopment } from '~/Utils/ShowInDevelopment';
 
 export function ChipPage() {
 	const { translate } = useTranslation();
@@ -103,19 +40,27 @@ export function ChipPage() {
 			<Section title={translate('CONTROLLED')} variant="h2">
 				<Section title={translate('EDITABLE')} variant="h3">
 					<span>{translate('EDITABLE_MODE_BY_CLICK')}</span>
-					<Chip value={valueChip1} onChange={(_, e) => setValueChip1(e)} />
+					<Chip
+						{...showInDevelopment({ 'data-testid': 'chip-editable' })}
+						value={valueChip1}
+						onChange={(_, e) => setValueChip1(e)}
+					/>
 				</Section>
 
 				<Section title={translate('CRUD')} variant="h3">
 					<div className="flex gap-2 items-center justify-center mb-2">
 						<Input
+							{...showInDevelopment({ 'data-testid': 'input-add-chip' })}
 							value={chipToAdd}
 							onChange={e => setChipToAdd(e.target.value)}
 							placeholder={translate('CHIP_DESCRIPTION')}
 						/>
 						<Button
+							{...showInDevelopment({ 'data-testid': 'button-add-chip' })}
 							onClick={() => {
-								handleAddChip(chipToAdd, setChips, setChipToAdd);
+								if (!chipToAdd) return;
+								setChips(prev => [...prev, chipToAdd]);
+								setChipToAdd('');
 							}}
 						>
 							{translate('ADD')}
@@ -124,11 +69,18 @@ export function ChipPage() {
 					<div className="flex gap-2 flex-wrap">
 						{chips.map(item => (
 							<Chip
+								{...showInDevelopment({
+									'data-testid': `chip-editable-${item}`,
+								})}
 								key={item}
 								value={item}
-								onRemove={e => handleRemoveChip(e, setChips)}
+								onRemove={e =>
+									setChips(prev =>
+										prev.filter(chipToFilter => chipToFilter !== e),
+									)
+								}
 								onChange={(oldValue, newValue) =>
-									handleUpdateChip(oldValue, newValue, setChips)
+									utilsChip.onChangeChip({ fn: setChips, newValue, oldValue })
 								}
 							/>
 						))}
@@ -139,16 +91,24 @@ export function ChipPage() {
 					<div className="flex gap-2 items-center flex-wrap p-2 border bg-slate-900 rounded">
 						{chipsYoutube.map(tag => (
 							<Chip
+								{...showInDevelopment({
+									'data-testid': `chip-editable-${tag}`,
+								})}
 								key={tag}
 								value={tag}
 								onChange={(oldValue, newValue) =>
-									handleUpdateChip(oldValue, newValue, setChipsYoutube)
+									utilsChip.onChangeChip({ fn: setChips, newValue, oldValue })
 								}
-								onRemove={e => handleRemoveChip(e, setChipsYoutube)}
+								onRemove={chipToRemove => {
+									setChipsYoutube(prev =>
+										prev.filter(item => item !== chipToRemove),
+									);
+								}}
 							/>
 						))}
 
 						<input
+							{...showInDevelopment({ 'data-testid': 'input-youtube-like' })}
 							className="p-2 outline-none overflow-hidden bg-slate-900 text-white flex-1 min-w-[30px]"
 							ref={inputRef}
 							value={valueYoutube}
@@ -156,7 +116,7 @@ export function ChipPage() {
 								setValueYoutube(event.target.value);
 							}}
 							onKeyDown={event =>
-								keyDownYoutube({
+								utilsChip.keyDownYoutube({
 									event,
 									setChipsYoutube,
 									setValueYoutube,
