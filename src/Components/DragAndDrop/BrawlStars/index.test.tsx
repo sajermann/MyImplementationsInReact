@@ -5,7 +5,7 @@ import { fireEvent, render } from '@testing-library/react';
 import { it, describe } from 'vitest';
 import { BrawlStar } from '.';
 
-describe('Components/BrawlStar', () => {
+describe('Components/DragAndDrop/BrawlStar', () => {
 	it(`must render component`, async () => {
 		const { queryAllByRole, container } = render(<BrawlStar />);
 		const result = queryAllByRole('button');

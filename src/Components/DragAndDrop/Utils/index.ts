@@ -62,3 +62,14 @@ export function save({
 	}
 	onSaveBrawersByTier({ ...brawlerOld });
 }
+
+export function handleKeyUpDroppable(
+	event: KeyboardEvent,
+	isHoverMouse: boolean,
+	saveData: () => void,
+) {
+	const allowKeys = ['Control', 'Enter'];
+	if (allowKeys.includes(event.key) && isHoverMouse) {
+		saveData();
+	}
+}

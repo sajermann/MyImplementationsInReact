@@ -69,7 +69,7 @@ export function BrawlStar() {
 									onSaveItems: setItems,
 								})
 							}
-							className="border border-b-0 w-full min-h-[7rem] flex p-2 gap-2 flex-wrap"
+							className="border border-b-0 w-full min-h-[7rem] flex p-2 gap-2 flex-wrap relative"
 							disableDropByKey
 							disableCountdown
 						>

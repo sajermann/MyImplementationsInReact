@@ -63,6 +63,7 @@ export function useToast() {
 
 						<div className="flex items-center justify-center">
 							<button
+								aria-label="close"
 								data-role="close"
 								onClick={() => {
 									toast.dismiss(t.id);
@@ -97,7 +98,7 @@ export function useToast() {
 			),
 			{
 				duration,
-			}
+			},
 		);
 	}
 

@@ -650,17 +650,17 @@ export function useRoutesMenu() {
 				label: translate('PAGINATION'),
 				demo: <PaginationDemo />,
 			},
-			{
-				name: 'Simple Md Text Editor',
-				path: '/simplet-md-text-editor',
-				implements_code:
-					'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Components/SimpleMdTextEditor',
-				docs_code:
-					'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/SimpleMdTextEditor',
-				element: <SimpleMdTextEditorPage />,
-				label: translate('SIMPLE_MD_TEXT_EDITOR'),
-				// demo: <PaginationDemo />,
-			},
+			// {
+			// 	name: 'Simple Md Text Editor',
+			// 	path: '/simplet-md-text-editor',
+			// 	implements_code:
+			// 		'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Components/SimpleMdTextEditor',
+			// 	docs_code:
+			// 		'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/SimpleMdTextEditor',
+			// 	element: <SimpleMdTextEditorPage />,
+			// 	label: translate('SIMPLE_MD_TEXT_EDITOR'),
+			// 	// demo: <PaginationDemo />,
+			// },
 			// {
 			// 	name: 'Virtualization',
 			// 	path: '/virtualization',
