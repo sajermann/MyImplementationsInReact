@@ -1,26 +1,13 @@
 import { useState } from 'react';
-import { DndContext, DragEndEvent, DragStartEvent } from '@dnd-kit/core';
+import { DndContext } from '@dnd-kit/core';
 import { makeData } from '~/Utils/MakeData';
 import { useTranslation } from '~/Hooks/UseTranslation';
 import { TBrawler } from '~/Types/TBrawler';
-import { isEmpty } from '~/Utils/IsEmpty';
 import { Draggable } from '../Draggable';
 import { AvatarBrawler } from './AvatarBrawler';
 import { Droppable } from '../Droppable';
-
-type SaveProps = {
-	data: TBrawler;
-	fromId: string;
-	toId: string;
-};
-
-type TTier = 'S' | 'A' | 'B' | 'C';
-type TBrawlerByTier = {
-	S: Array<TBrawler>;
-	A: Array<TBrawler>;
-	B: Array<TBrawler>;
-	C: Array<TBrawler>;
-};
+import { handleDragEnd, save } from '../Utils';
+import { TBrawlerByTier, TTier } from '../Types';
 
 export function BrawlStar() {
 	const { translate } = useTranslation();
@@ -32,39 +19,22 @@ export function BrawlStar() {
 		C: [],
 	});
 
-	function save({ data, toId, fromId }: SaveProps) {
-		console.log({ data, toId, fromId });
-		if (isEmpty(data as object) || toId === fromId) return;
-
-		const brawlerOld = { ...brawlersByTier };
-		brawlerOld[toId as TTier] = [...brawlerOld[toId as TTier], data];
-		if (fromId === 'origin') {
-			setItems(prev => prev.filter(item => item.name !== data.name));
-		} else {
-			brawlerOld[fromId as TTier] = brawlerOld[fromId as TTier].filter(
-				item => item.name !== data.name
-			);
-		}
-		setBrawlersByTier({ ...brawlerOld });
-	}
-
-	function handleDragStart(event: DragStartEvent) {
-		console.log('Start', event);
-	}
-
-	function handleDragEnd(event: DragEndEvent) {
-		console.log('End', event);
-		const to = event?.collisions?.at(0);
-		if (!to) return;
-		const toId = to.id as string;
-		const data = event.active.data.current as TBrawler;
-		const { fromId } = JSON.parse(event.active.id as string);
-		if (isEmpty(data)) return;
-		save({ data, fromId, toId });
-	}
-
 	return (
-		<DndContext onDragStart={handleDragStart} onDragEnd={handleDragEnd}>
+		<DndContext
+			onDragEnd={event =>
+				handleDragEnd({
+					event,
+					onSave: data => {
+						save({
+							...data,
+							brawlersByTier,
+							onSaveBrawersByTier: setBrawlersByTier,
+							onSaveItems: setItems,
+						});
+					},
+				})
+			}
+		>
 			<h1>Brawlers</h1>
 			{items.length > 0 && (
 				<div className="border p-2 w-full flex items-center justify-center gap-2 flex-wrap">
@@ -89,8 +59,17 @@ export function BrawlStar() {
 						</span>
 						<Droppable
 							id={tierDescription}
-							onDropCustom={save}
-							className="border border-b-0 w-full min-h-[7rem] flex p-2 gap-2 flex-wrap"
+							onDropCustom={({ data, fromId, toId }) =>
+								save({
+									data: data as TBrawler,
+									fromId,
+									toId,
+									brawlersByTier,
+									onSaveBrawersByTier: setBrawlersByTier,
+									onSaveItems: setItems,
+								})
+							}
+							className="border border-b-0 w-full min-h-[7rem] flex p-2 gap-2 flex-wrap relative"
 							disableDropByKey
 							disableCountdown
 						>

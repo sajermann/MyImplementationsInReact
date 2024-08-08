@@ -1,5 +1,12 @@
 {
 	"translations": {
+		"MINIMIZE": "Minimizar",
+		"MAXIMIZE": "Maximizar",
+		"ITALIC": "Itálico",
+		"BOLD": "Negrito",
+		"LIST": "Lista",
+		"CHANGE_PREVIEW_MODE": "Mudar modo de pré visualização",
+		"SIMPLE_MD_TEXT_EDITOR": "Editor Texto MD Simples",
 		"FROM_TOP_TO_BOTTOM": "De Cima para Baixo",
 		"FROM_BOTTOM_TO_TOP": "De baixo para cima",
 		"FROM_RIGHT_TO_LEFT": "Da direita para esquerda",

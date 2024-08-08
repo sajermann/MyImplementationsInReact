@@ -45,7 +45,7 @@ function animal(...lens: number[]) {
 					faker.animal.cat(),
 					faker.animal.bird(),
 				]),
-			})
+			}),
 		);
 	};
 
@@ -101,7 +101,7 @@ function chat(quantity: number) {
 				userAvatar: i % 2 === 0 ? userAvatarOne : userAvatarTwo,
 				message: faker.lorem.paragraphs(),
 				ref: createRef<ForwardedRef<unknown>>(),
-			})
+			}),
 		);
 	};
 
@@ -390,6 +390,16 @@ function uuid() {
 	return uuidv4();
 }
 
+function randomObject(keys: string[], quantity = 1) {
+	return range(quantity).map((i): { [index: string]: string } => {
+		let t = {};
+		for (const key of keys) {
+			t = { ...t, [key]: `${key}-${i}` };
+		}
+		return { ...t };
+	});
+}
+
 export const makeData = {
 	random,
 	vehicles,
@@ -400,4 +410,5 @@ export const makeData = {
 	brawlers,
 	uuid,
 	chat,
+	randomObject,
 };

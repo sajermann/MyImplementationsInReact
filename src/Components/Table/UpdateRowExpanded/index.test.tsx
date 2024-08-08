@@ -5,7 +5,7 @@ import { fireEvent, render, waitFor } from '@testing-library/react';
 import { it, describe, vi } from 'vitest';
 import { makeData } from '~/Utils/MakeData';
 import { UpdateRowExpanded } from '.';
-import { InjectorProviders } from '../InjectorProviders';
+import { InjectorProviders } from '../../InjectorProviders';
 
 describe('Components/Table/UpdateRowExpanded', () => {
 	it(`must change Select components`, async () => {
@@ -18,7 +18,7 @@ describe('Components/Table/UpdateRowExpanded', () => {
 						getToggleExpandedHandler: () => vi.fn(),
 					}}
 				/>
-			</InjectorProviders>
+			</InjectorProviders>,
 		);
 	});
 });
