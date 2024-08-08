@@ -7,23 +7,22 @@ import { fireEvent, render, waitFor } from '@testing-library/react';
 import {
 	ColumnDef,
 	getCoreRowModel,
-	getSortedRowModel,
 	useReactTable,
-	getFilteredRowModel,
 	Row,
 } from '@tanstack/react-table';
 import { describe, expect, vi } from 'vitest';
-import { RefObject, useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import { TSelection } from '~/Types/TSelection';
 import { makeData } from '~/Utils/MakeData';
 
-import * as useVirtualizerMock from '@tanstack/react-virtual';
 import { RowsWithVirtualization } from '.';
 
 const fallback: Record<string, string>[] = [];
 
-const columns: ColumnDef<Record<string, string>>[] = [
+type TIdName = { [index: string]: string };
+
+const columns: ColumnDef<TIdName>[] = [
 	{
 		accessorKey: 'id',
 		header: 'Id',
@@ -34,23 +33,23 @@ const columns: ColumnDef<Record<string, string>>[] = [
 	},
 ];
 
-type TProps<T> = {
-	selection?: Omit<TSelection<T>, 'disableCheckbox'>;
+type TProps = {
+	selection?: Omit<TSelection<TIdName>, 'disableCheckbox'>;
 	disabledVirtualization?: boolean;
-	rowForUpdate?: { row: number; data: T } | null;
+	rowForUpdate?: { row: number; data: TIdName } | null;
 	expandLine?: {
-		render: (data: Row<T>) => React.ReactNode;
+		render: (data: Row<TIdName>) => React.ReactNode;
 	};
 };
 
-function Mock<T>({
+function Mock({
 	disabledVirtualization,
 	expandLine,
 	rowForUpdate,
 	selection,
-}: TProps<T>) {
-	const [data, setData] = useState<Record<string, string>[]>([]);
-	const tableContainerRef = useRef<HTMLDivElement>(null);
+}: TProps) {
+	const [data, setData] = useState<TIdName[]>([]);
+	const ref = useRef<HTMLDivElement>(null);
 	const table = useReactTable({
 		data: data || fallback,
 		columns,
@@ -69,57 +68,75 @@ function Mock<T>({
 	return (
 		<div className="w-full h-96">
 			<div
+				data-testid="ref-container"
 				className="w-full h-80 p-4 border rounded-lg overflow-auto"
-				ref={tableContainerRef}
+				ref={ref}
 			>
-				<RowsWithVirtualization
-					tableContainerRef={tableContainerRef}
+				<RowsWithVirtualization<TIdName>
+					tableContainerRef={ref}
 					disabledVirtualization={disabledVirtualization}
 					rows={rows}
 					expandLine={expandLine}
 					rowForUpdate={rowForUpdate}
 					selection={selection}
 				/>
+				<button
+					onClick={() => {
+						console.log(
+							'CLICKCCCCC',
+							ref.current?.scroll,
+							ref.current?.scrollBy,
+						);
+						ref.current?.scrollTo({
+							top: 99_999_999,
+						});
+					}}
+				>
+					Scroll to Bottom
+				</button>
 			</div>
 		</div>
 	);
 }
 
 describe('Components/Table/RowsWithVirtualization', () => {
-	afterEach(() => {
-		vi.clearAllMocks();
-		vi.resetAllMocks();
+	vi.spyOn(Element.prototype, 'getBoundingClientRect').mockImplementation(
+		() => ({
+			width: 120,
+			height: 120,
+			top: 0,
+			left: 0,
+			bottom: 0,
+			right: 0,
+			x: 0,
+			y: 0,
+			// eslint-disable-next-line @typescript-eslint/no-empty-function
+			toJSON: () => {},
+		}),
+	);
 
-		vi.mock('react-router-dom', async () => ({
-			__esModule: true,
-			...(await vi.importActual('@tanstack/react-virtual')),
-		}));
+	it(`must render first item`, async () => {
+		const { queryByText, getByText } = render(<Mock />);
+		const first = getByText(`name-0`);
+		expect(first).toBeTruthy();
+		const last = queryByText(`name-49`);
+		expect(last).toBeFalsy();
 	});
 
-	it(`must ...`, async () => {
-		vi.spyOn(useVirtualizerMock, 'useVirtualizer').mockImplementation(() => {
-			console.log('Aquuiii');
-			return {
-				getVirtualItems: () => [
-					{ index: 1, lane: 1, end: 1, key: 1, size: 10, start: 10 },
-				],
-				getTotalSize: () => 2000,
-			} as any;
-		});
-		const { findByText, queryByText, queryAllByText, getAllByText, getByText } =
-			render(<Mock />);
-		fireEvent.click(getByText('Test Button'));
-		const first = getAllByText(`name-0`);
-		// const last = queryAllByText(`name-${data.length}`);
-		console.log({ first });
-
-		// await waitFor(
-		// 	async () => {
-		// 		const text = await findByText('name-0');
-		// 		console.log({ text });
-		// 		expect(text).not.toBeUndefined();
-		// 	},
-
-		// );
-	});
+	// Por algum motivo o scroll não está funcionando
+	// it(`must render last item`, async () => {
+	// 	const { queryByText, getAllByText, getByText, getByTestId, findByText } =
+	// 		render(<Mock />);
+	// 	const refContainer = getByTestId('ref-container');
+	// 	await waitFor(async () => {
+	// 		fireEvent.scroll(refContainer, { target: { scrollDown: 99_999_999 } });
+	// 		const scrollButton = getByText('Scroll to Bottom');
+	// 		fireEvent.click(scrollButton);
+	// 		const first = await findByText(`name-99`);
+	// 		console.log({ first });
+	// 		expect(first).toBeTruthy();
+	// 		const last = queryByText(`name-0`);
+	// 		expect(last).toBeFalsy();
+	// 	});
+	// });
 });

@@ -31,12 +31,12 @@ export function RowsWithVirtualization<T>({
 		estimateSize: () => 68,
 		overscan: 10,
 	});
-	console.log({
-		disabledVirtualization,
-		virtualItems: getVirtualItems(),
-		ref: tableContainerRef.current,
-		totalSize: getTotalSize(),
-	});
+	// console.log({
+	// 	disabledVirtualization,
+	// 	virtualItems: getVirtualItems(),
+	// 	ref: tableContainerRef.current,
+	// 	totalSize: getTotalSize(),
+	// });
 	if (disabledVirtualization) return null;
 	const paddingTop =
 		getVirtualItems().length > 0 ? getVirtualItems()?.[0]?.start || 0 : 0;

@@ -172,13 +172,13 @@ export function Table<T, U = undefined>({
 					if (sorting?.manualSorting) {
 						const resultSorts = (
 							funcUpdater as unknown as (
-								dataTempOldSort: SortingState
+								dataTempOldSort: SortingState,
 							) => Record<string, unknown>[]
 						)(sortingInternal);
 						sorting.manualSorting.fn(resultSorts);
 					}
 					return setSortingInternal(funcUpdater);
-			  },
+				},
 		getSortedRowModel: getSortedRowModel(),
 		getRowCanExpand: () => !!expandLine,
 		getExpandedRowModel: getExpandedRowModel(),
@@ -209,6 +209,7 @@ export function Table<T, U = undefined>({
 		<>
 			<Header table={table} globalFilter={globalFilter} tools={tools} />
 			<div
+				id="batata"
 				ref={tableContainerRef}
 				className={managerClassNames({
 					[styles.customContainer]: true,

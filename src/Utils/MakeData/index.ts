@@ -391,7 +391,7 @@ function uuid() {
 }
 
 function randomObject(keys: string[], quantity = 1) {
-	return range(quantity).map((i): Record<string, string> => {
+	return range(quantity).map((i): { [index: string]: string } => {
 		let t = {};
 		for (const key of keys) {
 			t = { ...t, [key]: `${key}-${i}` };
