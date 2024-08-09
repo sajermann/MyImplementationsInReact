@@ -9,42 +9,120 @@ import { useToast } from '~/Hooks/UseToast';
 
 export function ToastPage() {
 	const { translate } = useTranslation();
-	const { customToast } = useToast();
-
-	function handleError(type: 'error' | 'info' | 'success' | 'warning') {
-		customToast({ msg: translate('I_AM_TOAST'), type });
-	}
+	const { customReactHotToast, customReactToastify } = useToast();
 
 	return (
 		<Main data-content="content-main">
 			<Section title="Toast" variant="h1">
 				{`${translate('IMPLEMENTS_COMPONENT')} Toast ${translate(
-					'USING_THE_LIB'
-				)} react-hot-toast`}
+					'USING_THE_LIB',
+				)} react-hot-toast / react-toastify`}
 			</Section>
-			<Section title={translate('INSTALLATION_OF_LIB')} variant="h2">
+			<Section
+				title={translate('INSTALLATION_OF_LIB')}
+				variant="h2"
+				className="flex flex-col gap-2"
+			>
 				<CodeBlock>npm i react-hot-toast;</CodeBlock>
+				<CodeBlock>npm i react-toastify;</CodeBlock>
 			</Section>
 
 			<Section title={translate('CODES')} variant="h2">
 				<div className="flex gap-2 bg-dark-400">
-					<QuickAccessGithub name="Checkbox" />
+					<QuickAccessGithub name="Toast" />
 				</div>
 			</Section>
 
-			<Section title="Toast" variant="h2">
+			<Section title="react-hot-toast" variant="h2">
 				<ComponentBlock>
-					<Button colorStyle="success" onClick={() => handleError('success')}>
+					<Button
+						colorStyle="success"
+						onClick={() =>
+							customReactHotToast(translate('SUCCESS'), { type: 'success' })
+						}
+					>
 						{translate('SUCCESS')}
 					</Button>
-					<Button colorStyle="secondary" onClick={() => handleError('error')}>
+					<Button
+						colorStyle="secondary"
+						onClick={() =>
+							customReactHotToast(translate('ERROR'), { type: 'error' })
+						}
+					>
 						{translate('ERROR')}
 					</Button>
-					<Button colorStyle="warning" onClick={() => handleError('warning')}>
+					<Button
+						colorStyle="warning"
+						onClick={() =>
+							customReactHotToast(translate('WARNING'), { type: 'warning' })
+						}
+					>
 						{translate('WARNING')}
 					</Button>
-					<Button onClick={() => handleError('info')}>
+					<Button
+						onClick={() =>
+							customReactHotToast(translate('INFO'), { type: 'info' })
+						}
+					>
 						{translate('INFO')}
+					</Button>
+					<Button
+						variant="outlined"
+						onClick={() =>
+							customReactHotToast(translate('DEFAULT'), {
+								type: 'default',
+								id: 'default',
+							})
+						}
+					>
+						{translate('DEFAULT')}
+					</Button>
+				</ComponentBlock>
+			</Section>
+
+			<Section title="react-toastify" variant="h2">
+				<ComponentBlock>
+					<Button
+						colorStyle="success"
+						onClick={() =>
+							customReactToastify(translate('SUCCESS'), { type: 'success' })
+						}
+					>
+						{translate('SUCCESS')}
+					</Button>
+					<Button
+						colorStyle="secondary"
+						onClick={() =>
+							customReactToastify(translate('ERROR'), { type: 'error' })
+						}
+					>
+						{translate('ERROR')}
+					</Button>
+					<Button
+						colorStyle="warning"
+						onClick={() =>
+							customReactToastify(translate('WARNING'), { type: 'warning' })
+						}
+					>
+						{translate('WARNING')}
+					</Button>
+					<Button
+						onClick={() =>
+							customReactToastify(translate('INFO'), { type: 'info' })
+						}
+					>
+						{translate('INFO')}
+					</Button>
+					<Button
+						variant="outlined"
+						onClick={() =>
+							customReactToastify(translate('DEFAULT'), {
+								type: 'default',
+								id: 'default',
+							})
+						}
+					>
+						{translate('DEFAULT')}
 					</Button>
 				</ComponentBlock>
 			</Section>

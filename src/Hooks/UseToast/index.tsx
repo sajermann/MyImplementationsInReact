@@ -1,110 +1,87 @@
-/* eslint-disable react/button-has-type */
-import { toast } from 'react-hot-toast';
+import { toast as reactHotToast, ToastOptions } from 'react-hot-toast';
+import { toast as reactToastify, ToastContentProps } from 'react-toastify';
 
 import { Icons } from '~/Components/Icons';
-import { managerClassNames } from '~/Utils/ManagerClassNames';
+import { CustomReactHotToast } from './CustomReactHotToast';
+import { CustomReactToastify } from './CustomReactToastify';
+
+export type TTypeOptions = 'info' | 'success' | 'warning' | 'error' | 'default';
+
+const DURATION = 3000;
+
+export const ICONS = {
+	success: <Icons nameIcon="checked" />,
+	error: <Icons nameIcon="error" />,
+	warning: <Icons nameIcon="warning" />,
+	info: <Icons nameIcon="info" />,
+	default: null,
+};
+
+export const COMMONS_TYPE = {
+	success: 'text-success-700',
+	error: 'text-error-700',
+	warning: 'text-warning-700',
+	info: 'text-blue-400',
+	default: 'text-info-700',
+};
+
+export type TCustomReactToastify = {
+	type?: TTypeOptions;
+	autoClose?: number;
+	id?: string;
+};
 
 type Props = {
-	type: 'info' | 'success' | 'error' | 'warning';
-	msg: string;
-	enableProgress?: boolean;
+	type?: TTypeOptions;
+	duration?: number;
+	id?: string;
 };
 
 export function useToast() {
-	const duration = 3000;
-
-	function customToast({ type, msg, enableProgress }: Props) {
-		const commonsType = {
-			'bg-success-500 text-success-700': type === 'success',
-			'bg-error-500 text-error-700': type === 'error',
-			'bg-warning-500 text-warning-700': type === 'warning',
-			'bg-info-500 text-info-700': type === 'info',
-		};
-
-		const commonsTypeProgressBarPrimary = {
-			'bg-success-700': type === 'success',
-			'bg-error-700': type === 'error',
-			'bg-warning-700': type === 'warning',
-			'bg-info-700': type === 'info',
-		};
-
-		const icons = {
-			info: <Icons nameIcon="info" />,
-			success: <Icons nameIcon="checked" />,
-			error: <Icons nameIcon="error" />,
-			warning: <Icons nameIcon="info" />,
-		};
-
-		return toast.custom(
-			t => (
-				<div
-					className={managerClassNames({
-						'max-w-2xl w-full shadow-lg rounded pointer-events-auto flex': true,
-						'ring-1 ring-black ring-opacity-5  font-bold gap-1': true,
-						' flex-col': true,
-						'animate-enter': t.visible,
-						'animate-leave': !t.visible,
-						...commonsType,
-					})}
-				>
-					<div className="flex w-full py-4 px-3">
-						<div className="flex flex-1 w-0 items-center flex-row gap-2">
-							<div
-								className={managerClassNames({
-									'min-w-[1.75rem] w-7 max-w-[1.75rem]': true,
-									'min-h-[1.75rem] h-7 max-h-[1.75rem]': true,
-									...commonsType,
-								})}
-							>
-								{icons[type]}
-							</div>
-							<div data-type={type}>{msg}</div>
-						</div>
-
-						<div className="flex items-center justify-center">
-							<button
-								aria-label="close"
-								data-role="close"
-								onClick={() => {
-									toast.dismiss(t.id);
-								}}
-								className={managerClassNames({
-									'w-5 h-4 flex items-center justify-center': true,
-									...commonsType,
-								})}
-							>
-								<Icons nameIcon="close" />
-							</button>
-						</div>
-					</div>
-
-					{enableProgress && (
-						<div className="w-full relative -top-2">
-							<div
-								className={managerClassNames({
-									'w-full h-2 rounded-r-sm absolute': true,
-									...commonsType,
-								})}
-							/>
-							<div
-								className={managerClassNames({
-									'w-[50%] h-2 rounded-r-sm absolute': true,
-									...commonsTypeProgressBarPrimary,
-								})}
-							/>
-						</div>
-					)}
-				</div>
+	function customReactHotToast(message: string, { type, duration, id }: Props) {
+		return reactHotToast.custom(
+			options => (
+				<CustomReactHotToast
+					message={message}
+					type={type}
+					options={options}
+					closeToast={() => reactHotToast.dismiss(options.id)}
+				/>
 			),
 			{
-				duration,
+				duration: duration || DURATION,
+				id,
 			},
 		);
 	}
 
-	function removeToast(id?: string) {
-		toast.remove(id);
+	function customReactToastify(
+		msg: string,
+		options?: TCustomReactToastify,
+		toastContentOptions?: ToastContentProps,
+		toastOptions?: ToastOptions,
+	) {
+		return reactToastify(
+			internalProps => (
+				<CustomReactToastify
+					message={msg}
+					toastContentOptions={{ ...internalProps, ...toastContentOptions }}
+					options={options}
+				/>
+			),
+			{
+				...toastOptions,
+				className:
+					'bg-transparent backdrop-blur-md dark:text-white text-black h-full w-full border rounded-lg overflow-hidden m-1',
+				bodyClassName: 'h-full w-full p-0',
+				autoClose: options?.autoClose || 3000,
+				closeButton: false,
+				type: options?.type,
+				icon: false,
+				toastId: options?.id,
+			},
+		);
 	}
 
-	return { customToast, removeToast };
+	return { customReactHotToast, customReactToastify };
 }

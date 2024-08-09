@@ -36,7 +36,7 @@ export const Section = memo(
 			])}
 		>
 			{title && variant && <CustomHeading title={title} variant={variant} />}
-			<div>{children}</div>
+			{children}
 		</section>
-	)
+	),
 );

@@ -542,9 +542,9 @@ export function useRoutesMenu() {
 				name: 'Toast',
 				path: '/toast',
 				implements_code:
-					'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Components/Table',
+					'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Components/Toast',
 				docs_code:
-					'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/Table/Toast',
+					'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/Toast',
 				element: <ToastPage />,
 				demo: <ToastDemo />,
 				label: 'Toast',
