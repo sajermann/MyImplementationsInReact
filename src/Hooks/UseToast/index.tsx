@@ -1,21 +1,12 @@
 import { toast as reactHotToast, ToastOptions } from 'react-hot-toast';
 import { toast as reactToastify, ToastContentProps } from 'react-toastify';
 
-import { Icons } from '~/Components/Icons';
 import { CustomReactHotToast } from './CustomReactHotToast';
 import { CustomReactToastify } from './CustomReactToastify';
 
 export type TTypeOptions = 'info' | 'success' | 'warning' | 'error' | 'default';
 
 const DURATION = 3000;
-
-export const ICONS = {
-	success: <Icons nameIcon="checked" />,
-	error: <Icons nameIcon="error" />,
-	warning: <Icons nameIcon="warning" />,
-	info: <Icons nameIcon="info" />,
-	default: null,
-};
 
 export const COMMONS_TYPE = {
 	success: 'text-success-700',
@@ -31,26 +22,29 @@ export type TCustomReactToastify = {
 	id?: string;
 };
 
-type Props = {
+type TCustomReactHotToastProps = {
 	type?: TTypeOptions;
 	duration?: number;
 	id?: string;
 };
 
 export function useToast() {
-	function customReactHotToast(message: string, { type, duration, id }: Props) {
+	function customReactHotToast(
+		message: string,
+		props?: TCustomReactHotToastProps,
+	) {
 		return reactHotToast.custom(
 			options => (
 				<CustomReactHotToast
 					message={message}
-					type={type}
+					type={props?.type}
 					options={options}
 					closeToast={() => reactHotToast.dismiss(options.id)}
 				/>
 			),
 			{
-				duration: duration || DURATION,
-				id,
+				duration: props?.duration || DURATION,
+				id: props?.id,
 			},
 		);
 	}

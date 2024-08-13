@@ -4,13 +4,13 @@ import { useTranslation } from '~/Hooks/UseTranslation';
 
 export function ToastDemo() {
 	const { translate } = useTranslation();
-	const { customToast } = useToast();
+	const { customReactToastify } = useToast();
 
 	return (
 		<Button
 			colorStyle="success"
 			onClick={() =>
-				customToast({ msg: translate('I_AM_TOAST'), type: 'success' })
+				customReactToastify(translate('I_AM_TOAST'), { type: 'success' })
 			}
 		>
 			{translate('SUCCESS')}

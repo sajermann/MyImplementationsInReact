@@ -38,7 +38,9 @@ export function ToastPage() {
 					<Button
 						colorStyle="success"
 						onClick={() =>
-							customReactHotToast(translate('SUCCESS'), { type: 'success' })
+							customReactHotToast(`Toast ${translate('SUCCESS')}`, {
+								type: 'success',
+							})
 						}
 					>
 						{translate('SUCCESS')}
@@ -46,7 +48,9 @@ export function ToastPage() {
 					<Button
 						colorStyle="secondary"
 						onClick={() =>
-							customReactHotToast(translate('ERROR'), { type: 'error' })
+							customReactHotToast(`Toast ${translate('ERROR')}`, {
+								type: 'error',
+							})
 						}
 					>
 						{translate('ERROR')}
@@ -54,14 +58,18 @@ export function ToastPage() {
 					<Button
 						colorStyle="warning"
 						onClick={() =>
-							customReactHotToast(translate('WARNING'), { type: 'warning' })
+							customReactHotToast(`Toast ${translate('WARNING')}`, {
+								type: 'warning',
+							})
 						}
 					>
 						{translate('WARNING')}
 					</Button>
 					<Button
 						onClick={() =>
-							customReactHotToast(translate('INFO'), { type: 'info' })
+							customReactHotToast(`Toast ${translate('INFO')}`, {
+								type: 'info',
+							})
 						}
 					>
 						{translate('INFO')}
@@ -69,7 +77,7 @@ export function ToastPage() {
 					<Button
 						variant="outlined"
 						onClick={() =>
-							customReactHotToast(translate('DEFAULT'), {
+							customReactHotToast(`Toast ${translate('DEFAULT')}`, {
 								type: 'default',
 								id: 'default',
 							})

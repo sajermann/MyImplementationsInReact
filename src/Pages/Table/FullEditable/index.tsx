@@ -13,6 +13,7 @@ import { Main } from '~/Components/Main';
 import { Section } from '~/Components/Section';
 import { QuickAccessGithub } from '~/Components/QuickAccessGithub';
 import { ContainerInput } from '~/Components/ContainerInput';
+import { showInDevelopment } from '~/Utils/ShowInDevelopment';
 
 const DEFAULT_OPTIONS = [
 	{
@@ -46,7 +47,7 @@ export function FullEditablePage() {
 					};
 				}
 				return row;
-			})
+			}),
 		);
 	}
 
@@ -91,6 +92,9 @@ export function FullEditablePage() {
 				enableSorting: true,
 				cell: info => (
 					<Input
+						{...showInDevelopment({
+							'data-testid': `input-name-${info.row.index}`,
+						})}
 						type="text"
 						id="name"
 						onChange={e => handleInput(e, info.row.index)}
@@ -108,6 +112,9 @@ export function FullEditablePage() {
 				},
 				cell: info => (
 					<Input
+						{...showInDevelopment({
+							'data-testid': `input-lastName-${info.row.index}`,
+						})}
 						type="text"
 						id="lastName"
 						onChange={e => handleInput(e, info.row.index)}
@@ -154,7 +161,7 @@ export function FullEditablePage() {
 						menuPosition="fixed"
 						menuPortalTarget={document.body}
 						defaultValue={DEFAULT_OPTIONS.find(
-							item => item.value === info.getValue()
+							item => item.value === info.getValue(),
 						)}
 						options={DEFAULT_OPTIONS}
 						onChange={e => {
@@ -167,7 +174,7 @@ export function FullEditablePage() {
 							};
 							handleInput(
 								event as ChangeEvent<HTMLInputElement>,
-								info.row.index
+								info.row.index,
 							);
 						}}
 						id="role"
@@ -185,6 +192,9 @@ export function FullEditablePage() {
 				cell: info => (
 					<ContainerInput className="items-center">
 						<Checkbox
+							{...showInDevelopment({
+								'data-testid': `checkbox-isActive-${info.row.index}`,
+							})}
 							defaultChecked={info.getValue() as boolean}
 							id="isActive"
 							onCheckedChange={e =>
@@ -195,18 +205,20 @@ export function FullEditablePage() {
 				),
 			},
 		],
-		[]
+		[],
 	);
 
 	async function load() {
 		setIsLoading(true);
-		setData(makeData.person(10));
+		setData(makeData.person(5));
 		setIsLoading(false);
 	}
 
 	useEffect(() => {
 		load();
 	}, []);
+
+	console.log({ data, isLoading });
 
 	return (
 		<Main data-content="content-main">
@@ -219,7 +231,12 @@ export function FullEditablePage() {
 				</div>
 			</Section>
 			<Section title={translate('IMPLEMENTS')} variant="h2">
-				<Table isLoading={isLoading} columns={columns} data={data} />
+				<Table
+					disabledVirtualization
+					isLoading={isLoading}
+					columns={columns}
+					data={data}
+				/>
 				<pre>{JSON.stringify(data, null, 2)}</pre>
 			</Section>
 		</Main>
