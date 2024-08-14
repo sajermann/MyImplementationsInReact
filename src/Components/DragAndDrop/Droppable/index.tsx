@@ -3,6 +3,7 @@ import { CountdownCircleTimer } from 'react-countdown-circle-timer';
 import { DetailedHTMLProps, HTMLAttributes, ReactNode, useEffect } from 'react';
 import { isEmpty } from '~/Utils/IsEmpty';
 import { managerClassNames } from '~/Utils/ManagerClassNames';
+import { showInDevelopment } from '~/Utils/ShowInDevelopment';
 import { handleKeyUpDroppable } from '../Utils';
 
 type TOnDropCustomProps<T> = {
@@ -59,6 +60,9 @@ export function Droppable<T>({
 				{ 'bg-green-300 transition-colors duration-500': isOver },
 			])}
 			data-droppableid={`droppable-${id}`}
+			{...showInDevelopment({
+				'data-testid': `droppable-${id}`,
+			})}
 		>
 			{children}
 			{isOver &&

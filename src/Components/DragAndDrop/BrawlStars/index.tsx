@@ -40,6 +40,7 @@ export function BrawlStar() {
 				<div className="border p-2 w-full flex items-center justify-center gap-2 flex-wrap">
 					{items.map(item => (
 						<Draggable
+							onKeyUp={console.log}
 							key={item.name}
 							id={JSON.stringify({ itemId: item.name, fromId: 'origin' })}
 							data={{ ...item }}
