@@ -8,12 +8,12 @@ import { NotFoundPage } from '.';
 
 describe('Pages/NotFoundPage', () => {
 	it(`should render component`, async () => {
-		const { queryByTestId, getByTestId } = render(
+		const { getByText } = render(
 			<InjectorProviders>
 				<NotFoundPage />
 			</InjectorProviders>,
 		);
 
-		// TODO: apply test
+		expect(getByText('Not Found Page')).toBeTruthy();
 	});
 });

@@ -8,12 +8,12 @@ import { InjectorProviders } from '../InjectorProviders';
 
 describe('Components/Sidebar', () => {
 	it(`should render component`, async () => {
-		const { queryByTestId, getByTestId } = render(
+		const { getByTestId } = render(
 			<InjectorProviders>
 				<Sidebar />
 			</InjectorProviders>,
 		);
 
-		// TODO: apply test
+		expect(getByTestId('aside-sidebar')).toBeTruthy();
 	});
 });

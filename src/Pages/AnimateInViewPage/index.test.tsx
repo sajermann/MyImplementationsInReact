@@ -8,12 +8,12 @@ import { AnimateInViewPage } from '.';
 
 describe('Components/AnimateInViewPage', () => {
 	it(`should render component`, async () => {
-		const { queryByTestId, getByTestId } = render(
-			<InjectorProviders>
+		const { getByText } = render(
+			<InjectorProviders noLayout>
 				<AnimateInViewPage />
 			</InjectorProviders>,
 		);
 
-		// TODO: apply test
+		expect(getByText('Animate in View')).toBeTruthy();
 	});
 });

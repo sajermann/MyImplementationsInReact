@@ -8,12 +8,12 @@ import { DragAndDropPage } from '.';
 
 describe('Pages/DragAndDropPage', () => {
 	it(`should render component`, async () => {
-		const { queryByTestId, getByTestId } = render(
+		const { getByText } = render(
 			<InjectorProviders>
 				<DragAndDropPage />
 			</InjectorProviders>,
 		);
 
-		// TODO: apply test
+		expect(getByText('Brawl Stars')).toBeTruthy();
 	});
 });

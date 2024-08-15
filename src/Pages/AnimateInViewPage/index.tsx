@@ -6,12 +6,13 @@ import { Icons } from '~/Components/Icons';
 import { AnimateInView } from '~/Components/AnimateInView';
 
 const config = {
-	en: <Icons nameIcon="eua" />,
+	'en-US': <Icons nameIcon="eua" />,
 	'pt-BR': <Icons nameIcon="brazil" />,
 };
 
 export function AnimateInViewPage() {
 	const { translate, currentLanguage } = useTranslation();
+	console.log({ currentLanguage });
 	return (
 		<Main data-content="content-main">
 			<Section title={translate('ANIMATE_IN_VIEW')} variant="h1">
@@ -24,27 +25,27 @@ export function AnimateInViewPage() {
 			</Section>
 			<Section title={translate('FROM_LEFT_TO_RIGHT')} variant="h2">
 				<AnimateInView className="w-full" type="fromLeft">
-					{config[currentLanguage as 'en' | 'pt-BR']}
+					{config[currentLanguage]}
 				</AnimateInView>
 			</Section>
 			<Section title={translate('FROM_RIGHT_TO_LEFT')} variant="h2">
 				<AnimateInView className="w-full" type="fromRight">
-					{config[currentLanguage as 'en' | 'pt-BR']}
+					{config[currentLanguage]}
 				</AnimateInView>
 			</Section>
 			<Section title={translate('FROM_BOTTOM_TO_TOP')} variant="h2">
 				<AnimateInView className="w-full" type="fromBottom">
-					{config[currentLanguage as 'en' | 'pt-BR']}
+					{config[currentLanguage]}
 				</AnimateInView>
 			</Section>
 			<Section title={translate('FROM_TOP_TO_BOTTOM')} variant="h2">
 				<AnimateInView className="w-full" type="fromTop">
-					{config[currentLanguage as 'en' | 'pt-BR']}
+					{config[currentLanguage]}
 				</AnimateInView>
 			</Section>
 			<Section title="Fade" variant="h2">
 				<AnimateInView className="w-full" type="fade">
-					{config[currentLanguage as 'en' | 'pt-BR']}
+					{config[currentLanguage]}
 				</AnimateInView>
 			</Section>
 		</Main>

@@ -74,7 +74,7 @@ export function Home() {
 									<QuickAccessGithub name={opt.name} />
 								</footer>
 							</div>
-						)
+						),
 				)}
 			</div>
 		</Main>

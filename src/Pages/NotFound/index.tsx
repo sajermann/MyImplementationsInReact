@@ -14,9 +14,6 @@ export function NotFoundPage() {
 	const { setBreadcrumbs } = useBreadcrumbs();
 	const { globalMenus } = useRoutesMenu();
 
-	const LINK_CLASS =
-		'flex flex-col flex-1 items-center justify-center gap-1 p-1 text-sm hover:text-primary-700 transition-colors duration-500';
-
 	const mount = useMemo(() => globalMenus(search), [search, currentLanguage]);
 
 	useEffect(() => {
@@ -43,7 +40,10 @@ export function NotFoundPage() {
 				<div key={opt.name} className="border rounded flex">
 					<div className="flex w-full flex-1 items-center justify-center">
 						<div className="flex-1 ml-2">{opt.label}</div>
-						<Link to={opt.path} className={LINK_CLASS}>
+						<Link
+							to={opt.path}
+							className="flex flex-col flex-1 items-center justify-center gap-1 p-1 text-sm hover:text-primary-700 transition-colors duration-500"
+						>
 							<Icons nameIcon="eye" width="30px" />
 							Demo
 						</Link>
