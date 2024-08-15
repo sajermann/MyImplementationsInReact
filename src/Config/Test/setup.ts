@@ -41,4 +41,15 @@ beforeEach(() => {
 			dispatchEvent: vi.fn(),
 		})),
 	});
+
+	// Object.defineProperty(window, 'innerWidth', {
+	// 	writable: true,
+	// 	configurable: true,
+	// 	value: 1280,
+	// });
+	// Object.defineProperty(window, 'innerHeight', {
+	// 	writable: true,
+	// 	configurable: true,
+	// 	value: 720,
+	// });
 });

@@ -5,17 +5,6 @@ const container = tv({
 	slots: {
 		containerPropsInternal: ['group flex flex-col gap-1 w-full'],
 	},
-	variants: {
-		color: {
-			normal: {
-				inputPropsInternal: '',
-			},
-		},
-	},
-
-	defaultVariants: {
-		color: 'normal',
-	},
 });
 
 type TContainerInput = DetailedHTMLProps<

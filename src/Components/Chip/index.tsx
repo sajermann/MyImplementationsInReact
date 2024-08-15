@@ -90,17 +90,17 @@ function keyDownButton({
 interface ChipProps {
 	value: string;
 	onRemove?: (id: string) => void;
-
 	onChange?: (oldValue: string, newValue: string) => void;
 }
 
-export function Chip({ value, onRemove, onChange }: ChipProps) {
+export function Chip({ value, onRemove, onChange, ...rest }: ChipProps) {
 	const [editing, setEditing] = useState(false);
 	const [valueEditing, setValueEditing] = useState(value);
 
 	if (editing) {
 		return (
 			<div
+				{...rest}
 				className={managerClassNames([
 					{ 'relative w-min min-w-[1em] flex items-center': true },
 					{ 'pr-2': !!onRemove },
@@ -128,6 +128,7 @@ export function Chip({ value, onRemove, onChange }: ChipProps) {
 
 	return (
 		<div
+			{...rest}
 			className={managerClassNames([
 				{ 'flex items-center gap-2 w-max h-12': true },
 				{ 'bg-dark-400 p-2 rounded text-white': true },

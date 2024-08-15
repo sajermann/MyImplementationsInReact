@@ -13,11 +13,13 @@ export function SwitchLanguage() {
 					className={clsx(
 						'w-48 h-16 border flex items-center justify-center gap-2 p-4 rounded-l-lg',
 						{
-							'border-violet-700': currentLanguage === 'en',
-						}
+							'border-violet-700': currentLanguage === 'en-US',
+						},
 					)}
 					onClick={
-						currentLanguage !== 'en' ? () => changeLanguage('en') : undefined
+						currentLanguage !== 'en-US'
+							? () => changeLanguage('en-US')
+							: undefined
 					}
 				>
 					<div className="w-10">
@@ -31,7 +33,7 @@ export function SwitchLanguage() {
 						'w-48 h-16 border flex items-center justify-center gap-2 p-4 rounded-r-lg',
 						{
 							'border-violet-700': currentLanguage === 'pt-BR',
-						}
+						},
 					)}
 					onClick={
 						currentLanguage !== 'pt-BR'

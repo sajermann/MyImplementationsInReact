@@ -2,7 +2,7 @@
 /**
  * @vitest-environment jsdom
  */
-import { ColumnDef } from '@tanstack/react-table';
+import { ColumnDef } from '@tanstack/react-table/build/lib';
 import { fireEvent, render, waitFor } from '@testing-library/react';
 import { describe, expect, vi } from 'vitest';
 import { Table } from '.';
@@ -45,6 +45,7 @@ describe('Components/Table', () => {
 		const setRowSelectionMock = (s: any) => (resultMock = { ...s() });
 		const { container } = render(
 			<Table
+				disabledVirtualization
 				data={DATA}
 				columns={columns}
 				selection={{
@@ -52,10 +53,11 @@ describe('Components/Table', () => {
 					setRowSelection: setRowSelectionMock,
 					type: 'single',
 				}}
-			/>
+			/>,
 		);
 		const itemOne = await container.querySelectorAll('tbody tr')[0];
-		expect(itemOne).not.toBeNull();
+		console.log({ itemOne, container });
+		expect(itemOne).not.toBeUndefined();
 		fireEvent.click(itemOne);
 		await waitFor(() => {
 			expect(JSON.stringify(resultMock)).toBe(JSON.stringify({ '0': true }));
@@ -67,6 +69,7 @@ describe('Components/Table', () => {
 		const setRowSelectionMock = (s: any) => (resultMock = { ...s() });
 		const { container } = render(
 			<Table
+				disabledVirtualization
 				data={DATA}
 				columns={columns}
 				selection={{
@@ -74,7 +77,7 @@ describe('Components/Table', () => {
 					setRowSelection: setRowSelectionMock,
 					type: 'multi',
 				}}
-			/>
+			/>,
 		);
 		const itemTwo = await container.querySelectorAll('tbody tr')[1];
 		expect(itemTwo).not.toBeNull();
@@ -89,6 +92,7 @@ describe('Components/Table', () => {
 		const setRowSelectionMock = (s: any) => (resultMock = { ...s() });
 		const { container } = render(
 			<Table
+				disabledVirtualization
 				data={DATA}
 				columns={columns}
 				selection={{
@@ -96,7 +100,7 @@ describe('Components/Table', () => {
 					setRowSelection: setRowSelectionMock,
 					type: 'multi',
 				}}
-			/>
+			/>,
 		);
 		const checkbox = await container.querySelector('[data-state="unchecked"]');
 		expect(checkbox).not.toBeNull();
@@ -104,7 +108,7 @@ describe('Components/Table', () => {
 		fireEvent.click(checkbox);
 		await waitFor(() => {
 			expect(JSON.stringify(resultMock)).toBe(
-				JSON.stringify({ '0': true, '1': true })
+				JSON.stringify({ '0': true, '1': true }),
 			);
 		});
 	});
@@ -114,6 +118,7 @@ describe('Components/Table', () => {
 		const setRowSelectionMock = vi.fn();
 		const { container } = render(
 			<Table
+				disabledVirtualization
 				data={DATA}
 				columns={columns}
 				selection={{
@@ -122,7 +127,7 @@ describe('Components/Table', () => {
 					type: 'single',
 					disableSelectionRow: resultMock,
 				}}
-			/>
+			/>,
 		);
 		const itemOne = await container.querySelectorAll('tbody tr')[0];
 		expect(itemOne).not.toBeNull();

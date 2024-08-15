@@ -24,7 +24,7 @@ export function buildTable<T>({ data, defColumns }: Props<T>) {
 	const table = document.createElement('table');
 	table.setAttribute(
 		'style',
-		'border-collapse: collapse; width: 100%; color: black'
+		'border-collapse: collapse; width: 100%; color: black',
 	);
 
 	// Build THead
@@ -35,7 +35,7 @@ export function buildTable<T>({ data, defColumns }: Props<T>) {
 		const th = document.createElement('th');
 		th.setAttribute(
 			'style',
-			`padding: 8px; text-align:${header.align || 'left'}`
+			`padding: 8px; text-align:${header.align || 'left'}`,
 		);
 		th.textContent = header.value as string;
 		trHead.appendChild(th);
@@ -48,7 +48,7 @@ export function buildTable<T>({ data, defColumns }: Props<T>) {
 		const trBody = document.createElement('tr');
 		trBody.setAttribute(
 			'style',
-			'border-bottom: 1px solid black; padding: 4px'
+			'border-bottom: 1px solid black; padding: 4px',
 		);
 		for (const cell of row) {
 			const { cellRender } = cell as unknown as {
@@ -57,7 +57,7 @@ export function buildTable<T>({ data, defColumns }: Props<T>) {
 			const td = document.createElement('td');
 			td.setAttribute(
 				'style',
-				`padding: 8px; text-align:${cell.align || 'left'}`
+				`padding: 18px; text-align:${cell.align || 'left'}`,
 			);
 
 			if (cellRender) {

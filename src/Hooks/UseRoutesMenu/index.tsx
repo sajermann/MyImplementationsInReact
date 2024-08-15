@@ -31,230 +31,238 @@ const ColumnVisibilityPage = lazy(() =>
 	import('~/Pages/Table/ColumnVisibility').then(
 		({ ColumnVisibilityPage: ColumnVisibility }) => ({
 			default: ColumnVisibility,
-		})
-	)
+		}),
+	),
 );
 
 const ExportPage = lazy(() =>
 	import('~/Pages/Table/Export').then(({ ExportPage: Export }) => ({
 		default: Export,
-	}))
+	})),
 );
 
 const ToastPage = lazy(() =>
 	import('~/Pages/Toast').then(({ ToastPage: Toast }) => ({
 		default: Toast,
-	}))
+	})),
 );
 
 const SortPage = lazy(() =>
 	import('~/Pages/Table/Sort').then(({ SortPage: Sort }) => ({
 		default: Sort,
-	}))
+	})),
 );
 
 const EditablePage = lazy(() =>
 	import('~/Pages/Table/Editable').then(({ EditablePage: Editable }) => ({
 		default: Editable,
-	}))
+	})),
 );
 
 const FullEditablePage = lazy(() =>
 	import('~/Pages/Table/FullEditable').then(
 		({ FullEditablePage: FullEditable }) => ({
 			default: FullEditable,
-		})
-	)
+		}),
+	),
 );
 
 const VirtualizedPage = lazy(() =>
 	import('~/Pages/Table/Virtualized').then(
 		({ VirtualizedPage: Virtualized }) => ({
 			default: Virtualized,
-		})
-	)
+		}),
+	),
 );
 
 const PaginationTablePage = lazy(() =>
 	import('~/Pages/Table/Pagination').then(({ PaginationPage: Pagination }) => ({
 		default: Pagination,
-	}))
+	})),
 );
 
 const FavoritesPage = lazy(() =>
 	import('~/Pages/Table/Favorites').then(({ FavoritesPage: Favorites }) => ({
 		default: Favorites,
-	}))
+	})),
 );
 
 const EllipsisPage = lazy(() =>
 	import('~/Pages/Table/Ellipsis').then(({ EllipsisPage: Ellipsis }) => ({
 		default: Ellipsis,
-	}))
+	})),
 );
 
 const ResizingPage = lazy(() =>
 	import('~/Pages/Table/Resizing').then(({ ResizingPage: Resizing }) => ({
 		default: Resizing,
-	}))
+	})),
 );
 
 const FilterPage = lazy(() =>
 	import('~/Pages/Table/Filter').then(({ FilterPage: Filter }) => ({
 		default: Filter,
-	}))
+	})),
 );
 
 const SelectionPage = lazy(() =>
 	import('~/Pages/Table/Selection').then(({ SelectionPage: Selection }) => ({
 		default: Selection,
-	}))
+	})),
 );
 
 const ExpandedLinePage = lazy(() =>
 	import('~/Pages/Table/ExpandedLine').then(
 		({ ExpandedLinePage: ExpandedLine }) => ({
 			default: ExpandedLine,
-		})
-	)
+		}),
+	),
 );
 
 const LoadingPage = lazy(() =>
 	import('~/Pages/Table/Loading').then(({ LoadingPage: Loading }) => ({
 		default: Loading,
-	}))
+	})),
 );
 
 const ColumnOrderPage = lazy(() =>
 	import('~/Pages/Table/ColumnOrder').then(
 		({ ColumnOrderPage: ColumnOrder }) => ({
 			default: ColumnOrder,
-		})
-	)
+		}),
+	),
 );
 
 const InputPage = lazy(() =>
 	import('~/Pages/Input').then(({ InputPage: Input }) => ({
 		default: Input,
-	}))
+	})),
 );
 
 const ModalPage = lazy(() =>
 	import('~/Pages/Modal').then(({ ModalPage: Modal }) => ({
 		default: Modal,
-	}))
+	})),
 );
 
 const SelectPage = lazy(() =>
 	import('~/Pages/Select').then(({ SelectPage: Select }) => ({
 		default: Select,
-	}))
+	})),
 );
 
 const TablePage = lazy(() =>
 	import('~/Pages/Table').then(({ TablePage: Table }) => ({
 		default: Table,
-	}))
+	})),
 );
 
 const DrawerPage = lazy(() =>
 	import('~/Pages/Drawer').then(({ DrawerPage: Drawer }) => ({
 		default: Drawer,
-	}))
+	})),
 );
 
 const CheckboxPage = lazy(() =>
 	import('~/Pages/Checkbox').then(({ CheckboxPage: Checkbox }) => ({
 		default: Checkbox,
-	}))
+	})),
 );
 
 const DatepickerPage = lazy(() =>
 	import('~/Pages/Datepicker').then(({ DatepickerPage: Datepicker }) => ({
 		default: Datepicker,
-	}))
+	})),
 );
 
 const FooterPage = lazy(() =>
 	import('~/Pages/Table/Footer').then(({ FooterPage: Footer }) => ({
 		default: Footer,
-	}))
+	})),
 );
 
 const ButtonPage = lazy(() =>
 	import('~/Pages/Button').then(({ ButtonPage: Button }) => ({
 		default: Button,
-	}))
+	})),
 );
 
 const PrintPage = lazy(() =>
 	import('~/Pages/Print').then(({ PrintPage: Print }) => ({
 		default: Print,
-	}))
+	})),
 );
 
 const CarouselPage = lazy(() =>
 	import('~/Pages/Carousel').then(({ CarouselPage: Carousel }) => ({
 		default: Carousel,
-	}))
+	})),
 );
 
 const AnimateInViewPage = lazy(() =>
 	import('~/Pages/AnimateInViewPage').then(
 		({ AnimateInViewPage: AnimateInView }) => ({
 			default: AnimateInView,
-		})
-	)
+		}),
+	),
 );
 
 const NotFoundPage = lazy(() =>
 	import('~/Pages/NotFound').then(({ NotFoundPage: NotFound }) => ({
 		default: NotFound,
-	}))
+	})),
 );
 
 const SearchBoxPage = lazy(() =>
 	import('~/Pages/SearchBox').then(({ SearchBoxPage: SearchBox }) => ({
 		default: SearchBox,
-	}))
+	})),
 );
 
 const CalendarPickerPage = lazy(() =>
 	import('~/Pages/CalendarPicker').then(
 		({ CalendarPickerPage: CalendarPicker }) => ({
 			default: CalendarPicker,
-		})
-	)
+		}),
+	),
 );
 
 const ChipPage = lazy(() =>
 	import('~/Pages/Chip').then(({ ChipPage: Chip }) => ({
 		default: Chip,
-	}))
+	})),
 );
 
 const DragAndDropPage = lazy(() =>
 	import('~/Pages/DragAndDrop').then(({ DragAndDropPage: DragAndDrop }) => ({
 		default: DragAndDrop,
-	}))
+	})),
 );
 
 const SwitchPage = lazy(() =>
 	import('~/Pages/Switch').then(({ SwitchPage: Switch }) => ({
 		default: Switch,
-	}))
+	})),
 );
 
 const RadioPage = lazy(() =>
 	import('~/Pages/Radio').then(({ RadioPage: Radio }) => ({
 		default: Radio,
-	}))
+	})),
 );
 
 const PaginationPage = lazy(() =>
 	import('~/Pages/Pagination').then(({ PaginationPage: Pagination }) => ({
 		default: Pagination,
-	}))
+	})),
+);
+
+const SimpleMdTextEditorPage = lazy(() =>
+	import('~/Pages/SimpleMdTextEditor').then(
+		({ SimpleMdTextEditorPage: SimpleMdTextEditor }) => ({
+			default: SimpleMdTextEditor,
+		}),
+	),
 );
 
 export function useRoutesMenu() {
@@ -535,9 +543,9 @@ export function useRoutesMenu() {
 				name: 'Toast',
 				path: '/toast',
 				implements_code:
-					'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Components/Table',
+					'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Components/Toast',
 				docs_code:
-					'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/Table/Toast',
+					'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/Toast',
 				element: <ToastPage />,
 				demo: <ToastDemo />,
 				label: 'Toast',
@@ -655,6 +663,17 @@ export function useRoutesMenu() {
 				// demo: <PaginationDemo />,
 			},
 			// {
+			// 	name: 'Simple Md Text Editor',
+			// 	path: '/simplet-md-text-editor',
+			// 	implements_code:
+			// 		'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Components/SimpleMdTextEditor',
+			// 	docs_code:
+			// 		'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/SimpleMdTextEditor',
+			// 	element: <SimpleMdTextEditorPage />,
+			// 	label: translate('SIMPLE_MD_TEXT_EDITOR'),
+			// 	// demo: <PaginationDemo />,
+			// },
+			// {
 			// 	name: 'Virtualization',
 			// 	path: '/virtualization',
 			// 	implements_code:
@@ -676,17 +695,29 @@ export function useRoutesMenu() {
 				hideMenu: true,
 			},
 		],
-		[currentLanguage]
+		[currentLanguage],
 	);
 
 	const triRoutes: TTriRoutes = useMemo(
 		() => triRoutesMount.get(globalRoutes, location.pathname),
-		[currentLanguage, location.pathname]
+		[currentLanguage, location.pathname],
 	);
 
 	function globalMenus(filterValue: string) {
 		return menusMount.get(globalRoutes, filterValue);
 	}
 
-	return { globalRoutes, triRoutes, globalMenus };
+	return {
+		globalRoutes: globalRoutes.sort((a, b) => {
+			if (a.name < b.name) {
+				return -1;
+			}
+			if (a.name > b.name) {
+				return 1;
+			}
+			return 0;
+		}),
+		triRoutes,
+		globalMenus,
+	};
 }
