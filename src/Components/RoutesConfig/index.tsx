@@ -1,25 +1,12 @@
-import { Fragment, Suspense, useEffect } from 'react';
+import { Fragment, Suspense } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import { generateGuid } from '@sajermann/utils/Random';
 
 import { useRoutesMenu } from '~/Hooks/UseRoutesMenu';
-import { useTranslation } from '~/Hooks/UseTranslation';
-
 import { TRoutesMenu } from '~/Types/TRoutesMenu';
-import { useLoadingLazy } from '~/Store/UseLoadingLazy';
 import { Breadcrumbs } from '../Breadcumbs';
 import { Sidebar } from '../Sidebar';
-
-function IsLoading() {
-	const { translate } = useTranslation();
-	const { setIsLoadingLazy } = useLoadingLazy();
-
-	useEffect(() => {
-		setIsLoadingLazy(true);
-		return () => setIsLoadingLazy(false);
-	}, []);
-	return <p>{translate('LOADING...')}</p>;
-}
+import { IsLoading } from './IsLoading';
 
 export function RoutesConfig() {
 	const { globalRoutes: options } = useRoutesMenu();

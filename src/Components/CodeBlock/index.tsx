@@ -12,7 +12,7 @@ type TProps = {
 	children: string;
 };
 export function CodeBlock({ children }: TProps) {
-	const { customToast } = useToast();
+	const { customReactToastify } = useToast();
 	const [success, setSuccess] = useState(false);
 	const [isLoading, setIsLoading] = useState(false);
 	const { translate } = useTranslation();
@@ -23,10 +23,12 @@ export function CodeBlock({ children }: TProps) {
 			await navigator.clipboard.writeText(children);
 			setSuccess(true);
 		} catch {
-			customToast({
-				msg: 'Modo copy só disponível em ambientes seguros (HTTPS)',
-				type: 'error',
-			});
+			customReactToastify(
+				'Modo copy só disponível em ambientes seguros (HTTPS)',
+				{
+					type: 'error',
+				},
+			);
 		} finally {
 			setIsLoading(false);
 			await delay(1000);

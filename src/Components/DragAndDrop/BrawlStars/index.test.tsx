@@ -46,18 +46,18 @@ describe('Components/DragAndDrop/BrawlStar', () => {
 		});
 	});
 
-	afterAll(() => {
-		Object.defineProperty(
-			HTMLElement.prototype,
-			offsetHeight,
-			originalOffsetHeight,
-		);
-		Object.defineProperty(
-			HTMLElement.prototype,
-			offsetWidth,
-			originalOffsetWidth,
-		);
-	});
+	// afterAll(() => {
+	// 	Object.defineProperty(
+	// 		HTMLElement.prototype,
+	// 		offsetHeight,
+	// 		originalOffsetHeight,
+	// 	);
+	// 	Object.defineProperty(
+	// 		HTMLElement.prototype,
+	// 		offsetWidth,
+	// 		originalOffsetWidth,
+	// 	);
+	// });
 
 	it(`must render component`, async () => {
 		const { queryAllByRole, container } = render(<BrawlStar />);
@@ -78,7 +78,7 @@ describe('Components/DragAndDrop/BrawlStar', () => {
 			code: 'Space',
 		});
 
-		for (let i = 0; i < 1000; i += 1) {
+		for (let i = 0; i < 17; i += 1) {
 			fireEvent.keyDown(window, {
 				code: 'ArrowDown',
 			});
@@ -86,13 +86,11 @@ describe('Components/DragAndDrop/BrawlStar', () => {
 
 		await delay(1);
 
-		// await screen.findByText(
-		// 	'Draggable item 2 was moved over droppable area 1.',
-		// );
 		fireEvent.keyDown(draggables[0], {
 			code: 'Space',
 		});
 		screen.debug();
 		// Esse test não está dando certo e não tenho a solução por enquanto
+		// expect.soft(spy).toBeCalledWith('Entrando');
 	});
 });

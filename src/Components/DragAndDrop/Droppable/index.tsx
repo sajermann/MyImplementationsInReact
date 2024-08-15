@@ -36,6 +36,7 @@ export function Droppable<T>({
 	const { fromId } = JSON.parse((active?.id as string) || '{}');
 
 	useEffect(() => {
+		console.log(isOver ? 'Entrando' : 'Saindo');
 		if (disableDropByKey)
 			return () => {
 				/* This is Intentional */

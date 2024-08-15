@@ -33,7 +33,7 @@ const columns: ColumnDef<{ id: string; name: string }>[] = [
 	},
 ];
 
-describe.skip('Components/Table', () => {
+describe('Components/Table', () => {
 	test(`should render text NO_DATA when data is empty`, async () => {
 		const { findByText } = render(<Table data={[]} columns={[]} />);
 		const result = await findByText('NO_DATA');
@@ -45,6 +45,7 @@ describe.skip('Components/Table', () => {
 		const setRowSelectionMock = (s: any) => (resultMock = { ...s() });
 		const { container } = render(
 			<Table
+				disabledVirtualization
 				data={DATA}
 				columns={columns}
 				selection={{
@@ -52,10 +53,10 @@ describe.skip('Components/Table', () => {
 					setRowSelection: setRowSelectionMock,
 					type: 'single',
 				}}
-			/>
+			/>,
 		);
 		const itemOne = await container.querySelectorAll('tbody tr')[0];
-		console.log({itemOne, container})
+		console.log({ itemOne, container });
 		expect(itemOne).not.toBeUndefined();
 		fireEvent.click(itemOne);
 		await waitFor(() => {
@@ -68,6 +69,7 @@ describe.skip('Components/Table', () => {
 		const setRowSelectionMock = (s: any) => (resultMock = { ...s() });
 		const { container } = render(
 			<Table
+				disabledVirtualization
 				data={DATA}
 				columns={columns}
 				selection={{
@@ -75,7 +77,7 @@ describe.skip('Components/Table', () => {
 					setRowSelection: setRowSelectionMock,
 					type: 'multi',
 				}}
-			/>
+			/>,
 		);
 		const itemTwo = await container.querySelectorAll('tbody tr')[1];
 		expect(itemTwo).not.toBeNull();
@@ -90,6 +92,7 @@ describe.skip('Components/Table', () => {
 		const setRowSelectionMock = (s: any) => (resultMock = { ...s() });
 		const { container } = render(
 			<Table
+				disabledVirtualization
 				data={DATA}
 				columns={columns}
 				selection={{
@@ -97,7 +100,7 @@ describe.skip('Components/Table', () => {
 					setRowSelection: setRowSelectionMock,
 					type: 'multi',
 				}}
-			/>
+			/>,
 		);
 		const checkbox = await container.querySelector('[data-state="unchecked"]');
 		expect(checkbox).not.toBeNull();
@@ -105,7 +108,7 @@ describe.skip('Components/Table', () => {
 		fireEvent.click(checkbox);
 		await waitFor(() => {
 			expect(JSON.stringify(resultMock)).toBe(
-				JSON.stringify({ '0': true, '1': true })
+				JSON.stringify({ '0': true, '1': true }),
 			);
 		});
 	});
@@ -115,6 +118,7 @@ describe.skip('Components/Table', () => {
 		const setRowSelectionMock = vi.fn();
 		const { container } = render(
 			<Table
+				disabledVirtualization
 				data={DATA}
 				columns={columns}
 				selection={{
@@ -123,7 +127,7 @@ describe.skip('Components/Table', () => {
 					type: 'single',
 					disableSelectionRow: resultMock,
 				}}
-			/>
+			/>,
 		);
 		const itemOne = await container.querySelectorAll('tbody tr')[0];
 		expect(itemOne).not.toBeNull();
