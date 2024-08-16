@@ -12,7 +12,7 @@ export function FloatingVideoPage() {
 		<Main data-content="content-main">
 			<Section title={translate('FLOATING_VIDEO')} variant="h1">
 				{`${translate('IMPLEMENTS_COMPONENT')} ${translate(
-					'FLOATING_VIDEO'
+					'FLOATING_VIDEO',
 				)} ${translate('WITHOUT_USING_LIB')}`}
 			</Section>
 
@@ -23,6 +23,7 @@ export function FloatingVideoPage() {
 			</Section>
 
 			<Section title={translate('DRAGGABLE')} variant="h2">
+				<span className="italic">{translate('NOTE_FLOATING_VIDEO')}</span>
 				<ComponentBlock>
 					<FloatingVideo src="https://cdn.arnellebalane.com/videos/original-video.mp4" />
 				</ComponentBlock>
@@ -33,6 +34,7 @@ export function FloatingVideoPage() {
 					<FloatingVideo
 						src="https://cdn.arnellebalane.com/videos/original-video.mp4"
 						disableDraggable
+						floatingSide="left"
 					/>
 				</ComponentBlock>
 			</Section>

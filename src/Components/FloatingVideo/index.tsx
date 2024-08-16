@@ -1,71 +1,55 @@
+/* eslint-disable no-param-reassign */
 /* eslint-disable jsx-a11y/mouse-events-have-key-events */
 /* eslint-disable jsx-a11y/media-has-caption */
 import React, { useEffect, useRef, useState } from 'react';
+import {
+	handleMouseDown,
+	handleMouseMove,
+	onIntersectionObserver,
+} from '~/Utils/FloatingVideo';
+import { testIdOnlyDev } from '~/Utils/ShowInDevelopment';
 
 interface FloatingVideoProps {
 	src: string;
 	disableDraggable?: boolean;
+	floatingSide?: 'left' | 'right';
 }
 
-export function FloatingVideo({ src, disableDraggable }: FloatingVideoProps) {
+export function FloatingVideo({
+	src,
+	disableDraggable,
+	floatingSide = 'right',
+}: FloatingVideoProps) {
 	const videoRef = useRef<HTMLVideoElement | null>(null);
 	const containerRef = useRef<HTMLDivElement | null>(null);
 	const [dragging, setDragging] = useState(false);
 	const [position, setPosition] = useState({ x: 0, y: 0 });
 	const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
 
-	const handleMouseDown = (event: React.MouseEvent) => {
-		if (!videoRef.current || disableDraggable) return;
-		setDragging(true);
-		setMousePos({
-			x: event.clientX - videoRef.current.offsetLeft,
-			y: event.clientY - videoRef.current.offsetTop,
-		});
-	};
-
 	const handleMouseUp = () => {
 		setDragging(false);
 	};
 
-	const handleMouseMove = (event: MouseEvent) => {
-		if (dragging && videoRef.current) {
-			const { clientX, clientY } = event;
-			const { offsetWidth, offsetHeight } = videoRef.current;
-			const maxX = window.innerWidth - offsetWidth;
-			const maxY = window.innerHeight - offsetHeight;
-
-			const x = Math.min(Math.max(clientX - mousePos.x, 0), maxX);
-			const y = Math.min(Math.max(clientY - mousePos.y, 0), maxY);
-
-			setPosition({ x, y });
-		}
-	};
+	const handleMouseMoveInternal = (event: MouseEvent) =>
+		handleMouseMove({ event, dragging, mousePos, setPosition, videoRef });
 
 	useEffect(() => {
 		const observer = new IntersectionObserver(
-			([entry]) => {
-				if (entry.intersectionRatio <= 0 && !document.pictureInPictureElement) {
-					if (videoRef.current) {
-						videoRef.current.style.position = 'fixed';
-						videoRef.current.style.bottom = '10px';
-						videoRef.current.style.right = '10px';
-					}
-				} else if (videoRef.current) {
-					videoRef.current.style.position = 'static';
-				}
+			([entry]) => onIntersectionObserver({ entry, videoRef, floatingSide }),
+			{
+				threshold: [0],
 			},
-			{ threshold: [0] }
 		);
 
 		if (containerRef.current) {
 			observer.observe(containerRef.current);
 		}
 
-		window.addEventListener('mousemove', handleMouseMove);
+		window.addEventListener('mousemove', handleMouseMoveInternal);
 
 		return () => {
 			observer.disconnect();
-			window.removeEventListener('mousemove', handleMouseMove);
+			window.removeEventListener('mousemove', handleMouseMoveInternal);
 		};
 	}, [dragging]);
 
@@ -80,10 +64,20 @@ export function FloatingVideo({ src, disableDraggable }: FloatingVideoProps) {
 	return (
 		<div ref={containerRef}>
 			<video
+				{...testIdOnlyDev('floating-video')}
 				className="w-96"
 				ref={videoRef}
 				controls
-				onMouseDown={handleMouseDown}
+				muted
+				onMouseDown={event =>
+					handleMouseDown({
+						event,
+						setDragging,
+						setMousePos,
+						videoRef,
+						disableDraggable,
+					})
+				}
 				onMouseUp={handleMouseUp}
 				onMouseOut={handleMouseUp}
 			>
