@@ -14,14 +14,25 @@ export function TablePage() {
 	const { globalRoutes: options } = useRoutesMenu();
 	const [search, setSearch] = useState('');
 
-	const optionsSubTable = options.find(opt => opt.name === 'Table')?.subs;
+	const optionsSubTable = options
+		.find(opt => opt.name === 'Table')
+		?.subs?.sort((a, b) => {
+			if (translate(a.label) < translate(b.label)) {
+				return -1;
+			}
+			if (translate(a.label) > translate(b.label)) {
+				return 1;
+			}
+
+			return 0;
+		});
 
 	function getFiltreds() {
 		if (!search) {
 			return optionsSubTable;
 		}
 		return optionsSubTable?.filter(
-			opt => opt.label.toLowerCase().indexOf(search.toLowerCase()) > -1
+			opt => opt.label.toLowerCase().indexOf(search.toLowerCase()) > -1,
 		);
 	}
 
@@ -32,7 +43,7 @@ export function TablePage() {
 		<Main data-content="content-main">
 			<Section title={translate('TABLES')} variant="h1">
 				{`${translate('IMPLEMENTS_COMPONENT')} ${translate(
-					'TABLE'
+					'TABLE',
 				)} ${translate('USING_THE_LIB')} @tanstack/react-table`}
 			</Section>
 			<Section title={translate('INSTALLATION_OF_LIB')} variant="h2">

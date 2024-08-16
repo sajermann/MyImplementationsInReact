@@ -13,5 +13,9 @@ export function useTranslation() {
 		i18n.changeLanguage(language);
 	}
 
-	return { translate, changeLanguage, currentLanguage };
+	return {
+		translate,
+		changeLanguage,
+		currentLanguage: currentLanguage as 'pt-BR' | 'en-US',
+	};
 }

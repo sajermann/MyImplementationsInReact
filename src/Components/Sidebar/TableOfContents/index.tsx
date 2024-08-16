@@ -38,7 +38,7 @@ export function TableOfContents() {
 			});
 			subs[i].setAttribute(
 				'id',
-				`${i}-${subs[i].nodeName}-${subs[i].textContent}`
+				`${i}-${subs[i].nodeName}-${subs[i].textContent}`,
 			);
 		}
 
@@ -46,7 +46,7 @@ export function TableOfContents() {
 
 		if (menus.length === 0) return;
 		const closest = menus.reduce((prev, curr) =>
-			Math.abs(curr.top - goal) < Math.abs(prev.top - goal) ? curr : prev
+			Math.abs(curr.top - goal) < Math.abs(prev.top - goal) ? curr : prev,
 		);
 		const menusWithActive = menus.map(item => {
 			if (item.anchor === closest.anchor) {
@@ -60,7 +60,7 @@ export function TableOfContents() {
 
 	useEffect(
 		() => load(),
-		[scrollPosition, location.pathname, currentLanguage, isLoadingLazy]
+		[scrollPosition, location.pathname, currentLanguage, isLoadingLazy],
 	);
 
 	if (!optionsMenu.length) {
