@@ -46,5 +46,6 @@ Rate my implements or say hello in Linkedin 😀
     - [x] Sort
     - [x] Virtualized
 - [x] Pagination - With &nbsp;[ultimate-pagination](https://www.npmjs.com/package/ultimate-pagination)
+- [x] Floating Video - Without third party
 
 

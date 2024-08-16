@@ -1,5 +1,9 @@
 {
 	"translations": {
+		"NOTE_FLOATING_VIDEO": "Obs: O modo 'arrastável' não funciona no Firefox devido aos 'controles' do vídeo estarem ativos. Acredito ser um 'BUG'.",
+		"DISABLED_DRAGGABLE": "Arrastável Desabilitado",
+		"DRAGGABLE": "Arrastável",
+		"FLOATING_VIDEO": "Vídeo Flutuante",
 		"MINIMIZE": "Minimizar",
 		"MAXIMIZE": "Maximizar",
 		"ITALIC": "Itálico",
