@@ -26,6 +26,7 @@ import { SwitchDemo } from '~/Components/Demos/Switch';
 import { RadioDemo } from '~/Components/Demos/Radio';
 import { PaginationDemo } from '~/Components/Demos/Pagination';
 import { FloatingVideoPage } from '~/Pages/FloatingVideo';
+import { JsonViewerDemo } from '~/Components/Demos/JsonViewer';
 
 const ColumnVisibilityPage = lazy(() =>
 	import('~/Pages/Table/ColumnVisibility').then(
@@ -263,6 +264,12 @@ const SimpleMdTextEditorPage = lazy(() =>
 			default: SimpleMdTextEditor,
 		}),
 	),
+);
+
+const JsonViewerPage = lazy(() =>
+	import('~/Pages/JsonViewer').then(({ JsonViewerPage: JsonViewer }) => ({
+		default: JsonViewer,
+	})),
 );
 
 export function useRoutesMenu() {
@@ -660,7 +667,17 @@ export function useRoutesMenu() {
 					'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/FloatingVideo',
 				element: <FloatingVideoPage />,
 				label: translate('FLOATING_VIDEO'),
-				// demo: <PaginationDemo />,
+			},
+			{
+				name: 'Json Viewer',
+				path: '/json-viewer',
+				implements_code:
+					'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Components/JsonViewer',
+				docs_code:
+					'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/JsonViewer',
+				element: <JsonViewerPage />,
+				label: translate('JSON_VIEWER'),
+				demo: <JsonViewerDemo />,
 			},
 			// {
 			// 	name: 'Simple Md Text Editor',

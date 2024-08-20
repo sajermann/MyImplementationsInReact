@@ -1,5 +1,8 @@
 {
 	"translations": {
+		"JSON_VIEWER": "Visualizador JSON",
+		"FORM": "Formulário",
+		"DATA": "Dados",
 		"NOTE_FLOATING_VIDEO": "Obs: O modo 'arrastável' não funciona no Firefox devido aos 'controles' do vídeo estarem ativos. Acredito ser um 'BUG'.",
 		"DISABLED_DRAGGABLE": "Arrastável Desabilitado",
 		"DRAGGABLE": "Arrastável",

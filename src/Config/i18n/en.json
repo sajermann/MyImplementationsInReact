@@ -1,5 +1,8 @@
 {
 	"translations": {
+		"JSON_VIEWER": "JSON Viewer",
+		"FORM": "Form",
+		"DATA": "Data",
 		"NOTE_FLOATING_VIDEO": "Note: The 'draggable' mode does not work in Firefox because 'controls' of video being active. I believe it is a 'BUG'.",
 		"DISABLED_DRAGGABLE": "Disabled Draggable",
 		"DRAGGABLE": "Draggable",
