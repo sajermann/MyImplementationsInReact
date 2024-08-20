@@ -265,6 +265,12 @@ const SimpleMdTextEditorPage = lazy(() =>
 	),
 );
 
+const JsonViewerPage = lazy(() =>
+	import('~/Pages/JsonViewer').then(({ JsonViewerPage: JsonViewer }) => ({
+		default: JsonViewer,
+	})),
+);
+
 export function useRoutesMenu() {
 	const { translate, currentLanguage } = useTranslation();
 	const location = useLocation();
@@ -660,6 +666,16 @@ export function useRoutesMenu() {
 					'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/FloatingVideo',
 				element: <FloatingVideoPage />,
 				label: translate('FLOATING_VIDEO'),
+			},
+			{
+				name: 'Json Viewer',
+				path: '/json-viewer',
+				implements_code:
+					'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Components/JsonViewer',
+				docs_code:
+					'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/JsonViewer',
+				element: <JsonViewerPage />,
+				label: translate('JSON_VIEWER'),
 				// demo: <PaginationDemo />,
 			},
 			// {
