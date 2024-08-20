@@ -12,5 +12,5 @@ interface JsonViewerProps {
 export function JsonViewer(data: JsonViewerProps) {
 	const { darkMode } = useDarkModeZustand();
 	const theme = darkMode ? { ...darkTheme } : { ...lightTheme };
-	return <JsonView {...data} collapsed style={{ ...theme, width: '100%' }} />;
+	return <JsonView {...data} style={{ ...theme, width: '100%' }} />;
 }

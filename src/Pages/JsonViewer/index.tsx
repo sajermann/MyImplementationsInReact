@@ -9,6 +9,7 @@ import { useForm } from 'react-hook-form';
 import { Input } from '~/Components/Input';
 import { useState } from 'react';
 import { Button } from '~/Components/Button';
+import { CodeBlock } from '~/Components/CodeBlock';
 
 const data = makeData.person(5);
 
@@ -26,7 +27,11 @@ export function JsonViewerPage() {
 			<Section title={translate('JSON_VIEWER')} variant="h1">
 				{`${translate('IMPLEMENTS_COMPONENT')} ${translate(
 					'JSON_VIEWER',
-				)} ${translate('WITHOUT_USING_LIB')}`}
+				)} ${translate('USING_THE_LIB')} @uiw/react-json-view`}
+			</Section>
+
+			<Section title={translate('INSTALLATION_OF_LIB')} variant="h2">
+				<CodeBlock>npm i @uiw/react-json-view;</CodeBlock>
 			</Section>
 
 			<Section title={translate('CODES')} variant="h2">

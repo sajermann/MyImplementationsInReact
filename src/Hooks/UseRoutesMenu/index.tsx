@@ -26,6 +26,7 @@ import { SwitchDemo } from '~/Components/Demos/Switch';
 import { RadioDemo } from '~/Components/Demos/Radio';
 import { PaginationDemo } from '~/Components/Demos/Pagination';
 import { FloatingVideoPage } from '~/Pages/FloatingVideo';
+import { JsonViewerDemo } from '~/Components/Demos/JsonViewer';
 
 const ColumnVisibilityPage = lazy(() =>
 	import('~/Pages/Table/ColumnVisibility').then(
@@ -676,7 +677,7 @@ export function useRoutesMenu() {
 					'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/JsonViewer',
 				element: <JsonViewerPage />,
 				label: translate('JSON_VIEWER'),
-				// demo: <PaginationDemo />,
+				demo: <JsonViewerDemo />,
 			},
 			// {
 			// 	name: 'Simple Md Text Editor',

@@ -1,7 +1,7 @@
 /**
  * @vitest-environment jsdom
  */
-import { render } from '@testing-library/react';
+import { fireEvent, render } from '@testing-library/react';
 import { it, describe } from 'vitest';
 import { InjectorProviders } from '~/Components/InjectorProviders';
 
@@ -14,7 +14,7 @@ describe('Pages/JsonViewer', () => {
 				<JsonViewerPage />
 			</InjectorProviders>,
 		);
-
-		expect(getByText('JSON V')).toBeTruthy();
+		fireEvent.click(getByText('Submit')); // Line Coverage
+		expect(getByText('Form')).toBeTruthy();
 	});
 });
