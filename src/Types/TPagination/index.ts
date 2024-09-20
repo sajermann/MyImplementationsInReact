@@ -12,4 +12,5 @@ export type TPagination = {
 	>;
 	disabledActions?: boolean;
 	disabledPageSize?: boolean;
+	automatic?: boolean;
 };

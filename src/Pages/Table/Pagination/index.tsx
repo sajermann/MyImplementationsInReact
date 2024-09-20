@@ -11,8 +11,16 @@ import { Search } from '~/Components/Filter/Search';
 import { Section } from '~/Components/Section';
 import { Main } from '~/Components/Main';
 import { QuickAccessGithub } from '~/Components/QuickAccessGithub';
+import { ComponentBlock } from '~/Components/ComponentBlock';
+import { useState } from 'react';
 
 export function PaginationPage() {
+	const [dataForFront] = useState(makeData.person(100));
+	const [paginationOnlyFront, setPaginationOnlyFront] = useState({
+		pageIndex: 0,
+		pageSize: 10,
+	});
+
 	const {
 		pageCount,
 		setPageCount,
@@ -53,33 +61,52 @@ export function PaginationPage() {
 					<QuickAccessGithub name="Pagination" />
 				</div>
 			</Section>
-			<Section title={translate('IMPLEMENTS')} variant="h2">
-				<div className="flex flex-col gap-2">
-					<div>
-						<strong>{translate('NOTE')}: </strong>
-						<span>{translate('NOTE_PAGINATION_MODE')} </span>
-						<span>{JSON.stringify({ backQuery })}</span>
-					</div>
-					<Search
-						filterParams={filterQuery}
-						setFilterParams={setFilterQuery}
-						isLoading={isFetching}
-					/>
+			<Section title={translate('PAGINATION_IN_BACKEND')} variant="h2">
+				<ComponentBlock>
+					<div className="flex flex-col gap-2">
+						<div>
+							<strong>{translate('NOTE')}: </strong>
+							<span>{translate('NOTE_PAGINATION_MODE')} </span>
+							<span>{JSON.stringify({ backQuery })}</span>
+						</div>
+						<Search
+							filterParams={filterQuery}
+							setFilterParams={setFilterQuery}
+							isLoading={isFetching}
+						/>
 
+						<Table
+							isLoading={isFetching}
+							columns={[...columns]}
+							data={data || []}
+							pagination={{
+								pageCount,
+								pageIndex: pagination.pageIndex,
+								pageSize: pagination.pageSize,
+								setPagination,
+								disabledActions: isFetching,
+							}}
+							disabledVirtualization
+						/>
+					</div>
+				</ComponentBlock>
+			</Section>
+
+			<Section title={translate('PAGINATION_IN_FRONTEND')} variant="h2">
+				<ComponentBlock>
 					<Table
-						isLoading={isFetching}
 						columns={[...columns]}
-						data={data || []}
+						data={dataForFront}
 						pagination={{
-							pageCount,
-							pageIndex: pagination.pageIndex,
-							pageSize: pagination.pageSize,
-							setPagination,
-							disabledActions: isFetching,
+							pageCount: dataForFront.length / paginationOnlyFront.pageSize,
+							pageIndex: paginationOnlyFront.pageIndex,
+							pageSize: paginationOnlyFront.pageSize,
+							setPagination: setPaginationOnlyFront,
+							automatic: true,
 						}}
 						disabledVirtualization
 					/>
-				</div>
+				</ComponentBlock>
 			</Section>
 		</Main>
 	);

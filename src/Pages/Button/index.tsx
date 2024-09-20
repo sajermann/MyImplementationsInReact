@@ -43,7 +43,7 @@ export function ButtonPage() {
 		<Main data-content="content-main">
 			<Section title={translate('BUTTONS')} variant="h1">
 				{`${translate('IMPLEMENTS_COMPONENT')} Button ${translate(
-					'WITHOUT_USING_LIB'
+					'WITHOUT_USING_LIB',
 				)}`}
 			</Section>
 
@@ -67,6 +67,7 @@ export function ButtonPage() {
 					<Button colorStyle="secondary">Secondary</Button>
 					<Button colorStyle="success">Success</Button>
 					<Button colorStyle="warning">Warning</Button>
+					<Button colorStyle="white">White</Button>
 				</ComponentBlock>
 			</Section>
 

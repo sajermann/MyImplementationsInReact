@@ -54,7 +54,7 @@ export function DrawerPage() {
 		<Main data-content="content-main">
 			<Section title="Drawer" variant="h1">
 				{`${translate('IMPLEMENTS_COMPONENT')} Drawer ${translate(
-					'WITHOUT_USING_LIB'
+					'WITHOUT_USING_LIB',
 				)}`}
 			</Section>
 

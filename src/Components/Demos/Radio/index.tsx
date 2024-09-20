@@ -2,8 +2,10 @@ import { RadioGroup } from '@radix-ui/react-radio-group';
 import { ContainerInput } from '~/Components/ContainerInput';
 import { Label } from '~/Components/Label';
 import { RadioItem } from '~/Components/Radio';
+import { useDarkModeZustand } from '~/Store/UseDarkMode';
 
 export function RadioDemo() {
+	const { darkMode } = useDarkModeZustand();
 	return (
 		<RadioGroup className="flex gap-2">
 			<ContainerInput className="items-center">
@@ -69,6 +71,11 @@ export function RadioDemo() {
 						className: 'after:bg-yellow-500',
 					}}
 				/>
+			</ContainerInput>
+
+			<ContainerInput className="items-center">
+				<Label htmlFor="6">6</Label>
+				<RadioItem colorStyle={darkMode ? 'white' : 'black'} id="6" value="6" />
 			</ContainerInput>
 		</RadioGroup>
 	);

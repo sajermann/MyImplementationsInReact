@@ -50,6 +50,7 @@ export function Thead<T>({ table, sorting }: Props<T>) {
 										<button
 											type="button"
 											className={managerClassNames({
+												'flex items-center gap-2': true,
 												'cursor-pointer select-none':
 													header.column.getCanSort() && !sorting,
 												'cursor-default outline-0 tab select-none':
@@ -60,7 +61,7 @@ export function Thead<T>({ table, sorting }: Props<T>) {
 										>
 											{flexRender(
 												header.column.columnDef.header,
-												header.getContext()
+												header.getContext(),
 											)}
 											<SortIcon header={header} />
 										</button>

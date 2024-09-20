@@ -20,7 +20,7 @@ const CONFIG = {
 	Charmeleon:
 		'https://static.pokemonpets.com/images/monsters-images-300-300/5-Charmeleon.png',
 	Charizard:
-		'https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/c7bca634-434f-4d30-8394-513ca6421852/da3vckd-edf40d34-5e2e-48ca-be8b-6c3eff6d26ae.png/v1/fill/w_800,h_800/tatsu_s_charizard_by_seviyummy_da3vckd-fullview.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9ODAwIiwicGF0aCI6IlwvZlwvYzdiY2E2MzQtNDM0Zi00ZDMwLTgzOTQtNTEzY2E2NDIxODUyXC9kYTN2Y2tkLWVkZjQwZDM0LTVlMmUtNDhjYS1iZThiLTZjM2VmZjZkMjZhZS5wbmciLCJ3aWR0aCI6Ijw9ODAwIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmltYWdlLm9wZXJhdGlvbnMiXX0.mUZ6BnFNV8kPZ1UqlPTaVXuOtgxnh3G-mSlAEQ_5MHM',
+		'https://www.pokemon.com/static-assets/content-assets/cms2/img/pokedex/full/006.png',
 };
 
 export function RadioPage() {
@@ -33,7 +33,7 @@ export function RadioPage() {
 		<Main data-content="content-main">
 			<Section title="Radio" variant="h1">
 				{`${translate('IMPLEMENTS_COMPONENT')} Radio ${translate(
-					'USING_THE_LIB'
+					'USING_THE_LIB',
 				)} @radix-ui/react-radio-group`}
 			</Section>
 			<Section title={translate('INSTALLATION_OF_LIB')} variant="h2">

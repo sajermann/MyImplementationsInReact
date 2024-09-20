@@ -14,6 +14,7 @@ import {
 	FilterFnOption,
 	ColumnSizingState,
 	ColumnSizingInfoState,
+	getPaginationRowModel,
 } from '@tanstack/react-table';
 
 import { TPagination } from '~/Types/TPagination';
@@ -182,7 +183,10 @@ export function Table<T, U = undefined>({
 		getSortedRowModel: getSortedRowModel(),
 		getRowCanExpand: () => !!expandLine,
 		getExpandedRowModel: getExpandedRowModel(),
-		manualPagination: true,
+		manualPagination: pagination?.automatic ? undefined : true,
+		getPaginationRowModel: pagination?.automatic
+			? getPaginationRowModel()
+			: undefined,
 		onPaginationChange: pagination?.setPagination,
 		meta,
 		globalFilterFn: globalFilter?.globalFilterFn || 'auto',
