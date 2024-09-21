@@ -66,7 +66,7 @@ export function TablePage() {
 						getFiltreds()?.map(opt => (
 							<div
 								key={opt.name}
-								className="border rounded flex bg-dark-400 text-white"
+								className="border rounded flex bg-dark-400 text-white h-16"
 							>
 								<div className="flex w-full flex-1 items-center justify-center">
 									<div className="flex-1 ml-2">{opt.label}</div>
@@ -78,6 +78,12 @@ export function TablePage() {
 								</div>
 							</div>
 						))}
+
+					{!getFiltreds()?.length && (
+						<span className="border rounded bg-dark-400 text-white h-16 flex items-center justify-center">
+							{translate('NO_RESULT')}
+						</span>
+					)}
 				</div>
 			</Section>
 		</Main>

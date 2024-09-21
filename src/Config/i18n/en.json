@@ -1,5 +1,8 @@
 {
 	"translations": {
+		"NO_RESULT": "No Result",
+		"CANCEL": "Cancel",
+		"SAVE": "Save",
 		"PAGINATION_IN_FRONTEND": "Pagination in Frontend",
 		"PAGINATION_IN_BACKEND": "Pagination in Backend",
 		"JSON_VIEWER": "JSON Viewer",

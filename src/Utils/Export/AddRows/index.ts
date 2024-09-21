@@ -16,7 +16,7 @@ export function addRows<T>({ data, defColumns }: PropsPrint<T>) {
 						row: data[i],
 						original: data,
 						index: i,
-				  })
+					})
 				: data[i][defCol.accessor];
 			rowTemp.push({
 				value,

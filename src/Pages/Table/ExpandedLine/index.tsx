@@ -53,7 +53,6 @@ export function ExpandedLinePage() {
 							<UpdateRowExpanded row={row} onSave={handleSaveUpdate} />
 						),
 					}}
-					disabledVirtualization
 				/>
 			</Section>
 		</Main>

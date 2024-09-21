@@ -52,7 +52,7 @@ type Props<T, U = undefined> = {
 	};
 
 	rowForUpdate?: { row: number; data: T } | null;
-	disabledVirtualization?: boolean;
+	enableVirtualization?: boolean;
 	pagination?: TPagination;
 	meta?: TableMeta<T>;
 	onResizing?: (data: {
@@ -84,7 +84,7 @@ export function Table<T, U = undefined>({
 	expandLine,
 	globalFilter,
 	rowForUpdate,
-	disabledVirtualization,
+	enableVirtualization,
 	pagination,
 	meta,
 	onResizing,
@@ -213,7 +213,6 @@ export function Table<T, U = undefined>({
 		<>
 			<Header table={table} globalFilter={globalFilter} tools={tools} />
 			<div
-				id="batata"
 				ref={tableContainerRef}
 				className={managerClassNames({
 					[styles.customContainer]: true,
@@ -243,7 +242,7 @@ export function Table<T, U = undefined>({
 							expandLine={expandLine}
 							selection={selection}
 							rowForUpdate={rowForUpdate}
-							disabledVirtualization={disabledVirtualization}
+							enableVirtualization={enableVirtualization}
 						/>
 						<Tfoot table={table} showFooter={showFooter} />
 					</table>

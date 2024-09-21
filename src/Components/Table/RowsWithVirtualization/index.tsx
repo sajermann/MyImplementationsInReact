@@ -10,7 +10,7 @@ import { Tr } from '../Tr';
 type Props<T> = {
 	selection?: Omit<TSelection<T>, 'disableCheckbox'>;
 	rows: Row<T>[];
-	disabledVirtualization?: boolean;
+	enableVirtualization?: boolean;
 	rowForUpdate?: { row: number; data: T } | null;
 	expandLine?: {
 		render: (data: Row<T>) => React.ReactNode;
@@ -20,7 +20,7 @@ type Props<T> = {
 export function RowsWithVirtualization<T>({
 	selection,
 	rows,
-	disabledVirtualization,
+	enableVirtualization,
 	rowForUpdate,
 	expandLine,
 	tableContainerRef,
@@ -31,13 +31,8 @@ export function RowsWithVirtualization<T>({
 		estimateSize: () => 68,
 		overscan: 10,
 	});
-	// console.log({
-	// 	disabledVirtualization,
-	// 	virtualItems: getVirtualItems(),
-	// 	ref: tableContainerRef.current,
-	// 	totalSize: getTotalSize(),
-	// });
-	if (disabledVirtualization) return null;
+
+	if (!enableVirtualization) return null;
 	const paddingTop =
 		getVirtualItems().length > 0 ? getVirtualItems()?.[0]?.start || 0 : 0;
 	const paddingBottom =
@@ -55,7 +50,6 @@ export function RowsWithVirtualization<T>({
 			)}
 			{getVirtualItems().map(virtualRow => {
 				const row = rows[virtualRow.index];
-				// console.log('batata', row.getVisibleCells(), { row });
 				return (
 					<Fragment key={row.id}>
 						<Tr row={row} selection={selection} expandLine={expandLine}>

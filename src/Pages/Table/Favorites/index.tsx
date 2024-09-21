@@ -29,7 +29,9 @@ export function FavoritesPage() {
 				size: 60,
 				minSize: 60,
 				maxSize: 60,
-				align: 'center',
+				meta: {
+					align: 'center',
+				},
 				enableSorting: false,
 				cell: ({ row }: CellContext<TPerson, unknown>) => (
 					<div className="w-full h-6 flex items-center justify-center hover:cursor-pointer">
@@ -42,7 +44,7 @@ export function FavoritesPage() {
 				),
 			},
 		],
-		[translate]
+		[translate],
 	);
 
 	useEffect(() => {

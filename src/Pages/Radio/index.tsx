@@ -1,3 +1,5 @@
+import { useRef, useState } from 'react';
+
 import { Main } from '~/Components/Main';
 import { useTranslation } from '~/Hooks/UseTranslation';
 import { Section } from '~/Components/Section';
@@ -5,7 +7,6 @@ import { ComponentBlock } from '~/Components/ComponentBlock';
 import { CodeBlock } from '~/Components/CodeBlock';
 import { QuickAccessGithub } from '~/Components/QuickAccessGithub';
 import { RadioGroup, RadioItem } from '~/Components/Radio';
-import { useRef, useState } from 'react';
 import { RadioDemo } from '~/Components/Demos/Radio';
 import { Button } from '~/Components/Button';
 import { ContainerInput } from '~/Components/ContainerInput';

@@ -45,7 +45,6 @@ describe('Components/Table', () => {
 		const setRowSelectionMock = (s: any) => (resultMock = { ...s() });
 		const { container } = render(
 			<Table
-				disabledVirtualization
 				data={DATA}
 				columns={columns}
 				selection={{
@@ -69,7 +68,6 @@ describe('Components/Table', () => {
 		const setRowSelectionMock = (s: any) => (resultMock = { ...s() });
 		const { container } = render(
 			<Table
-				disabledVirtualization
 				data={DATA}
 				columns={columns}
 				selection={{
@@ -92,7 +90,6 @@ describe('Components/Table', () => {
 		const setRowSelectionMock = (s: any) => (resultMock = { ...s() });
 		const { container } = render(
 			<Table
-				disabledVirtualization
 				data={DATA}
 				columns={columns}
 				selection={{
@@ -118,7 +115,6 @@ describe('Components/Table', () => {
 		const setRowSelectionMock = vi.fn();
 		const { container } = render(
 			<Table
-				disabledVirtualization
 				data={DATA}
 				columns={columns}
 				selection={{

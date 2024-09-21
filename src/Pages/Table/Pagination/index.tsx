@@ -86,7 +86,6 @@ export function PaginationPage() {
 								setPagination,
 								disabledActions: isFetching,
 							}}
-							disabledVirtualization
 						/>
 					</div>
 				</ComponentBlock>
@@ -104,7 +103,6 @@ export function PaginationPage() {
 							setPagination: setPaginationOnlyFront,
 							automatic: true,
 						}}
-						disabledVirtualization
 					/>
 				</ComponentBlock>
 			</Section>
