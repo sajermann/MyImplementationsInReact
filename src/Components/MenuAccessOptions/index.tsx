@@ -163,6 +163,9 @@ export default function MenuAccessOptions({
 							/>
 						);
 					})}
+					{!mount.length && (
+						<span className="h-14">{translate('NO_RESULT')}</span>
+					)}
 				</ul>
 			</BoxScroll>
 		</Main>

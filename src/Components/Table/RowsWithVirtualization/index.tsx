@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/control-has-associated-label */
 import { flexRender, Row } from '@tanstack/react-table';
 import { Fragment, RefObject } from 'react';
 import { useVirtualizer } from '@tanstack/react-virtual';
@@ -9,7 +10,7 @@ import { Tr } from '../Tr';
 type Props<T> = {
 	selection?: Omit<TSelection<T>, 'disableCheckbox'>;
 	rows: Row<T>[];
-	disabledVirtualization?: boolean;
+	enableVirtualization?: boolean;
 	rowForUpdate?: { row: number; data: T } | null;
 	expandLine?: {
 		render: (data: Row<T>) => React.ReactNode;
@@ -19,19 +20,19 @@ type Props<T> = {
 export function RowsWithVirtualization<T>({
 	selection,
 	rows,
-	disabledVirtualization,
+	enableVirtualization,
 	rowForUpdate,
 	expandLine,
 	tableContainerRef,
 }: Props<T>) {
-	const rowVirtualizer = useVirtualizer({
+	const { getVirtualItems, getTotalSize } = useVirtualizer({
 		count: rows.length,
 		getScrollElement: () => tableContainerRef.current,
 		estimateSize: () => 68,
 		overscan: 10,
 	});
-	const { getVirtualItems, getTotalSize } = rowVirtualizer;
-	if (disabledVirtualization) return null;
+
+	if (!enableVirtualization) return null;
 	const paddingTop =
 		getVirtualItems().length > 0 ? getVirtualItems()?.[0]?.start || 0 : 0;
 	const paddingBottom =

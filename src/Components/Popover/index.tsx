@@ -1,4 +1,5 @@
 import * as PopoverRadix from '@radix-ui/react-popover';
+import { managerClassNames } from '~/Utils/ManagerClassNames';
 import { Icons } from '../Icons';
 
 type Props = {
@@ -17,8 +18,13 @@ export function Popover({ children, isOpen, onClose, trigger }: Props) {
 					<PopoverRadix.Content
 						align="center"
 						sideOffset={4}
-						className="radix-side-top:animate-slide-up radix-side-bottom:animate-slide-down w-48 rounded-lg p-4 pt-10 shadow-md md:w-56 bg-white dark:bg-dark-400 z-[1]"
-						style={{ border: '1px solid' }}
+						className={managerClassNames([
+							{ 'data-[state=open]:animate-enter': true },
+							{ 'data-[state=closed]:animate-leave': true },
+							{ 'rounded-lg z-[1] p-4': true },
+							{ 'shadow-lg shadow-black/25 dark:shadow-white/25': true },
+							{ 'bg-transparent backdrop-blur-md border': true },
+						])}
 					>
 						{children}
 						<PopoverRadix.Close

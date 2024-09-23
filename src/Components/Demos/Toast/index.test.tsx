@@ -11,9 +11,10 @@ describe('Components/Demos/ToastDemo', () => {
 		const { getByText } = render(
 			<InjectorProviders>
 				<ToastDemo />
-			</InjectorProviders>
+			</InjectorProviders>,
 		);
 		const button = await getByText('Success');
 		fireEvent.click(button);
+		expect(getByText('I am a Toast!')).toBeTruthy();
 	});
 });

@@ -44,7 +44,7 @@ export function VirtualizedPage() {
 						className="w-44"
 					>
 						{translate(
-							virtualized ? 'DISABLED_VIRTUALIZATION' : 'ACTIVE_VIRTUALIZATION'
+							virtualized ? 'DISABLED_VIRTUALIZATION' : 'ACTIVE_VIRTUALIZATION',
 						)}
 					</Button>
 
@@ -52,7 +52,7 @@ export function VirtualizedPage() {
 						isLoading={isLoading}
 						columns={[...columns]}
 						data={data}
-						disabledVirtualization={!virtualized}
+						enableVirtualization={virtualized}
 					/>
 				</div>
 			</Section>

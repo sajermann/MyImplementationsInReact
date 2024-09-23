@@ -20,7 +20,7 @@ type Props<T> = {
 		render: (data: Row<T>) => React.ReactNode;
 	};
 	rowForUpdate?: { row: number; data: T } | null;
-	disabledVirtualization?: boolean;
+	enableVirtualization?: boolean;
 };
 
 export function Tbody<T>({
@@ -32,7 +32,7 @@ export function Tbody<T>({
 	selection,
 	expandLine,
 	rowForUpdate,
-	disabledVirtualization,
+	enableVirtualization,
 }: Props<T>) {
 	const { rows } = table.getRowModel();
 	const { darkMode } = useDarkModeZustand();
@@ -63,7 +63,7 @@ export function Tbody<T>({
 			/>
 			<RowsWithoutVirtualization
 				table={table}
-				disabledVirtualization={disabledVirtualization}
+				enableVirtualization={enableVirtualization}
 				expandLine={expandLine}
 				rowForUpdate={rowForUpdate}
 				selection={selection}
@@ -71,7 +71,7 @@ export function Tbody<T>({
 
 			<RowsWithVirtualization
 				tableContainerRef={tableContainerRef}
-				disabledVirtualization={disabledVirtualization}
+				enableVirtualization={enableVirtualization}
 				rows={rows}
 				expandLine={expandLine}
 				rowForUpdate={rowForUpdate}

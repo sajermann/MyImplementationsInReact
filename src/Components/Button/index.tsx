@@ -50,6 +50,11 @@ const buttonVariants = tv({
 					'bg-yellow-500 border border-yellow-700 focus:ring-yellow-700 text-white',
 				],
 			},
+			white: {
+				buttonPropsInternal: [
+					'border border-white focus:ring-white text-white',
+				],
+			},
 		},
 		variant: {
 			default: {
@@ -114,7 +119,7 @@ interface IButton extends ButtonHTMLAttributes<HTMLButtonElement> {
 	containerChildrenProps?: AllHTMLAttributes<HTMLDivElement>;
 	withFeedback?: TFeedbackProps;
 	variant?: 'default' | 'outlined' | 'option';
-	colorStyle?: 'primary' | 'secondary' | 'success' | 'warning';
+	colorStyle?: 'primary' | 'secondary' | 'success' | 'warning' | 'white';
 	iconButton?: 'rounded' | 'squared';
 	type?: 'submit' | 'reset' | 'button';
 }

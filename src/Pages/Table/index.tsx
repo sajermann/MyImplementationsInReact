@@ -14,14 +14,25 @@ export function TablePage() {
 	const { globalRoutes: options } = useRoutesMenu();
 	const [search, setSearch] = useState('');
 
-	const optionsSubTable = options.find(opt => opt.name === 'Table')?.subs;
+	const optionsSubTable = options
+		.find(opt => opt.name === 'Table')
+		?.subs?.sort((a, b) => {
+			if (translate(a.label) < translate(b.label)) {
+				return -1;
+			}
+			if (translate(a.label) > translate(b.label)) {
+				return 1;
+			}
+
+			return 0;
+		});
 
 	function getFiltreds() {
 		if (!search) {
 			return optionsSubTable;
 		}
 		return optionsSubTable?.filter(
-			opt => opt.label.toLowerCase().indexOf(search.toLowerCase()) > -1
+			opt => opt.label.toLowerCase().indexOf(search.toLowerCase()) > -1,
 		);
 	}
 
@@ -32,7 +43,7 @@ export function TablePage() {
 		<Main data-content="content-main">
 			<Section title={translate('TABLES')} variant="h1">
 				{`${translate('IMPLEMENTS_COMPONENT')} ${translate(
-					'TABLE'
+					'TABLE',
 				)} ${translate('USING_THE_LIB')} @tanstack/react-table`}
 			</Section>
 			<Section title={translate('INSTALLATION_OF_LIB')} variant="h2">
@@ -55,7 +66,7 @@ export function TablePage() {
 						getFiltreds()?.map(opt => (
 							<div
 								key={opt.name}
-								className="border rounded flex bg-dark-400 text-white"
+								className="border rounded flex bg-dark-400 text-white h-16"
 							>
 								<div className="flex w-full flex-1 items-center justify-center">
 									<div className="flex-1 ml-2">{opt.label}</div>
@@ -67,6 +78,12 @@ export function TablePage() {
 								</div>
 							</div>
 						))}
+
+					{!getFiltreds()?.length && (
+						<span className="border rounded bg-dark-400 text-white h-16 flex items-center justify-center">
+							{translate('NO_RESULT')}
+						</span>
+					)}
 				</div>
 			</Section>
 		</Main>

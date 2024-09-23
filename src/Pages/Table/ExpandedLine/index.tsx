@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { Table } from '~/Components/Table';
 import { TPerson } from '~/Types/TPerson';
 import { makeData } from '~/Utils/MakeData';
-import { UpdateRowExpanded } from '~/Components/UpdateRowExpanded';
+import { UpdateRowExpanded } from '~/Components/Table/UpdateRowExpanded';
 import { useColumns } from '~/Hooks/UseColumns';
 import { Main } from '~/Components/Main';
 import { Section } from '~/Components/Section';
@@ -53,7 +53,6 @@ export function ExpandedLinePage() {
 							<UpdateRowExpanded row={row} onSave={handleSaveUpdate} />
 						),
 					}}
-					disabledVirtualization
 				/>
 			</Section>
 		</Main>

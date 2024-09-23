@@ -60,7 +60,7 @@ module.exports = {
 				xl: '1280px',
 				'2xl': '1366px',
 				'3xl': '1536px',
-				'4xl': '1980px',
+				'4xl': '1920px',
 			},
 			keyframes: {
 				overlayShow: {

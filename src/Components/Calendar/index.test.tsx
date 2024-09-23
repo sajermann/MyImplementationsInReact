@@ -7,7 +7,7 @@ import { InjectorProviders } from '~/Components/InjectorProviders';
 
 import { Calendar } from '.';
 
-describe('Pages/Calendar', () => {
+describe('Components/Calendar', () => {
 	it(`must select date single `, async () => {
 		const date = new Date(2024, 3, 1);
 		const spy = vi.fn();
@@ -25,13 +25,13 @@ describe('Pages/Calendar', () => {
 						},
 					}}
 				/>
-			</InjectorProviders>
+			</InjectorProviders>,
 		);
 		const result = getByText('13');
 		fireEvent.mouseEnter(result);
 		fireEvent.click(result);
 		expect(spy).toBeCalledWith(
-			new Date(date.getFullYear(), date.getMonth(), 13)
+			new Date(date.getFullYear(), date.getMonth(), 13),
 		);
 	});
 
@@ -53,7 +53,7 @@ describe('Pages/Calendar', () => {
 						},
 					}}
 				/>
-			</InjectorProviders>
+			</InjectorProviders>,
 		);
 		const result = getByText('13');
 		fireEvent.mouseEnter(result);

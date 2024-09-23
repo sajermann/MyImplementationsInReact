@@ -31,6 +31,18 @@ const radioVariants = tv({
 				radioIndicatorPropsInternal: 'after:bg-red-500',
 			},
 
+			white: {
+				radioItemPropsInternal:
+					'focus:ring-white focus:shadow-white group-hover:border-white focus:border-white',
+				radioIndicatorPropsInternal: 'after:bg-white',
+			},
+
+			black: {
+				radioItemPropsInternal:
+					'focus:ring-black focus:shadow-black group-hover:border-black focus:border-black',
+				radioIndicatorPropsInternal: 'after:bg-black',
+			},
+
 			normal: {
 				radioItemPropsInternal: '',
 			},
@@ -69,6 +81,7 @@ export function RadioGroup({
 }
 
 type Props = {
+	colorStyle?: 'primary' | 'white' | 'black';
 	id?: string;
 	value: string;
 	itemProps?: {
@@ -82,10 +95,21 @@ type Props = {
 };
 
 export const RadioItem = forwardRef<HTMLButtonElement, Props>(
-	({ id, value, itemProps, indicatorProps, disabled, iserror }, ref) => {
+	(
+		{
+			id,
+			value,
+			itemProps,
+			indicatorProps,
+			disabled,
+			iserror,
+			colorStyle = 'primary',
+		},
+		ref,
+	) => {
 		const { radioItemPropsInternal, radioIndicatorPropsInternal } =
 			radioVariants({
-				color: iserror ? 'error' : 'primary',
+				color: iserror ? 'error' : colorStyle,
 			});
 		return (
 			<RadioGroupPrimitive.Item
@@ -104,5 +128,5 @@ export const RadioItem = forwardRef<HTMLButtonElement, Props>(
 				/>
 			</RadioGroupPrimitive.Item>
 		);
-	}
+	},
 );

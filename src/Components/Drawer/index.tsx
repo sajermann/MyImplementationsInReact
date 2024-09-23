@@ -85,7 +85,7 @@ export function Drawer({
 			<div
 				className={managerClassNames([
 					{ 'opacity-0 transition-opacity duration-500': true },
-					{ 'inset-0 fixed z-[9998]': true },
+					{ 'inset-0 fixed z-[9999]': true },
 					{ 'opacity-50 ': isOpenInternal },
 					{ 'bg-black': !disableBackdrop },
 				])}
@@ -95,6 +95,7 @@ export function Drawer({
 			<div
 				className={managerClassNames([
 					{ 'fixed inset-0 transition-all duration-500 z-[9999]': true },
+					{ 'shadow-lg shadow-black/25 dark:shadow-white/25': true },
 					// Left
 					{ '-translate-x-full': !isOpenInternal && openFrom === 'left' },
 					// Right
@@ -114,6 +115,6 @@ export function Drawer({
 				{children}
 			</div>
 		</>,
-		document.body
+		document.body,
 	);
 }
