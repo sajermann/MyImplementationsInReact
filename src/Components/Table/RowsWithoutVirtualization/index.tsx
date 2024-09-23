@@ -12,16 +12,16 @@ type Props<T> = {
 	expandLine?: {
 		render: (data: Row<T>) => React.ReactNode;
 	};
-	disabledVirtualization?: boolean;
+	enableVirtualization?: boolean;
 };
 export function RowsWithoutVirtualization<T>({
 	table,
 	rowForUpdate,
 	expandLine,
 	selection,
-	disabledVirtualization,
+	enableVirtualization,
 }: Props<T>) {
-	if (!disabledVirtualization) return null;
+	if (enableVirtualization) return null;
 	return (
 		<>
 			{table.getRowModel().rows.map(row => (

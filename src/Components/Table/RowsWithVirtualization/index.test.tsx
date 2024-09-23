@@ -35,7 +35,7 @@ const columns: ColumnDef<TIdName>[] = [
 
 type TProps = {
 	selection?: Omit<TSelection<TIdName>, 'disableCheckbox'>;
-	disabledVirtualization?: boolean;
+	enableVirtualization?: boolean;
 	rowForUpdate?: { row: number; data: TIdName } | null;
 	expandLine?: {
 		render: (data: Row<TIdName>) => React.ReactNode;
@@ -43,7 +43,7 @@ type TProps = {
 };
 
 function Mock({
-	disabledVirtualization,
+	enableVirtualization,
 	expandLine,
 	rowForUpdate,
 	selection,
@@ -74,7 +74,7 @@ function Mock({
 			>
 				<RowsWithVirtualization<TIdName>
 					tableContainerRef={ref}
-					disabledVirtualization={disabledVirtualization}
+					enableVirtualization={enableVirtualization}
 					rows={rows}
 					expandLine={expandLine}
 					rowForUpdate={rowForUpdate}
@@ -124,19 +124,19 @@ describe('Components/Table/RowsWithVirtualization', () => {
 	});
 
 	// Por algum motivo o scroll não está funcionando
-	// it(`must render last item`, async () => {
-	// 	const { queryByText, getAllByText, getByText, getByTestId, findByText } =
-	// 		render(<Mock />);
-	// 	const refContainer = getByTestId('ref-container');
-	// 	await waitFor(async () => {
-	// 		fireEvent.scroll(refContainer, { target: { scrollDown: 99_999_999 } });
-	// 		const scrollButton = getByText('Scroll to Bottom');
-	// 		fireEvent.click(scrollButton);
-	// 		const first = await findByText(`name-99`);
-	// 		console.log({ first });
-	// 		expect(first).toBeTruthy();
-	// 		const last = queryByText(`name-0`);
-	// 		expect(last).toBeFalsy();
-	// 	});
-	// });
+	it(`must render last item`, async () => {
+		const { queryByText, getAllByText, getByText, getByTestId, findByText } =
+			render(<Mock />);
+		const refContainer = getByTestId('ref-container');
+		await waitFor(async () => {
+			fireEvent.scroll(refContainer, { target: { scrollDown: 99_999_999 } });
+			const scrollButton = getByText('Scroll to Bottom');
+			fireEvent.click(scrollButton);
+			const first = await findByText(`name-99`);
+			console.log({ first });
+			expect(first).toBeTruthy();
+			const last = queryByText(`name-0`);
+			expect(last).toBeFalsy();
+		});
+	});
 });

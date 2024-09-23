@@ -56,7 +56,7 @@ export function Modal({
 				<Dialog.Overlay
 					{...overlayProps}
 					className={managerClassNames([
-						{ 'bg-black/60 inset-0 fixed z-[9998]': true },
+						{ 'bg-black/60 inset-0 fixed z-[9999]': true },
 						// Look tailwind.config.cjs
 						{ 'data-[state=open]:animate-overlayShow': true },
 						{ 'data-[state=closed]:animate-overlayClose': true },
@@ -70,7 +70,8 @@ export function Modal({
 					onEscapeKeyDown={closeByEsc ? onClose : undefined}
 					className={managerClassNames([
 						{ 'top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 ': true },
-						{ 'shadow-lg shadow-black/25 z-[9999] fixed rounded': true },
+						{ 'shadow-lg shadow-black/25 dark:shadow-white/25': true },
+						{ 'z-[9999] fixed rounded border': true },
 						{ ' bg-transparent backdrop-blur-md text-white': true },
 						// Look tailwind.config.cjs
 						{ 'data-[state=open]:animate-contentShow': true },

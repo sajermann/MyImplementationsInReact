@@ -27,11 +27,10 @@ export function SortPage() {
 				header: translate('FRIENDS'),
 				minSize: 100,
 				size: 200,
-				align: 'left',
 				cell: info => info.getValue(),
 			},
 		],
-		[translate]
+		[translate],
 	);
 
 	return (
@@ -47,11 +46,7 @@ export function SortPage() {
 			<Section title={translate('AUTOMATIC_SORT')} variant="h2">
 				{translate('NOTE_FRIENDS_IS_ARRAY_OF_OBJECT')}
 
-				<Table
-					columns={[...columns, ...columns2]}
-					data={data}
-					disabledVirtualization
-				/>
+				<Table columns={[...columns, ...columns2]} data={data} />
 			</Section>
 
 			<Section title={translate('MANUAL_SORT')} variant="h2">

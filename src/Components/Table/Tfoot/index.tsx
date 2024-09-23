@@ -1,4 +1,5 @@
 import { flexRender, Table } from '@tanstack/react-table';
+import { managerClassNames } from '~/Utils/ManagerClassNames';
 
 type Props<T> = {
 	table: Table<T>;
@@ -9,37 +10,27 @@ export function Tfoot<T>({ table, showFooter }: Props<T>) {
 	if (!showFooter) return null;
 	return (
 		<tfoot
-			style={{
-				margin: 0,
-				position: 'sticky',
-				bottom: 0,
-				zIndex: 1,
-			}}
-			className="bg-white dark:bg-dark-700"
+			className={managerClassNames({
+				'm-0 bottom-0 sticky z-[1] backdrop-blur-md h-14': true,
+				'shadow-lg shadow-black/25 dark:shadow-white/25': true,
+			})}
 		>
 			{table.getFooterGroups().map(footerGroup => (
-				<tr
-					key={footerGroup.id}
-					style={{
-						height: '60px',
-						boxShadow: '0 -2px #000000',
-					}}
-				>
+				<tr key={footerGroup.id}>
 					{footerGroup.headers.map(header => (
 						<th
 							key={header.id}
 							colSpan={header.colSpan}
 							style={{
-								// @ts-expect-error align exists
-								textAlign: header.getContext().column.columnDef.align,
+								textAlign: header.getContext().column.columnDef.meta?.align,
 							}}
 						>
 							{header.isPlaceholder
 								? null
 								: flexRender(
 										header.column.columnDef.footer,
-										header.getContext()
-								  )}
+										header.getContext(),
+									)}
 						</th>
 					))}
 				</tr>

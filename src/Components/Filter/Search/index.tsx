@@ -75,6 +75,7 @@ export function Search({
 						const event = {
 							target: {
 								value: e?.value,
+								id: 'isActive',
 							},
 						};
 						handleInput(event as ChangeEvent<HTMLInputElement>);

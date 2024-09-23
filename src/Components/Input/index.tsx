@@ -7,7 +7,7 @@ const input = tv({
 	slots: {
 		inputPropsInternal: [
 			'group outline-none focus:ring-1 border h-11 py-1 px-2 rounded w-full bg-transparent',
-			'transition-all duration-500',
+			'transition-all duration-500 disabled:cursor-not-allowed disabled:opacity-50',
 		],
 	},
 	variants: {
@@ -35,7 +35,7 @@ const input = tv({
 export const Input = forwardRef<HTMLInputElement, TInput>(
 	(
 		{ iserror, onBeforeChange, onChange, debounce, className, ...rest },
-		ref
+		ref,
 	) => {
 		const [event, setEvent] = useState<React.ChangeEvent<HTMLInputElement>>();
 		const { inputPropsInternal } = input({
@@ -74,5 +74,5 @@ export const Input = forwardRef<HTMLInputElement, TInput>(
 				}
 			/>
 		);
-	}
+	},
 );

@@ -1,10 +1,8 @@
 import { Table, flexRender } from '@tanstack/react-table';
-import { useDarkModeZustand } from '~/Store/UseDarkMode';
 import { managerClassNames } from '~/Utils/ManagerClassNames';
 import { Filter } from './Filter';
 import { Resizing } from './Resizing';
 import { SortIcon } from './SortIcon';
-import styles from './index.module.css';
 
 type Props<T> = {
 	table: Table<T>;
@@ -14,20 +12,18 @@ type Props<T> = {
 };
 
 export function Thead<T>({ table, sorting }: Props<T>) {
-	const { darkMode } = useDarkModeZustand();
-
 	return (
 		<thead
 			className={managerClassNames({
-				[styles.thead]: true,
-				'!bg-dark-400': darkMode,
+				'm-0 top-0 sticky z-[1] backdrop-blur-md h-14': true,
+				'shadow-lg shadow-black/25 dark:shadow-white/25': true,
 			})}
 		>
 			{table.getHeaderGroups().map(headerGroup => (
 				<tr key={headerGroup.id}>
 					{headerGroup.headers.map(header => (
 						<th
-							className={styles.th}
+							className="p-4 text-left"
 							key={header.id}
 							colSpan={header.colSpan}
 							style={{
@@ -50,6 +46,7 @@ export function Thead<T>({ table, sorting }: Props<T>) {
 										<button
 											type="button"
 											className={managerClassNames({
+												'flex items-center gap-2': true,
 												'cursor-pointer select-none':
 													header.column.getCanSort() && !sorting,
 												'cursor-default outline-0 tab select-none':
@@ -60,7 +57,7 @@ export function Thead<T>({ table, sorting }: Props<T>) {
 										>
 											{flexRender(
 												header.column.columnDef.header,
-												header.getContext()
+												header.getContext(),
 											)}
 											<SortIcon header={header} />
 										</button>

@@ -94,7 +94,7 @@ export function PrintPage() {
 							isLoading={isLoading}
 							columns={[...columns]}
 							data={data}
-							disabledVirtualization={!isPrinting}
+							enableVirtualization={!isPrinting}
 						/>
 					</ToPrint>
 				</div>

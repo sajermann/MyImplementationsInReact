@@ -101,7 +101,7 @@ export function ExportPage() {
 					(valueCell as { name: string }[]).map(item => item.name).join(' | '),
 			},
 		],
-		[translate]
+		[translate],
 	);
 
 	const defForCsvAndXml = useMemo<TDefCsv<TPerson>[]>(
@@ -145,7 +145,7 @@ export function ExportPage() {
 					(valueCell as { name: string }[]).map(item => item.name).join(' | '),
 			},
 		],
-		[translate]
+		[translate],
 	);
 
 	const defForPrintAndPdfAndPng = useMemo<TDefPrintPdfPng<TPerson>[]>(
@@ -167,7 +167,9 @@ export function ExportPage() {
 				accessor: 'birthday',
 				accessorFn: ({ valueCell }) =>
 					formatDate(new Date(valueCell as string)),
-				align: 'center',
+				meta: {
+					align: 'center',
+				},
 			},
 			{
 				header: 'Email',
@@ -176,14 +178,18 @@ export function ExportPage() {
 			{
 				header: 'Role',
 				accessor: 'role',
-				align: 'center',
+				meta: {
+					align: 'center',
+				},
 			},
 			{
 				header: translate('ACTIVE'),
 				accessor: 'isActive',
 				accessorFn: ({ valueCell }) =>
 					(valueCell as string) ? translate('YES') : translate('NO'),
-				align: 'center',
+				meta: {
+					align: 'center',
+				},
 			},
 			{
 				header: translate('FRIENDS'),
@@ -197,7 +203,7 @@ export function ExportPage() {
 					`,
 			},
 		],
-		[translate]
+		[translate],
 	);
 
 	return (

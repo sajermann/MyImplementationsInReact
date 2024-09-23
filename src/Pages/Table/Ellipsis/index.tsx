@@ -24,11 +24,10 @@ export function EllipsisPage() {
 				header: translate('FRIENDS'),
 				minSize: 50,
 				size: 50,
-				align: 'left',
 				cell: info => info.getValue(),
 			},
 		],
-		[translate]
+		[translate],
 	);
 
 	useEffect(() => {

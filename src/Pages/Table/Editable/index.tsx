@@ -241,7 +241,7 @@ export function EditablePage() {
 				},
 			},
 		],
-		[translate]
+		[translate],
 	);
 
 	async function load() {
@@ -266,7 +266,6 @@ export function EditablePage() {
 			</Section>
 			<Section title={translate('IMPLEMENTS')} variant="h2">
 				<Table
-					disabledVirtualization
 					isLoading={isLoading}
 					columns={[...columnsInternal]}
 					data={data}

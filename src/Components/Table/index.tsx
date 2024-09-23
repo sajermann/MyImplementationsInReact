@@ -14,6 +14,7 @@ import {
 	FilterFnOption,
 	ColumnSizingState,
 	ColumnSizingInfoState,
+	getPaginationRowModel,
 } from '@tanstack/react-table';
 
 import { TPagination } from '~/Types/TPagination';
@@ -51,7 +52,7 @@ type Props<T, U = undefined> = {
 	};
 
 	rowForUpdate?: { row: number; data: T } | null;
-	disabledVirtualization?: boolean;
+	enableVirtualization?: boolean;
 	pagination?: TPagination;
 	meta?: TableMeta<T>;
 	onResizing?: (data: {
@@ -83,7 +84,7 @@ export function Table<T, U = undefined>({
 	expandLine,
 	globalFilter,
 	rowForUpdate,
-	disabledVirtualization,
+	enableVirtualization,
 	pagination,
 	meta,
 	onResizing,
@@ -182,7 +183,10 @@ export function Table<T, U = undefined>({
 		getSortedRowModel: getSortedRowModel(),
 		getRowCanExpand: () => !!expandLine,
 		getExpandedRowModel: getExpandedRowModel(),
-		manualPagination: true,
+		manualPagination: pagination?.automatic ? undefined : true,
+		getPaginationRowModel: pagination?.automatic
+			? getPaginationRowModel()
+			: undefined,
 		onPaginationChange: pagination?.setPagination,
 		meta,
 		globalFilterFn: globalFilter?.globalFilterFn || 'auto',
@@ -209,7 +213,6 @@ export function Table<T, U = undefined>({
 		<>
 			<Header table={table} globalFilter={globalFilter} tools={tools} />
 			<div
-				id="batata"
 				ref={tableContainerRef}
 				className={managerClassNames({
 					[styles.customContainer]: true,
@@ -239,7 +242,7 @@ export function Table<T, U = undefined>({
 							expandLine={expandLine}
 							selection={selection}
 							rowForUpdate={rowForUpdate}
-							disabledVirtualization={disabledVirtualization}
+							enableVirtualization={enableVirtualization}
 						/>
 						<Tfoot table={table} showFooter={showFooter} />
 					</table>

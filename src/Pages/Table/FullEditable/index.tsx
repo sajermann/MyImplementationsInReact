@@ -67,7 +67,9 @@ export function FullEditablePage() {
 				header: 'Avatar',
 				minSize: 60,
 				size: 60,
-				align: 'left',
+				meta: {
+					align: 'left',
+				},
 				cell: ({ getValue }) => (
 					<div className="w-14 h-14 flex items-center justify-center">
 						<img
@@ -231,12 +233,7 @@ export function FullEditablePage() {
 				</div>
 			</Section>
 			<Section title={translate('IMPLEMENTS')} variant="h2">
-				<Table
-					disabledVirtualization
-					isLoading={isLoading}
-					columns={columns}
-					data={data}
-				/>
+				<Table isLoading={isLoading} columns={columns} data={data} />
 				<pre>{JSON.stringify(data, null, 2)}</pre>
 			</Section>
 		</Main>

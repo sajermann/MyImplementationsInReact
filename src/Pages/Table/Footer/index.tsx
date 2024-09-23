@@ -25,7 +25,9 @@ export function FooterPage() {
 				header: 'Id',
 				minSize: 100,
 				size: 100,
-				align: 'center',
+				meta: {
+					align: 'center',
+				},
 				enableResizing: false,
 			},
 			{
@@ -33,9 +35,12 @@ export function FooterPage() {
 				header: translate('NAME'),
 				minSize: 100,
 				size: 100,
-				align: 'center',
+
 				enableSorting: true,
 				footer: translate('TOTALS'),
+				meta: {
+					align: 'center',
+				},
 			},
 			{
 				accessorFn: ({ price }) => mask.currency(price, currentLanguage),
@@ -43,18 +48,20 @@ export function FooterPage() {
 				header: translate('PRICE'),
 				minSize: 100,
 				size: 100,
-				align: 'center',
+				meta: {
+					align: 'center',
+				},
 				footer: ({ table }) => {
 					const myRows = table.getRowModel().rows.map(item => item.original);
 					const result = myRows.reduce(
 						(accumulator, currentValue) => accumulator + currentValue.price,
-						0
+						0,
 					);
 					return mask.currency(result, currentLanguage);
 				},
 			},
 		],
-		[translate, currentLanguage]
+		[translate, currentLanguage],
 	);
 
 	return (
@@ -76,7 +83,6 @@ export function FooterPage() {
 						setFilter: setGlobalFilter,
 					}}
 					showFooter
-					disabledVirtualization
 				/>
 			</Section>
 		</Main>

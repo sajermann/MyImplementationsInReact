@@ -1,5 +1,10 @@
 {
 	"translations": {
+		"NO_RESULT": "Sem Resultado",
+		"CANCEL": "Cancelar",
+		"SAVE": "Salvar",
+		"PAGINATION_IN_FRONTEND": "Paginação no Frontend",
+		"PAGINATION_IN_BACKEND": "Paginação no Backend",
 		"JSON_VIEWER": "Visualizador JSON",
 		"FORM": "Formulário",
 		"DATA": "Dados",

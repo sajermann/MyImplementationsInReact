@@ -52,7 +52,7 @@ export function VirtualizedPage() {
 						isLoading={isLoading}
 						columns={[...columns]}
 						data={data}
-						disabledVirtualization={!virtualized}
+						enableVirtualization={virtualized}
 					/>
 				</div>
 			</Section>

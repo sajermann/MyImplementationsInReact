@@ -12,7 +12,6 @@ const config = {
 
 export function AnimateInViewPage() {
 	const { translate, currentLanguage } = useTranslation();
-	console.log({ currentLanguage });
 	return (
 		<Main data-content="content-main">
 			<Section title={translate('ANIMATE_IN_VIEW')} variant="h1">

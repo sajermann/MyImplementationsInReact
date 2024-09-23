@@ -25,7 +25,7 @@ export function InputPage() {
 		<Main data-content="content-main">
 			<Section title={translate('INPUT')} variant="h1">
 				{`${translate('IMPLEMENTS_COMPONENT')} Input ${translate(
-					'WITHOUT_USING_LIB'
+					'WITHOUT_USING_LIB',
 				)}`}
 			</Section>
 
@@ -40,6 +40,15 @@ export function InputPage() {
 					<ContainerInput>
 						<Label htmlFor="label">{translate('TRADICIONAL_INPUT')}</Label>
 						<Input placeholder={translate('TRADICIONAL_INPUT')} id="label" />
+					</ContainerInput>
+				</ComponentBlock>
+			</Section>
+
+			<Section title={translate('DISABLED')} variant="h2">
+				<ComponentBlock>
+					<ContainerInput>
+						<Label htmlFor="label">{translate('DISABLED')}</Label>
+						<Input placeholder={translate('DISABLED')} id="label" disabled />
 					</ContainerInput>
 				</ComponentBlock>
 			</Section>
