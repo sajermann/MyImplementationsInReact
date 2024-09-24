@@ -67,7 +67,7 @@ export function ButtonPage() {
 					<Button colorStyle="secondary">Secondary</Button>
 					<Button colorStyle="success">Success</Button>
 					<Button colorStyle="warning">Warning</Button>
-					<Button colorStyle="white">White</Button>
+					<Button colorStyle="mono">Mono</Button>
 				</ComponentBlock>
 			</Section>
 
@@ -104,6 +104,16 @@ export function ButtonPage() {
 						Outlined
 					</Button>
 					<Button variant="option" colorStyle="warning">
+						Option
+					</Button>
+
+					<Button variant="default" colorStyle="mono">
+						Default
+					</Button>
+					<Button variant="outlined" colorStyle="mono">
+						Outlined
+					</Button>
+					<Button variant="option" colorStyle="mono">
 						Option
 					</Button>
 				</ComponentBlock>

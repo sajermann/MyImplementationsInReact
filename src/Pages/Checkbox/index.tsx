@@ -23,7 +23,7 @@ export function CheckboxPage() {
 		<Main data-content="content-main">
 			<Section title="Checkbox" variant="h1">
 				{`${translate('IMPLEMENTS_COMPONENT')} Checkbox ${translate(
-					'USING_THE_LIB'
+					'USING_THE_LIB',
 				)} @radix-ui/react-checkbox`}
 			</Section>
 
