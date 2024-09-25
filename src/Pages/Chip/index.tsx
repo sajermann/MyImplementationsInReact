@@ -3,7 +3,7 @@ import { useTranslation } from '~/Hooks/UseTranslation';
 import { Main } from '~/Components/Main';
 import { Section } from '~/Components/Section';
 import { QuickAccessGithub } from '~/Components/QuickAccessGithub';
-import { Chip } from '~/Components/Chip';
+import { Chip, ColorStyle, Variant } from '~/Components/Chip';
 import { Input } from '~/Components/Input';
 import { Button } from '~/Components/Button';
 import { utilsChip } from '~/Utils/Chips';
@@ -18,6 +18,54 @@ export function ChipPage() {
 	const [valueYoutube, setValueYoutube] = useState('');
 	const [chipsYoutube, setChipsYoutube] = useState<string[]>([]);
 	const inputRef = useRef<HTMLInputElement>(null);
+
+	const VARIANTS = ['default', 'outlined', 'option'];
+	const COLOR_STYLE = ['primary', 'secondary', 'success', 'warning', 'mono'];
+	const VARIANTS_AND_COLOR_STYLE = [
+		{ variant: 'default', colorStyle: undefined, value: 'Default' },
+		{ variant: 'outlined', colorStyle: undefined, value: 'Outlined' },
+		{ variant: 'option', colorStyle: undefined, value: 'Option' },
+		{ variant: 'default', colorStyle: 'secondary', value: 'Default Secondary' },
+		{
+			variant: 'outlined',
+			colorStyle: 'secondary',
+			value: 'Outlined Secondary',
+		},
+		{ variant: 'option', colorStyle: 'secondary', value: 'Option Secondary' },
+		{
+			variant: 'default',
+			colorStyle: 'success',
+			value: 'Default Success',
+		},
+		{
+			variant: 'outlined',
+			colorStyle: 'success',
+			value: 'Outlined Success',
+		},
+		{
+			variant: 'option',
+			colorStyle: 'success',
+			value: 'Option Success',
+		},
+		{
+			variant: 'default',
+			colorStyle: 'warning',
+			value: 'Default Warning',
+		},
+		{
+			variant: 'outlined',
+			colorStyle: 'warning',
+			value: 'Outlined Warning',
+		},
+		{
+			variant: 'option',
+			colorStyle: 'warning',
+			value: 'Option Warning',
+		},
+		{ variant: 'default', colorStyle: 'mono', value: 'Default Mono' },
+		{ variant: 'outlined', colorStyle: 'mono', value: 'Outlined Mono' },
+		{ variant: 'option', colorStyle: 'mono', value: 'Option Mono' },
+	];
 
 	return (
 		<Main data-content="content-main">
@@ -34,85 +82,56 @@ export function ChipPage() {
 
 			<Section title={translate('VARIANTS')} variant="h2">
 				<ComponentBlock>
-					<Chip variant="default" value="Default" />
-					<Chip variant="outlined" value="Outlined" />
-					<Chip variant="option" value="Option" />
+					{VARIANTS.map(variant => (
+						<Chip
+							key={variant}
+							variant={variant as Variant}
+							value={`${variant.at(0)?.toUpperCase()}${variant.substring(1)}`}
+						/>
+					))}
 				</ComponentBlock>
 			</Section>
 
 			<Section title={translate('COLOR_STYLE')} variant="h2">
 				<ComponentBlock>
-					<Chip colorStyle="primary" value="Primary" />
-					<Chip colorStyle="secondary" value="Secondary" />
-					<Chip colorStyle="success" value="Success" />
-					<Chip colorStyle="warning" value="Warning" />
-					<Chip colorStyle="mono" value="Mono" />
+					{COLOR_STYLE.map(variant => (
+						<Chip
+							key={variant}
+							colorStyle={variant as ColorStyle}
+							value={`${variant.at(0)?.toUpperCase()}${variant.substring(1)}`}
+						/>
+					))}
 				</ComponentBlock>
 			</Section>
 
 			<Section title={translate('VARIANTS_AND_COLOR_STYLE')} variant="h2">
 				<ComponentBlock>
-					<Chip variant="default" value="Default" />
-					<Chip variant="outlined" value="Outlined" />
-					<Chip variant="option" value="Option" />
-
-					<Chip
-						variant="default"
-						colorStyle="secondary"
-						value="Default Secondary"
-					/>
-					<Chip
-						variant="outlined"
-						colorStyle="secondary"
-						value="Outlined Secondary"
-					/>
-					<Chip
-						variant="option"
-						colorStyle="secondary"
-						value="Option Secondary"
-					/>
-					<Chip
-						variant="default"
-						colorStyle="success"
-						value="Default Success"
-					/>
-
-					<Chip
-						variant="outlined"
-						colorStyle="success"
-						value="Outlined Success"
-					/>
-
-					<Chip variant="option" colorStyle="success" value="Option Success" />
-
-					<Chip
-						variant="default"
-						colorStyle="warning"
-						value="Default Warning"
-					/>
-
-					<Chip
-						variant="outlined"
-						colorStyle="warning"
-						value="Outlined Warning"
-					/>
-					<Chip variant="option" colorStyle="warning" value="Option Warning" />
-
-					<Chip variant="default" colorStyle="mono" value="Default Mono" />
-					<Chip variant="outlined" colorStyle="mono" value="Outlined Mono" />
-					<Chip variant="option" colorStyle="mono" value="Option Mono" />
+					{VARIANTS_AND_COLOR_STYLE.map(variant => (
+						<Chip
+							key={variant.value}
+							colorStyle={variant.colorStyle as ColorStyle}
+							variant={variant.variant as Variant}
+							value={variant.value}
+						/>
+					))}
 				</ComponentBlock>
 			</Section>
 
 			<Section title={translate('CONTROLLED')} variant="h2">
 				<Section title={translate('EDITABLE')} variant="h3">
-					<ComponentBlock className="flex flex-col">
-						<span>{translate('EDITABLE_MODE_BY_CLICK')}</span>
-						<Chip
-							{...showInDevelopment({ 'data-testid': 'chip-editable' })}
-							value={valueChip1}
-							onChange={(_, e) => setValueChip1(e)}
-						/>
+					<ComponentBlock>
+						<span className="w-full">
+							{translate('EDITABLE_MODE_BY_CLICK')}
+						</span>
+						{VARIANTS_AND_COLOR_STYLE.map(variant => (
+							<Chip
+								key={variant.value}
+								colorStyle={variant.colorStyle as ColorStyle}
+								variant={variant.variant as Variant}
+								value={valueChip1}
+								onChange={(_, e) => setValueChip1(e)}
+							/>
+						))}
 					</ComponentBlock>
 				</Section>
 
@@ -143,6 +162,8 @@ export function ChipPage() {
 									{...showInDevelopment({
 										'data-testid': `chip-editable-${item}`,
 									})}
+									variant="default"
+									colorStyle="mono"
 									key={item}
 									value={item}
 									onRemove={e =>

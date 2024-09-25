@@ -8,13 +8,7 @@ import {
 } from 'react';
 import { tv } from 'tailwind-variants';
 import { managerClassNames } from '~/Utils/ManagerClassNames';
-import { ButtonRemove } from './ButtonRemove';
-
-// { 'flex items-center gap-2 w-max h-12': true },
-// { 'bg-dark-400 p-2 rounded text-white': true },
-// { 'hover:cursor-default': !onChange },
-// { 'hover:cursor-pointer': onChange },
-// { invisible: editing },
+import { ActionButton } from './ActionButton';
 
 const chipsVariants = tv({
 	slots: {
@@ -22,9 +16,7 @@ const chipsVariants = tv({
 			'relative w-min min-w-[1em] flex items-center pr-2',
 		],
 		chipUpdatingDescription: ['invisible whitespace-pre p-2 h-12'],
-		chipUpdatingInput: [
-			'bg-dark-400 text-white outline-none p-2 absolute left-0 w-full rounded h-12 border',
-		],
+		chipUpdatingInput: ['outline-none p-2 absolute left-0 w-full rounded h-12'],
 		chipNoUpdating: ['flex items-center gap-2 w-max h-12', 'p-2 rounded '],
 	},
 	variants: {
@@ -32,31 +24,35 @@ const chipsVariants = tv({
 			primary: {
 				chipUpdatingContainer: [],
 				chipUpdatingDescription: [],
-				chipUpdatingInput: [],
+				chipUpdatingInput: ['bg-blue-500 text-white border border-blue-500'],
 				chipNoUpdating: [`bg-blue-500 text-white border border-blue-500`],
 			},
 			secondary: {
 				chipUpdatingContainer: [],
 				chipUpdatingDescription: [],
-				chipUpdatingInput: [],
+				chipUpdatingInput: ['bg-red-500 text-white border border-red-500'],
 				chipNoUpdating: [`bg-red-500 text-white border border-red-500`],
 			},
 			success: {
 				chipUpdatingContainer: [],
 				chipUpdatingDescription: [],
-				chipUpdatingInput: [],
+				chipUpdatingInput: ['bg-green-500 text-white border border-green-500'],
 				chipNoUpdating: [`bg-green-500 text-white border border-green-500`],
 			},
 			warning: {
 				chipUpdatingContainer: [],
 				chipUpdatingDescription: [],
-				chipUpdatingInput: [],
+				chipUpdatingInput: [
+					'bg-yellow-500 text-white border border-yellow-500',
+				],
 				chipNoUpdating: [`bg-yellow-500 text-white border border-yellow-500`],
 			},
 			mono: {
 				chipUpdatingContainer: [],
 				chipUpdatingDescription: [],
-				chipUpdatingInput: [],
+				chipUpdatingInput: [
+					'bg-black border border-black text-white dark:bg-white dark:text-black dark:border-white',
+				],
 				chipNoUpdating: [
 					'bg-black border border-black focus:ring-black text-white',
 					'dark:bg-white dark:border-white dark:focus:ring-white dark:text-black',
@@ -73,44 +69,44 @@ const chipsVariants = tv({
 			outlined: {
 				chipUpdatingContainer: [],
 				chipUpdatingDescription: [],
-				chipUpdatingInput: [],
+				chipUpdatingInput: [`bg-transparent`],
 				chipNoUpdating: [`bg-transparent`],
 			},
 			option: {
 				chipUpdatingContainer: [],
 				chipUpdatingDescription: [],
-				chipUpdatingInput: [],
+				chipUpdatingInput: [`bg-transparent border-0`],
 				chipNoUpdating: [`bg-transparent border-0`],
 			},
 		},
 	},
 	compoundSlots: [
 		{
-			slots: ['chipNoUpdating'],
+			slots: ['chipNoUpdating', 'chipUpdatingInput'],
 			color: 'primary',
 			variant: ['outlined', 'option'],
 			className: 'text-blue-500',
 		},
 		{
-			slots: ['chipNoUpdating'],
+			slots: ['chipNoUpdating', 'chipUpdatingInput'],
 			color: 'secondary',
 			variant: ['outlined', 'option'],
 			className: 'text-red-500',
 		},
 		{
-			slots: ['chipNoUpdating'],
+			slots: ['chipNoUpdating', 'chipUpdatingInput'],
 			color: 'success',
 			variant: ['outlined', 'option'],
 			className: 'text-green-500',
 		},
 		{
-			slots: ['chipNoUpdating'],
+			slots: ['chipNoUpdating', 'chipUpdatingInput'],
 			color: 'warning',
 			variant: ['outlined', 'option'],
 			className: 'text-yellow-500',
 		},
 		{
-			slots: ['chipNoUpdating'],
+			slots: ['chipNoUpdating', 'chipUpdatingInput'],
 			color: 'mono',
 			variant: ['outlined', 'option'],
 			className: 'text-black dark:text-white dark:bg-transparent',
@@ -201,13 +197,20 @@ function keyDownButton({
 	}
 }
 
-interface ChipProps {
+export type ColorStyle =
+	| 'primary'
+	| 'secondary'
+	| 'success'
+	| 'warning'
+	| 'mono';
+export type Variant = 'default' | 'outlined' | 'option';
+export type ChipProps = {
 	value: string;
 	onRemove?: (id: string) => void;
 	onChange?: (oldValue: string, newValue: string) => void;
-	variant?: 'default' | 'outlined' | 'option';
-	colorStyle?: 'primary' | 'secondary' | 'success' | 'warning' | 'mono';
-}
+	variant?: Variant;
+	colorStyle?: ColorStyle;
+};
 
 export function Chip({
 	value,
@@ -252,7 +255,7 @@ export function Chip({
 						saveEditing({ value, valueEditing, setEditing, onChange })
 					}
 				/>
-				<ButtonRemove show={!!onRemove} />
+				<ActionButton icon="checked" show={!!onRemove} />
 			</div>
 		);
 	}
@@ -260,13 +263,6 @@ export function Chip({
 	return (
 		<div
 			{...rest}
-			// className={managerClassNames([
-			// 	{ 'flex items-center gap-2 w-max h-12': true },
-			// 	{ 'bg-dark-400 p-2 rounded text-white': true },
-			// 	{ 'hover:cursor-default': !onChange },
-			// 	{ 'hover:cursor-pointer': onChange },
-			// 	{ invisible: editing },
-			// ])}
 			className={chipNoUpdating({
 				className: managerClassNames([
 					{ 'hover:cursor-default': !onChange },
@@ -291,7 +287,11 @@ export function Chip({
 		>
 			{!editing && <span>{value}</span>}
 
-			<ButtonRemove show={!!onRemove} onClick={() => onRemove?.(value)} />
+			<ActionButton
+				icon="close"
+				show={!!onRemove}
+				onClick={() => onRemove?.(value)}
+			/>
 		</div>
 	);
 }
