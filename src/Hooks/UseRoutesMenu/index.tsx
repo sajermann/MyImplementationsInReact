@@ -28,6 +28,16 @@ import { PaginationDemo } from '~/Components/Demos/Pagination';
 import { FloatingVideoPage } from '~/Pages/FloatingVideo';
 import { JsonViewerDemo } from '~/Components/Demos/JsonViewer';
 
+const sortCustom = (a: TRoutesMenu, b: TRoutesMenu) => {
+	if (a.name < b.name) {
+		return -1;
+	}
+	if (a.name > b.name) {
+		return 1;
+	}
+	return 0;
+};
+
 const ColumnVisibilityPage = lazy(() =>
 	import('~/Pages/Table/ColumnVisibility').then(
 		({ ColumnVisibilityPage: ColumnVisibility }) => ({
@@ -276,441 +286,444 @@ export function useRoutesMenu() {
 	const { translate, currentLanguage } = useTranslation();
 	const location = useLocation();
 	const globalRoutes: TRoutesMenu[] = useMemo(
-		(): TRoutesMenu[] => [
-			{
-				name: 'Home',
-				path: '/',
-				implements_code: '',
-				docs_code: '',
-				element: <Home />,
-				label: 'Home',
-			},
-			{
-				name: 'Button',
-				path: '/button',
-				implements_code:
-					'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Components/Button/',
-				docs_code:
-					'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/Button',
-				element: <ButtonPage />,
-				demo: <ButtonDemo />,
-				label: translate('BUTTON'),
-			},
-			{
-				name: 'Modal',
-				path: '/modal',
-				implements_code:
-					'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Components/Modal',
-				docs_code:
-					'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/Modal',
-				element: <ModalPage />,
-				demo: <ModalDemo />,
-				label: 'Modal',
-			},
-			{
-				name: 'Drawer',
-				path: '/drawler',
-				implements_code:
-					'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Components/Drawer',
-				docs_code:
-					'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/Drawer',
-				element: <DrawerPage />,
-				demo: <DrawerDemo />,
-				label: 'Drawer',
-			},
-			{
-				name: 'Input',
-				path: '/input',
-				implements_code:
-					'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Components/Input',
-				docs_code:
-					'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/Input',
-				element: <InputPage />,
-				demo: <InputDemo />,
-				label: 'Input',
-			},
-			{
-				name: 'Datepicker',
-				path: '/datepicker',
-				implements_code:
-					'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Components/Datepicker',
-				docs_code:
-					'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/Datepicker',
-				element: <DatepickerPage />,
-				demo: <DatepickerDemo />,
-				label: 'Datepicker',
-			},
-			{
-				name: 'Select',
-				path: '/select',
-				implements_code:
-					'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Components/Select',
-				docs_code:
-					'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/Select',
-				element: <SelectPage />,
-				demo: <SelectDemo />,
-				label: 'Select',
-			},
-			{
-				name: 'Checkbox',
-				path: '/checkbox',
-				implements_code:
-					'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Components/Checkbox',
-				docs_code:
-					'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/Checkbox',
-				element: <CheckboxPage />,
-				demo: <CheckboxDemo />,
-				label: 'Checkbox',
-			},
-			{
-				name: 'Table',
-				path: '/table',
-				implements_code:
-					'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Components/Table',
-				docs_code:
-					'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/Table',
-				element: <TablePage />,
-				label: translate('TABLE'),
-				demo: <TableDemo />,
-				subs: [
-					{
-						name: 'Filter',
-						path: '/table/filter',
-						implements_code:
-							'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Components/Table',
-						docs_code:
-							'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/Table/Filter',
-						element: <FilterPage />,
-						label: translate('FILTER'),
-					},
-					{
-						name: 'Selection',
-						path: '/table/selection',
-						implements_code:
-							'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Components/Table',
-						docs_code:
-							'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/Table/Selection',
-						element: <SelectionPage />,
-						label: translate('SELECTION'),
-					},
-					{
-						name: 'ExpandedLine',
-						path: '/table/expand-line',
-						implements_code:
-							'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Components/Table',
-						docs_code:
-							'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/Table/ExpandedLine',
-						element: <ExpandedLinePage />,
-						label: translate('EXPAND_LINE'),
-					},
-					{
-						name: 'Loading',
-						path: '/table/loading',
-						implements_code:
-							'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Components/Table',
-						docs_code:
-							'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/Table/Loading',
-						element: <LoadingPage />,
-						label: translate('LOADING'),
-					},
-					{
-						name: 'ColumnOrder',
-						path: '/table/column-order',
-						implements_code:
-							'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Components/Table',
-						docs_code:
-							'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/Table/ColumnOrder',
-						element: <ColumnOrderPage />,
-						label: translate('COLUMN_ORDER'),
-					},
-					{
-						name: 'Sort',
-						path: '/table/sort',
-						implements_code:
-							'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Components/Table',
-						docs_code:
-							'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/Table/Sort',
-						element: <SortPage />,
-						label: translate('SORT'),
-					},
-					{
-						name: 'Editable',
-						path: '/table/editable',
-						implements_code:
-							'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Components/Table',
-						docs_code:
-							'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/Table/Editable',
-						element: <EditablePage />,
-						label: translate('EDITABLE'),
-					},
-					{
-						name: 'FullEditable',
-						path: '/table/full-editable',
-						implements_code:
-							'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Components/Table',
-						docs_code:
-							'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/Table/FullEditable',
-						element: <FullEditablePage />,
-						label: translate('FULL_EDITABLE'),
-					},
-					{
-						name: 'Virtualized',
-						path: '/table/virtualized',
-						implements_code:
-							'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Components/Table',
-						docs_code:
-							'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/Table/Virtualized',
-						element: <VirtualizedPage />,
-						label: translate('VIRTUALIZED'),
-					},
-					{
-						name: 'Pagination',
-						path: '/table/pagination',
-						implements_code:
-							'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Components/Table',
-						docs_code:
-							'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/Table/Pagination',
-						element: <PaginationTablePage />,
-						label: translate('PAGINATION'),
-					},
-					{
-						name: 'Favorites',
-						path: '/table/favorites',
-						implements_code:
-							'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Components/Table',
-						docs_code:
-							'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/Table/Favorites',
-						element: <FavoritesPage />,
-						label: translate('FAVORITES'),
-					},
-					{
-						name: 'Ellipsis',
-						path: '/table/ellipsis',
-						implements_code:
-							'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Components/Table',
-						docs_code:
-							'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/Table/Ellipsis',
-						element: <EllipsisPage />,
-						label: 'Ellipsis',
-					},
-					{
-						name: 'Resizing',
-						path: '/table/resizing',
-						implements_code:
-							'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Components/Table',
-						docs_code:
-							'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/Table/Resizing',
-						element: <ResizingPage />,
-						label: translate('RESIZING'),
-					},
-					{
-						name: 'ColumnVisibility',
-						path: '/table/column-visibility',
-						implements_code:
-							'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Components/Table',
-						docs_code:
-							'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/Table/ColumnVisibility',
-						element: <ColumnVisibilityPage />,
-						label: translate('COLUMN_VISIBILITY'),
-					},
-					{
-						name: 'Export',
-						path: '/table/export',
-						implements_code:
-							'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Components/Table',
-						docs_code:
-							'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/Table/Export',
-						element: <ExportPage />,
-						label: translate('EXPORT'),
-					},
-					{
-						name: 'Footer',
-						path: '/table/footer',
-						implements_code:
-							'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Components/Table',
-						docs_code:
-							'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/Table/Footer',
-						element: <FooterPage />,
-						label: translate('FOOTER'),
-					},
-				],
-			},
-			{
-				name: 'Search Box',
-				path: '/search-box',
-				implements_code:
-					'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Components/SearchBox',
-				docs_code:
-					'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/SearchBox',
-				element: <SearchBoxPage />,
-				label: translate('SEARCH_BOX'),
-				demo: <SearchBoxDemo />,
-			},
-			{
-				name: 'Toast',
-				path: '/toast',
-				implements_code:
-					'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Components/Toast',
-				docs_code:
-					'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/Toast',
-				element: <ToastPage />,
-				demo: <ToastDemo />,
-				label: 'Toast',
-			},
-			{
-				name: 'Print',
-				path: '/print',
-				implements_code:
-					'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Hooks/UsePrinter',
-				docs_code:
-					'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/Print',
-				element: <PrintPage />,
-				label: translate('PRINT'),
-				demo: <PrintDemo />,
-			},
-			{
-				name: 'Carousel',
-				path: '/carousel',
-				implements_code:
-					'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Components/Carousel',
-				docs_code:
-					'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/Carousel',
-				element: <CarouselPage />,
-				label: translate('CAROUSEL'),
-				demo: <CarouselDemo />,
-			},
-			{
-				name: 'Animate In View',
-				path: '/animate-in-view',
-				implements_code:
-					'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Components/AnimateInView',
-				docs_code:
-					'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/AnimateInView',
-				element: <AnimateInViewPage />,
-				label: translate('ANIMATE_IN_VIEW'),
-				demo: <AnimateInViewDemo />,
-			},
-			{
-				name: 'Chip',
-				path: '/chip',
-				implements_code:
-					'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Components/Chip',
-				docs_code:
-					'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/Chip',
-				element: <ChipPage />,
-				label: 'Chip',
-				demo: <ChipDemo />,
-			},
-			{
-				name: 'Calendar Picker',
-				path: '/calendar-picker',
-				implements_code:
-					'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Components/CalendarPicker',
-				docs_code:
-					'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/CalendarPicker',
-				element: <CalendarPickerPage />,
-				label: translate('CALENDAR_PICKER'),
-				demo: <CalendarPickerDemo />,
-				className:
-					'col-span-12 sm:!col-span-12 lg:!col-span-8 xl:!col-span-6 h-full md:row-span-2 md:h-full',
-			},
-			{
-				name: 'Drag And Drop',
-				path: '/drag-and-drop',
-				implements_code:
-					'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Components/DragAndDrop',
-				docs_code:
-					'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/DragAndDrop',
-				element: <DragAndDropPage />,
-				label: 'DND',
-				// demo: <ChipDemo />,
-			},
-			{
-				name: 'Switch',
-				path: '/switch',
-				implements_code:
-					'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Components/Switch',
-				docs_code:
-					'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/Switch',
-				element: <SwitchPage />,
-				label: 'Switch',
-				demo: <SwitchDemo />,
-			},
-			{
-				name: 'Radio',
-				path: '/radio',
-				implements_code:
-					'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Components/Radio',
-				docs_code:
-					'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/Radio',
-				element: <RadioPage />,
-				label: 'Radio',
-				demo: <RadioDemo />,
-			},
-			{
-				name: 'Pagination',
-				path: '/pagination',
-				implements_code:
-					'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Components/Pagination',
-				docs_code:
-					'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/Pagination',
-				element: <PaginationPage />,
-				label: translate('PAGINATION'),
-				demo: <PaginationDemo />,
-			},
-			{
-				name: 'Floating Video',
-				path: '/floating-video',
-				implements_code:
-					'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Components/FloatingVideo',
-				docs_code:
-					'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/FloatingVideo',
-				element: <FloatingVideoPage />,
-				label: translate('FLOATING_VIDEO'),
-			},
-			{
-				name: 'Json Viewer',
-				path: '/json-viewer',
-				implements_code:
-					'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Components/JsonViewer',
-				docs_code:
-					'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/JsonViewer',
-				element: <JsonViewerPage />,
-				label: translate('JSON_VIEWER'),
-				demo: <JsonViewerDemo />,
-			},
-			{
-				name: 'Simple Md Text Editor',
-				path: '/simplet-md-text-editor',
-				implements_code:
-					'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Components/SimpleMdTextEditor',
-				docs_code:
-					'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/SimpleMdTextEditor',
-				element: <SimpleMdTextEditorPage />,
-				label: translate('SIMPLE_MD_TEXT_EDITOR'),
-			},
-			// {
-			// 	name: 'Virtualization',
-			// 	path: '/virtualization',
-			// 	implements_code:
-			// 		'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Components/Virtualization',
-			// 	docs_code:
-			// 		'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/Virtualization',
-			// 	element: <VirtualizationPage />,
-			// 	label: translate('VIRTUALIZATION'),
-			// 	// demo: <RadioDemo />,
-			// },
-			{
-				name: 'NotFound',
-				path: '*',
-				implements_code: '',
-				docs_code: '',
-				element: <NotFoundPage />,
-				label: translate('NOT_FOUND'),
-				hideTriRoutes: true,
-				hideMenu: true,
-			},
-		],
+		(): TRoutesMenu[] =>
+			[
+				{
+					name: 'Home',
+					path: '/',
+					implements_code: '',
+					docs_code: '',
+					element: <Home />,
+					label: 'Home',
+					hideTriRoutes: true,
+				},
+				{
+					name: 'Button',
+					path: '/button',
+					implements_code:
+						'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Components/Button/',
+					docs_code:
+						'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/Button',
+					element: <ButtonPage />,
+					demo: <ButtonDemo />,
+					label: translate('BUTTON'),
+				},
+				{
+					name: 'Modal',
+					path: '/modal',
+					implements_code:
+						'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Components/Modal',
+					docs_code:
+						'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/Modal',
+					element: <ModalPage />,
+					demo: <ModalDemo />,
+					label: 'Modal',
+				},
+				{
+					name: 'Drawer',
+					path: '/drawler',
+					implements_code:
+						'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Components/Drawer',
+					docs_code:
+						'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/Drawer',
+					element: <DrawerPage />,
+					demo: <DrawerDemo />,
+					label: 'Drawer',
+				},
+				{
+					name: 'Input',
+					path: '/input',
+					implements_code:
+						'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Components/Input',
+					docs_code:
+						'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/Input',
+					element: <InputPage />,
+					demo: <InputDemo />,
+					label: 'Input',
+					hideTriRoutes: true,
+				},
+				{
+					name: 'Datepicker',
+					path: '/datepicker',
+					implements_code:
+						'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Components/Datepicker',
+					docs_code:
+						'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/Datepicker',
+					element: <DatepickerPage />,
+					demo: <DatepickerDemo />,
+					label: 'Datepicker',
+				},
+				{
+					name: 'Select',
+					path: '/select',
+					implements_code:
+						'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Components/Select',
+					docs_code:
+						'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/Select',
+					element: <SelectPage />,
+					demo: <SelectDemo />,
+					label: 'Select',
+				},
+				{
+					name: 'Checkbox',
+					path: '/checkbox',
+					implements_code:
+						'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Components/Checkbox',
+					docs_code:
+						'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/Checkbox',
+					element: <CheckboxPage />,
+					demo: <CheckboxDemo />,
+					label: 'Checkbox',
+				},
+				{
+					name: 'Table',
+					path: '/table',
+					implements_code:
+						'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Components/Table',
+					docs_code:
+						'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/Table',
+					element: <TablePage />,
+					label: translate('TABLE'),
+					demo: <TableDemo />,
+					subs: [
+						{
+							name: 'Filter',
+							path: '/table/filter',
+							implements_code:
+								'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Components/Table',
+							docs_code:
+								'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/Table/Filter',
+							element: <FilterPage />,
+							label: translate('FILTER'),
+						},
+						{
+							name: 'Selection',
+							path: '/table/selection',
+							implements_code:
+								'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Components/Table',
+							docs_code:
+								'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/Table/Selection',
+							element: <SelectionPage />,
+							label: translate('SELECTION'),
+						},
+						{
+							name: 'ExpandedLine',
+							path: '/table/expand-line',
+							implements_code:
+								'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Components/Table',
+							docs_code:
+								'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/Table/ExpandedLine',
+							element: <ExpandedLinePage />,
+							label: translate('EXPAND_LINE'),
+						},
+						{
+							name: 'Loading',
+							path: '/table/loading',
+							implements_code:
+								'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Components/Table',
+							docs_code:
+								'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/Table/Loading',
+							element: <LoadingPage />,
+							label: translate('LOADING'),
+						},
+						{
+							name: 'ColumnOrder',
+							path: '/table/column-order',
+							implements_code:
+								'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Components/Table',
+							docs_code:
+								'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/Table/ColumnOrder',
+							element: <ColumnOrderPage />,
+							label: translate('COLUMN_ORDER'),
+						},
+						{
+							name: 'Sort',
+							path: '/table/sort',
+							implements_code:
+								'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Components/Table',
+							docs_code:
+								'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/Table/Sort',
+							element: <SortPage />,
+							label: translate('SORT'),
+						},
+						{
+							name: 'Editable',
+							path: '/table/editable',
+							implements_code:
+								'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Components/Table',
+							docs_code:
+								'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/Table/Editable',
+							element: <EditablePage />,
+							label: translate('EDITABLE'),
+						},
+						{
+							name: 'FullEditable',
+							path: '/table/full-editable',
+							implements_code:
+								'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Components/Table',
+							docs_code:
+								'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/Table/FullEditable',
+							element: <FullEditablePage />,
+							label: translate('FULL_EDITABLE'),
+						},
+						{
+							name: 'Virtualized',
+							path: '/table/virtualized',
+							implements_code:
+								'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Components/Table',
+							docs_code:
+								'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/Table/Virtualized',
+							element: <VirtualizedPage />,
+							label: translate('VIRTUALIZED'),
+						},
+						{
+							name: 'Pagination',
+							path: '/table/pagination',
+							implements_code:
+								'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Components/Table',
+							docs_code:
+								'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/Table/Pagination',
+							element: <PaginationTablePage />,
+							label: translate('PAGINATION'),
+						},
+						{
+							name: 'Favorites',
+							path: '/table/favorites',
+							implements_code:
+								'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Components/Table',
+							docs_code:
+								'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/Table/Favorites',
+							element: <FavoritesPage />,
+							label: translate('FAVORITES'),
+						},
+						{
+							name: 'Ellipsis',
+							path: '/table/ellipsis',
+							implements_code:
+								'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Components/Table',
+							docs_code:
+								'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/Table/Ellipsis',
+							element: <EllipsisPage />,
+							label: 'Ellipsis',
+						},
+						{
+							name: 'Resizing',
+							path: '/table/resizing',
+							implements_code:
+								'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Components/Table',
+							docs_code:
+								'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/Table/Resizing',
+							element: <ResizingPage />,
+							label: translate('RESIZING'),
+						},
+						{
+							name: 'ColumnVisibility',
+							path: '/table/column-visibility',
+							implements_code:
+								'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Components/Table',
+							docs_code:
+								'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/Table/ColumnVisibility',
+							element: <ColumnVisibilityPage />,
+							label: translate('COLUMN_VISIBILITY'),
+						},
+						{
+							name: 'Export',
+							path: '/table/export',
+							implements_code:
+								'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Components/Table',
+							docs_code:
+								'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/Table/Export',
+							element: <ExportPage />,
+							label: translate('EXPORT'),
+						},
+						{
+							name: 'Footer',
+							path: '/table/footer',
+							implements_code:
+								'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Components/Table',
+							docs_code:
+								'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/Table/Footer',
+							element: <FooterPage />,
+							label: translate('FOOTER'),
+						},
+					].sort(sortCustom),
+				},
+				{
+					name: 'Search Box',
+					path: '/search-box',
+					implements_code:
+						'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Components/SearchBox',
+					docs_code:
+						'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/SearchBox',
+					element: <SearchBoxPage />,
+					label: translate('SEARCH_BOX'),
+					demo: <SearchBoxDemo />,
+				},
+				{
+					name: 'Toast',
+					path: '/toast',
+					implements_code:
+						'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Components/Toast',
+					docs_code:
+						'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/Toast',
+					element: <ToastPage />,
+					demo: <ToastDemo />,
+					label: 'Toast',
+				},
+				{
+					name: 'Print',
+					path: '/print',
+					implements_code:
+						'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Hooks/UsePrinter',
+					docs_code:
+						'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/Print',
+					element: <PrintPage />,
+					label: translate('PRINT'),
+					demo: <PrintDemo />,
+				},
+				{
+					name: 'Carousel',
+					path: '/carousel',
+					implements_code:
+						'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Components/Carousel',
+					docs_code:
+						'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/Carousel',
+					element: <CarouselPage />,
+					label: translate('CAROUSEL'),
+					demo: <CarouselDemo />,
+				},
+				{
+					name: 'Animate In View',
+					path: '/animate-in-view',
+					implements_code:
+						'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Components/AnimateInView',
+					docs_code:
+						'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/AnimateInView',
+					element: <AnimateInViewPage />,
+					label: translate('ANIMATE_IN_VIEW'),
+					demo: <AnimateInViewDemo />,
+				},
+				{
+					name: 'Chip',
+					path: '/chip',
+					implements_code:
+						'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Components/Chip',
+					docs_code:
+						'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/Chip',
+					element: <ChipPage />,
+					label: 'Chip',
+					demo: <ChipDemo />,
+				},
+				{
+					name: 'Calendar Picker',
+					path: '/calendar-picker',
+					implements_code:
+						'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Components/CalendarPicker',
+					docs_code:
+						'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/CalendarPicker',
+					element: <CalendarPickerPage />,
+					label: translate('CALENDAR_PICKER'),
+					demo: <CalendarPickerDemo />,
+					className:
+						'col-span-12 sm:!col-span-12 lg:!col-span-8 xl:!col-span-6 h-full md:row-span-2 md:h-full',
+				},
+				{
+					name: 'Drag And Drop',
+					path: '/drag-and-drop',
+					implements_code:
+						'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Components/DragAndDrop',
+					docs_code:
+						'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/DragAndDrop',
+					element: <DragAndDropPage />,
+					label: 'DND',
+					// demo: <ChipDemo />,
+				},
+				{
+					name: 'Switch',
+					path: '/switch',
+					implements_code:
+						'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Components/Switch',
+					docs_code:
+						'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/Switch',
+					element: <SwitchPage />,
+					label: 'Switch',
+					demo: <SwitchDemo />,
+				},
+				{
+					name: 'Radio',
+					path: '/radio',
+					implements_code:
+						'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Components/Radio',
+					docs_code:
+						'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/Radio',
+					element: <RadioPage />,
+					label: 'Radio',
+					demo: <RadioDemo />,
+				},
+				{
+					name: 'Pagination',
+					path: '/pagination',
+					implements_code:
+						'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Components/Pagination',
+					docs_code:
+						'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/Pagination',
+					element: <PaginationPage />,
+					label: translate('PAGINATION'),
+					demo: <PaginationDemo />,
+				},
+				{
+					name: 'Floating Video',
+					path: '/floating-video',
+					implements_code:
+						'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Components/FloatingVideo',
+					docs_code:
+						'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/FloatingVideo',
+					element: <FloatingVideoPage />,
+					label: translate('FLOATING_VIDEO'),
+				},
+				{
+					name: 'Json Viewer',
+					path: '/json-viewer',
+					implements_code:
+						'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Components/JsonViewer',
+					docs_code:
+						'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/JsonViewer',
+					element: <JsonViewerPage />,
+					label: translate('JSON_VIEWER'),
+					demo: <JsonViewerDemo />,
+				},
+				{
+					name: 'Simple Md Text Editor',
+					path: '/simplet-md-text-editor',
+					implements_code:
+						'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Components/SimpleMdTextEditor',
+					docs_code:
+						'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/SimpleMdTextEditor',
+					element: <SimpleMdTextEditorPage />,
+					label: translate('SIMPLE_MD_TEXT_EDITOR'),
+				},
+				// {
+				// 	name: 'Virtualization',
+				// 	path: '/virtualization',
+				// 	implements_code:
+				// 		'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Components/Virtualization',
+				// 	docs_code:
+				// 		'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/Virtualization',
+				// 	element: <VirtualizationPage />,
+				// 	label: translate('VIRTUALIZATION'),
+				// 	// demo: <RadioDemo />,
+				// },
+				{
+					name: 'NotFound',
+					path: '*',
+					implements_code: '',
+					docs_code: '',
+					element: <NotFoundPage />,
+					label: translate('NOT_FOUND'),
+					hideTriRoutes: true,
+					hideMenu: true,
+				},
+			].sort(sortCustom),
 		[currentLanguage],
 	);
 
@@ -724,15 +737,7 @@ export function useRoutesMenu() {
 	}
 
 	return {
-		globalRoutes: globalRoutes.sort((a, b) => {
-			if (a.name < b.name) {
-				return -1;
-			}
-			if (a.name > b.name) {
-				return 1;
-			}
-			return 0;
-		}),
+		globalRoutes,
 		triRoutes,
 		globalMenus,
 	};
