@@ -3,12 +3,11 @@
 /**
  * @vitest-environment jsdom
  */
-import { fireEvent, render, waitFor } from '@testing-library/react';
+import { fireEvent, render } from '@testing-library/react';
 import {
 	ColumnDef,
 	getCoreRowModel,
 	useReactTable,
-	Row,
 } from '@tanstack/react-table';
 import { describe, expect, vi } from 'vitest';
 import { useEffect, useRef, useState } from 'react';
@@ -30,41 +29,32 @@ const columns: ColumnDef<TIdName>[] = [
 	{
 		accessorKey: 'name',
 		header: 'Nome',
+		meta: {
+			cellEdit: ({ name }) => <span>{name}</span>,
+		},
 	},
 ];
 
+const dataMock = makeData.randomObject(['id', 'name'], 50);
+
 type TProps = {
 	selection?: Omit<TSelection<TIdName>, 'disableCheckbox'>;
-	enableVirtualization?: boolean;
-	rowForUpdate?: { row: number; data: TIdName } | null;
-	expandLine?: {
-		render: (data: Row<TIdName>) => React.ReactNode;
-	};
 };
 
-function Mock({
-	enableVirtualization,
-	expandLine,
-	rowForUpdate,
-	selection,
-}: TProps) {
-	const [data, setData] = useState<TIdName[]>([]);
+function Mock({ selection }: TProps) {
+	const [data, setData] = useState<TIdName[]>(dataMock);
 	const ref = useRef<HTMLDivElement>(null);
 	const table = useReactTable({
 		data: data || fallback,
 		columns,
 		getCoreRowModel: getCoreRowModel(),
 	});
-
-	async function load() {
-		setData(makeData.randomObject(['id', 'name'], 50));
-	}
+	const { rows } = table.getRowModel();
 
 	useEffect(() => {
-		load();
+		setData(makeData.randomObject(['id', 'name'], 50));
 	}, []);
 
-	const { rows } = table.getRowModel();
 	return (
 		<div className="w-full h-96">
 			<div
@@ -74,26 +64,11 @@ function Mock({
 			>
 				<RowsWithVirtualization<TIdName>
 					tableContainerRef={ref}
-					enableVirtualization={enableVirtualization}
+					enableVirtualization
 					rows={rows}
-					expandLine={expandLine}
-					rowForUpdate={rowForUpdate}
 					selection={selection}
+					rowForUpdate={{ row: 1, data: { id: '1', name: 'name-1' } }}
 				/>
-				<button
-					onClick={() => {
-						console.log(
-							'CLICKCCCCC',
-							ref.current?.scroll,
-							ref.current?.scrollBy,
-						);
-						ref.current?.scrollTo({
-							top: 99_999_999,
-						});
-					}}
-				>
-					Scroll to Bottom
-				</button>
 			</div>
 		</div>
 	);
@@ -101,18 +76,17 @@ function Mock({
 
 describe('Components/Table/RowsWithVirtualization', () => {
 	vi.spyOn(Element.prototype, 'getBoundingClientRect').mockImplementation(
-		() => ({
-			width: 120,
-			height: 120,
-			top: 0,
-			left: 0,
-			bottom: 0,
-			right: 0,
-			x: 0,
-			y: 0,
-			// eslint-disable-next-line @typescript-eslint/no-empty-function
-			toJSON: () => {},
-		}),
+		() =>
+			({
+				x: 8,
+				y: 72,
+				width: 1247,
+				height: 320,
+				top: 72,
+				right: 1255,
+				bottom: 392,
+				left: 8,
+			}) as any,
 	);
 
 	it(`must render first item`, async () => {
@@ -123,20 +97,12 @@ describe('Components/Table/RowsWithVirtualization', () => {
 		expect(last).toBeFalsy();
 	});
 
-	// Por algum motivo o scroll não está funcionando
 	it(`must render last item`, async () => {
-		const { queryByText, getAllByText, getByText, getByTestId, findByText } =
-			render(<Mock />);
-		const refContainer = getByTestId('ref-container');
-		await waitFor(async () => {
-			fireEvent.scroll(refContainer, { target: { scrollDown: 99_999_999 } });
-			const scrollButton = getByText('Scroll to Bottom');
-			fireEvent.click(scrollButton);
-			const first = await findByText(`name-99`);
-			console.log({ first });
-			expect(first).toBeTruthy();
-			const last = queryByText(`name-0`);
-			expect(last).toBeFalsy();
+		const { getByText, getByTestId } = render(<Mock />);
+		expect(getByText(`name-0`)).toBeTruthy();
+		fireEvent.scroll(getByTestId('ref-container'), {
+			target: { scrollTop: 99_999_999 },
 		});
+		expect(getByText(`name-49`)).toBeTruthy();
 	});
 });

@@ -85,7 +85,7 @@ export const Container = forwardRef<HTMLDivElement, TContainer>(
 				{ [className as string]: className },
 			])}
 		/>
-	)
+	),
 );
 
 export const Checkbox = forwardRef<HTMLButtonElement, Props>(
@@ -102,7 +102,7 @@ export const Checkbox = forwardRef<HTMLButtonElement, Props>(
 			iserror,
 			...rest
 		},
-		ref
+		ref,
 	) => {
 		const [situation, setSituation] = useState(() => {
 			if (checked === true || defaultChecked === true) {
@@ -173,5 +173,5 @@ export const Checkbox = forwardRef<HTMLButtonElement, Props>(
 				</CheckboxRadix.Indicator>
 			</CheckboxRadix.Root>
 		);
-	}
+	},
 );

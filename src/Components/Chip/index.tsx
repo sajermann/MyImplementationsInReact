@@ -1,159 +1,140 @@
-/* eslint-disable jsx-a11y/no-autofocus */
 import {
-	ChangeEvent,
-	Dispatch,
-	SetStateAction,
+	ButtonHTMLAttributes,
+	DetailedHTMLProps,
+	HTMLAttributes,
+	InputHTMLAttributes,
 	useState,
-	KeyboardEvent,
 } from 'react';
 import { managerClassNames } from '~/Utils/ManagerClassNames';
-import { ButtonRemove } from './ButtonRemove';
+import { ActionButton } from './ActionButton';
+import { NoUpdatingContainer } from './NoUpdateContainer';
+import { NoUpdatingDescription } from './NoUpdatingDescription';
+import { ColorStyle, Variant } from './types';
+import { UpdatingContainer } from './UpdatingContainer';
+import { UpdatingDescription } from './UpdatingDescription';
+import { UpdatingInput } from './UpdatingInput';
+import { chipUtils } from './utils';
 
-type SaveEditingProps = {
+export type ChipProps = {
 	value: string;
-	valueEditing: string;
-	onChange?: (oldValue: string, newValue: string) => void;
-	setEditing: Dispatch<SetStateAction<boolean>>;
-};
-function saveEditing({
-	onChange,
-	setEditing,
-	value,
-	valueEditing,
-}: SaveEditingProps) {
-	if (!onChange) return;
-	onChange(value, valueEditing);
-	setEditing(false);
-}
-
-type ChangeProps = {
-	event: ChangeEvent<HTMLInputElement>;
-	setValueEditing: Dispatch<SetStateAction<string>>;
-};
-
-function change({ event, setValueEditing }: ChangeProps) {
-	const { value } = event.target;
-	if (value === ',') {
-		return;
-	}
-	setValueEditing(value);
-}
-
-type KeyDownInputProps = {
-	event: KeyboardEvent<HTMLInputElement>;
-	value: string;
-	valueEditing: string;
-	setEditing: Dispatch<SetStateAction<boolean>>;
-	onChange?: (oldValue: string, newValue: string) => void;
-};
-function keyDownInput({
-	event,
-	value,
-	valueEditing,
-	setEditing,
-	onChange,
-}: KeyDownInputProps) {
-	const keysToVerify = [',', 'Enter', 'Escape', 'Tab'];
-	if (keysToVerify.includes(event.key)) {
-		event.preventDefault();
-		saveEditing({ value, valueEditing, setEditing, onChange });
-	}
-}
-
-type KeyDownButtonProps = {
-	event: KeyboardEvent<HTMLDivElement>;
-	value: string;
-	setEditing: Dispatch<SetStateAction<boolean>>;
-	onChange?: (oldValue: string, newValue: string) => void;
 	onRemove?: (id: string) => void;
+	onChange?: (oldValue: string, newValue: string) => void;
+	variant?: Variant;
+	colorStyle?: ColorStyle;
+	noUpdatingContainerProps?: DetailedHTMLProps<
+		HTMLAttributes<HTMLDivElement>,
+		HTMLDivElement
+	>;
+	noUpdatingDescriptionProps?: DetailedHTMLProps<
+		HTMLAttributes<HTMLSpanElement>,
+		HTMLSpanElement
+	>;
+	updatingContainerProps?: DetailedHTMLProps<
+		HTMLAttributes<HTMLDivElement>,
+		HTMLDivElement
+	>;
+	updatingDescriptionProps?: DetailedHTMLProps<
+		HTMLAttributes<HTMLSpanElement>,
+		HTMLSpanElement
+	>;
+	updatingInputProps?: DetailedHTMLProps<
+		InputHTMLAttributes<HTMLInputElement>,
+		HTMLInputElement
+	>;
+	actionButtonProps?: DetailedHTMLProps<
+		ButtonHTMLAttributes<HTMLButtonElement>,
+		HTMLButtonElement
+	>;
 };
-
-function keyDownButton({
-	event,
+export function Chip({
 	value,
-	setEditing,
-	onChange,
 	onRemove,
-}: KeyDownButtonProps) {
-	const keysToVerify = [' ', 'Enter'];
-	const { tagName } = (event as unknown as { target: { tagName: string } })
-		.target;
-	if (tagName === 'BUTTON' && keysToVerify.includes(event.key) && onRemove) {
-		onRemove(value);
-		return;
-	}
-	if (tagName === 'DIV' && keysToVerify.includes(event.key) && onChange) {
-		setEditing(true);
-	}
-}
-
-interface ChipProps {
-	value: string;
-	onRemove?: (id: string) => void;
-	onChange?: (oldValue: string, newValue: string) => void;
-}
-
-export function Chip({ value, onRemove, onChange, ...rest }: ChipProps) {
-	const [editing, setEditing] = useState(false);
+	onChange,
+	colorStyle,
+	variant,
+	noUpdatingContainerProps,
+	updatingContainerProps,
+	updatingDescriptionProps,
+	updatingInputProps,
+	noUpdatingDescriptionProps,
+	actionButtonProps,
+}: ChipProps) {
+	const [updating, setUpdating] = useState(false);
 	const [valueEditing, setValueEditing] = useState(value);
 
-	if (editing) {
+	if (updating) {
 		return (
-			<div
-				{...rest}
-				className={managerClassNames([
-					{ 'relative w-min min-w-[1em] flex items-center': true },
-					{ 'pr-2': !!onRemove },
-				])}
-			>
-				<span className="invisible whitespace-pre p-2 h-12">
-					{editing ? valueEditing : value}
-				</span>
-				<input
+			<UpdatingContainer {...updatingContainerProps}>
+				<UpdatingDescription
+					{...updatingDescriptionProps}
+					value={updating ? valueEditing : value}
+				/>
+				<UpdatingInput
+					{...updatingInputProps}
 					autoFocus
-					className="bg-dark-400 text-white outline-none p-2 absolute left-0 w-full rounded h-12 border"
-					value={editing ? valueEditing : value}
-					onChange={event => change({ event, setValueEditing })}
+					colorStyle={colorStyle}
+					variant={variant}
+					value={updating ? valueEditing : value}
+					onChange={event => chipUtils.change({ event, setValueEditing })}
 					onKeyDown={event =>
-						keyDownInput({ event, setEditing, value, valueEditing, onChange })
+						chipUtils.keyDownInput({
+							event,
+							setEditing: setUpdating,
+							value,
+							valueEditing,
+							onChange,
+						})
 					}
 					onBlur={() =>
-						saveEditing({ value, valueEditing, setEditing, onChange })
+						chipUtils.save({
+							value,
+							valueEditing,
+							setEditing: setUpdating,
+							onChange,
+						})
 					}
 				/>
-				<ButtonRemove show={!!onRemove} />
-			</div>
+				<ActionButton
+					{...actionButtonProps}
+					colorStyle={colorStyle}
+					variant={variant}
+					icon="checked"
+					show={!!onRemove}
+				/>
+			</UpdatingContainer>
 		);
 	}
 
 	return (
-		<div
-			{...rest}
+		<NoUpdatingContainer
+			{...noUpdatingContainerProps}
 			className={managerClassNames([
-				{ 'flex items-center gap-2 w-max h-12': true },
-				{ 'bg-dark-400 p-2 rounded text-white': true },
 				{ 'hover:cursor-default': !onChange },
 				{ 'hover:cursor-pointer': onChange },
-				{ invisible: editing },
+				{ invisible: updating },
+				{
+					[noUpdatingContainerProps?.className as string]:
+						noUpdatingContainerProps?.className,
+				},
 			])}
-			role="button"
-			tabIndex={0}
+			colorStyle={colorStyle}
+			variant={variant}
 			onClick={() => {
-				if (onChange) setEditing(true);
+				if (onChange) setUpdating(true);
 			}}
-			onKeyDown={event =>
-				keyDownButton({
-					event,
-					setEditing,
-					value,
-					onChange,
-					onRemove,
-				})
-			}
 		>
-			{!editing && <span>{value}</span>}
+			<NoUpdatingDescription {...noUpdatingDescriptionProps}>
+				{value}
+			</NoUpdatingDescription>
 
-			<ButtonRemove show={!!onRemove} onClick={() => onRemove?.(value)} />
-		</div>
+			<ActionButton
+				{...actionButtonProps}
+				colorStyle={colorStyle}
+				variant={variant}
+				icon="close"
+				show={!!onRemove}
+				onClick={() => onRemove?.(value)}
+			/>
+		</NoUpdatingContainer>
 	);
 }

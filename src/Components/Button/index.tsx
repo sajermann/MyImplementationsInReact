@@ -50,9 +50,10 @@ const buttonVariants = tv({
 					'bg-yellow-500 border border-yellow-700 focus:ring-yellow-700 text-white',
 				],
 			},
-			white: {
+			mono: {
 				buttonPropsInternal: [
-					'border border-white focus:ring-white text-white',
+					'bg-black border border-black focus:ring-black text-white',
+					'dark:bg-white dark:border-white dark:focus:ring-white dark:text-black',
 				],
 			},
 		},
@@ -65,7 +66,7 @@ const buttonVariants = tv({
 			},
 			option: {
 				buttonPropsInternal: [
-					'bg-transparent border-0 ring-0 focus:ring-0 hover:bg-slate-500',
+					'bg-transparent border-0 ring-0 focus:ring-0 hover:opacity-50',
 				],
 			},
 		},
@@ -103,6 +104,12 @@ const buttonVariants = tv({
 			variant: ['outlined', 'option'],
 			className: 'text-yellow-500',
 		},
+		{
+			slots: ['buttonPropsInternal'],
+			color: 'mono',
+			variant: ['outlined', 'option'],
+			className: 'text-black dark:text-white dark:bg-transparent',
+		},
 	],
 
 	defaultVariants: {
@@ -119,7 +126,7 @@ interface IButton extends ButtonHTMLAttributes<HTMLButtonElement> {
 	containerChildrenProps?: AllHTMLAttributes<HTMLDivElement>;
 	withFeedback?: TFeedbackProps;
 	variant?: 'default' | 'outlined' | 'option';
-	colorStyle?: 'primary' | 'secondary' | 'success' | 'warning' | 'white';
+	colorStyle?: 'primary' | 'secondary' | 'success' | 'warning' | 'mono';
 	iconButton?: 'rounded' | 'squared';
 	type?: 'submit' | 'reset' | 'button';
 }
