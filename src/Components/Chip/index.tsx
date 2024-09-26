@@ -22,8 +22,8 @@ export type ChipProps = {
 	variant?: Variant;
 	colorStyle?: ColorStyle;
 	noUpdatingContainerProps?: DetailedHTMLProps<
-		ButtonHTMLAttributes<HTMLButtonElement>,
-		HTMLButtonElement
+		HTMLAttributes<HTMLDivElement>,
+		HTMLDivElement
 	>;
 	noUpdatingDescriptionProps?: DetailedHTMLProps<
 		HTMLAttributes<HTMLSpanElement>,

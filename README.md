@@ -17,6 +17,7 @@ Rate my implements or say hello in Linkedin 😀
 - [x] Carousel - With &nbsp;[nuka-carousel](https://www.npmjs.com/package/date-fns)
 - [x] Checkbox - With &nbsp;[@radix-ui/react-checkbox](https://www.npmjs.com/package/@radix-ui/react-checkbox)
 - [x] Chip - Without third party
+- [x] Countdown - Without third party
 - [x] Datepicker - With &nbsp;[react-datepicker](https://www.npmjs.com/package/react-datepicker)
 - [x] Drag and Drop - With &nbsp;[dnd-kit](https://www.npmjs.com/package/@dnd-kit/core)
 - [x] Drawer - Without third party

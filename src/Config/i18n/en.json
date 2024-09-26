@@ -1,6 +1,10 @@
 {
 	"translations": {
-		"ADD_CHIPS": "Add Chips",
+		"PERCENT_LEFT": "% Left",
+		"TIME_LEFT": "Time Left",
+		"REMOVE": "Remove",
+		"MILLISECONDS": "Milliseconds",
+		"ADD_CHIPS": "Adicionar Chips",
 		"NO_RESULT": "No Result",
 		"CANCEL": "Cancel",
 		"SAVE": "Save",

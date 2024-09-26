@@ -1,4 +1,4 @@
-import { DetailedHTMLProps, ButtonHTMLAttributes } from 'react';
+import { DetailedHTMLProps, HTMLAttributes } from 'react';
 import { tv } from 'tailwind-variants';
 import { ColorStyle, Variant } from '../types';
 
@@ -79,8 +79,8 @@ const buttonVariants = tv({
 });
 
 type NoUpdatingContainerProps = DetailedHTMLProps<
-	ButtonHTMLAttributes<HTMLButtonElement>,
-	HTMLButtonElement
+	HTMLAttributes<HTMLDivElement>,
+	HTMLDivElement
 > & {
 	variant?: Variant;
 	colorStyle?: ColorStyle;
@@ -98,9 +98,8 @@ export function NoUpdatingContainer({
 		variant,
 	});
 	return (
-		<button
+		<div
 			{...rest}
-			type="button"
 			className={chipNoUpdating({
 				className,
 			})}

@@ -27,6 +27,7 @@ import { RadioDemo } from '~/Components/Demos/Radio';
 import { PaginationDemo } from '~/Components/Demos/Pagination';
 import { FloatingVideoPage } from '~/Pages/FloatingVideo';
 import { JsonViewerDemo } from '~/Components/Demos/JsonViewer';
+import { CountdownDemo } from '~/Components/Demos/Countdown';
 
 const sortCustom = (a: TRoutesMenu, b: TRoutesMenu) => {
 	if (a.name < b.name) {
@@ -279,6 +280,12 @@ const SimpleMdTextEditorPage = lazy(() =>
 const JsonViewerPage = lazy(() =>
 	import('~/Pages/JsonViewer').then(({ JsonViewerPage: JsonViewer }) => ({
 		default: JsonViewer,
+	})),
+);
+
+const CountdownPage = lazy(() =>
+	import('~/Pages/CountdownPage').then(({ CountdownPage: Countdown }) => ({
+		default: Countdown,
 	})),
 );
 
@@ -636,7 +643,6 @@ export function useRoutesMenu() {
 						'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/DragAndDrop',
 					element: <DragAndDropPage />,
 					label: 'DND',
-					// demo: <ChipDemo />,
 				},
 				{
 					name: 'Switch',
@@ -691,6 +697,7 @@ export function useRoutesMenu() {
 					element: <JsonViewerPage />,
 					label: translate('JSON_VIEWER'),
 					demo: <JsonViewerDemo />,
+					hideTriRoutes: true,
 				},
 				{
 					name: 'Simple Md Text Editor',
@@ -702,17 +709,17 @@ export function useRoutesMenu() {
 					element: <SimpleMdTextEditorPage />,
 					label: translate('SIMPLE_MD_TEXT_EDITOR'),
 				},
-				// {
-				// 	name: 'Virtualization',
-				// 	path: '/virtualization',
-				// 	implements_code:
-				// 		'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Components/Virtualization',
-				// 	docs_code:
-				// 		'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/Virtualization',
-				// 	element: <VirtualizationPage />,
-				// 	label: translate('VIRTUALIZATION'),
-				// 	// demo: <RadioDemo />,
-				// },
+				{
+					name: 'Countdown',
+					path: '/countdown',
+					implements_code:
+						'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Components/Countdown',
+					docs_code:
+						'https://github.com/sajermann/MyImplementationsInReact/tree/main/src/Pages/Countdown',
+					element: <CountdownPage />,
+					label: 'Countdown',
+					demo: <CountdownDemo />,
+				},
 				{
 					name: 'NotFound',
 					path: '*',

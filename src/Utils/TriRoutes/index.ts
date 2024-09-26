@@ -1,25 +1,15 @@
 import { TRoutesMenu } from '~/Types/TRoutesMenu';
 import { TTriRoutes } from '~/Types/TTriRoutes';
 
-// TODO: Tanto o getPrev e o getNext são problemáticos, afinal se eu tiver dois menus seguidos cujo é hideTriRoutes mas o terceiro existir, vai dar como null
-// e não será exibido, preciso fazer uma função circular para ajustar isso
-function getPrev(options: TRoutesMenu[], indexOpt: number) {
+function getPrev(options: TRoutesMenu[], indexOpt: number): TRoutesMenu | null {
 	const prev = options[indexOpt - 1] || null;
-	const prevAfterPrev = options[indexOpt - 2] || null;
-	if (!prev?.hideTriRoutes) {
-		return prev;
-	}
-
-	return prevAfterPrev;
+	const realPrev = prev?.hideTriRoutes ? getPrev(options, indexOpt - 1) : prev;
+	return realPrev;
 }
-function getNext(options: TRoutesMenu[], indexOpt: number) {
+function getNext(options: TRoutesMenu[], indexOpt: number): TRoutesMenu | null {
 	const next = options[indexOpt + 1] || null;
-	const nextAfterNext = options[indexOpt + 2] || null;
-	if (!next?.hideTriRoutes) {
-		return next;
-	}
-
-	return nextAfterNext;
+	const realNext = next?.hideTriRoutes ? getNext(options, indexOpt + 1) : next;
+	return realNext;
 }
 
 function get(options: TRoutesMenu[], url: string) {
@@ -34,12 +24,12 @@ function get(options: TRoutesMenu[], url: string) {
 	}
 
 	options.forEach((opt, indexOpt) => {
-		console.log({ options });
 		if (opt.path === url) {
 			result.actual = opt;
 			result.prev = getPrev(options, indexOpt);
 			result.next = getNext(options, indexOpt);
 		}
+		// TODO: Os filhos (Subs) não está ocorrendo verificação de hideTriRoutes, ou seja, se existir algum que não deveria ser mostrando, vai acabar sendo.
 		if (opt.subs) {
 			opt.subs.forEach((optSub, indexOptSub) => {
 				if (optSub.path === url) {
