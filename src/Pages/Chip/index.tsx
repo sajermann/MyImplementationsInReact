@@ -3,12 +3,13 @@ import { useTranslation } from '~/Hooks/UseTranslation';
 import { Main } from '~/Components/Main';
 import { Section } from '~/Components/Section';
 import { QuickAccessGithub } from '~/Components/QuickAccessGithub';
-import { Chip, ColorStyle, Variant } from '~/Components/Chip';
+import { Chip } from '~/Components/Chip';
 import { Input } from '~/Components/Input';
 import { Button } from '~/Components/Button';
 import { utilsChip } from '~/Utils/Chips';
-import { showInDevelopment } from '~/Utils/ShowInDevelopment';
+import { testIdOnlyDev } from '~/Utils/ShowInDevelopment';
 import { ComponentBlock } from '~/Components/ComponentBlock';
+import { ColorStyle, Variant } from '~/Components/Chip/types';
 
 export function ChipPage() {
 	const { translate } = useTranslation();
@@ -16,6 +17,7 @@ export function ChipPage() {
 	const [chipToAdd, setChipToAdd] = useState('');
 	const [chips, setChips] = useState<string[]>([]);
 	const [valueYoutube, setValueYoutube] = useState('');
+	const [chipYoutube, setChipYoutube] = useState<string>(`Youtube`);
 	const [chipsYoutube, setChipsYoutube] = useState<string[]>([]);
 	const inputRef = useRef<HTMLInputElement>(null);
 
@@ -117,6 +119,49 @@ export function ChipPage() {
 				</ComponentBlock>
 			</Section>
 
+			<Section title={translate('CUSTOMIZATIONS')} variant="h3">
+				<ComponentBlock>
+					<Chip
+						noUpdatingContainerProps={{
+							className:
+								'rounded-3xl bg-pink-500 border-2 border-pink-700 hover:opacity-80 transition-all duration-500',
+						}}
+						value="Chip 1"
+					/>
+					{chipYoutube && (
+						<Chip
+							noUpdatingContainerProps={{
+								...testIdOnlyDev(`chip-youtube`),
+								className: 'h-7 bg-zinc-900 border-0 hover:bg-zinc-800',
+							}}
+							updatingInputProps={{
+								...testIdOnlyDev(`input-for-update-youtube`),
+								className: 'h-7 bg-zinc-900 border-2 border-white',
+							}}
+							actionButtonProps={{
+								...testIdOnlyDev(`action-button-youtube`),
+							}}
+							value={chipYoutube}
+							onChange={(_, e) => setChipYoutube(e)}
+							onRemove={() => {
+								setChipYoutube('');
+							}}
+						/>
+					)}
+
+					<Chip
+						noUpdatingContainerProps={{
+							className:
+								'rounded-3xl bg-orange-500 text-yellow-500 border-0 hover:opacity-80 transition-all duration-500 max-w-96 overflow-hidden p-10',
+						}}
+						noUpdatingDescriptionProps={{
+							className: 'text-2xl truncate text-',
+						}}
+						value="Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet cumque autem sapiente dolore quis voluptatibus aspernatur soluta odit ipsam asperiores? Beatae doloribus aperiam eius qui veniam ut laboriosam maiores laborum!"
+					/>
+				</ComponentBlock>
+			</Section>
+
 			<Section title={translate('CONTROLLED')} variant="h2">
 				<Section title={translate('EDITABLE')} variant="h3">
 					<ComponentBlock>
@@ -139,14 +184,15 @@ export function ChipPage() {
 					<ComponentBlock className="flex flex-col gap-2 items-center justify-center">
 						<div className="flex gap-2">
 							<Input
-								{...showInDevelopment({ 'data-testid': 'input-add-chip' })}
+								{...testIdOnlyDev('input-add-chip')}
 								value={chipToAdd}
 								onChange={e => setChipToAdd(e.target.value)}
 								placeholder={translate('CHIP_DESCRIPTION')}
 							/>
 							<Button
-								{...showInDevelopment({ 'data-testid': 'button-add-chip' })}
+								{...testIdOnlyDev('button-add-chip')}
 								onClick={() => {
+									console.log('clicou', { chipToAdd });
 									if (!chipToAdd) return;
 									setChips(prev => [...prev, chipToAdd]);
 									setChipToAdd('');
@@ -159,10 +205,16 @@ export function ChipPage() {
 						<div className="flex gap-2 flex-wrap">
 							{chips.map(item => (
 								<Chip
-									{...showInDevelopment({
-										'data-testid': `chip-editable-${item}`,
-									})}
-									variant="default"
+									noUpdatingContainerProps={{
+										...testIdOnlyDev(`chip-${item}`),
+									}}
+									updatingInputProps={{
+										...testIdOnlyDev(`input-for-update-${item}`),
+									}}
+									actionButtonProps={{
+										...testIdOnlyDev(`action-button-${item}`),
+									}}
+									variant="outlined"
 									colorStyle="mono"
 									key={item}
 									value={item}
@@ -181,48 +233,62 @@ export function ChipPage() {
 				</Section>
 
 				<Section title={translate('BOX_CHIPS_LIKE_TAGS_YOUTUBE')} variant="h3">
-					<div className="flex gap-2 items-center flex-wrap p-2 border bg-slate-900 rounded">
-						{chipsYoutube.map(tag => (
-							<Chip
-								{...showInDevelopment({
-									'data-testid': `chip-editable-${tag}`,
-								})}
-								key={tag}
-								value={tag}
-								onChange={(oldValue, newValue) =>
-									utilsChip.onChangeChip({ fn: setChips, newValue, oldValue })
+					<ComponentBlock>
+						<div className="flex gap-2 items-center flex-wrap p-2 border bg-slate-900 rounded w-full">
+							{chipsYoutube.map(tag => (
+								<Chip
+									noUpdatingContainerProps={{
+										...testIdOnlyDev(`chip-${tag}`),
+									}}
+									updatingInputProps={{
+										...testIdOnlyDev(`input-for-update-${tag}`),
+									}}
+									actionButtonProps={{
+										...testIdOnlyDev(`action-button-${tag}`),
+									}}
+									key={tag}
+									value={tag}
+									onChange={(oldValue, newValue) => {
+										console.log({ oldValue, newValue });
+										utilsChip.onChangeChip({
+											fn: setChipsYoutube,
+											newValue,
+											oldValue,
+										});
+									}}
+									onRemove={chipToRemove => {
+										setChipsYoutube(prev =>
+											prev.filter(item => item !== chipToRemove),
+										);
+									}}
+								/>
+							))}
+
+							<input
+								{...testIdOnlyDev('input-youtube-like')}
+								className="p-2 outline-none overflow-hidden bg-slate-900 text-white flex-1 min-w-[30px]"
+								ref={inputRef}
+								value={valueYoutube}
+								placeholder={translate('ADD_CHIPS')}
+								onChange={event => {
+									setValueYoutube(event.target.value);
+								}}
+								onKeyDown={event =>
+									utilsChip.keyDownYoutube({
+										event,
+										setChipsYoutube,
+										setValueYoutube,
+										valueYoutube,
+									})
 								}
-								onRemove={chipToRemove => {
-									setChipsYoutube(prev =>
-										prev.filter(item => item !== chipToRemove),
-									);
+								onBlur={() => {
+									if (valueYoutube === '') return;
+									setChipsYoutube(prev => [...prev, valueYoutube.trim()]);
+									setValueYoutube('');
 								}}
 							/>
-						))}
-
-						<input
-							{...showInDevelopment({ 'data-testid': 'input-youtube-like' })}
-							className="p-2 outline-none overflow-hidden bg-slate-900 text-white flex-1 min-w-[30px]"
-							ref={inputRef}
-							value={valueYoutube}
-							onChange={event => {
-								setValueYoutube(event.target.value);
-							}}
-							onKeyDown={event =>
-								utilsChip.keyDownYoutube({
-									event,
-									setChipsYoutube,
-									setValueYoutube,
-									valueYoutube,
-								})
-							}
-							onBlur={() => {
-								if (valueYoutube === '') return;
-								setChipsYoutube(prev => [...prev, valueYoutube.trim()]);
-								setValueYoutube('');
-							}}
-						/>
-					</div>
+						</div>
+					</ComponentBlock>
 				</Section>
 			</Section>
 		</Main>

@@ -10,14 +10,13 @@ describe('Pages/Filter/SuperFilter', () => {
 	it(`must add filter and remove`, async () => {
 		const mock = vi.fn();
 		const spy = (e: any) => {
-			console.log({ e });
 			if (e[0]) {
 				return mock(e[0].value);
 			}
 			return mock([]);
 		};
 		const { getByTestId, getByLabelText, getByText } = render(
-			<SuperFilter onChange={spy} />
+			<SuperFilter onChange={spy} />,
 		);
 		const buttonOpen = getByText('SUPER_FILTER');
 		fireEvent.click(buttonOpen);
@@ -34,7 +33,7 @@ describe('Pages/Filter/SuperFilter', () => {
 		expect(mock).toBeCalledWith('1');
 
 		fireEvent.click(buttonOpen);
-		const removeButton = getByTestId('remove-button');
+		const removeButton = getByTestId('action-button-1');
 		fireEvent.click(removeButton);
 		fireEvent.click(buttonConfirm);
 	});

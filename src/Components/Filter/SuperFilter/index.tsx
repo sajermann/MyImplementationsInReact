@@ -10,7 +10,7 @@ import { TFilterActive } from '~/Types/TFilterActive';
 import { Chip } from '~/Components/Chip';
 import { ContainerInput } from '~/Components/ContainerInput';
 import { Label } from '~/Components/Label';
-import { showInDevelopment } from '~/Utils/ShowInDevelopment';
+import { showInDevelopment, testIdOnlyDev } from '~/Utils/ShowInDevelopment';
 
 type Props = {
 	onChange: Dispatch<SetStateAction<TFilterActive[]>>;
@@ -64,7 +64,7 @@ export function SuperFilter({ onChange }: Props) {
 				type: optionTypeSelected,
 				value: valueSelected,
 				labelColumn: optionsColumns.find(
-					item => item.value === optionColumnSelected
+					item => item.value === optionColumnSelected,
 				)?.label,
 				labelType: optionsType.find(item => item.value === optionTypeSelected)
 					?.label,
@@ -84,8 +84,8 @@ export function SuperFilter({ onChange }: Props) {
 	function handleRemoveFilter(id: string) {
 		setActiveFilters(old =>
 			old.filter(
-				item => `${item.labelColumn} ${item.labelType} - ${item.value}` !== id
-			)
+				item => `${item.labelColumn} ${item.labelType} - ${item.value}` !== id,
+			),
 		);
 	}
 
@@ -114,7 +114,7 @@ export function SuperFilter({ onChange }: Props) {
 								isClearable
 								options={optionsColumns}
 								value={optionsColumns.find(
-									item => item.value === optionColumnSelected
+									item => item.value === optionColumnSelected,
 								)}
 								onChange={e => setOptionColumnSelected(e?.value || '')}
 								id="select_column"
@@ -129,7 +129,7 @@ export function SuperFilter({ onChange }: Props) {
 								isClearable
 								options={optionsType}
 								value={optionsType.find(
-									item => item.value === optionTypeSelected
+									item => item.value === optionTypeSelected,
 								)}
 								onChange={e => setOptionTypeSelected(e?.value || '')}
 								id="select_type"
@@ -147,7 +147,7 @@ export function SuperFilter({ onChange }: Props) {
 								onChange={e => setValueSelected(e.target.value)}
 								type={
 									optionsColumns.find(
-										item => item.value === optionColumnSelected
+										item => item.value === optionColumnSelected,
 									)?.type
 								}
 							/>
@@ -175,8 +175,10 @@ export function SuperFilter({ onChange }: Props) {
 									{activeFilters.map(item => (
 										<Chip
 											key={item.id}
+											actionButtonProps={{
+												...testIdOnlyDev(`action-button-${item.value}`),
+											}}
 											value={`${item.labelColumn} ${item.labelType} - ${item.value}`}
-											// id={item.id}
 											onRemove={handleRemoveFilter}
 										/>
 									))}

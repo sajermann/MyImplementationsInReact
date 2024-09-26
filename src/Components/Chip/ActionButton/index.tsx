@@ -1,8 +1,7 @@
 import { ButtonHTMLAttributes, DetailedHTMLProps } from 'react';
 import { tv } from 'tailwind-variants';
 import { Icons } from '~/Components/Icons';
-import { showInDevelopment } from '~/Utils/ShowInDevelopment';
-import { ColorStyle, Variant } from '..';
+import { ColorStyle, Variant } from '../types';
 
 const actionButtonVariants = tv({
 	slots: {
@@ -23,7 +22,7 @@ const actionButtonVariants = tv({
 				buttonStyles: [`text-white`],
 			},
 			mono: {
-				buttonStyles: [`text-black`],
+				buttonStyles: [`text-white dark:text-black`],
 			},
 		},
 		variant: {
@@ -67,7 +66,7 @@ const actionButtonVariants = tv({
 			slots: ['buttonStyles'],
 			color: 'mono',
 			variant: ['outlined', 'option'],
-			className: '',
+			className: 'text-black dark:text-white',
 		},
 	],
 
@@ -92,15 +91,18 @@ export function ActionButton({
 	icon,
 	variant,
 	colorStyle,
+	className,
+	...rest
 }: Props) {
 	const { buttonStyles } = actionButtonVariants({
 		variant,
 		color: colorStyle,
+		className,
 	});
 	if (!show) return null;
 	return (
 		<button
-			{...showInDevelopment({ 'data-testid': 'remove-button' })}
+			{...rest}
 			type="button"
 			className={buttonStyles()}
 			onClick={onClick}
