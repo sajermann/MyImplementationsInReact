@@ -220,8 +220,6 @@ export function FullEditablePage() {
 		load();
 	}, []);
 
-	console.log({ data, isLoading });
-
 	return (
 		<Main data-content="content-main">
 			<Section title={translate('FULL_EDITABLE')} variant="h1">

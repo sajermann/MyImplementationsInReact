@@ -16,24 +16,28 @@ export function OtherComponents() {
 	return (
 		<Main heading={translate('OTHERS_COMPONENTS')}>
 			<div className="flex justify-between items-center">
-				{triRoutes.prev && (
-					<Link
-						className="flex items-center justify-center hover:text-primary-700 transition-colors duration-500"
-						to={triRoutes.prev.path}
-					>
-						<Icons nameIcon="arrowSingleLeft" width="2rem" />
-						<span>{triRoutes.prev.label}</span>
-					</Link>
-				)}
-				{triRoutes.next && (
-					<Link
-						className="flex items-center justify-center hover:text-primary-700 transition-colors duration-500"
-						to={triRoutes.next.path}
-					>
-						{triRoutes.next.label}
-						<Icons nameIcon="arrowSingleRight" width="2rem" />
-					</Link>
-				)}
+				<div>
+					{triRoutes.prev && (
+						<Link
+							className="flex items-center justify-center hover:text-primary-700 transition-colors duration-500"
+							to={triRoutes.prev.path}
+						>
+							<Icons nameIcon="arrowSingleLeft" width="2rem" />
+							<span>{triRoutes.prev.label}</span>
+						</Link>
+					)}
+				</div>
+				<div>
+					{triRoutes.next && (
+						<Link
+							className="flex items-center justify-center hover:text-primary-700 transition-colors duration-500"
+							to={triRoutes.next.path}
+						>
+							{triRoutes.next.label}
+							<Icons nameIcon="arrowSingleRight" width="2rem" />
+						</Link>
+					)}
+				</div>
 			</div>
 		</Main>
 	);

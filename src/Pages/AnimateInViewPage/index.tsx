@@ -15,7 +15,9 @@ export function AnimateInViewPage() {
 	return (
 		<Main data-content="content-main">
 			<Section title={translate('ANIMATE_IN_VIEW')} variant="h1">
-				{translate('IMPLEMENTS_ANIMATE_IN_VIEW')}
+				{`${translate('IMPLEMENTS_COMPONENT')} ${translate('ANIMATE_IN_VIEW')} ${translate(
+					'USING_THE_LIB',
+				)} framer-motion`}
 			</Section>
 			<Section title={translate('CODES')} variant="h2">
 				<div className="flex gap-2  bg-dark-400">

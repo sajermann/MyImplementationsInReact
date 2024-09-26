@@ -7,48 +7,17 @@ import { InjectorProviders } from '~/Components/InjectorProviders';
 import { ChipPage } from '.';
 
 describe('Pages/Chip', () => {
-	it(`should edit chip editable`, async () => {
+	it(`should update chip customizations`, async () => {
 		const textRandom = new Date().toISOString();
-		const { getByTestId, container, getByText } = render(
-			<InjectorProviders>
+		const { getByTestId, queryByText, getByText } = render(
+			<InjectorProviders noLayout>
 				<ChipPage />
 			</InjectorProviders>,
 		);
-		const chip = getByTestId('chip-editable');
-		fireEvent.click(chip);
-		const input = container.querySelector(
-			"[data-testid='chip-editable'] input",
-		);
-		expect(input).toBeTruthy();
-		if (!input) return;
-		fireEvent.change(input, { target: { value: textRandom } });
-		fireEvent.keyDown(input, { key: 'Enter', code: 'Enter', charCode: 13 });
-		expect(getByText(textRandom)).toBeTruthy();
-	});
-
-	it(`should test crud chip`, async () => {
-		const textRandom = new Date().toISOString();
-		const { getByTestId, getByText, container, queryByText } = render(
-			<InjectorProviders>
-				<ChipPage />
-			</InjectorProviders>,
-		);
-
-		// Add Chip
-		const input = getByTestId('input-add-chip');
-		const button = getByTestId('button-add-chip');
-		fireEvent.change(input, { target: { value: textRandom } });
-		fireEvent.click(button);
-		expect(getByText(textRandom)).toBeTruthy();
-
 		// Update Chip
-		const chipToUpdate = getByTestId(`chip-editable-${textRandom}`);
+		const chipToUpdate = getByTestId(`chip-youtube`);
 		fireEvent.click(chipToUpdate);
-		const inputChipToUpdate = container.querySelector(
-			`[data-testid='chip-editable-${textRandom}'] input`,
-		);
-		expect(inputChipToUpdate).toBeTruthy();
-		if (!inputChipToUpdate) return;
+		const inputChipToUpdate = getByTestId(`input-for-update-youtube`);
 		fireEvent.change(inputChipToUpdate, { target: { value: textRandom } });
 		fireEvent.keyDown(inputChipToUpdate, {
 			key: 'Enter',
@@ -58,9 +27,41 @@ describe('Pages/Chip', () => {
 		expect(getByText(textRandom)).toBeTruthy();
 
 		// Delete Chip
-		const buttonDeleteChip = container.querySelector(
-			`[data-testid='chip-editable-${textRandom}'] button`,
+		const buttonDeleteChip = getByTestId(`action-button-youtube`);
+		expect(buttonDeleteChip).toBeTruthy();
+		if (!buttonDeleteChip) return;
+		fireEvent.click(buttonDeleteChip);
+		const textRemoved = queryByText(textRandom);
+		expect(textRemoved).toBeFalsy();
+	});
+
+	it(`should test crud chip complete`, async () => {
+		const textRandom = new Date().toISOString();
+		const { getByTestId, queryByText, getByText } = render(
+			<InjectorProviders noLayout>
+				<ChipPage />
+			</InjectorProviders>,
 		);
+		const input = getByTestId('input-add-chip');
+		const button = getByTestId('button-add-chip');
+		fireEvent.change(input, { target: { value: textRandom } });
+		fireEvent.click(button);
+		expect(getByText(textRandom)).toBeTruthy();
+
+		// Update Chip
+		const chipToUpdate = getByTestId(`chip-${textRandom}`);
+		fireEvent.click(chipToUpdate);
+		const inputChipToUpdate = getByTestId(`input-for-update-${textRandom}`);
+		fireEvent.change(inputChipToUpdate, { target: { value: textRandom } });
+		fireEvent.keyDown(inputChipToUpdate, {
+			key: 'Enter',
+			code: 'Enter',
+			charCode: 13,
+		});
+		expect(getByText(textRandom)).toBeTruthy();
+
+		// Delete Chip
+		const buttonDeleteChip = getByTestId(`action-button-${textRandom}`);
 		expect(buttonDeleteChip).toBeTruthy();
 		if (!buttonDeleteChip) return;
 		fireEvent.click(buttonDeleteChip);
@@ -70,7 +71,7 @@ describe('Pages/Chip', () => {
 
 	it(`should test chips youtube like`, async () => {
 		const textRandom = new Date().toISOString();
-		const { getByTestId, getByText, container, queryByText } = render(
+		const { getByTestId, getByText, queryByText } = render(
 			<InjectorProviders>
 				<ChipPage />
 			</InjectorProviders>,
@@ -85,13 +86,9 @@ describe('Pages/Chip', () => {
 		expect(getByText(textRandom)).toBeTruthy();
 
 		// Update Chip
-		const chipToUpdate = getByTestId(`chip-editable-${textRandom}`);
+		const chipToUpdate = getByTestId(`chip-${textRandom}`);
 		fireEvent.click(chipToUpdate);
-		const inputChipToUpdate = container.querySelector(
-			`[data-testid='chip-editable-${textRandom}'] input`,
-		);
-		expect(inputChipToUpdate).toBeTruthy();
-		if (!inputChipToUpdate) return;
+		const inputChipToUpdate = getByTestId(`input-for-update-${textRandom}`);
 		fireEvent.change(inputChipToUpdate, { target: { value: textRandom } });
 		fireEvent.keyDown(inputChipToUpdate, {
 			key: 'Enter',
@@ -101,9 +98,7 @@ describe('Pages/Chip', () => {
 		expect(getByText(textRandom)).toBeTruthy();
 
 		// Delete Chip
-		const buttonDeleteChip = container.querySelector(
-			`[data-testid='chip-editable-${textRandom}'] button`,
-		);
+		const buttonDeleteChip = getByTestId(`action-button-${textRandom}`);
 		expect(buttonDeleteChip).toBeTruthy();
 		if (!buttonDeleteChip) return;
 		fireEvent.click(buttonDeleteChip);

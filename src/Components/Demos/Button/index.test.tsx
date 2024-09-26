@@ -8,12 +8,12 @@ import { ButtonDemo } from '.';
 
 describe('Components/Demos/ButtonDemo', () => {
 	it(`must open Modal`, async () => {
-		const { getAllByRole } = render(
+		const { getByText } = render(
 			<InjectorProviders>
 				<ButtonDemo />
-			</InjectorProviders>
+			</InjectorProviders>,
 		);
-		const openButton = await getAllByRole('button')[0];
+		const openButton = getByText('default | primary');
 		fireEvent.click(openButton);
 		fireEvent.click(openButton);
 		fireEvent.click(openButton);

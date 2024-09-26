@@ -1,5 +1,10 @@
 {
 	"translations": {
+		"PERCENT_LEFT": "% Restante",
+		"TIME_LEFT": "Tempo Restante",
+		"REMOVE": "Remover",
+		"MILLISECONDS": "Milisegundos",
+		"ADD_CHIPS": "Adicionar Chips",
 		"NO_RESULT": "Sem Resultado",
 		"CANCEL": "Cancelar",
 		"SAVE": "Salvar",
