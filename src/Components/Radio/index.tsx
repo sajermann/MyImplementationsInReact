@@ -31,16 +31,12 @@ const radioVariants = tv({
 				radioIndicatorPropsInternal: 'after:bg-red-500',
 			},
 
-			white: {
-				radioItemPropsInternal:
-					'focus:ring-white focus:shadow-white group-hover:border-white focus:border-white',
-				radioIndicatorPropsInternal: 'after:bg-white',
-			},
-
-			black: {
-				radioItemPropsInternal:
-					'focus:ring-black focus:shadow-black group-hover:border-black focus:border-black',
-				radioIndicatorPropsInternal: 'after:bg-black',
+			mono: {
+				radioItemPropsInternal: [
+					'focus:ring-black focus:shadow-black group-hover:border-black focus:border-black border-black',
+					'dark:focus:ring-white dark:focus:shadow-white dark:group-hover:border-white dark:focus:border-white dark:border-white',
+				],
+				radioIndicatorPropsInternal: 'after:bg-black dark:after:bg-white',
 			},
 
 			normal: {
@@ -81,7 +77,7 @@ export function RadioGroup({
 }
 
 type Props = {
-	colorStyle?: 'primary' | 'white' | 'black';
+	colorStyle?: 'primary' | 'mono';
 	id?: string;
 	value: string;
 	itemProps?: {
