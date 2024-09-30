@@ -14,18 +14,7 @@ export function TablePage() {
 	const { globalRoutes: options } = useRoutesMenu();
 	const [search, setSearch] = useState('');
 
-	const optionsSubTable = options
-		.find(opt => opt.name === 'Table')
-		?.subs?.sort((a, b) => {
-			if (translate(a.label) < translate(b.label)) {
-				return -1;
-			}
-			if (translate(a.label) > translate(b.label)) {
-				return 1;
-			}
-
-			return 0;
-		});
+	const optionsSubTable = options.find(opt => opt.name === 'Table')?.subs;
 
 	function getFiltreds() {
 		if (!search) {

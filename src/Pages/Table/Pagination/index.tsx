@@ -15,7 +15,7 @@ import { ComponentBlock } from '~/Components/ComponentBlock';
 import { useState } from 'react';
 
 export function PaginationPage() {
-	const [dataForFront] = useState(makeData.person(100));
+	const [dataForFront] = useState(makeData.person(9));
 	const [paginationOnlyFront, setPaginationOnlyFront] = useState({
 		pageIndex: 0,
 		pageSize: 10,
@@ -97,7 +97,9 @@ export function PaginationPage() {
 						columns={[...columns]}
 						data={dataForFront}
 						pagination={{
-							pageCount: dataForFront.length / paginationOnlyFront.pageSize,
+							pageCount: Math.round(
+								dataForFront.length / paginationOnlyFront.pageSize,
+							),
 							pageIndex: paginationOnlyFront.pageIndex,
 							pageSize: paginationOnlyFront.pageSize,
 							setPagination: setPaginationOnlyFront,
