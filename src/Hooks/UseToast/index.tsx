@@ -68,7 +68,7 @@ export function useToast() {
 				className:
 					'bg-transparent backdrop-blur-md dark:text-white text-black h-full w-full border rounded-lg overflow-hidden m-1',
 				bodyClassName: 'h-full w-full p-0',
-				autoClose: options?.autoClose || 3000,
+				autoClose: options?.autoClose || 300000,
 				closeButton: false,
 				type: options?.type,
 				icon: false,

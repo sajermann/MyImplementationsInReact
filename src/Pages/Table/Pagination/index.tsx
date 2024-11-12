@@ -15,7 +15,7 @@ import { ComponentBlock } from '~/Components/ComponentBlock';
 import { useState } from 'react';
 
 export function PaginationPage() {
-	const [dataForFront] = useState(makeData.person(9));
+	const [dataForFront] = useState(makeData.person(100));
 	const [paginationOnlyFront, setPaginationOnlyFront] = useState({
 		pageIndex: 0,
 		pageSize: 10,

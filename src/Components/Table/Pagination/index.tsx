@@ -122,7 +122,8 @@ export function Pagination<T>({
 				<span className="flex items-center gap-1">
 					<span>{translate('PAGE')}</span>
 					<strong>{table.getState().pagination.pageIndex + 1}</strong>
-					<span>{translate('OF')}</span> <strong>{table.getPageCount()}</strong>
+					<span>{translate('OF')}</span>{' '}
+					<strong>{table.getPageCount() || 1}</strong>
 				</span>
 				<ContainerInput className="w-max flex-row items-center">
 					<Label className="whitespace-nowrap" htmlFor="pageNumber">
@@ -154,7 +155,7 @@ export function Pagination<T>({
 							isSearchable={false}
 							isDisabled={pagination?.disabledActions}
 							value={DEFAULT_OPTIONS.find(
-								item => item.value === table.getState().pagination.pageSize
+								item => item.value === table.getState().pagination.pageSize,
 							)}
 							options={DEFAULT_OPTIONS}
 							onChange={e => {

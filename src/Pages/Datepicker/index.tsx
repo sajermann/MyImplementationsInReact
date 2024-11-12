@@ -12,6 +12,7 @@ import { ContainerInput } from '~/Components/ContainerInput';
 import { Label } from '~/Components/Label';
 import { ErrorsInput } from '~/Components/ErrorsInput';
 import { Checkbox } from '~/Components/Checkbox';
+import { DatepickerMega } from '~/Components/DatepickerMega';
 
 export function DatepickerPage() {
 	const [firstPicker, setFirstPicker] = useState(new Date().toISOString());
@@ -21,7 +22,25 @@ export function DatepickerPage() {
 
 	return (
 		<Main data-content="content-main">
-			<Section title="Datepicker" variant="h1">
+			<Section title={translate('DATE')} variant="h2">
+				<ComponentBlock>
+					<ContainerInput className="w-48">
+						<Label htmlFor="Date1">{translate('DATE')}</Label>
+						<DatepickerMega />
+					</ContainerInput>
+				</ComponentBlock>
+			</Section>
+
+			<Section title={translate('DATE')} variant="h2">
+				<ComponentBlock>
+					<ContainerInput className="w-48">
+						<Label htmlFor="Date1">{translate('DATE')}</Label>
+						<Datepicker placeholder={translate('DD/MM/YYYY')} id="Date1" />
+					</ContainerInput>
+				</ComponentBlock>
+			</Section>
+
+			{/* <Section title="Datepicker" variant="h1">
 				{`${translate('IMPLEMENTS_COMPONENT')} Datepicker ${translate(
 					'USING_THE_LIB'
 				)} react-datepicker`}
@@ -185,7 +204,7 @@ export function DatepickerPage() {
 						Focus
 					</Button>
 				</ComponentBlock>
-			</Section>
+			</Section> */}
 		</Main>
 	);
 }
