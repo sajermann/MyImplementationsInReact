@@ -37,6 +37,7 @@ export function DatepickerPage() {
 							<DatepickerMega.Month />
 							<DatepickerMega.Divider />
 							<DatepickerMega.Year />
+							<DatepickerMega.CalendarTrigger />
 						</DatepickerMega.Root>
 					</ContainerInput>
 				</ComponentBlock>

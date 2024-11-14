@@ -16,6 +16,10 @@ type DatepickerMegaContextType = {
 	inputYearRef: React.RefObject<HTMLInputElement>;
 	onChange?: (data: TDate) => void;
 	defaultDate?: Date;
+	isOpenCalendar: boolean;
+	setIsOpenCalendar: (
+		value: boolean | ((prevState: boolean) => boolean),
+	) => void;
 };
 
 const datepickerMegaContextDefaultValues: DatepickerMegaContextType =
@@ -33,12 +37,14 @@ type Props = {
 	children: ReactNode;
 	defaultDate?: Date;
 	onChange?: (data: TDate) => void;
+	rootRef?: React.RefObject<HTMLInputElement>;
 };
 
 export function DatepickerMegaProvider({
 	children,
 	defaultDate,
 	onChange,
+	rootRef,
 }: Props) {
 	const [date, setDate] = useState<TDate>(() => {
 		if (defaultDate) {
@@ -60,6 +66,8 @@ export function DatepickerMegaProvider({
 		};
 	});
 
+	const [isOpenCalendar, setIsOpenCalendar] = useState(false);
+
 	const inputDayRef = useRef<HTMLInputElement>(null);
 	const inputMonthRef = useRef<HTMLInputElement>(null);
 	const inputYearRef = useRef<HTMLInputElement>(null);
@@ -73,8 +81,10 @@ export function DatepickerMegaProvider({
 			inputYearRef,
 			onChange,
 			defaultDate,
+			isOpenCalendar,
+			setIsOpenCalendar,
 		}),
-		[date],
+		[date, isOpenCalendar],
 	);
 
 	return (

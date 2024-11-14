@@ -49,10 +49,13 @@ export type TChangeMonth = {
 	setDate: (value: TDate | ((prevState: TDate) => TDate)) => void;
 	onChange?: (data: TDate) => void;
 	monthRef: React.RefObject<HTMLInputElement>;
+	dayRef: React.RefObject<HTMLInputElement>;
 };
 
 export type TChangeYear = {
 	event: React.ChangeEvent<HTMLInputElement>;
 	setDate: (value: TDate | ((prevState: TDate) => TDate)) => void;
+	dayRef: React.RefObject<HTMLInputElement>;
+	yearRef: React.RefObject<HTMLInputElement>;
 	onChange?: (data: TDate) => void;
 };

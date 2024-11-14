@@ -11,7 +11,6 @@ import {
 } from '../types';
 
 const focusNextInput = (currentInput: HTMLInputElement) => {
-	// Pegar todos os inputs do formulário que são do tipo text ou number
 	if (!currentInput.parentElement) {
 		return;
 	}
@@ -19,9 +18,7 @@ const focusNextInput = (currentInput: HTMLInputElement) => {
 		currentInput.parentElement.querySelectorAll('input'),
 	);
 	const currentIndex = inputs.indexOf(currentInput);
-	console.log({ currentInput, inputs, currentIndex });
 
-	// Focar o próximo input se existir
 	if (currentIndex < inputs.length - 1) {
 		inputs[currentIndex + 1].focus();
 	}
@@ -154,6 +151,7 @@ export const onChangeMonth = ({
 	setDate,
 	onChange,
 	monthRef,
+	dayRef,
 }: TChangeMonth) => {
 	const temp = { ...event };
 	let valueTemp = temp.target.value;
@@ -180,16 +178,23 @@ export const onChangeMonth = ({
 		if (onChange) {
 			onChange(newValues);
 		}
+
+		if (valueTemp.length > 1 && monthRef?.current) {
+			focusNextInput(monthRef.current);
+			adjustDay({ date: newValues, dayRef, setDate, onChange });
+		}
+
 		return { ...newValues };
 	});
-
-	// Esse trecho não aciona o onBlur do Month, assim o ajuste de dia não ocorre
-	if (valueTemp.length > 1 && monthRef?.current) {
-		focusNextInput(monthRef.current);
-	}
 };
 
-export const onChangeYear = ({ event, setDate, onChange }: TChangeYear) => {
+export const onChangeYear = ({
+	event,
+	setDate,
+	onChange,
+	dayRef,
+	yearRef,
+}: TChangeYear) => {
 	const temp = { ...event };
 	let valueTemp = temp.target.value;
 	valueTemp = valueTemp.replace(/[^0-9]/g, '');
@@ -211,6 +216,12 @@ export const onChangeYear = ({ event, setDate, onChange }: TChangeYear) => {
 		if (onChange) {
 			onChange(newValues);
 		}
+
+		if (valueTemp.length > 3 && yearRef?.current) {
+			focusNextInput(yearRef.current);
+			adjustDay({ date: newValues, dayRef, setDate, onChange });
+		}
+
 		return { ...newValues };
 	});
 };

@@ -7,7 +7,7 @@ export default function Day() {
 	// 	InputHTMLAttributes<HTMLInputElement>,
 	// 	HTMLInputElement
 	// >,
-	const { inputDayRef, inputMonthRef, date, setDate, onChange, defaultDate } =
+	const { inputDayRef, date, setDate, onChange, defaultDate } =
 		useDatepickerMega();
 
 	return (

@@ -10,7 +10,15 @@ export default function Year() {
 			defaultValue={defaultDate?.getFullYear()}
 			placeholder="yyyy"
 			className="group ring-0 outline-none bg-transparent w-12 h-8 p-1 flex  text-center"
-			onChange={event => onChangeYear({ event, setDate, onChange })}
+			onChange={event =>
+				onChangeYear({
+					event,
+					setDate,
+					onChange,
+					yearRef: inputYearRef,
+					dayRef: inputDayRef,
+				})
+			}
 			onBlur={event =>
 				onBlurYear({
 					date,

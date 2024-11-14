@@ -11,7 +11,13 @@ export default function Month() {
 			placeholder="mm"
 			className="group ring-0 outline-none bg-transparent w-9 h-8 p-1 flex  text-center"
 			onChange={event =>
-				onChangeMonth({ event, setDate, onChange, monthRef: inputMonthRef })
+				onChangeMonth({
+					event,
+					setDate,
+					onChange,
+					monthRef: inputMonthRef,
+					dayRef: inputDayRef,
+				})
 			}
 			onBlur={event =>
 				onBlurMonth({

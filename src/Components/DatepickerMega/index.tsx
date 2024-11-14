@@ -3,6 +3,7 @@ import Divider from './components/Divider';
 import Month from './components/Month';
 import Root from './components/Root';
 import Year from './components/Year';
+import CalendarTrigger from './components/CalendarTrigger';
 
 export const DatepickerMega = {
 	Root,
@@ -10,14 +11,5 @@ export const DatepickerMega = {
 	Month,
 	Year,
 	Divider,
+	CalendarTrigger,
 };
-
-{
-	/* <button
-						type="button"
-						aria-label="icon:calendar"
-						className="ring-0 outline-none flex items-center justify-center h-8 p-1 "
-					>
-						<CalendarIcon />
-					</button> */
-}
