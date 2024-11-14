@@ -26,19 +26,30 @@ export function DatepickerPage() {
 				<ComponentBlock>
 					<ContainerInput className="w-48">
 						<Label htmlFor="Date1">{translate('DATE')}</Label>
-						<DatepickerMega />
+						<DatepickerMega.Root
+							// defaultDate={new Date()}
+							onChange={date => {
+								// console.log(`onChange do Root`, JSON.stringify({ date }));
+							}}
+						>
+							<DatepickerMega.Day />
+							<DatepickerMega.Divider />
+							<DatepickerMega.Month />
+							<DatepickerMega.Divider />
+							<DatepickerMega.Year />
+						</DatepickerMega.Root>
 					</ContainerInput>
 				</ComponentBlock>
 			</Section>
 
-			<Section title={translate('DATE')} variant="h2">
+			{/* <Section title={translate('DATE')} variant="h2">
 				<ComponentBlock>
 					<ContainerInput className="w-48">
 						<Label htmlFor="Date1">{translate('DATE')}</Label>
 						<Datepicker placeholder={translate('DD/MM/YYYY')} id="Date1" />
 					</ContainerInput>
 				</ComponentBlock>
-			</Section>
+			</Section> */}
 
 			{/* <Section title="Datepicker" variant="h1">
 				{`${translate('IMPLEMENTS_COMPONENT')} Datepicker ${translate(

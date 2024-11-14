@@ -1,5 +1,5 @@
 /* eslint-disable no-param-reassign */
-import { lastDayOfMonth } from 'date-fns';
+import { isValid, lastDayOfMonth } from 'date-fns';
 import {
 	TOnBlurDay,
 	TOnBlurMonth,
@@ -10,7 +10,24 @@ import {
 	TAdjustDay,
 } from '../types';
 
-const adjustDay = ({ date, dayRef, setDate }: TAdjustDay) => {
+const focusNextInput = (currentInput: HTMLInputElement) => {
+	// Pegar todos os inputs do formulário que são do tipo text ou number
+	if (!currentInput.parentElement) {
+		return;
+	}
+	const inputs = Array.from(
+		currentInput.parentElement.querySelectorAll('input'),
+	);
+	const currentIndex = inputs.indexOf(currentInput);
+	console.log({ currentInput, inputs, currentIndex });
+
+	// Focar o próximo input se existir
+	if (currentIndex < inputs.length - 1) {
+		inputs[currentIndex + 1].focus();
+	}
+};
+
+const adjustDay = ({ date, dayRef, setDate, onChange }: TAdjustDay) => {
 	if (!date.month) {
 		return;
 	}
@@ -24,10 +41,20 @@ const adjustDay = ({ date, dayRef, setDate }: TAdjustDay) => {
 	) {
 		const lastDay = lastDayOfMonthSelected.getDate();
 		dayRef.current.value = lastDay.toString();
-		setDate(prev => ({
-			...prev,
-			day: lastDay,
-		}));
+
+		const dateComplete = new Date(`${date.year}-${date.month}-${lastDay}`);
+		setDate(prev => {
+			const newValues = {
+				...prev,
+				day: lastDay,
+				date: isValid(dateComplete) ? dateComplete : null,
+				iso: isValid(dateComplete) ? dateComplete.toISOString() : null,
+			};
+			if (onChange) {
+				onChange(newValues);
+			}
+			return { ...newValues };
+		});
 	}
 };
 
@@ -44,12 +71,13 @@ export const onBlurMonth = ({
 	dayRef,
 	date,
 	setDate,
+	onChange,
 }: TOnBlurMonth) => {
 	const { value } = event.target;
 	if (value === '0' && monthRef?.current) {
 		monthRef.current.value = '';
 	}
-	adjustDay({ date, dayRef, setDate });
+	adjustDay({ date, dayRef, setDate, onChange });
 };
 
 export const onBlurYear = ({
@@ -58,15 +86,22 @@ export const onBlurYear = ({
 	yearRef,
 	date,
 	setDate,
+	onChange,
 }: TOnBlurYear) => {
 	const { value } = event.target;
 	if (value === '0' && yearRef?.current) {
 		yearRef.current.value = '';
 	}
-	adjustDay({ date, dayRef, setDate });
+	adjustDay({ date, dayRef, setDate, onChange });
 };
 
-export const onChangeDay = ({ event, date, setDate }: TChangeDay) => {
+export const onChangeDay = ({
+	event,
+	date,
+	setDate,
+	onChange,
+	dayRef,
+}: TChangeDay) => {
 	const temp = { ...event };
 	let valueTemp = temp.target.value;
 	valueTemp = valueTemp.replace(/[^0-9]/g, '');
@@ -89,13 +124,37 @@ export const onChangeDay = ({ event, date, setDate }: TChangeDay) => {
 	}
 
 	temp.target.value = valueTemp;
-	setDate(prev => ({
-		...prev,
-		day: Number(valueTemp) || null,
-	}));
+
+	const dateComplete = new Date(
+		`${date.year}-${date.month}-${Number(valueTemp)}`,
+	);
+
+	setDate(prev => {
+		const newValues = {
+			...prev,
+			day: Number(valueTemp) || null,
+			date: isValid(dateComplete) ? dateComplete : null,
+			iso: isValid(dateComplete) ? dateComplete.toISOString() : null,
+		};
+		if (onChange) {
+			onChange(newValues);
+		}
+		return {
+			...newValues,
+		};
+	});
+
+	if (valueTemp.length > 1 && dayRef?.current) {
+		focusNextInput(dayRef.current);
+	}
 };
 
-export const onChangeMonth = ({ event, setDate }: TChangeMonth) => {
+export const onChangeMonth = ({
+	event,
+	setDate,
+	onChange,
+	monthRef,
+}: TChangeMonth) => {
 	const temp = { ...event };
 	let valueTemp = temp.target.value;
 	valueTemp = valueTemp.replace(/[^0-9]/g, '');
@@ -107,13 +166,30 @@ export const onChangeMonth = ({ event, setDate }: TChangeMonth) => {
 	}
 
 	temp.target.value = valueTemp;
-	setDate(prev => ({
-		...prev,
-		month: Number(valueTemp) || null,
-	}));
+
+	setDate(prev => {
+		const dateComplete = new Date(
+			`${prev.year}-${Number(valueTemp)}-${prev.day}`,
+		);
+		const newValues = {
+			...prev,
+			month: Number(valueTemp) || null,
+			date: isValid(dateComplete) ? dateComplete : null,
+			iso: isValid(dateComplete) ? dateComplete.toISOString() : null,
+		};
+		if (onChange) {
+			onChange(newValues);
+		}
+		return { ...newValues };
+	});
+
+	// Esse trecho não aciona o onBlur do Month, assim o ajuste de dia não ocorre
+	if (valueTemp.length > 1 && monthRef?.current) {
+		focusNextInput(monthRef.current);
+	}
 };
 
-export const onChangeYear = ({ event, setDate }: TChangeYear) => {
+export const onChangeYear = ({ event, setDate, onChange }: TChangeYear) => {
 	const temp = { ...event };
 	let valueTemp = temp.target.value;
 	valueTemp = valueTemp.replace(/[^0-9]/g, '');
@@ -121,8 +197,20 @@ export const onChangeYear = ({ event, setDate }: TChangeYear) => {
 		valueTemp = valueTemp.substring(0, 4);
 	}
 	temp.target.value = valueTemp;
-	setDate(prev => ({
-		...prev,
-		year: Number(valueTemp) || null,
-	}));
+
+	setDate(prev => {
+		const dateComplete = new Date(
+			`${Number(valueTemp)}-${prev.month}-${prev.day}`,
+		);
+		const newValues = {
+			...prev,
+			year: Number(valueTemp) || null,
+			date: isValid(dateComplete) ? dateComplete : null,
+			iso: isValid(dateComplete) ? dateComplete.toISOString() : null,
+		};
+		if (onChange) {
+			onChange(newValues);
+		}
+		return { ...newValues };
+	});
 };

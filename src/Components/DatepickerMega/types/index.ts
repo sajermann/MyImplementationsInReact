@@ -2,6 +2,7 @@ export type TDate = {
 	day: number | null;
 	month: number | null;
 	year: number | null;
+	date: Date | null;
 	iso: string | null;
 };
 
@@ -9,6 +10,7 @@ export type TAdjustDay = {
 	dayRef: React.RefObject<HTMLInputElement>;
 	date: TDate;
 	setDate: (value: TDate | ((prevState: TDate) => TDate)) => void;
+	onChange?: (data: TDate) => void;
 };
 
 export type TOnBlurDay = {
@@ -22,6 +24,7 @@ export type TOnBlurMonth = {
 	monthRef: React.RefObject<HTMLInputElement>;
 	date: TDate;
 	setDate: (value: TDate | ((prevState: TDate) => TDate)) => void;
+	onChange?: (data: TDate) => void;
 };
 
 export type TOnBlurYear = {
@@ -30,20 +33,26 @@ export type TOnBlurYear = {
 	yearRef: React.RefObject<HTMLInputElement>;
 	date: TDate;
 	setDate: (value: TDate | ((prevState: TDate) => TDate)) => void;
+	onChange?: (data: TDate) => void;
 };
 
 export type TChangeDay = {
 	event: React.ChangeEvent<HTMLInputElement>;
 	date: TDate;
 	setDate: (value: TDate | ((prevState: TDate) => TDate)) => void;
+	onChange?: (data: TDate) => void;
+	dayRef: React.RefObject<HTMLInputElement>;
 };
 
 export type TChangeMonth = {
 	event: React.ChangeEvent<HTMLInputElement>;
 	setDate: (value: TDate | ((prevState: TDate) => TDate)) => void;
+	onChange?: (data: TDate) => void;
+	monthRef: React.RefObject<HTMLInputElement>;
 };
 
 export type TChangeYear = {
 	event: React.ChangeEvent<HTMLInputElement>;
 	setDate: (value: TDate | ((prevState: TDate) => TDate)) => void;
+	onChange?: (data: TDate) => void;
 };
