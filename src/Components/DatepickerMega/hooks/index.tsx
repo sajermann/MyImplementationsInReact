@@ -37,14 +37,12 @@ type Props = {
 	children: ReactNode;
 	defaultDate?: Date;
 	onChange?: (data: TDate) => void;
-	rootRef?: React.RefObject<HTMLInputElement>;
 };
 
 export function DatepickerMegaProvider({
 	children,
 	defaultDate,
 	onChange,
-	rootRef,
 }: Props) {
 	const [date, setDate] = useState<TDate>(() => {
 		if (defaultDate) {

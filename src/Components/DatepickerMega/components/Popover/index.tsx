@@ -33,8 +33,8 @@ const PopoverContent = forwardRef<
 				[
 					{ 'data-[state=open]:animate-enter rounded-lg bg-transparent': true },
 					{ 'data-[state=closed]:animate-leave z-[1] backdrop-blur-md': true },
-					{ 'shadow-lg shadow-black/25 dark:shadow-white/25 p-4': true },
-					{ ' border': true },
+					{ 'shadow-lg shadow-black/25 dark:shadow-white/25 p-1': true },
+					{ 'border h-full': true },
 				],
 				className,
 			)}

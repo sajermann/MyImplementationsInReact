@@ -1,5 +1,7 @@
 /* eslint-disable no-param-reassign */
 import { isValid, lastDayOfMonth } from 'date-fns';
+import { DPDay, DPMonth, DPYear } from '@rehookify/datepicker';
+import { managerClassNames } from '~/Utils/ManagerClassNames';
 import {
 	TOnBlurDay,
 	TOnBlurMonth,
@@ -225,3 +227,14 @@ export const onChangeYear = ({
 		return { ...newValues };
 	});
 };
+
+export const getDayClassName = (
+	className: string,
+	{ selected, disabled, inCurrentMonth, now }: DPDay,
+) =>
+	managerClassNames(className, {
+		'bg-slate-700 text-white hover:bg-slate-700 opacity-100': selected,
+		'opacity-25 cursor-not-allowed': disabled,
+		'opacity-50': !inCurrentMonth,
+		'border border-slate-500': now,
+	});

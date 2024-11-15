@@ -63,7 +63,7 @@ export function Container({ children }: { children: ReactNode }) {
 			</PopoverTrigger>
 			<PopoverPortal>
 				<PopoverContent
-					className="w-full"
+					className=""
 					onInteractOutside={() => setIsOpenCalendar(false)}
 				>
 					<PopoverArrow />
