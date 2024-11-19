@@ -1,5 +1,5 @@
 /* eslint-disable no-param-reassign */
-import { isValid, lastDayOfMonth } from 'date-fns';
+import { isValid, lastDayOfMonth, parse } from 'date-fns';
 import { DPDay, DPMonth, DPYear } from '@rehookify/datepicker';
 import { managerClassNames } from '~/Utils/ManagerClassNames';
 import {
@@ -10,6 +10,7 @@ import {
 	TChangeMonth,
 	TChangeYear,
 	TAdjustDay,
+	TChangeDatepicker,
 } from '../types';
 
 const focusNextInput = (currentInput: HTMLInputElement) => {
@@ -42,6 +43,7 @@ const adjustDay = ({ date, dayRef, setDate, onChange }: TAdjustDay) => {
 		dayRef.current.value = lastDay.toString();
 
 		const dateComplete = new Date(`${date.year}-${date.month}-${lastDay}`);
+		console.log({ dateComplete });
 		setDate(prev => {
 			const newValues = {
 				...prev,
@@ -206,9 +208,18 @@ export const onChangeYear = ({
 	temp.target.value = valueTemp;
 
 	setDate(prev => {
-		const dateComplete = new Date(
+		console.log(`${Number(valueTemp)}-${prev.month}-${prev.day}`);
+		// const dateComplete = new Date(
+		// 	`${Number(valueTemp)}-${prev.month}-${prev.day}`,
+		// );
+		// ajustar aqui se a data quebrar quebra a aplicacao
+		const dateComplete = parse(
 			`${Number(valueTemp)}-${prev.month}-${prev.day}`,
+			'yyyy-MM-dd',
+			new Date(),
 		);
+		dateComplete.setHours(0, 0, 0, 0);
+		console.log(dateComplete.toISOString());
 		const newValues = {
 			...prev,
 			year: Number(valueTemp) || null,
@@ -225,6 +236,40 @@ export const onChangeYear = ({
 		}
 
 		return { ...newValues };
+	});
+};
+
+export const onChangeDatepicker = ({
+	dates,
+	onChange,
+	setDate,
+	dayRef,
+	monthRef,
+	yearRef,
+}: TChangeDatepicker) => {
+	setDate(prev => {
+		const newValues = {
+			...prev,
+			year: dates[0].getFullYear() || null,
+			month: dates[0].getMonth() + 1 || null,
+			day: dates[0].getDate() || null,
+			date: dates[0] || null,
+			iso: dates[0].toISOString() || null,
+		};
+		if (dayRef?.current) {
+			dayRef.current.value = newValues.day?.toString() || '';
+		}
+		if (monthRef?.current) {
+			monthRef.current.value = newValues.month?.toString() || '';
+		}
+		if (yearRef?.current) {
+			yearRef.current.value = newValues.year?.toString() || '';
+		}
+		if (onChange) {
+			onChange(newValues);
+		}
+
+		return newValues;
 	});
 };
 

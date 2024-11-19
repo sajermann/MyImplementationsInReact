@@ -59,3 +59,12 @@ export type TChangeYear = {
 	yearRef: React.RefObject<HTMLInputElement>;
 	onChange?: (data: TDate) => void;
 };
+
+export type TChangeDatepicker = {
+	dates: Date[];
+	onChange?: (data: TDate) => void;
+	setDate: (value: TDate | ((prevState: TDate) => TDate)) => void;
+	dayRef: React.RefObject<HTMLInputElement>;
+	yearRef: React.RefObject<HTMLInputElement>;
+	monthRef: React.RefObject<HTMLInputElement>;
+};

@@ -5,7 +5,8 @@ import { memo, useState } from 'react';
 import { Button } from '~/Components/Button';
 
 import { TDisabled, TSelectOptions } from '~/Types/TCalendarPick';
-import { getDayClassName } from '../../utils';
+import { useDatepickerMega } from '../../hooks';
+import { getDayClassName, onChangeDatepicker } from '../../utils';
 // import Button from './button';
 
 type Props = {
@@ -18,7 +19,15 @@ type Props = {
 };
 
 const Calendar = memo((props: Props) => {
-	const [selectedDates, setSelectedDates] = useState<Date[]>([]);
+	const {
+		date,
+		setDate,
+		onChange,
+		inputDayRef,
+		inputMonthRef,
+		inputYearRef,
+		setIsOpenCalendar,
+	} = useDatepickerMega();
 	const {
 		data: { calendars, weekDays, formattedDates, months, years },
 		propGetters: {
@@ -31,20 +40,32 @@ const Calendar = memo((props: Props) => {
 			yearButton,
 		},
 	} = useDatePicker({
-		selectedDates,
-		onDatesChange: setSelectedDates,
+		selectedDates: date?.date ? [date.date] : [],
+		onDatesChange: dates => {
+			onChangeDatepicker({
+				dates,
+				setDate,
+				onChange,
+				dayRef: inputDayRef,
+				monthRef: inputMonthRef,
+				yearRef: inputYearRef,
+			});
+			setIsOpenCalendar(false);
+		},
 		calendar: {
 			startDay: 0,
 		},
+		exclude: {
+			date: [new Date(2024, 10, 19)],
+		},
 	});
-	console.log({ calendars });
+
 	const { month, year, days } = calendars[0];
 
-	console.log({ days });
-
 	return (
-		<section className="w-56">
-			<header className="grid grid-cols-[2rem_1fr_2rem] items-center mb-2">
+		<section className="w-48 flex flex-col gap-2">
+			{date.date?.toISOString()}
+			<header className="flex items-center">
 				<Button
 					iconButton="rounded"
 					variant="option"
@@ -53,7 +74,7 @@ const Calendar = memo((props: Props) => {
 				>
 					<ChevronLeft />
 				</Button>
-				<p className="text-center text-sm">{month}</p>
+				<p className="text-center text-sm flex-1">{month}</p>
 				<Button
 					iconButton="rounded"
 					variant="option"
@@ -63,22 +84,20 @@ const Calendar = memo((props: Props) => {
 					<ChevronRight />
 				</Button>
 			</header>
-			<main className="mb-2 items-center h-8 grid grid-cols-7 gap-y-2">
-				{' '}
-				// ajuystar o centralizar
+			<main className=" items-center h-8 grid grid-cols-7">
 				{weekDays.map(d => (
-					<p key={d} className="w-6 text-xs text-center">
+					<div key={d} className="text-xs text-center">
 						{d}
-					</p>
+					</div>
 				))}
 			</main>
-			<main className="mb-2 items-center grid grid-cols-7 gap-y-2">
+			<main className=" items-center grid grid-cols-7">
 				{days.map(d => (
 					<button
 						type="button"
 						key={d.$date.toString()}
 						className={getDayClassName(
-							'h-6 flex justify-center items-center hover:bg-slate-300 rounded w-6 text-xs',
+							'h-6 flex justify-center items-center hover:bg-slate-300 rounded text-xs',
 							d,
 						)}
 						{...dayButton(d)}

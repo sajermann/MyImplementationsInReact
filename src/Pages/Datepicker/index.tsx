@@ -13,12 +13,20 @@ import { Label } from '~/Components/Label';
 import { ErrorsInput } from '~/Components/ErrorsInput';
 import { Checkbox } from '~/Components/Checkbox';
 import { DatepickerMega } from '~/Components/DatepickerMega';
+import { TDate } from '~/Components/DatepickerMega/types';
 
 export function DatepickerPage() {
 	const [firstPicker, setFirstPicker] = useState(new Date().toISOString());
 	const [errorMode, setErrorMode] = useState(false);
 	const { translate } = useTranslation();
 	const ref = useRef<HTMLInputElement>(null);
+	const [date, setDate] = useState<TDate>({
+		date: null,
+		day: null,
+		month: null,
+		year: null,
+		iso: null,
+	});
 
 	return (
 		<Main data-content="content-main">
@@ -28,9 +36,7 @@ export function DatepickerPage() {
 						<Label htmlFor="Date1">{translate('DATE')}</Label>
 						<DatepickerMega.Root
 							// defaultDate={new Date()}
-							onChange={date => {
-								// console.log(`onChange do Root`, JSON.stringify({ date }));
-							}}
+							onChange={setDate}
 						>
 							<DatepickerMega.Day />
 							<DatepickerMega.Divider />
@@ -42,6 +48,7 @@ export function DatepickerPage() {
 					</ContainerInput>
 				</ComponentBlock>
 			</Section>
+			<pre>{JSON.stringify({ date })}</pre>
 
 			{/* <Section title={translate('DATE')} variant="h2">
 				<ComponentBlock>
