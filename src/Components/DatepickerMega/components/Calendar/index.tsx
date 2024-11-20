@@ -2,7 +2,9 @@
 import { useDatePicker } from '@rehookify/datepicker';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { memo, useState } from 'react';
+
 import { Button } from '~/Components/Button';
+import { useTranslation } from '~/Hooks/UseTranslation';
 
 import { TDisabled, TSelectOptions } from '~/Types/TCalendarPick';
 import { useDatepickerMega } from '../../hooks';
@@ -19,6 +21,7 @@ type Props = {
 };
 
 const Calendar = memo((props: Props) => {
+	const { translate } = useTranslation();
 	const {
 		date,
 		setDate,
@@ -64,7 +67,6 @@ const Calendar = memo((props: Props) => {
 
 	return (
 		<section className="w-48 flex flex-col gap-2">
-			{date.date?.toISOString()}
 			<header className="flex items-center">
 				<Button
 					iconButton="rounded"
@@ -74,7 +76,9 @@ const Calendar = memo((props: Props) => {
 				>
 					<ChevronLeft />
 				</Button>
-				<p className="text-center text-sm flex-1">{month}</p>
+				<p className="text-center text-sm flex-1">
+					{month} {year}
+				</p>
 				<Button
 					iconButton="rounded"
 					variant="option"

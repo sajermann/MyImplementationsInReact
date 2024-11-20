@@ -126,16 +126,24 @@ export const onChangeDay = ({
 
 	temp.target.value = valueTemp;
 
-	const dateComplete = new Date(
-		`${date.year}-${date.month}-${Number(valueTemp)}`,
-	);
+	const dateComplete =
+		valueTemp && date.month && date.year
+			? parse(
+					`${date.year}-${date.month}-${Number(valueTemp)}`,
+					'yyyy-MM-dd',
+					new Date(),
+				)
+			: null;
 
 	setDate(prev => {
 		const newValues = {
 			...prev,
 			day: Number(valueTemp) || null,
-			date: isValid(dateComplete) ? dateComplete : null,
-			iso: isValid(dateComplete) ? dateComplete.toISOString() : null,
+			date: isValid(dateComplete) && dateComplete ? dateComplete : null,
+			iso:
+				isValid(dateComplete) && dateComplete
+					? dateComplete.toISOString()
+					: null,
 		};
 		if (onChange) {
 			onChange(newValues);
@@ -170,14 +178,23 @@ export const onChangeMonth = ({
 	temp.target.value = valueTemp;
 
 	setDate(prev => {
-		const dateComplete = new Date(
-			`${prev.year}-${Number(valueTemp)}-${prev.day}`,
-		);
+		const dateComplete =
+			prev.day && valueTemp && prev.year
+				? parse(
+						`${prev.year}-${Number(valueTemp)}-${prev.day}`,
+						'yyyy-MM-dd',
+						new Date(),
+					)
+				: null;
+
 		const newValues = {
 			...prev,
 			month: Number(valueTemp) || null,
-			date: isValid(dateComplete) ? dateComplete : null,
-			iso: isValid(dateComplete) ? dateComplete.toISOString() : null,
+			date: isValid(dateComplete) && dateComplete ? dateComplete : null,
+			iso:
+				isValid(dateComplete) && dateComplete
+					? dateComplete.toISOString()
+					: null,
 		};
 		if (onChange) {
 			onChange(newValues);
@@ -208,23 +225,27 @@ export const onChangeYear = ({
 	temp.target.value = valueTemp;
 
 	setDate(prev => {
-		console.log(`${Number(valueTemp)}-${prev.month}-${prev.day}`);
-		// const dateComplete = new Date(
-		// 	`${Number(valueTemp)}-${prev.month}-${prev.day}`,
-		// );
-		// ajustar aqui se a data quebrar quebra a aplicacao
-		const dateComplete = parse(
-			`${Number(valueTemp)}-${prev.month}-${prev.day}`,
-			'yyyy-MM-dd',
-			new Date(),
-		);
-		dateComplete.setHours(0, 0, 0, 0);
-		console.log(dateComplete.toISOString());
+		const dateComplete =
+			prev.day && prev.month && valueTemp
+				? parse(
+						`${Number(valueTemp)}-${prev.month}-${prev.day}`,
+						'yyyy-MM-dd',
+						new Date(),
+					)
+				: null;
+
+		if (dateComplete) {
+			dateComplete.setHours(0, 0, 0, 0);
+		}
+
 		const newValues = {
 			...prev,
 			year: Number(valueTemp) || null,
-			date: isValid(dateComplete) ? dateComplete : null,
-			iso: isValid(dateComplete) ? dateComplete.toISOString() : null,
+			date: isValid(dateComplete) && dateComplete ? dateComplete : null,
+			iso:
+				isValid(dateComplete) && dateComplete
+					? dateComplete.toISOString()
+					: null,
 		};
 		if (onChange) {
 			onChange(newValues);
