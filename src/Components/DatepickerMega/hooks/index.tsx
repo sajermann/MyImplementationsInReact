@@ -14,6 +14,9 @@ type DatepickerMegaContextType = {
 	inputDayRef: React.RefObject<HTMLInputElement>;
 	inputMonthRef: React.RefObject<HTMLInputElement>;
 	inputYearRef: React.RefObject<HTMLInputElement>;
+	inputHourRef: React.RefObject<HTMLInputElement>;
+	inputMinuteRef: React.RefObject<HTMLInputElement>;
+	rootRef: React.RefObject<HTMLInputElement>;
 	onChange?: (data: TDate) => void;
 	defaultDate?: Date;
 	isOpenCalendar: boolean;
@@ -51,6 +54,8 @@ export function DatepickerMegaProvider({
 				date: temp,
 				day: temp.getDate(),
 				month: temp.getMonth(),
+				hour: temp.getHours(),
+				minute: temp.getMinutes(),
 				year: temp.getFullYear(),
 				iso: temp.toISOString(),
 			};
@@ -59,6 +64,8 @@ export function DatepickerMegaProvider({
 			date: null,
 			day: null,
 			month: null,
+			hour: null,
+			minute: null,
 			year: null,
 			iso: null,
 		};
@@ -69,6 +76,9 @@ export function DatepickerMegaProvider({
 	const inputDayRef = useRef<HTMLInputElement>(null);
 	const inputMonthRef = useRef<HTMLInputElement>(null);
 	const inputYearRef = useRef<HTMLInputElement>(null);
+	const inputHourRef = useRef<HTMLInputElement>(null);
+	const inputMinuteRef = useRef<HTMLInputElement>(null);
+	const rootRef = useRef<HTMLInputElement>(null);
 
 	const memoizedValue = useMemo(
 		() => ({
@@ -77,6 +87,9 @@ export function DatepickerMegaProvider({
 			inputDayRef,
 			inputMonthRef,
 			inputYearRef,
+			inputHourRef,
+			inputMinuteRef,
+			rootRef,
 			onChange,
 			defaultDate,
 			isOpenCalendar,

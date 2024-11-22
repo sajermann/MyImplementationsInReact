@@ -24,6 +24,8 @@ export function DatepickerPage() {
 		date: null,
 		day: null,
 		month: null,
+		hour: null,
+		minute: null,
 		year: null,
 		iso: null,
 	});
@@ -43,12 +45,22 @@ export function DatepickerPage() {
 							<DatepickerMega.Month />
 							<DatepickerMega.Divider />
 							<DatepickerMega.Year />
+							<DatepickerMega.Divider> - </DatepickerMega.Divider>
+							<DatepickerMega.Hour />
+							<DatepickerMega.Divider> : </DatepickerMega.Divider>
+							<DatepickerMega.Minute />
 							<DatepickerMega.CalendarTrigger />
 						</DatepickerMega.Root>
 					</ContainerInput>
 				</ComponentBlock>
 			</Section>
-			<pre>{JSON.stringify({ date })}</pre>
+			<pre>{JSON.stringify({ date }, null, 2)}</pre>
+			<input
+				type="datetime-local"
+				className="border mt-10 bg-transparent text-white"
+				name=""
+				id=""
+			/>
 
 			{/* <Section title={translate('DATE')} variant="h2">
 				<ComponentBlock>

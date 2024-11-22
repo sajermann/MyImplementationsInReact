@@ -2,6 +2,8 @@ export type TDate = {
 	day: number | null;
 	month: number | null;
 	year: number | null;
+	hour: number | null;
+	minute: number | null;
 	date: Date | null;
 	iso: string | null;
 };
@@ -58,6 +60,20 @@ export type TChangeYear = {
 	dayRef: React.RefObject<HTMLInputElement>;
 	yearRef: React.RefObject<HTMLInputElement>;
 	onChange?: (data: TDate) => void;
+};
+
+export type TChangeHour = {
+	event: React.ChangeEvent<HTMLInputElement>;
+	setDate: (value: TDate | ((prevState: TDate) => TDate)) => void;
+	onChange?: (data: TDate) => void;
+	hourRef: React.RefObject<HTMLInputElement>;
+};
+
+export type TChangeMinute = {
+	event: React.ChangeEvent<HTMLInputElement>;
+	setDate: (value: TDate | ((prevState: TDate) => TDate)) => void;
+	onChange?: (data: TDate) => void;
+	minuteRef: React.RefObject<HTMLInputElement>;
 };
 
 export type TChangeDatepicker = {

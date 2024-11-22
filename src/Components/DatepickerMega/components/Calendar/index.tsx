@@ -7,6 +7,7 @@ import { Button } from '~/Components/Button';
 import { useTranslation } from '~/Hooks/UseTranslation';
 
 import { TDisabled, TSelectOptions } from '~/Types/TCalendarPick';
+import { managerClassNames } from '~/Utils/ManagerClassNames';
 import { useDatepickerMega } from '../../hooks';
 import { getDayClassName, onChangeDatepicker } from '../../utils';
 // import Button from './button';
@@ -30,6 +31,7 @@ const Calendar = memo((props: Props) => {
 		inputMonthRef,
 		inputYearRef,
 		setIsOpenCalendar,
+		rootRef,
 	} = useDatepickerMega();
 	const {
 		data: { calendars, weekDays, formattedDates, months, years },
@@ -55,6 +57,7 @@ const Calendar = memo((props: Props) => {
 			});
 			setIsOpenCalendar(false);
 		},
+
 		calendar: {
 			startDay: 0,
 		},
@@ -62,11 +65,18 @@ const Calendar = memo((props: Props) => {
 			date: [new Date(2024, 10, 19)],
 		},
 	});
-
+	console.log(rootRef.current?.getBoundingClientRect());
 	const { month, year, days } = calendars[0];
 
 	return (
-		<section className="w-48 flex flex-col gap-2">
+		<section
+			className={managerClassNames([{ 'flex flex-col gap-2 min-w-48': true }])}
+			style={{
+				width: rootRef.current?.getBoundingClientRect().width
+					? rootRef.current.getBoundingClientRect().width - 10
+					: undefined,
+			}}
+		>
 			<header className="flex items-center">
 				<Button
 					iconButton="rounded"
@@ -113,5 +123,4 @@ const Calendar = memo((props: Props) => {
 		</section>
 	);
 });
-
 export default Calendar;

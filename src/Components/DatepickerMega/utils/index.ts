@@ -11,6 +11,8 @@ import {
 	TChangeYear,
 	TAdjustDay,
 	TChangeDatepicker,
+	TChangeHour,
+	TChangeMinute,
 } from '../types';
 
 const focusNextInput = (currentInput: HTMLInputElement) => {
@@ -152,7 +154,7 @@ export const onChangeDay = ({
 			...newValues,
 		};
 	});
-
+	console.log({ dayRef, valueTemp });
 	if (valueTemp.length > 1 && dayRef?.current) {
 		focusNextInput(dayRef.current);
 	}
@@ -258,6 +260,86 @@ export const onChangeYear = ({
 
 		return { ...newValues };
 	});
+};
+
+export const onChangeHour = ({
+	event,
+	setDate,
+	onChange,
+	hourRef,
+}: TChangeHour) => {
+	const temp = { ...event };
+	let valueTemp = temp.target.value;
+	valueTemp = valueTemp.replace(/[^0-9]/g, '');
+	if (valueTemp.length > 2) {
+		valueTemp = valueTemp.substring(0, 2);
+	}
+	if (Number(valueTemp) > 23) {
+		valueTemp = '23';
+	}
+
+	temp.target.value = valueTemp;
+
+	setDate(prev => {
+		if (prev.date) {
+			prev.date.setHours(Number(valueTemp));
+			prev.iso = prev.date.toISOString();
+		}
+		const newValues = {
+			...prev,
+			hour: Number(valueTemp) || null,
+		};
+		if (onChange) {
+			onChange(newValues);
+		}
+		return {
+			...newValues,
+		};
+	});
+
+	if (valueTemp.length > 1 && hourRef?.current) {
+		focusNextInput(hourRef.current);
+	}
+};
+
+export const onChangeMinute = ({
+	event,
+	setDate,
+	onChange,
+	minuteRef,
+}: TChangeMinute) => {
+	const temp = { ...event };
+	let valueTemp = temp.target.value;
+	valueTemp = valueTemp.replace(/[^0-9]/g, '');
+	if (valueTemp.length > 2) {
+		valueTemp = valueTemp.substring(0, 2);
+	}
+	if (Number(valueTemp) > 59) {
+		valueTemp = '59';
+	}
+
+	temp.target.value = valueTemp;
+
+	setDate(prev => {
+		if (prev.date) {
+			prev.date.setMinutes(Number(valueTemp));
+			prev.iso = prev.date.toISOString();
+		}
+		const newValues = {
+			...prev,
+			minute: Number(valueTemp) || null,
+		};
+		if (onChange) {
+			onChange(newValues);
+		}
+		return {
+			...newValues,
+		};
+	});
+
+	if (valueTemp.length > 1 && minuteRef?.current) {
+		focusNextInput(minuteRef.current);
+	}
 };
 
 export const onChangeDatepicker = ({

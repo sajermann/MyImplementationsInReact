@@ -1,8 +1,10 @@
-import Day from './components/Day';
-import Divider from './components/Divider';
-import Month from './components/Month';
 import Root from './components/Root';
+import Day from './components/Day';
+import Month from './components/Month';
 import Year from './components/Year';
+import Hour from './components/Hour';
+import Minute from './components/Minute';
+import Divider from './components/Divider';
 import CalendarTrigger from './components/CalendarTrigger';
 
 export const DatepickerMega = {
@@ -12,4 +14,6 @@ export const DatepickerMega = {
 	Year,
 	Divider,
 	CalendarTrigger,
+	Hour,
+	Minute,
 };
