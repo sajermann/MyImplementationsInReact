@@ -267,7 +267,9 @@ export const onChangeHour = ({
 	setDate,
 	onChange,
 	hourRef,
+	amPm,
 }: TChangeHour) => {
+	console.log({ event, setDate, onChange, hourRef, amPm });
 	const temp = { ...event };
 	let valueTemp = temp.target.value;
 	valueTemp = valueTemp.replace(/[^0-9]/g, '');

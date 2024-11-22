@@ -1,7 +1,7 @@
 import { useDatepickerMega } from '../../hooks';
 import { onChangeHour } from '../../utils';
 
-export default function Hour() {
+export default function Hour({ amPm }: { amPm?: boolean }) {
 	// props: DetailedHTMLProps<
 	// 	InputHTMLAttributes<HTMLInputElement>,
 	// 	HTMLInputElement
@@ -15,7 +15,7 @@ export default function Hour() {
 			placeholder="hh"
 			className="group ring-0 outline-none bg-transparent w-8 h-8 p-1 flex  text-center"
 			onChange={event =>
-				onChangeHour({ event, setDate, onChange, hourRef: inputHourRef })
+				onChangeHour({ event, setDate, onChange, hourRef: inputHourRef, amPm })
 			}
 			// onBlur={event => onBlurDay({ event, dayRef: inputHourRef })}
 		/>

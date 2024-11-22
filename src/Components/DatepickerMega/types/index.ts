@@ -67,6 +67,7 @@ export type TChangeHour = {
 	setDate: (value: TDate | ((prevState: TDate) => TDate)) => void;
 	onChange?: (data: TDate) => void;
 	hourRef: React.RefObject<HTMLInputElement>;
+	amPm?: boolean;
 };
 
 export type TChangeMinute = {
