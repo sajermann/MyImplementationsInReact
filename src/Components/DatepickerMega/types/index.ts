@@ -6,6 +6,7 @@ export type TDate = {
 	minute: number | null;
 	date: Date | null;
 	iso: string | null;
+	clockType: 'am' | 'pm' | null;
 };
 
 export type TAdjustDay = {
@@ -67,7 +68,7 @@ export type TChangeHour = {
 	setDate: (value: TDate | ((prevState: TDate) => TDate)) => void;
 	onChange?: (data: TDate) => void;
 	hourRef: React.RefObject<HTMLInputElement>;
-	amPm?: boolean;
+	isAmPm?: boolean;
 };
 
 export type TChangeMinute = {
@@ -75,6 +76,13 @@ export type TChangeMinute = {
 	setDate: (value: TDate | ((prevState: TDate) => TDate)) => void;
 	onChange?: (data: TDate) => void;
 	minuteRef: React.RefObject<HTMLInputElement>;
+};
+
+export type TClickToggleAmPm = {
+	setDate: (value: TDate | ((prevState: TDate) => TDate)) => void;
+	onChange?: (data: TDate) => void;
+	hourRef: React.RefObject<HTMLInputElement>;
+	isAmPm?: boolean;
 };
 
 export type TChangeDatepicker = {

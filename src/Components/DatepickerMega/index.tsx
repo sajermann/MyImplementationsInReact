@@ -6,6 +6,7 @@ import Hour from './components/Hour';
 import Minute from './components/Minute';
 import Divider from './components/Divider';
 import CalendarTrigger from './components/CalendarTrigger';
+import AmPmToggle from './components/AmPmToggle';
 
 export const DatepickerMega = {
 	Root,
@@ -16,4 +17,5 @@ export const DatepickerMega = {
 	CalendarTrigger,
 	Hour,
 	Minute,
+	AmPmToggle,
 };

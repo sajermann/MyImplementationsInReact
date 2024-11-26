@@ -23,6 +23,7 @@ type DatepickerMegaContextType = {
 	setIsOpenCalendar: (
 		value: boolean | ((prevState: boolean) => boolean),
 	) => void;
+	isAmPmMode?: boolean;
 };
 
 const datepickerMegaContextDefaultValues: DatepickerMegaContextType =
@@ -39,6 +40,7 @@ export function useDatepickerMega() {
 type Props = {
 	children: ReactNode;
 	defaultDate?: Date;
+	isAmPm?: boolean;
 	onChange?: (data: TDate) => void;
 };
 
@@ -46,19 +48,26 @@ export function DatepickerMegaProvider({
 	children,
 	defaultDate,
 	onChange,
+	isAmPm,
 }: Props) {
 	const [date, setDate] = useState<TDate>(() => {
 		if (defaultDate) {
-			const temp = new Date(defaultDate);
-			return {
-				date: temp,
-				day: temp.getDate(),
-				month: temp.getMonth(),
-				hour: temp.getHours(),
-				minute: temp.getMinutes(),
-				year: temp.getFullYear(),
-				iso: temp.toISOString(),
+			console.log({ defaultDate });
+			const values: TDate = {
+				date: defaultDate,
+				day: defaultDate.getDate(),
+				month: defaultDate.getMonth(),
+				hour:
+					isAmPm && defaultDate.getHours() > 12
+						? defaultDate.getHours() - 12
+						: defaultDate.getHours(),
+				minute: defaultDate.getMinutes(),
+				year: defaultDate.getFullYear(),
+				iso: defaultDate.toISOString(),
+				clockType: defaultDate.getHours() > 12 ? 'pm' : 'am',
 			};
+			onChange?.(values);
+			return values;
 		}
 		return {
 			date: null,
@@ -68,9 +77,10 @@ export function DatepickerMegaProvider({
 			minute: null,
 			year: null,
 			iso: null,
+			clockType: isAmPm ? 'pm' : 'am',
 		};
 	});
-
+	const [isAmPmMode] = useState(!!isAmPm);
 	const [isOpenCalendar, setIsOpenCalendar] = useState(false);
 
 	const inputDayRef = useRef<HTMLInputElement>(null);
@@ -94,8 +104,9 @@ export function DatepickerMegaProvider({
 			defaultDate,
 			isOpenCalendar,
 			setIsOpenCalendar,
+			isAmPmMode,
 		}),
-		[date, isOpenCalendar],
+		[date, isOpenCalendar, isAmPmMode],
 	);
 
 	return (

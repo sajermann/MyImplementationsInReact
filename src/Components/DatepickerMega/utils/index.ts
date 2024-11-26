@@ -13,6 +13,8 @@ import {
 	TChangeDatepicker,
 	TChangeHour,
 	TChangeMinute,
+	TClickToggleAmPm,
+	TDate,
 } from '../types';
 
 const focusNextInput = (currentInput: HTMLInputElement) => {
@@ -267,29 +269,38 @@ export const onChangeHour = ({
 	setDate,
 	onChange,
 	hourRef,
-	amPm,
+	isAmPm,
 }: TChangeHour) => {
-	console.log({ event, setDate, onChange, hourRef, amPm });
+	console.log({ event, setDate, onChange, hourRef, isAmPm });
 	const temp = { ...event };
 	let valueTemp = temp.target.value;
 	valueTemp = valueTemp.replace(/[^0-9]/g, '');
 	if (valueTemp.length > 2) {
 		valueTemp = valueTemp.substring(0, 2);
 	}
-	if (Number(valueTemp) > 23) {
+
+	if (isAmPm && Number(valueTemp) > 12) {
+		valueTemp = '12';
+	}
+
+	if (!isAmPm && Number(valueTemp) > 23) {
 		valueTemp = '23';
 	}
 
 	temp.target.value = valueTemp;
 
 	setDate(prev => {
+		const adjustedHour =
+			isAmPm && prev.clockType === 'am'
+				? Number(valueTemp)
+				: Number(valueTemp) + 12;
 		if (prev.date) {
-			prev.date.setHours(Number(valueTemp));
+			prev.date.setHours(adjustedHour);
 			prev.iso = prev.date.toISOString();
 		}
 		const newValues = {
 			...prev,
-			hour: Number(valueTemp) || null,
+			hour: adjustedHour || null,
 		};
 		if (onChange) {
 			onChange(newValues);
@@ -342,6 +353,40 @@ export const onChangeMinute = ({
 	if (valueTemp.length > 1 && minuteRef?.current) {
 		focusNextInput(minuteRef.current);
 	}
+};
+
+export const onClickToggleAmPm = ({
+	setDate,
+	onChange,
+	hourRef,
+	isAmPm,
+}: TClickToggleAmPm) => {
+	setDate(prev => {
+		if (prev.date) {
+			if (isAmPm) {
+				if (prev.clockType === 'pm') {
+					prev.date.setHours(prev.date.getHours() - 12);
+					console.log(prev.date, `teria que dar 10 da manha + 3 = 1`);
+				} else {
+					prev.date.setHours(prev.date.getHours() + 12);
+					console.log(prev.date, `teria que dar 22 da manha + 3 = 1 do dia 26`);
+				}
+			}
+			// console.log({ h: prev.date.getHours(), adjustedHour });
+			// prev.date.setHours(adjustedHour);
+			prev.iso = prev.date.toISOString();
+		}
+		const newValues: TDate = {
+			...prev,
+			clockType: prev.clockType === 'am' ? 'pm' : 'am',
+		};
+		if (onChange) {
+			onChange(newValues);
+		}
+		return {
+			...newValues,
+		};
+	});
 };
 
 export const onChangeDatepicker = ({

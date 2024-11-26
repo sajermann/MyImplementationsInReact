@@ -12,7 +12,7 @@ export default function Minute() {
 
 	return (
 		<input
-			defaultValue={defaultDate?.getHours()}
+			defaultValue={defaultDate?.getMinutes()}
 			ref={inputMinuteRef}
 			placeholder="mm"
 			className="group ring-0 outline-none bg-transparent w-9 h-8 p-1 flex  text-center"

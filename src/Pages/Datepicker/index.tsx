@@ -28,6 +28,7 @@ export function DatepickerPage() {
 		minute: null,
 		year: null,
 		iso: null,
+		clockType: null,
 	});
 
 	return (
@@ -37,8 +38,9 @@ export function DatepickerPage() {
 					<ContainerInput className="w-48">
 						<Label htmlFor="Date1">{translate('DATE')}</Label>
 						<DatepickerMega.Root
-							// defaultDate={new Date()}
+							defaultDate={new Date()}
 							onChange={setDate}
+							isAmPm
 						>
 							<DatepickerMega.Day />
 							<DatepickerMega.Divider />
@@ -49,6 +51,7 @@ export function DatepickerPage() {
 							<DatepickerMega.Hour />
 							<DatepickerMega.Divider> : </DatepickerMega.Divider>
 							<DatepickerMega.Minute />
+							<DatepickerMega.AmPmToggle />
 							<DatepickerMega.CalendarTrigger />
 						</DatepickerMega.Root>
 					</ContainerInput>
