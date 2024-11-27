@@ -15,7 +15,7 @@ export default function Minute() {
 			defaultValue={defaultDate?.getMinutes()}
 			ref={inputMinuteRef}
 			placeholder="mm"
-			className="group ring-0 outline-none bg-transparent w-9 h-8 p-1 flex  text-center"
+			className="group ring-0 outline-none bg-transparent w-9 h-8 p-1 flex text-center"
 			onChange={event =>
 				onChangeMinute({
 					event,
@@ -24,7 +24,6 @@ export default function Minute() {
 					minuteRef: inputMinuteRef,
 				})
 			}
-			// onBlur={event => onBlurDay({ event, dayRef: inputHourRef })}
 		/>
 	);
 }

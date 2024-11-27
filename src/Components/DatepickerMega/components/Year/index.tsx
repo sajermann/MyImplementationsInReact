@@ -9,7 +9,7 @@ export default function Year() {
 			ref={inputYearRef}
 			defaultValue={defaultDate?.getFullYear()}
 			placeholder="yyyy"
-			className="group ring-0 outline-none bg-transparent w-12 h-8 p-1 flex  text-center"
+			className="group ring-0 outline-none bg-transparent w-12 h-8 p-1 flex text-center"
 			onChange={event =>
 				onChangeYear({
 					event,

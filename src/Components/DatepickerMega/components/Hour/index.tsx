@@ -6,7 +6,7 @@ export default function Hour() {
 	// 	InputHTMLAttributes<HTMLInputElement>,
 	// 	HTMLInputElement
 	// >,
-	const { inputHourRef, setDate, onChange, defaultDate, isAmPmMode, date } =
+	const { inputHourRef, setDate, onChange, defaultDate, isAmPmMode } =
 		useDatepickerMega();
 
 	const getDefault = () => {
@@ -34,7 +34,6 @@ export default function Hour() {
 					isAmPm: isAmPmMode,
 				})
 			}
-			// onBlur={event => onBlurDay({ event, dayRef: inputHourRef })}
 		/>
 	);
 }

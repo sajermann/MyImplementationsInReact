@@ -15,7 +15,7 @@ export default function Day() {
 			defaultValue={defaultDate?.getDate()}
 			ref={inputDayRef}
 			placeholder="dd"
-			className="group ring-0 outline-none bg-transparent w-8 h-8 p-1 flex  text-center"
+			className="group ring-0 outline-none bg-transparent w-8 h-8 p-1 flex text-center"
 			onChange={event =>
 				onChangeDay({ event, date, setDate, onChange, dayRef: inputDayRef })
 			}

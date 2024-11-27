@@ -9,7 +9,7 @@ export default function Month() {
 			ref={inputMonthRef}
 			defaultValue={defaultDate && defaultDate.getMonth() + 1}
 			placeholder="mm"
-			className="group ring-0 outline-none bg-transparent w-9 h-8 p-1 flex  text-center"
+			className="group ring-0 outline-none bg-transparent w-10 h-8 p-1 flex text-center"
 			onChange={event =>
 				onChangeMonth({
 					event,

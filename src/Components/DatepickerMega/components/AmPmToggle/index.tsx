@@ -1,27 +1,22 @@
-/* eslint-disable jsx-a11y/click-events-have-key-events */
 // import { DetailedHTMLProps, InputHTMLAttributes } from 'react';
 import { useDatepickerMega } from '../../hooks';
-import {
-	onBlurDay,
-	onChangeDay,
-	onChangeHour,
-	onClickToggleAmPm,
-} from '../../utils';
+import { onClickToggleAmPm } from '../../utils';
 
 export default function AmPmToggle() {
 	// props: DetailedHTMLProps<
 	// 	InputHTMLAttributes<HTMLInputElement>,
 	// 	HTMLInputElement
 	// >,
-	const { inputHourRef, setDate, onChange, defaultDate, isAmPmMode, date } =
+	const { inputHourRef, setDate, onChange, isAmPmMode, date } =
 		useDatepickerMega();
 
 	if (!date.clockType) {
 		return null;
 	}
 	return (
-		// eslint-disable-next-line jsx-a11y/no-static-element-interactions
-		<span
+		<input
+			readOnly
+			className="group ring-0 outline-none bg-transparent w-9 h-8 p-1 flex  text-center cursor-pointer"
 			onClick={() => {
 				onClickToggleAmPm({
 					setDate,
@@ -30,8 +25,7 @@ export default function AmPmToggle() {
 					isAmPm: isAmPmMode,
 				});
 			}}
-		>
-			{date.clockType.toString().toUpperCase()}
-		</span>
+			value={date.clockType.toString().toUpperCase()}
+		/>
 	);
 }
