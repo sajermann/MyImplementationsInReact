@@ -81,8 +81,7 @@ export type TChangeMinute = {
 export type TClickToggleAmPm = {
 	setDate: (value: TDate | ((prevState: TDate) => TDate)) => void;
 	onChange?: (data: TDate) => void;
-	hourRef: React.RefObject<HTMLInputElement>;
-	isAmPm?: boolean;
+	isAmPm: boolean;
 };
 
 export type TChangeDatepicker = {

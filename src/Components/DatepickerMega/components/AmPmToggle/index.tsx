@@ -7,10 +7,9 @@ export default function AmPmToggle() {
 	// 	InputHTMLAttributes<HTMLInputElement>,
 	// 	HTMLInputElement
 	// >,
-	const { inputHourRef, setDate, onChange, isAmPmMode, date } =
-		useDatepickerMega();
+	const { setDate, onChange, isAmPmMode, date } = useDatepickerMega();
 
-	if (!date.clockType) {
+	if (!date.clockType || !isAmPmMode) {
 		return null;
 	}
 	return (
@@ -21,7 +20,6 @@ export default function AmPmToggle() {
 				onClickToggleAmPm({
 					setDate,
 					onChange,
-					hourRef: inputHourRef,
 					isAmPm: isAmPmMode,
 				});
 			}}

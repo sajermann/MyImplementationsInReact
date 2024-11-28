@@ -290,10 +290,12 @@ export const onChangeHour = ({
 	temp.target.value = valueTemp;
 
 	setDate(prev => {
-		const adjustedHour =
-			isAmPm && prev.clockType === 'am'
-				? Number(valueTemp)
-				: Number(valueTemp) + 12;
+		const hourStandard = Number(valueTemp);
+		const hourAmPm =
+			isAmPm && prev.clockType === 'am' ? hourStandard : hourStandard + 12;
+		const adjustedHour = !isAmPm ? hourStandard : hourAmPm;
+
+		console.log({ adjustedHour });
 		if (prev.date) {
 			prev.date.setHours(adjustedHour);
 			prev.iso = prev.date.toISOString();
@@ -358,7 +360,6 @@ export const onChangeMinute = ({
 export const onClickToggleAmPm = ({
 	setDate,
 	onChange,
-	hourRef,
 	isAmPm,
 }: TClickToggleAmPm) => {
 	setDate(prev => {
@@ -366,14 +367,10 @@ export const onClickToggleAmPm = ({
 			if (isAmPm) {
 				if (prev.clockType === 'pm') {
 					prev.date.setHours(prev.date.getHours() - 12);
-					console.log(prev.date, `teria que dar 10 da manha + 3 = 1`);
 				} else {
 					prev.date.setHours(prev.date.getHours() + 12);
-					console.log(prev.date, `teria que dar 22 da manha + 3 = 1 do dia 26`);
 				}
 			}
-			// console.log({ h: prev.date.getHours(), adjustedHour });
-			// prev.date.setHours(adjustedHour);
 			prev.iso = prev.date.toISOString();
 		}
 		const newValues: TDate = {
