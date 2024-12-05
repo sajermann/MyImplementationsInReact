@@ -220,7 +220,7 @@ function technologies() {
 	];
 }
 
-function brawlers(quantity?: number): Array<TBrawler> {
+function brawlers(from?: number, to?: number): Array<TBrawler> {
 	const result = [
 		{
 			id: '16000087',
@@ -653,7 +653,7 @@ function brawlers(quantity?: number): Array<TBrawler> {
 			image: 'https://cdn.brawlify.com/brawlers/borderless/16000000.png',
 		},
 	];
-	return result.slice(0, quantity);
+	return result.slice(from, to);
 }
 
 function uuid() {
