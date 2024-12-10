@@ -357,20 +357,15 @@ export const onChangeMinute = ({
 	}
 };
 
-export const onClickToggleAmPm = ({
-	setDate,
-	onChange,
-	isAmPm,
-}: TClickToggleAmPm) => {
+export const onClickToggleAmPm = ({ setDate, onChange }: TClickToggleAmPm) => {
 	setDate(prev => {
 		if (prev.date) {
-			if (isAmPm) {
-				if (prev.clockType === 'pm') {
-					prev.date.setHours(prev.date.getHours() - 12);
-				} else {
-					prev.date.setHours(prev.date.getHours() + 12);
-				}
+			if (prev.clockType === 'pm') {
+				prev.date.setHours(prev.date.getHours() - 12);
+			} else {
+				prev.date.setHours(prev.date.getHours() + 12);
 			}
+
 			prev.iso = prev.date.toISOString();
 		}
 		const newValues: TDate = {

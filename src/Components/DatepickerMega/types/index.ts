@@ -81,7 +81,6 @@ export type TChangeMinute = {
 export type TClickToggleAmPm = {
 	setDate: (value: TDate | ((prevState: TDate) => TDate)) => void;
 	onChange?: (data: TDate) => void;
-	isAmPm: boolean;
 };
 
 export type TChangeDatepicker = {

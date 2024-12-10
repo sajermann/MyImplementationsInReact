@@ -7,21 +7,11 @@ type TProps = {
 	defaultDate?: Date;
 	onChange?: (data: TDate) => void;
 	children: ReactNode;
-	isAmPm?: boolean;
 };
 
-export default function Root({
-	children,
-	defaultDate,
-	onChange,
-	isAmPm,
-}: TProps) {
+export default function Root({ children, defaultDate, onChange }: TProps) {
 	return (
-		<DatepickerMegaProvider
-			defaultDate={defaultDate}
-			onChange={onChange}
-			isAmPm={isAmPm}
-		>
+		<DatepickerMegaProvider defaultDate={defaultDate} onChange={onChange}>
 			<Container>{children}</Container>
 		</DatepickerMegaProvider>
 	);

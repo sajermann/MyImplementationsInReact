@@ -5,6 +5,7 @@ import {
 	useState,
 	useMemo,
 	useRef,
+	useEffect,
 } from 'react';
 import { TDate } from '../types';
 
@@ -24,6 +25,7 @@ type DatepickerMegaContextType = {
 		value: boolean | ((prevState: boolean) => boolean),
 	) => void;
 	isAmPmMode?: boolean;
+	setIsAmPmMode: (value: boolean | ((prevState: boolean) => boolean)) => void;
 };
 
 const datepickerMegaContextDefaultValues: DatepickerMegaContextType =
@@ -40,7 +42,6 @@ export function useDatepickerMega() {
 type Props = {
 	children: ReactNode;
 	defaultDate?: Date;
-	isAmPm?: boolean;
 	onChange?: (data: TDate) => void;
 };
 
@@ -48,7 +49,6 @@ export function DatepickerMegaProvider({
 	children,
 	defaultDate,
 	onChange,
-	isAmPm,
 }: Props) {
 	const [date, setDate] = useState<TDate>(() => {
 		if (defaultDate) {
@@ -57,10 +57,11 @@ export function DatepickerMegaProvider({
 				date: defaultDate,
 				day: defaultDate.getDate(),
 				month: defaultDate.getMonth(),
-				hour:
-					isAmPm && defaultDate.getHours() > 12
-						? defaultDate.getHours() - 12
-						: defaultDate.getHours(),
+				hour: defaultDate.getHours(),
+				// hour:
+				// 	isAmPm && defaultDate.getHours() > 12
+				// 		? defaultDate.getHours() - 12
+				// 		: defaultDate.getHours(),
 				minute: defaultDate.getMinutes(),
 				year: defaultDate.getFullYear(),
 				iso: defaultDate.toISOString(),
@@ -77,10 +78,11 @@ export function DatepickerMegaProvider({
 			minute: null,
 			year: null,
 			iso: null,
-			clockType: isAmPm ? 'pm' : 'am',
+			// clockType: isAmPm ? 'pm' : 'am',
+			clockType: 'am',
 		};
 	});
-	const [isAmPmMode] = useState(!!isAmPm);
+	const [isAmPmMode, setIsAmPmMode] = useState(false);
 	const [isOpenCalendar, setIsOpenCalendar] = useState(false);
 
 	const inputDayRef = useRef<HTMLInputElement>(null);
@@ -89,6 +91,22 @@ export function DatepickerMegaProvider({
 	const inputHourRef = useRef<HTMLInputElement>(null);
 	const inputMinuteRef = useRef<HTMLInputElement>(null);
 	const rootRef = useRef<HTMLInputElement>(null);
+
+	useEffect(() => {
+		setDate(prev => {
+			const hourNew =
+				isAmPmMode && prev.hour && prev.hour > 12 ? prev.hour - 12 : prev.hour;
+			const values: TDate = {
+				...prev,
+				hour: hourNew,
+				clockType: prev.hour && prev.hour > 12 ? 'pm' : 'am',
+			};
+			if (inputHourRef.current && hourNew && hourNew > -1) {
+				inputHourRef.current.value = hourNew.toString();
+			}
+			return values;
+		});
+	}, [isAmPmMode]);
 
 	const memoizedValue = useMemo(
 		() => ({
@@ -105,6 +123,7 @@ export function DatepickerMegaProvider({
 			isOpenCalendar,
 			setIsOpenCalendar,
 			isAmPmMode,
+			setIsAmPmMode,
 		}),
 		[date, isOpenCalendar, isAmPmMode],
 	);

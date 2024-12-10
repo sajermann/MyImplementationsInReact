@@ -1,17 +1,14 @@
 // import { DetailedHTMLProps, InputHTMLAttributes } from 'react';
+import { useEffect } from 'react';
 import { useDatepickerMega } from '../../hooks';
 import { onClickToggleAmPm } from '../../utils';
 
 export default function AmPmToggle() {
-	// props: DetailedHTMLProps<
-	// 	InputHTMLAttributes<HTMLInputElement>,
-	// 	HTMLInputElement
-	// >,
-	const { setDate, onChange, isAmPmMode, date } = useDatepickerMega();
+	const { setDate, onChange, date, setIsAmPmMode } = useDatepickerMega();
+	useEffect(() => {
+		setIsAmPmMode(true);
+	}, []);
 
-	if (!date.clockType || !isAmPmMode) {
-		return null;
-	}
 	return (
 		<input
 			readOnly
@@ -20,10 +17,10 @@ export default function AmPmToggle() {
 				onClickToggleAmPm({
 					setDate,
 					onChange,
-					isAmPm: isAmPmMode,
+					isAmPm: true,
 				});
 			}}
-			value={date.clockType.toString().toUpperCase()}
+			value={date.clockType?.toString().toUpperCase()}
 		/>
 	);
 }

@@ -37,11 +37,7 @@ export function DatepickerPage() {
 				<ComponentBlock>
 					<ContainerInput className="w-48">
 						<Label htmlFor="Date1">{translate('DATE')}</Label>
-						<DatepickerMega.Root
-							defaultDate={new Date()}
-							onChange={setDate}
-							isAmPm
-						>
+						<DatepickerMega.Root defaultDate={new Date()} onChange={setDate}>
 							<DatepickerMega.Day />
 							<DatepickerMega.Divider />
 							<DatepickerMega.Month />
@@ -55,15 +51,18 @@ export function DatepickerPage() {
 							<DatepickerMega.CalendarTrigger />
 						</DatepickerMega.Root>
 					</ContainerInput>
+
+					<div className="flex ml-56 -mt-3">
+						<input
+							type="datetime-local"
+							className="border mt-10 bg-transparent text-white"
+							name=""
+							id=""
+						/>
+					</div>
 				</ComponentBlock>
 			</Section>
 			<pre>{JSON.stringify({ date }, null, 2)}</pre>
-			<input
-				type="datetime-local"
-				className="border mt-10 bg-transparent text-white"
-				name=""
-				id=""
-			/>
 
 			{/* <Section title={translate('DATE')} variant="h2">
 				<ComponentBlock>
