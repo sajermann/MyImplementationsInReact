@@ -11,8 +11,8 @@ export function DragAndDropPage() {
 		<Main data-content="content-main">
 			<Section title="Drag and Drop" variant="h1">
 				{`${translate('IMPLEMENTS_COMPONENT')} Drag and Drop ${translate(
-					'USING_THE_LIB'
-				)} dnd-kit`}
+					'USING_THE_LIB',
+				)} @dnd-kit`}
 			</Section>
 			<Section title={translate('INSTALLATION_OF_LIB')} variant="h2">
 				<CodeBlock>npm i @dnd-kit/core;</CodeBlock>
