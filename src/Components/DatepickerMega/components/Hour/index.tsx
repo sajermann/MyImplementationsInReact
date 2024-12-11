@@ -1,39 +1,37 @@
+import { DetailedHTMLProps, InputHTMLAttributes } from 'react';
+import { tv } from 'tailwind-variants';
 import { useDatepickerMega } from '../../hooks';
 import { onChangeHour } from '../../utils';
 
-export default function Hour() {
-	// props: DetailedHTMLProps<
-	// 	InputHTMLAttributes<HTMLInputElement>,
-	// 	HTMLInputElement
-	// >,
-	const { inputHourRef, setDate, onChange, defaultDate, isAmPmMode } =
-		useDatepickerMega();
+const input = tv({
+	base: 'group ring-0 outline-none bg-transparent w-8 h-8 p-1 flex  text-center',
+});
 
-	const getDefault = () => {
-		if (!defaultDate) return undefined;
-		if (!isAmPmMode) {
-			return defaultDate.getHours();
-		}
-		return defaultDate.getHours() > 12
-			? defaultDate.getHours() - 12
-			: defaultDate.getHours();
-	};
+export default function Hour({
+	placeholder = 'hh',
+	...props
+}: Omit<
+	DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>,
+	'ref'
+>) {
+	const { inputHourRef, setDate, onChange, isAmPmMode } = useDatepickerMega();
 
 	return (
 		<input
-			defaultValue={getDefault()}
+			{...props}
 			ref={inputHourRef}
-			placeholder="hh"
-			className="group ring-0 outline-none bg-transparent w-8 h-8 p-1 flex  text-center"
-			onChange={event =>
+			placeholder={placeholder}
+			className={input({ class: props?.className })}
+			onChange={event => {
+				props?.onChange?.(event);
 				onChangeHour({
 					event,
 					setDate,
 					onChange,
 					hourRef: inputHourRef,
 					isAmPm: isAmPmMode,
-				})
-			}
+				});
+			}}
 		/>
 	);
 }

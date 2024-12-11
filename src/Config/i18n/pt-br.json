@@ -1,5 +1,13 @@
 {
 	"translations": {
+		"MEGA_DATE_PICKER_CAUTION": "Cuidado: atualize o estado escolhendo entre o onChange do root ou onChange dos inputs para que não ocorra a duplicação dos onChange, dê preferência ao onChange do root, assim ele entrega o objeto completo além de entregar as mudanças do Calendar Picker.",
+		"THIS_IS_STATE": "Isso é um estado",
+		"CALENDAR_CHANGES_INPUT_VALUE_BY_INPUT_REFERENCES": "Calendário muda o valor do input através de suas referências",
+		"DEFAULT_VALUES": "Valores Padrão",
+		"BY_STATE": "Por estado",
+		"LAST_EVENT_ONCHANGE_IS_NOT_STATE": "Último evento onchange (Não é estado)",
+		"EVENT_ONCHANGE_ROOT": "Evento Onchange (Root)",
+		"UNCONTROLLED": "Não Controlado",
 		"PERCENT_LEFT": "% Restante",
 		"TIME_LEFT": "Tempo Restante",
 		"REMOVE": "Remover",

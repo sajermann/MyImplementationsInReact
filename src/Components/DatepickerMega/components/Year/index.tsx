@@ -1,25 +1,39 @@
+import { DetailedHTMLProps, InputHTMLAttributes } from 'react';
+import { tv } from 'tailwind-variants';
 import { useDatepickerMega } from '../../hooks';
 import { onBlurYear, onChangeYear } from '../../utils';
 
-export default function Year() {
-	const { inputYearRef, inputDayRef, date, setDate, defaultDate, onChange } =
+const input = tv({
+	base: 'group ring-0 outline-none bg-transparent w-12 h-8 p-1 flex text-center',
+});
+
+export default function Year({
+	placeholder = 'yyyy',
+	...props
+}: Omit<
+	DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>,
+	'ref'
+>) {
+	const { inputYearRef, inputDayRef, date, setDate, onChange } =
 		useDatepickerMega();
 	return (
 		<input
+			{...props}
 			ref={inputYearRef}
-			defaultValue={defaultDate?.getFullYear()}
-			placeholder="yyyy"
-			className="group ring-0 outline-none bg-transparent w-12 h-8 p-1 flex text-center"
-			onChange={event =>
+			placeholder={placeholder}
+			className={input({ class: props?.className })}
+			onChange={event => {
+				props?.onChange?.(event);
 				onChangeYear({
 					event,
 					setDate,
 					onChange,
 					yearRef: inputYearRef,
 					dayRef: inputDayRef,
-				})
-			}
-			onBlur={event =>
+				});
+			}}
+			onBlur={event => {
+				props?.onBlur?.(event);
 				onBlurYear({
 					date,
 					setDate,
@@ -27,8 +41,8 @@ export default function Year() {
 					yearRef: inputYearRef,
 					event,
 					onChange,
-				})
-			}
+				});
+			}}
 		/>
 	);
 }

@@ -14,10 +14,13 @@ import { ErrorsInput } from '~/Components/ErrorsInput';
 import { Checkbox } from '~/Components/Checkbox';
 import { DatepickerMega } from '~/Components/DatepickerMega';
 import { TDate } from '~/Components/DatepickerMega/types';
+import { JsonViewer } from '~/Components/JsonViewer';
 
 export function DatepickerPage() {
 	const [firstPicker, setFirstPicker] = useState(new Date().toISOString());
 	const [errorMode, setErrorMode] = useState(false);
+	const [lastEventOnChangeRoot, setLastEventOnChangeRoot] =
+		useState<TDate | null>(null);
 	const { translate } = useTranslation();
 	const ref = useRef<HTMLInputElement>(null);
 	const [date, setDate] = useState<TDate>({
@@ -33,41 +36,102 @@ export function DatepickerPage() {
 
 	return (
 		<Main data-content="content-main">
-			<Section title={translate('DATE')} variant="h2">
-				<ComponentBlock>
-					<ContainerInput className="w-48">
-						<Label htmlFor="Date1">{translate('DATE')}</Label>
-						<DatepickerMega.Root defaultDate={new Date()} onChange={setDate}>
-							<DatepickerMega.Day />
-							<DatepickerMega.Divider />
-							<DatepickerMega.Month />
-							<DatepickerMega.Divider />
-							<DatepickerMega.Year />
-							<DatepickerMega.Divider> - </DatepickerMega.Divider>
-							<DatepickerMega.Hour />
-							<DatepickerMega.Divider> : </DatepickerMega.Divider>
-							<DatepickerMega.Minute />
-							<DatepickerMega.AmPmToggle />
-							<DatepickerMega.CalendarTrigger />
-						</DatepickerMega.Root>
-					</ContainerInput>
+			<Section title={translate('UNCONTROLLED')} variant="h2">
+				<Section title={translate('EVENT_ONCHANGE_ROOT')} variant="h3">
+					<ComponentBlock className="flex flex-col !items-start">
+						<ContainerInput>
+							<Label>{translate('DATE')}</Label>
+							<DatepickerMega.Root onChange={setLastEventOnChangeRoot}>
+								<DatepickerMega.Day />
+								<DatepickerMega.Divider />
+								<DatepickerMega.Month />
+								<DatepickerMega.Divider />
+								<DatepickerMega.Year />
+								<DatepickerMega.Divider> - </DatepickerMega.Divider>
+								<DatepickerMega.Hour />
+								<DatepickerMega.Divider> : </DatepickerMega.Divider>
+								<DatepickerMega.Minute />
+								<DatepickerMega.CalendarTrigger />
+							</DatepickerMega.Root>
+						</ContainerInput>
+						<div className="w-full">
+							<h1>{translate('LAST_EVENT_ONCHANGE_IS_NOT_STATE')}</h1>
+							<JsonViewer value={lastEventOnChangeRoot || {}} />
+						</div>
+					</ComponentBlock>
+				</Section>
 
-					<div className="flex ml-56 -mt-3">
-						<input
-							type="datetime-local"
-							className="border mt-10 bg-transparent text-white"
-							name=""
-							id=""
-						/>
+				<Section title={translate('DEFAULT_VALUES')} variant="h3">
+					<ComponentBlock className="flex flex-col !items-start">
+						<ContainerInput>
+							<Label>{translate('DATE')}</Label>
+							<DatepickerMega.Root>
+								<DatepickerMega.Day defaultValue={new Date().getDate()} />
+								<DatepickerMega.Divider />
+								<DatepickerMega.Month
+									defaultValue={new Date().getMonth() + 1}
+								/>
+								<DatepickerMega.Divider />
+								<DatepickerMega.Year defaultValue={new Date().getFullYear()} />
+								<DatepickerMega.Divider> - </DatepickerMega.Divider>
+								<DatepickerMega.Hour defaultValue={new Date().getHours()} />
+								<DatepickerMega.Divider> : </DatepickerMega.Divider>
+								<DatepickerMega.Minute defaultValue={new Date().getMinutes()} />
+								<DatepickerMega.CalendarTrigger />
+							</DatepickerMega.Root>
+						</ContainerInput>
+						<h3 className="text-sm italic font-bold">
+							* {translate('CALENDAR_CHANGES_INPUT_VALUE_BY_INPUT_REFERENCES')}
+						</h3>
+					</ComponentBlock>
+				</Section>
+			</Section>
+			<Section title={translate('CONTROLLED')} variant="h2">
+				<ComponentBlock className="flex flex-col !items-start">
+					<div className="flex gap-2">
+						<ContainerInput>
+							<Label>{translate('DATE')}</Label>
+							<DatepickerMega.Root onChange={setDate}>
+								<DatepickerMega.Day value={String(date.day || '')} />
+								<DatepickerMega.Divider />
+								<DatepickerMega.Month value={String(date.month || '')} />
+								<DatepickerMega.Divider />
+								<DatepickerMega.Year value={String(date.year || '')} />
+								<DatepickerMega.Divider> - </DatepickerMega.Divider>
+								<DatepickerMega.Hour value={String(date.hour || '')} />
+								<DatepickerMega.Divider> : </DatepickerMega.Divider>
+								<DatepickerMega.Minute value={String(date.minute || '')} />
+								<DatepickerMega.AmPmToggle />
+								<DatepickerMega.CalendarTrigger />
+							</DatepickerMega.Root>
+						</ContainerInput>
+
+						<div className="flex">
+							<label htmlFor="native" className="flex flex-col">
+								Native Input
+								<input
+									onChange={e => console.log({ e })}
+									type="datetime-local"
+									className="border bg-transparent "
+									id="native"
+								/>
+							</label>
+						</div>
 					</div>
+					<div className="w-full">
+						<h1>{translate('THIS_IS_STATE')}</h1>
+						<JsonViewer value={date} />
+					</div>
+					<h3 className="text-sm italic font-bold">
+						* {translate('MEGA_DATE_PICKER_CAUTION')}
+					</h3>
 				</ComponentBlock>
 			</Section>
-			<pre>{JSON.stringify({ date }, null, 2)}</pre>
 
 			{/* <Section title={translate('DATE')} variant="h2">
 				<ComponentBlock>
 					<ContainerInput className="w-48">
-						<Label htmlFor="Date1">{translate('DATE')}</Label>
+						<Label>{translate('DATE')}</Label>
 						<Datepicker placeholder={translate('DD/MM/YYYY')} id="Date1" />
 					</ContainerInput>
 				</ComponentBlock>
@@ -92,7 +156,7 @@ export function DatepickerPage() {
 			<Section title={translate('DATE')} variant="h2">
 				<ComponentBlock>
 					<ContainerInput className="w-48">
-						<Label htmlFor="Date1">{translate('DATE')}</Label>
+						<Label>{translate('DATE')}</Label>
 						<Datepicker placeholder={translate('DD/MM/YYYY')} id="Date1" />
 					</ContainerInput>
 				</ComponentBlock>

@@ -1,25 +1,39 @@
+import { DetailedHTMLProps, InputHTMLAttributes } from 'react';
+import { tv } from 'tailwind-variants';
 import { useDatepickerMega } from '../../hooks';
 import { onBlurMonth, onChangeMonth } from '../../utils';
 
-export default function Month() {
-	const { inputMonthRef, inputDayRef, date, setDate, defaultDate, onChange } =
+const input = tv({
+	base: 'group ring-0 outline-none bg-transparent w-10 h-8 p-1 flex text-center',
+});
+
+export default function Month({
+	placeholder = 'mm',
+	...props
+}: Omit<
+	DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>,
+	'ref'
+>) {
+	const { inputMonthRef, inputDayRef, date, setDate, onChange } =
 		useDatepickerMega();
 	return (
 		<input
+			{...props}
 			ref={inputMonthRef}
-			defaultValue={defaultDate && defaultDate.getMonth() + 1}
-			placeholder="mm"
-			className="group ring-0 outline-none bg-transparent w-10 h-8 p-1 flex text-center"
-			onChange={event =>
+			placeholder={placeholder}
+			className={input({ class: props?.className })}
+			onChange={event => {
+				props?.onChange?.(event);
 				onChangeMonth({
 					event,
 					setDate,
 					onChange,
 					monthRef: inputMonthRef,
 					dayRef: inputDayRef,
-				})
-			}
-			onBlur={event =>
+				});
+			}}
+			onBlur={event => {
+				props?.onBlur?.(event);
 				onBlurMonth({
 					date,
 					setDate,
@@ -27,8 +41,8 @@ export default function Month() {
 					event,
 					monthRef: inputMonthRef,
 					onChange,
-				})
-			}
+				});
+			}}
 		/>
 	);
 }
