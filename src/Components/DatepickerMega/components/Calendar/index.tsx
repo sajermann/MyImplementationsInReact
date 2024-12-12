@@ -10,6 +10,7 @@ import { TDisabled, TSelectOptions } from '~/Types/TCalendarPick';
 import { managerClassNames } from '~/Utils/ManagerClassNames';
 import { useDatepickerMega } from '../../hooks';
 import { getDayClassName, onChangeDatepicker } from '../../utils';
+import SelectorMonthYear from '../SelectorMonthYear';
 // import Button from './button';
 
 type Props = {
@@ -65,7 +66,9 @@ const Calendar = memo((props: Props) => {
 			date: [new Date(2024, 10, 19)],
 		},
 	});
-	console.log(rootRef.current?.getBoundingClientRect());
+
+	const [isOpenSelectorMonthYear, setIsOpenSelectorMonthYear] = useState(false);
+
 	const { month, year, days } = calendars[0];
 
 	return (
@@ -86,9 +89,13 @@ const Calendar = memo((props: Props) => {
 				>
 					<ChevronLeft />
 				</Button>
-				<p className="text-center text-sm flex-1">
+				<button
+					type="button"
+					onClick={() => setIsOpenSelectorMonthYear(prev => !prev)}
+					className="text-center text-sm flex-1"
+				>
 					{month} {year}
-				</p>
+				</button>
 				<Button
 					iconButton="rounded"
 					variant="option"
@@ -98,6 +105,7 @@ const Calendar = memo((props: Props) => {
 					<ChevronRight />
 				</Button>
 			</header>
+			<SelectorMonthYear show={isOpenSelectorMonthYear} />
 			<main className=" items-center h-8 grid grid-cols-7">
 				{weekDays.map(d => (
 					<div key={d} className="text-xs text-center">

@@ -1,5 +1,11 @@
 {
 	"translations": {
+		"AM_PM": "Am/Pm",
+		"24_HOURS": "24 Hours",
+		"TIMER": "Timer",
+		"DATE_TIME": "Date and Time",
+		"MONTH_AND_YEAR": "Month and Year",
+		"COMPOSITION_PATTERN": "Composition Pattern",
 		"MEGA_DATE_PICKER_CAUTION": "Caution: update the state by choosing between the root's onChange or the inputs' onChange so that there is no duplication of onChanges. Give preference to the root's onChange, so it delivers the complete object in addition to delivering the changes from the Calendar Picker.",
 		"THIS_IS_STATE": "This is a state",
 		"CALENDAR_CHANGES_INPUT_VALUE_BY_INPUT_REFERENCES": "Calendar changes the input value by its references",	

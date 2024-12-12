@@ -1,5 +1,11 @@
 {
 	"translations": {
+		"AM_PM": "Am/Pm",
+		"24_HOURS": "24 Horas",
+		"TIMER": "Hora",
+		"DATE_TIME": "Data e Hora",
+		"MONTH_AND_YEAR": "Mês e Ano",
+		"COMPOSITION_PATTERN": "Padrão de Composição",
 		"MEGA_DATE_PICKER_CAUTION": "Cuidado: atualize o estado escolhendo entre o onChange do root ou onChange dos inputs para que não ocorra a duplicação dos onChange, dê preferência ao onChange do root, assim ele entrega o objeto completo além de entregar as mudanças do Calendar Picker.",
 		"THIS_IS_STATE": "Isso é um estado",
 		"CALENDAR_CHANGES_INPUT_VALUE_BY_INPUT_REFERENCES": "Calendário muda o valor do input através de suas referências",

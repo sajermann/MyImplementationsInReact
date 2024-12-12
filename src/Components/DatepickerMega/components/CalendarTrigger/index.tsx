@@ -7,7 +7,7 @@ export default function CalendarTrigger() {
 		<button
 			type="button"
 			aria-label="icon:calendar"
-			className="ring-0 outline-none flex items-center justify-center h-8 p-1"
+			className="ring-0 outline-none flex items-center justify-center h-8 p-1 hover:text-blue-500 transition-colors duration-500"
 			onClick={() => setIsOpenCalendar(true)}
 		>
 			<CalendarIcon />

@@ -40,9 +40,9 @@ export function DatepickerPage() {
 				<Section title={translate('EVENT_ONCHANGE_ROOT')} variant="h3">
 					<ComponentBlock className="flex flex-col !items-start">
 						<ContainerInput>
-							<Label>{translate('DATE')}</Label>
+							<Label htmlFor="date">{translate('DATE')}</Label>
 							<DatepickerMega.Root onChange={setLastEventOnChangeRoot}>
-								<DatepickerMega.Day />
+								<DatepickerMega.Day id="date" />
 								<DatepickerMega.Divider />
 								<DatepickerMega.Month />
 								<DatepickerMega.Divider />
@@ -88,7 +88,7 @@ export function DatepickerPage() {
 			</Section>
 			<Section title={translate('CONTROLLED')} variant="h2">
 				<ComponentBlock className="flex flex-col !items-start">
-					<div className="flex gap-2">
+					<div className="flex items-baseline gap-2">
 						<ContainerInput>
 							<Label>{translate('DATE')}</Label>
 							<DatepickerMega.Root onChange={setDate}>
@@ -97,23 +97,45 @@ export function DatepickerPage() {
 								<DatepickerMega.Month value={String(date.month || '')} />
 								<DatepickerMega.Divider />
 								<DatepickerMega.Year value={String(date.year || '')} />
-								<DatepickerMega.Divider> - </DatepickerMega.Divider>
-								<DatepickerMega.Hour value={String(date.hour || '')} />
-								<DatepickerMega.Divider> : </DatepickerMega.Divider>
-								<DatepickerMega.Minute value={String(date.minute || '')} />
-								<DatepickerMega.AmPmToggle />
 								<DatepickerMega.CalendarTrigger />
 							</DatepickerMega.Root>
 						</ContainerInput>
 
-						<div className="flex">
+						<div className="flex ">
 							<label htmlFor="native" className="flex flex-col">
 								Native Input
 								<input
-									onChange={e => console.log({ e })}
-									type="datetime-local"
-									className="border bg-transparent "
+									onChange={e => {
+										const { value } = e.target;
+										if (!value) {
+											setDate({
+												date: null,
+												day: null,
+												month: null,
+												hour: null,
+												minute: null,
+												year: null,
+												iso: null,
+												clockType: null,
+											});
+											return;
+										}
+										const [year, month, day] = value.split('-').map(Number);
+										const dateComplete = new Date(year, month - 1, day);
+
+										setDate(prev => ({
+											...prev,
+											date: dateComplete,
+											day: dateComplete.getDate(),
+											month: dateComplete.getMonth() + 1,
+											year: dateComplete.getFullYear(),
+											iso: dateComplete.toISOString(),
+										}));
+									}}
+									type="date"
+									className="border bg-transparent ring-0 outline-none rounded h-11"
 									id="native"
+									value={date.iso?.substring(0, 10)}
 								/>
 							</label>
 						</div>
@@ -127,7 +149,75 @@ export function DatepickerPage() {
 					</h3>
 				</ComponentBlock>
 			</Section>
-
+			<Section title={translate('COMPOSITION_PATTERN')} variant="h2">
+				<ComponentBlock className="flex !items-start !justify-start">
+					<div className="flex gap-2 flex-wrap">
+						<ContainerInput className="w-max">
+							<Label>{translate('MONTH_AND_YEAR')}</Label>
+							<DatepickerMega.Root>
+								<DatepickerMega.Month />
+								<DatepickerMega.Divider />
+								<DatepickerMega.Year />
+								<DatepickerMega.CalendarTrigger />
+							</DatepickerMega.Root>
+						</ContainerInput>
+						<ContainerInput className="w-max">
+							<Label htmlFor="year-composition">
+								{translate('YYYY-MM-DD')}
+							</Label>
+							<DatepickerMega.Root>
+								<DatepickerMega.Year id="year-composition" />
+								<DatepickerMega.Divider>-</DatepickerMega.Divider>
+								<DatepickerMega.Month />
+								<DatepickerMega.Divider>-</DatepickerMega.Divider>
+								<DatepickerMega.Day />
+								<DatepickerMega.CalendarTrigger />
+							</DatepickerMega.Root>
+						</ContainerInput>
+						<ContainerInput className="w-max">
+							<Label>{translate('DATE_TIME')}</Label>
+							<DatepickerMega.Root>
+								<DatepickerMega.Day />
+								<DatepickerMega.Divider>-</DatepickerMega.Divider>
+								<DatepickerMega.Year />
+								<DatepickerMega.Divider>-</DatepickerMega.Divider>
+								<DatepickerMega.Month />
+								<DatepickerMega.Divider> - </DatepickerMega.Divider>
+								<DatepickerMega.Hour />
+								<DatepickerMega.Divider> : </DatepickerMega.Divider>
+								<DatepickerMega.Minute />
+								<DatepickerMega.CalendarTrigger />
+							</DatepickerMega.Root>
+						</ContainerInput>
+					</div>
+				</ComponentBlock>
+			</Section>
+			<Section title={translate('TIMER')} variant="h2">
+				<ComponentBlock className="flex !items-start !justify-start">
+					<div className="flex gap-2 flex-wrap">
+						<ContainerInput className="w-max">
+							<Label>{translate('24_HOURS')}</Label>
+							<DatepickerMega.Root>
+								<DatepickerMega.Hour />
+								<DatepickerMega.Divider> : </DatepickerMega.Divider>
+								<DatepickerMega.Minute />
+								<DatepickerMega.CalendarTrigger />
+							</DatepickerMega.Root>
+						</ContainerInput>
+						<ContainerInput className="w-max">
+							<Label htmlFor="year-composition">{translate('AM_PM')}</Label>
+							<DatepickerMega.Root>
+								<DatepickerMega.Hour />
+								<DatepickerMega.Divider> : </DatepickerMega.Divider>
+								<DatepickerMega.Minute />
+								<DatepickerMega.AmPmToggle />
+								<DatepickerMega.CalendarTrigger />
+							</DatepickerMega.Root>
+						</ContainerInput>
+					</div>
+				</ComponentBlock>
+			</Section>
+			datas bloqueadas datas maximo datas min
 			{/* <Section title={translate('DATE')} variant="h2">
 				<ComponentBlock>
 					<ContainerInput className="w-48">
@@ -136,7 +226,6 @@ export function DatepickerPage() {
 					</ContainerInput>
 				</ComponentBlock>
 			</Section> */}
-
 			{/* <Section title="Datepicker" variant="h1">
 				{`${translate('IMPLEMENTS_COMPONENT')} Datepicker ${translate(
 					'USING_THE_LIB'
