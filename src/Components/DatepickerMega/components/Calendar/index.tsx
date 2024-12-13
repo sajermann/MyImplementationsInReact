@@ -1,29 +1,17 @@
-/* eslint-disable import/no-duplicates */
-import { useDatePicker, useMonths } from '@rehookify/datepicker';
+import { useDatePicker } from '@rehookify/datepicker';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { memo, useState } from 'react';
 
 import { Button } from '~/Components/Button';
 import { useTranslation } from '~/Hooks/UseTranslation';
 
-import { TDisabled, TSelectOptions } from '~/Types/TCalendarPick';
 import { managerClassNames } from '~/Utils/ManagerClassNames';
 import { useDatepickerMega } from '../../hooks';
 import { getDayClassName, onChangeDatepicker } from '../../utils';
-import SelectorMonthYear from '../SelectorMonthYear';
-// import Button from './button';
+import SelectorVertical from '../SelectorVertical';
 
-type Props = {
-	year?: number;
-	month?: number;
-	disabled?: TDisabled;
-	onPrevClick?: () => void;
-	onNextClick?: () => void;
-	selectOptions?: TSelectOptions;
-};
-
-const Calendar = memo((props: Props) => {
-	const { translate } = useTranslation();
+const Calendar = memo(() => {
+	const { currentLanguage } = useTranslation();
 	const {
 		date,
 		setDate,
@@ -33,18 +21,14 @@ const Calendar = memo((props: Props) => {
 		inputYearRef,
 		setIsOpenCalendar,
 		rootRef,
+		disabledDates,
+		disabledWeeks,
+		minDate,
+		maxDate,
 	} = useDatepickerMega();
 	const {
-		data: { calendars, weekDays, formattedDates, months, years },
-		propGetters: {
-			dayButton,
-			addOffset,
-			subtractOffset,
-			monthButton,
-			nextYearsButton,
-			previousYearsButton,
-			yearButton,
-		},
+		data: { calendars, weekDays, months, years },
+		propGetters: { dayButton, addOffset, subtractOffset },
 	} = useDatePicker({
 		selectedDates: date?.date ? [date.date] : [],
 		onDatesChange: dates => {
@@ -61,9 +45,18 @@ const Calendar = memo((props: Props) => {
 
 		calendar: {
 			startDay: 0,
+			offsets: [-1, 1],
 		},
 		exclude: {
-			date: [new Date(2024, 10, 19)],
+			date: disabledDates,
+			day: disabledWeeks,
+		},
+		locale: {
+			locale: currentLanguage,
+		},
+		dates: {
+			minDate,
+			maxDate,
 		},
 	});
 
@@ -71,8 +64,8 @@ const Calendar = memo((props: Props) => {
 
 	const { month, year, days } = calendars[0];
 
-	const getIndexMonth = () => {
-		const result = months
+	const getIndex = (data: { active: boolean }[]) => {
+		const result = data
 			.map((item, index) => {
 				if (item.active) {
 					return index;
@@ -82,12 +75,10 @@ const Calendar = memo((props: Props) => {
 			.find(item => typeof item === 'number');
 		return result || 0;
 	};
-	console.log({ formattedDates, years });
 
 	const changeToMonth = (monthIndex: number) => {
-		const currentMonthIndex = getIndexMonth();
+		const currentMonthIndex = getIndex(months);
 		const result = monthIndex - currentMonthIndex;
-		console.log(`changeToMonthh`, { result, monthIndex, currentMonthIndex });
 		if (result < 0) {
 			subtractOffset({
 				months: Number(String(result).split('-')[1]),
@@ -99,16 +90,32 @@ const Calendar = memo((props: Props) => {
 		}
 	};
 
+	const changeToYear = (index: number) => {
+		const currentMonthIndex = getIndex(years);
+		const result = index - currentMonthIndex;
+		if (result < 0) {
+			subtractOffset({
+				years: Number(String(result).split('-')[1]),
+			})?.onClick?.({} as React.MouseEvent<HTMLElement, MouseEvent>);
+		} else {
+			addOffset({
+				years: result,
+			})?.onClick?.({} as React.MouseEvent<HTMLElement, MouseEvent>);
+		}
+	};
+
+	console.log({ months, years });
+
 	return (
 		<section
-			className={managerClassNames('flex flex-col gap-2 min-w-48 border')}
+			className={managerClassNames('flex flex-col gap-2 min-w-48')}
 			style={{
 				width: rootRef.current?.getBoundingClientRect().width
 					? rootRef.current.getBoundingClientRect().width - 10
 					: undefined,
 			}}
 		>
-			<header className="flex items-center border">
+			<header className="flex items-center">
 				<Button
 					iconButton="rounded"
 					variant="option"
@@ -120,9 +127,9 @@ const Calendar = memo((props: Props) => {
 				<button
 					type="button"
 					onClick={() => setIsOpenSelectorMonthYear(prev => !prev)}
-					className="text-center text-sm flex-1"
+					className="text-center text-sm flex-1 hover:opacity-70 transition-opacity duration-500"
 				>
-					{month} {year}
+					{month.charAt(0).toUpperCase() + month.slice(1)} {year}
 				</button>
 				<Button
 					iconButton="rounded"
@@ -133,39 +140,42 @@ const Calendar = memo((props: Props) => {
 					<ChevronRight />
 				</Button>
 			</header>
-			<main className="w-full h-48 border">
+			<main className="w-full h-44 relative">
 				<div
 					className={managerClassNames(
-						'flex relative transition-opacity duration-500 border w-full',
+						'grid grid-cols-2 absolute transition-opacity duration-500 w-full z-10',
 						{
-							'opacity-0': !isOpenSelectorMonthYear,
+							'opacity-0 z-0': !isOpenSelectorMonthYear,
 						},
 					)}
 				>
-					<SelectorMonthYear
-						months={months}
-						onMonthChange={changeToMonth}
-						currentMonthIndex={getIndexMonth()}
-					/>
-					<SelectorMonthYear
-						months={months}
-						onMonthChange={changeToMonth}
-						show={isOpenSelectorMonthYear}
-						currentMonthIndex={getIndexMonth()}
-					/>
+					<div className="col-span-1 w-full">
+						<SelectorVertical
+							data={months.map(item => ({ ...item, label: item.month }))}
+							onChange={changeToMonth}
+							currentIndex={getIndex(months)}
+						/>
+					</div>
+					<div className="col-span-1 w-full">
+						<SelectorVertical
+							data={years.map(item => ({ ...item, label: String(item.year) }))}
+							onChange={changeToYear}
+							currentIndex={getIndex(years)}
+						/>
+					</div>
 				</div>
-				{/* <div
+				<div
 					className={managerClassNames(
-						'absolute transition-opacity duration-500  border',
+						'absolute top-0 left-0 right-0 transition-opacity duration-500',
 						{
-							'opacity-0': isOpenSelectorMonthYear,
+							'opacity-0 z-0': isOpenSelectorMonthYear,
 						},
 					)}
 				>
 					<main className=" items-center h-8 grid grid-cols-7">
 						{weekDays.map(d => (
 							<div key={d} className="text-xs text-center">
-								{d}
+								{(d.charAt(0).toUpperCase() + d.slice(1)).replace('.', '')}
 							</div>
 						))}
 					</main>
@@ -184,7 +194,7 @@ const Calendar = memo((props: Props) => {
 							</button>
 						))}
 					</main>
-				</div> */}
+				</div>
 			</main>
 		</section>
 	);

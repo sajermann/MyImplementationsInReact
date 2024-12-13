@@ -17,7 +17,7 @@ type DatepickerMegaContextType = {
 	inputYearRef: React.RefObject<HTMLInputElement>;
 	inputHourRef: React.RefObject<HTMLInputElement>;
 	inputMinuteRef: React.RefObject<HTMLInputElement>;
-	rootRef: React.RefObject<HTMLInputElement>;
+	rootRef: React.RefObject<HTMLDivElement>;
 	onChange?: (data: TDate) => void;
 	defaultDate?: Date;
 	isOpenCalendar: boolean;
@@ -26,6 +26,10 @@ type DatepickerMegaContextType = {
 	) => void;
 	isAmPmMode?: boolean;
 	setIsAmPmMode: (value: boolean | ((prevState: boolean) => boolean)) => void;
+	disabledDates?: Date[];
+	disabledWeeks?: (0 | 1 | 2 | 3 | 4 | 5 | 6)[];
+	minDate?: Date;
+	maxDate?: Date;
 };
 
 const datepickerMegaContextDefaultValues: DatepickerMegaContextType =
@@ -43,12 +47,20 @@ type Props = {
 	children: ReactNode;
 	defaultDate?: Date;
 	onChange?: (data: TDate) => void;
+	disabledDates?: Date[];
+	disabledWeeks?: (0 | 1 | 2 | 3 | 4 | 5 | 6)[];
+	minDate?: Date;
+	maxDate?: Date;
 };
 
 export function DatepickerMegaProvider({
 	children,
 	defaultDate,
 	onChange,
+	disabledDates,
+	disabledWeeks,
+	minDate,
+	maxDate,
 }: Props) {
 	const [date, setDate] = useState<TDate>(() => {
 		if (defaultDate) {
@@ -90,7 +102,7 @@ export function DatepickerMegaProvider({
 	const inputYearRef = useRef<HTMLInputElement>(null);
 	const inputHourRef = useRef<HTMLInputElement>(null);
 	const inputMinuteRef = useRef<HTMLInputElement>(null);
-	const rootRef = useRef<HTMLInputElement>(null);
+	const rootRef = useRef<HTMLDivElement>(null);
 
 	useEffect(() => {
 		setDate(prev => {
@@ -124,8 +136,20 @@ export function DatepickerMegaProvider({
 			setIsOpenCalendar,
 			isAmPmMode,
 			setIsAmPmMode,
+			disabledDates,
+			disabledWeeks,
+			minDate,
+			maxDate,
 		}),
-		[date, isOpenCalendar, isAmPmMode],
+		[
+			date,
+			isOpenCalendar,
+			isAmPmMode,
+			disabledDates,
+			disabledWeeks,
+			minDate,
+			maxDate,
+		],
 	);
 
 	return (

@@ -1,5 +1,7 @@
 {
 	"translations": {
+		"YESTERDAY_AND_TOMORROW": "Yesterday and Tomorrow",
+		"SATURDAYS_AND_SUNDAYS": "Saturdays and Sundays",
 		"AM_PM": "Am/Pm",
 		"24_HOURS": "24 Hours",
 		"TIMER": "Timer",

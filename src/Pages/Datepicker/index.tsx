@@ -179,9 +179,9 @@ export function DatepickerPage() {
 							<DatepickerMega.Root>
 								<DatepickerMega.Day />
 								<DatepickerMega.Divider>-</DatepickerMega.Divider>
-								<DatepickerMega.Year />
-								<DatepickerMega.Divider>-</DatepickerMega.Divider>
 								<DatepickerMega.Month />
+								<DatepickerMega.Divider>-</DatepickerMega.Divider>
+								<DatepickerMega.Year />
 								<DatepickerMega.Divider> - </DatepickerMega.Divider>
 								<DatepickerMega.Hour />
 								<DatepickerMega.Divider> : </DatepickerMega.Divider>
@@ -190,6 +190,76 @@ export function DatepickerPage() {
 							</DatepickerMega.Root>
 						</ContainerInput>
 					</div>
+				</ComponentBlock>
+			</Section>
+			<Section title={translate('DISABLED_DATES')} variant="h2">
+				<ComponentBlock className="flex !items-start !justify-start">
+					<div className="flex gap-2 flex-wrap items-end">
+						<ContainerInput className="w-max">
+							<Label>{translate('YESTERDAY_AND_TOMORROW')}</Label>
+							<DatepickerMega.Root
+								disabledDates={[
+									addDays(new Date(), -1),
+									addDays(new Date(), +1),
+								]}
+							>
+								<DatepickerMega.Day />
+								<DatepickerMega.Divider />
+								<DatepickerMega.Month />
+								<DatepickerMega.Divider />
+								<DatepickerMega.Year />
+								<DatepickerMega.CalendarTrigger />
+							</DatepickerMega.Root>
+						</ContainerInput>
+						<ContainerInput className="w-max">
+							<Label>{translate('SATURDAYS_AND_SUNDAYS')}</Label>
+							<DatepickerMega.Root disabledWeeks={[0, 6]}>
+								<DatepickerMega.Day />
+								<DatepickerMega.Divider />
+								<DatepickerMega.Month />
+								<DatepickerMega.Divider />
+								<DatepickerMega.Year />
+								<DatepickerMega.CalendarTrigger />
+							</DatepickerMega.Root>
+						</ContainerInput>
+						<ContainerInput className="w-max">
+							<Label>{translate('MIN_DATE')}</Label>
+							<DatepickerMega.Root minDate={addDays(new Date(), -7)}>
+								<DatepickerMega.Day />
+								<DatepickerMega.Divider />
+								<DatepickerMega.Month />
+								<DatepickerMega.Divider />
+								<DatepickerMega.Year />
+								<DatepickerMega.CalendarTrigger />
+							</DatepickerMega.Root>
+						</ContainerInput>
+						<ContainerInput className="w-max">
+							<Label>{translate('MAX_DATE')}</Label>
+							<DatepickerMega.Root maxDate={addDays(new Date(), 7)}>
+								<DatepickerMega.Day />
+								<DatepickerMega.Divider />
+								<DatepickerMega.Month />
+								<DatepickerMega.Divider />
+								<DatepickerMega.Year />
+								<DatepickerMega.CalendarTrigger />
+							</DatepickerMega.Root>
+						</ContainerInput>
+					</div>
+				</ComponentBlock>
+			</Section>
+			<Section title={translate('READ_ONLY')} variant="h2">
+				<ComponentBlock className="flex !items-start !justify-start">
+					<ContainerInput className="w-max">
+						<Label>{translate('DATE')}</Label>
+						<DatepickerMega.Root>
+							<DatepickerMega.Day disabled />
+							<DatepickerMega.Divider />
+							<DatepickerMega.Month readOnly />
+							<DatepickerMega.Divider />
+							<DatepickerMega.Year readOnly />
+							<DatepickerMega.CalendarTrigger />
+						</DatepickerMega.Root>
+					</ContainerInput>
 				</ComponentBlock>
 			</Section>
 			<Section title={translate('TIMER')} variant="h2">
@@ -217,7 +287,7 @@ export function DatepickerPage() {
 					</div>
 				</ComponentBlock>
 			</Section>
-			datas bloqueadas datas maximo datas min
+			datas bloqueadas datas maximo datas min arrumar icone seletor no timer
 			{/* <Section title={translate('DATE')} variant="h2">
 				<ComponentBlock>
 					<ContainerInput className="w-48">
