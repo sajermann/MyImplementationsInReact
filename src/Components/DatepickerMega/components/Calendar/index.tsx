@@ -1,5 +1,5 @@
 /* eslint-disable import/no-duplicates */
-import { useDatePicker } from '@rehookify/datepicker';
+import { useDatePicker, useMonths } from '@rehookify/datepicker';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { memo, useState } from 'react';
 
@@ -71,16 +71,44 @@ const Calendar = memo((props: Props) => {
 
 	const { month, year, days } = calendars[0];
 
+	const getIndexMonth = () => {
+		const result = months
+			.map((item, index) => {
+				if (item.active) {
+					return index;
+				}
+				return null;
+			})
+			.find(item => typeof item === 'number');
+		return result || 0;
+	};
+	console.log({ formattedDates, years });
+
+	const changeToMonth = (monthIndex: number) => {
+		const currentMonthIndex = getIndexMonth();
+		const result = monthIndex - currentMonthIndex;
+		console.log(`changeToMonthh`, { result, monthIndex, currentMonthIndex });
+		if (result < 0) {
+			subtractOffset({
+				months: Number(String(result).split('-')[1]),
+			})?.onClick?.({} as React.MouseEvent<HTMLElement, MouseEvent>);
+		} else {
+			addOffset({
+				months: result,
+			})?.onClick?.({} as React.MouseEvent<HTMLElement, MouseEvent>);
+		}
+	};
+
 	return (
 		<section
-			className={managerClassNames([{ 'flex flex-col gap-2 min-w-48': true }])}
+			className={managerClassNames('flex flex-col gap-2 min-w-48 border')}
 			style={{
 				width: rootRef.current?.getBoundingClientRect().width
 					? rootRef.current.getBoundingClientRect().width - 10
 					: undefined,
 			}}
 		>
-			<header className="flex items-center">
+			<header className="flex items-center border">
 				<Button
 					iconButton="rounded"
 					variant="option"
@@ -105,28 +133,58 @@ const Calendar = memo((props: Props) => {
 					<ChevronRight />
 				</Button>
 			</header>
-			<SelectorMonthYear show={isOpenSelectorMonthYear} />
-			<main className=" items-center h-8 grid grid-cols-7">
-				{weekDays.map(d => (
-					<div key={d} className="text-xs text-center">
-						{d}
-					</div>
-				))}
-			</main>
-			<main className=" items-center grid grid-cols-7">
-				{days.map(d => (
-					<button
-						type="button"
-						key={d.$date.toString()}
-						className={getDayClassName(
-							'h-6 flex justify-center items-center hover:bg-slate-300 rounded text-xs',
-							d,
-						)}
-						{...dayButton(d)}
-					>
-						{d.day}
-					</button>
-				))}
+			<main className="w-full h-48 border">
+				<div
+					className={managerClassNames(
+						'flex relative transition-opacity duration-500 border w-full',
+						{
+							'opacity-0': !isOpenSelectorMonthYear,
+						},
+					)}
+				>
+					<SelectorMonthYear
+						months={months}
+						onMonthChange={changeToMonth}
+						currentMonthIndex={getIndexMonth()}
+					/>
+					<SelectorMonthYear
+						months={months}
+						onMonthChange={changeToMonth}
+						show={isOpenSelectorMonthYear}
+						currentMonthIndex={getIndexMonth()}
+					/>
+				</div>
+				{/* <div
+					className={managerClassNames(
+						'absolute transition-opacity duration-500  border',
+						{
+							'opacity-0': isOpenSelectorMonthYear,
+						},
+					)}
+				>
+					<main className=" items-center h-8 grid grid-cols-7">
+						{weekDays.map(d => (
+							<div key={d} className="text-xs text-center">
+								{d}
+							</div>
+						))}
+					</main>
+					<main className=" items-center grid grid-cols-7">
+						{days.map(d => (
+							<button
+								type="button"
+								key={d.$date.toString()}
+								className={getDayClassName(
+									'h-6 flex justify-center items-center hover:bg-slate-300 rounded text-xs',
+									d,
+								)}
+								{...dayButton(d)}
+							>
+								{d.day}
+							</button>
+						))}
+					</main>
+				</div> */}
 			</main>
 		</section>
 	);

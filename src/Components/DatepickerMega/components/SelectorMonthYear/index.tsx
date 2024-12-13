@@ -1,82 +1,99 @@
-import { ChevronDownIcon, ChevronUp, ChevronUpIcon } from 'lucide-react';
+import { ChevronDownIcon, ChevronUpIcon } from 'lucide-react';
 import { useState } from 'react';
 import { Button } from '~/Components/Button';
-
-const MONTHS = [
-	'Jan',
-	'Fev',
-	'Mar',
-	'Abr',
-	'Mai',
-	'Jun',
-	'Jul',
-	'Ago',
-	'Set',
-	'Out',
-	'Nov',
-	'Dez',
-];
+import { managerClassNames } from '~/Utils/ManagerClassNames';
 
 type TProps = {
-	show?: boolean;
+	months: {
+		month: string;
+	}[];
+
+	currentMonthIndex?: number;
+	visibleMonths?: number;
+	onMonthChange?: (month: number) => void;
 };
 
-export default function SelectorMonthYear({ show }: TProps) {
-	const [currentMonthIndex, setCurrentMonthIndex] = useState(0);
+export default function SelectorMonthYear({
+	currentMonthIndex = 0,
+	visibleMonths = 5,
+	onMonthChange,
+	months,
+}: TProps) {
+	const [currentMonthIndexInternal, setCurrentMonthIndexInternal] =
+		useState(currentMonthIndex);
 
-	const handleScrollUp = () => {
-		setCurrentMonthIndex(prevIndex =>
-			prevIndex === 0 ? MONTHS.length - 1 : prevIndex - 1,
-		);
-	};
-
-	const handleScrollDown = () => {
-		setCurrentMonthIndex(prevIndex =>
-			prevIndex === MONTHS.length - 1 ? 0 : prevIndex + 1,
-		);
+	const changeMonth = (month: number) => {
+		console.log(`Opa`, { month });
+		let fixed = month;
+		if (month < 0) {
+			fixed = months.length - 1;
+		}
+		if (month > months.length - 1) {
+			fixed = 0;
+		}
+		setCurrentMonthIndexInternal(fixed);
+		onMonthChange?.(fixed);
 	};
 
 	const getVisibleMonths = () => {
-		const prevIndex =
-			currentMonthIndex === 0 ? MONTHS.length - 1 : currentMonthIndex - 1;
+		const visibleMonthsList = [];
+		const safeVisibleMonths =
+			visibleMonths % 2 === 0 ? visibleMonths + 1 : visibleMonths;
+		const middleIndex = Math.floor(safeVisibleMonths / 2);
 
-		const nextIndex =
-			currentMonthIndex === MONTHS.length - 1 ? 0 : currentMonthIndex + 1;
+		for (let i = 0; i < safeVisibleMonths; i += 1) {
+			// Calcula o índice do mês considerando a rolagem circular
+			const monthIndex =
+				(currentMonthIndexInternal + i - middleIndex + months.length) %
+				months.length;
+			visibleMonthsList.push({
+				month: months[monthIndex].month,
+				index: months.map(item => item.month).indexOf(months[monthIndex].month),
+			});
+		}
 
-		return [MONTHS[prevIndex], MONTHS[currentMonthIndex], MONTHS[nextIndex]];
+		return visibleMonthsList;
 	};
-
-	if (!show) return null;
+	// if (!show) return null;
 
 	return (
-		<div className="month-picker">
-			<Button
-				iconButton="rounded"
-				variant="option"
-				colorStyle="mono"
-				onClick={handleScrollUp}
+		<div className="w-1/2 flex flex-col items-center border">
+			<button
+				type="button"
+				className="p-0"
+				// iconButton="rounded"
+				// variant="option"
+				// colorStyle="mono"
+				aria-label="previous month"
+				onClick={() => changeMonth(currentMonthIndexInternal - 1)}
 			>
 				<ChevronUpIcon />
-			</Button>
+			</button>
 
-			<div className="month-list">
+			<div className="flex flex-col gap-2">
 				{getVisibleMonths().map((month, index) => (
-					<div
-						key={month}
-						className={`month ${
-							index === 1 ? 'current-month' : 'adjacent-month'
-						}`}
+					<button
+						type="button"
+						key={month.month}
+						className={managerClassNames(
+							'text-xs px-2 hover:opacity-70 transition-opacity duration-500',
+							{
+								'border rounded': index === 2,
+							},
+						)}
+						onClick={() => changeMonth?.(month.index)}
 					>
-						{month}
-					</div>
+						{month.month}
+					</button>
 				))}
 			</div>
 
 			<Button
+				className="p-0"
 				iconButton="rounded"
 				variant="option"
 				colorStyle="mono"
-				onClick={handleScrollDown}
+				onClick={() => changeMonth(currentMonthIndexInternal + 1)}
 			>
 				<ChevronDownIcon />
 			</Button>
