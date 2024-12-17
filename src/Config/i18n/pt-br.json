@@ -1,5 +1,10 @@
 {
 	"translations": {
+		"MIN_DATE": "Date Mínima",
+		"MAX_DATE": "Data Máxima",
+		"TRIGGER": "Gatilho",
+		"BY_ICON": "Por Icone",
+		"READ_ONLY": "Somente Leitura",
 		"YESTERDAY_AND_TOMORROW": "Ontem e Amanhã",
 		"SATURDAYS_AND_SUNDAYS": "Sábados e Domingos",
 		"AM_PM": "Am/Pm",

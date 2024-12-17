@@ -1,5 +1,10 @@
 {
 	"translations": {
+		"MIN_DATE": "Min Date",
+		"MAX_DATE": "Max Date",
+		"TRIGGER": "Trigger",
+		"BY_ICON": "By Icon",
+		"READ_ONLY": "Read Only",
 		"YESTERDAY_AND_TOMORROW": "Yesterday and Tomorrow",
 		"SATURDAYS_AND_SUNDAYS": "Saturdays and Sundays",
 		"AM_PM": "Am/Pm",
