@@ -7,7 +7,7 @@ const input = tv({
 	base: 'group ring-0 outline-none bg-transparent w-8 h-8 p-1 flex text-center',
 });
 
-export default function Day({
+export function Day({
 	placeholder = 'dd',
 	...props
 }: Omit<

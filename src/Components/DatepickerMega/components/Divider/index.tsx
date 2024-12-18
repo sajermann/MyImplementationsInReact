@@ -1,6 +1,6 @@
 import { DetailedHTMLProps, HTMLAttributes } from 'react';
 
-export default function Divider(
+export function Divider(
 	props: DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>,
 ) {
 	return (

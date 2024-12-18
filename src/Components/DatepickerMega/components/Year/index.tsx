@@ -7,7 +7,7 @@ const input = tv({
 	base: 'group ring-0 outline-none bg-transparent w-12 h-8 p-1 flex text-center',
 });
 
-export default function Year({
+export function Year({
 	placeholder = 'yyyy',
 	...props
 }: Omit<

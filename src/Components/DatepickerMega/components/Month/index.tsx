@@ -7,7 +7,7 @@ const input = tv({
 	base: 'group ring-0 outline-none bg-transparent w-10 h-8 p-1 flex text-center',
 });
 
-export default function Month({
+export function Month({
 	placeholder = 'mm',
 	...props
 }: Omit<

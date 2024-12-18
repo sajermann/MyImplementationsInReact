@@ -425,3 +425,25 @@ export const getDayClassName = (
 		'opacity-50': !inCurrentMonth,
 		'border border-slate-500': now,
 	});
+
+export const getMonthClassName = (
+	className: string,
+	{ active, now, disabled, selected }: DPMonth,
+) =>
+	managerClassNames(className, {
+		'bg-slate-700 text-white hover:bg-slate-700 opacity-100': selected,
+		'border border-slate-500': now && !selected,
+		'border border-dashed border-slate-500': active && !selected,
+		'opacity-25 cursor-not-allowed': disabled,
+	});
+
+export const getYearClassName = (
+	className: string,
+	{ selected, now, disabled, active }: DPYear,
+) =>
+	managerClassNames(className, {
+		'bg-slate-700 text-white hover:bg-slate-700 opacity-100': selected,
+		'border border-slate-500': now && !selected,
+		'border border-dashed border-slate-500': active && !selected,
+		'opacity-25 cursor-not-allowed': disabled,
+	});

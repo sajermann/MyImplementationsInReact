@@ -13,7 +13,7 @@ type TProps = {
 	maxDate?: Date;
 };
 
-export default function Root({
+export function Root({
 	children,
 	defaultDate,
 	onChange,

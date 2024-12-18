@@ -1,7 +1,7 @@
 import { ReactNode } from 'react';
 import { tv } from 'tailwind-variants';
 import { useDatepickerMega } from '../../hooks';
-import Calendar from '../Calendar';
+import { SingleDayPicker } from '../SingleDayPicker';
 import {
 	Popover,
 	PopoverArrow,
@@ -9,6 +9,7 @@ import {
 	PopoverPortal,
 	PopoverTrigger,
 } from '../Popover';
+import { SingleMonthPicker } from '../SingleMonthPicker';
 
 const rootContainer = tv({
 	slots: {
@@ -39,8 +40,19 @@ const rootContainer = tv({
 	},
 });
 
+function RenderPicker() {
+	const { modePicker } = useDatepickerMega();
+	const CONFIG = {
+		single_day_picker: <SingleDayPicker />,
+		single_month_picker: <SingleMonthPicker />,
+	};
+
+	return CONFIG[modePicker];
+}
+
 export function Container({ children }: { children: ReactNode }) {
-	const { isOpenCalendar, setIsOpenCalendar, rootRef } = useDatepickerMega();
+	const { isOpenCalendar, setIsOpenCalendar, rootRef, modePicker } =
+		useDatepickerMega();
 	const { inputPropsInternal } = rootContainer({
 		color: 'primary',
 	});
@@ -55,7 +67,7 @@ export function Container({ children }: { children: ReactNode }) {
 			<PopoverPortal>
 				<PopoverContent onInteractOutside={() => setIsOpenCalendar(false)}>
 					<PopoverArrow />
-					<Calendar />
+					<RenderPicker />
 				</PopoverContent>
 			</PopoverPortal>
 		</Popover>

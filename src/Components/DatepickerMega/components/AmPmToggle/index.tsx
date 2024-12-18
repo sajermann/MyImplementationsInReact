@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useDatepickerMega } from '../../hooks';
 import { onClickToggleAmPm } from '../../utils';
 
-export default function AmPmToggle() {
+export function AmPmToggle() {
 	const { setDate, onChange, date, setIsAmPmMode } = useDatepickerMega();
 	useEffect(() => {
 		setIsAmPmMode(true);

@@ -7,7 +7,7 @@ import {
 	useRef,
 	useEffect,
 } from 'react';
-import { TDate } from '../types';
+import { TDate, TModepicker } from '../types';
 
 type DatepickerMegaContextType = {
 	date: TDate;
@@ -30,6 +30,10 @@ type DatepickerMegaContextType = {
 	disabledWeeks?: (0 | 1 | 2 | 3 | 4 | 5 | 6)[];
 	minDate?: Date;
 	maxDate?: Date;
+	modePicker: TModepicker;
+	setModePicker: (
+		value: TModepicker | ((prevState: TModepicker) => TModepicker),
+	) => void;
 };
 
 const datepickerMegaContextDefaultValues: DatepickerMegaContextType =
@@ -96,6 +100,8 @@ export function DatepickerMegaProvider({
 	});
 	const [isAmPmMode, setIsAmPmMode] = useState(false);
 	const [isOpenCalendar, setIsOpenCalendar] = useState(false);
+	const [modePicker, setModePicker] =
+		useState<TModepicker>('single_day_picker');
 
 	const inputDayRef = useRef<HTMLInputElement>(null);
 	const inputMonthRef = useRef<HTMLInputElement>(null);
@@ -140,6 +146,8 @@ export function DatepickerMegaProvider({
 			disabledWeeks,
 			minDate,
 			maxDate,
+			modePicker,
+			setModePicker,
 		}),
 		[
 			date,
@@ -149,6 +157,7 @@ export function DatepickerMegaProvider({
 			disabledWeeks,
 			minDate,
 			maxDate,
+			modePicker,
 		],
 	);
 

@@ -1,16 +1,15 @@
 import { useDatePicker } from '@rehookify/datepicker';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
-import { memo, useState } from 'react';
+import { useState } from 'react';
 
 import { Button } from '~/Components/Button';
 import { useTranslation } from '~/Hooks/UseTranslation';
-
 import { managerClassNames } from '~/Utils/ManagerClassNames';
 import { useDatepickerMega } from '../../hooks';
 import { getDayClassName, onChangeDatepicker } from '../../utils';
 import SelectorVertical from '../SelectorVertical';
 
-const Calendar = memo(() => {
+export function SingleDayPicker() {
 	const { currentLanguage } = useTranslation();
 	const {
 		date,
@@ -62,8 +61,6 @@ const Calendar = memo(() => {
 
 	const [isOpenSelectorMonthYear, setIsOpenSelectorMonthYear] = useState(false);
 
-	const { month, year, days } = calendars[0];
-
 	const getIndex = (data: { active: boolean }[]) => {
 		const result = data
 			.map((item, index) => {
@@ -104,23 +101,27 @@ const Calendar = memo(() => {
 		}
 	};
 
-	console.log({ months, years });
-
 	return (
 		<section
-			className={managerClassNames('flex flex-col gap-2 min-w-48')}
+			className={managerClassNames('flex flex-col min-w-48')}
 			style={{
 				width: rootRef.current?.getBoundingClientRect().width
 					? rootRef.current.getBoundingClientRect().width - 10
 					: undefined,
 			}}
 		>
-			<header className="flex items-center">
+			<header className="flex items-center h-11">
 				<Button
 					iconButton="rounded"
 					variant="option"
 					colorStyle="mono"
-					{...subtractOffset({ months: 1 })}
+					className={managerClassNames({
+						'!opacity-0 !cursor-default': isOpenSelectorMonthYear,
+					})}
+					{...subtractOffset(
+						{ months: 1 },
+						{ disabled: isOpenSelectorMonthYear },
+					)}
 				>
 					<ChevronLeft />
 				</Button>
@@ -129,13 +130,18 @@ const Calendar = memo(() => {
 					onClick={() => setIsOpenSelectorMonthYear(prev => !prev)}
 					className="text-center text-sm flex-1 hover:opacity-70 transition-opacity duration-500"
 				>
-					{month.charAt(0).toUpperCase() + month.slice(1)} {year}
+					{calendars[0].month.charAt(0).toUpperCase() +
+						calendars[0].month.slice(1)}{' '}
+					{calendars[0].year}
 				</button>
 				<Button
 					iconButton="rounded"
 					variant="option"
 					colorStyle="mono"
-					{...addOffset({ months: 1 })}
+					className={managerClassNames({
+						'!opacity-0 !cursor-default': isOpenSelectorMonthYear,
+					})}
+					{...addOffset({ months: 1 }, { disabled: isOpenSelectorMonthYear })}
 				>
 					<ChevronRight />
 				</Button>
@@ -143,9 +149,10 @@ const Calendar = memo(() => {
 			<main className="w-full h-44 relative">
 				<div
 					className={managerClassNames(
-						'grid grid-cols-2 absolute transition-opacity duration-500 w-full z-10',
+						'grid grid-cols-2 absolute transition-opacity duration-500 w-full',
 						{
 							'opacity-0 z-0': !isOpenSelectorMonthYear,
+							'z-10': isOpenSelectorMonthYear,
 						},
 					)}
 				>
@@ -180,7 +187,7 @@ const Calendar = memo(() => {
 						))}
 					</main>
 					<main className=" items-center grid grid-cols-7">
-						{days.map(d => (
+						{calendars[0].days.map(d => (
 							<button
 								type="button"
 								key={d.$date.toString()}
@@ -198,5 +205,4 @@ const Calendar = memo(() => {
 			</main>
 		</section>
 	);
-});
-export default Calendar;
+}
