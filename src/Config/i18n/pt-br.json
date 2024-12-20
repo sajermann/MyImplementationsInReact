@@ -1,5 +1,6 @@
 {
 	"translations": {
+		"YEAR": "Ano",
 		"MIN_DATE": "Data Mínima",
 		"MAX_DATE": "Data Máxima",
 		"TRIGGER": "Gatilho",

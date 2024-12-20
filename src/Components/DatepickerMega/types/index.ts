@@ -91,5 +91,3 @@ export type TChangeDatepicker = {
 	yearRef: React.RefObject<HTMLInputElement>;
 	monthRef: React.RefObject<HTMLInputElement>;
 };
-
-export type TModepicker = 'single_day_picker' | 'single_month_picker';

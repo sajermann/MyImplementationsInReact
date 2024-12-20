@@ -7,7 +7,7 @@ import {
 	useRef,
 	useEffect,
 } from 'react';
-import { TDate, TModepicker } from '../types';
+import { TDate } from '../types';
 
 type DatepickerMegaContextType = {
 	date: TDate;
@@ -30,10 +30,8 @@ type DatepickerMegaContextType = {
 	disabledWeeks?: (0 | 1 | 2 | 3 | 4 | 5 | 6)[];
 	minDate?: Date;
 	maxDate?: Date;
-	modePicker: TModepicker;
-	setModePicker: (
-		value: TModepicker | ((prevState: TModepicker) => TModepicker),
-	) => void;
+	hasTrigger?: boolean;
+	setHasTrigger: (value: boolean | ((prevState: boolean) => boolean)) => void;
 };
 
 const datepickerMegaContextDefaultValues: DatepickerMegaContextType =
@@ -43,8 +41,18 @@ const DatepickerMegaContext = createContext<DatepickerMegaContextType>(
 	datepickerMegaContextDefaultValues,
 );
 
-export function useDatepickerMega() {
-	return useContext(DatepickerMegaContext);
+export function useDatepickerMega(props?: { hasTrigger?: boolean }) {
+	const { setHasTrigger, ...rest } = useContext(DatepickerMegaContext);
+
+	useEffect(() => {
+		if (props?.hasTrigger) {
+			setHasTrigger(props.hasTrigger);
+		}
+	}, [props]);
+
+	return {
+		...rest,
+	};
 }
 
 type Props = {
@@ -66,6 +74,9 @@ export function DatepickerMegaProvider({
 	minDate,
 	maxDate,
 }: Props) {
+	const [isAmPmMode, setIsAmPmMode] = useState(false);
+	const [isOpenCalendar, setIsOpenCalendar] = useState(false);
+	const [hasTrigger, setHasTrigger] = useState(false);
 	const [date, setDate] = useState<TDate>(() => {
 		if (defaultDate) {
 			console.log({ defaultDate });
@@ -98,10 +109,6 @@ export function DatepickerMegaProvider({
 			clockType: 'am',
 		};
 	});
-	const [isAmPmMode, setIsAmPmMode] = useState(false);
-	const [isOpenCalendar, setIsOpenCalendar] = useState(false);
-	const [modePicker, setModePicker] =
-		useState<TModepicker>('single_day_picker');
 
 	const inputDayRef = useRef<HTMLInputElement>(null);
 	const inputMonthRef = useRef<HTMLInputElement>(null);
@@ -109,7 +116,6 @@ export function DatepickerMegaProvider({
 	const inputHourRef = useRef<HTMLInputElement>(null);
 	const inputMinuteRef = useRef<HTMLInputElement>(null);
 	const rootRef = useRef<HTMLDivElement>(null);
-
 	useEffect(() => {
 		setDate(prev => {
 			const hourNew =
@@ -146,8 +152,8 @@ export function DatepickerMegaProvider({
 			disabledWeeks,
 			minDate,
 			maxDate,
-			modePicker,
-			setModePicker,
+			hasTrigger,
+			setHasTrigger,
 		}),
 		[
 			date,
@@ -157,7 +163,7 @@ export function DatepickerMegaProvider({
 			disabledWeeks,
 			minDate,
 			maxDate,
-			modePicker,
+			hasTrigger,
 		],
 	);
 

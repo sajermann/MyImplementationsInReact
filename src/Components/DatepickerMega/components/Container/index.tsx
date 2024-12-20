@@ -1,15 +1,7 @@
 import { ReactNode } from 'react';
 import { tv } from 'tailwind-variants';
 import { useDatepickerMega } from '../../hooks';
-import { SingleDayPicker } from '../SingleDayPicker';
-import {
-	Popover,
-	PopoverArrow,
-	PopoverContent,
-	PopoverPortal,
-	PopoverTrigger,
-} from '../Popover';
-import { SingleMonthPicker } from '../SingleMonthPicker';
+import { Popover, PopoverAnchor } from '../Popover';
 
 const rootContainer = tv({
 	slots: {
@@ -40,36 +32,32 @@ const rootContainer = tv({
 	},
 });
 
-function RenderPicker() {
-	const { modePicker } = useDatepickerMega();
-	const CONFIG = {
-		single_day_picker: <SingleDayPicker />,
-		single_month_picker: <SingleMonthPicker />,
-	};
-
-	return CONFIG[modePicker];
-}
-
-export function Container({ children }: { children: ReactNode }) {
-	const { isOpenCalendar, setIsOpenCalendar, rootRef, modePicker } =
-		useDatepickerMega();
+function WithoutPopover({ children }: { children: ReactNode }) {
+	const { rootRef } = useDatepickerMega();
 	const { inputPropsInternal } = rootContainer({
 		color: 'primary',
 	});
+	return (
+		<div ref={rootRef} className={inputPropsInternal()}>
+			{children}
+		</div>
+	);
+}
+
+export function Container({ children }: { children: ReactNode }) {
+	const { isOpenCalendar } = useDatepickerMega();
+
+	// TODO: Não está dando tempo do picker trigger ativar o hasTrigger, ai o estoura erro do radix pelo trigger não estar dentro do popover do radix
+	// Então por enquando é melhor deixar o popover em tudo mesmo que não tenha o trigger
+	// if (!hasTrigger) {
+	// 	return <WithoutPopover>{children}</WithoutPopover>;
+	// }
 
 	return (
 		<Popover open={isOpenCalendar}>
-			<PopoverTrigger asChild className="hover:cursor-default">
-				<div ref={rootRef} className={inputPropsInternal()}>
-					{children}
-				</div>
-			</PopoverTrigger>
-			<PopoverPortal>
-				<PopoverContent onInteractOutside={() => setIsOpenCalendar(false)}>
-					<PopoverArrow />
-					<RenderPicker />
-				</PopoverContent>
-			</PopoverPortal>
+			<PopoverAnchor className="hover:cursor-default">
+				<WithoutPopover>{children}</WithoutPopover>
+			</PopoverAnchor>
 		</Popover>
 	);
 }

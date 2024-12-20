@@ -3,7 +3,8 @@ import { tv } from 'tailwind-variants';
 
 const container = tv({
 	slots: {
-		containerPropsInternal: ['group flex flex-col gap-1 w-full'],
+		// containerPropsInternal: ['group flex flex-col gap-1 w-full'],
+		containerPropsInternal: ['group flex flex-col gap-1'],
 	},
 });
 
@@ -24,5 +25,5 @@ export const ContainerInput = forwardRef<HTMLDivElement, TContainerInput>(
 				})}
 			/>
 		);
-	}
+	},
 );

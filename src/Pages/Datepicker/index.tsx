@@ -52,9 +52,10 @@ export function DatepickerPage() {
 								<DatepickerMega.Hour />
 								<DatepickerMega.Divider> : </DatepickerMega.Divider>
 								<DatepickerMega.Minute />
-								<DatepickerMega.SingleDayTrigger>
+								<DatepickerMega.PickerTrigger>
 									<CalendarIcon />
-								</DatepickerMega.SingleDayTrigger>
+								</DatepickerMega.PickerTrigger>
+								<DatepickerMega.SingleDayPicker />
 							</DatepickerMega.Root>
 						</ContainerInput>
 						<div className="w-full">
@@ -80,9 +81,10 @@ export function DatepickerPage() {
 								<DatepickerMega.Hour defaultValue={new Date().getHours()} />
 								<DatepickerMega.Divider> : </DatepickerMega.Divider>
 								<DatepickerMega.Minute defaultValue={new Date().getMinutes()} />
-								<DatepickerMega.SingleDayTrigger>
+								<DatepickerMega.PickerTrigger>
 									<CalendarIcon />
-								</DatepickerMega.SingleDayTrigger>
+								</DatepickerMega.PickerTrigger>
+								<DatepickerMega.SingleDayPicker />
 							</DatepickerMega.Root>
 						</ContainerInput>
 						<h3 className="text-sm italic font-bold">
@@ -102,9 +104,10 @@ export function DatepickerPage() {
 								<DatepickerMega.Month value={String(date.month || '')} />
 								<DatepickerMega.Divider />
 								<DatepickerMega.Year value={String(date.year || '')} />
-								<DatepickerMega.SingleDayTrigger>
+								<DatepickerMega.PickerTrigger>
 									<CalendarIcon />
-								</DatepickerMega.SingleDayTrigger>
+								</DatepickerMega.PickerTrigger>
+								<DatepickerMega.SingleDayPicker />
 							</DatepickerMega.Root>
 						</ContainerInput>
 
@@ -160,17 +163,6 @@ export function DatepickerPage() {
 				<ComponentBlock className="flex !items-start !justify-start">
 					<div className="flex gap-2 flex-wrap">
 						<ContainerInput className="w-max">
-							<Label>{translate('MONTH_AND_YEAR')}</Label>
-							<DatepickerMega.Root onChange={console.log}>
-								<DatepickerMega.Month />
-								<DatepickerMega.Divider />
-								<DatepickerMega.Year />
-								<DatepickerMega.SingleMonthTrigger>
-									<CalendarIcon />
-								</DatepickerMega.SingleMonthTrigger>
-							</DatepickerMega.Root>
-						</ContainerInput>
-						{/* <ContainerInput className="w-max">
 							<Label htmlFor="year-composition">
 								{translate('YYYY-MM-DD')}
 							</Label>
@@ -180,12 +172,36 @@ export function DatepickerPage() {
 								<DatepickerMega.Month />
 								<DatepickerMega.Divider>-</DatepickerMega.Divider>
 								<DatepickerMega.Day />
-								<DatepickerMega.SingleDayTrigger>
+								<DatepickerMega.PickerTrigger>
 									<CalendarIcon />
-								</DatepickerMega.SingleDayTrigger>
+								</DatepickerMega.PickerTrigger>
+								<DatepickerMega.SingleDayPicker />
 							</DatepickerMega.Root>
 						</ContainerInput>
 						<ContainerInput className="w-max">
+							<Label>{translate('MONTH_AND_YEAR')}</Label>
+							<DatepickerMega.Root onChange={console.log}>
+								<DatepickerMega.Month />
+								<DatepickerMega.Divider />
+								<DatepickerMega.Year />
+								<DatepickerMega.PickerTrigger>
+									<CalendarIcon />
+								</DatepickerMega.PickerTrigger>
+								<DatepickerMega.SingleMonthPicker />
+							</DatepickerMega.Root>
+						</ContainerInput>
+						<ContainerInput className="w-max">
+							<Label>{translate('YEAR')}</Label>
+							<DatepickerMega.Root onChange={console.log}>
+								<DatepickerMega.Year />
+								<DatepickerMega.PickerTrigger>
+									<CalendarIcon />
+								</DatepickerMega.PickerTrigger>
+								<DatepickerMega.SingleYearPicker />
+							</DatepickerMega.Root>
+						</ContainerInput>
+
+						{/* <ContainerInput className="w-max">
 							<Label>{translate('DATE_TIME')}</Label>
 							<DatepickerMega.Root>
 								<DatepickerMega.Day />
@@ -197,15 +213,16 @@ export function DatepickerPage() {
 								<DatepickerMega.Hour />
 								<DatepickerMega.Divider> : </DatepickerMega.Divider>
 								<DatepickerMega.Minute />
-								<DatepickerMega.SingleDayTrigger>
+								<DatepickerMega.PickerTrigger>
 									<CalendarIcon />
-								</DatepickerMega.SingleDayTrigger>
+								</DatepickerMega.PickerTrigger>
+								<DatepickerMega.SingleDayPicker />
 							</DatepickerMega.Root>
 						</ContainerInput> */}
 					</div>
 				</ComponentBlock>
 			</Section>
-			{/* <Section title={translate('DISABLED_DATES')} variant="h2">
+			<Section title={translate('DISABLED_DATES')} variant="h2">
 				<ComponentBlock className="flex !items-start !justify-start">
 					<div className="flex gap-2 flex-wrap items-end">
 						<ContainerInput className="w-max">
@@ -221,9 +238,10 @@ export function DatepickerPage() {
 								<DatepickerMega.Month />
 								<DatepickerMega.Divider />
 								<DatepickerMega.Year />
-								<DatepickerMega.SingleDayTrigger>
+								<DatepickerMega.PickerTrigger>
 									<CalendarIcon />
-								</DatepickerMega.SingleDayTrigger>
+								</DatepickerMega.PickerTrigger>
+								<DatepickerMega.SingleDayPicker />
 							</DatepickerMega.Root>
 						</ContainerInput>
 						<ContainerInput className="w-max">
@@ -234,9 +252,10 @@ export function DatepickerPage() {
 								<DatepickerMega.Month />
 								<DatepickerMega.Divider />
 								<DatepickerMega.Year />
-								<DatepickerMega.SingleDayTrigger>
+								<DatepickerMega.PickerTrigger>
 									<CalendarIcon />
-								</DatepickerMega.SingleDayTrigger>
+								</DatepickerMega.PickerTrigger>
+								<DatepickerMega.SingleDayPicker />
 							</DatepickerMega.Root>
 						</ContainerInput>
 						<ContainerInput className="w-max">
@@ -247,9 +266,10 @@ export function DatepickerPage() {
 								<DatepickerMega.Month />
 								<DatepickerMega.Divider />
 								<DatepickerMega.Year />
-								<DatepickerMega.SingleDayTrigger>
+								<DatepickerMega.PickerTrigger>
 									<CalendarIcon />
-								</DatepickerMega.SingleDayTrigger>
+								</DatepickerMega.PickerTrigger>
+								<DatepickerMega.SingleDayPicker />
 							</DatepickerMega.Root>
 						</ContainerInput>
 						<ContainerInput className="w-max">
@@ -260,9 +280,10 @@ export function DatepickerPage() {
 								<DatepickerMega.Month />
 								<DatepickerMega.Divider />
 								<DatepickerMega.Year />
-								<DatepickerMega.SingleDayTrigger>
+								<DatepickerMega.PickerTrigger>
 									<CalendarIcon />
-								</DatepickerMega.SingleDayTrigger>
+								</DatepickerMega.PickerTrigger>
+								<DatepickerMega.SingleDayPicker />
 							</DatepickerMega.Root>
 						</ContainerInput>
 					</div>
@@ -278,9 +299,10 @@ export function DatepickerPage() {
 							<DatepickerMega.Month readOnly />
 							<DatepickerMega.Divider />
 							<DatepickerMega.Year readOnly />
-							<DatepickerMega.SingleDayTrigger>
+							<DatepickerMega.PickerTrigger>
 								<CalendarIcon />
-							</DatepickerMega.SingleDayTrigger>
+							</DatepickerMega.PickerTrigger>
+							<DatepickerMega.SingleDayPicker />
 						</DatepickerMega.Root>
 					</ContainerInput>
 				</ComponentBlock>
@@ -290,13 +312,14 @@ export function DatepickerPage() {
 					<ContainerInput className="w-max">
 						<Label>Input</Label>
 						<DatepickerMega.Root>
-							<DatepickerMega.SingleDayTrigger className="cursor-pointer">
+							<DatepickerMega.PickerTrigger className="cursor-pointer">
 								<DatepickerMega.Day readOnly className="cursor-pointer" />
 								<DatepickerMega.Divider />
 								<DatepickerMega.Month readOnly className="cursor-pointer" />
 								<DatepickerMega.Divider />
 								<DatepickerMega.Year readOnly className="cursor-pointer" />
-							</DatepickerMega.SingleDayTrigger>
+							</DatepickerMega.PickerTrigger>
+							<DatepickerMega.SingleDayPicker />
 						</DatepickerMega.Root>
 					</ContainerInput>
 					<ContainerInput className="w-max">
@@ -307,9 +330,10 @@ export function DatepickerPage() {
 							<DatepickerMega.Month />
 							<DatepickerMega.Divider />
 							<DatepickerMega.Year />
-							<DatepickerMega.SingleDayTrigger>
+							<DatepickerMega.PickerTrigger>
 								<CalendarIcon />
-							</DatepickerMega.SingleDayTrigger>
+							</DatepickerMega.PickerTrigger>
+							<DatepickerMega.SingleDayPicker />
 						</DatepickerMega.Root>
 					</ContainerInput>
 				</ComponentBlock>
@@ -323,9 +347,9 @@ export function DatepickerPage() {
 								<DatepickerMega.Hour />
 								<DatepickerMega.Divider> : </DatepickerMega.Divider>
 								<DatepickerMega.Minute />
-								<DatepickerMega.SingleDayTrigger>
+								<DatepickerMega.PickerTrigger>
 									<CalendarIcon />
-								</DatepickerMega.SingleDayTrigger>
+								</DatepickerMega.PickerTrigger>
 							</DatepickerMega.Root>
 						</ContainerInput>
 						<ContainerInput className="w-max">
@@ -335,15 +359,18 @@ export function DatepickerPage() {
 								<DatepickerMega.Divider> : </DatepickerMega.Divider>
 								<DatepickerMega.Minute />
 								<DatepickerMega.AmPmToggle />
-								<DatepickerMega.SingleDayTrigger>
+								<DatepickerMega.PickerTrigger>
 									<CalendarIcon />
-								</DatepickerMega.SingleDayTrigger>
+								</DatepickerMega.PickerTrigger>
 							</DatepickerMega.Root>
 						</ContainerInput>
 					</div>
 				</ComponentBlock>
-			</Section> */}
-			datas bloqueadas datas maximo datas min arrumar icone seletor no timer
+			</Section>
+			<p>Todos: </p>
+			<p>Criar Picker pra hora </p>
+			<p>Datas bloqueadas não podem ser selecionadas no input </p>
+			<p>Range de datas (talvez) </p>
 			{/* <Section title={translate('DATE')} variant="h2">
 				<ComponentBlock>
 					<ContainerInput className="w-48">

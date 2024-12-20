@@ -24,7 +24,13 @@ export function Day({
 			className={input({ class: props?.className })}
 			onChange={event => {
 				props?.onChange?.(event);
-				onChangeDay({ event, date, setDate, onChange, dayRef: inputDayRef });
+				onChangeDay({
+					event,
+					date,
+					setDate,
+					onChange,
+					dayRef: inputDayRef,
+				});
 			}}
 			onBlur={event => {
 				props?.onBlur?.(event);

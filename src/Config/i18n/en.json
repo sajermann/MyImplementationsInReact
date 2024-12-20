@@ -1,5 +1,6 @@
 {
 	"translations": {
+		"YEAR": "Year",
 		"MIN_DATE": "Min Date",
 		"MAX_DATE": "Max Date",
 		"TRIGGER": "Trigger",

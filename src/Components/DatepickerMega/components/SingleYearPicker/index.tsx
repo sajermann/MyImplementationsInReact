@@ -1,19 +1,14 @@
 import { useDatePicker } from '@rehookify/datepicker';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
-import { useState } from 'react';
 
 import { Button } from '~/Components/Button';
 import { useTranslation } from '~/Hooks/UseTranslation';
 import { managerClassNames } from '~/Utils/ManagerClassNames';
 import { useDatepickerMega } from '../../hooks';
-import {
-	getMonthClassName,
-	getYearClassName,
-	onChangeDatepicker,
-} from '../../utils';
+import { getYearClassName, onChangeDatepicker } from '../../utils';
 import { PopoverArrow, PopoverContent, PopoverPortal } from '../Popover';
 
-export function SingleMonthPicker() {
+export function SingleYearPicker() {
 	const { currentLanguage } = useTranslation();
 	const {
 		date,
@@ -30,13 +25,8 @@ export function SingleMonthPicker() {
 		maxDate,
 	} = useDatepickerMega();
 	const {
-		data: { calendars, months, years },
-		propGetters: {
-			monthButton,
-			yearButton,
-			previousYearsButton,
-			nextYearsButton,
-		},
+		data: { calendars, years },
+		propGetters: { yearButton, previousYearsButton, nextYearsButton },
 	} = useDatePicker({
 		selectedDates: date?.date ? [date.date] : [],
 		onDatesChange: dates => {
@@ -50,7 +40,6 @@ export function SingleMonthPicker() {
 			});
 			setIsOpenCalendar(false);
 		},
-
 		calendar: {
 			startDay: 0,
 			offsets: [-1, 1],
@@ -67,8 +56,6 @@ export function SingleMonthPicker() {
 			maxDate,
 		},
 	});
-
-	const [isOpenSelectorYear, setIsOpenSelectorYear] = useState(false);
 
 	return (
 		<PopoverPortal>
@@ -87,45 +74,29 @@ export function SingleMonthPicker() {
 							iconButton="rounded"
 							variant="option"
 							colorStyle="mono"
-							className={managerClassNames({
-								'!opacity-0 !cursor-default': !isOpenSelectorYear,
-							})}
-							{...previousYearsButton({ disabled: !isOpenSelectorYear })}
+							{...previousYearsButton()}
 						>
 							<ChevronLeft />
 						</Button>
-						<button
-							type="button"
-							onClick={() => setIsOpenSelectorYear(prev => !prev)}
-							className="text-center text-sm flex-1 hover:opacity-70 transition-opacity duration-500"
-						>
-							{calendars[0].month.charAt(0).toUpperCase() +
-								calendars[0].month.slice(1)}{' '}
+						<div className="text-center text-sm flex-1">
 							{calendars[0].year}
-						</button>
+						</div>
 						<Button
 							iconButton="rounded"
 							variant="option"
 							colorStyle="mono"
-							className={managerClassNames({
-								'!opacity-0 !cursor-default': !isOpenSelectorYear,
-							})}
-							{...nextYearsButton({ disabled: !isOpenSelectorYear })}
+							{...nextYearsButton()}
 						>
 							<ChevronRight />
 						</Button>
 					</header>
-					<main className="w-full h-44 relative">
+					<main className="w-full h-44 ">
 						<div
 							className={managerClassNames(
-								'absolute transition-opacity duration-500 w-full',
-								{
-									'opacity-0 z-0': !isOpenSelectorYear,
-									'z-10': isOpenSelectorYear,
-								},
+								' transition-opacity duration-500 w-full',
 							)}
 						>
-							<main className=" items-center grid grid-cols-3 gap-x-2 gap-y-6">
+							<main className="items-center grid grid-cols-3 gap-x-2 gap-y-6">
 								{years.map(y => (
 									<button
 										type="button"
@@ -137,36 +108,8 @@ export function SingleMonthPicker() {
 										{...yearButton(y)}
 										onClick={e => {
 											yearButton?.(y).onClick?.(e);
-											setIsOpenSelectorYear(false);
-										}}
-									>
-										{y.year}
-									</button>
-								))}
-							</main>
-						</div>
-						<div
-							className={managerClassNames(
-								'absolute top-0 left-0 right-0 transition-opacity duration-500',
-								{
-									'opacity-0 z-0': isOpenSelectorYear,
-								},
-							)}
-						>
-							<main className=" items-center grid grid-cols-3 gap-x-2 gap-y-6">
-								{months.map(m => (
-									<button
-										type="button"
-										key={m.month.toString()}
-										className={getMonthClassName(
-											'h-6 flex justify-center items-center hover:bg-slate-300 rounded text-xs',
-											m,
-										)}
-										{...monthButton(m)}
-										onClick={e => {
-											monthButton?.(m).onClick?.(e);
 											onChangeDatepicker({
-												dates: [m.$date],
+												dates: [y.$date],
 												setDate,
 												onChange,
 												dayRef: inputDayRef,
@@ -176,7 +119,7 @@ export function SingleMonthPicker() {
 											setIsOpenCalendar(false);
 										}}
 									>
-										{m.month.charAt(0).toUpperCase() + m.month.slice(1)}
+										{y.year}
 									</button>
 								))}
 							</main>
