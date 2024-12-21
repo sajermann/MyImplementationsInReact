@@ -37,7 +37,7 @@ export function DatepickerPage() {
 
 	return (
 		<Main data-content="content-main">
-			<Section title={translate('UNCONTROLLED')} variant="h2">
+			{/* <Section title={translate('UNCONTROLLED')} variant="h2">
 				<Section title={translate('EVENT_ONCHANGE_ROOT')} variant="h3">
 					<ComponentBlock className="flex flex-col !items-start">
 						<ContainerInput>
@@ -92,13 +92,16 @@ export function DatepickerPage() {
 						</h3>
 					</ComponentBlock>
 				</Section>
-			</Section>
+			</Section> */}
 			<Section title={translate('CONTROLLED')} variant="h2">
 				<ComponentBlock className="flex flex-col !items-start">
 					<div className="flex items-baseline gap-2">
 						<ContainerInput>
 							<Label>{translate('DATE')}</Label>
-							<DatepickerMega.Root onChange={setDate}>
+							<DatepickerMega.Root
+								onChange={setDate}
+								disabledDates={[new Date(2024, 11, 20)]}
+							>
 								<DatepickerMega.Day value={String(date.day || '')} />
 								<DatepickerMega.Divider />
 								<DatepickerMega.Month value={String(date.month || '')} />
@@ -222,7 +225,7 @@ export function DatepickerPage() {
 					</div>
 				</ComponentBlock>
 			</Section>
-			<Section title={translate('DISABLED_DATES')} variant="h2">
+			{/* <Section title={translate('DISABLED_DATES')} variant="h2">
 				<ComponentBlock className="flex !items-start !justify-start">
 					<div className="flex gap-2 flex-wrap items-end">
 						<ContainerInput className="w-max">
@@ -366,11 +369,12 @@ export function DatepickerPage() {
 						</ContainerInput>
 					</div>
 				</ComponentBlock>
-			</Section>
+			</Section> */}
 			<p>Todos: </p>
 			<p>Criar Picker pra hora </p>
 			<p>Datas bloqueadas não podem ser selecionadas no input </p>
 			<p>Range de datas (talvez) </p>
+			<p>Hook Forms </p>
 			{/* <Section title={translate('DATE')} variant="h2">
 				<ComponentBlock>
 					<ContainerInput className="w-48">
