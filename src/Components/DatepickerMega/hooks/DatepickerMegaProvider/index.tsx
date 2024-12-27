@@ -1,13 +1,12 @@
 import {
 	createContext,
-	useContext,
 	ReactNode,
 	useState,
 	useMemo,
 	useRef,
 	useEffect,
 } from 'react';
-import { TDate } from '../types';
+import { TDate } from '../../types';
 
 type DatepickerMegaContextType = {
 	date: TDate;
@@ -34,28 +33,11 @@ type DatepickerMegaContextType = {
 	setHasTrigger: (value: boolean | ((prevState: boolean) => boolean)) => void;
 };
 
-const datepickerMegaContextDefaultValues: DatepickerMegaContextType =
-	{} as DatepickerMegaContextType;
-
-const DatepickerMegaContext = createContext<DatepickerMegaContextType>(
-	datepickerMegaContextDefaultValues,
+export const DatepickerMegaContext = createContext(
+	{} as DatepickerMegaContextType,
 );
 
-export function useDatepickerMega(props?: { hasTrigger?: boolean }) {
-	const { setHasTrigger, ...rest } = useContext(DatepickerMegaContext);
-
-	useEffect(() => {
-		if (props?.hasTrigger) {
-			setHasTrigger(props.hasTrigger);
-		}
-	}, [props]);
-
-	return {
-		...rest,
-	};
-}
-
-type Props = {
+type TDatepickerMegaProviderProps = {
 	children: ReactNode;
 	defaultDate?: Date;
 	onChange?: (data: TDate) => void;
@@ -73,7 +55,7 @@ export function DatepickerMegaProvider({
 	disabledWeeks,
 	minDate,
 	maxDate,
-}: Props) {
+}: TDatepickerMegaProviderProps) {
 	const [isAmPmMode, setIsAmPmMode] = useState(false);
 	const [isOpenCalendar, setIsOpenCalendar] = useState(false);
 	const [hasTrigger, setHasTrigger] = useState(false);

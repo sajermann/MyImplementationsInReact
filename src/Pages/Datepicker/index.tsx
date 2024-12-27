@@ -2,28 +2,18 @@ import { Main } from '~/Components/Main';
 import { useTranslation } from '~/Hooks/UseTranslation';
 import { ComponentBlock } from '~/Components/ComponentBlock';
 import { Section } from '~/Components/Section';
-import { QuickAccessGithub } from '~/Components/QuickAccessGithub';
-import { Datepicker } from '~/Components/Datepicker';
-import { useRef, useState } from 'react';
-import { Button } from '~/Components/Button';
-import { CodeBlock } from '~/Components/CodeBlock';
-import { addDays, subDays } from 'date-fns';
+import { useState } from 'react';
 import { ContainerInput } from '~/Components/ContainerInput';
 import { Label } from '~/Components/Label';
-import { ErrorsInput } from '~/Components/ErrorsInput';
-import { Checkbox } from '~/Components/Checkbox';
 import * as DatepickerMega from '~/Components/DatepickerMega';
 import { TDate } from '~/Components/DatepickerMega/types';
 import { JsonViewer } from '~/Components/JsonViewer';
 import { CalendarIcon } from 'lucide-react';
 
 export function DatepickerPage() {
-	const [firstPicker, setFirstPicker] = useState(new Date().toISOString());
-	const [errorMode, setErrorMode] = useState(false);
 	const [lastEventOnChangeRoot, setLastEventOnChangeRoot] =
 		useState<TDate | null>(null);
 	const { translate } = useTranslation();
-	const ref = useRef<HTMLInputElement>(null);
 	const [date, setDate] = useState<TDate>({
 		date: null,
 		day: null,
@@ -37,12 +27,15 @@ export function DatepickerPage() {
 
 	return (
 		<Main data-content="content-main">
-			{/* <Section title={translate('UNCONTROLLED')} variant="h2">
+			<Section title={translate('UNCONTROLLED')} variant="h2">
 				<Section title={translate('EVENT_ONCHANGE_ROOT')} variant="h3">
 					<ComponentBlock className="flex flex-col !items-start">
 						<ContainerInput>
 							<Label htmlFor="date">{translate('DATE')}</Label>
-							<DatepickerMega.Root onChange={setLastEventOnChangeRoot}>
+							<DatepickerMega.Root
+								disabledDates={[new Date(2024, 11, 26)]}
+								onChange={setLastEventOnChangeRoot}
+							>
 								<DatepickerMega.Day id="date" />
 								<DatepickerMega.Divider />
 								<DatepickerMega.Month />
@@ -65,7 +58,7 @@ export function DatepickerPage() {
 					</ComponentBlock>
 				</Section>
 
-				<Section title={translate('DEFAULT_VALUES')} variant="h3">
+				{/* <Section title={translate('DEFAULT_VALUES')} variant="h3">
 					<ComponentBlock className="flex flex-col !items-start">
 						<ContainerInput>
 							<Label>{translate('DATE')}</Label>
@@ -91,9 +84,9 @@ export function DatepickerPage() {
 							* {translate('CALENDAR_CHANGES_INPUT_VALUE_BY_INPUT_REFERENCES')}
 						</h3>
 					</ComponentBlock>
-				</Section>
-			</Section> */}
-			<Section title={translate('CONTROLLED')} variant="h2">
+				</Section> */}
+			</Section>
+			{/* <Section title={translate('CONTROLLED')} variant="h2">
 				<ComponentBlock className="flex flex-col !items-start">
 					<div className="flex items-baseline gap-2">
 						<ContainerInput>
@@ -161,11 +154,11 @@ export function DatepickerPage() {
 						* {translate('MEGA_DATE_PICKER_CAUTION')}
 					</h3>
 				</ComponentBlock>
-			</Section>
+			</Section> */}
 			<Section title={translate('COMPOSITION_PATTERN')} variant="h2">
 				<ComponentBlock className="flex !items-start !justify-start">
 					<div className="flex gap-2 flex-wrap">
-						<ContainerInput className="w-max">
+						{/* <ContainerInput className="w-max">
 							<Label htmlFor="year-composition">
 								{translate('YYYY-MM-DD')}
 							</Label>
@@ -202,7 +195,7 @@ export function DatepickerPage() {
 								</DatepickerMega.PickerTrigger>
 								<DatepickerMega.SingleYearPicker />
 							</DatepickerMega.Root>
-						</ContainerInput>
+						</ContainerInput> */}
 
 						{/* <ContainerInput className="w-max">
 							<Label>{translate('DATE_TIME')}</Label>

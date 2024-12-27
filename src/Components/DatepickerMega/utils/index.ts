@@ -16,9 +16,8 @@ import {
 	TClickToggleAmPm,
 	TDate,
 } from '../types';
-import { useIsValidDate } from './useIsValidDate';
 
-const focusNextInput = (currentInput: HTMLInputElement) => {
+export const focusNextInput = (currentInput: HTMLInputElement) => {
 	if (!currentInput.parentElement) {
 		return;
 	}
@@ -32,7 +31,7 @@ const focusNextInput = (currentInput: HTMLInputElement) => {
 	}
 };
 
-const adjustDay = ({ date, dayRef, setDate, onChange }: TAdjustDay) => {
+export const adjustDay = ({ date, dayRef, setDate, onChange }: TAdjustDay) => {
 	if (!date.month) {
 		return;
 	}
@@ -65,7 +64,6 @@ const adjustDay = ({ date, dayRef, setDate, onChange }: TAdjustDay) => {
 };
 
 export const onBlurDay = ({ event, dayRef }: TOnBlurDay) => {
-	const { isValidDate } = useIsValidDate();
 	const { value } = event.target;
 	if (value === '0' && dayRef?.current) {
 		dayRef.current.value = '';

@@ -1,7 +1,7 @@
 import { DetailedHTMLProps, InputHTMLAttributes } from 'react';
 import { tv } from 'tailwind-variants';
-import { useDatepickerMega } from '../../hooks';
-import { onBlurDay, onChangeDay } from '../../utils';
+
+import { useInputDayProps } from '../../hooks';
 
 const input = tv({
 	base: 'group ring-0 outline-none bg-transparent w-8 h-8 p-1 flex text-center',
@@ -12,30 +12,16 @@ export function Day({
 	...props
 }: Omit<
 	DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>,
-	'ref'
+	'ref' | 'onChange' | 'onBlur'
 >) {
-	const { inputDayRef, date, setDate, onChange } = useDatepickerMega();
+	const inputProps = useInputDayProps();
 
 	return (
 		<input
 			{...props}
-			ref={inputDayRef}
 			placeholder={placeholder}
 			className={input({ class: props?.className })}
-			onChange={event => {
-				props?.onChange?.(event);
-				onChangeDay({
-					event,
-					date,
-					setDate,
-					onChange,
-					dayRef: inputDayRef,
-				});
-			}}
-			onBlur={event => {
-				props?.onBlur?.(event);
-				onBlurDay({ event, dayRef: inputDayRef });
-			}}
+			{...inputProps}
 		/>
 	);
 }
