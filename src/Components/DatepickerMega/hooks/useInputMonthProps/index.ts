@@ -1,19 +1,39 @@
 import { isValid, parse } from 'date-fns';
 import { ChangeEvent, FocusEvent } from 'react';
 import { useIsValidDate, useDatepickerMega } from '..';
+import { TDate } from '../../types';
 import { adjustDay, focusNextInput } from '../../utils';
 
 export function useInputMonthProps() {
 	const { inputMonthRef, inputDayRef, date, setDate, onChange } =
 		useDatepickerMega();
-	const { isValidDate } = useIsValidDate();
+	const { isDisabledDate } = useIsValidDate();
 
 	const onBlur = (event: FocusEvent<HTMLInputElement, Element>) => {
 		const { value } = event.target;
-		if (value === '0' && inputMonthRef?.current) {
+
+		if (inputMonthRef?.current && (value === '0' || isDisabledDate())) {
 			inputMonthRef.current.value = '';
+			setDate(prev => {
+				const newValues: TDate = {
+					...prev,
+					month: null,
+					date: null,
+					iso: null,
+				};
+				if (onChange) {
+					onChange(newValues);
+				}
+				return newValues;
+			});
 		}
-		adjustDay({ date, dayRef: inputDayRef, setDate, onChange });
+
+		adjustDay({
+			date: date.current,
+			dayRef: inputDayRef,
+			setDate,
+			onChange,
+		});
 	};
 
 	const onChangeInternal = (event: ChangeEvent<HTMLInputElement>) => {
@@ -29,17 +49,17 @@ export function useInputMonthProps() {
 
 		temp.target.value = valueTemp;
 
-		setDate(prev => {
-			const dateComplete =
-				prev.day && valueTemp && prev.year
-					? parse(
-							`${prev.year}-${Number(valueTemp)}-${prev.day}`,
-							'yyyy-MM-dd',
-							new Date(),
-						)
-					: null;
+		const dateComplete =
+			date.current.day && valueTemp && date.current.year
+				? parse(
+						`${date.current.year}-${Number(valueTemp)}-${date.current.day}`,
+						'yyyy-MM-dd',
+						new Date(),
+					)
+				: null;
 
-			const newValues = {
+		setDate(prev => {
+			const newValues: TDate = {
 				...prev,
 				month: Number(valueTemp) || null,
 				date: isValid(dateComplete) && dateComplete ? dateComplete : null,
@@ -52,13 +72,13 @@ export function useInputMonthProps() {
 				onChange(newValues);
 			}
 
-			if (valueTemp.length > 1 && inputMonthRef?.current) {
-				focusNextInput(inputMonthRef.current);
-				adjustDay({ date: newValues, dayRef: inputDayRef, setDate, onChange });
-			}
-
 			return { ...newValues };
 		});
+
+		if (valueTemp.length > 1 && inputMonthRef?.current) {
+			adjustDay({ date: date.current, dayRef: inputDayRef, setDate, onChange });
+			focusNextInput(inputMonthRef.current);
+		}
 	};
 
 	return {

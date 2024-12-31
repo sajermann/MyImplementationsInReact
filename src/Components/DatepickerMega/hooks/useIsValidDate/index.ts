@@ -11,9 +11,12 @@ export function useIsValidDate() {
 	};
 
 	const isDisabledDate = () => {
-		if (!date.date) return;
-		const t = disabledDates?.find(d => d.valueOf() === date.date?.valueOf());
-		console.log(`is Disabled Date`, { t, date: date.date });
+		console.log(`isDisabledDate`, date.current.date, disabledDates);
+		if (!date.current.date) return false;
+		const t = disabledDates?.find(
+			d => d.valueOf() === date.current.date?.valueOf(),
+		);
+		return !!t;
 	};
 
 	return {

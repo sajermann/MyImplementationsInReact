@@ -5,11 +5,12 @@ import {
 	useMemo,
 	useRef,
 	useEffect,
+	MutableRefObject,
 } from 'react';
 import { TDate } from '../../types';
 
 type DatepickerMegaContextType = {
-	date: TDate;
+	date: MutableRefObject<TDate>;
 	setDate: (value: TDate | ((prevState: TDate) => TDate)) => void;
 	inputDayRef: React.RefObject<HTMLInputElement>;
 	inputMonthRef: React.RefObject<HTMLInputElement>;
@@ -59,37 +60,16 @@ export function DatepickerMegaProvider({
 	const [isAmPmMode, setIsAmPmMode] = useState(false);
 	const [isOpenCalendar, setIsOpenCalendar] = useState(false);
 	const [hasTrigger, setHasTrigger] = useState(false);
-	const [date, setDate] = useState<TDate>(() => {
-		if (defaultDate) {
-			console.log({ defaultDate });
-			const values: TDate = {
-				date: defaultDate,
-				day: defaultDate.getDate(),
-				month: defaultDate.getMonth(),
-				hour: defaultDate.getHours(),
-				// hour:
-				// 	isAmPm && defaultDate.getHours() > 12
-				// 		? defaultDate.getHours() - 12
-				// 		: defaultDate.getHours(),
-				minute: defaultDate.getMinutes(),
-				year: defaultDate.getFullYear(),
-				iso: defaultDate.toISOString(),
-				clockType: defaultDate.getHours() > 12 ? 'pm' : 'am',
-			};
-			onChange?.(values);
-			return values;
-		}
-		return {
-			date: null,
-			day: null,
-			month: null,
-			hour: null,
-			minute: null,
-			year: null,
-			iso: null,
-			// clockType: isAmPm ? 'pm' : 'am',
-			clockType: 'am',
-		};
+	const date = useRef<TDate>({
+		date: null,
+		day: null,
+		month: null,
+		hour: null,
+		minute: null,
+		year: null,
+		iso: null,
+		// clockType: isAmPm ? 'pm' : 'am',
+		clockType: 'am',
 	});
 
 	const inputDayRef = useRef<HTMLInputElement>(null);
@@ -98,6 +78,16 @@ export function DatepickerMegaProvider({
 	const inputHourRef = useRef<HTMLInputElement>(null);
 	const inputMinuteRef = useRef<HTMLInputElement>(null);
 	const rootRef = useRef<HTMLDivElement>(null);
+
+	const setDate = (value: TDate | ((prevState: TDate) => TDate)) => {
+		if (typeof value === 'function') {
+			const newState = value(date.current);
+			date.current = newState;
+		} else {
+			date.current = value;
+		}
+	};
+
 	useEffect(() => {
 		setDate(prev => {
 			const hourNew =

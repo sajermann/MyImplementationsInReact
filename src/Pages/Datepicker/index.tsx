@@ -33,8 +33,8 @@ export function DatepickerPage() {
 						<ContainerInput>
 							<Label htmlFor="date">{translate('DATE')}</Label>
 							<DatepickerMega.Root
-								disabledDates={[new Date(2024, 11, 26)]}
-								onChange={setLastEventOnChangeRoot}
+								disabledDates={[new Date(2024, 11, 26), new Date(1991, 1, 28)]}
+								onChange={e => console.log(`onchance central`, e)}
 							>
 								<DatepickerMega.Day id="date" />
 								<DatepickerMega.Divider />

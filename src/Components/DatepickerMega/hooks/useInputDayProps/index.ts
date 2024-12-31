@@ -1,18 +1,30 @@
 import { isValid, lastDayOfMonth, parse } from 'date-fns';
 import { ChangeEvent, FocusEvent } from 'react';
 import { useIsValidDate, useDatepickerMega } from '..';
+import { TDate } from '../../types';
 import { focusNextInput } from '../../utils';
 
 export function useInputDayProps() {
 	const { inputDayRef, date, setDate, onChange } = useDatepickerMega();
-	const { isValidDate, isDisabledDate } = useIsValidDate();
+	const { isDisabledDate } = useIsValidDate();
 
 	const onBlur = (event: FocusEvent<HTMLInputElement, Element>) => {
 		const { value } = event.target;
-		if (value === '0' && inputDayRef?.current) {
+		if (inputDayRef?.current && (value === '0' || isDisabledDate())) {
 			inputDayRef.current.value = '';
+			setDate(prev => {
+				const newValues: TDate = {
+					...prev,
+					day: null,
+					date: null,
+					iso: null,
+				};
+				if (onChange) {
+					onChange(newValues);
+				}
+				return newValues;
+			});
 		}
-		isDisabledDate();
 	};
 
 	const onChangeInternal = (event: ChangeEvent<HTMLInputElement>) => {
@@ -26,10 +38,13 @@ export function useInputDayProps() {
 			valueTemp = '31';
 		}
 
-		if (date.month) {
+		if (date.current.month) {
 			const today = new Date();
 			const lastDayOfMonthSelected = lastDayOfMonth(
-				new Date(date.year || today.getFullYear(), date.month - 1),
+				new Date(
+					date.current.year || today.getFullYear(),
+					date.current.month - 1,
+				),
 			);
 
 			if (lastDayOfMonthSelected.getDate() < Number(valueTemp)) {
@@ -40,16 +55,16 @@ export function useInputDayProps() {
 		temp.target.value = valueTemp;
 
 		const dateComplete =
-			valueTemp && date.month && date.year
+			valueTemp && date.current.month && date.current.year
 				? parse(
-						`${date.year}-${date.month}-${Number(valueTemp)}`,
+						`${date.current.year}-${date.current.month}-${Number(valueTemp)}`,
 						'yyyy-MM-dd',
 						new Date(),
 					)
 				: null;
 
 		setDate(prev => {
-			const newValues = {
+			const newValues: TDate = {
 				...prev,
 				day: Number(valueTemp) || null,
 				date: isValid(dateComplete) && dateComplete ? dateComplete : null,
