@@ -9,6 +9,7 @@ import * as DatepickerMega from '~/Components/DatepickerMega';
 import { TDate } from '~/Components/DatepickerMega/types';
 import { JsonViewer } from '~/Components/JsonViewer';
 import { CalendarIcon } from 'lucide-react';
+import { addDays } from 'date-fns';
 
 export function DatepickerPage() {
 	const [lastEventOnChangeRoot, setLastEventOnChangeRoot] =
@@ -32,19 +33,16 @@ export function DatepickerPage() {
 					<ComponentBlock className="flex flex-col !items-start">
 						<ContainerInput>
 							<Label htmlFor="date">{translate('DATE')}</Label>
-							<DatepickerMega.Root
-								disabledDates={[new Date(2024, 11, 26), new Date(1991, 1, 28)]}
-								onChange={e => console.log(`onchance central`, e)}
-							>
+							<DatepickerMega.Root onChange={setLastEventOnChangeRoot}>
 								<DatepickerMega.Day id="date" />
 								<DatepickerMega.Divider />
 								<DatepickerMega.Month />
 								<DatepickerMega.Divider />
 								<DatepickerMega.Year />
-								<DatepickerMega.Divider> - </DatepickerMega.Divider>
+								{/* <DatepickerMega.Divider> - </DatepickerMega.Divider>
 								<DatepickerMega.Hour />
 								<DatepickerMega.Divider> : </DatepickerMega.Divider>
-								<DatepickerMega.Minute />
+								<DatepickerMega.Minute /> */}
 								<DatepickerMega.PickerTrigger>
 									<CalendarIcon />
 								</DatepickerMega.PickerTrigger>
@@ -58,7 +56,7 @@ export function DatepickerPage() {
 					</ComponentBlock>
 				</Section>
 
-				{/* <Section title={translate('DEFAULT_VALUES')} variant="h3">
+				<Section title={translate('DEFAULT_VALUES')} variant="h3">
 					<ComponentBlock className="flex flex-col !items-start">
 						<ContainerInput>
 							<Label>{translate('DATE')}</Label>
@@ -84,16 +82,16 @@ export function DatepickerPage() {
 							* {translate('CALENDAR_CHANGES_INPUT_VALUE_BY_INPUT_REFERENCES')}
 						</h3>
 					</ComponentBlock>
-				</Section> */}
+				</Section>
 			</Section>
-			{/* <Section title={translate('CONTROLLED')} variant="h2">
+			<Section title={translate('CONTROLLED')} variant="h2">
 				<ComponentBlock className="flex flex-col !items-start">
 					<div className="flex items-baseline gap-2">
 						<ContainerInput>
 							<Label>{translate('DATE')}</Label>
 							<DatepickerMega.Root
 								onChange={setDate}
-								disabledDates={[new Date(2024, 11, 20)]}
+								defaultDate={date.date || undefined}
 							>
 								<DatepickerMega.Day value={String(date.day || '')} />
 								<DatepickerMega.Divider />
@@ -154,11 +152,11 @@ export function DatepickerPage() {
 						* {translate('MEGA_DATE_PICKER_CAUTION')}
 					</h3>
 				</ComponentBlock>
-			</Section> */}
+			</Section>
 			<Section title={translate('COMPOSITION_PATTERN')} variant="h2">
 				<ComponentBlock className="flex !items-start !justify-start">
 					<div className="flex gap-2 flex-wrap">
-						{/* <ContainerInput className="w-max">
+						<ContainerInput className="w-max">
 							<Label htmlFor="year-composition">
 								{translate('YYYY-MM-DD')}
 							</Label>
@@ -195,9 +193,9 @@ export function DatepickerPage() {
 								</DatepickerMega.PickerTrigger>
 								<DatepickerMega.SingleYearPicker />
 							</DatepickerMega.Root>
-						</ContainerInput> */}
+						</ContainerInput>
 
-						{/* <ContainerInput className="w-max">
+						<ContainerInput className="w-max">
 							<Label>{translate('DATE_TIME')}</Label>
 							<DatepickerMega.Root>
 								<DatepickerMega.Day />
@@ -214,11 +212,11 @@ export function DatepickerPage() {
 								</DatepickerMega.PickerTrigger>
 								<DatepickerMega.SingleDayPicker />
 							</DatepickerMega.Root>
-						</ContainerInput> */}
+						</ContainerInput>
 					</div>
 				</ComponentBlock>
 			</Section>
-			{/* <Section title={translate('DISABLED_DATES')} variant="h2">
+			<Section title={translate('DISABLED_DATES')} variant="h2">
 				<ComponentBlock className="flex !items-start !justify-start">
 					<div className="flex gap-2 flex-wrap items-end">
 						<ContainerInput className="w-max">
@@ -362,12 +360,15 @@ export function DatepickerPage() {
 						</ContainerInput>
 					</div>
 				</ComponentBlock>
-			</Section> */}
+			</Section>
 			<p>Todos: </p>
 			<p>Criar Picker pra hora </p>
-			<p>Datas bloqueadas não podem ser selecionadas no input </p>
 			<p>Range de datas (talvez) </p>
 			<p>Hook Forms </p>
+			<p>Formatar, por exemplo dia 1 para 01 </p>
+			<p>Composition - Deixar os calendarios mais composition possivel</p>
+			<p>Exclude Month</p>
+			<p>Exclude Year</p>
 			{/* <Section title={translate('DATE')} variant="h2">
 				<ComponentBlock>
 					<ContainerInput className="w-48">
@@ -375,7 +376,7 @@ export function DatepickerPage() {
 						<Datepicker placeholder={translate('DD/MM/YYYY')} id="Date1" />
 					</ContainerInput>
 				</ComponentBlock>
-			</Section> */}
+			</Section> 
 			{/* <Section title="Datepicker" variant="h1">
 				{`${translate('IMPLEMENTS_COMPONENT')} Datepicker ${translate(
 					'USING_THE_LIB'

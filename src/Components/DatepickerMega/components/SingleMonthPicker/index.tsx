@@ -38,7 +38,7 @@ export function SingleMonthPicker() {
 			nextYearsButton,
 		},
 	} = useDatePicker({
-		selectedDates: date?.date ? [date.date] : [],
+		selectedDates: date?.current.date ? [date.current.date] : [],
 		onDatesChange: dates => {
 			onChangeDatepicker({
 				dates,

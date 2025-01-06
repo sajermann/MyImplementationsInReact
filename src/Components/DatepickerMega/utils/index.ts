@@ -63,6 +63,13 @@ export const adjustDay = ({ date, dayRef, setDate, onChange }: TAdjustDay) => {
 	}
 };
 
+export const formatTwoNumbers = (value: string) => {
+	if (Number(value) < 10 && Number(value) > 0) {
+		return `0${Number(value)}`;
+	}
+	return value;
+};
+
 export const onBlurDay = ({ event, dayRef }: TOnBlurDay) => {
 	const { value } = event.target;
 	if (value === '0' && dayRef?.current) {
@@ -98,7 +105,6 @@ export const onBlurYear = ({
 		yearRef.current.value = '';
 	}
 	adjustDay({ date, dayRef, setDate, onChange });
-	isValidDate();
 };
 
 export const onChangeDay = ({
@@ -400,10 +406,12 @@ export const onChangeDatepicker = ({
 			iso: dates[0].toISOString() || null,
 		};
 		if (dayRef?.current) {
-			dayRef.current.value = newValues.day?.toString() || '';
+			dayRef.current.value = formatTwoNumbers(newValues.day?.toString() || '');
 		}
 		if (monthRef?.current) {
-			monthRef.current.value = newValues.month?.toString() || '';
+			monthRef.current.value = formatTwoNumbers(
+				newValues.month?.toString() || '',
+			);
 		}
 		if (yearRef?.current) {
 			yearRef.current.value = newValues.year?.toString() || '';

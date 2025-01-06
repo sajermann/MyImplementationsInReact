@@ -104,6 +104,28 @@ export function DatepickerMegaProvider({
 		});
 	}, [isAmPmMode]);
 
+	useEffect(() => {
+		if (defaultDate) {
+			setDate(prev => ({
+				...prev,
+				year: defaultDate.getFullYear() || null,
+				month: defaultDate.getMonth() + 1 || null,
+				day: defaultDate.getDate() || null,
+				date: defaultDate || null,
+				iso: defaultDate.toISOString() || null,
+			}));
+		} else {
+			setDate(prev => ({
+				...prev,
+				year: null,
+				month: null,
+				day: null,
+				date: null,
+				iso: null,
+			}));
+		}
+	}, [defaultDate]);
+
 	const memoizedValue = useMemo(
 		() => ({
 			date,

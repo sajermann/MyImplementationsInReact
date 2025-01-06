@@ -2,7 +2,7 @@ import { isValid, lastDayOfMonth, parse } from 'date-fns';
 import { ChangeEvent, FocusEvent } from 'react';
 import { useIsValidDate, useDatepickerMega } from '..';
 import { TDate } from '../../types';
-import { focusNextInput } from '../../utils';
+import { focusNextInput, formatTwoNumbers } from '../../utils';
 
 export function useInputDayProps() {
 	const { inputDayRef, date, setDate, onChange } = useDatepickerMega();
@@ -24,6 +24,11 @@ export function useInputDayProps() {
 				}
 				return newValues;
 			});
+		}
+
+		// Parte do codigo beta, precisa de mais testes
+		if (inputDayRef?.current) {
+			inputDayRef.current.value = formatTwoNumbers(value);
 		}
 	};
 

@@ -2,7 +2,7 @@ import { isValid, parse } from 'date-fns';
 import { ChangeEvent, FocusEvent } from 'react';
 import { useIsValidDate, useDatepickerMega } from '..';
 import { TDate } from '../../types';
-import { adjustDay, focusNextInput } from '../../utils';
+import { adjustDay, focusNextInput, formatTwoNumbers } from '../../utils';
 
 export function useInputMonthProps() {
 	const { inputMonthRef, inputDayRef, date, setDate, onChange } =
@@ -26,6 +26,10 @@ export function useInputMonthProps() {
 				}
 				return newValues;
 			});
+		}
+
+		if (inputMonthRef?.current) {
+			inputMonthRef.current.value = formatTwoNumbers(value);
 		}
 
 		adjustDay({

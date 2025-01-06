@@ -29,7 +29,7 @@ export function SingleDayPicker() {
 		data: { calendars, weekDays, months, years },
 		propGetters: { dayButton, addOffset, subtractOffset },
 	} = useDatePicker({
-		selectedDates: date?.date ? [date.date] : [],
+		selectedDates: date?.current.date ? [date.current.date] : [],
 		onDatesChange: dates => {
 			onChangeDatepicker({
 				dates,
