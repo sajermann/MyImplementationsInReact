@@ -28,7 +28,7 @@ export function SingleYearPicker() {
 		data: { calendars, years },
 		propGetters: { yearButton, previousYearsButton, nextYearsButton },
 	} = useDatePicker({
-		selectedDates: date?.date ? [date.date] : [],
+		selectedDates: date?.current.date ? [date.current.date] : [],
 		onDatesChange: dates => {
 			onChangeDatepicker({
 				dates,

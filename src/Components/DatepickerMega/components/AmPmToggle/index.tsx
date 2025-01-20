@@ -18,7 +18,7 @@ export function AmPmToggle() {
 					onChange,
 				});
 			}}
-			value={date.clockType?.toString().toUpperCase()}
+			value={date.current.clockType?.toString().toUpperCase()}
 		/>
 	);
 }
